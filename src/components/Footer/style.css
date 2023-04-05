@@ -1,0 +1,28 @@
+.footer {
+    background-color: #e4eaf5;
+    flex: 0 0 auto;
+    padding: 0 0 0 120px;
+    height: 154px;
+}
+
+.footer-content {
+    height: 100%;
+    display: flex;
+    padding: 0 40px 0 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-content__links-container {
+    padding: 0 20% 0 0;
+}
+
+.footer-content__link {
+    padding: 0 48px 0 48px;
+    color: #37476a;
+    white-space: nowrap;
+}
+
+.footer-content__link:visited {
+    color: #37476a;
+}

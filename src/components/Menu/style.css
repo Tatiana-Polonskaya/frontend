@@ -1,0 +1,8 @@
+.menu {
+    position: absolute;
+    width: 120px;
+    height: 90%;
+    background-color: white;
+    border-right: 1px solid #e4e6ea;
+    border-radius: 0px 48px 48px 0px;
+}
