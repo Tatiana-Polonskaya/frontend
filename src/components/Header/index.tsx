@@ -1,3 +1,5 @@
+import { cn } from "@bem-react/classname";
+
 import "./style.scss";
 import NoPhoto from "./assets/no-photo.png";
 
@@ -6,10 +8,12 @@ type Props = {
     displayName?: string;
 };
 
+const cnHeader = cn("header");
+
 export default function Header(props: Props) {
     return (
-        <header className="header">
-            <div className="header-content">
+        <header className={cnHeader()}>
+            <div className={cnHeader("content")}>
                 <div className="header-content__profile">
                     <img
                         src={props.imageUrl || NoPhoto}
