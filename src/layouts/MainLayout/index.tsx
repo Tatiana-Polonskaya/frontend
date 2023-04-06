@@ -1,7 +1,7 @@
-import "./style.css";
+import "./style.scss";
 import Menu from "../../components/Menu";
 import Footer from "../../components/Footer";
-import { ReactElement, ReactFragment, ReactNode } from "react";
+import { ReactNode } from "react";
 import Header from "../../components/Header";
 
 type Props = {

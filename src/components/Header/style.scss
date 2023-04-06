@@ -1,0 +1,25 @@
+.header {
+    flex: 0 0 auto;
+    padding: 0 0 0 120px;
+
+    &-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px 40px;
+
+        &__profile {
+            display: flex;
+            align-items: center;
+        }
+
+        &__photo {
+            width: 60px;
+            height: 60px;
+            margin: 0 16px 0 0;
+            border: 4px solid white;
+            border-radius: 100%;
+            object-fit: cover;
+        }
+    }
+}

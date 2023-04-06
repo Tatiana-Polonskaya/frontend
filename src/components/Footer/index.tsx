@@ -1,4 +1,4 @@
-import "./style.css";
+import "./style.scss";
 
 import LogoTitle from "./assets/logo-title.svg";
 

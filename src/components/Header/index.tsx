@@ -1,4 +1,4 @@
-import "./style.css";
+import "./style.scss";
 import NoPhoto from "./assets/no-photo.png";
 
 type Props = {
