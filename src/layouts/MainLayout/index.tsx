@@ -1,10 +1,8 @@
 import "./style.css";
 import Menu from "../../components/Menu";
 import Footer from "../../components/Footer";
-import { ReactElement, ReactFragment } from "react";
+import { ReactElement, ReactFragment, ReactNode } from "react";
 import Header from "../../components/Header";
-
-type ReactNode = ReactFragment | boolean | null | undefined;
 
 type Props = {
     children: ReactNode;
