@@ -1,5 +1,8 @@
 import MainLayout from "../../layouts/MainLayout";
 
 export default function HomePage() {
-    return (<MainLayout><div></div></MainLayout>);
+    const createTestContainers = (n: number) =>
+        new Array(n).fill(undefined).map((_, i) => <div key={i}>{i}</div>);
+
+    return <MainLayout>{createTestContainers(50)}</MainLayout>;
 }
