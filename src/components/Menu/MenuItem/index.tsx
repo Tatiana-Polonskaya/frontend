@@ -1,26 +1,27 @@
-import {HandySvg} from 'handy-svg';
-import { ReactComponentElement, ReactElement, ReactNode, SVGProps } from 'react';
+import { HandySvg } from "handy-svg";
+import { cn } from "@bem-react/classname";
+
+import "./style.scss"
 
 type Props = {
     id: number;
     item: Item;
 };
-type Item ={
-    title: string,
-    url: string,
-    img: string,
-}
+type Item = {
+    title: string;
+    url: string;
+    img: string;
+};
+
+const cnMenuItem = cn("menu-item")
 
 export default function MenuItem(props: Props) {
-    
-    return <>
-            <span className='span-logo'>
-                <HandySvg
-                    src={props.item.img}
-                    className="ul-logo"
-                />
+    return (
+        <>
+            <span className={cnMenuItem("span-logo")}>
+                <HandySvg src={props.item.img} className={cnMenuItem("ul-logo")} />
             </span>
-             <span>{props.item.title}</span>
-            
+            <span>{props.item.title}</span>
         </>
+    );
 }
