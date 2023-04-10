@@ -7,15 +7,19 @@ import Menu from "../../components/Menu";
 import "./style.scss";
 
 type Props = {
-    children: ReactNode;
+    children?: ReactNode;
 };
 
 const cnContent = cn("content")
 
 export default function MainLayout(props: Props) {
+
+    
+
     return (
         <>
             <Menu />
+
             <div className={cnContent()}>
                 <Header />
                 <div className={cnContent("wrapper")}>

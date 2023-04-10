@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 export default function TestPage() {
     return (
         <>
-            <Menu />
+
             <div className="above-footer">
                 <TestComponent />
                 <a href="/">to main page</a>

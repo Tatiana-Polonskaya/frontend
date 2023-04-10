@@ -19,7 +19,7 @@ export default function ProfilePreview(props: Props) {
                 alt="Avatar"
             />
             <div>
-                {props.displayName ? (
+                {!props.displayName ? (
                     <>
                         <span>Добрый день,</span>
                         <span>{props.displayName}</span>
