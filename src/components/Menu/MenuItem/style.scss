@@ -1,4 +1,40 @@
 .menu-item {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    align-content: center;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+
+    height: 60px;
+
+    cursor: pointer;
+
+    color: #90a0c1;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+
+    &:hover {
+        background: linear-gradient(
+            270deg,
+            rgba(36, 119, 244, 0.1) 0%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        border-right-color: #2477f4;
+        border-right-style: solid; /* Стиль линии */
+        border-right-width: 3px; /* Толщина линии */
+        border-radius: 40px 0px 0px 40px;
+
+        & svg {
+            fill: #2477f4;
+        }
+    }
+
     &-span-logo {
         padding-right: 5%;
 
