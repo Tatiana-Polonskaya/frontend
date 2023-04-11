@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
+
+import { ReactSVG } from "react-svg";
 import { cn } from "@bem-react/classname";
 import MenuItem from "./MenuItem";
-import { HandySvg } from "handy-svg";
 import iconSrc from "./icons/logo-mini.svg";
 
 import images from "./icons";
@@ -57,8 +57,7 @@ export default function Menu() {
 
     return (
         <div className={cnMenu()}>
-            <HandySvg src={iconSrc} className={cnMenu("logo")} />
-
+            <ReactSVG src={iconSrc} className={cnMenu("logo")} />
             <ul>
                 {titleMenu.map((el) => {
                     return (
