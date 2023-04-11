@@ -5,12 +5,13 @@ import ImprovisationPage from "./pages/ImprovisationPage";
 import LearningPage from "./pages/LearningPage";
 import RepetitionPage from "./pages/RepetitionPage";
 import SettingsPage from "./pages/SettingsPage";
+import TestPage from "./pages/TestPage";
 
 export default function App() {
     return (
         <div className="wrapper">
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<TestPage />} />
                 <Route path="/diary" element={<DiaryPage />} />
                 <Route path="/improvisation" element={<ImprovisationPage />} />
                 <Route path="/learning" element={<LearningPage />} />

@@ -1,0 +1,26 @@
+.chat-footer {
+    height: 72px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    background-color: antiquewhite;
+
+    &-message {
+        background: #f3f5f9;
+        height: 50%;
+        width: 80%;
+        overflow: hidden;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    &-textarea {
+        flex: 1 0 auto;
+    }
+
+    &-send-btn {
+    }
+}
