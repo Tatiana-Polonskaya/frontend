@@ -1,0 +1,14 @@
+.menu-item {
+    &-span-logo {
+        padding-right: 5%;
+
+        & svg {
+            fill: #90a0c1;
+        }
+    }
+    &-ul-logo {
+        height: 25px;
+        width: 25px;
+        fill: #90a0c1;
+    }
+}

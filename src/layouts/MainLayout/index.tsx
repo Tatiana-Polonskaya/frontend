@@ -7,22 +7,36 @@ import Menu from "../../components/Menu";
 import "./style.scss";
 
 type Props = {
-    children: ReactNode;
+    children?: ReactNode;
 };
 
-const cnContent = cn("content")
+const cnContent = cn("content");
 
 export default function MainLayout(props: Props) {
     return (
         <>
-            <Menu />
-            <div className={cnContent()}>
-                <Header />
-                <div className={cnContent("wrapper")}>
-                    <section className={cnContent("main")}>{props.children}</section>
+            {/* <Menu />
+            <div>
+                <div className={cnContent()}>
+                    <Header />
+                    <div className={cnContent("wrapper")}>
+                        <section className={cnContent("main")}>
+                            {props.children}
+                        </section>
+                    </div>
+                    <Footer />
                 </div>
-                <Footer />
+            </div> */}
+            <div className={cnContent()}>
+                <Menu />
+                <div className={cnContent("wrapper")}>
+                    <Header />
+                    <section className={cnContent("main")}>
+                        {props.children}
+                    </section>
+                </div>
             </div>
+            <Footer />
         </>
     );
 }
