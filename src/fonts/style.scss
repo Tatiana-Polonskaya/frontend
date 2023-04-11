@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+@font-face {
+    font-family: "Onest";
+    src: local("Onest-Thin"), url("./ttf/Onest-Thin.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Onest";
+    src: local("Onest-Light"), url("./ttf/Onest-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Onest";
+    src: local("Onest-Regular"),
+        url("./ttf/Onest-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Onest";
+    src: local("Onest-Medium"), url("./ttf/Onest-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Onest";
+    src: local("Onest-Bold"), url("./ttf/Onest-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Onest";
+    src: local("Onest-Black"), url("./ttf/Onest-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}

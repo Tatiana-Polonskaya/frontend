@@ -1,3 +1,5 @@
+@import "./_reset.scss";
+
 input,
 button,
 textarea,
@@ -9,6 +11,11 @@ select {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    font-family: "Onest", Helvetica, sans-serif !important;
+    font-size: 16px;
 }
 
 html,
