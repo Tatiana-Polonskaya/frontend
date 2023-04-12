@@ -1,14 +1,24 @@
 import { cn } from "@bem-react/classname";
+import { ReactSVG } from "react-svg";
+import SendIcon from "./icons/send.svg";
+
 import "./style.scss";
+
 const cnFooter = cn("chat-footer");
 
 export default function ChatFooter() {
     return (
         <div className={cnFooter()}>
-            <div className={cnFooter("message")}>
-                <div contentEditable className={cnFooter("textarea")}></div>
+            <div className={cnFooter("send-area")}>
+                <div contentEditable className={cnFooter("textarea")} />
             </div>
-            <button className={cnFooter("send-btn")}>SEND</button>
+            <ReactSVG
+                beforeInjection={(svg) =>
+                    svg.addEventListener("click", () => console.log("send"))
+                }
+                src={SendIcon}
+                className={cnFooter("send-btn")}
+            />
         </div>
     );
 }

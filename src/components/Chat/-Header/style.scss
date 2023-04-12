@@ -1,11 +1,19 @@
-
 .chat-header {
     height: 72px;
-    // border-bottom: 1px solid #e4e6ea;
     border-radius: 32px 32px 0 0;
     display: flex;
     padding: 0 24px;
     flex-direction: row;
     align-items: center;
     flex: 0 0 auto;
+
+    &-title {
+        padding: 0 10px;
+    }
+
+    &-expand-btn {
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+    }
 }

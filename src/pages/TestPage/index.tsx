@@ -7,7 +7,7 @@ export default function TestPage() {
             <div
                 style={{
                     border: "1px solid red",
-                    width: "500px",
+                    width: "340px",
                     height: "600px",
                     backgroundColor: "black",
                 }}
