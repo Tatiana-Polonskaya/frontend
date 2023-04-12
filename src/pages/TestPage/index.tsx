@@ -6,10 +6,10 @@ export default function TestPage() {
         <MainLayout>
             <div
                 style={{
-                    // border: "1px solid red",
+                    border: "1px solid red",
                     width: "500px",
                     height: "600px",
-                    // backgroundColor: "black",
+                    backgroundColor: "black",
                 }}
             >
                 <Chat />

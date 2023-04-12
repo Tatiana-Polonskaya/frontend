@@ -1,24 +1,33 @@
 import { cn } from "@bem-react/classname";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { createContext } from "react";
+
+import ChatFooter from "./-Footer";
+import ChatHeader from "./-Header";
 
 import "./style.scss";
-import { useState } from "react";
-import ChatFooter from "./-Footer";
+
+export const ChatContext = createContext({
+    isExpanded: true,
+    setIsExpanded: (() => {}) as Dispatch<SetStateAction<boolean>>,
+});
 
 const cnChat = cn("chat");
 
 export default function Chat() {
-    const [isOpened, setIsOpened] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(true);
 
     return (
-        <div className={cnChat()}>
-            <div className={cnChat("header")}>
-                <button onClick={() => setIsOpened(prev => !prev)}>v</button>
-                <span>Чат поддержки</span>
+        <ChatContext.Provider value={{ isExpanded, setIsExpanded }}>
+            <div className={cnChat()}>
+                <ChatHeader />
+                {isExpanded && (
+                    <>
+                        <div className={cnChat("content")}></div>
+                        <ChatFooter />
+                    </>
+                )}
             </div>
-            {isOpened && <>
-                <div className={cnChat("content")}></div>
-                <ChatFooter />
-            </>}
-        </div>
+        </ChatContext.Provider>
     );
 }
