@@ -1,0 +1,33 @@
+.chat-message {
+    padding: 8px 8px 8px 12px;
+    border-radius: 16px;
+    margin: 4px;
+
+    &-mine {
+        background: #e4eaf5;
+        color: #37476a;
+    }
+
+    &-other {
+        background: linear-gradient(310.91deg, #3aa0ff 0.21%, #0050c9 100.21%);
+        color: white;
+    }
+
+    &-header {
+        padding: 0 0 4px 0;
+    }
+
+    &-sender-name {
+        font-weight: 700;
+        font-size: 0.75rem;
+    }
+
+    &-sender-description {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    &-sender-info {
+        display: flex;
+        justify-content: space-between;
+    }
+}
