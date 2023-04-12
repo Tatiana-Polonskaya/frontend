@@ -1,3 +1,4 @@
+import Carousel from "../../components/Сarousel";
 import MainLayout from "../../layouts/MainLayout";
 import { useEffect, useState, useCallback } from "react";
 
@@ -43,5 +44,6 @@ export default function HomePage() {
         <StateComponent />
         {hasEffectComponent && <EffectComponent />}
         <button onClick={() => setEffectComponent(prev => !prev)}>toggle</button>
+        <Carousel />
     </MainLayout>;
 }
