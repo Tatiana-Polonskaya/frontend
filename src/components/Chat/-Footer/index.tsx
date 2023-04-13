@@ -10,12 +10,10 @@ export default function ChatFooter() {
     return (
         <div className={cnFooter()}>
             <div className={cnFooter("send-area")}>
-                <div contentEditable className={cnFooter("textarea")} />
+                <div contentEditable placeholder="Задай свой вопрос..." className={cnFooter("textarea")} />
             </div>
             <ReactSVG
-                beforeInjection={(svg) =>
-                    svg.addEventListener("click", () => console.log("send"))
-                }
+                beforeInjection={(svg) => svg.addEventListener("click", () => console.log("send"))}
                 src={SendIcon}
                 className={cnFooter("send-btn")}
             />

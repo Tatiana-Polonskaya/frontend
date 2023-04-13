@@ -15,7 +15,7 @@ export default function Footer() {
                         Пользовательское соглашение
                     </a>
                 </div>
-                <span>© Спичап 2023</span>
+                <span>&#169;&nbsp;ООО&nbsp;«Точка инноваций»&nbsp;2023</span>
             </div>
         </footer>
     );

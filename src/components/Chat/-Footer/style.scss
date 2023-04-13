@@ -18,10 +18,20 @@
         flex: 0 0 auto;
         max-width: 90%;
         overflow: hidden;
+        font-size: 0.75rem;
     }
 
     &-textarea {
         flex: 1 0 auto;
+        padding: 0 0 0 8px;
+
+        &[contenteditable="true"]:empty:before {
+            // https://stackoverflow.com/a/61659129
+            content: attr(placeholder);
+            pointer-events: none;
+            display: block; /* For Firefox */
+            color: #7c8eb5;
+        }
     }
 
     &-send-btn {

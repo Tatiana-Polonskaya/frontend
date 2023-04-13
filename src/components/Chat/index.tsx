@@ -77,7 +77,7 @@ const cnChat = cn("chat");
 export default function Chat() {
     const [isExpanded, setIsExpanded] = useState(true);
 
-    const [messages, setMessages] = useState(messagesMock);
+    const [messages, setMessages] = useState([...messagesMock]);
     // для сообщений, наверное, лучше использовать useMemo
 
 
@@ -88,7 +88,7 @@ export default function Chat() {
                 {isExpanded && (
                     <>
                         <div className={cnChat("content")}>
-                            {messages.map((msg, idx) => (
+                            {messages.reverse().map((msg, idx) => (
                                 <ChatMessage key={idx} {...msg} />
                             ))}
                         </div>

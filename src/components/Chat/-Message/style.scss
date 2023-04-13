@@ -1,7 +1,37 @@
 .chat-message {
-    padding: 8px 8px 8px 12px;
-    border-radius: 16px;
-    margin: 4px;
+    &-wrapper {
+        display: flex;
+        flex-direction: row;
+        // align-items: center;
+        margin: 4px;
+    }
+
+    &-triangle-other {
+        margin: 16px 0 0 0;
+        width: 0px;
+        height: 0px;
+        border-right: 14px solid #0557cd;
+        border-bottom: 8px solid transparent;
+        border-top: 8px solid transparent;
+
+        flex: 0 0 auto;
+    }
+    &-triangle-mine {
+        width: 0px;
+        height: 0px;
+        border-left: 14px solid #e4eaf5;
+        border-bottom: 8px solid transparent;
+        border-top: 8px solid transparent;
+
+        margin: 16px 0 0 0;
+
+        flex: 0 0 auto;
+    }
+
+    &-actual {
+        padding: 8px 8px 8px 12px;
+        border-radius: 16px;
+    }
 
     &-mine {
         background: #e4eaf5;
