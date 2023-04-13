@@ -2,7 +2,6 @@
     &-wrapper {
         margin: 4px;
 
-        // justify-content: flex-end;
         &_mine {
             display: flex;
             flex-direction: row;
@@ -14,60 +13,63 @@
             justify-content: flex-start;
         }
     }
+    &_triangle {
+        &_mine {
+            width: 0px;
+            height: 0px;
+            border-left: 14px solid #e4eaf5;
+            border-bottom: 8px solid transparent;
+            border-top: 8px solid transparent;
 
-    &-triangle-other {
-        margin: 16px 0 0 0;
-        width: 0px;
-        height: 0px;
-        border-right: 14px solid #0557cd;
-        border-bottom: 8px solid transparent;
-        border-top: 8px solid transparent;
+            margin: 16px 0 0 0;
+            flex: 0 0 auto;
+        }
+        &_other {
+            width: 0px;
+            height: 0px;
+            border-right: 14px solid #0557cd;
+            border-bottom: 8px solid transparent;
+            border-top: 8px solid transparent;
 
-        flex: 0 0 auto;
-    }
-    &-triangle-mine {
-        width: 0px;
-        height: 0px;
-        border-left: 14px solid #e4eaf5;
-        border-bottom: 8px solid transparent;
-        border-top: 8px solid transparent;
-
-        margin: 16px 0 0 0;
-
-        flex: 0 0 auto;
+            margin: 16px 0 0 0;
+            flex: 0 0 auto;
+        }
     }
 
     &-actual {
         padding: 8px 8px 8px 12px;
         border-radius: 16px;
         min-width: 50%;
-    }
 
-    &-mine {
-        background: #e4eaf5;
-        color: #37476a;
-    }
+        &_mine {
+            background: #e4eaf5;
+            color: #37476a;
+        }
 
-    &-other {
-        background: linear-gradient(310.91deg, #3aa0ff 0.21%, #0050c9 100.21%);
-        color: white;
+        &_other {
+            background: linear-gradient(310.91deg, #3aa0ff 0.21%, #0050c9 100.21%);
+            color: white;
+        }
     }
 
     &-header {
         padding: 0 0 4px 0;
-    }
 
-    &-sender-name {
-        font-weight: 700;
-        font-size: 0.75rem;
-    }
+        &_sender {
+            &_name {
+                font-weight: 700;
+                font-size: 0.75rem;
+                padding: 0 2px 0 0;
+            }
 
-    &-sender-description {
-        color: rgba(255, 255, 255, 0.7);
-    }
+            &_description {
+                color: rgba(255, 255, 255, 0.7);
+            }
 
-    &-sender-info {
-        display: flex;
-        justify-content: space-between;
+            &_info {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
     }
 }
