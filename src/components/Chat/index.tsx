@@ -70,6 +70,7 @@ const messagesMock = [
 export const ChatContext = createContext({
     isExpanded: true,
     setIsExpanded: (() => {}) as Dispatch<SetStateAction<boolean>>,
+    addMessage: (message: any) => {},
 });
 
 const cnChat = cn("chat");
@@ -78,11 +79,11 @@ export default function Chat() {
     const [isExpanded, setIsExpanded] = useState(true);
 
     const [messages, setMessages] = useState([...messagesMock]);
+    const addMessage = (message: any) => setMessages([message, ...messages]);
     // для сообщений, наверное, лучше использовать useMemo
 
-
     return (
-        <ChatContext.Provider value={{ isExpanded, setIsExpanded }}>
+        <ChatContext.Provider value={{ isExpanded, setIsExpanded, addMessage }}>
             <div className={cnChat()}>
                 <ChatHeader />
                 {isExpanded && (

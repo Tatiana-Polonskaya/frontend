@@ -24,6 +24,7 @@
     &-textarea {
         flex: 1 0 auto;
         padding: 0 0 0 8px;
+        word-break: break-word;
 
         &[contenteditable="true"]:empty:before {
             // https://stackoverflow.com/a/61659129
