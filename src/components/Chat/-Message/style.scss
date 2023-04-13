@@ -1,9 +1,18 @@
 .chat-message {
     &-wrapper {
-        display: flex;
-        flex-direction: row;
-        // align-items: center;
         margin: 4px;
+
+        // justify-content: flex-end;
+        &_mine {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+        &_other {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
     }
 
     &-triangle-other {
@@ -31,6 +40,7 @@
     &-actual {
         padding: 8px 8px 8px 12px;
         border-radius: 16px;
+        min-width: 50%;
     }
 
     &-mine {

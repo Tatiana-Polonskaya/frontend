@@ -13,7 +13,7 @@ const cnMessage = cn("chat-message");
 
 export default function ChatMessage(props: MessageProps) {
     return (
-        <div className={cnMessage("wrapper")}>
+        <div className={cnMessage("wrapper", { mine: props.mine, other: !props.mine })}>
             {!props.mine && <div className={cnMessage("triangle-other")} />}
 
             <div className={cnMessage("actual", [cnMessage(props.mine ? "mine" : "other")])}>
