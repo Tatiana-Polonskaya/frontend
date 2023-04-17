@@ -11,7 +11,7 @@ export default function App() {
     return (
         <div className="wrapper">
             <Routes>
-                <Route path="/" element={<TestPage />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/diary" element={<DiaryPage />} />
                 <Route path="/improvisation" element={<ImprovisationPage />} />
                 <Route path="/learning" element={<LearningPage />} />

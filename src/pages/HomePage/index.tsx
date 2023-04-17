@@ -1,47 +1,33 @@
-import MainLayout from "../../layouts/MainLayout";
+import { cn } from "@bem-react/classname";
 import { useEffect, useState, useCallback } from "react";
 
+import MainLayout from "../../layouts/MainLayout";
+import Chat from "../../components/Chat";
 
-function StateComponent() {
-    const [counter, setCounter] = useState(0)
+import "./style.scss";
 
-    const increment = () => setCounter(prev => ++prev)
-
-    return (
-        <div>
-            <span>{counter}</span>
-            <button onClick={increment}>Incement</button>
-        </div>
-    )
-}
-
-function EffectComponent() {
-
-    useEffect(() => console.log("did mount"), [])
-    useEffect(() => () => console.log("destroy"), [])
-    useEffect(() => console.log("always"))
-    const [counter, setCounter] = useState(0)
-
-    useEffect(() => console.log(2), [counter]) // для useState counter
-
-    const increment = () => setCounter(prev => ++prev)
-
-    return (
-        <div>
-            <span>{counter}</span>
-            <button onClick={increment}>Incement</button>
-        </div>
-    )
-}
-
-
+const cnHome = cn("home");
 
 export default function HomePage() {
-
-    const [hasEffectComponent, setEffectComponent] = useState(true)
-    return <MainLayout>
-        <StateComponent />
-        {hasEffectComponent && <EffectComponent />}
-        <button onClick={() => setEffectComponent(prev => !prev)}>toggle</button>
-    </MainLayout>;
+    return (
+        <MainLayout>
+            <div className={cnHome()}>
+                <div className={cnHome("header")}>
+                    <div>Лучшие выступления</div>
+                    <div className={cnHome("chat-wrapper")}>
+                        <div className={cnHome("chat-wrapper-wrapper")}>
+                            <Chat />
+                        </div>
+                    </div>
+                </div>
+                <p style={{ overflowWrap: "break-word", width: "100%" }}>
+                    {" "}
+                    {/*main content*/}
+                    Lorem ipsum dolor sit amet consecteturblanditiis facilis
+                    sunt laudantium earum beatae, in nesciunt. Sed placeat fugit
+                    vel repellat!
+                </p>
+            </div>
+        </MainLayout>
+    );
 }

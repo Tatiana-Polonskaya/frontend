@@ -75,8 +75,12 @@ export const ChatContext = createContext({
 
 const cnChat = cn("chat");
 
-export default function Chat() {
-    const [isExpanded, setIsExpanded] = useState(true);
+type Props = {
+    isExpanded?: boolean;
+};
+
+export default function Chat(props: Props) {
+    const [isExpanded, setIsExpanded] = useState(Boolean(props.isExpanded));
 
     const [messages, setMessages] = useState([...messagesMock]);
     const addMessage = (message: any) => setMessages([message, ...messages]);

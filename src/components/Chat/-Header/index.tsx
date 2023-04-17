@@ -18,7 +18,7 @@ export default function ChatHeader() {
                 onClick={() => setIsExpanded((prev) => !prev)}
                 className={cnChatHeader("expand-btn")}
                 wrapper="div"
-                style={{ rotate: isExpanded ? "90deg" : "-90deg" }}
+                style={{ rotate: isExpanded ? "-90deg" : "90deg" }}
             />
             <span className={cnChatHeader("title")}>Чат поддержки</span>
         </div>
