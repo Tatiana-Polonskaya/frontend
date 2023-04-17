@@ -5,12 +5,17 @@ import SendIcon from "./icons/send.svg";
 import "./style.scss";
 import { useCallback, useEffect, useRef, useContext, useState } from "react";
 import { ChatContext } from "..";
+import { RootState } from "../../../store";
+import { useSelector } from "react-redux";
 
 const cnFooter = cn("chat-footer");
 
 export default function ChatFooter() {
     const [message, setMessage] = useState(String());
     const { addMessage } = useContext(ChatContext);
+
+    const lastName = useSelector((state: RootState) => state.profile.lastName);
+    const name = useSelector((state: RootState) => state.profile.name);
 
     const textAreaRef = useRef(null);
 
@@ -32,11 +37,12 @@ export default function ChatFooter() {
         addMessage({
             message,
             mine: true,
-            senderName: "ME",
+            senderName: `${name} ${lastName}`,
             time: "XX:YY",
         });
         setMessage("");
-        if (textAreaRef.current) (textAreaRef.current as HTMLDivElement).innerText = "";
+        if (textAreaRef.current)
+            (textAreaRef.current as HTMLDivElement).innerText = "";
     };
 
     return (
@@ -52,7 +58,9 @@ export default function ChatFooter() {
                 ></div>
             </div>
             <ReactSVG
-                beforeInjection={(svg) => svg.addEventListener("click", newMessageHandler)}
+                beforeInjection={(svg) =>
+                    svg.addEventListener("click", newMessageHandler)
+                }
                 src={SendIcon}
                 className={cnFooter("send-btn")}
             />
