@@ -19,6 +19,11 @@ export default function ChatFooter() {
         if (!target.innerText.replace(/\n/g, "")) {
             target.innerText = "";
         }
+        if (event.key === "Enter") {
+            if (event.ctrlKey) {
+                newMessageHandler();
+            }
+        }
         setMessage(target.innerText);
     };
 
