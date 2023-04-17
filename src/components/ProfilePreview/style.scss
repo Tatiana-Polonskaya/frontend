@@ -10,4 +10,19 @@
         border-radius: 100%;
         object-fit: cover;
     }
+
+    &-text {
+        display: flex;
+        flex-direction: column;
+        font-weight: 600;
+        color: #7c8eb5;
+
+        font-size: 1rem;
+        &_username {
+            color: #2477f4;
+            padding: 5px 0;
+            font-size: 1.375rem;
+            font-weight: 600;
+        }
+    }
 }

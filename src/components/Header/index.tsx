@@ -1,6 +1,10 @@
 import { cn } from "@bem-react/classname";
 import ProfilePreview from "../ProfilePreview";
 
+import Arrow from "./icons/arrow.svg";
+import NotificationStatus from "./icons/notification-status.svg";
+import { ReactSVG } from "react-svg";
+
 import "./style.scss";
 
 type Props = {
@@ -15,7 +19,11 @@ export default function Header(props: Props) {
         <header className={cnHeader()}>
             <div className={cnHeader("content")}>
                 <ProfilePreview {...props} />
-                <div>Уведомления</div>
+                <div className={cnHeader("notifications")}>
+                    <ReactSVG src={NotificationStatus} wrapper="span"/>
+                    <span>Уведомления</span>
+                    <ReactSVG src={Arrow} wrapper="span"/>
+                </div>
             </div>
         </header>
     );
