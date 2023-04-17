@@ -12,7 +12,7 @@ export default function ChatHeader() {
     const { isExpanded, setIsExpanded } = useContext(ChatContext);
 
     return (
-        <div className={cnChatHeader()}>
+        <div className={cnChatHeader({ expanded: isExpanded })}>
             <ReactSVG
                 src={ExpandIcon}
                 onClick={() => setIsExpanded((prev) => !prev)}

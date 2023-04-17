@@ -3,7 +3,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: white;
     border-radius: 18px;
 
     &-content {
@@ -11,6 +10,7 @@
         overflow: auto;
         border-bottom: 1px solid #e4e6ea;
         border-top: 1px solid #e4e6ea;
+        background: white;
         display: flex;
         flex-direction: column-reverse;
         font-size: 0.8rem;
