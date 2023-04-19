@@ -5,6 +5,7 @@ import ImprovisationPage from "./pages/ImprovisationPage";
 import LearningPage from "./pages/LearningPage";
 import RepetitionPage from "./pages/RepetitionPage";
 import SettingsPage from "./pages/SettingsPage";
+import TestPage from "./pages/TestPage";
 
 export default function App() {
     return (

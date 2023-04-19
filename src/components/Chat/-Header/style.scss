@@ -1,0 +1,25 @@
+.chat-header {
+    height: 60px;
+    display: flex;
+    padding: 18px 20px;
+    flex-direction: row;
+    align-items: center;
+    flex: 0 0 auto;
+    background: white;
+
+    border-radius: 18px 0 0 18px;
+
+    &_expanded {
+        border-radius: 32px 32px 0 0;
+    }
+
+    &-title {
+        padding: 0 10px;
+    }
+
+    &-expand-btn {
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+    }
+}

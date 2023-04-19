@@ -18,11 +18,17 @@ export default function ProfilePreview(props: Props) {
                 src={props.imageUrl || NoPhoto}
                 alt="Avatar"
             />
-            <div>
-                {!props.displayName ? (
+            <div className={cnProfilePreview("text")}>
+                {props.displayName ? (
                     <>
                         <span>Добрый день,</span>
-                        <span>{props.displayName}</span>
+                        <span
+                            className={cnProfilePreview("text", {
+                                username: true,
+                            })}
+                        >
+                            {props.displayName}
+                        </span>
                     </>
                 ) : (
                     <span>Добрый день!</span>

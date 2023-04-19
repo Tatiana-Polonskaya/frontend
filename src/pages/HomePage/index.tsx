@@ -1,48 +1,34 @@
 import Carousel from "../../components/Сarousel";
+import { cn } from "@bem-react/classname";
+
 import MainLayout from "../../layouts/MainLayout";
-import { useEffect, useState, useCallback } from "react";
+import Chat from "../../components/Chat";
 
-function StateComponent() {
-    const [counter, setCounter] = useState(0)
+import ElementEqual from "./icons/element-equal.svg";
+import "./style.scss";
+import { ReactSVG } from "react-svg";
 
-    const increment = () => setCounter(prev => ++prev)
-
-    return (
-        <div>
-            <span>{counter}</span>
-            <button onClick={increment}>Incement</button>
-        </div>
-    )
-}
-
-function EffectComponent() {
-
-    useEffect(() => console.log("did mount"), [])
-    useEffect(() => () => console.log("destroy"), [])
-    useEffect(() => console.log("always"))
-    const [counter, setCounter] = useState(0)
-
-    useEffect(() => console.log(2), [counter]) // для useState counter
-
-    const increment = () => setCounter(prev => ++prev)
-
-    return (
-        <div>
-            <span>{counter}</span>
-            <button onClick={increment}>Incement</button>
-        </div>
-    )
-}
-
-
+const cnHome = cn("home");
 
 export default function HomePage() {
-
-    const [hasEffectComponent, setEffectComponent] = useState(true)
-    return <MainLayout>
-        <StateComponent />
-        {hasEffectComponent && <EffectComponent />}
-        <button onClick={() => setEffectComponent(prev => !prev)}>toggle</button>
-        <Carousel />
-    </MainLayout>;
+    return (
+        <MainLayout>
+            <div className={cnHome()}>
+                <div className={cnHome("chat")}>
+                    <Chat />
+                </div>
+                <div className={cnHome("header")}>
+                    <ReactSVG src={ElementEqual} />
+                    <div>Лучшие выступления</div>
+                </div>
+                <div className={cnHome("content")}>
+                    <p>
+                        Lorem ipsum dolor sit amet consecteturblanditiis facilis
+                        sunt laudantium earum beatae, in nesciunt. Sed placeat
+                        fugit vel repellat!
+                    </p>
+                </div>
+            </div>
+        </MainLayout>
+    );
 }

@@ -7,4 +7,18 @@
         justify-content: space-between;
         padding: 25px 40px;
     }
+
+    &-notifications {
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: #7c8eb5;
+        display: flex;
+        align-items: center;
+
+        & span span {
+            // из-за двойной обертки ReactSVG
+            padding: 0 6px;
+            margin: 0;
+        }
+    }
 }
