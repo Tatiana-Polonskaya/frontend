@@ -2,7 +2,6 @@ import Carousel from "../../components/Сarousel";
 import MainLayout from "../../layouts/MainLayout";
 import { useEffect, useState, useCallback } from "react";
 
-
 function StateComponent() {
     const [counter, setCounter] = useState(0)
 

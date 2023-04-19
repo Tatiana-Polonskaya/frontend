@@ -1,0 +1,47 @@
+.carouse-item{
+    display: flex;
+    flex-flow: column nowrap;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: space-around;
+
+    width: 180px;
+
+    &-img-block{
+        height: 120px;
+        width: 120px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 120px 120px;
+        border-radius: 100% 100% 100% 100%;
+    }
+
+    &-button{
+        display: flex;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+
+        img{
+            height: 32px;
+            width: 32px;
+        }
+        
+    }
+
+    p{
+        padding-top: 10px;
+        font-family: Onest;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0em;
+        text-align: center;
+        color: #000000;
+
+    }
+    
+}
+
