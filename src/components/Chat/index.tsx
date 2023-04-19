@@ -88,7 +88,7 @@ export default function Chat(props: Props) {
 
     return (
         <ChatContext.Provider value={{ isExpanded, setIsExpanded, addMessage }}>
-            <div className={cnChat()}>
+            <div className={cnChat({expanded: isExpanded})}>
                 <ChatHeader />
                 {isExpanded && (
                     <>
