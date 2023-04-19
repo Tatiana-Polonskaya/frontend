@@ -62,7 +62,7 @@ export default function Menu() {
                 {titleMenu.map((el) => {
                     return (
                         <li>
-                            <MenuItem item={el} id={el.id} key={el.id} />
+                            <MenuItem item={el} key={el.id} />
                         </li>
                     );
                 })}

@@ -1,3 +1,4 @@
+import Carousel from "../../components/Сarousel";
 import { cn } from "@bem-react/classname";
 
 import MainLayout from "../../layouts/MainLayout";
@@ -27,6 +28,7 @@ export default function HomePage() {
                         fugit vel repellat!
                     </p>
                 </div>
+                <Carousel/>
             </div>
         </MainLayout>
     );

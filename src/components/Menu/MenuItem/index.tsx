@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import "./style.scss";
 
 type Props = {
-    id: number;
     item: Item;
 };
 
