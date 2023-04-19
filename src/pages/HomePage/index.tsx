@@ -28,6 +28,7 @@ export default function HomePage() {
                         fugit vel repellat!
                     </p>
                 </div>
+                <Carousel/>
             </div>
         </MainLayout>
     );
