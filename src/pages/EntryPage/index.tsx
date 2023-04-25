@@ -10,6 +10,7 @@ import "./style.scss";
 import { useState } from "react";
 
 const cnEntryPage = cn("entry-page");
+const cnRadioItem = cn("radio-item");
 
 enum PageState {
     Personal,
@@ -23,8 +24,9 @@ type RadioItemProps = {
 };
 
 const RadioItem = (props: RadioItemProps) => (
-    <label>
+    <label className={cnRadioItem("label", {checked: props.condition})}>
         <input
+            className={cnRadioItem("input")}
             type="radio"
             checked={props.condition}
             onChange={props.changer}
@@ -49,12 +51,12 @@ export default function EntryPage() {
                     <RadioItem
                         condition={pageState === PageState.Personal}
                         changer={() => setPageState(PageState.Personal)}
-                        label="Для себя"
+                        label={"Для себя"}
                     />
                     <RadioItem
                         condition={pageState === PageState.Business}
                         changer={() => setPageState(PageState.Business)}
-                        label="Для бизнеса"
+                        label={"Для бизнеса"}
                     />
                     <PageHelper state={pageState} />
                 </div>
