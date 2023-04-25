@@ -1,14 +1,13 @@
-.entry-page {
+.entry-layout {
     height: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
 
-    &-main {
-        padding: 40px 80px;
-    }
-
     &-content {
-        padding: 32px 0;
+        padding: 50px 85px;
     }
-}
 
+    // &-image {
+    // }
+}

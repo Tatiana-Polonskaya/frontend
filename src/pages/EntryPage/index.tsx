@@ -17,6 +17,11 @@ enum PageState {
     Business,
 }
 
+export enum PageMode {
+    Login,
+    Register,
+}
+
 type RadioItemProps = {
     condition: boolean;
     changer: React.ChangeEventHandler<HTMLInputElement>;
@@ -35,14 +40,9 @@ const RadioItem = (props: RadioItemProps) => (
     </label>
 );
 
-const PageHelper = ({ state }: { state: PageState }) =>
-    ({
-        [PageState.Personal]: <EntryPagePersonal />,
-        [PageState.Business]: <EntryPageBusiness />,
-    }[state]);
-
 export default function EntryPage() {
     const [pageState, setPageState] = useState(PageState.Personal);
+    const [pageMode, setPageMode] = useState(PageMode.Login);
 
     return (
         <div className={cnEntryPage()}>
@@ -59,7 +59,12 @@ export default function EntryPage() {
                         label={"Для бизнеса"}
                     />
                     <div className={cnEntryPage("content")}>
-                        <PageHelper state={pageState} />
+                        {pageState === PageState.Personal && (
+                            <EntryPagePersonal mode={pageMode} />
+                        )}
+                        {pageState === PageState.Business && (
+                            <EntryPageBusiness mode={pageMode} />
+                        )}
                     </div>
                 </div>
             </div>

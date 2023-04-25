@@ -1,20 +1,15 @@
 import { cn } from "@bem-react/classname";
 
-import Button from "../../../components/ui-kit/Button";
-import Link from "../../../components/ui-kit/Link";
-import TextInput from "../../../components/ui-kit/TextInput";
+import Button from "../../../../components/ui-kit/Button";
+import Link from "../../../../components/ui-kit/Link";
+import TextInput from "../../../../components/ui-kit/TextInput";
 
 import "./style.scss";
-import { useEffect, useState } from "react";
-import { PageMode } from "..";
+import { useState } from "react";
 
 const cnEntryPagePersonal = cn("entry-page-personal");
 
-type EntryPagePersonalProps = {
-    mode: PageMode;
-};
-
-export default function EntryPagePersonal(props: EntryPagePersonalProps) {
+export default function EntryPagePersonal() {
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
