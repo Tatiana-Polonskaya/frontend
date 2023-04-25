@@ -1,11 +1,14 @@
 .entry-page {
     height: 100%;
     display: flex;
-    border: 1px solid red;
     justify-content: space-between;
 
     &-main {
         padding: 40px 80px;
+    }
+
+    &-content {
+        padding: 32px 0;
     }
 }
 
@@ -26,10 +29,5 @@
     }
     &-input {
         appearance: none;
-
-        // &:checked {
-        //     background: #ffb800;
-        //     color: white;
-        // }
     }
 }

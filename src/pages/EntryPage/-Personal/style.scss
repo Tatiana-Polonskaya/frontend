@@ -1,10 +1,12 @@
 .entry-page-personal {
-    padding: 32px 0;
-
     &-header {
         text-transform: uppercase;
         font-weight: 700;
         padding: 16px 0;
+
+        & > * {
+            padding-right: 16px;
+        }
     }
 
     &-phrase {
@@ -20,27 +22,16 @@
         padding: 8px 0;
     }
 
+    &-details-link {
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+
     &-labels {
         padding: 32px 0;
     }
 
-    &-label {
-        display: flex;
-        flex-direction: column;
-        padding: 8px 0;
-        font-weight: 500;
-        & input {
-            border: 2px solid #b2c2e4;
-            border-radius: 16px;
-            padding: 18px 16px;
-            font-size: 1.25rem;
-        }
 
-        & span {
-            padding: 4px 16px;
-            font-weight: 600;
-        }
-    }
 
     &-footer {
         display: block;

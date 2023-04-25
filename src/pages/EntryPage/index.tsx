@@ -24,7 +24,7 @@ type RadioItemProps = {
 };
 
 const RadioItem = (props: RadioItemProps) => (
-    <label className={cnRadioItem("label", {checked: props.condition})}>
+    <label className={cnRadioItem("label", { checked: props.condition })}>
         <input
             className={cnRadioItem("input")}
             type="radio"
@@ -58,7 +58,9 @@ export default function EntryPage() {
                         changer={() => setPageState(PageState.Business)}
                         label={"Для бизнеса"}
                     />
-                    <PageHelper state={pageState} />
+                    <div className={cnEntryPage("content")}>
+                        <PageHelper state={pageState} />
+                    </div>
                 </div>
             </div>
             <ReactSVG src={RegImage} />

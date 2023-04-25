@@ -12,7 +12,7 @@ export default function Button(
 ) {
     const newProps = {...props, className: cnButton()}
     return (
-        <button {...props} className={cnButton()}>
+        <button {...props} className={`${props.className} ${cnButton()}`}>
             {props.children}
         </button>
     );
