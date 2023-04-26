@@ -10,9 +10,9 @@ import { useState } from "react";
 const cnFirstStep = cn("first-step");
 
 type FirstStepProps = {
-    phrase: string,
-    subphrase: string,
-}
+    phrase: string;
+    subphrase: string;
+};
 
 export default function FirstStep(props: FirstStepProps) {
     const [name, setName] = useState("");
@@ -25,17 +25,13 @@ export default function FirstStep(props: FirstStepProps) {
                 <span>Уже есть аккаунт?</span>
                 <Link href="/">Войти</Link>
             </div>
-            <span className={cnFirstStep("phrase")}>
-                {props.phrase}
-            </span>
-            <span className={cnFirstStep("subphrase")}>
-                {props.subphrase}
-            </span>
+            <span className={cnFirstStep("phrase")}>{props.phrase}</span>
+            <span className={cnFirstStep("subphrase")}>{props.subphrase}</span>
             <Link href="/" className={cnFirstStep("details-link")}>
                 Узнать подробнее о сервисе ▶
             </Link>
 
-            <div className={cnFirstStep("labels")}>
+            <div className={cnFirstStep("inputs")}>
                 <TextInput
                     label="Имя"
                     placeholder="Введите имя"
@@ -54,12 +50,11 @@ export default function FirstStep(props: FirstStepProps) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-
-                <Button>Продолжить</Button>
-                <span className={cnFirstStep("footer")}>
-                    Нажимая «продолжить», я соглашаюсь...
-                </span>
             </div>
+            <Button className={cnFirstStep("button")} disabled={!(name && lastName && email)}>Продолжить</Button>
+            <span className={cnFirstStep("footer")}>
+                Нажимая «продолжить», я соглашаюсь...
+            </span>
         </section>
     );
 }

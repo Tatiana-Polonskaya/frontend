@@ -5,10 +5,18 @@
     justify-content: space-between;
 
     &-content {
-        padding: 50px 85px;
+        padding: 48px 16px;
+        // padding: 50px 85px;
+        margin: auto;
+        max-width: 30%;
+        
+        @media screen and (max-width: 1024px) {
+            max-width: inherit;
+        }
     }
 
     &-image {
+        margin: auto 0;
         @media screen and (max-width: 1024px) {
             display: none;
         }

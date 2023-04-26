@@ -15,8 +15,11 @@ type TextInputProps = {
 export default function TextInput(props: TextInputProps) {
     return (
         <label className={cnTextInput()}>
-            <span>{props.label}</span>
+            <span className={cnTextInput("label", { wrong: false })}>
+                {props.label}
+            </span>
             <input
+                className={cnTextInput("input", { wrong: false })}
                 type="text"
                 placeholder={props.placeholder}
                 value={props.value}
