@@ -1,37 +1,41 @@
 import { cn } from "@bem-react/classname";
 
-import Button from "../../../../components/ui-kit/Button";
-import Link from "../../../../components/ui-kit/Link";
-import TextInput from "../../../../components/ui-kit/TextInput";
+import Button from "../../../../../components/ui-kit/Button";
+import Link from "../../../../../components/ui-kit/Link";
+import TextInput from "../../../../../components/ui-kit/TextInput";
 
 import "./style.scss";
 import { useState } from "react";
 
-const cnEntryPagePersonal = cn("entry-page-personal");
+const cnFirstStep = cn("first-step");
 
-export default function EntryPagePersonal() {
+type FirstStepProps = {
+    phrase: string,
+    subphrase: string,
+}
+
+export default function FirstStep(props: FirstStepProps) {
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
 
     return (
-        <section className={cnEntryPagePersonal()}>
-            <div className={cnEntryPagePersonal("header")}>
+        <section className={cnFirstStep()}>
+            <div className={cnFirstStep("header")}>
                 <span>Уже есть аккаунт?</span>
                 <Link href="/">Войти</Link>
             </div>
-            <span className={cnEntryPagePersonal("phrase")}>
-                Станьте успешнее и увереннее в себе
+            <span className={cnFirstStep("phrase")}>
+                {props.phrase}
             </span>
-            <span className={cnEntryPagePersonal("subphrase")}>
-                Совершенствуйте навыки выступлений, репетируя наедине с собой
-                без какого-либо смущения.
+            <span className={cnFirstStep("subphrase")}>
+                {props.subphrase}
             </span>
-            <Link href="/" className={cnEntryPagePersonal("details-link")}>
+            <Link href="/" className={cnFirstStep("details-link")}>
                 Узнать подробнее о сервисе ▶
             </Link>
 
-            <div className={cnEntryPagePersonal("labels")}>
+            <div className={cnFirstStep("labels")}>
                 <TextInput
                     label="Имя"
                     placeholder="Введите имя"
@@ -52,7 +56,7 @@ export default function EntryPagePersonal() {
                 />
 
                 <Button>Продолжить</Button>
-                <span className={cnEntryPagePersonal("footer")}>
+                <span className={cnFirstStep("footer")}>
                     Нажимая «продолжить», я соглашаюсь...
                 </span>
             </div>

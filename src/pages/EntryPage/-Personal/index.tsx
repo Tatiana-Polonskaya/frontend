@@ -6,15 +6,12 @@ import TextInput from "../../../components/ui-kit/TextInput";
 
 import "./style.scss";
 import { useEffect, useState } from "react";
-import { PageMode } from "..";
 
 const cnEntryPagePersonal = cn("entry-page-personal");
 
-type EntryPagePersonalProps = {
-    mode: PageMode;
-};
 
-export default function EntryPagePersonal(props: EntryPagePersonalProps) {
+
+export default function EntryPagePersonal() {
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");

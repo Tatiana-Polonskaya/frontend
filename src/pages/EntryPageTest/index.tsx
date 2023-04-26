@@ -1,67 +1,95 @@
 import { ReactSVG } from "react-svg";
 import EntryLayout from "../../layouts/EntryLayout";
 
-import RegImage from "../EntryPage/assets/reg-image-personal.svg";
+import RegImagePersonal from "./assets/reg-image-personal.svg";
+import RegImageBusiness from "./assets/reg-image-business.svg";
+
 import Tab from "../../components/ui-kit/Tab";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 
-enum PageState {
+import RegisterPage from "./-Register";
+
+import "./style.scss";
+
+export enum UserType {
     Personal = "personal",
     Business = "business",
 }
 
-enum PageMode {
+export enum PageMode {
     Login = "login",
     Register = "register",
     PasswordRecovery = "password-recovery",
 }
 
-type EntryPageProps = {
-    initialState?: PageState;
-    initialMode?: PageMode;
+export type GenericProps = {
+    userType: UserType;
 };
 
-const isEnumMember = (value: any, enum_: Object) =>
-    Object.values(enum_).includes(value as typeof enum_);
+const USER_TYPE_PARAM = "type";
+const PAGE_MODE_PARAM = "mode";
 
 export default function EntryPageTest() {
     const [params, setParams] = useSearchParams();
 
-    const isValidPageState = (value: string | null) =>
-        Object.values(PageState).includes((value || "") as PageState);
+    const isValidUserType = (value: string | null) =>
+        Object.values(UserType).includes((value || "") as UserType);
     const isValidPageMode = (value?: string | null) =>
         Object.values(PageMode).includes((value || "") as PageMode);
 
-    const [pageState, setPageState] = useState(
-        isValidPageState(params.get("state")) ? params.get("state") : PageState.Personal
+    const [userType, setUserType] = useState(
+        isValidUserType(params.get(USER_TYPE_PARAM))
+            ? (params.get(USER_TYPE_PARAM) as UserType)
+            : UserType.Personal
     );
     const [pageMode, setPageMode] = useState(
-        isValidPageMode(params.get("mode")) ? params.get("mode") : PageMode.Login
+        isValidPageMode(params.get(PAGE_MODE_PARAM))
+            ? (params.get(PAGE_MODE_PARAM) as PageMode)
+            : PageMode.Register
     );
 
     useEffect(() => {
         setParams((prev) => {
-            isValidPageState(pageState) && prev.set("state", String(pageState));
-            isValidPageMode(pageMode) && prev.set("mode", String(pageMode));
+            isValidUserType(userType) &&
+                prev.set(USER_TYPE_PARAM, String(userType));
+            isValidPageMode(pageMode) &&
+                prev.set(PAGE_MODE_PARAM, String(pageMode));
             return prev;
         });
-    }, [pageState, pageMode]);
+    }, [userType, pageMode]);
 
     return (
-        <EntryLayout image={<ReactSVG src={RegImage} />}>
-            <Tab
-                selected={pageState === PageState.Personal}
-                onClick={() => setPageState(PageState.Personal)}
-            >
-                Для себя
-            </Tab>
-            <Tab
-                selected={pageState === PageState.Business}
-                onClick={() => setPageState(PageState.Business)}
-            >
-                Для бизнеса
-            </Tab>
+        <EntryLayout
+            image={
+                <ReactSVG
+                    src={
+                        userType === UserType.Personal
+                            ? RegImagePersonal
+                            : RegImageBusiness
+                    }
+                />
+            }
+        >
+            <div>
+                <Tab
+                    selected={userType === UserType.Personal}
+                    onClick={() => setUserType(UserType.Personal)}
+                >
+                    Для себя
+                </Tab>
+                <Tab
+                    selected={userType === UserType.Business}
+                    onClick={() => setUserType(UserType.Business)}
+                >
+                    Для бизнеса
+                </Tab>
+            </div>
+            <div>
+                {pageMode === PageMode.Register && (
+                    <RegisterPage userType={userType} />
+                )}
+            </div>
         </EntryLayout>
     );
 }
