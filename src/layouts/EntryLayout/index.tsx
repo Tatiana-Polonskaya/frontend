@@ -13,7 +13,7 @@ export default function EntryLayout(props: EntryLayoutProps) {
     return (
         <div className={cnEntryLayout()}>
             <div className={cnEntryLayout("content")}>{props.children}</div>
-            <div className={cnEntryLayout("image")}>{props.image || "image"}</div>
+            <div className={cnEntryLayout("image")}>{props.image}</div>
         </div>
     );
 }
