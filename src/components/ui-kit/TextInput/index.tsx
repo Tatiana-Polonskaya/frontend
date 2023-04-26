@@ -6,21 +6,24 @@ import { ChangeEventHandler } from "react";
 const cnTextInput = cn("text-input");
 
 type TextInputProps = {
-    label: string;
+    label?: string;
     placeholder?: string;
     value?: string;
     onChange?: ChangeEventHandler<HTMLInputElement>;
+    password?: boolean;
 };
 
 export default function TextInput(props: TextInputProps) {
     return (
         <label className={cnTextInput()}>
-            <span className={cnTextInput("label", { wrong: false })}>
-                {props.label}
-            </span>
+            {props.label && (
+                <span className={cnTextInput("label", { wrong: false })}>
+                    {props.label}
+                </span>
+            )}
             <input
                 className={cnTextInput("input", { wrong: false })}
-                type="text"
+                type={props.password ? "password" : "text"}
                 placeholder={props.placeholder}
                 value={props.value}
                 onChange={props.onChange}
