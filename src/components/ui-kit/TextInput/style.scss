@@ -5,10 +5,18 @@
     font-weight: 500;
 
     &-input {
+        padding: 18px 16px;
+        width: 100%;
+        background: transparent;
+        border: none;
+    }
+
+    &-input-wrapper {
         border: 2px solid #b2c2e4;
         border-radius: 16px;
-        padding: 18px 16px;
         font-size: 1.25rem;
+        display: flex;
+        align-items: center;
 
         &:focus {
             border-color: #2477f4;
@@ -27,5 +35,10 @@
         &_wrong {
             color: #f35b60;
         }
+    }
+
+    &-eye {
+        cursor: pointer;
+        padding: 0 18px;
     }
 }

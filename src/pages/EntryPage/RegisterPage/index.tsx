@@ -77,6 +77,7 @@ export default function RegisterPage() {
                     <>
                         <Link
                             onClick={() => setStep(RegisterSteps.PrimaryInfo)}
+                            arrow="left"
                         >
                             Вернуться
                         </Link>
