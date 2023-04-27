@@ -1,0 +1,20 @@
+.login-page {
+    padding: 48px 0;
+    &-next-button {
+        width: 100%;
+        margin: 32px 0;
+    }
+
+    &-phrase {
+        display: block;
+        text-transform: uppercase;
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    &-subphrase {
+        display: block;
+        font-size: 1.25rem;
+        padding: 8px 0;
+    }
+}

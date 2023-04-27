@@ -1,0 +1,9 @@
+.login-register-changer {
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 48px 0 16px 0;
+
+    & > * {
+        padding-right: 16px;
+    }
+}
