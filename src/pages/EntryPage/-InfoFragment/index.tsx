@@ -18,7 +18,7 @@ export default function InfoFragment(props: InfoFragmentProps) {
         <div className={cnLoginFragment()}>
             <p className={cnLoginFragment("phrase")}>{props.phrase}</p>
             <p className={cnLoginFragment("subphrase")}>{props.subphrase}</p>
-            <Link className={cnLoginFragment("subphrase")}>Узнать подробнее о сервисе</Link>
+            <Link className={cnLoginFragment("subphrase")} arrow="right">Узнать подробнее о сервисе</Link>
         </div>
     );
 }
