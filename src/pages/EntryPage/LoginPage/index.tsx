@@ -46,23 +46,30 @@ export default function LoginPage() {
                             : "Поможем сделать правильный выбор."
                     }
                 />
-                <TextInput
-                    label="Логин"
-                    placeholder={
-                        userType === UserType.Personal
-                            ? "+7 XXX XXX XX XX"
-                            : "Введите электронную почту"
-                    }
-                />
-                <TextInput
-                    label="Пароль"
-                    placeholder="Введите пароль"
-                    password
-                />
-                <Button>Продолжить</Button>
+                <div className={cnLoginPage("inputs")}>
+                    <TextInput
+                        label="Логин"
+                        placeholder={
+                            userType === UserType.Personal
+                                ? "+7 XXX XXX XX XX"
+                                : "Введите электронную почту"
+                        }
+                    />
+                    <TextInput
+                        label="Пароль"
+                        placeholder="Введите пароль"
+                        password
+                    />
+                    <Button className={cnLoginPage("next-button")}>
+                        Продолжить
+                    </Button>
+                </div>
                 <p>
-                    Забыли пароль?{" "}
-                    <Link onClick={() => navigate("/restore")}>
+                    <span>Забыли пароль?</span>&nbsp;
+                    <Link
+                        className={cnLoginPage("link")}
+                        onClick={() => navigate("/restore")}
+                    >
                         Восстановить
                     </Link>
                 </p>
