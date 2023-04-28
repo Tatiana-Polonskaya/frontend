@@ -16,19 +16,18 @@ export default function LoginRegisterChanger(props: LoginRegisterChangerProps) {
     const navigate = useNavigate();
     return (
         <div className={cnLoginRegisterChanger()}>
-            <span>
-                {props.pageType === PageType.Register ? (
-                    <>Уже есть аккаунт?</>
-                ) : (
-                    <>Еще нет аккаунта?</>
-                )}
-            </span>
             {props.pageType === PageType.Register ? (
-                <Link onClick={() => navigate("/login")}>Войти</Link>
+                <>
+                    <span>Уже есть аккаунт?</span>
+                    <Link onClick={() => navigate("/login")}>Войти</Link>
+                </>
             ) : (
-                <Link onClick={() => navigate("/register")}>
-                    Зарегистрироваться
-                </Link>
+                <>
+                    <span>Еще нет аккаунта?</span>
+                    <Link onClick={() => navigate("/register")}>
+                        Зарегистрироваться
+                    </Link>
+                </>
             )}
         </div>
     );

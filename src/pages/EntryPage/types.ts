@@ -9,7 +9,7 @@ export enum PageType {
     PasswordRestore,
 }
 
-export enum RegisterSteps {
+export enum RegisterStep {
     PrimaryInfo,
     SecondaryInfo,
     EmailVerification,

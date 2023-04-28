@@ -4,7 +4,7 @@ import {
     IBusinessRegister,
     IPersonalRegister,
     PageType,
-    RegisterSteps,
+    RegisterStep,
     UserType,
 } from "../types";
 
@@ -12,13 +12,17 @@ import RegisterImagePersonal from "./assets/reg-image-personal.svg";
 import RegisterImageBusiness from "./assets/reg-image-business.svg";
 import { ReactSVG } from "react-svg";
 
-import { RegisterSteps as RegisterStep } from "../types";
 import UserTypeSwitch from "../-UserTypeSwitch";
 import LoginRegisterChanger from "../-LoginRegisterChanger";
 import InfoFragment from "../-InfoFragment";
 import TextInput from "../../../components/ui-kit/TextInput";
 import Button from "../../../components/ui-kit/Button";
 import Link from "../../../components/ui-kit/Link";
+import PrimaryInfo from "./PrimaryInfo";
+import SecondaryInfoPersonal from "./SecondaryInfoPersonal";
+import SecondaryInfoBusiness from "./SecondaryInfoBusiness";
+import FinishPersonal from "./FinishPersonal";
+import FinishBusiness from "./FinishBusiness";
 
 const PersonalRegisterContext: Context<IPersonalRegister> = createContext({});
 const BusinessRegisterContext: Context<IBusinessRegister> = createContext({});
@@ -46,97 +50,20 @@ export default function RegisterPage() {
                 />
             }
         >
-            {RegisterSteps.PrimaryInfo === step && (
-                <>
-                    <UserTypeSwitch
-                        currentType={userType}
-                        setter={setUserType}
-                    />
-                    <LoginRegisterChanger pageType={PageType.Register} />
-                    {userType === UserType.Personal ? (
-                        <InfoFragment
-                            phrase="Станьше успешнее и увереннее в себе"
-                            subphrase="Совершенствуйте навыки выступлений, репетируя наедине с собой без какого-либо смущения."
-                        />
-                    ) : (
-                        <InfoFragment
-                            phrase="Автоматизируйте первичный отбор"
-                            subphrase="Оставьте свою заявку на присоединение к сервису, заполнив форму ниже."
-                        />
-                    )}
-                    <TextInput label="Имя" placeholder="Введите имя" />
-                    <TextInput label="Фамилия" placeholder="Введите фамилию" />
-                    <TextInput label="Почта" placeholder="Укажите почту" />
-                    <Button onClick={() => setStep(RegisterStep.SecondaryInfo)}>
-                        Продолжить
-                    </Button>
-                </>
+            {RegisterStep.PrimaryInfo === step && (
+                <PrimaryInfo
+                    userType={userType}
+                    setUserType={setUserType}
+                    setStep={setStep}
+                />
             )}
-            {RegisterSteps.SecondaryInfo === step &&
+            {RegisterStep.SecondaryInfo === step &&
                 (userType === UserType.Personal ? (
-                    <>
-                        <Link
-                            onClick={() => setStep(RegisterSteps.PrimaryInfo)}
-                            arrow="left"
-                        >
-                            Вернуться
-                        </Link>
-                        <p>Приветствуем, {"Anna"}!</p>
-                        <TextInput
-                            label="Дата рождения"
-                            placeholder="Поменять на другой инпут"
-                        />
-                        <TextInput
-                            label="Город"
-                            placeholder="Введите свой город"
-                        />
-                        <TextInput
-                            label="Пароль"
-                            placeholder="Придумайте пароль"
-                            password
-                        />
-                        <TextInput
-                            label="Подтверждение пароля"
-                            placeholder="Повторите пароль"
-                            password
-                        />
-                        <Button
-                            onClick={() =>
-                                setStep(RegisterSteps.EmailVerification)
-                            }
-                        >
-                            Продолжить
-                        </Button>
-                    </>
+                    <SecondaryInfoPersonal setStep={setStep} />
                 ) : (
-                    <>
-                        <p>Приветствуем, {"Anna"}!</p>
-                        <p>Завяка на корпоративное использование</p>
-                        <p>
-                            Пожалуйста, добавьте информацию о вашей компании. Не
-                            переживайте, мы запрашиваем её исключительно в целях
-                            безопасности.
-                        </p>
-
-                        <TextInput
-                            label="Название компании"
-                            placeholder="Введите название"
-                        />
-                        <TextInput label="ИНН" placeholder="Введите ИНН" />
-                        <TextInput
-                            label="Ваша должность"
-                            placeholder="Укажите вашу должность"
-                        />
-                        <Button
-                            onClick={() =>
-                                setStep(RegisterSteps.FinishRegister)
-                            }
-                        >
-                            Отправить заявку
-                        </Button>
-                    </>
+                    <SecondaryInfoBusiness setStep={setStep} />
                 ))}
-            {RegisterSteps.EmailVerification === step && (
+            {RegisterStep.EmailVerification === step && (
                 <>
                     <p>
                         Мы отправили письмо со ссылкой для подтверждения
@@ -148,10 +75,12 @@ export default function RegisterPage() {
                     </p>
                 </>
             )}
-            {RegisterSteps.FinishRegister === step &&
-                (UserType.Personal === userType
-                    ? "finish personal"
-                    : "finish business")}
+            {RegisterStep.FinishRegister === step &&
+                (UserType.Personal === userType ? (
+                    <FinishPersonal />
+                ) : (
+                    <FinishBusiness />
+                ))}
         </EntryLayout>
     );
 }

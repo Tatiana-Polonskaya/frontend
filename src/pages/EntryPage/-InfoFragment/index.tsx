@@ -1,9 +1,6 @@
 import { cn } from "@bem-react/classname";
 
 import "./style.scss";
-import TextInput from "../../../components/ui-kit/TextInput";
-import Button from "../../../components/ui-kit/Button";
-import { UserType } from "../types";
 import Link from "../../../components/ui-kit/Link";
 
 const cnLoginFragment = cn("login-fragment");
