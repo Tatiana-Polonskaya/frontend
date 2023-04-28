@@ -1,0 +1,39 @@
+.secondary-info-business {
+    &-back-link {
+        display: block;
+        font-weight: 600;
+        padding: 14px 0;
+    }
+
+    &-title {
+        color: #37476a;
+        font-size: 32px;
+
+        padding: 16px 0;
+
+        &_name {
+            color: #2477f4;
+            font-weight: 600;
+        }
+    }
+
+    &-subtitle {
+        font-weight: 500;
+        font-size: 1.375rem;
+        color: #2477f4;
+        padding: 0 0 8px 0;
+    }
+
+    &-description {
+        color: #37476a;
+        font-size: 1.25rem;
+    }
+
+    &-inputs {
+        padding: 32px 0;
+    }
+
+    &-next-button {
+        width: 100%;
+    }
+}

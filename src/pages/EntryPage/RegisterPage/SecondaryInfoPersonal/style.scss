@@ -1,0 +1,29 @@
+.secondary-info-personal {
+    &-back-link {
+        display: block;
+        margin: 14px 0;
+        font-weight: 600;
+    }
+
+    &-title {
+        color: #37476a;
+        font-size: 32px;
+
+        padding: 16px 0;
+
+        &_name {
+            color: #2477f4;
+            font-weight: 600;
+
+        }
+    }
+
+    &-inputs {
+        padding: 16px 0;
+    }
+
+    &-next-button {
+        width: 100%;
+        margin: 16px 0;
+    }
+}
