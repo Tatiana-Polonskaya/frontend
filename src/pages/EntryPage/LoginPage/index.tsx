@@ -28,6 +28,8 @@ const cnLoginPage = cn("login-page");
 export default function LoginPage() {
     const [userType, setUserType] = useState(UserType.Personal);
     const navigate = useNavigate();
+    const [login, setLogin] = useState("");
+    const [password, setPassword] = useState("");
 
     return (
         <EntryLayout image={<ReactSVG src={LoginImage} />}>
@@ -49,18 +51,21 @@ export default function LoginPage() {
                 <div className={cnLoginPage("inputs")}>
                     <TextInput
                         label="Логин"
-                        placeholder={
-                            userType === UserType.Personal
-                                ? "+7 XXX XXX XX XX"
-                                : "Введите электронную почту"
-                        }
+                        placeholder="Введите электронную почту"
+                        value={login}
+                        onChange={(e) => setLogin(e.target.value)}
                     />
                     <TextInput
                         label="Пароль"
                         placeholder="Введите пароль"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         password
                     />
-                    <Button className={cnLoginPage("next-button")}>
+                    <Button
+                        className={cnLoginPage("next-button")}
+                        disabled={!(login && password)}
+                    >
                         Продолжить
                     </Button>
                 </div>

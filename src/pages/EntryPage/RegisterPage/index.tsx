@@ -30,8 +30,6 @@ export default function RegisterPage() {
     const [userType, setUserType] = useState(UserType.Personal);
     const [step, setStep] = useState(RegisterStep.PrimaryInfo);
 
-    useEffect(() => console.log(step), [step]);
-
     return (
         <EntryLayout
             image={
