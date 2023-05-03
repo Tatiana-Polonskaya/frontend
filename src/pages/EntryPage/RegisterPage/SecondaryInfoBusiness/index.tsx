@@ -6,6 +6,8 @@ import { RegisterStep } from "../../types";
 import "./style.scss";
 import Link from "../../../../components/ui-kit/Link";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { RegisterContext } from "..";
 
 const cnSecondaryInfoBusiness = cn("secondary-info-business");
 
@@ -14,6 +16,7 @@ export default function SecondaryInfoBusiness({
 }: {
     setStep: Function;
 }) {
+    const { primaryInfo } = useContext(RegisterContext);
     const navigate = useNavigate();
     return (
         <>
@@ -29,7 +32,7 @@ export default function SecondaryInfoBusiness({
                 <span
                     className={cnSecondaryInfoBusiness("title", { name: true })}
                 >
-                    {"Anna"}
+                    {primaryInfo.name}
                 </span>
                 !
             </p>

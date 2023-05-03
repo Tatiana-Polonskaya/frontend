@@ -8,6 +8,8 @@ import TextInput from "../../../../components/ui-kit/TextInput";
 import { UserType, PageType, RegisterStep } from "../../types";
 
 import "./style.scss";
+import { useContext } from "react";
+import { RegisterContext } from "..";
 
 interface IPrimaryInfo {
     userType: UserType;
@@ -22,6 +24,8 @@ export default function PrimaryInfo({
     setUserType,
     setStep,
 }: IPrimaryInfo) {
+    const { primaryInfo, setPrimaryInfo } = useContext(RegisterContext);
+
     return (
         <>
             <UserTypeSwitch currentType={userType} setter={setUserType} />
@@ -38,9 +42,39 @@ export default function PrimaryInfo({
                 />
             )}
             <div className={cnPrimaryInfo("inputs")}>
-                <TextInput label="Имя" placeholder="Введите имя" />
-                <TextInput label="Фамилия" placeholder="Введите фамилию" />
-                <TextInput label="Почта" placeholder="Укажите почту" />
+                <TextInput
+                    label="Имя"
+                    placeholder="Введите имя"
+                    value={primaryInfo.name}
+                    onChange={(e) =>
+                        setPrimaryInfo((prev) => ({
+                            ...prev,
+                            name: e.target.value,
+                        }))
+                    }
+                />
+                <TextInput
+                    label="Фамилия"
+                    placeholder="Введите фамилию"
+                    value={primaryInfo.lastName}
+                    onChange={(e) =>
+                        setPrimaryInfo((prev) => ({
+                            ...prev,
+                            lastName: e.target.value,
+                        }))
+                    }
+                />
+                <TextInput
+                    label="Почта"
+                    placeholder="Укажите почту"
+                    value={primaryInfo.email}
+                    onChange={(e) =>
+                        setPrimaryInfo((prev) => ({
+                            ...prev,
+                            email: e.target.value,
+                        }))
+                    }
+                />
             </div>
             <Button
                 className={cnPrimaryInfo("next-button")}

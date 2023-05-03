@@ -5,6 +5,8 @@ import TextInput from "../../../../components/ui-kit/TextInput";
 import { RegisterStep } from "../../types";
 
 import "./style.scss";
+import { useContext, useState } from "react";
+import { RegisterContext } from "..";
 
 const cnSecondaryInfoPersonal = cn("secondary-info-personal");
 
@@ -13,6 +15,13 @@ export default function SecondaryInfoPersonal({
 }: {
     setStep: Function;
 }) {
+    const { primaryInfo } = useContext(RegisterContext);
+
+    const [city, setCity] = useState("");
+    const [birthday, setBirthday] = useState(new Date(2023, 5, 3));
+    const [password, setPassword] = useState("");
+    const [passwordRepeat, setPasswordRepeat] = useState("");
+
     return (
         <>
             <Link
@@ -27,7 +36,7 @@ export default function SecondaryInfoPersonal({
                 <span
                     className={cnSecondaryInfoPersonal("title", { name: true })}
                 >
-                    {"Anna"}
+                    {primaryInfo.name}
                 </span>
                 !
             </p>
@@ -36,15 +45,24 @@ export default function SecondaryInfoPersonal({
                     label="Дата рождения"
                     placeholder="Поменять на другой инпут"
                 />
-                <TextInput label="Город" placeholder="Введите свой город" />
+                <TextInput
+                    label="Город"
+                    placeholder="Введите свой город"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                />
                 <TextInput
                     label="Пароль"
                     placeholder="Придумайте пароль"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     password
                 />
                 <TextInput
                     label="Подтверждение пароля"
                     placeholder="Повторите пароль"
+                    value={passwordRepeat}
+                    onChange={(e) => setPasswordRepeat(e.target.value)}
                     password
                 />
             </div>

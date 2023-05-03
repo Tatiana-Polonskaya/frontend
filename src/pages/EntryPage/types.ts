@@ -16,20 +16,36 @@ export enum RegisterStep {
     FinishRegister,
 }
 
-export interface IRegister {
-    name?: string;
-    lastName?: string;
-    email?: string;
-}
-
-export interface IPersonalRegister extends IRegister {
+export interface IPersonalSecondaryInfo {
     birthday?: Date;
     city?: string;
     password?: string;
 }
 
-export interface IBusinessRegister extends IRegister {
+export interface IBusinessSecondaryInfo {
     companyName?: string;
     TIN?: string;
     workPosition?: string;
+}
+
+export interface IPrimaryInfo {
+    name?: string;
+    lastName?: string;
+    email?: string;
+}
+
+interface X<T> {
+    data: T;
+    setter: React.Dispatch<React.SetStateAction<{}>>;
+}
+
+export interface IRegister {
+    personal: {
+        primary: IPrimaryInfo;
+        secondary: IPersonalSecondaryInfo;
+    };
+    business: {
+        primary: IPrimaryInfo;
+        secondary: IBusinessSecondaryInfo;
+    };
 }
