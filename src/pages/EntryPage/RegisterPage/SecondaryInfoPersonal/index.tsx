@@ -7,6 +7,7 @@ import { RegisterStep } from "../../types";
 import "./style.scss";
 import { useContext, useState } from "react";
 import { RegisterContext } from "..";
+import DateInput from "../../../../components/ui-kit/DateInput";
 
 const cnSecondaryInfoPersonal = cn("secondary-info-personal");
 
@@ -41,10 +42,7 @@ export default function SecondaryInfoPersonal({
                 !
             </p>
             <div className={cnSecondaryInfoPersonal("inputs")}>
-                <TextInput
-                    label="Дата рождения"
-                    placeholder="Поменять на другой инпут"
-                />
+                <DateInput label="Дата рождения"/>
                 <TextInput
                     label="Город"
                     placeholder="Введите свой город"
