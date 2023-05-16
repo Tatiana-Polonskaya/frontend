@@ -1,23 +1,33 @@
 import { cn } from "@bem-react/classname";
-import Link from "../../../../components/ui-kit/Link";
 import { useNavigate } from "react-router-dom";
+import { useConfirmQuery } from "../../../../store/api/register";
+
+import Link from "../../../../components/ui-kit/Link";
 
 import "./style.scss";
 
 const cnFinishPersonal = cn("finish-personal");
 
-export default function FinishPersonal() {
+export default function FinishPersonal({ token }: { token: string }) {
     const navigate = useNavigate();
+    const response = useConfirmQuery(token);
+    const { isLoading, isSuccess, isError, data } = response;
 
     return (
         <>
-            <p className={cnFinishPersonal("title")}>
-                Регистрация прошла успешно!
-            </p>
-            <p className={cnFinishPersonal("description")}>
-                Поздравляем! Ваш путь к успешным выступлениям начинается прямо
-                сейчас.
-            </p>
+            {data?.success ? (
+                <>
+                    <p className={cnFinishPersonal("title")}>
+                        Регистрация прошла успешно!
+                    </p>
+                    <p className={cnFinishPersonal("description")}>
+                        Поздравляем! Ваш путь к успешным выступлениям начинается
+                        прямо сейчас.
+                    </p>
+                </>
+            ) : (
+                <p className={cnFinishPersonal("title")}>{data?.error?.msg}</p>
+            )}
             <Link
                 className={cnFinishPersonal("link")}
                 arrow="right"

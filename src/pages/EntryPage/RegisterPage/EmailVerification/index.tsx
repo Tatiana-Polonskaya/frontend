@@ -11,7 +11,9 @@ export default function EmailVerification() {
                 Мы отправили письмо со ссылкой для подтверждения регистрации
                 аккаунта на указанный почтовый адрес
             </p>
-            <p className={cnEmailVerification("description")}>Пожалуйста, перейдите по ней, чтобы завершить регистрацию.</p>
+            <p className={cnEmailVerification("description")}>
+                Пожалуйста, перейдите по ней, чтобы завершить регистрацию.
+            </p>
         </>
     );
 }

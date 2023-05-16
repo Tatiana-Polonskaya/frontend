@@ -1,8 +1,10 @@
 import { cn } from "@bem-react/classname";
-import LoginRegisterChanger from "../../-LoginRegisterChanger";
-import { PageType } from "../../types";
-import Link from "../../../../components/ui-kit/Link";
 import { useNavigate } from "react-router-dom";
+
+import { PageType } from "../../../../models/entry";
+
+import LoginRegisterChanger from "../../-LoginRegisterChanger";
+import Link from "../../../../components/ui-kit/Link";
 
 import "./style.scss";
 

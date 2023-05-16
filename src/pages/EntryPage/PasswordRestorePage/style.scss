@@ -1,17 +1,19 @@
 .password-restore-page {
-    &-return-link {
-        font-weight: 600;
-        padding: 28px 0;
+    &-link {
+        font-weight: 500;
         display: block;
+        padding: 16px 0;
+        font-size: 1.25rem;
     }
 
     &-title {
-        font-size: 1.25rem;
+        font-size: 2rem;
         color: #37476a;
     }
 
     &-description {
         padding: 16px 0 32px 0;
+        font-size: 1.25rem;
     }
 
     &-next-button {

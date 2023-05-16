@@ -1,34 +1,88 @@
 import { cn } from "@bem-react/classname";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
+
+import { UserType, PageType, RegisterStep } from "../../../../models/entry";
+import {
+    setEmail,
+    setLastName,
+    setName,
+} from "../../../../store/slices/entry/register/primaryInfo";
+
+import { setStep } from "../../../../store/slices/entry/register";
+import { useLazyCheckEmailQuery } from "../../../../store/api/register";
+import { useRef, useState } from "react";
+
 import InfoFragment from "../../-InfoFragment";
 import LoginRegisterChanger from "../../-LoginRegisterChanger";
 import UserTypeSwitch from "../../-UserTypeSwitch";
 import Button from "../../../../components/ui-kit/Button";
 import Link from "../../../../components/ui-kit/Link";
-import TextInput from "../../../../components/ui-kit/TextInput";
-import { UserType, PageType, RegisterStep } from "../../types";
+
+import Input, { ForwardedInput } from "../../../../components/ui-kit/Input";
+import InputHeader from "../../../../components/ui-kit/InputHeader";
 
 import "./style.scss";
-import { useContext } from "react";
-import { RegisterContext } from "..";
-
-interface IPrimaryInfo {
-    userType: UserType;
-    setUserType: Function;
-    setStep: Function;
-}
 
 const cnPrimaryInfo = cn("primary-info");
 
-export default function PrimaryInfo({
-    userType,
-    setUserType,
-    setStep,
-}: IPrimaryInfo) {
-    const { primaryInfo, setPrimaryInfo } = useContext(RegisterContext);
+const EMAIL_WRONG_TEXT_INIT = "Неверный формат почты";
+
+export default function PrimaryInfo() {
+    const [checkEmailRequest, checkEmailResponse] = useLazyCheckEmailQuery();
+
+    const { data, isFetching, isSuccess } = checkEmailResponse;
+
+    const dispatch = useAppDispatch();
+
+    const userType = useAppSelector((state) => state.entry.entry.userType);
+    const name = useAppSelector((state) => state.entry.register.primary.name);
+    const lastName = useAppSelector(
+        (state) => state.entry.register.primary.lastName
+    );
+    const email = useAppSelector((state) => state.entry.register.primary.email);
+
+    const [isNameValid, setNameValid] = useState(true);
+    const [isEmailValid, setEmailValid] = useState(true);
+
+    const [wrongEmailText, setWrongEmailText] = useState(EMAIL_WRONG_TEXT_INIT);
+    const nameInputRef = useRef<HTMLInputElement>(null);
+    const emailInputRef = useRef<HTMLInputElement>(null);
+
+    const onSubmit = async () => {
+        const isEmailValidLocal = emailInputRef.current?.checkValidity();
+        const isNameValidLocal = nameInputRef.current?.checkValidity();
+
+        if (!isNameValidLocal) {
+            setNameValid(false);
+            return;
+        }
+
+        if (!isEmailValidLocal) {
+            setEmailValid(false);
+            setWrongEmailText(EMAIL_WRONG_TEXT_INIT);
+            return;
+        }
+
+        try {
+            const checkEmailResponseData = await checkEmailRequest({
+                email,
+            }).unwrap();
+            if (checkEmailResponseData.success) {
+                dispatch(setStep(RegisterStep.SecondaryInfo));
+            } else {
+                setEmailValid(false);
+                setWrongEmailText(
+                    checkEmailResponseData.error?.msg || "Unknown error"
+                );
+            }
+        } catch (e) {
+            alert(e);
+        }
+    };
 
     return (
         <>
-            <UserTypeSwitch currentType={userType} setter={setUserType} />
+            <UserTypeSwitch />
             <LoginRegisterChanger pageType={PageType.Register} />
             {userType === UserType.Personal ? (
                 <InfoFragment
@@ -42,43 +96,53 @@ export default function PrimaryInfo({
                 />
             )}
             <div className={cnPrimaryInfo("inputs")}>
-                <TextInput
-                    label="Имя"
-                    placeholder="Введите имя"
-                    value={primaryInfo.name}
-                    onChange={(e) =>
-                        setPrimaryInfo((prev) => ({
-                            ...prev,
-                            name: e.target.value,
-                        }))
-                    }
-                />
-                <TextInput
-                    label="Фамилия"
-                    placeholder="Введите фамилию"
-                    value={primaryInfo.lastName}
-                    onChange={(e) =>
-                        setPrimaryInfo((prev) => ({
-                            ...prev,
-                            lastName: e.target.value,
-                        }))
-                    }
-                />
-                <TextInput
-                    label="Почта"
-                    placeholder="Укажите почту"
-                    value={primaryInfo.email}
-                    onChange={(e) =>
-                        setPrimaryInfo((prev) => ({
-                            ...prev,
-                            email: e.target.value,
-                        }))
-                    }
-                />
+                <label>
+                    <InputHeader
+                        text="Имя"
+                        wrong={!isNameValid}
+                        wrongText="Поле не может быть пустым"
+                    />
+                    <ForwardedInput
+                        required
+                        placeholder="Введите имя"
+                        maxLength={50}
+                        value={name}
+                        invalid={!isNameValid}
+                        onChange={(e) => dispatch(setName(e.target.value))}
+                        onBlur={(e) => setNameValid(e.target.checkValidity())}
+                        ref={nameInputRef}
+                    />
+                </label>
+                <label>
+                    <InputHeader text="Фамилия" />
+                    <Input
+                        placeholder="Введите фамилию"
+                        value={lastName}
+                        onChange={(e) => dispatch(setLastName(e.target.value))}
+                    />
+                </label>
+                <label>
+                    <InputHeader
+                        text="Почта"
+                        wrong={!isEmailValid}
+                        wrongText={wrongEmailText}
+                    />
+                    <ForwardedInput
+                        type="email"
+                        required
+                        placeholder="Укажите почту"
+                        value={email}
+                        onChange={(e) => dispatch(setEmail(e.target.value))}
+                        onBlur={(e) => setEmailValid(e.target.checkValidity())}
+                        ref={emailInputRef}
+                        invalid={!isEmailValid}
+                    />
+                </label>
             </div>
             <Button
                 className={cnPrimaryInfo("next-button")}
-                onClick={() => setStep(RegisterStep.SecondaryInfo)}
+                disabled={isFetching}
+                onClick={onSubmit}
             >
                 Продолжить
             </Button>

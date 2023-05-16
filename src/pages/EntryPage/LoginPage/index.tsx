@@ -1,22 +1,24 @@
 import { useState } from "react";
-
-import EntryLayout from "../../../layouts/EntryLayout";
-
-import LoginImage from "./assets/login.svg";
 import { ReactSVG } from "react-svg";
+import { cn } from "@bem-react/classname";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../hooks/redux";
+
+import { useLazyLoginQuery } from "../../../store/api/account";
+import { PageType } from "../../../models/entry";
 
 import UserTypeSwitch from "../-UserTypeSwitch";
 import InfoFragment from "../-InfoFragment";
-
-import { cn } from "@bem-react/classname";
-
-import "./style.scss";
+import EntryLayout from "../../../layouts/EntryLayout";
 import LoginRegisterChanger from "../-LoginRegisterChanger";
-import { PageType } from "../types";
-import TextInput from "../../../components/ui-kit/TextInput";
 import Button from "../../../components/ui-kit/Button";
 import Link from "../../../components/ui-kit/Link";
-import { useNavigate } from "react-router-dom";
+import InputHeader from "../../../components/ui-kit/InputHeader";
+import Input from "../../../components/ui-kit/Input";
+
+import LoginImage from "./assets/login.svg";
+
+import "./style.scss";
 
 enum UserType {
     Personal,
@@ -25,15 +27,48 @@ enum UserType {
 
 const cnLoginPage = cn("login-page");
 
+const INVALID_LOGIN_INIT_TEXT = "Поле не может быть пустым";
+
 export default function LoginPage() {
-    const [userType, setUserType] = useState(UserType.Personal);
+    const userType = useAppSelector((state) => state.entry.entry.userType);
     const navigate = useNavigate();
-    const [login, setLogin] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const [isEmailWrong, setEmailWrong] = useState(false);
+    const [isPasswordWrong, setPasswordWrong] = useState(false);
+    const [wrongEmailText, setWrongEmailText] = useState(
+        INVALID_LOGIN_INIT_TEXT
+    );
+    const [wrongPasswordText, setWrongPasswordText] = useState("");
+
+    const [loginRequest, loginResponse] = useLazyLoginQuery();
+    const { isFetching } = loginResponse;
+
+    const onSubmit = async () => {
+        const response = await loginRequest({ email, password }).unwrap();
+        console.log(response);
+        setEmailWrong(false);
+        setPasswordWrong(false);
+        if (response.success && response.data) {
+            localStorage.setItem("access_token", response.data.access_token);
+        } else {
+            switch (response.error?.code) {
+                case 10003:
+                    setWrongPasswordText(response.error.msg);
+                    setPasswordWrong(true);
+                    break;
+                case 10015:
+                    setWrongEmailText(response.error.msg);
+                    setEmailWrong(true);
+                    break;
+            }
+        }
+    };
 
     return (
         <EntryLayout image={<ReactSVG src={LoginImage} />}>
-            <UserTypeSwitch currentType={userType} setter={setUserType} />
+            <UserTypeSwitch />
             <LoginRegisterChanger pageType={PageType.Login} />
             <div className={cnLoginPage()}>
                 <InfoFragment
@@ -49,22 +84,39 @@ export default function LoginPage() {
                     }
                 />
                 <div className={cnLoginPage("inputs")}>
-                    <TextInput
-                        label="Логин"
-                        placeholder="Введите электронную почту"
-                        value={login}
-                        onChange={(e) => setLogin(e.target.value)}
-                    />
-                    <TextInput
-                        label="Пароль"
-                        placeholder="Введите пароль"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        password
-                    />
+                    <label>
+                        <InputHeader
+                            text="Почта"
+                            wrong={isEmailWrong}
+                            wrongText={wrongEmailText}
+                        />
+                        <Input
+                            placeholder="Введите электронную почту"
+                            value={email}
+                            type="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            invalid={isEmailWrong}
+                        />
+                    </label>
+                    <label>
+                        <InputHeader
+                            text="Пароль"
+                            wrong={isPasswordWrong}
+                            wrongText={wrongPasswordText}
+                        />
+                        <Input
+                            placeholder="Введите пароль"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            type="password"
+                            invalid={isPasswordWrong}
+                        />
+                    </label>
+
                     <Button
                         className={cnLoginPage("next-button")}
-                        disabled={!(login && password)}
+                        disabled={isFetching || !(email && password)}
+                        onClick={onSubmit}
                     >
                         Продолжить
                     </Button>

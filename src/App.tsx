@@ -10,15 +10,19 @@ import SettingsPage from "./pages/SettingsPage";
 import LoginPage from "./pages/EntryPage/LoginPage";
 import RegisterPage from "./pages/EntryPage/RegisterPage";
 import PasswordRestorePage from "./pages/EntryPage/PasswordRestorePage";
+import ActivationPage from "./pages/EntryPage/ActivationPage";
+import LandingPage from "./pages/LandingPage";
 
 export default function App() {
     return (
         <div className="wrapper">
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/landing" element={<LandingPage />} />
 
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/activation" element={<ActivationPage />} />
                 <Route path="/restore" element={<PasswordRestorePage />} />
 
                 <Route path="/home" element={<HomePage />} />

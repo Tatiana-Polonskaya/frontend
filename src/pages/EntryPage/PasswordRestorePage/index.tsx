@@ -1,41 +1,78 @@
+import { useState } from "react";
 import { ReactSVG } from "react-svg";
-import EntryLayout from "../../../layouts/EntryLayout";
+import { cn } from "@bem-react/classname";
 
+import { useNavigate } from "react-router-dom";
+import { useLazyPasswordRestoreQuery } from "../../../store/api/account";
+
+import EntryLayout from "../../../layouts/EntryLayout";
 import PasswordRestoreImage from "./assets/password-restore.svg";
 import Link from "../../../components/ui-kit/Link";
-import { useNavigate } from "react-router-dom";
-import TextInput from "../../../components/ui-kit/TextInput";
 import Button from "../../../components/ui-kit/Button";
 
+import InputHeader from "../../../components/ui-kit/InputHeader";
+import Input from "../../../components/ui-kit/Input";
+
 import "./style.scss";
-import { cn } from "@bem-react/classname";
-import { useState } from "react";
 
 const cnPasswordRestorePage = cn("password-restore-page");
 
 export default function PasswordRestorePage() {
     const navigate = useNavigate();
-    const [state, setState] = useState(false);
+    const [email, setEmail] = useState("");
+    const [isProcessed, setIsProcessed] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [restorePasswordRequest, restorePasswordResponse] =
+        useLazyPasswordRestoreQuery();
+
+    const [errorMessage, setErrorMessage] = useState<string>();
+    const { isFetching } = restorePasswordResponse;
+    const onSubmit = async () => {
+        try {
+            const response = await restorePasswordRequest(email).unwrap();
+            if (response.success) {
+                setIsProcessed(true);
+            } else {
+                setErrorMessage(response.error?.msg);
+                setIsError(true);
+            }
+        } catch (e) {
+            alert(e);
+        }
+    };
 
     return (
         <EntryLayout image={<ReactSVG src={PasswordRestoreImage} />}>
             <div className={cnPasswordRestorePage()}>
-                {state ? (
+                {isProcessed ? (
                     <>
-                        <p>Новый пароль выслан вам на почту!</p>
-                        <p>
+                        <p className={cnPasswordRestorePage("title")}>
+                            Новый пароль выслан вам на почту!
+                        </p>
+                        <p className={cnPasswordRestorePage("description")}>
                             Продолжайте пользоваться всеми возможностями Speech
                             Up.
                         </p>
-                        <Link arrow="right">Войти в аккаунт</Link>
-                        <Link arrow="right">Изучить возможности сервиса</Link>
+                        <Link
+                            arrow="right"
+                            onClick={() => navigate("/login")}
+                            className={cnPasswordRestorePage("link")}
+                        >
+                            Войти в аккаунт
+                        </Link>
+                        <Link
+                            arrow="right"
+                            className={cnPasswordRestorePage("link")}
+                        >
+                            Изучить возможности сервиса
+                        </Link>
                     </>
                 ) : (
                     <>
                         <Link
                             onClick={() => navigate(-1)}
                             arrow="left"
-                            className={cnPasswordRestorePage("return-link")}
+                            className={cnPasswordRestorePage("link")}
                         >
                             Вернуться
                         </Link>
@@ -47,10 +84,25 @@ export default function PasswordRestorePage() {
                             вышлем новый пароль. Вы всегда можете изменить его в
                             настройках.
                         </p>
-                        <TextInput label="Почта" placeholder="Укажите почту" />
+                        <label>
+                            <InputHeader
+                                text="Почта"
+                                wrongText={errorMessage}
+                                wrong={isError}
+                            />
+                            <Input
+                                type="email"
+                                placeholder="Укажите почту"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                invalid={isError}
+                            />
+                        </label>
+
                         <Button
                             className={cnPasswordRestorePage("next-button")}
-                            onClick={() => setState(true)}
+                            onClick={onSubmit}
+                            disabled={isFetching}
                         >
                             Продолжить
                         </Button>

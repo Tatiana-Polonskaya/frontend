@@ -1,16 +1,24 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { testApi } from "./api/testApi";
+import { registerApi } from "./api/register";
+import { accountApi } from "./api/account";
+
 import testSlice from "./slices/testSlice";
 import profileSlice from "./slices/profileSlice";
+import entryReducer from "./slices/entry";
 
 export const store = configureStore({
     reducer: {
-        [testApi.reducerPath]: testApi.reducer,
+        [registerApi.reducerPath]: registerApi.reducer,
+        [accountApi.reducerPath]: accountApi.reducer,
         test: testSlice,
         profile: profileSlice,
+        entry: entryReducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(testApi.middleware),
+        getDefaultMiddleware().concat(
+            registerApi.middleware,
+            accountApi.middleware
+        ),
     devTools: process.env.NODE_ENV !== "production",
 });
 

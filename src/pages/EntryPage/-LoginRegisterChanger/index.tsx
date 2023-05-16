@@ -1,8 +1,9 @@
 import { cn } from "@bem-react/classname";
-import { UserType } from "../types";
-import Link from "../../../components/ui-kit/Link";
-import { PageType } from "../types";
 import { useNavigate } from "react-router-dom";
+
+import { PageType } from "../../../models/entry";
+
+import Link from "../../../components/ui-kit/Link";
 
 import "./style.scss";
 

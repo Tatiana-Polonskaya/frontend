@@ -1,0 +1,41 @@
+.new-input {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+
+    &-input {
+        width: 100%;
+        padding: 18px 16px;
+        border: 2px solid #b2c2e4;
+        border-radius: 16px;
+        background: transparent;
+        font-size: 1.25rem;
+        font-weight: 500;
+
+        &_password {
+            padding: 18px 45px 18px 16px;
+        }
+        &:focus {
+            border-color: #2477f4;
+        }
+
+        &_invalid {
+            border-color: #f35b60;
+        }
+
+        &_numeric {
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button,
+            & {
+                -webkit-appearance: none;
+                margin: 0;
+                -moz-appearance: textfield !important;
+            }
+        }
+    }
+
+    &-eye {
+        margin-left: -45px;
+        cursor: pointer;
+    }
+}
