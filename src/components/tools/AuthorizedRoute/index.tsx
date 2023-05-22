@@ -1,5 +1,6 @@
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { useGetMeQuery } from "../../../store/api/user";
+import RoutesEnum from "../../../models/routes";
 
 export default function AuthorizedRoute() {
     const location = useLocation();
@@ -16,6 +17,6 @@ export default function AuthorizedRoute() {
     return data ? (
         <Outlet />
     ) : (
-        <Navigate to="/login" state={{ from: location }} replace />
+        <Navigate to={RoutesEnum.LOGIN} state={{ from: location }} replace />
     );
 }

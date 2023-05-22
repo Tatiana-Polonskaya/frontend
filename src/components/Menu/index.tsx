@@ -8,6 +8,7 @@ import "./style.scss";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/redux";
 import { logout } from "../../store/slices/user";
+import RoutesEnum from "../../models/routes";
 
 const cnMenu = cn("menu");
 
@@ -19,38 +20,38 @@ export default function Menu() {
         {
             title: "Главная",
             img: images.Home,
-            onClick: () => navigate("/"),
+            onClick: () => navigate(RoutesEnum.HOME),
         },
         {
             title: "Обучение",
-            onClick: () => navigate("/learning"),
+            onClick: () => navigate(RoutesEnum.LEARNING),
             img: images.Teacher,
         },
         {
             title: "Репетиция",
-            onClick: () => navigate("/repetition"),
+            onClick: () => navigate(RoutesEnum.REPETITION),
             img: images.Repetition,
         },
         {
             title: "Импровизация",
-            onClick: () => navigate("/improvisation"),
+            onClick: () => navigate(RoutesEnum.IMPROVISATION),
             img: images.Improvization,
         },
         {
             title: "Дневник",
-            onClick: () => navigate("/diary"),
+            onClick: () => navigate(RoutesEnum.DIARY),
             img: images.Book,
         },
         {
             title: "Настройки",
-            onClick: () => navigate("/settings"),
+            onClick: () => navigate(RoutesEnum.SETTINGS),
             img: images.Setting,
         },
         {
             title: "Выход",
             onClick: async () => {
                 await dispatch(logout());
-                navigate("/login");
+                navigate(RoutesEnum.LOGIN);
             },
             img: images.Logout,
         },

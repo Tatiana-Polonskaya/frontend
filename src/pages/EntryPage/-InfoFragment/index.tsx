@@ -3,6 +3,7 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 import Link from "../../../components/ui-kit/Link";
 import { useNavigate } from "react-router";
+import RoutesEnum from "../../../models/routes";
 
 const cnLoginFragment = cn("login-fragment");
 
@@ -20,7 +21,7 @@ export default function InfoFragment(props: InfoFragmentProps) {
             <Link
                 className={cnLoginFragment("subphrase")}
                 arrow="right"
-                onClick={() => navigate("/landing")}
+                onClick={() => navigate(RoutesEnum.LANDING)}
             >
                 Узнать подробнее о сервисе
             </Link>

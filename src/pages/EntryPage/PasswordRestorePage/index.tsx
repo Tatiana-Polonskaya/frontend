@@ -14,6 +14,7 @@ import InputHeader from "../../../components/ui-kit/InputHeader";
 import Input from "../../../components/ui-kit/Input";
 
 import "./style.scss";
+import RoutesEnum from "../../../models/routes";
 
 const cnPasswordRestorePage = cn("password-restore-page");
 
@@ -55,7 +56,7 @@ export default function PasswordRestorePage() {
                         </p>
                         <Link
                             arrow="right"
-                            onClick={() => navigate("/login")}
+                            onClick={() => navigate(RoutesEnum.LOGIN)}
                             className={cnPasswordRestorePage("link")}
                         >
                             Войти в аккаунт

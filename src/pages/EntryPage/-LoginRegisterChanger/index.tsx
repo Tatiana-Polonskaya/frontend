@@ -6,6 +6,7 @@ import { PageType } from "../../../models/entry";
 import Link from "../../../components/ui-kit/Link";
 
 import "./style.scss";
+import RoutesEnum from "../../../models/routes";
 
 interface LoginRegisterChangerProps {
     pageType: PageType;
@@ -20,12 +21,12 @@ export default function LoginRegisterChanger(props: LoginRegisterChangerProps) {
             {props.pageType === PageType.Register ? (
                 <>
                     <span>Уже есть аккаунт?</span>
-                    <Link onClick={() => navigate("/login")}>Войти</Link>
+                    <Link onClick={() => navigate(RoutesEnum.LOGIN)}>Войти</Link>
                 </>
             ) : (
                 <>
                     <span>Еще нет аккаунта?</span>
-                    <Link onClick={() => navigate("/register")}>
+                    <Link onClick={() => navigate(RoutesEnum.REGISTER)}>
                         Зарегистрироваться
                     </Link>
                 </>

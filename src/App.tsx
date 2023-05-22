@@ -14,30 +14,63 @@ import ActivationPage from "./pages/EntryPage/ActivationPage";
 import LandingPage from "./pages/LandingPage";
 import AuthorizedRoute from "./components/tools/AuthorizedRoute";
 import UnauthorizedRoute from "./components/tools/UnauthorizedRoute";
+import RoutesEnum from "./models/routes";
 
 export default function App() {
     return (
         <div className="wrapper">
             <Routes>
-                <Route path="/landing" element={<LandingPage />} />
+                <Route path={RoutesEnum.LANDING} element={<LandingPage />} />
                 <Route element={<UnauthorizedRoute />}>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/activation" element={<ActivationPage />} />
-                    <Route path="/restore" element={<PasswordRestorePage />} />
+                    <Route path={RoutesEnum.LOGIN} element={<LoginPage />} />
+                    <Route
+                        path={RoutesEnum.REGISTER}
+                        element={<RegisterPage />}
+                    />
+                    <Route
+                        path={RoutesEnum.ACTIVATION}
+                        element={<ActivationPage />}
+                    />
+                    <Route
+                        path={RoutesEnum.RESTORE}
+                        element={<PasswordRestorePage />}
+                    />
                 </Route>
 
-                <Route element={process.env.NODE_ENV === "production" ? <AuthorizedRoute /> : <Outlet />}>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/home" element={<HomePage />} />
-                    <Route path="/diary" element={<DiaryPage />} />
-                    <Route path="/improvisation" element={<ImprovisationPage />} />
-                    <Route path="/learning" element={<LearningPage />} />
-                    <Route path="/repetition" element={<RepetitionPage />} />
-                    <Route path="/settings" element={<SettingsPage />} />
+                <Route
+                    element={
+                        process.env.NODE_ENV === "production" ? (
+                            <AuthorizedRoute />
+                        ) : (
+                            <Outlet />
+                        )
+                    }
+                >
+                    <Route path={RoutesEnum.ROOT} element={<HomePage />} />
+                    <Route path={RoutesEnum.HOME} element={<HomePage />} />
+                    <Route path={RoutesEnum.DIARY} element={<DiaryPage />} />
+                    <Route
+                        path={RoutesEnum.IMPROVISATION}
+                        element={<ImprovisationPage />}
+                    />
+                    <Route
+                        path={RoutesEnum.LEARNING}
+                        element={<LearningPage />}
+                    />
+                    <Route
+                        path={RoutesEnum.REPETITION}
+                        element={<RepetitionPage />}
+                    />
+                    <Route
+                        path={RoutesEnum.SETTINGS}
+                        element={<SettingsPage />}
+                    />
                 </Route>
 
-                <Route path="*" element={<Navigate to="/" />} />
+                <Route
+                    path={RoutesEnum.ALL}
+                    element={<Navigate to={RoutesEnum.ROOT} />}
+                />
             </Routes>
         </div>
     );

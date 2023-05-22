@@ -19,6 +19,7 @@ import Input from "../../../components/ui-kit/Input";
 import LoginImage from "./assets/login.svg";
 
 import "./style.scss";
+import RoutesEnum from "../../../models/routes";
 
 enum UserType {
     Personal,
@@ -47,7 +48,7 @@ export default function LoginPage() {
 
     const location = useLocation();
 
-    const from = ((location.state as any)?.from.pathname as string) || "/home";
+    const from = ((location.state as any)?.from.pathname as string) || RoutesEnum.HOME;
 
     async function onSubmit() {
         const result = await loginRequest({ email, password });
@@ -133,7 +134,7 @@ export default function LoginPage() {
                     <span>Забыли пароль?</span>&nbsp;
                     <Link
                         className={cnLoginPage("link")}
-                        onClick={() => navigate("/restore")}
+                        onClick={() => navigate(RoutesEnum.RESTORE)}
                     >
                         Восстановить
                     </Link>

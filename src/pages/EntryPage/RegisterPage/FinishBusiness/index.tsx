@@ -7,6 +7,7 @@ import LoginRegisterChanger from "../../-LoginRegisterChanger";
 import Link from "../../../../components/ui-kit/Link";
 
 import "./style.scss";
+import RoutesEnum from "../../../../models/routes";
 
 const cnFinishBusiness = cn("finish-business");
 
@@ -28,7 +29,7 @@ export default function FinishBusiness() {
             <Link
                 className={cnFinishBusiness("link")}
                 arrow="right"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate(RoutesEnum.REGISTER)}
             >
                 Вернуться к регистрации
             </Link>

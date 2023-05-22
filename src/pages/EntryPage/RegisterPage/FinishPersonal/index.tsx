@@ -5,6 +5,7 @@ import { useConfirmQuery } from "../../../../store/api/register";
 import Link from "../../../../components/ui-kit/Link";
 
 import "./style.scss";
+import RoutesEnum from "../../../../models/routes";
 
 const cnFinishPersonal = cn("finish-personal");
 
@@ -34,7 +35,7 @@ export default function FinishPersonal({ token }: { token: string }) {
             <Link
                 className={cnFinishPersonal("link")}
                 arrow="right"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate(RoutesEnum.LOGIN)}
             >
                 Войти в аккаунт
             </Link>
