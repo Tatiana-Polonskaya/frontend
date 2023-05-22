@@ -31,6 +31,13 @@ export const accountApi = createApi({
                 } catch (error) {}
             },
         }),
+        logout: build.mutation<null, any>({
+            query: () => ({
+                url: "logout",
+                method: "POST",
+                credentials: "include",
+            }),
+        }),
         passwordRestore: build.query<IResponse<void>, string>({
             query: (email) => ({
                 url: "password/restore",
@@ -49,6 +56,11 @@ export const accountApi = createApi({
     }),
 });
 
-export const { useLazyLoginQuery, useLazyPasswordRestoreQuery, useGetMeQuery } =
-    accountApi;
+export const {
+    useLazyLoginQuery,
+    useLazyPasswordRestoreQuery,
+    useGetMeQuery,
+    useLogoutMutation,
+} = accountApi;
+
 export const { endpoints, reducerPath, reducer, middleware } = accountApi;

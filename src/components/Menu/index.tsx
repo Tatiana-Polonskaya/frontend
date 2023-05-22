@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/redux";
 import { logout } from "../../store/slices/user";
 import RoutesEnum from "../../models/routes";
+import { userApi } from "../../store/api/user";
+import { accountApi } from "../../store/api/account";
 
 const cnMenu = cn("menu");
 
@@ -50,6 +52,7 @@ export default function Menu() {
         {
             title: "Выход",
             onClick: async () => {
+                await dispatch(accountApi.endpoints.logout.initiate(null));
                 await dispatch(logout());
                 navigate(RoutesEnum.LOGIN);
             },
