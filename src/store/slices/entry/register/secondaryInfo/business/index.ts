@@ -10,6 +10,7 @@ const secondaryInfoBusinessSlice = createSlice({
     name: "secondaryBusiness",
     initialState,
     reducers: {
+        resetBusinessInfo: () => initialState,
         setCompanyName(state, action) {
             state.companyName = action.payload;
         },
@@ -22,7 +23,7 @@ const secondaryInfoBusinessSlice = createSlice({
     },
 });
 
-export const { setCompanyName, setTIN, setWorkPosition } =
+export const { setCompanyName, setTIN, setWorkPosition, resetBusinessInfo } =
     secondaryInfoBusinessSlice.actions;
 
 export default secondaryInfoBusinessSlice.reducer;

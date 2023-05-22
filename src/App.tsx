@@ -39,11 +39,11 @@ export default function App() {
 
                 <Route
                     element={
-                        process.env.NODE_ENV === "production" ? (
+                        // process.env.NODE_ENV === "production" ? (
                             <AuthorizedRoute />
-                        ) : (
-                            <Outlet />
-                        )
+                        // ) : (
+                        //     <Outlet />
+                        // )
                     }
                 >
                     <Route path={RoutesEnum.ROOT} element={<HomePage />} />

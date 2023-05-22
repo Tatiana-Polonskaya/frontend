@@ -5,15 +5,13 @@ type Type = {
     city?: string;
 };
 
-const initialState: Type = {
-    birthday: undefined,
-    city: undefined,
-};
+const initialState: Type = {};
 
 const secondaryInfoPersonalSlice = createSlice({
     name: "secondaryPersonal",
     initialState,
     reducers: {
+        resetSecondaryInfoPersonal: () => initialState,
         setBirthday(state, action) {
             state.birthday = action.payload;
         },
@@ -23,6 +21,7 @@ const secondaryInfoPersonalSlice = createSlice({
     },
 });
 
-export const { setBirthday, setCity } = secondaryInfoPersonalSlice.actions;
+export const { setBirthday, setCity, resetSecondaryInfoPersonal } =
+    secondaryInfoPersonalSlice.actions;
 
 export default secondaryInfoPersonalSlice.reducer;

@@ -180,8 +180,12 @@ export default function SecondaryInfoPersonal() {
                 disabled={isLoading}
                 onClick={onSubmit}
             >
-                Продолжить
+                Завершить регистрацию
             </Button>
+            <p className={cnSecondaryInfoPersonal("remark")}>
+                Нажимая данную кнопку, вы подтверждаете корректность введенных
+                данных.
+            </p>
         </>
     );
 }

@@ -24,6 +24,13 @@
 
     &-next-button {
         width: 100%;
-        margin: 16px 0;
+        margin: 16px 0 8px 0;
     }
+
+    &-remark {
+        font-size: 0.75rem;
+        line-height: 16px;
+        color: #7C8EB5;
+    }
+    
 }
