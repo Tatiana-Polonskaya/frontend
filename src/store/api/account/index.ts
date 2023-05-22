@@ -3,10 +3,16 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IResponse } from "../../../models/api";
 
 import { ILoginRequest, ILoginResponse } from "../../../models/entry/login";
+import { setUser, setAccessToken } from "../../slices/user";
+import { IUser } from "../../../models/entry/user";
+
+import { userApi } from "../user";
 
 export const accountApi = createApi({
     reducerPath: "api/login",
-    baseQuery: fetchBaseQuery({ baseUrl: "account" }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: "account",
+    }),
     endpoints: (build) => ({
         login: build.query<IResponse<ILoginResponse>, ILoginRequest>({
             query: (loginRequest) => ({
@@ -15,6 +21,15 @@ export const accountApi = createApi({
                 params: { email: loginRequest.email },
                 body: { password: loginRequest.password },
             }),
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    if (data.success) {
+                        await dispatch(setAccessToken(data.data!.access_token));
+                        await dispatch(userApi.endpoints.getMe.initiate(null));
+                    }
+                } catch (error) {}
+            },
         }),
         passwordRestore: build.query<IResponse<void>, string>({
             query: (email) => ({
@@ -23,8 +38,17 @@ export const accountApi = createApi({
                 params: { email },
             }),
         }),
+        getMe: build.query<IUser, null>({
+            query: () => ({
+                url: "me",
+                method: "GET",
+                credentials: "include",
+            }),
+            transformResponse: (result: IResponse<IUser>) => result.data!,
+        }),
     }),
 });
 
-export const { useLazyLoginQuery, useLazyPasswordRestoreQuery } = accountApi;
+export const { useLazyLoginQuery, useLazyPasswordRestoreQuery, useGetMeQuery } =
+    accountApi;
 export const { endpoints, reducerPath, reducer, middleware } = accountApi;

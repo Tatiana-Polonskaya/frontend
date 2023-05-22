@@ -1,4 +1,3 @@
-
 import { ReactSVG } from "react-svg";
 import { cn } from "@bem-react/classname";
 import MenuItem from "./MenuItem";
@@ -6,66 +5,67 @@ import iconSrc from "./icons/logo-mini.svg";
 
 import images from "./icons";
 import "./style.scss";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/redux";
+import { logout } from "../../store/slices/user";
 
 const cnMenu = cn("menu");
 
 export default function Menu() {
-    const titleMenu = [
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
+    const items = [
         {
-            id: 1,
             title: "Главная",
-            url: "/",
             img: images.Home,
+            onClick: () => navigate("/"),
         },
         {
-            id: 2,
             title: "Обучение",
-            url: "/learning",
+            onClick: () => navigate("/learning"),
             img: images.Teacher,
         },
         {
-            id: 3,
             title: "Репетиция",
-            url: "/repetition",
+            onClick: () => navigate("/repetition"),
             img: images.Repetition,
         },
         {
-            id: 4,
             title: "Импровизация",
-            url: "/improvisation",
+            onClick: () => navigate("/improvisation"),
             img: images.Improvization,
         },
         {
-            id: 5,
             title: "Дневник",
-            url: "/diary",
+            onClick: () => navigate("/diary"),
             img: images.Book,
         },
         {
-            id: 6,
             title: "Настройки",
-            url: "/settings",
+            onClick: () => navigate("/settings"),
             img: images.Setting,
         },
         {
-            id: 7,
             title: "Выход",
-            url: "/",
+            onClick: async () => {
+                await dispatch(logout());
+                navigate("/login");
+            },
             img: images.Logout,
         },
     ];
 
+    const uniqueFactory = () => window.crypto.randomUUID(); // not works with SSR
     return (
         <div className={cnMenu()}>
             <ReactSVG src={iconSrc} className={cnMenu("logo")} />
             <ul>
-                {titleMenu.map((el) => {
-                    return (
-                        <li>
-                            <MenuItem item={el} key={el.id} />
-                        </li>
-                    );
-                })}
+                {items.map((props, idx) => (
+                    <li key={uniqueFactory()}>
+                        <MenuItem {...props} />
+                    </li>
+                ))}
             </ul>
         </div>
     );

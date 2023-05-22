@@ -26,7 +26,7 @@ type Props = InputProps & {
     customRef?: LegacyRef<HTMLInputElement>;
 };
 
-export default function Input(props: Props) {
+export default function Input({ invalid = false, ...props }: Props) {
     const isPassword = props.type === "password";
     const [showPassword, setShowPassword] = useState(false);
 
@@ -44,8 +44,8 @@ export default function Input(props: Props) {
                 }
                 className={cnInput("input", {
                     password: isPassword,
-                    invalid: props.invalid,
-                    numeric: props.type === "number"
+                    invalid: invalid,
+                    numeric: props.type === "number",
                 })}
             />
             {isPassword && (

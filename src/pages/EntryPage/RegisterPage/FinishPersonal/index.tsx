@@ -11,7 +11,7 @@ const cnFinishPersonal = cn("finish-personal");
 export default function FinishPersonal({ token }: { token: string }) {
     const navigate = useNavigate();
     const response = useConfirmQuery(token);
-    const { isLoading, isSuccess, isError, data } = response;
+    const { isLoading, isSuccess, isError, data, error } = response;
 
     return (
         <>
@@ -26,7 +26,10 @@ export default function FinishPersonal({ token }: { token: string }) {
                     </p>
                 </>
             ) : (
-                <p className={cnFinishPersonal("title")}>{data?.error?.msg}</p>
+                <p className={cnFinishPersonal("title")}>
+                    {data?.error?.msg ||
+                        "Ошибка сети, повторите запрос позднее"}
+                </p>
             )}
             <Link
                 className={cnFinishPersonal("link")}

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { cn } from "@bem-react/classname";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../hooks/redux";
 
 import { useLazyLoginQuery } from "../../../store/api/account";
@@ -32,8 +32,8 @@ const INVALID_LOGIN_INIT_TEXT = "Поле не может быть пустым"
 export default function LoginPage() {
     const userType = useAppSelector((state) => state.entry.entry.userType);
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("alex.thunder@tut.by");
+    const [password, setPassword] = useState("Password1");
 
     const [isEmailWrong, setEmailWrong] = useState(false);
     const [isPasswordWrong, setPasswordWrong] = useState(false);
@@ -45,26 +45,33 @@ export default function LoginPage() {
     const [loginRequest, loginResponse] = useLazyLoginQuery();
     const { isFetching } = loginResponse;
 
-    const onSubmit = async () => {
-        const response = await loginRequest({ email, password }).unwrap();
-        console.log(response);
-        setEmailWrong(false);
-        setPasswordWrong(false);
-        if (response.success && response.data) {
-            localStorage.setItem("access_token", response.data.access_token);
-        } else {
-            switch (response.error?.code) {
-                case 10003:
-                    setWrongPasswordText(response.error.msg);
-                    setPasswordWrong(true);
-                    break;
-                case 10015:
-                    setWrongEmailText(response.error.msg);
-                    setEmailWrong(true);
-                    break;
+    const location = useLocation();
+
+    const from = ((location.state as any)?.from.pathname as string) || "/home";
+
+    async function onSubmit() {
+        const result = await loginRequest({ email, password });
+        const { isSuccess, data } = result;
+        if (isSuccess && data) {
+            if (data.success) {
+                navigate(from);
+            } else {
+                const error = data.error!;
+                setEmailWrong(false);
+                setPasswordWrong(false);
+                switch (error.code) {
+                    case 10003:
+                        setWrongPasswordText(error.msg);
+                        setPasswordWrong(true);
+                        break;
+                    case 10015:
+                        setWrongEmailText(error.msg);
+                        setEmailWrong(true);
+                        break;
+                }
             }
         }
-    };
+    }
 
     return (
         <EntryLayout image={<ReactSVG src={LoginImage} />}>
@@ -117,6 +124,7 @@ export default function LoginPage() {
                         className={cnLoginPage("next-button")}
                         disabled={isFetching || !(email && password)}
                         onClick={onSubmit}
+                        // onClick={() => loginRequest({ email, password })}
                     >
                         Продолжить
                     </Button>

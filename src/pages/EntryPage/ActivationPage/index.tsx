@@ -2,7 +2,7 @@ import { ReactSVG } from "react-svg";
 import EntryLayout from "../../../layouts/EntryLayout";
 import FinishPersonal from "../RegisterPage/FinishPersonal";
 import RegisterPersonalImg from "../RegisterPage/assets/reg-image-personal.svg";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, Navigate } from "react-router-dom";
 
 export default function ActivationPage() {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function ActivationPage() {
 
     return (
         <EntryLayout image={<ReactSVG src={RegisterPersonalImg} />}>
-            {token ? <FinishPersonal token={token} /> : <>Token not found!</>}
+            {token ? <FinishPersonal token={token} /> : <Navigate to="/" />}
         </EntryLayout>
     );
 }
