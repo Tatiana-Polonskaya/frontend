@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { registerApi } from "./api/register";
 import { accountApi } from "./api/account";
 
@@ -6,6 +6,7 @@ import testSlice from "./slices/testSlice";
 import profileSlice from "./slices/profileSlice";
 import entryReducer from "./slices/entry";
 import userReducer from "./slices/user";
+import registerReducer from "./slices/register";
 import { userApi } from "./api/user";
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
         [registerApi.reducerPath]: registerApi.reducer,
         [accountApi.reducerPath]: accountApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
+        register: registerReducer,
         test: testSlice,
         profile: profileSlice,
         entry: entryReducer,

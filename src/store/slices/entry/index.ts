@@ -1,12 +1,9 @@
-import { combineReducers } from "@reduxjs/toolkit";
-
 import { createSlice } from "@reduxjs/toolkit";
-import { PageType, UserType } from "../../../models/entry";
-
-import registerReducer from "./register";
+import { PageType, RegisterStep, UserType } from "../../../models/entry";
 
 const initialState = {
     userType: UserType.Personal,
+    registerStep: RegisterStep.PrimaryInfo,
 };
 
 const entrySlice = createSlice({
@@ -16,13 +13,12 @@ const entrySlice = createSlice({
         setUserType(state, action) {
             state.userType = action.payload;
         },
+        setStep(state, action) {
+            state.registerStep = action.payload;
+        },
     },
 });
 
-export const entryReducer = combineReducers({
-    entry: entrySlice.reducer,
-    register: registerReducer,
-});
-export default entryReducer;
+export default entrySlice.reducer;
 
-export const { setUserType } = entrySlice.actions;
+export const { setUserType, setStep } = entrySlice.actions;

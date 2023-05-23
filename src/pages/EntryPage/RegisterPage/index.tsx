@@ -12,11 +12,12 @@ import PrimaryInfo from "./PrimaryInfo";
 import SecondaryInfoPersonal from "./SecondaryInfoPersonal";
 import SecondaryInfoBusiness from "./SecondaryInfoBusiness";
 import EmailVerification from "./EmailVerification";
+import PrimaryInfoPersonal from "./PrimaryInfoPersonal";
 
 export default function RegisterPage() {
-    const userType = useAppSelector((state) => state.entry.entry.userType);
+    const userType = useAppSelector((state) => state.entry.userType);
 
-    const step = useAppSelector((state) => state.entry.register.generic.step);
+    const step = useAppSelector((state) => state.entry.registerStep);
 
     return (
         <EntryLayout
@@ -30,13 +31,20 @@ export default function RegisterPage() {
                 />
             }
         >
-            {RegisterStep.PrimaryInfo === step && <PrimaryInfo />}
+            {/* {RegisterStep.PrimaryInfo === step && <PrimaryInfo />} */}
+            {RegisterStep.PrimaryInfo === step &&
+                (userType === UserType.Personal ? (
+                    <PrimaryInfoPersonal />
+                ) : (
+                    <PrimaryInfo />
+                ))}
             {RegisterStep.SecondaryInfo === step &&
                 (userType === UserType.Personal ? (
                     <SecondaryInfoPersonal />
                 ) : (
                     <SecondaryInfoBusiness />
                 ))}
+            
             {RegisterStep.EmailVerification === step && <EmailVerification />}
         </EntryLayout>
     );

@@ -31,7 +31,7 @@ const cnLoginPage = cn("login-page");
 const INVALID_LOGIN_INIT_TEXT = "Поле не может быть пустым";
 
 export default function LoginPage() {
-    const userType = useAppSelector((state) => state.entry.entry.userType);
+    const userType = useAppSelector((state) => state.entry.userType);
     const navigate = useNavigate();
     const [email, setEmail] = useState("alex.thunder@tut.by");
     const [password, setPassword] = useState("Password1");

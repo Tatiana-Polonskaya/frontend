@@ -6,29 +6,63 @@ import { RegisterStep } from "../../../../models/entry";
 import { useEffect, useRef, useState } from "react";
 import isPasswordValid from "../../../../tools/validations/passwordValidation";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
-import {
-    setCity,
-    setBirthday,
-} from "../../../../store/slices/entry/register/secondaryInfo/personal";
-import { setStep } from "../../../../store/slices/entry/register";
+
+import { setStep } from "../../../../store/slices/entry";
+import { setEmail } from "../../../../store/slices/register/personal";
 
 import "./style.scss";
-import { useRegisterMutation } from "../../../../store/api/register";
+import {
+    useLazyCheckEmailQuery,
+    useRegisterMutation,
+} from "../../../../store/api/register";
 import InputHeader from "../../../../components/ui-kit/InputHeader";
 import Input, { ForwardedInput } from "../../../../components/ui-kit/Input";
 
 const cnSecondaryInfoPersonal = cn("secondary-info-personal");
 
 const PASSWORD_ERROR_TEXT_INIT = "Пароли не совпадают";
+const EMAIL_WRONG_TEXT_INIT = "Неверный формат почты";
 
 export default function SecondaryInfoPersonal() {
-    const primaryInfo = useAppSelector((state) => state.entry.register.primary);
-    const info = useAppSelector(
-        (state) => state.entry.register.secondary.personal
-    );
     const dispatch = useAppDispatch();
+
+    const { name, lastName, birthday, email } = useAppSelector(
+        (state) => state.register.personal
+    );
+    const [checkEmailRequest, checkEmailResponse] = useLazyCheckEmailQuery();
+    const [wrongEmailText, setWrongEmailText] = useState(EMAIL_WRONG_TEXT_INIT);
+    const [isEmailValid, setEmailValid] = useState(true);
+
     const [registerRequest, registerResponse] = useRegisterMutation();
     const { isLoading, isSuccess, isError } = registerResponse;
+
+    const emailInputRef = useRef<HTMLInputElement>(null);
+
+    const onSubmit = async () => {
+        const isEmailValidLocal = emailInputRef.current?.checkValidity();
+
+        if (!isEmailValidLocal) {
+            setEmailValid(false);
+            setWrongEmailText(EMAIL_WRONG_TEXT_INIT);
+            return;
+        }
+
+        try {
+            const checkEmailResponseData = await checkEmailRequest({
+                email,
+            }).unwrap();
+            if (checkEmailResponseData.success) {
+                dispatch(setStep(RegisterStep.SecondaryInfo));
+            } else {
+                setEmailValid(false);
+                setWrongEmailText(
+                    checkEmailResponseData.error?.msg || "Unknown error"
+                );
+            }
+        } catch (e) {
+            alert(e);
+        }
+    };
 
     useEffect(() => {
         if (isSuccess) {
@@ -58,49 +92,12 @@ export default function SecondaryInfoPersonal() {
     const [password, setPassword] = useState("");
     const [passwordRepeat, setPasswordRepeat] = useState("");
 
-    const [isBirthdayError, setBirthdayError] = useState(false);
     const [isPasswordError, setPasswordError] = useState(false);
     const [passwordErrorText, setPasswordErrorText] = useState(
         PASSWORD_ERROR_TEXT_INIT
     );
 
     const birthdayInputRef = useRef<HTMLInputElement>(null);
-
-    const onSubmit = () => {
-        setBirthdayError(false);
-        setPasswordError(false);
-        if (birthdayInputRef.current && info.birthday) {
-            const year = new Date(info.birthday).getFullYear();
-            const isYearNotValid =
-                year < 1900 || year > new Date().getFullYear();
-            setBirthdayError(isYearNotValid);
-        } else {
-            setBirthdayError(true);
-        }
-
-        if (password !== passwordRepeat) {
-            setPasswordError(true);
-            setPasswordErrorText(PASSWORD_ERROR_TEXT_INIT);
-        } else if (!isPasswordValid(password)) {
-            setPasswordError(true);
-            setPasswordErrorText("См. подсказку");
-        }
-
-        if (
-            !isPasswordError &&
-            password === passwordRepeat &&
-            !isBirthdayError &&
-            info.birthday
-        ) {
-            registerRequest({
-                firstname: primaryInfo.name,
-                lastname: primaryInfo.lastName,
-                email: primaryInfo.email,
-                birthday: info.birthday,
-                password,
-            });
-        }
-    };
 
     return (
         <>
@@ -116,33 +113,31 @@ export default function SecondaryInfoPersonal() {
                 <span
                     className={cnSecondaryInfoPersonal("title", { name: true })}
                 >
-                    {primaryInfo.name}
+                    {name}
                 </span>
                 !
             </p>
             <div className={cnSecondaryInfoPersonal("inputs")}>
                 <label>
                     <InputHeader
-                        text="Дата рождения"
-                        wrong={isBirthdayError}
-                        wrongText="Некорректная дата"
+                        text="Почта"
+                        wrong={!isEmailValid}
+                        wrongText={wrongEmailText}
                     />
                     <ForwardedInput
-                        type="date"
-                        min="1900-01-01"
-                        value={info.birthday}
-                        onChange={(e) => dispatch(setBirthday(e.target.value))}
-                        max={new Date().toLocaleDateString("fr-ca")}
-                        ref={birthdayInputRef}
+                        type="email"
+                        required
+                        placeholder="Укажите почту"
+                        value={email}
+                        onChange={(e) => dispatch(setEmail(e.target.value))}
+                        onBlur={(e) => setEmailValid(e.target.checkValidity())}
+                        ref={emailInputRef}
+                        invalid={!isEmailValid}
                     />
                 </label>
                 <label>
-                    <InputHeader text="Город" />
-                    <Input
-                        placeholder="Введите свой город"
-                        value={info.city}
-                        onChange={(e) => dispatch(setCity(e.target.value))}
-                    />
+                    <InputHeader text="Телефон" />
+                    <ForwardedInput type="tel" placeholder="+7" />
                 </label>
                 <label>
                     <InputHeader

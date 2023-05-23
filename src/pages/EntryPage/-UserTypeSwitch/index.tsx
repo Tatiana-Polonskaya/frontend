@@ -10,7 +10,7 @@ import "./style.scss";
 const cnUserTypeSwitch = cn("user-type-switch");
 
 export default function UserTypeSwitch() {
-    const userType = useAppSelector((state) => state.entry.entry.userType);
+    const userType = useAppSelector((state) => state.entry.userType);
     const dispatch = useAppDispatch();
     return (
         <div className={cnUserTypeSwitch()}>

@@ -5,15 +5,14 @@ import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
 import Link from "../../../../components/ui-kit/Link";
 import { useNavigate } from "react-router-dom";
 import RoutesEnum from "../../../../models/routes";
-import { setStep } from "../../../../store/slices/entry/register";
+import { setStep } from "../../../../store/slices/entry";
 import { RegisterStep } from "../../../../models/entry";
-import { resetPrimaryInfo } from "../../../../store/slices/entry/register/primaryInfo";
-import { resetSecondaryInfoPersonal } from "../../../../store/slices/entry/register/secondaryInfo/personal";
+import { clearPersonalRegister } from "../../../../store/slices/register/personal";
 
 const cnEmailVerification = cn("email-verification");
 
 export default function EmailVerification() {
-    const email = useAppSelector((state) => state.entry.register.primary.email);
+    const email = useAppSelector((state) => state.register.personal.email);
     const dispatch = useAppDispatch();
 
     return (
@@ -23,8 +22,7 @@ export default function EmailVerification() {
                 className={cnEmailVerification("register-link")}
                 onClick={() => {
                     dispatch(setStep(RegisterStep.PrimaryInfo));
-                    dispatch(resetPrimaryInfo());
-                    dispatch(resetSecondaryInfoPersonal());
+                    dispatch(clearPersonalRegister());
                 }}
             >
                 Вернуться к началу регистрации

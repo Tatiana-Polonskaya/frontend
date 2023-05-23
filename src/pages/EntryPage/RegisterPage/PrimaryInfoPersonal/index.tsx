@@ -2,13 +2,16 @@ import { cn } from "@bem-react/classname";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
 
 import { UserType, PageType, RegisterStep } from "../../../../models/entry";
+
 import {
-    setEmail,
-    setLastName,
     setName,
-} from "../../../../store/slices/register/business";
+    setBirthday,
+    setCity,
+    setLastName,
+} from "../../../../store/slices/register/personal";
 
 import { setStep } from "../../../../store/slices/entry";
+
 import { useLazyCheckEmailQuery } from "../../../../store/api/register";
 import { useRef, useState } from "react";
 
@@ -25,58 +28,41 @@ import "./style.scss";
 
 const cnPrimaryInfo = cn("primary-info");
 
-const EMAIL_WRONG_TEXT_INIT = "Неверный формат почты";
-
 export default function PrimaryInfo() {
-    const [checkEmailRequest, checkEmailResponse] = useLazyCheckEmailQuery();
-
-    const { data, isFetching, isSuccess } = checkEmailResponse;
-
     const dispatch = useAppDispatch();
 
     const userType = useAppSelector((state) => state.entry.userType);
 
-    const { name, lastName, email } = useAppSelector(
-        (state) => state.register.business
+    const { name, lastName, birthday, city } = useAppSelector(
+        (state) => state.register.personal
     );
+    // const name = useAppSelector((state) => state.entry.register.primary.name);
+    // const lastName = useAppSelector(
+    //     (state) => state.entry.register.primary.lastName
+    // );
+    // const email = useAppSelector((state) => state.entry.register.primary.email);
 
     const [isNameValid, setNameValid] = useState(true);
-    const [isEmailValid, setEmailValid] = useState(true);
+    
 
-    const [wrongEmailText, setWrongEmailText] = useState(EMAIL_WRONG_TEXT_INIT);
+    const [isBirthdayValid, setBirthdayValid] = useState(false);
+
     const nameInputRef = useRef<HTMLInputElement>(null);
     const emailInputRef = useRef<HTMLInputElement>(null);
+    const birthdayInputRef = useRef<HTMLInputElement>(null);
 
-    const onSubmit = async () => {
-        const isEmailValidLocal = emailInputRef.current?.checkValidity();
-        const isNameValidLocal = nameInputRef.current?.checkValidity();
-
-        if (!isNameValidLocal) {
+    const onSubmit = () => {
+        const isNameValid = nameInputRef.current?.checkValidity();
+        if (!isNameValid) {
             setNameValid(false);
             return;
         }
-
-        if (!isEmailValidLocal) {
-            setEmailValid(false);
-            setWrongEmailText(EMAIL_WRONG_TEXT_INIT);
+        const isBirthdayValid = birthdayInputRef.current?.checkValidity();
+        if (!isBirthdayValid) {
+            setBirthdayValid(false);
             return;
         }
-
-        try {
-            const checkEmailResponseData = await checkEmailRequest({
-                email,
-            }).unwrap();
-            if (checkEmailResponseData.success) {
-                dispatch(setStep(RegisterStep.SecondaryInfo));
-            } else {
-                setEmailValid(false);
-                setWrongEmailText(
-                    checkEmailResponseData.error?.msg || "Unknown error"
-                );
-            }
-        } catch (e) {
-            alert(e);
-        }
+        dispatch(setStep(RegisterStep.SecondaryInfo));
     };
 
     return (
@@ -120,29 +106,24 @@ export default function PrimaryInfo() {
                         onChange={(e) => dispatch(setLastName(e.target.value))}
                     />
                 </label>
+
                 <label>
                     <InputHeader
-                        text="Почта"
-                        wrong={!isEmailValid}
-                        wrongText={wrongEmailText}
+                        text="Дата рождения"
+                        wrong={!isBirthdayValid}
+                        wrongText="Некорректная дата"
                     />
                     <ForwardedInput
-                        type="email"
-                        required
-                        placeholder="Укажите почту"
-                        value={email}
-                        onChange={(e) => dispatch(setEmail(e.target.value))}
-                        onBlur={(e) => setEmailValid(e.target.checkValidity())}
-                        ref={emailInputRef}
-                        invalid={!isEmailValid}
+                        type="date"
+                        min="1900-01-01"
+                        value={birthday}
+                        onChange={(e) => dispatch(setBirthday(e.target.value))}
+                        max={new Date().toLocaleDateString("fr-ca")}
+                        ref={birthdayInputRef}
                     />
                 </label>
             </div>
-            <Button
-                className={cnPrimaryInfo("next-button")}
-                disabled={isFetching}
-                onClick={onSubmit}
-            >
+            <Button className={cnPrimaryInfo("next-button")} onClick={onSubmit}>
                 Продолжить
             </Button>
             <p className={cnPrimaryInfo("legal")}>

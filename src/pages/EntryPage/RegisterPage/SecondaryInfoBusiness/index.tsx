@@ -6,8 +6,8 @@ import {
     setCompanyName,
     setTIN,
     setWorkPosition,
-} from "../../../../store/slices/entry/register/secondaryInfo/business";
-import { setStep } from "../../../../store/slices/entry/register";
+} from "../../../../store/slices/register/business";
+import { setStep } from "../../../../store/slices/entry";
 
 import Button from "../../../../components/ui-kit/Button";
 import Link from "../../../../components/ui-kit/Link";
@@ -19,10 +19,9 @@ import "./style.scss";
 const cnSecondaryInfoBusiness = cn("secondary-info-business");
 
 export default function SecondaryInfoBusiness() {
-    const info = useAppSelector(
-        (state) => state.entry.register.secondary.business
+    const { name, companyName, TIN, workPosition } = useAppSelector(
+        (state) => state.register.business
     );
-    const name = useAppSelector((state) => state.entry.register.primary.name);
     const dispatch = useAppDispatch();
 
     return (
@@ -56,7 +55,7 @@ export default function SecondaryInfoBusiness() {
                     <InputHeader text="Название компании" />
                     <Input
                         placeholder="Введите название"
-                        value={info.companyName}
+                        value={companyName}
                         onChange={(e) =>
                             dispatch(setCompanyName(e.target.value))
                         }
@@ -66,7 +65,7 @@ export default function SecondaryInfoBusiness() {
                     <InputHeader text="ИНН" />
                     <Input
                         placeholder="Введите ИНН"
-                        value={info.TIN}
+                        value={TIN}
                         onChange={(e) => dispatch(setTIN(e.target.value))}
                     />
                 </label>
@@ -74,7 +73,7 @@ export default function SecondaryInfoBusiness() {
                     <InputHeader text="Ваша должность" />
                     <Input
                         placeholder="Укажите вашу должность"
-                        value={info.workPosition}
+                        value={workPosition}
                         onChange={(e) =>
                             dispatch(setWorkPosition(e.target.value))
                         }
@@ -83,10 +82,9 @@ export default function SecondaryInfoBusiness() {
             </div>
             <Button
                 className={cnSecondaryInfoBusiness("next-button")}
-                onClick={() => {
-                    setStep(RegisterStep.FinishRegister);
-                }}
-                disabled={Object.values(info).some((x) => !x)}
+                // onClick={() => {
+                //     setStep(RegisterStep.FinishRegister);
+                // }}
             >
                 Отправить заявку
             </Button>
