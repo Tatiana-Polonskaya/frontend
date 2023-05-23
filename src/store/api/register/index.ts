@@ -1,11 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 import { IResponse } from "../../../models/api";
-import {
-    IRegister,
-    IRegisterResponse,
-    ICheckEmail,
-} from "../../../models/entry/register";
+import { IRegister, IRegisterResponse } from "../../../models/entry/register";
 
 export const registerApi = createApi({
     reducerPath: "api/register",
@@ -18,11 +14,11 @@ export const registerApi = createApi({
                 body,
             }),
         }),
-        checkEmail: build.query<IResponse<void>, ICheckEmail>({
-            query: (body) => ({
+        checkEmail: build.query<IResponse<void>, string>({
+            query: (email) => ({
                 url: "validation",
                 method: "POST",
-                body,
+                body: { email },
             }),
         }),
         confirm: build.query<IResponse<void>, string>({

@@ -4,11 +4,11 @@ import Link from "../../../../components/ui-kit/Link";
 import { RegisterStep } from "../../../../models/entry";
 
 import { useEffect, useRef, useState } from "react";
-import isPasswordValid from "../../../../tools/validations/passwordValidation";
+import checkPasswordRegex from "../../../../tools/validations/passwordValidation";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
 
 import { setStep } from "../../../../store/slices/entry";
-import { setEmail } from "../../../../store/slices/register/personal";
+import { setEmail, setTel } from "../../../../store/slices/register/personal";
 
 import "./style.scss";
 import {
@@ -26,41 +26,75 @@ const EMAIL_WRONG_TEXT_INIT = "Неверный формат почты";
 export default function SecondaryInfoPersonal() {
     const dispatch = useAppDispatch();
 
-    const { name, lastName, birthday, email } = useAppSelector(
+    const { name, lastName, birthday, email, tel } = useAppSelector(
         (state) => state.register.personal
     );
     const [checkEmailRequest, checkEmailResponse] = useLazyCheckEmailQuery();
     const [wrongEmailText, setWrongEmailText] = useState(EMAIL_WRONG_TEXT_INIT);
     const [isEmailValid, setEmailValid] = useState(true);
+    const [isTelValid, setTelValid] = useState(true);
+
+    const [password, setPassword] = useState("");
+    const [passwordRepeat, setPasswordRepeat] = useState("");
+
+    const [isPasswordValid, setPasswordValid] = useState(true);
+    const [passwordErrorText, setPasswordErrorText] = useState(
+        PASSWORD_ERROR_TEXT_INIT
+    );
 
     const [registerRequest, registerResponse] = useRegisterMutation();
     const { isLoading, isSuccess, isError } = registerResponse;
 
     const emailInputRef = useRef<HTMLInputElement>(null);
+    const telInputRef = useRef<HTMLInputElement>(null);
 
     const onSubmit = async () => {
-        const isEmailValidLocal = emailInputRef.current?.checkValidity();
+        setWrongEmailText(EMAIL_WRONG_TEXT_INIT);
+        setPasswordErrorText(PASSWORD_ERROR_TEXT_INIT);
+        const isTelValid = !!telInputRef.current?.checkValidity();
+        let isEmailValid = !!emailInputRef.current?.checkValidity();
+        const isPasswordsEquals = password === passwordRepeat;
+        const _isPasswordValid =
+            password.length !== 0 && checkPasswordRegex(password);
 
-        if (!isEmailValidLocal) {
-            setEmailValid(false);
-            setWrongEmailText(EMAIL_WRONG_TEXT_INIT);
-            return;
+        setTelValid(isTelValid);
+        setEmailValid(isEmailValid);
+        setPasswordValid(isPasswordsEquals && _isPasswordValid);
+
+        if (!_isPasswordValid) {
+            setPasswordErrorText("Неверный пароль (см. подсказку)");
+        }
+        if (isEmailValid) {
+            const checkEmailResponse = await checkEmailRequest(email);
+            if (!checkEmailResponse.isSuccess) {
+                setWrongEmailText(
+                    "Ошибка при проверке почты, попробуйте позднее"
+                );
+                isEmailValid = false;
+            } else if (!checkEmailResponse.data?.success) {
+                setWrongEmailText(
+                    "Пользователь с такой почтой уже зарегистрирован"
+                );
+                isEmailValid = false;
+            } else {
+                isEmailValid = true;
+            }
+            setEmailValid(isEmailValid);
         }
 
-        try {
-            const checkEmailResponseData = await checkEmailRequest({
-                email,
-            }).unwrap();
-            if (checkEmailResponseData.success) {
-                dispatch(setStep(RegisterStep.SecondaryInfo));
-            } else {
-                setEmailValid(false);
-                setWrongEmailText(
-                    checkEmailResponseData.error?.msg || "Unknown error"
-                );
-            }
-        } catch (e) {
-            alert(e);
+        if (
+            isTelValid &&
+            isEmailValid &&
+            isPasswordsEquals &&
+            _isPasswordValid
+        ) {
+            await registerRequest({
+                firstname: name,
+                lastname: lastName,
+                birthday: birthday,
+                email: email,
+                password: password,
+            });
         }
     };
 
@@ -88,16 +122,6 @@ export default function SecondaryInfoPersonal() {
             console.log(registerResponse.error);
         }
     }, [isError]);
-
-    const [password, setPassword] = useState("");
-    const [passwordRepeat, setPasswordRepeat] = useState("");
-
-    const [isPasswordError, setPasswordError] = useState(false);
-    const [passwordErrorText, setPasswordErrorText] = useState(
-        PASSWORD_ERROR_TEXT_INIT
-    );
-
-    const birthdayInputRef = useRef<HTMLInputElement>(null);
 
     return (
         <>
@@ -136,13 +160,25 @@ export default function SecondaryInfoPersonal() {
                     />
                 </label>
                 <label>
-                    <InputHeader text="Телефон" />
-                    <ForwardedInput type="tel" placeholder="+7" />
+                    <InputHeader
+                        text="Телефон"
+                        wrongText="Неверный формат номера"
+                        wrong={!isTelValid}
+                    />
+                    <ForwardedInput
+                        type="tel"
+                        placeholder="Укажите телефон"
+                        onChange={(e) => dispatch(setTel(e.target.value))}
+                        value={tel}
+                        pattern="^[\+\d](?:\d\s?){6,14}\d$"
+                        ref={telInputRef}
+                        invalid={!isTelValid}
+                    />
                 </label>
                 <label>
                     <InputHeader
                         text="Пароль"
-                        wrong={isPasswordError}
+                        wrong={!isPasswordValid}
                         wrongText={passwordErrorText}
                         helpText={`Не менее 8 символов.
                             Минимум 1 латинская буква верхнего и нижнего регистра.
@@ -153,20 +189,20 @@ export default function SecondaryInfoPersonal() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         type="password"
-                        invalid={isPasswordError}
+                        invalid={!isPasswordValid}
                     />
                 </label>
                 <label>
                     <InputHeader
                         text="Подтверждение пароля"
-                        wrong={isPasswordError}
+                        wrong={!isPasswordValid}
                     />
                     <Input
                         placeholder="Повторите пароль"
                         value={passwordRepeat}
                         onChange={(e) => setPasswordRepeat(e.target.value)}
                         type="password"
-                        invalid={isPasswordError}
+                        invalid={!isPasswordValid}
                     />
                 </label>
             </div>

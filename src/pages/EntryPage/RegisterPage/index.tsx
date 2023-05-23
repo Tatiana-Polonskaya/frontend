@@ -8,7 +8,7 @@ import EntryLayout from "../../../layouts/EntryLayout";
 import RegisterImagePersonal from "./assets/reg-image-personal.svg";
 import RegisterImageBusiness from "./assets/reg-image-business.svg";
 
-import PrimaryInfo from "./PrimaryInfo";
+import PrimaryInfoBusiness from "./PrimaryInfoBusiness";
 import SecondaryInfoPersonal from "./SecondaryInfoPersonal";
 import SecondaryInfoBusiness from "./SecondaryInfoBusiness";
 import EmailVerification from "./EmailVerification";
@@ -36,7 +36,7 @@ export default function RegisterPage() {
                 (userType === UserType.Personal ? (
                     <PrimaryInfoPersonal />
                 ) : (
-                    <PrimaryInfo />
+                    <PrimaryInfoBusiness />
                 ))}
             {RegisterStep.SecondaryInfo === step &&
                 (userType === UserType.Personal ? (

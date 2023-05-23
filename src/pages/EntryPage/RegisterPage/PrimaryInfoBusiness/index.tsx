@@ -27,7 +27,7 @@ const cnPrimaryInfo = cn("primary-info");
 
 const EMAIL_WRONG_TEXT_INIT = "Неверный формат почты";
 
-export default function PrimaryInfo() {
+export default function PrimaryInfoBusiness() {
     const [checkEmailRequest, checkEmailResponse] = useLazyCheckEmailQuery();
 
     const { data, isFetching, isSuccess } = checkEmailResponse;
@@ -63,9 +63,9 @@ export default function PrimaryInfo() {
         }
 
         try {
-            const checkEmailResponseData = await checkEmailRequest({
-                email,
-            }).unwrap();
+            const checkEmailResponseData = await checkEmailRequest(
+                email
+            ).unwrap();
             if (checkEmailResponseData.success) {
                 dispatch(setStep(RegisterStep.SecondaryInfo));
             } else {

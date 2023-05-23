@@ -32,37 +32,28 @@ export default function PrimaryInfo() {
     const dispatch = useAppDispatch();
 
     const userType = useAppSelector((state) => state.entry.userType);
-
-    const { name, lastName, birthday, city } = useAppSelector(
+    const { name, lastName, birthday } = useAppSelector(
         (state) => state.register.personal
     );
-    // const name = useAppSelector((state) => state.entry.register.primary.name);
-    // const lastName = useAppSelector(
-    //     (state) => state.entry.register.primary.lastName
-    // );
-    // const email = useAppSelector((state) => state.entry.register.primary.email);
 
     const [isNameValid, setNameValid] = useState(true);
-    
-
-    const [isBirthdayValid, setBirthdayValid] = useState(false);
+    const [isBirthdayValid, setBirthdayValid] = useState(true);
 
     const nameInputRef = useRef<HTMLInputElement>(null);
-    const emailInputRef = useRef<HTMLInputElement>(null);
     const birthdayInputRef = useRef<HTMLInputElement>(null);
 
     const onSubmit = () => {
         const isNameValid = nameInputRef.current?.checkValidity();
         if (!isNameValid) {
             setNameValid(false);
-            return;
         }
         const isBirthdayValid = birthdayInputRef.current?.checkValidity();
         if (!isBirthdayValid) {
             setBirthdayValid(false);
-            return;
         }
-        dispatch(setStep(RegisterStep.SecondaryInfo));
+        if (isNameValid && isBirthdayValid) {
+            dispatch(setStep(RegisterStep.SecondaryInfo));
+        }
     };
 
     return (
@@ -116,10 +107,12 @@ export default function PrimaryInfo() {
                     <ForwardedInput
                         type="date"
                         min="1900-01-01"
+                        required
                         value={birthday}
                         onChange={(e) => dispatch(setBirthday(e.target.value))}
                         max={new Date().toLocaleDateString("fr-ca")}
                         ref={birthdayInputRef}
+                        invalid={!isBirthdayValid}
                     />
                 </label>
             </div>
