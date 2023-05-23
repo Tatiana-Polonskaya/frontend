@@ -13,6 +13,7 @@ import SecondaryInfoPersonal from "./SecondaryInfoPersonal";
 import SecondaryInfoBusiness from "./SecondaryInfoBusiness";
 import EmailVerification from "./EmailVerification";
 import PrimaryInfoPersonal from "./PrimaryInfoPersonal";
+import RegisterErrorPage from "./ErrorPage";
 
 export default function RegisterPage() {
     const userType = useAppSelector((state) => state.entry.userType);
@@ -44,8 +45,8 @@ export default function RegisterPage() {
                 ) : (
                     <SecondaryInfoBusiness />
                 ))}
-            
             {RegisterStep.EmailVerification === step && <EmailVerification />}
+            {RegisterStep.Error === step && <RegisterErrorPage />}
         </EntryLayout>
     );
 }

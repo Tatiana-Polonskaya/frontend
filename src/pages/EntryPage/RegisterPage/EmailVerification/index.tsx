@@ -8,13 +8,14 @@ import RoutesEnum from "../../../../models/routes";
 import { setStep } from "../../../../store/slices/entry";
 import { RegisterStep } from "../../../../models/entry";
 import { clearPersonalRegister } from "../../../../store/slices/register/personal";
+import { useResendEmailMutation } from "../../../../store/api/register";
 
 const cnEmailVerification = cn("email-verification");
 
 export default function EmailVerification() {
     const email = useAppSelector((state) => state.register.personal.email);
     const dispatch = useAppDispatch();
-
+    const [request, response] = useResendEmailMutation();
     return (
         <>
             <Link
@@ -37,7 +38,10 @@ export default function EmailVerification() {
 
             <p className={cnEmailVerification("resend-text")}>
                 Не пришло письмо?
-                <Link className={cnEmailVerification("resend-link")}>
+                <Link
+                    className={cnEmailVerification("resend-link")}
+                    onClick={() => request(email)}
+                >
                     Отправить еще раз
                 </Link>
             </p>

@@ -119,13 +119,7 @@ export default function PrimaryInfo() {
             <Button className={cnPrimaryInfo("next-button")} onClick={onSubmit}>
                 Продолжить
             </Button>
-            <p className={cnPrimaryInfo("legal")}>
-                Нажимая «Продолжить», я принимаю условия{" "}
-                <Link>Пользовательского соглашения</Link> и даю своё согласие
-                ООО «Точка инноваций» на обработку моей персональной информации
-                на условиях, определённых{" "}
-                <Link>Политикой конфиденциальности</Link>.
-            </p>
+
         </>
     );
 }

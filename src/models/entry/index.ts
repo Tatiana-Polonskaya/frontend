@@ -16,6 +16,7 @@ export enum RegisterStep {
     SecondaryInfo,
     EmailVerification,
     FinishRegister,
+    Error,
 }
 
 export interface JWTToken {
@@ -23,4 +24,3 @@ export interface JWTToken {
     iat: number;
     user: IUser;
 }
-

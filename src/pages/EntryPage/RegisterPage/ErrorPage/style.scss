@@ -1,0 +1,20 @@
+.register-error-page {
+    &-title {
+        font-weight: 500;
+        font-size: 2rem;
+        color: #37476A;
+    }
+
+    &-description {
+        padding: 16px 0;
+        color: #37476A;
+        font-size: 1.25rem;
+    }
+
+    &-link {
+        display: block;
+        padding: 16px 0;
+        font-weight: 500;
+        font-size: 1.25rem;
+    }
+}

@@ -27,9 +27,20 @@ export const registerApi = createApi({
                 method: "GET",
             }),
         }),
+        resendEmail: build.mutation<IResponse<void>, string>({
+            query: (email) => ({
+                url: "resend-email",
+                params: { email },
+                method: "POST",
+            }),
+        }),
     }),
 });
 
-export const { useRegisterMutation, useLazyCheckEmailQuery, useConfirmQuery } =
-    registerApi;
+export const {
+    useRegisterMutation,
+    useLazyCheckEmailQuery,
+    useConfirmQuery,
+    useResendEmailMutation,
+} = registerApi;
 export const { endpoints, reducerPath, reducer, middleware } = registerApi;
