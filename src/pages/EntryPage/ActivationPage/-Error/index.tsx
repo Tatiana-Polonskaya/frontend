@@ -9,7 +9,7 @@ import RoutesEnum from "../../../../models/routes";
 
 const cnRegisterErrorPage = cn("register-error-page");
 
-export default function RegisterErrorPage() {
+export default function ActivationErrorPage() {
     const navigate = useNavigate();
 
     return (

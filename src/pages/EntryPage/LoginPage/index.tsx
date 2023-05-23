@@ -48,7 +48,8 @@ export default function LoginPage() {
 
     const location = useLocation();
 
-    const from = ((location.state as any)?.from.pathname as string) || RoutesEnum.HOME;
+    const from =
+        ((location.state as any)?.from.pathname as string) || RoutesEnum.HOME;
 
     async function onSubmit() {
         const result = await loginRequest({ email, password });
@@ -68,6 +69,9 @@ export default function LoginPage() {
                     case 10015:
                         setWrongEmailText(error.msg);
                         setEmailWrong(true);
+                        break;
+                    default:
+                        alert(error.msg);
                         break;
                 }
             }

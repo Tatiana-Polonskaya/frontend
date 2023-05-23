@@ -8,7 +8,7 @@ import RoutesEnum from "../../../../models/routes";
 
 const cnFinishPersonal = cn("finish-personal");
 
-export default function FinishPersonal() {
+export default function ActivationPageSuccess() {
     const navigate = useNavigate();
 
     return (
