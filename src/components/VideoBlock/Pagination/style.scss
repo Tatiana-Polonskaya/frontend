@@ -1,0 +1,56 @@
+.pagination-block{
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 2rem;
+    
+
+    &-button{
+        
+        cursor: pointer;
+        fill: rgba(124, 142, 181, 0.5);
+        width: 1.5rem;
+
+        &-svg div{
+            display: flex;
+            width: 1.5rem;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        &_active{
+            fill:rgba(36, 119, 244, 1);
+        }
+    }
+
+    &-number{
+        cursor: pointer;
+        font-family: 'Montserrat Alternates';
+        font-style: normal;
+        font-weight: 500;    
+        font-size: 20px;
+        line-height: 24px;
+        color: #7C8EB5;
+
+        &_current {
+            font-weight: 700;
+            color: #2477F4;
+        }
+    }
+
+    &-dot{
+        font-family: 'Montserrat Alternates';
+        font-style: normal;
+        font-weight: 500;    
+        font-size: 20px;
+        line-height: 24px;
+        color: #7C8EB5;
+    }
+}

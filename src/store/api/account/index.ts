@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IResponse } from "../../../models/api";
 
 import { ILoginRequest, ILoginResponse } from "../../../models/entry/login";
-import { setUser, setAccessToken } from "../../slices/user";
+import { setAccessToken } from "../../slices/user";
 import { IUser } from "../../../models/entry/user";
 
 import { userApi } from "../user";

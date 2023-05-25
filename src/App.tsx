@@ -6,7 +6,6 @@ import ImprovisationPage from "./pages/ImprovisationPage";
 import LearningPage from "./pages/LearningPage";
 import RepetitionPage from "./pages/RepetitionPage";
 import SettingsPage from "./pages/SettingsPage";
-
 import LoginPage from "./pages/EntryPage/LoginPage";
 import RegisterPage from "./pages/EntryPage/RegisterPage";
 import PasswordRestorePage from "./pages/EntryPage/PasswordRestorePage";
@@ -15,6 +14,7 @@ import LandingPage from "./pages/LandingPage";
 import AuthorizedRoute from "./components/tools/AuthorizedRoute";
 import UnauthorizedRoute from "./components/tools/UnauthorizedRoute";
 import RoutesEnum from "./models/routes";
+import SurveyPage from "./pages/SurveyPage";
 
 export default function App() {
     return (
@@ -40,7 +40,7 @@ export default function App() {
                 <Route
                     element={
                         // process.env.NODE_ENV === "production" ? (
-                            <AuthorizedRoute />
+                        <AuthorizedRoute />
                         // ) : (
                         //     <Outlet />
                         // )
@@ -71,6 +71,7 @@ export default function App() {
                     path={RoutesEnum.ALL}
                     element={<Navigate to={RoutesEnum.ROOT} />}
                 />
+                <Route path={RoutesEnum.SURVEY} element={<SurveyPage />} />
             </Routes>
         </div>
     );

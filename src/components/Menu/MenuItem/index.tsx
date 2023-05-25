@@ -20,7 +20,7 @@ export default function MenuItem(props: Props) {
             <span className={cnMenuItem("span-logo")}>
                 <ReactSVG
                     src={props.img}
-                    className={cnMenuItem("ul-logo")}
+                    className={cnMenuItem("span-logo-svg")}
                 />
             </span>
             <span>{props.title}</span>

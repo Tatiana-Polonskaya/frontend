@@ -1,0 +1,114 @@
+.checkbox-main{
+    font-size: 18px;
+    line-height: 20px;
+    font-family: 'Montserrat Alternates';
+
+    &-title{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        color: #031C3D;
+    }
+
+    &-col-answers{
+        display: grid;
+        grid-template-columns: 1fr  1fr;
+        gap: 2px;
+        justify-items: start;
+    }
+
+    &-block-answers{
+        
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+        gap: 15px;
+        padding-top: 5px;
+
+        &-item{
+
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            padding-top: 10px;
+            color: #7C8EB5;
+            fill: #7C8EB5;
+            width: 100%;
+
+            &-icon{
+                width: 24px;
+                height: 24px;
+            }
+
+            &-label{
+                display: flex;
+                width: 100%;
+                cursor: pointer;
+                user-select: none;
+                font-style: normal;
+                font-weight: 600;
+                font-size:  1em;
+                line-height:  1em;
+            }
+
+            &-check{
+                display: none;
+            }
+
+            &-span{
+                display: inline-flex;
+                align-items: center;
+                user-select: none;
+            }
+
+            /* создание в label псевдоэлемента before со следующими стилями */
+            &-span::before {
+                content: '';
+                display: inline-block;
+                width: 1.5em;
+                height: 1.5em;
+                flex-shrink: 0;
+                flex-grow: 0;
+                border: 2px solid rgba(178, 194, 228, 1);
+                border-radius: 8px;
+                margin-right: 0.5em;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: 50% 50%;
+            }
+
+            /* стили при наведении курсора на checkbox */
+            &-check:not(:disabled):not(:checked)+&-span:hover::before {
+                border-color: #b3d7ff;
+            }
+
+            /* стили для чекбокса, находящегося в состоянии checked */
+            &-check:checked+&-span::before {
+                border-color: #2477F4;
+                background-color: #2477F4;
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+            }
+        
+            &-input-text{
+                
+                height: 50px;
+                border: 2px solid #B2C2E4;
+                border-radius: 16px;
+                color: #7C8EB5;
+                font-size: 1em;
+                flex-grow: 1;
+                align-self: stretch;
+                margin-left: .5em;
+                padding-left: 1em;
+            }
+            &-input-text::placeholder{
+                font-style: normal;
+                font-weight: 500;
+                font-size: 1em;
+                color: #7C8EB5;
+            }
+        }
+    }
+}
+  

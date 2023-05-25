@@ -12,7 +12,7 @@ type Props = {
     children?: ReactNode;
 };
 
-const cnContent = cn("content");
+const cnContent = cn("mainLayout");
 
 export default function MainLayout(props: Props) {
     const lastName = useSelector((state: RootState) => state.profile.lastName);

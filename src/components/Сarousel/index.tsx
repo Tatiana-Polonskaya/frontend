@@ -26,6 +26,7 @@ function SampleNextArrow(props: ArrowProps) {
                 onClick={onClick}
             />
         </div>
+        
     );
 }
 

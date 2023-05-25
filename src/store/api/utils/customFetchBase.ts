@@ -29,7 +29,7 @@ const customFetchBase: BaseQueryFn<
 > = async (args, api, extraOptions) => {
     await mutex.waitForUnlock();
     let result = await baseQuery(args, api, extraOptions);
-    console.log(args, result);
+    
     const data = result.data as IResponse<any>;
     if (
         !data.success &&

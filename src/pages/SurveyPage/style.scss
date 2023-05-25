@@ -1,0 +1,96 @@
+.survey{
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: 10%;
+    padding-top: 10%;
+    gap: 10px;
+    
+
+    &-title{
+        font-family: 'Onest';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        text-transform: uppercase;
+        color: #031C3D;
+
+    }
+
+    &-description{
+        font-family: 'Onest';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        color: #37476A;
+    }
+
+    &-questions{
+        padding-top: 15px;
+        display: flex;
+        flex-flow: column nowrap;
+        gap:20px;
+    }
+
+    &-footer{
+        padding-top: 10px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+
+        &-block-btn{
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        &-current-step{
+            font-family: 'Montserrat Alternates';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 29px;
+
+            letter-spacing: 0.02em;
+            color: #031C3D;
+        }
+
+        &-all-step{
+
+            font-family: 'Montserrat Alternates';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 29px;
+            letter-spacing: 0.02em;
+            color: #D4DFF4;
+
+        }
+    }
+
+    &-btn{
+        justify-content: center;
+
+        width: 300px;
+        height: 61px;
+        background: #2477F4;
+        
+        border-radius: 14px;
+        border: none;
+
+        font-family: 'Montserrat Alternates';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        color: #FFFFFF;
+
+        &_disabled{
+            background: #2477F4;
+            opacity: 0.5;
+        }
+
+    }
+}

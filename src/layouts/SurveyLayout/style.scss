@@ -1,0 +1,27 @@
+.surveyLayput {
+    width: 100%;
+    display: flex;
+    flex: 1 0 auto;
+
+    &-wrapper {
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: row;
+        
+    }
+
+    &-left-content {
+        width: 60vw;
+        height: 100vh;
+    }
+
+    &-right-content {
+        width: 40vw;
+        height: 100vh;
+
+        &-img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

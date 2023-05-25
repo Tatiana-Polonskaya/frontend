@@ -7,6 +7,7 @@ import profileSlice from "./slices/profileSlice";
 import entryReducer from "./slices/entry";
 import userReducer from "./slices/user";
 import registerReducer from "./slices/register";
+import surveyReducer from "./slices/survey";
 import { userApi } from "./api/user";
 
 export const store = configureStore({
@@ -19,6 +20,7 @@ export const store = configureStore({
         profile: profileSlice,
         entry: entryReducer,
         user: userReducer,
+        survey: surveyReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(

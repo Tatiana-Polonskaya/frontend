@@ -12,7 +12,7 @@ import RoutesEnum from "../../models/routes";
 import { userApi } from "../../store/api/user";
 import { accountApi } from "../../store/api/account";
 
-const cnMenu = cn("menu");
+const cnMenu = cn("menuStyle");
 
 export default function Menu() {
     const navigate = useNavigate();

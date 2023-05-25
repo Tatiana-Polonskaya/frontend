@@ -7,6 +7,7 @@ import Chat from "../../components/Chat";
 import ElementEqual from "./icons/element-equal.svg";
 import "./style.scss";
 import { ReactSVG } from "react-svg";
+import VideoBlock from "../../components/VideoBlock";
 
 const cnHome = cn("home");
 
@@ -28,6 +29,8 @@ export default function HomePage() {
                         fugit vel repellat!
                     </p>
                 </div>
+
+                <VideoBlock></VideoBlock>
                 <Carousel/>
             </div>
         </MainLayout>
