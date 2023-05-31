@@ -15,6 +15,8 @@ import AuthorizedRoute from "./components/tools/AuthorizedRoute";
 import UnauthorizedRoute from "./components/tools/UnauthorizedRoute";
 import RoutesEnum from "./models/routes";
 import SurveyPage from "./pages/SurveyPage";
+import Rep from "./components/Rep";
+import About from "./components/About";
 
 export default function App() {
     return (
@@ -46,6 +48,7 @@ export default function App() {
                         // )
                     }
                 >
+                    <Route path={RoutesEnum.SURVEY} element={<SurveyPage />} />
                     <Route path={RoutesEnum.ROOT} element={<HomePage />} />
                     <Route path={RoutesEnum.HOME} element={<HomePage />} />
                     <Route path={RoutesEnum.DIARY} element={<DiaryPage />} />
@@ -60,7 +63,10 @@ export default function App() {
                     <Route
                         path={RoutesEnum.REPETITION}
                         element={<RepetitionPage />}
-                    />
+                    >
+                        <Route path="about" element={<About />} />
+                        <Route path="" element={<Rep />} />
+                    </Route>
                     <Route
                         path={RoutesEnum.SETTINGS}
                         element={<SettingsPage />}
@@ -71,7 +77,6 @@ export default function App() {
                     path={RoutesEnum.ALL}
                     element={<Navigate to={RoutesEnum.ROOT} />}
                 />
-                <Route path={RoutesEnum.SURVEY} element={<SurveyPage />} />
             </Routes>
         </div>
     );
