@@ -12,7 +12,7 @@ export const userApi = createApi({
     endpoints: (build) => ({
         getMe: build.query<IResponse<IUser>, null>({
             query: () => ({
-                url: "account/me",
+                url: "/account/me",
                 method: "GET",
                 credentials: "include",
             }),

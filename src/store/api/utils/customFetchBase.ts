@@ -29,7 +29,7 @@ const customFetchBase: BaseQueryFn<
 > = async (args, api, extraOptions) => {
     await mutex.waitForUnlock();
     let result = await baseQuery(args, api, extraOptions);
-    
+
     const data = result.data as IResponse<any>;
     if (
         !data.success &&
@@ -59,6 +59,9 @@ const customFetchBase: BaseQueryFn<
                     api.dispatch(logout());
                     window.location.href = "/"; /// to login page
                 }
+            } catch (e) {
+                api.dispatch(logout());
+                window.location.href = "/"; /// to login page
             } finally {
                 release();
             }

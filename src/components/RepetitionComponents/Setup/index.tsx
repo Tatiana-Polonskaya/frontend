@@ -45,7 +45,6 @@ export default function RecodingSetup() {
                 <ReactSVG src={note_icon} className={styleSetup("svg-big")} />
                 Сопроводительные материалы
             </div>
-            
             <div className={styleSetup("block")}>
                 <div className={styleSetup("text-row")}>
                     <ReactSVG
