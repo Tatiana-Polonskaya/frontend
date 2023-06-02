@@ -52,29 +52,35 @@ export default function LoginPage() {
         ((location.state as any)?.from.pathname as string) || RoutesEnum.HOME;
 
     async function onSubmit() {
-        const result = await loginRequest({ email, password });
-        const { isSuccess, data } = result;
-        if (isSuccess && data) {
-            if (data.success) {
-                navigate(from);
-            } else {
-                const error = data.error!;
-                setEmailWrong(false);
-                setPasswordWrong(false);
-                switch (error.code) {
-                    case 10003:
-                        setWrongPasswordText(error.msg);
-                        setPasswordWrong(true);
-                        break;
-                    case 10015:
-                        setWrongEmailText(error.msg);
-                        setEmailWrong(true);
-                        break;
-                    default:
-                        alert(error.msg);
-                        break;
+        try {
+            const result = await loginRequest({ email, password });
+            const { isSuccess, data } = result;
+            if (isSuccess && data) {
+                if (data.success) {
+                    navigate(from);
+                } else {
+                    const error = data.error!;
+                    setEmailWrong(false);
+                    setPasswordWrong(false);
+                    switch (error.code) {
+                        case 10003:
+                            setWrongPasswordText(error.msg);
+                            setPasswordWrong(true);
+                            break;
+                        case 10015:
+                            setWrongEmailText(error.msg);
+                            setEmailWrong(true);
+                            break;
+                        default:
+                            alert(error.msg);
+                            break;
+                    }
                 }
+            } else {
+                alert("Ошибка сервера");
             }
+        } catch (e) {
+            alert(e);
         }
     }
 

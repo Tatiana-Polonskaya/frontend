@@ -4,7 +4,7 @@ import { IResponse } from "../../../models/api";
 
 import { IUser } from "../../../models/entry/user";
 import customFetchBase from "../utils/customFetchBase";
-import { setUser } from "../../slices/user";
+import { logout, setUser } from "../../slices/user";
 
 export const userApi = createApi({
     reducerPath: "api/user",
@@ -22,7 +22,9 @@ export const userApi = createApi({
                     if (data.success) {
                         await dispatch(setUser(data.data!));
                     }
-                } catch (error) {}
+                } catch (error) {
+                    await dispatch(logout());
+                }
             },
         }),
     }),
