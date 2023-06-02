@@ -17,6 +17,9 @@ import {
 import { IAnswer, IQuestion } from "../../models/survey";
 import { UUID } from "crypto";
 
+
+// ПЕРЕДЕЛАТЬ ВСЮ ПРОВЕРКУ НА ПРАВИЛЬНОТЬ ОТВЕТОВ ПО СТАРОМУ ОБРАЗЦУ ОТВЕТОВ, ЗАТЕМ ИЗМЕНИТЬ ФУНКЦИЮ ДОБАВЛЕНИЯ ПОЛЯ ДРУГОЕ
+
 export default function SurveyPage() {
     // const { name, lastName, birthday } = useAppSelector(
     //     (state) => state.register.personal
@@ -320,6 +323,22 @@ export default function SurveyPage() {
 
     let answers: IAnswer[] = [];
     let anotherAnswers: string[] = [];
+
+    for (let i = 0; i < questions?.length; i++) {
+        if (questions[i].type === typeQuestion.radio) {
+            answers.push(-1);
+        } else {
+            let temp: boolean[] = [];
+            for (let j = 0; j < question[i].answers.length; j++) {
+                temp.push(false);
+            }
+            if (question[i].block_another) {
+                temp.push(false);
+            }
+            answers.push(temp);
+        }
+        anotherAnswers.push("");
+    }
 
     const addAnswers = (newAnswer: IAnswer) => {
         // взять из стора и проверить есть ли там уже ответы
