@@ -41,7 +41,7 @@ const customFetchBase: BaseQueryFn<
                 const refreshResult = await baseQuery(
                     {
                         credentials: "include",
-                        url: "/account/refresh",
+                        url: "/api/users/account/refresh",
                         method: "POST",
                     },
                     api,

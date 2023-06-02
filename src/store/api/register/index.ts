@@ -5,7 +5,7 @@ import { IRegister, IRegisterResponse } from "../../../models/entry/register";
 
 export const registerApi = createApi({
     reducerPath: "api/register",
-    baseQuery: fetchBaseQuery({ baseUrl: "register" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "api/users/register" }),
     endpoints: (build) => ({
         register: build.mutation<IResponse<IRegisterResponse>, IRegister>({
             query: (body) => ({

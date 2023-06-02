@@ -11,7 +11,7 @@ import { userApi } from "../user";
 export const accountApi = createApi({
     reducerPath: "api/login",
     baseQuery: fetchBaseQuery({
-        baseUrl: "account",
+        baseUrl: "api/users/account",
     }),
     endpoints: (build) => ({
         login: build.query<IResponse<ILoginResponse>, ILoginRequest>({
