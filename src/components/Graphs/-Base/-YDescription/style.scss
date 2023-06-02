@@ -1,0 +1,18 @@
+.base-graph-y-description {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    justify-content: space-between;
+    padding: 10px 6px 0 0;
+    min-width: 40px;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    &-item {
+        width: inherit;
+        text-align: right;
+        color: #b2c2e4;
+    }
+}

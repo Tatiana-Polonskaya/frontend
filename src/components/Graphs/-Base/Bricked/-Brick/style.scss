@@ -1,0 +1,17 @@
+.bricked-graph-brick {
+    position: absolute;
+
+    &_solid {
+        border-radius: 4px;
+        height: 24px;
+    }
+
+    &_thin {
+        height: 8px;
+        border-radius: 2px;
+    }
+
+    &_line {
+        height: 2px;
+    }
+}

@@ -12,7 +12,12 @@ enum RoutesEnum {
     LEARNING = "/learning",
     REPETITION = "/repetition",
     SETTINGS = "/settings",
+
+
+    TEST_GRAPH = "/test-graph",
+
     SURVEY ="/survey",
+
 }
 
 export default RoutesEnum;

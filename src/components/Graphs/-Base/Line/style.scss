@@ -1,0 +1,16 @@
+.line-graph {
+    &-center {
+        position: absolute;
+        top: 50%;
+    }
+
+    &-recharts-wrapper {
+        overflow: hidden;
+    }
+
+    &-background {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+}

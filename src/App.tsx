@@ -14,9 +14,13 @@ import LandingPage from "./pages/LandingPage";
 import AuthorizedRoute from "./components/tools/AuthorizedRoute";
 import UnauthorizedRoute from "./components/tools/UnauthorizedRoute";
 import RoutesEnum from "./models/routes";
+
+import TestPage from "./pages/TestPage";
+
 import SurveyPage from "./pages/SurveyPage";
 import Rep from "./components/Rep";
 import About from "./components/About";
+
 
 export default function App() {
     return (
@@ -77,6 +81,8 @@ export default function App() {
                     path={RoutesEnum.ALL}
                     element={<Navigate to={RoutesEnum.ROOT} />}
                 />
+
+                <Route path={RoutesEnum.TEST_GRAPH} element={<TestPage />} />
             </Routes>
         </div>
     );

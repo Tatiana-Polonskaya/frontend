@@ -1,0 +1,27 @@
+.base-graph-x-description {
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: flex;
+
+    &-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 4px;
+        margin: 6px;
+        width: 50px;
+
+        color: #adb9d4;
+        background-color: #f7faff;
+
+        &_first {
+            margin-left: 14px;
+        }
+
+        &_selected {
+            background-color: #ffb800;
+            color: white;
+        }
+    }
+}

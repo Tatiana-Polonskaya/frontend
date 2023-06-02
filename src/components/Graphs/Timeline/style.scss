@@ -1,0 +1,52 @@
+.timeline-graph {
+    // border: thin solid red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+
+    &-time {
+        font-size: 0.875rem;
+        color: #7c8eb5;
+    }
+
+    &-body {
+        display: flex;
+        flex: 1 0 auto;
+        height: 100%;
+        margin: 0 8px;
+
+        & > div {
+            &:first-child {
+                border-radius: 40% 0 0 40%;
+            }
+            &:last-child {
+                border-radius: 0 40% 40% 0;
+            }
+        }
+    }
+
+    &-help {
+        &_time {
+            padding: 0 8px 0 0;
+            color: gray;
+        }
+    }
+
+    &-element {
+        margin: 0 1px;
+        flex: 1 0 auto;
+
+        &_gray {
+            background: #d4dff4;
+        }
+
+        &_red {
+            background: #fe5d74;
+        }
+
+        &_blue {
+            background: #2477f4;
+        }
+    }
+}
