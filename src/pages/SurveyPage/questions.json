@@ -4,64 +4,79 @@
         "title": "Укажите ваш вид деятельности",
         "type": "radio",
         "icons": true,
-        "block_another": true,
-        "placeholder_another": "Введите тип деятельности",
-        "type_answer": "icon-rows",
-        "answers": [
+        "type_choice": "icon-rows",
+        "choices": [
             {
                 "id": 0,
                 "title": "Предпринимательство",
-                "icon": "./components/Menu/icons/book.svg"
+                "icon": "./components/Menu/icons/book.svg",
+                "another": false
             },
             {
                 "id": 1,
                 "title": "Управление",
-                "icon": ""
+                "icon": "",
+                "another": false
             },
             {
                 "id": 2,
                 "title": "Медиа",
-                "icon": ""
+                "icon": "",
+                "another": false
             },
             {
                 "id": 3,
                 "title": "Маркетинг",
-                "icon": ""
+                "icon": "",
+                "another": false
             },
             {
                 "id": 4,
                 "title": "Политика",
-                "icon": ""
+                "icon": "",
+                "another": false
             },
             {
                 "id": 5,
                 "title": "Учеба",
-                "icon": ""
+                "icon": "",
+                "another": false
             },
             {
                 "id": 6,
                 "title": "Творчество",
-                "icon": ""
+                "icon": "",
+                "another": false
             },
             {
                 "id": 7,
                 "title": "Адвокатура",
-                "icon": ""
+                "icon": "",
+                "another": false
             },
             {
                 "id": 8,
                 "title": "Журналистика",
-                "icon": ""
+                "icon": "",
+                "another": false
             },
             {
                 "id": 9,
                 "title": "Актерское мастерство",
-                "icon": ""
+                "icon": "",
+                "another": false
             },
             {
                 "id": 10,
                 "title": "Преподавание",
-                "icon": ""
+                "icon": "",
+                "another": false
+            },
+            {
+                "id": 11,
+                "title": "Введите тип деятельности",
+                "icon": "",
+                "another": true
             }
         ]
     },
@@ -70,21 +85,31 @@
         "title": "Для каких целей вы хотите использовать наш сервис?",
         "type": "checkbox",
         "icons": false,
-        "block_another": true,
-        "placeholder_another": "Опишите цель использования сервиса",
-        "type_answer": "block-answers",
-        "answers": [
+        "type_choice": "block-answers",
+        "choices": [
             {
                 "id": 0,
-                "title": "Повысить уверенность в себе и в своих навыках публичного выступления"
+                "title": "Повысить уверенность в себе и в своих навыках публичного выступления",
+                "icon":"",
+                "another":""
             },
             {
                 "id": 1,
-                "title": "Улучшить качество презентаций в рамках учебных и профессиональных мероприятий"
+                "title": "Улучшить качество презентаций в рамках учебных и профессиональных мероприятий",
+                "icon":"",
+                "another":""
             },
             {
                 "id": 2,
-                "title": "Подготовиться к важному профессиональному или личному мероприятию, такому как конференция, выставка, презентация проекта"
+                "title": "Подготовиться к важному профессиональному или личному мероприятию, такому как конференция, выставка, презентация проекта",
+                "icon":"",
+                "another":""
+            },
+            {
+                "id": 2,
+                "title": "Подготовиться к важному профессиональному или личному мероприятию, такому как конференция, выставка, презентация проекта",
+                "icon":"",
+                "another":"Опишите цель использования сервиса"
             }
         ]
     },
@@ -93,37 +118,55 @@
         "title": "Выберите ключевые навыки, которые вы хотите развить",
         "type": "checkbox",
         "icons": false,
-        "block_another": true,
-        "placeholder_another": "Укажите желаемые для освоения навыки",
-        "type_answer": "col-answers",
-        "answers": [
+        "type_choice": "col-answers",
+        "choices": [
             {
                 "id": 0,
-                "title": "Поработать над темпом речи"
+                "title": "Поработать над темпом речи",
+                "icon":"",
+                "another":false
             },
             {
                 "id": 1,
-                "title": "Уменьшить число слов-паразитов"
+                "title": "Уменьшить число слов-паразитов",
+                "icon":"",
+                "another":false
             },
             {
                 "id": 2,
-                "title": "Научиться уверенно говорить"
+                "title": "Научиться уверенно говорить",
+                "icon":"",
+                "another":false
             },
             {
                 "id": 3,
-                "title": "Сделать речь более эмоциональной"
+                "title": "Сделать речь более эмоциональной",
+                "icon":"",
+                "another":false
             },
             {
                 "id": 4,
-                "title": "Улучшить произношение"
+                "title": "Улучшить произношение",
+                "icon":"",
+                "another":false
             },
             {
                 "id": 5,
-                "title": "Избавиться от страха выступлений"
+                "title": "Избавиться от страха выступлений",
+                "icon":"",
+                "another":false
             },
             {
                 "id": 6,
-                "title": "Научиться красиво строить фразы"
+                "title": "Научиться красиво строить фразы",
+                "icon":"",
+                "another":false
+            },
+            {
+                "id": 6,
+                "title": "Укажите желаемые для освоения навыки",
+                "icon":"",
+                "another":true
             }
         ]
     },
@@ -132,17 +175,19 @@
         "title": "Как вы планируете использовать наш сервис?",
         "type": "radio",
         "icons": false,
-        "block_another": false,
-        "placeholder_another": "",
-        "type_answer": "block-answers",
-        "answers": [
+        "type_choice": "block-answers",
+        "choices": [
             {
                 "id": 0,
-                "title": "На регулярной основе"
+                "title": "На регулярной основе",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 1,
-                "title": "Для подготовки к конкретному выступлению"
+                "title": "Для подготовки к конкретному выступлению",
+                "icon": "",
+                "another": false
             }
         ]
     },
@@ -151,29 +196,37 @@
         "title": "Сколько времени вы готовы уделять подготовке?",
         "type": "radio",
         "icons": false,
-        "block_another": false,
-        "placeholder_another": "",
-        "type_answer": "col-answers",
-        "answers": [
+        "type_choice": "col-answers",
+        "choices": [
             {
                 "id": 0,
-                "title": "Менее 30 минут в неделю"
+                "title": "Менее 30 минут в неделю",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 1,
-                "title": "От 2 до 3 часов в неделю"
+                "title": "От 2 до 3 часов в неделю",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 2,
-                "title": "От 30 минут до 1 часа в неделю"
+                "title": "От 30 минут до 1 часа в неделю",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 3,
-                "title": "Более 3 часов в неделю"
+                "title": "Более 3 часов в неделю",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 4,
-                "title": "От 1 до 2 часов в неделю"
+                "title": "От 1 до 2 часов в неделю",
+                "icon": "",
+                "another": false
             }
         ]
     },
@@ -182,29 +235,37 @@
         "title": "Когда вы ожидаете увидеть ощутимые результаты?",
         "type": "radio",
         "icons": false,
-        "block_another": false,
-        "placeholder_another": "",
-        "type_answer": "col-answers",
-        "answers": [
+        "type_choice": "col-answers",
+        "choices": [
             {
                 "id": 0,
-                "title": "В течение месяца"
+                "title": "В течение месяца",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 1,
-                "title": "Через полгода"
+                "title": "Через полгода",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 2,
-                "title": "Через месяц"
+                "title": "Через месяц",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 3,
-                "title": "В течение года"
+                "title": "В течение года",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 4,
-                "title": "Через 3 месяца"
+                "title": "Через 3 месяца",
+                "icon": "",
+                "another": false
             }
         ]
     },
@@ -213,33 +274,49 @@
         "title": "Откуда вы о нас узнали?",
         "type": "checkbox",
         "icons": false,
-        "block_another": true,
-        "placeholder_another": "Укажите  источник информации",
-        "type_answer": "block-answers",
-        "answers": [
+        "type_choice": "block-answers",
+        "choices": [
             {
                 "id": 0,
-                "title": "Рекомендация от друга/коллеги"
+                "title": "Рекомендация от друга/коллеги",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 1,
-                "title": "Из социальной сети ВКонтакте"
+                "title": "Из социальной сети ВКонтакте",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 2,
-                "title": "Реклама в Яндексе"
+                "title": "Реклама в Яндексе",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 3,
-                "title": "По поисковому запросу"
+                "title": "По поисковому запросу",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 4,
-                "title": "Е-mail рассылка"
+                "title": "Е-mail рассылка",
+                "icon": "",
+                "another": false
             },
             {
                 "id": 5,
-                "title": "СМИ"
+                "title": "СМИ",
+                "icon": "",
+                "another": false
+            },
+            {
+                "id": 6,
+                "title": "Укажите  источник информации",
+                "icon": "",
+                "another": true
             }
         ]
     }
