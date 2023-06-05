@@ -33,8 +33,8 @@ const INVALID_LOGIN_INIT_TEXT = "Поле не может быть пустым"
 export default function LoginPage() {
     const userType = useAppSelector((state) => state.entry.userType);
     const navigate = useNavigate();
-    const [email, setEmail] = useState("alex.thunder@tut.by");
-    const [password, setPassword] = useState("Password1");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const [isEmailWrong, setEmailWrong] = useState(false);
     const [isPasswordWrong, setPasswordWrong] = useState(false);
