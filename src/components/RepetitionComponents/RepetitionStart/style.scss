@@ -1,0 +1,58 @@
+.RepetitionStart{
+    font-size: 16px;
+    line-height: 20px;
+    
+
+    &-text{
+        
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 10px;
+
+        padding-bottom: 40px;
+
+        font-family: 'Onest';
+        font-style: normal;
+
+        &-dark-blue{
+            font-family: 'Montserrat Alternates';
+            font-weight: 600;
+            color: #37476A;
+        }
+
+        &-black{
+            font-weight: 400;
+            color: #000000;
+        }
+
+        &-gray{
+            font-weight: 400;
+            color: #7C8EB5;
+            
+            &-bold{
+                font-weight: 500;
+            }
+        }
+        &-blue{
+            font-weight: 500;
+            color: #2477F4;
+        }
+    }
+
+    &-btn-block{
+        display: flex;
+        flex-flow: row wrap;
+        gap:25px;
+
+        &-link{
+            cursor: pointer;
+            max-width: 600px;
+        
+
+            &-svg{
+                width: 100%;
+
+            }
+        }
+    }
+}

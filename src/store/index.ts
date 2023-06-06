@@ -9,12 +9,14 @@ import userReducer from "./slices/user";
 import registerReducer from "./slices/register";
 import surveyReducer from "./slices/survey";
 import { userApi } from "./api/user";
+import { surveyApi } from "./api/survey";
 
 export const store = configureStore({
     reducer: {
         [registerApi.reducerPath]: registerApi.reducer,
         [accountApi.reducerPath]: accountApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
+        [surveyApi.reducerPath]: surveyApi.reducer,
         register: registerReducer,
         test: testSlice,
         profile: profileSlice,
@@ -26,7 +28,8 @@ export const store = configureStore({
         getDefaultMiddleware().concat(
             registerApi.middleware,
             accountApi.middleware,
-            userApi.middleware
+            userApi.middleware,
+            surveyApi.middleware,
         ),
     devTools: process.env.NODE_ENV !== "production",
 });
