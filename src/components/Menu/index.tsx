@@ -60,13 +60,12 @@ export default function Menu() {
         },
     ];
 
-    const uniqueFactory = () => window.crypto.randomUUID(); // not works with SSR
     return (
         <div className={cnMenu()}>
             <ReactSVG src={iconSrc} className={cnMenu("logo")} />
             <ul>
                 {items.map((props, idx) => (
-                    <li key={uniqueFactory()}>
+                    <li key={idx}>
                         <MenuItem {...props} />
                     </li>
                 ))}
