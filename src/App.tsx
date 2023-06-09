@@ -82,7 +82,14 @@ export default function App() {
                             element={<RepetitionPage />}
                         >
                             <Route index={true} element={<RepetitionStart />} />
-                             <Route
+
+                            <Route
+                                index={false}
+                                path="about"
+                                element={<About />}
+                            />
+
+                            <Route
                                 index={false}
                                 path="about"
                                 element={<About />}

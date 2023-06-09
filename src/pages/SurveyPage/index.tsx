@@ -326,7 +326,7 @@ export default function SurveyPage() {
 
     for (let i = 0; i < questions?.length; i++) {
         if (questions[i].type === typeQuestion.radio) {
-            answers.push(-1);
+            // answers.push(-1);
         } else {
             let temp: boolean[] = [];
             for (let j = 0; j < question[i].answers.length; j++) {
@@ -335,7 +335,7 @@ export default function SurveyPage() {
             if (question[i].block_another) {
                 temp.push(false);
             }
-            answers.push(temp);
+            // answers.push(temp);
         }
         anotherAnswers.push("");
     }

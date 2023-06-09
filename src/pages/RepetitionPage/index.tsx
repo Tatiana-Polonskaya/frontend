@@ -1,7 +1,6 @@
 import { Link, Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import MainLayout from "../../layouts/MainLayout";
-import RepetitionStart from "../../components/RepetitionComponents/RepetitionStart";
-import About from "../../components/About";
+
 
 
 

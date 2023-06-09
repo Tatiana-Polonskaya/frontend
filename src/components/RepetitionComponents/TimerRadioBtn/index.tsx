@@ -7,6 +7,6 @@ const cnButton = cn("button");
 export default function TimerRadioBtn() {
 
     return (
-<>TimerRadioBtn</>
+<>Здесь будет реализован таймер для выступления</>
     );
 }

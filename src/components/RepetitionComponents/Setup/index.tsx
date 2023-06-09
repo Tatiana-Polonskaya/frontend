@@ -67,30 +67,37 @@ export default function RecodingSetup() {
                 />
                 Настройки
             </div>
-            <div className={styleSetup("text-row")}>
-                <ReactSVG
-                    src={video_time_icon}
-                    className={styleSetup("svg-small")}
-                />
-                Время выступления
+            
+            <div className={styleSetup("block")}>
+                <div className={styleSetup("text-row")}>
+                    <ReactSVG
+                        src={video_time_icon}
+                        className={styleSetup("svg-small")}
+                    />
+                    Время выступления
+                </div>
+                <div className={styleSetup("text-grey")}>
+                    Боитесь не уложиться во время? Установите таймер, чтобы
+                    понимать, сколько времени на окончание выступления у вас
+                    осталось.
+                </div>
+                <div className={styleSetup("text-blue")}>
+                    Обратите внимание, что максимальная длительность репетиции
+                    составляет 15 минут.
+                </div>
+                <TimerRadioBtn />
             </div>
-            <div className={styleSetup("text-grey")}>
-                Боитесь не уложиться во время? Установите таймер, чтобы
-                понимать, сколько времени на окончание выступления у вас
-                осталось.
+
+            <div className={styleSetup("btn-block")}>
+                <Button className={styleSetup("btn-block-btn")}>
+                    <ReactSVG
+                        src={record_start_icon}
+                        className={styleSetup("svg-small")}
+                    />
+                    Начать запись
+                </Button>
             </div>
-            <div className={styleSetup("text-blue")}>
-                Обратите внимание, что максимальная длительность репетиции
-                составляет 15 минут.
-            </div>
-            <TimerRadioBtn />
-            <Button className={styleSetup("btn")}>
-                <ReactSVG
-                    src={record_start_icon}
-                    className={styleSetup("svg-small")}
-                />
-                Начать запись
-            </Button>
+            
         </div>
     );
 }
