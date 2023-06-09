@@ -9,14 +9,9 @@ import online_btn from "./img/online_btn.svg";
 import { Link } from "react-router-dom";
 
 export default function RepetitionStart() {
+
     const cnRepetitionStart = cn("RepetitionStart");
 
-    const newLocal = (
-        <ReactSVG
-            src={downloand_btn}
-            className={cnRepetitionStart("btn-block-link-svg")}
-        />
-    );
     return (
         <div>
             <div className={cnRepetitionStart("text")}>

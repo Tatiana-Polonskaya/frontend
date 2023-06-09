@@ -21,6 +21,7 @@ import SurveyPage from "./pages/SurveyPage";
 import RepetitionStart from "./components/RepetitionComponents/RepetitionStart";
 import About from "./components/About";
 import RecodingSetup from "./components/RepetitionComponents/Setup";
+import RecodingPage from "./pages/RepetitionPage/RecodingPage";
 
 
 export default function App() {
@@ -76,19 +77,18 @@ export default function App() {
                         <Route
                             path={RoutesEnum.LEARNING}
                             element={<LearningPage />}
-                        />                    
+                        />   
+
+                        <Route
+                            path={RoutesEnum.RECODING}
+                            element={<RecodingPage />}
+                        />
+
                         <Route
                             path={RoutesEnum.REPETITION}
                             element={<RepetitionPage />}
                         >
                             <Route index={true} element={<RepetitionStart />} />
-
-                            <Route
-                                index={false}
-                                path="about"
-                                element={<About />}
-                            />
-
                             <Route
                                 index={false}
                                 path="about"

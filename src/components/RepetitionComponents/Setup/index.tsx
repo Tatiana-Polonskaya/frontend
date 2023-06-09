@@ -12,6 +12,7 @@ import record_start_icon from "./icons/record_start_icon.svg";
 import Button from "../../ui-kit/Button";
 import TimerRadioBtn from "../TimerRadioBtn";
 import ListInput from "../ListInput";
+import RoutesEnum from "../../../models/routes";
 // type Props = {
 //     question: Question;
 //     addAnswers: Function;
@@ -89,7 +90,7 @@ export default function RecodingSetup() {
             </div>
 
             <div className={styleSetup("btn-block")}>
-                <Button className={styleSetup("btn-block-btn")}>
+                <Button className={styleSetup("btn-block-btn")}  onClick={ () => navigate(RoutesEnum.RECODING)}>
                     <ReactSVG
                         src={record_start_icon}
                         className={styleSetup("svg-small")}
@@ -97,7 +98,6 @@ export default function RecodingSetup() {
                     Начать запись
                 </Button>
             </div>
-            
         </div>
     );
 }
