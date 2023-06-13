@@ -21,7 +21,7 @@ import SurveyPage from "./pages/SurveyPage";
 import RepetitionStart from "./components/RepetitionComponents/RepetitionStart";
 import About from "./components/About";
 import RecodingSetup from "./components/RepetitionComponents/Setup";
-import RecodingPage from "./pages/RepetitionPage/RecodingPage";
+import RecodingPage from "./pages/RecodingPage";
 
 
 export default function App() {

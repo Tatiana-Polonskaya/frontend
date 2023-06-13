@@ -22,6 +22,7 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "react-svg": "^16.1.7",
+    "react-webcam": "^7.1.1",
     "recharts": "^2.6.2",
     "sass": "^1.60.0",
     "slick-carousel": "^1.8.1",
@@ -57,5 +58,5 @@
     "@types/react-slick": "^0.23.10",
     "@types/tiny-slider-react": "^0.3.4"
   },
-  "proxy": "http://0.0.0.0:8080"
+  "proxy": "http://dev.speech-up.online"
 }
