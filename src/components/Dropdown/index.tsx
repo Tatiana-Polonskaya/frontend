@@ -6,6 +6,10 @@ import Arrow from "./icons/arrow-down.svg";
 
 import "./style.scss";
 
+import Visible from "./-Visible";
+import Invisible from "./-Invisible";
+
+
 const cnDropDown = cn("dropdown");
 
 interface IDropdown {
@@ -44,9 +48,12 @@ export default function DropDown(props: IDropdown) {
                     <p>{props.subtitle}</p>
                 </div>
             </div>
-            {/* видимая часть компонентом */}
-            {props.visible}
-            <div className={active}>{props.invisible}</div>
+
+            <Visible>{props.visible}</Visible>
+            <div className={active}>
+                <Invisible>{props.invisible}</Invisible>
+            </div>
+
         </div>
     );
 }
