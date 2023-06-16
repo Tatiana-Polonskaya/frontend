@@ -22,6 +22,7 @@ type InputProps = DetailedHTMLProps<
 >;
 
 type Props = InputProps & {
+    className?: string;
     invalid?: boolean;
     customRef?: LegacyRef<HTMLInputElement>;
 };
@@ -42,11 +43,11 @@ export default function Input({ invalid = false, ...props }: Props) {
                             : "password"
                         : props.type
                 }
-                className={cnInput("input", {
+                className={`${props.className} ${cnInput("input", {
                     password: isPassword,
                     invalid: invalid,
                     numeric: props.type === "number",
-                })}
+                })}` }
             />
             {isPassword && (
                 <ReactSVG

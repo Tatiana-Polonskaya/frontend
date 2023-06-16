@@ -1,7 +1,13 @@
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 
-import React, { useState } from "react";
+import React, {
+    Dispatch,
+    SetStateAction,
+    createContext,
+    useEffect,
+    useState,
+} from "react";
 import { ReactSVG } from "react-svg";
 
 import downloand_btn from "./img/download_btn.svg";
@@ -14,24 +20,47 @@ import Upload from "../../Upload";
 
 import closeIcon from "./assets/close.svg";
 import uploadIcon from "./assets/document-upload.svg";
+import PreviewBlock from "../../PreviewBlock";
+import {
+    useGetVideoQuery,
+    useLazyGetVideoQuery,
+} from "../../../store/api/userVideo";
 
-
-
+export const VideoUploadContext = createContext({
+    currentFile: new File([], "empty"),
+    setCurrentFile: (() => {}) as Dispatch<SetStateAction<File>>,
+});
 
 export default function RepetitionStart() {
     const cnRepetitionStart = cn("RepetitionStart");
     const cnModalTitle = cn("ModalTitle");
 
     const [isModal, setModal] = useState(false);
-    // const [modalVideo, setModalVideo] = useState<Item>(items[0]);
-
+    const [currentFile, setCurrentFile] = useState<File>(new File([], "empty"));
 
     const showModal = () => {
         setModal(true);
     };
 
+    const closeModal = () => {
+        // setCur rentFile(new File([],"empty"));
+        setModal(false);
+    };
+
+    useEffect(() => {
+        if (currentFile.size !== 0)
+            console.log(
+                "currentFile was been changed:",
+                currentFile,
+                currentFile.name
+            );
+    }, [currentFile]);
+
+    const videoData  = useGetVideoQuery("feb81d20-2bb0-4622-b41a-3c6d50c6b3f8");
+    
     return (
         <div>
+            <video src={`api/video/feb81d20-2bb0-4622-b41a-3c6d50c6b3f8.mp4`} controls></video>
             <div className={cnRepetitionStart("text")}>
                 <div className={cnRepetitionStart("text-dark-blue")}>
                     Подготовка к репетиции
@@ -76,7 +105,7 @@ export default function RepetitionStart() {
                 </div>
             </div>
 
-            <ModalWindow isVisible={isModal} onClose={() => setModal(false)}>
+            <ModalWindow isVisible={isModal} onClose={closeModal}>
                 <div className={cnModalTitle("header")}>
                     <ReactSVG
                         src={uploadIcon}
@@ -89,12 +118,16 @@ export default function RepetitionStart() {
                     <ReactSVG
                         src={closeIcon}
                         className={cnModalTitle("header-icon-close")}
-                        onClick={() => setModal(false)}
+                        onClick={closeModal}
                     />
                 </div>
-                <Upload />
+                <VideoUploadContext.Provider
+                    value={{ currentFile, setCurrentFile }}
+                >
+                    {currentFile.size === 0 && <Upload />}
+                    {currentFile.size !== 0 && <PreviewBlock />}
+                </VideoUploadContext.Provider>
             </ModalWindow>
-
         </div>
     );
 }

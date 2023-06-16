@@ -4,6 +4,7 @@ enum typeQuestion {
     checkbox = "checkbox",
     radio = "radio",
 }
+
 enum typeStyleAnswers {
     row = "block-answers",
     column = "col-answers",

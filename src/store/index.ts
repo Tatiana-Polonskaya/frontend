@@ -10,6 +10,7 @@ import registerReducer from "./slices/register";
 import surveyReducer from "./slices/survey";
 import { userApi } from "./api/user";
 import { surveyApi } from "./api/survey";
+import { videoApi } from "./api/userVideo";
 
 export const store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
         [accountApi.reducerPath]: accountApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
         [surveyApi.reducerPath]: surveyApi.reducer,
+        [videoApi.reducerPath]: videoApi.reducer,
         register: registerReducer,
         test: testSlice,
         profile: profileSlice,
@@ -30,6 +32,7 @@ export const store = configureStore({
             accountApi.middleware,
             userApi.middleware,
             surveyApi.middleware,
+            videoApi.middleware,
         ),
     devTools: process.env.NODE_ENV !== "production",
 });

@@ -1,21 +1,26 @@
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import {
+    ChangeEvent,
+    createContext,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import { PreventAny } from "@reduxjs/toolkit/dist/entities/models";
+import PreviewBlock from "../PreviewBlock";
+import { VideoUploadContext } from "../RepetitionComponents/RepetitionStart";
 
-
-
+export const PreviewVideoContext = createContext({videoName: "", url: ""});
 
 export default function Upload() {
-
-    const reader = new FileReader();
-
-    const handleFile = (files: any) => {
-        setVideoFile(files[0]);
-        
-        console.log("videoFile ok", videoFile, files[0]);
-    }
+    const handleFile = (file: any) => {
+        setVideoFile(file);
+        // setNewVideo(file.name);
+        console.log("videoFile ok", videoFile, file);
+    };
 
     const cnUpload = cn("cnUpload");
     const [dragActive, setDragActive] = useState(false);
@@ -38,35 +43,23 @@ export default function Upload() {
         e.stopPropagation();
         setDragActive(false);
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            handleFile(e.dataTransfer.files);
-            // at least one file has been dropped so do something
-            // handleFiles(e.dataTransfer.files);
+            handleFile(e.dataTransfer.files[0]);
         }
     };
-    let blobData = undefined; 
-    const [videoblobData, setVideoblobData] = useState<any>();
 
     // triggers when file is selected with click
     const handleChange = function (e: any) {
         e.preventDefault();
         if (e.target.files && e.target.files[0]) {
-            console.log(e.target.files[0]);
-            setVideoFile(e.target.files[0]);
-            // const file = new File(e.target.files, "mynewfile.jpeg");
-            
-            // reader.readAsDataURL(e.target.files[0]);
-
-            // reader.onload = (readerEvent) => {
-            //     setVideoblobData(readerEvent?.target?.result); //blob data
-            //     console.log();
-            //   };
+            handleFile(e.target.files[0]);
+            setCurrentFile(e.target.files[0])
         }
     };
 
-    
+
+    const {currentFile, setCurrentFile} = useContext(VideoUploadContext);
 
     const inputRef = useRef<HTMLInputElement>(null);
-    
 
     const onButtonClick = () => {
         inputRef.current?.click();
@@ -94,7 +87,7 @@ export default function Upload() {
                         ref={inputRef}
                         type="file"
                         className={cnUpload("dropdown-input-file-upload")}
-                        accept='video/mp4'
+                        accept="video/mp4"
                         onChange={handleChange}
                     />
                     <label
@@ -105,9 +98,7 @@ export default function Upload() {
                         htmlFor="input-file-upload"
                     >
                         <div>
-                            <p className={cnUpload(
-                                        "dropdown-text-upload"
-                                    )}>
+                            <p className={cnUpload("dropdown-text-upload")}>
                                 Перетащите видео сюда или{" "}
                                 <span
                                     className={cnUpload(
@@ -131,7 +122,16 @@ export default function Upload() {
                     )}
                 </form>
             </div>
-            { videoFile && (<video width="600" height="300" controls><source src={URL.createObjectURL(videoFile as File)} /></video>)}
+            {/* {videoFile &&
+            <PreviewVideoContext.Provider value={{videoName: videoFile.name ,url:URL.createObjectURL(videoFile as File)}}>
+                <PreviewBlock />
+            </PreviewVideoContext.Provider> */}
+
+            {/* {videoFile && (
+                <video width="600" height="300" controls>
+                    <source src={URL.createObjectURL(videoFile as File)} />
+                </video>
+            )} */}
         </div>
     );
 }
