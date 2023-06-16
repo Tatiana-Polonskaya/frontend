@@ -1,16 +1,34 @@
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 
-import React from "react";
+import React, { useState } from "react";
 import { ReactSVG } from "react-svg";
 
 import downloand_btn from "./img/download_btn.svg";
 import online_btn from "./img/online_btn.svg";
+
 import { Link } from "react-router-dom";
+import ModalWindow from "../../ModalWindow/ModalWindow";
+
+import Upload from "../../Upload";
+
+import closeIcon from "./assets/close.svg";
+import uploadIcon from "./assets/document-upload.svg";
+
+
+
 
 export default function RepetitionStart() {
-
     const cnRepetitionStart = cn("RepetitionStart");
+    const cnModalTitle = cn("ModalTitle");
+
+    const [isModal, setModal] = useState(false);
+    // const [modalVideo, setModalVideo] = useState<Item>(items[0]);
+
+
+    const showModal = () => {
+        setModal(true);
+    };
 
     return (
         <div>
@@ -44,20 +62,39 @@ export default function RepetitionStart() {
                 <div className={cnRepetitionStart("btn-block-link")}>
                     <Link to="/repetition/setup">
                         <ReactSVG
-                            src={online_btn} 
+                            src={online_btn}
                             className={cnRepetitionStart("btn-block-link-svg")}
                         />
                     </Link>
                 </div>
                 <div className={cnRepetitionStart("btn-block-link")}>
-                    <Link to="setup">
-                        <ReactSVG
-                            src={downloand_btn}
-                            className={cnRepetitionStart("btn-block-link-svg")}
-                        />
-                    </Link>
+                    <ReactSVG
+                        src={downloand_btn}
+                        className={cnRepetitionStart("btn-block-link-svg")}
+                        onClick={() => showModal()}
+                    />
                 </div>
             </div>
+
+            <ModalWindow isVisible={isModal} onClose={() => setModal(false)}>
+                <div className={cnModalTitle("header")}>
+                    <ReactSVG
+                        src={uploadIcon}
+                        className={cnModalTitle("header-icon")}
+                    />
+                    <span className={cnModalTitle("header-title")}>
+                        Загрузка репетиции
+                    </span>
+
+                    <ReactSVG
+                        src={closeIcon}
+                        className={cnModalTitle("header-icon-close")}
+                        onClick={() => setModal(false)}
+                    />
+                </div>
+                <Upload />
+            </ModalWindow>
+
         </div>
     );
 }

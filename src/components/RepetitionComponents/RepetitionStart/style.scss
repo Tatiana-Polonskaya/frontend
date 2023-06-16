@@ -56,3 +56,39 @@
         }
     }
 }
+
+.ModalTitle{
+    &-header {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: start;
+        align-items: center;
+        font-size: 16px;
+        line-height: 20px;
+        padding: 10px;
+        gap: 10px;
+
+        &-title {
+            font-family: 'Montserrat Alternates';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 1em;
+            line-height: 1em;
+            color: #37476A;
+            flex-grow: 1;
+        }
+
+        &-icon {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            width: 28px;
+
+            &-close{
+                cursor: pointer;
+            }
+        }
+    }
+
+}
