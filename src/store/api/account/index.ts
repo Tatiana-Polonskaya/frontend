@@ -9,9 +9,9 @@ import { IUser } from "../../../models/entry/user";
 import { userApi } from "../user";
 
 export const accountApi = createApi({
-    reducerPath: "api/login",
+    reducerPath: "/api/login",
     baseQuery: fetchBaseQuery({
-        baseUrl: "api/users/account",
+        baseUrl: "/api/users/account",
     }),
     endpoints: (build) => ({
         login: build.query<IResponse<ILoginResponse>, ILoginRequest>({
