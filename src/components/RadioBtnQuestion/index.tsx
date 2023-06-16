@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import "./style.scss";
 import { cn } from "@bem-react/classname";
 import { ReactSVG } from "react-svg";
@@ -10,11 +10,12 @@ import {
     EnumStringBody,
     EnumStringMember,
 } from "@babel/types";
+import { IQuestion } from "../CheckboxQuestion";
+import { UUID } from "crypto";
 
 type Props = {
-    question: Question;
+    question: IQuestion;
     addAnswers: Function;
-    addAnotherAnswers: Function;
 };
 
 type Question = {
@@ -37,16 +38,16 @@ type Answer = {
 export default function RadioBtnQuestion(props: Props) {
     const cnMain = cn("radio-main");
 
-    const [selectedOption, setSelectedOption] = useState(-1);
+    const [selectedOption, setSelectedOption] = useState<UUID>();
 
-    function handleChange(id: number) {
+    function handleChange(id: UUID) {
         setSelectedOption(id);
-        props.addAnswers(id, props.question.id - 1);
+        props.addAnswers(id, props.question.id);
     }
-    const index_another = props.question.answers.length;
+    const index_another = props.question.choices.length;
 
     const addText = (value: string) => {
-        props.addAnotherAnswers(props.question.id - 1, value);
+        // props.addAnotherAnswers(props.question.id, value);
     };
 
     // `${props.question.type_answer}`
@@ -54,81 +55,97 @@ export default function RadioBtnQuestion(props: Props) {
 
     return (
         <div className={cnMain()}>
-            <h3 className={cnMain("title")}>
-                {props.question.id}. {props.question.title}
-            </h3>
-            <div className={cnMain(`${props.question.type_answer}`)}>
-                {props.question.answers.map((el) => (
-                    <div
-                        key={el.id}
-                        className={cnMain(
-                            `${props.question.type_answer}-item`,
-                            {
-                                checked: selectedOption === el.id,
-                            }
-                        )}
-                    >
-                        {props.question.icons && (
-                            <ReactSVG
-                                src={svgg}
-                                className={cnMain(
-                                    `${props.question.type_answer}-item-icon`
-                                )}
-                            />
-                        )}
-
-                        <label
-                            className={cnMain(
-                                `${props.question.type_answer}-item-label`
-                            )}
-                        >
-                            <input
-                                type="radio"
-                                value={el.id}
-                                checked={selectedOption === el.id}
-                                onChange={() => handleChange(el.id)}
-                                className={cnMain(
-                                    `${props.question.type_answer}-item-label-radio`
-                                )}
-                            />
+            <h3 className={cnMain("title")}>{props.question.title}</h3>
+            <div className={cnMain(`${props.question.type_choice}`)}>
+                {props.question.choices.map((el, index) => (
+                    <Fragment key={index}>
+                        {!el.another && (
                             <div
+                                key={el.id}
                                 className={cnMain(
-                                    `${props.question.type_answer}-item-label-custom-radio__label`
+                                    `${props.question.type_choice}-item`,
+                                    {
+                                        checked: selectedOption === el.id,
+                                    }
                                 )}
                             >
-                                <strong>{el.title}</strong>
+                                {props.question.icons && (
+                                    <ReactSVG
+                                        src={svgg}
+                                        className={cnMain(
+                                            `${props.question.type_choice}-item-icon`
+                                        )}
+                                    />
+                                )}
+
+                                <label
+                                    className={cnMain(
+                                        `${props.question.type_choice}-item-label`
+                                    )}
+                                >
+                                    <input
+                                        type="radio"
+                                        value={el.id}
+                                        checked={selectedOption === el.id}
+                                        onChange={() => handleChange(el.id)}
+                                        className={cnMain(
+                                            `${props.question.type_choice}-item-label-radio`
+                                        )}
+                                    />
+                                    <div
+                                        className={cnMain(
+                                            `${props.question.type_choice}-item-label-custom-radio__label`
+                                        )}
+                                    >
+                                        <strong>{el.title}</strong>
+                                    </div>
+                                </label>
                             </div>
-                        </label>
-                    </div>
+                        )}
+                        {el.another && (
+                            <div className={cnMain("another")}>
+                                <label className={cnMain("another-label")}>
+                                    <input
+                                        type="radio"
+                                        value={el.id}
+                                        className={cnMain(
+                                            "another-label-radio"
+                                        )}
+                                        checked={
+                                            selectedOption === el.id
+                                        }
+                                        onChange={() =>
+                                            handleChange(el.id)
+                                        }
+                                    />
+                                    <div
+                                        className={cnMain(
+                                            "another-label-custom-radio__label"
+                                        )}
+                                    >
+                                        <strong>Другое:</strong>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder={
+                                            el.title
+                                        }
+                                        className={cnMain(
+                                            "another-label-input-text"
+                                        )}
+                                        disabled={
+                                            selectedOption !== el.id
+                                        }
+                                        onChange={(e) =>
+                                            addText(e.target.value)
+                                        }
+                                    />
+                                </label>
+                            </div>
+                        )}
+                    </Fragment>
                 ))}
             </div>
-            {props.question.block_another && (
-                <div className={cnMain("another")}>
-                    <label className={cnMain("another-label")}>
-                        <input
-                            type="radio"
-                            value={index_another}
-                            className={cnMain("another-label-radio")}
-                            checked={selectedOption === index_another}
-                            onChange={() => handleChange(index_another)}
-                        />
-                        <div
-                            className={cnMain(
-                                "another-label-custom-radio__label"
-                            )}
-                        >
-                            <strong>Другое:</strong>
-                        </div>
-                        <input
-                            type="text"
-                            placeholder={props.question.placeholder_another}
-                            className={cnMain("another-label-input-text")}
-                            disabled={selectedOption !== index_another}
-                            onChange={(e) => addText(e.target.value)}
-                        />
-                    </label>
-                </div>
-            )}
         </div>
     );
 }

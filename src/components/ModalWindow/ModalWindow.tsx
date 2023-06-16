@@ -4,7 +4,6 @@ import "./style.scss";
 interface IWindowModalProps {
     isVisible: boolean;
     title?: string;
-   
     footer?: ReactElement;
     onClose: Function;
     children?: ReactNode;
@@ -13,7 +12,6 @@ interface IWindowModalProps {
 export default function ModalWindow({
     isVisible = false,
     title,
-    
     footer,
     onClose,
     children
