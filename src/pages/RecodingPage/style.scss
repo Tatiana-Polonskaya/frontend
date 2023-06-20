@@ -6,7 +6,6 @@
     height: 100vh;
     background-color: #020913;
 
-    &-Container {}
 
     &-video-block {
         position: relative;
@@ -14,6 +13,9 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        border-radius: 24px;
+        overflow: hidden;
     }
 
     &-video {
@@ -32,8 +34,8 @@
     &-button-block {
 
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 10px;
+        left: 10px;
         display: flex;
         justify-content: start;
         align-items: center;
@@ -64,6 +66,38 @@
         }
     }
 
+    &-right-block{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-flow: column nowrap;
+        gap: 10px;
+
+        width: 300px;
+        min-height: 90px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 24px;
+    }
+
+    &-bottom-block{
+        position: absolute;
+        bottom: 20px;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column nowrap;
+        gap: 10px;
+        min-height: 90px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 24px;
+        color: #FFFFFF;
+    }
+
     &-button {
 
         display: flex;
@@ -89,6 +123,44 @@
     &-icon{
         width: 28px;
         height: 28px;
+    }
+
+}
+
+
+
+.ModalTitle{
+    &-header {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: start;
+        align-items: center;
+        font-size: 16px;
+        line-height: 20px;
+        padding: 10px;
+        gap: 10px;
+
+        &-title {
+            font-family: 'Montserrat Alternates';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 1em;
+            line-height: 1em;
+            color: #37476A;
+            flex-grow: 1;
+        }
+
+        &-icon {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            width: 28px;
+
+            &-close{
+                cursor: pointer;
+            }
+        }
     }
 
 }

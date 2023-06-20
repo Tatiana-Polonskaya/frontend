@@ -7,6 +7,9 @@
         @extend .RecodingSetup-text-dark-blue;
         color: #37476a;
         cursor: pointer;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 10px;
     }
 
     &-block {

@@ -1,5 +1,7 @@
 import React, { ReactElement, ReactNode, useEffect } from "react";
 import "./style.scss";
+import { ReactSVG } from "react-svg";
+import { cn } from "@bem-react/classname";
 
 interface IWindowModalProps {
     isVisible: boolean;
@@ -14,7 +16,7 @@ export default function ModalWindow({
     title,
     footer,
     onClose,
-    children
+    children,
 }: IWindowModalProps) {
     const keydownHandler = ({ key }: any) => {
         switch (key) {
@@ -31,22 +33,34 @@ export default function ModalWindow({
         return () => document.removeEventListener("keydown", keydownHandler);
     });
 
+    const cnModalWindow = cn("ModalWindow");
+
     return !isVisible ? null : (
-        <div className="modal" onClick={() => onClose()}>
-            <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
+        <div className={cnModalWindow()} onClick={() => onClose()}>
+            <div className={cnModalWindow("dialog")} onClick={(e) => e.stopPropagation()}>
                 {title && (
-                    <div className="modal-header">
-                        <h3 className="modal-title">{title}</h3>
-                        <span className="modal-close" onClick={() => onClose()}>
-                            &times;
+                    <div className={cnModalWindow("header")}>
+                        <ReactSVG
+                            src={
+                                process.env.PUBLIC_URL +
+                                "/images/upload-icon.svg"
+                            }
+                            className={cnModalWindow("header-icon")}
+                        />
+                        <span className={cnModalWindow("header-title")}>
+                            {title}
                         </span>
+                        <ReactSVG
+                            src={process.env.PUBLIC_URL + "/images/close.svg"}
+                            className={cnModalWindow("header-icon-close")}
+                            onClick={()=>onClose()}
+                        />
                     </div>
                 )}
-                <div className="modal-body">
-                    
-                    <div className="modal-content">{children}</div>
+                <div className={cnModalWindow("body")}>
+                    <div className={cnModalWindow("content")}>{children}</div>
                 </div>
-                {footer && <div className="modal-footer">{footer}</div>}
+                {footer && <div className={cnModalWindow("footer")}>{footer}</div>}
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 
-import React, {
+import {
     Dispatch,
     SetStateAction,
     createContext,
@@ -18,12 +18,10 @@ import ModalWindow from "../../ModalWindow/ModalWindow";
 
 import Upload from "../../Upload";
 
-import closeIcon from "./assets/close.svg";
-import uploadIcon from "./assets/document-upload.svg";
 import PreviewBlock from "../../PreviewBlock";
 import {
-    useGetVideoQuery,
-    useLazyGetVideoQuery,
+    useGetVideoByIdQuery,
+    useLazyGetVideoByIdQuery,
 } from "../../../store/api/userVideo";
 
 export const VideoUploadContext = createContext({
@@ -33,34 +31,34 @@ export const VideoUploadContext = createContext({
 
 export default function RepetitionStart() {
     const cnRepetitionStart = cn("RepetitionStart");
-    const cnModalTitle = cn("ModalTitle");
 
     const [isModal, setModal] = useState(false);
     const [currentFile, setCurrentFile] = useState<File>(new File([], "empty"));
 
-    const showModal = () => {
+    const showModal = async () => {
+        setCurrentFile(new File([], "empty"));
         setModal(true);
     };
 
     const closeModal = () => {
-        // setCur rentFile(new File([],"empty"));
+        setCurrentFile(new File([], "empty"));
         setModal(false);
     };
 
     useEffect(() => {
-        if (currentFile.size !== 0)
+        if (currentFile && currentFile.size !== 0)
             console.log(
-                "currentFile was been changed:",
-                currentFile,
-                currentFile.name
+                "RepetitionStart: currentFile was been changed:",
+                currentFile
             );
     }, [currentFile]);
+    console.log(currentFile)
 
-    const videoData  = useGetVideoQuery("feb81d20-2bb0-4622-b41a-3c6d50c6b3f8");
-    
+    // const videoData  = useGetVideoQuery("feb81d20-2bb0-4622-b41a-3c6d50c6b3f8");
+
     return (
-        <div>
-            <video src={`api/video/feb81d20-2bb0-4622-b41a-3c6d50c6b3f8.mp4`} controls></video>
+        <div className={cnRepetitionStart()}>
+            {/* <video src={`api/video/feb81d20-2bb0-4622-b41a-3c6d50c6b3f8.mp4`} controls></video> */}
             <div className={cnRepetitionStart("text")}>
                 <div className={cnRepetitionStart("text-dark-blue")}>
                     Подготовка к репетиции
@@ -105,27 +103,26 @@ export default function RepetitionStart() {
                 </div>
             </div>
 
-            <ModalWindow isVisible={isModal} onClose={closeModal}>
-                <div className={cnModalTitle("header")}>
-                    <ReactSVG
-                        src={uploadIcon}
-                        className={cnModalTitle("header-icon")}
-                    />
-                    <span className={cnModalTitle("header-title")}>
-                        Загрузка репетиции
-                    </span>
-
-                    <ReactSVG
-                        src={closeIcon}
-                        className={cnModalTitle("header-icon-close")}
-                        onClick={closeModal}
-                    />
-                </div>
+            <ModalWindow
+                isVisible={isModal}
+                onClose={closeModal}
+                title={
+                    currentFile && currentFile.size !== 0
+                        ? "Предпросмотр загруженной репетиции"
+                        :  "Загрузка репетиции"
+                }
+            >
                 <VideoUploadContext.Provider
                     value={{ currentFile, setCurrentFile }}
                 >
-                    {currentFile.size === 0 && <Upload />}
-                    {currentFile.size !== 0 && <PreviewBlock />}
+                    {((currentFile && currentFile.size === 0) || (!currentFile) ) && <Upload />}
+                    {currentFile && currentFile.size !== 0 && (
+                        <PreviewBlock
+                            onClickRerecordBtn={() =>
+                                setCurrentFile(new File([], ""))
+                            }
+                        />
+                    )}
                 </VideoUploadContext.Provider>
             </ModalWindow>
         </div>

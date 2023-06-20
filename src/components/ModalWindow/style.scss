@@ -1,23 +1,20 @@
-.modal {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.25);
-    animation-name: appear;
-    animation-duration: 300ms;
+.ModalWindow {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
+  animation-name: appear;
+  animation-duration: 300ms;
 
-  }
-  
-  .modal-dialog {
+  &-dialog {
     border-radius: 3em;
-
     width: auto;
     max-width: auto;
     background: white;
@@ -34,52 +31,73 @@
     animation-name: slide-in;
     animation-duration: 0.3s;
   }
-  
-  .modal-header,
-  .modal-footer {
+
+  &-header{
     display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
     align-items: center;
-    padding: 1rem;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 1rem 1.5rem 0 1.5rem;
+    gap: 10px;
+
+    &-title {
+      font-family: 'Montserrat Alternates';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 1em;
+      line-height: 1em;
+      color: #37476A;
+      flex-grow: 1;
+    }
+
+    &-icon {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      width: 28px;
+
+      &-close {
+        cursor: pointer;
+      }
+    }
   }
-  
-  .modal-header {
-    border-bottom: 1thick solid #dbdbdb;
-    justify-content: space-between;
-  }
-  
-  .modal-footer {
-    border-top: 1px solid #dbdbdb;
-    justify-content: flex-end;
-  }
-  
-  .modal-close {
-    cursor: pointer;
-    padding: 1rem;
-    margin: -1rem -1rem -1rem auto;
-  }
-  
-  .modal-body {
+
+
+  &-body {
     overflow: auto;
   }
-  
-  .modal-content {
+
+  &-content {
     padding: 1rem;
   }
-  
+
   @keyframes appear {
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
   }
-  
+
   @keyframes slide-in {
     from {
       transform: translateY(-10px);
     }
+
     to {
       transform: translateY(0);
     }
   }
+
+  &-footer {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+  }
+}
+

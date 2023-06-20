@@ -1,0 +1,105 @@
+.RadioItem {
+    &-col-answers {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+        justify-items: start;
+
+        &-item {
+
+            font-family: 'Montserrat Alternates';
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+            padding-top: 10px;
+            gap: 12px;
+            color: #7C8EB5;
+
+            &-icon {
+
+                width: 24px;
+                height: 24px;
+            }
+
+            &-label {
+                cursor: pointer;
+                user-select: none;
+
+                font-family: 'Montserrat Alternates';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 20px;
+
+                // &-radio
+                &-radio:checked,
+                &-radio:not(:checked) {
+                    display: none;
+                }
+
+                &-radio:checked+&-custom-radio__label,
+                &-radio:not(:checked)+&-custom-radio__label {
+                    position: relative;
+                    padding: 6px 0 0 40px;
+                    display: inline-block;
+                    margin-bottom: 5px;
+                }
+
+                &-radio:not(:checked)+&-custom-radio__label:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 28px;
+                    height: 28px;
+                    border: 2px solid #B2C2E4;
+                    border-radius: 8px;
+
+                }
+
+                &-radio:checked+&-custom-radio__label:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 8px;
+                    background: #2477F4;
+
+                    outline: 2px solid #FFFFFF;
+                    outline-offset: -4px;
+
+                }
+
+                &-radio:checked+&-custom-radio__label:after {
+                    // content: '';
+                    // width: 24px;
+                    // // width: 1.3em;
+                    // height: 24px;
+                    // left: 4px;
+                    // top: 4px;
+                    // position: absolute;
+                    // background: #2477F4;
+                    // border-radius: 6px;
+                    // // z-index: 1;
+
+                    // background-repeat: no-repeat;
+                    // background-position: center center;
+                    // background-size: 50% 50%;
+                    // background-image: url("./images/rectangle-answer.png");
+
+                }
+            }
+        }
+
+        &_checked {
+            background: #2477F4;
+            box-shadow: 0px 0px 14px rgba(124, 142, 181, 0.25);
+            fill: #FFFFFF;
+            color: #FFFFFF;
+            color: #031C3D;
+        }
+    }
+}

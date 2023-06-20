@@ -1,6 +1,7 @@
 .RepetitionStart{
     font-size: 16px;
     line-height: 20px;
+    width: 100%;
     
 
     &-text{
@@ -43,15 +44,16 @@
         display: flex;
         flex-flow: row wrap;
         gap:25px;
+        
 
         &-link{
             cursor: pointer;
             max-width: 600px;
+
         
 
             &-svg{
                 width: 100%;
-
             }
         }
     }

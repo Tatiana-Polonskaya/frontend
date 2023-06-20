@@ -51,6 +51,16 @@
         border: 1px solid #b2c2e4;
         border-radius: 12px;
     }
+    &-input::placeholder{
+        font-family: 'Onest';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #37476A;
+    }
+
+    
 
     &-input-block {
         width: 100%;
@@ -85,6 +95,13 @@
 
     &-btn {
         width: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        gap:10px;
+        height: 40px;
+        align-items: center;
+
         &-text {
             font-family: "Montserrat Alternates";
             font-style: normal;
@@ -95,6 +112,7 @@
 
         &-gray {
             @extend .cnPreview-btn-text;
+            @extend .cnPreview-btn;
             width: 100%;
             background: #f3f5f9;
             color: #2477f4;
@@ -103,6 +121,8 @@
 
         &-blue {
             @extend .cnPreview-btn-text;
+            @extend .cnPreview-btn;
+            border-radius: 9px;
             width: 100%;
         }
     }

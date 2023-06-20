@@ -1,0 +1,42 @@
+.BasicTextPlan{
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 60px 1fr 60px;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    &-text{
+
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        gap:20px;
+
+        font-family: 'Onest';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 31px;
+        
+        
+        
+
+        &-blue{
+            font-family: 'Onest';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 32px;
+            line-height: 41px;
+            color: #5196FF;
+        }
+    }
+
+    &-arrow{
+        cursor: pointer;
+
+    }
+}

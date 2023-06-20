@@ -50,9 +50,6 @@ export default function RadioBtnQuestion(props: Props) {
         // props.addAnotherAnswers(props.question.id, value);
     };
 
-    // `${props.question.type_answer}`
-    let style = "column-answers";
-
     return (
         <div className={cnMain()}>
             <h3 className={cnMain("title")}>{props.question.title}</h3>

@@ -2,29 +2,23 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 
 import {
-    ChangeEvent,
-    createContext,
     useContext,
     useEffect,
     useRef,
     useState,
 } from "react";
-import { PreventAny } from "@reduxjs/toolkit/dist/entities/models";
-import PreviewBlock from "../PreviewBlock";
+
 import { VideoUploadContext } from "../RepetitionComponents/RepetitionStart";
 
-export const PreviewVideoContext = createContext({videoName: "", url: ""});
-
 export default function Upload() {
-    const handleFile = (file: any) => {
-        setVideoFile(file);
-        // setNewVideo(file.name);
-        console.log("videoFile ok", videoFile, file);
-    };
-
     const cnUpload = cn("cnUpload");
     const [dragActive, setDragActive] = useState(false);
-    const [videoFile, setVideoFile] = useState<any>();
+    const [videoFile, setVideoFile] = useState<File>();
+
+    const handleFile = (file: any) => {
+        setVideoFile(file);
+        console.log("Upload: videoFile ok", videoFile, file);
+    };
 
     // handle drag events
     const handleDrag = function (e: any) {
@@ -52,12 +46,14 @@ export default function Upload() {
         e.preventDefault();
         if (e.target.files && e.target.files[0]) {
             handleFile(e.target.files[0]);
-            setCurrentFile(e.target.files[0])
         }
     };
 
+    useEffect(() => {
+        if (videoFile) setCurrentFile(videoFile);
+    }, [videoFile]);
 
-    const {currentFile, setCurrentFile} = useContext(VideoUploadContext);
+    const { currentFile, setCurrentFile } = useContext(VideoUploadContext);
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -122,16 +118,6 @@ export default function Upload() {
                     )}
                 </form>
             </div>
-            {/* {videoFile &&
-            <PreviewVideoContext.Provider value={{videoName: videoFile.name ,url:URL.createObjectURL(videoFile as File)}}>
-                <PreviewBlock />
-            </PreviewVideoContext.Provider> */}
-
-            {/* {videoFile && (
-                <video width="600" height="300" controls>
-                    <source src={URL.createObjectURL(videoFile as File)} />
-                </video>
-            )} */}
         </div>
     );
 }

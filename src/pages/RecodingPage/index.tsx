@@ -1,18 +1,60 @@
 import EmptyLayout from "../../layouts/EmptyLayout";
 import { cn } from "@bem-react/classname";
 import Webcam from "react-webcam";
-import { useCallback, useRef, useState } from "react";
+import {
+    useCallback,
+    useEffect,
+    useLayoutEffect,
+    useRef,
+    useState,
+} from "react";
 
 import "./style.scss";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import sss from "./assets/Vector.svg";
 import vvvv from "./assets/video-play.svg";
 import { ReactSVG } from "react-svg";
 
+import Timer from "../../components/Timer";
+import BasicTextPlan from "../../components/BasicTextPlan";
+import ModalWindow from "../../components/ModalWindow/ModalWindow";
+import { VideoUploadContext } from "../../components/RepetitionComponents/RepetitionStart";
+import PreviewBlock from "../../components/PreviewBlock";
+
+export const TIMER_STATUS = {
+    START: true,
+    STOP: false,
+};
+
 export default function RecodingPage() {
     const navigate = useNavigate();
     const cnRecoding = cn("RecodingPage");
+
+    const { state } = useLocation();
+    const { basicPlan, isTimer } = state;
+
+    // timer params
+    const isShowBasicPlan =
+        basicPlan && basicPlan.length > 0 && basicPlan[0] !== "" ? true : false;
+    const [isTimerStart, setIsTimerStart] = useState(false);
+    const updateIsTimerStart = (value: boolean) => {
+        setIsTimerStart(value);
+    };
+
+    // modal params
+
+    const cnModalTitle = cn("ModalTitle");
+
+    const [isModal, setModal] = useState(false);
+    const [currentFile, setCurrentFile] = useState<File>(new File([], "empty"));
+
+    const closeModal = () => {
+        setCurrentFile(new File([], "empty"));
+        setModal(false);
+    };
+
+    // webcam params
 
     const webcamRef = useRef<Webcam>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -20,20 +62,22 @@ export default function RecodingPage() {
     const [recordedChunks, setRecordedChunks] = useState([]);
 
     const handleDataAvailable = useCallback(
-        ({ data }: any) => {
+        ({ data }:any) => {
+            console.log("handleDataAvailable", data);
             if (data.size > 0) {
+                console.log("size", data.size);
                 setRecordedChunks((prev) => prev.concat(data));
             }
         },
-        [setRecordedChunks]
-    );
+        [setRecordedChunks]);
 
     const handleStartCaptureClick = useCallback(() => {
+        updateIsTimerStart(TIMER_STATUS.START);
         setCapturing(true);
         mediaRecorderRef.current = new MediaRecorder(
             webcamRef?.current?.stream as MediaStream,
             {
-                mimeType: "video/webm",
+                mimeType: "video/mp4",
             }
         );
         mediaRecorderRef.current.addEventListener(
@@ -44,25 +88,29 @@ export default function RecodingPage() {
     }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
 
     const handleStopCaptureClick = useCallback(() => {
+        updateIsTimerStart(TIMER_STATUS.STOP);
         if (mediaRecorderRef.current) mediaRecorderRef.current.stop();
         setCapturing(false);
     }, [mediaRecorderRef, setCapturing]);
 
-    const handleDownload = useCallback(() => {
-        if (recordedChunks.length) {
-            const blob = new Blob(recordedChunks, {
+    useEffect(()=>{
+        if (recordedChunks.length > 0) {
+            const file = new File(recordedChunks, "filename", {
                 type: "video/mp4",
             });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            document.body.appendChild(a);
-            a.href = url;
-            a.download = "react-webcam-stream-capture.mp4";
-            a.click();
-            window.URL.revokeObjectURL(url);
+            setCurrentFile(file);
             setRecordedChunks([]);
         }
-    }, [recordedChunks]);
+    },[recordedChunks])
+
+    useLayoutEffect(() => {
+        if (currentFile.size !== 0) {
+            setModal(true);
+        }
+        else{
+            setModal(false);
+        }
+    }, [currentFile]);
 
     const videoConstraints = {
         width: 1280,
@@ -73,7 +121,7 @@ export default function RecodingPage() {
     return (
         <EmptyLayout>
             <div className={cnRecoding()}>
-                <div className={cnRecoding("Container")}>
+                <div className={cnRecoding("container")}>
                     <div className={cnRecoding("video-block")}>
                         <Webcam
                             className={cnRecoding("video")}
@@ -119,16 +167,45 @@ export default function RecodingPage() {
                                 </>
                             )}
                         </div>
+
+                        {isTimer && (
+                            <div className={cnRecoding("right-block")}>
+                                <Timer
+                                    minutes={15}
+                                    seconds={0}
+                                    isStart={isTimerStart}
+                                    setIsStart={updateIsTimerStart}
+                                />
+                            </div>
+                        )}
+
+                        {isShowBasicPlan && (
+                            <div className={cnRecoding("bottom-block")}>
+                                <BasicTextPlan textPlan={basicPlan} />
+                            </div>
+                        )}
                     </div>
 
-                    {recordedChunks.length > 0 && (
-                        <button
-                            className={cnRecoding("button")}
-                            onClick={handleDownload}
+                    <ModalWindow
+                        isVisible={isModal}
+                        onClose={closeModal}
+                        title={"Предпросмотр завершенной репетиции"}
+                    >
+                        <VideoUploadContext.Provider
+                            value={{ currentFile, setCurrentFile }}
                         >
-                            Download
-                        </button>
-                    )}
+                            {currentFile.size !== 0 && (
+                                <PreviewBlock
+                                    titleRerecordBtn={"Перезаписать репетицию"}
+                                    titleContinueBtn={"Отправить на анализ"}
+                                    titleHelpForInput={
+                                        "Задайте название репетиции"
+                                    }
+                                    onClickRerecordBtn={()=>{}}
+                                />
+                            )}
+                        </VideoUploadContext.Provider>
+                    </ModalWindow>
                 </div>
             </div>
         </EmptyLayout>
