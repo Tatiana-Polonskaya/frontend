@@ -70,7 +70,7 @@ export default function Upload() {
                 </span>
                 <span className={cnUpload("description-blue")}>
                     Максимальная длительность видео - 15 минут. Формат видео:
-                    MP4, MOV или AVI, минимальное разрешение 640х480.
+                    MP4 минимальное разрешение 640х480.
                 </span>
             </div>
             <div className={cnUpload("dropdown")}>

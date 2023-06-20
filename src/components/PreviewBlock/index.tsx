@@ -22,6 +22,10 @@ type IPreviewBlock = {
     titleHelpForInput?: string;
     onClickRerecordBtn: Function;
 };
+type propFuncSize ={
+    titleSize: string,
+    titleNameSize: string,
+}
 
 export default function PreviewBlock({
     titleRerecordBtn = "Загрузить другой файл",
@@ -39,59 +43,14 @@ export default function PreviewBlock({
     // get videofile from content
     const { currentFile, setCurrentFile } = useContext(VideoUploadContext);
 
+
     //  for sending video to server
     const [videoSendRequest, videoSendResponse] = useSendVideoMutation();
     const { isLoading, isSuccess, isError } = videoSendResponse;
 
-    // let video:( HTMLMediaElement | null) = document.querySelector("video#myVideo");
     const videoRef = useRef<HTMLVideoElement | any>();
     let mediaSource = new MediaSource();
-    const mimeCodec = "video/webm;codecs=vp8";
-
-    const videoTypes = ["webm", "ogg", "mp4", "x-matroska"];
-    const audioTypes = ["webm", "ogg", "mp3", "x-matroska"];
-    const codecs = [
-        "should-not-be-supported",
-        "vp9",
-        "vp9.0",
-        "vp8",
-        "vp8.0",
-        "avc1",
-        "av1",
-        "h265",
-        "h.265",
-        "h264",
-        "h.264",
-        "opus",
-        "pcm",
-        "aac",
-        "mpeg",
-        "mp4a",
-    ];
-
-    const supportedVideos = getSupportedMimeTypes("video", videoTypes, codecs);
-
-    function getSupportedMimeTypes(media: string, types: string[], codecs:string[]) {
-        const isSupported = MediaSource.isTypeSupported;
-        const supported:any = [];
-        types.forEach((type:any) => {
-            const mimeType = `${media}/${type}`;
-            codecs.forEach((codec) =>
-                [
-                    `${mimeType}; codecs=${codec}`,
-                    `${mimeType}; codecs=${codec.toUpperCase()}`,
-                    // /!\ false positive /!\
-                    // `${mimeType};codecs:${codec}`,
-                    // `${mimeType};codecs:${codec.toUpperCase()}`
-                ].forEach((variation) => {
-                    if (isSupported(variation)) supported.push(variation);
-                })
-            );
-            if (isSupported(mimeType)) supported.push(mimeType);
-        });
-        return supported;
-    }
-    // console.log("-- Top supported Video : ", supportedVideos);
+    const mimeCodec = "video/mp4";
 
     function sourceOpen() {
         console.log(mediaSource.readyState); // open
@@ -113,22 +72,23 @@ export default function PreviewBlock({
     useEffect(() => {
         if (
             "MediaSource" in window &&
-            MediaSource.isTypeSupported(mimeCodec) &&
             videoRef.current
         ) {
             console.log(mediaSource.readyState); // closed
             
             try {
                 videoRef.current.srcObject = mediaSource;
-                console.log(videoRef.current)
+                // console.log(videoRef.current)
             } catch (error) {
                 videoRef.current.src = URL.createObjectURL(currentFile);
-                console.log(error, videoRef.current)
+                // console.log("mediasource", error, videoRef.current)
             }
             mediaSource.addEventListener("sourceopen ", sourceOpen);
         } else {
-            console.error("Unsupported MIME type or codec: ", mimeCodec);
+            // console.error("Unsupported MIME type or codec: ", mimeCodec);
         }
+
+        
     }, [videoRef.current]);
 
     // mediaSource.addEventListener("sourceopen", () => {
@@ -199,26 +159,17 @@ export default function PreviewBlock({
                 <div className={cnPreview("col")}>
                     <div className={cnPreview("video-block")}>
                         <ReactPlayer
-                            url={[
-                                {
-                                    src: URL.createObjectURL(currentFile),
-                                    type: "video/webm; codecs=vp9"
-                                },
-                                {
-                                    src: URL.createObjectURL(currentFile),
-                                    type: "video/webm; codecs=vp8"
-                                },
-                                {
-                                    src: URL.createObjectURL(currentFile),
-                                    type: "video/webm; codecs='vp8.0'"
-                                },
-                            ]}
+                            width={'100%'} 
+                            height='100%'
+                            ref={videoRef}
+                            url={ URL.createObjectURL(currentFile)}
+                            muted={true}
+                            controls={true}
                         />
-                        <video id="myVideo" ref={videoRef}
-                            
+                        {/* <video id="myVideo" 
                             controls
                         />
-
+                        <video src={URL.createObjectURL(currentFile)} /> */}
 
                     </div>
                 </div>
@@ -229,7 +180,7 @@ export default function PreviewBlock({
                             {currentFile.name}
                         </span>
                         <span className={cnPreview("title-characters")}>
-                            1,2 Гб • 14 минут
+                            {/* продолжительность и размер файла */}
                         </span>
                     </div>
                     <div className={cnPreview("input-block")}>
