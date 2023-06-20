@@ -43,7 +43,7 @@ export default function PreviewBlock({
     const [videoSendRequest, videoSendResponse] = useSendVideoMutation();
     const { isLoading, isSuccess, isError } = videoSendResponse;
 
-    let video:( HTMLMediaElement | null) = document.querySelector("video#myVideo");
+    // let video:( HTMLMediaElement | null) = document.querySelector("video#myVideo");
     const videoRef = useRef<HTMLVideoElement | any>();
     let mediaSource = new MediaSource();
     const mimeCodec = "video/webm;codecs=vp8";
@@ -103,7 +103,7 @@ export default function PreviewBlock({
 
             sourceBuffer.addEventListener("updateend", () => {
                 mediaSource.endOfStream();
-                video ?.play();
+                videoRef.current ?.play();
                 console.log(mediaSource.readyState); // ended
             });
         };
@@ -114,22 +114,22 @@ export default function PreviewBlock({
         if (
             "MediaSource" in window &&
             MediaSource.isTypeSupported(mimeCodec) &&
-            video
+            videoRef.current
         ) {
             console.log(mediaSource.readyState); // closed
             
             try {
-                video.srcObject = mediaSource;
-                console.log(video)
+                videoRef.current.srcObject = mediaSource;
+                console.log(videoRef.current)
             } catch (error) {
-                video.src = URL.createObjectURL(currentFile);
-                console.log(error, video)
+                videoRef.current.src = URL.createObjectURL(currentFile);
+                console.log(error, videoRef.current)
             }
             mediaSource.addEventListener("sourceopen ", sourceOpen);
         } else {
             console.error("Unsupported MIME type or codec: ", mimeCodec);
         }
-    }, [video]);
+    }, [videoRef.current]);
 
     // mediaSource.addEventListener("sourceopen", () => {
     //     // Await sourceopen on MediaSource before creating SourceBuffers
