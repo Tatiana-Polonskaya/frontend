@@ -2,7 +2,7 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 import rerecordIcon from "./rerecoding.svg";
 
-import { ReactNode, useContext, useEffect, useRef, useState } from "react";
+import { LegacyRef, ReactNode, RefObject, useContext, useEffect, useRef, useState } from "react";
 
 import { ForwardedInput } from "../ui-kit/Input";
 import Button from "../ui-kit/Button";
@@ -32,8 +32,7 @@ export default function PreviewBlock({
     const cnPreview = cn("cnPreview");
     const navigate = useNavigate();
 
-
-    // for input 
+    // for input
     const [isFileNameValid, setFilenamevalid] = useState(true);
     const [fileName, setFileName] = useState("");
 
@@ -44,60 +43,124 @@ export default function PreviewBlock({
     const [videoSendRequest, videoSendResponse] = useSendVideoMutation();
     const { isLoading, isSuccess, isError } = videoSendResponse;
 
+    let video:( HTMLMediaElement | null) = document.querySelector("video#myVideo");
+    const videoRef = useRef<HTMLVideoElement | any>();
+    let mediaSource = new MediaSource();
+    const mimeCodec = "video/webm;codecs=vp8";
 
-    
-    let video = document.querySelector("video");
-    const mediaSource = new MediaSource();
-    const mimeCodec = "video/mp4";
+    const videoTypes = ["webm", "ogg", "mp4", "x-matroska"];
+    const audioTypes = ["webm", "ogg", "mp3", "x-matroska"];
+    const codecs = [
+        "should-not-be-supported",
+        "vp9",
+        "vp9.0",
+        "vp8",
+        "vp8.0",
+        "avc1",
+        "av1",
+        "h265",
+        "h.265",
+        "h264",
+        "h.264",
+        "opus",
+        "pcm",
+        "aac",
+        "mpeg",
+        "mp4a",
+    ];
+
+    const supportedVideos = getSupportedMimeTypes("video", videoTypes, codecs);
+
+    function getSupportedMimeTypes(media: string, types: string[], codecs:string[]) {
+        const isSupported = MediaSource.isTypeSupported;
+        const supported:any = [];
+        types.forEach((type:any) => {
+            const mimeType = `${media}/${type}`;
+            codecs.forEach((codec) =>
+                [
+                    `${mimeType}; codecs=${codec}`,
+                    `${mimeType}; codecs=${codec.toUpperCase()}`,
+                    // /!\ false positive /!\
+                    // `${mimeType};codecs:${codec}`,
+                    // `${mimeType};codecs:${codec.toUpperCase()}`
+                ].forEach((variation) => {
+                    if (isSupported(variation)) supported.push(variation);
+                })
+            );
+            if (isSupported(mimeType)) supported.push(mimeType);
+        });
+        return supported;
+    }
+    // console.log("-- Top supported Video : ", supportedVideos);
+
+    function sourceOpen() {
+        console.log(mediaSource.readyState); // open
+        const sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+
+        const getBuff = async () => {
+            const buf = await currentFile.arrayBuffer();
+            sourceBuffer.appendBuffer(buf);
+
+            sourceBuffer.addEventListener("updateend", () => {
+                mediaSource.endOfStream();
+                video ?.play();
+                console.log(mediaSource.readyState); // ended
+            });
+        };
+        getBuff();
+    }
 
     useEffect(() => {
-        console.log(video, "useEffect");
-        if (video) {
-            if ("srcObject" in video) {
-                try {
-                    video.srcObject = mediaSource;
-                } catch (err: any) {
-                    if (err.name !== "TypeError") {
-                        throw err;
-                    }
-                    // Even if they do, they may only support MediaStream
-                    video.src = URL.createObjectURL(mediaSource);
-                }
-            } 
+        if (
+            "MediaSource" in window &&
+            MediaSource.isTypeSupported(mimeCodec) &&
+            video
+        ) {
+            console.log(mediaSource.readyState); // closed
+            
+            try {
+                video.srcObject = mediaSource;
+                console.log(video)
+            } catch (error) {
+                video.src = URL.createObjectURL(currentFile);
+                console.log(error, video)
+            }
+            mediaSource.addEventListener("sourceopen ", sourceOpen);
+        } else {
+            console.error("Unsupported MIME type or codec: ", mimeCodec);
         }
     }, [video]);
 
-    mediaSource.addEventListener("sourceopen", () => {
-        // Await sourceopen on MediaSource before creating SourceBuffers
-        // and populating them with fetched media — MediaSource won't
-        // accept creation of SourceBuffers until it is attached to the
-        // HTMLMediaElement and its readyState is "open"
-        const getSourceBuffers = async () => {
-            const vidBuff = await currentFile.arrayBuffer();
-            const sourceBuffer: SourceBuffer = await new Promise(
-                (resolve, reject) => {
-                    const getSourceBuffer = () => {
-                        try {
-                            const sourceBuffer =
-                                mediaSource.addSourceBuffer(mimeCodec);
-                            
-                            resolve(sourceBuffer);
-                        } catch (e) {
-                            reject(e);
-                        }
-                    };
-                    getSourceBuffer();
-                }
-            );
-            sourceBuffer.appendBuffer(vidBuff);
-            sourceBuffer.onupdateend = () => {
-                // Nothing else to load
-                mediaSource.endOfStream();
-            };
-        
-        };
-        getSourceBuffers();
-    });
+    // mediaSource.addEventListener("sourceopen", () => {
+    //     // Await sourceopen on MediaSource before creating SourceBuffers
+    //     // and populating them with fetched media — MediaSource won't
+    //     // accept creation of SourceBuffers until it is attached to the
+    //     // HTMLMediaElement and its readyState is "open"
+    //     const getSourceBuffers = async () => {
+    //         const vidBuff = await currentFile.arrayBuffer();
+    //         const sourceBuffer: SourceBuffer = await new Promise(
+    //             (resolve, reject) => {
+    //                 const getSourceBuffer = () => {
+    //                     try {
+    //                         const sourceBuffer =
+    //                             mediaSource.addSourceBuffer(mimeCodec);
+
+    //                         resolve(sourceBuffer);
+    //                     } catch (e) {
+    //                         reject(e);
+    //                     }
+    //                 };
+    //                 getSourceBuffer();
+    //             }
+    //         );
+    //         sourceBuffer.appendBuffer(vidBuff);
+    //         sourceBuffer.onupdateend = () => {
+    //             // Nothing else to load
+    //             mediaSource.endOfStream();
+    //         };
+    //     };
+    //     getSourceBuffers();
+    // });
 
     const clickUpload = async () => {
         await videoSendRequest({
@@ -135,10 +198,28 @@ export default function PreviewBlock({
             <div className={cnPreview("row")}>
                 <div className={cnPreview("col")}>
                     <div className={cnPreview("video-block")}>
-                        <ReactPlayer url={URL.createObjectURL(currentFile)}/>
-                        <video width="500" height="300" controls>
-                            Sorry, your browser doesn't support embedded videos.
-                        </video>
+                        <ReactPlayer
+                            url={[
+                                {
+                                    src: URL.createObjectURL(currentFile),
+                                    type: "video/webm; codecs=vp9"
+                                },
+                                {
+                                    src: URL.createObjectURL(currentFile),
+                                    type: "video/webm; codecs=vp8"
+                                },
+                                {
+                                    src: URL.createObjectURL(currentFile),
+                                    type: "video/webm; codecs='vp8.0'"
+                                },
+                            ]}
+                        />
+                        <video id="myVideo" ref={videoRef}
+                            
+                            controls
+                        />
+
+
                     </div>
                 </div>
 

@@ -52,7 +52,6 @@ export default function RepetitionStart() {
                 currentFile
             );
     }, [currentFile]);
-    console.log(currentFile)
 
     // const videoData  = useGetVideoQuery("feb81d20-2bb0-4622-b41a-3c6d50c6b3f8");
 
