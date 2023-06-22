@@ -17,7 +17,7 @@ export default function DiaryPage() {
             {userVideos &&
                 userVideos.map((el) => (
                     <Fragment key={el.id}>
-                        <ReactPlayer url={`api/video/${el.id}.mp4`}/>
+                        <ReactPlayer url={`api/video/${el.id}`}/>
                     </Fragment>
                 ))}
         </MainLayout>
