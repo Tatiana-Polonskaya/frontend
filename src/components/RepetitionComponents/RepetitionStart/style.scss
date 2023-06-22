@@ -1,11 +1,11 @@
-.RepetitionStart{
+.RepetitionStart {
     font-size: 16px;
     line-height: 20px;
     width: 100%;
-    
 
-    &-text{
-        
+
+    &-text {
+
         display: flex;
         flex-flow: column nowrap;
         gap: 8px;
@@ -18,7 +18,7 @@
         font-family: 'Onest';
         font-style: normal;
 
-        &-dark-blue{
+        &-dark-blue {
             font-family: 'Montserrat Alternates';
             font-weight: 600;
             color: #37476A;
@@ -29,46 +29,90 @@
             align-items: center;
         }
 
-        &-black{
+        &-black {
             font-weight: 400;
             color: #000000;
         }
 
-        &-gray{
+        &-gray {
             font-weight: 400;
             color: #7C8EB5;
-            
-            &-bold{
+
+            &-bold {
                 font-weight: 500;
             }
         }
-        &-blue{
+
+        &-blue {
             font-weight: 500;
             color: #2477F4;
         }
     }
 
-    &-btn-block{
+    &-btn-block {
         display: flex;
         flex-flow: row wrap;
-        gap:25px;
+        gap: 25px;
         margin-top: 30px;
         margin-bottom: 30px;
 
-        &-link{
+        &-link {
             cursor: pointer;
             max-width: 600px;
 
-        
 
-            &-svg{
+
+            &-svg {
                 width: 100%;
             }
         }
     }
+
+    &-loading {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        // width: 100%;
+        gap: 10px;
+
+        &-img {
+            padding-bottom: 10px;
+        }
+
+        &-title {
+            color: #37476A;
+            font-size: 24px;
+            font-family: Montserrat Alternates;
+            font-weight: 600;
+
+            &-error {
+                color: #FF4E78;
+                font-size: 24px;
+                font-family: Montserrat Alternates;
+                font-weight: 600;
+            }
+
+            &-link {
+                color: #2477F4;
+                font-size: 16px;
+                font-family: Montserrat Alternates;
+                font-weight: 500;
+                cursor: pointer;
+            }
+        }
+
+        &-description {
+            color: #7C8EB5;
+            font-size: 16px;
+            font-family: Montserrat Alternates;
+            font-weight: 500;
+        }
+    }
 }
 
-.ModalTitle{
+.ModalTitle {
     &-header {
         display: flex;
         flex-flow: row nowrap;
@@ -96,7 +140,7 @@
             align-items: center;
             width: 28px;
 
-            &-close{
+            &-close {
                 cursor: pointer;
             }
         }

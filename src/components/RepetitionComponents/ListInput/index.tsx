@@ -10,6 +10,8 @@ type Props = {
     saveResultPlan: Function;
 };
 
+const LIMIT_POINT_PLAN = 20;
+
 export default function ListInput(props: Props) {
     const ListInputStyle = cn("ListInput");
 
@@ -18,7 +20,7 @@ export default function ListInput(props: Props) {
     );
 
     const addInput = () => {
-        setInputValues((inputValues) => [...inputValues, ""]);
+        if(inputValues.length < LIMIT_POINT_PLAN) setInputValues((inputValues) => [...inputValues, ""]);
     };
 
     const removeInput = (index: number) => {

@@ -19,8 +19,14 @@ import { ReactSVG } from "react-svg";
 import Timer from "../../components/Timer";
 import BasicTextPlan from "../../components/BasicTextPlan";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
-import { VideoUploadContext } from "../../components/RepetitionComponents/RepetitionStart";
+import {
+    IInfoVideo,
+    VideoUploadContext,
+    initialInfoVideo,
+} from "../../components/RepetitionComponents/RepetitionStart";
 import PreviewBlock from "../../components/PreviewBlock";
+import { useSendVideoMutation } from "../../store/api/userVideo";
+import RoutesEnum from "../../models/routes";
 
 export const TIMER_STATUS = {
     START: true,
@@ -32,13 +38,16 @@ const LIMIT_TIMER = 15;
 export default function RecodingPage() {
     const navigate = useNavigate();
     const cnRecoding = cn("RecodingPage");
+    const loadingPicture = "/images/loading.svg"; //path to public
 
     const { state } = useLocation();
     const { basicPlan, isTimer } = state;
 
-    // timer params
+    // basicPlan params
     const isShowBasicPlan =
         basicPlan && basicPlan.length > 0 && basicPlan[0] !== "" ? true : false;
+
+    // timer params
     const [isTimerStart, setIsTimerStart] = useState(false);
 
     const updateIsTimerStart = (value: boolean) => {
@@ -63,9 +72,7 @@ export default function RecodingPage() {
 
     const handleDataAvailable = useCallback(
         ({ data }: any) => {
-            console.log("handleDataAvailable", data);
             if (data.size > 0) {
-                console.log("size", data.size);
                 setRecordedChunks((prev) => prev.concat(data));
             }
         },
@@ -99,7 +106,9 @@ export default function RecodingPage() {
             const file = new Blob(recordedChunks, {
                 type: "video/webm",
             });
-            setCurrentFile(new File([file], "Recoding Repetition"));
+            setCurrentFile(new File([file], "Recoding Repetition",{
+                type: "video/webm",
+            }));
             setRecordedChunks([]);
         }
     }, [recordedChunks]);
@@ -117,6 +126,61 @@ export default function RecodingPage() {
         height: 720,
         facingMode: "user",
     };
+
+
+    // loading modal
+    const [isLoadingModal, setIsLoadingModal] = useState(false);
+    const [currentInfoData, setCurrentInfoData] =
+        useState<IInfoVideo>(initialInfoVideo);
+    const [isErrorWithSuccess, setIsErrorWithSuccess] = useState(false);
+
+    useEffect(() => {
+        if (currentInfoData && currentInfoData.title.length > 0) {
+            sendVideoData();
+            closeModal();
+            showLoadingModal();
+        }
+    }, [currentInfoData]);
+
+    const [videoSendRequest, videoSendResponse] = useSendVideoMutation();
+    const { isLoading, isSuccess, isError } = videoSendResponse;
+
+    const sendVideoData = async () => {
+        if (currentInfoData) {
+            await videoSendRequest(currentInfoData);
+        }
+    };
+
+    const showLoadingModal = async () => {
+        setIsLoadingModal(true);
+    };
+
+    const closeLoadingModal = () => {
+        setIsLoadingModal(false);
+    };
+
+
+    // answers from back
+    useEffect(() => {
+        if (isSuccess) {
+            const data = videoSendResponse.data;
+            if (data.success) {
+                setCurrentFile(new File([], "empty"));
+                setCurrentInfoData(initialInfoVideo);
+            } else {
+                setIsErrorWithSuccess(true);
+            }
+        }
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) {
+            const error = videoSendResponse.error as Response;
+            console.log(videoSendResponse.error);
+            setCurrentFile(new File([], "empty")); 
+            setCurrentInfoData(initialInfoVideo);
+        }
+    }, [isError]);
 
     return (
         <EmptyLayout>
@@ -169,7 +233,7 @@ export default function RecodingPage() {
                         </div>
                         <div
                             className={cnRecoding("right-block", {
-                                "hidden": !isTimer,
+                                hidden: !isTimer,
                             })}
                         >
                             <Timer
@@ -194,7 +258,12 @@ export default function RecodingPage() {
                         title={"Предпросмотр завершенной репетиции"}
                     >
                         <VideoUploadContext.Provider
-                            value={{ currentFile, setCurrentFile }}
+                            value={{
+                                currentFile,
+                                setCurrentFile,
+                                currentInfoData,
+                                setCurrentInfoData,
+                            }}
                         >
                             {currentFile.size !== 0 && (
                                 <PreviewBlock
@@ -207,6 +276,90 @@ export default function RecodingPage() {
                                 />
                             )}
                         </VideoUploadContext.Provider>
+                    </ModalWindow>
+
+                    <ModalWindow
+                        isVisible={isLoadingModal}
+                        onClose={closeLoadingModal}
+                        closeOnClickOutside={!isLoading}
+                    >
+                        {(isLoading || (isErrorWithSuccess || isError)) && (
+                                <div className={cnRecoding("loading")}>
+                                    <ReactSVG
+                                        src={
+                                            process.env.PUBLIC_URL +
+                                            loadingPicture
+                                        }
+                                        className={cnRecoding("loading-img")}
+                                    />
+                                    {isLoading && (
+                                        <>
+                                            <div
+                                                className={cnRecoding(
+                                                    "loading-title"
+                                                )}
+                                            >
+                                                Идет загрузка видео...
+                                            </div>
+                                            <div
+                                                className={cnRecoding(
+                                                    "loading-description"
+                                                )}
+                                            >
+                                                Пожалуйста, не закрывайте
+                                                вкладку до окончания загрузки.
+                                            </div>
+                                        </>
+                                    )}
+                                    {(isErrorWithSuccess || isError) && (
+                                        <>
+                                            <div
+                                                className={cnRecoding(
+                                                    "loading-title-error"
+                                                )}
+                                            >
+                                                Произошла ошибка, попробуйте еще
+                                                раз
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            )}
+                        {isSuccess && (
+                            <div className={cnRecoding("loading")}>
+                                <ReactSVG
+                                    src={
+                                        process.env.PUBLIC_URL + loadingPicture
+                                    }
+                                    className={cnRecoding("loading-img")}
+                                />
+                                <>
+                                    <div
+                                        className={cnRecoding("loading-title")}
+                                    >
+                                        Загрузка видео успешно закончена и
+                                        отправлена на анализ
+                                    </div>
+                                    <div
+                                        className={cnRecoding(
+                                            "loading-description"
+                                        )}
+                                    >
+                                        Анализ вы можете посмотреть на странице{" "}
+                                        <span
+                                            className={cnRecoding(
+                                                "loading-title-link"
+                                            )}
+                                            onClick={() =>
+                                                navigate(RoutesEnum.DIARY)
+                                            }
+                                        >
+                                            Дневник
+                                        </span>
+                                    </div>
+                                </>
+                            </div>
+                        )}
                     </ModalWindow>
                 </div>
             </div>

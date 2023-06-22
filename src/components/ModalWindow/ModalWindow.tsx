@@ -9,6 +9,7 @@ interface IWindowModalProps {
     footer?: ReactElement;
     onClose: Function;
     children?: ReactNode;
+    closeOnClickOutside?:boolean
 }
 
 export default function ModalWindow({
@@ -17,6 +18,7 @@ export default function ModalWindow({
     footer,
     onClose,
     children,
+    closeOnClickOutside=true
 }: IWindowModalProps) {
     const keydownHandler = ({ key }: any) => {
         switch (key) {
@@ -36,7 +38,7 @@ export default function ModalWindow({
     const cnModalWindow = cn("ModalWindow");
 
     return !isVisible ? null : (
-        <div className={cnModalWindow()} onClick={() => onClose()}>
+        <div className={cnModalWindow()} onClick={() => (closeOnClickOutside && onClose())}>
             <div className={cnModalWindow("dialog")} onClick={(e) => e.stopPropagation()}>
                 {title && (
                     <div className={cnModalWindow("header")}>

@@ -6,7 +6,7 @@ import {
     useState,
 } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import ModalWindow from "../../ModalWindow/ModalWindow";
 import Upload from "../../Upload";
@@ -19,10 +19,30 @@ import { ReactSVG } from "react-svg";
 import downloand_btn from "./img/download_btn.svg";
 import online_btn from "./img/online_btn.svg";
 import notice_btn from "../Setup/icons/note_icon.svg";
+import loadingPic from "./img/loading.svg";
+
+import { useSendVideoMutation } from "../../../store/api/userVideo";
+import RoutesEnum from "../../../models/routes";
+
+export interface IInfoVideo {
+    title: string;
+    duration: string;
+    description: string;
+    file: File;
+}
+
+export const initialInfoVideo: IInfoVideo = {
+    title: "",
+    duration: "",
+    description: "",
+    file: new File([], "empty"),
+};
 
 export const VideoUploadContext = createContext({
     currentFile: new File([], "empty"),
     setCurrentFile: (() => {}) as Dispatch<SetStateAction<File>>,
+    currentInfoData: initialInfoVideo,
+    setCurrentInfoData: (() => {}) as Dispatch<SetStateAction<IInfoVideo>>,
 });
 
 export default function RepetitionStart() {
@@ -41,13 +61,61 @@ export default function RepetitionStart() {
         setModal(false);
     };
 
+    // loading modal
+    const [isLoadingModal, setIsLoadingModal] = useState(false);
+    const [currentInfoData, setCurrentInfoData] =
+        useState<IInfoVideo>(initialInfoVideo);
+
+    useEffect(()=>{
+        if(currentInfoData && currentInfoData.title.length>0){
+            sendVideoData();
+            closeModal();
+            showLoadingModal();
+        }
+    },[currentInfoData])
+
+    const [videoSendRequest, videoSendResponse] = useSendVideoMutation();
+    const { isLoading, isSuccess, isError } = videoSendResponse;
+    const [isErrorWithSuccess, setIsErrorWithSuccess] = useState(false);
+
+    const navigate = useNavigate();
+
+    const sendVideoData = async () => {
+        if (currentInfoData) {
+            await videoSendRequest(currentInfoData);
+            // navigate(RoutesEnum.DIARY);
+        }
+    };
+
+    const showLoadingModal = async () => {
+        setIsLoadingModal(true);
+    };
+
+    const closeLoadingModal = () => {
+        setIsLoadingModal(false);
+    };
+
+    // answers from back
     useEffect(() => {
-        if (currentFile && currentFile.size !== 0)
-            console.log(
-                "RepetitionStart: currentFile was been changed:",
-                currentFile
-            );
-    }, [currentFile]);
+        if (isSuccess) {
+            const data = videoSendResponse.data;
+            if (data.success) {
+                setCurrentFile(new File([], "empty")); 
+                setCurrentInfoData(initialInfoVideo);
+            } else {
+                setIsErrorWithSuccess(true);
+            }
+        }
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) {
+            const error = videoSendResponse.error as Response;
+            console.log(videoSendResponse.error);
+            setCurrentFile(new File([], "empty")); 
+            setCurrentInfoData(initialInfoVideo);
+        }
+    }, [isError]);
 
     // const videoData  = useGetVideoQuery("feb81d20-2bb0-4622-b41a-3c6d50c6b3f8");
 
@@ -104,13 +172,19 @@ export default function RepetitionStart() {
                 title={
                     currentFile && currentFile.size !== 0
                         ? "Предпросмотр загруженной репетиции"
-                        :  "Загрузка репетиции"
+                        : "Загрузка репетиции"
                 }
             >
                 <VideoUploadContext.Provider
-                    value={{ currentFile, setCurrentFile }}
+                    value={{
+                        currentFile,
+                        setCurrentFile,
+                        currentInfoData,
+                        setCurrentInfoData,
+                    }}
                 >
-                    {((currentFile && currentFile.size === 0) || (!currentFile) ) && <Upload />}
+                    {((currentFile && currentFile.size === 0) ||
+                        !currentFile) && <Upload />}
                     {currentFile && currentFile.size !== 0 && (
                         <PreviewBlock
                             onClickRerecordBtn={() =>
@@ -119,6 +193,72 @@ export default function RepetitionStart() {
                         />
                     )}
                 </VideoUploadContext.Provider>
+            </ModalWindow>
+
+            <ModalWindow isVisible={isLoadingModal} onClose={closeLoadingModal}
+            closeOnClickOutside={!isLoading}
+            >
+                {(isLoading || isErrorWithSuccess || isError) &&  (
+                    <div className={cnRepetitionStart("loading")}>
+                        <ReactSVG src={loadingPic} className={cnRepetitionStart("loading-img")}/>
+                        {isLoading && (
+                            <>
+                                <div
+                                    className={cnRepetitionStart(
+                                        "loading-title"
+                                    )}
+                                >
+                                    Идет загрузка видео...
+                                </div>
+                                <div
+                                    className={cnRepetitionStart(
+                                        "loading-description"
+                                    )}
+                                >
+                                    Пожалуйста, не закрывайте вкладку до
+                                    окончания загрузки.
+                                </div>
+                            </>
+                        )}
+                        {(isErrorWithSuccess || isError)  && (
+                            <>
+                                <div
+                                    className={cnRepetitionStart(
+                                        "loading-title-error"
+                                    )}
+                                >
+                                    Произошла ошибка, попробуйте еще раз
+                                </div>
+                            </>
+                        )}
+                    </div>
+                )}
+                {isSuccess && (
+                    <div className={cnRepetitionStart("loading")}>
+                        <ReactSVG src={loadingPic} className={cnRepetitionStart("loading-img")}/>
+                            <>
+                                <div
+                                    className={cnRepetitionStart(
+                                        "loading-title"
+                                    )}
+                                >
+                                    Загрузка видео успешно закончена и
+                                    отправлена на анализ
+                                </div>
+                                <div
+                                    className={cnRepetitionStart(
+                                        "loading-description"
+                                    )}
+                                >
+                                    Анализ вы можете посмотреть на странице{" "}
+                                    
+                                    <span className={cnRepetitionStart(
+                                        "loading-title-link"
+                                    )} onClick={()=>navigate(RoutesEnum.DIARY)}>Дневник</span>
+                                </div>
+                            </>
+                    </div>
+                )}
             </ModalWindow>
         </div>
     );

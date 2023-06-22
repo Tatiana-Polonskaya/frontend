@@ -17,7 +17,7 @@ export default function Upload() {
     const [videoFile, setVideoFile] = useState<File>();
     const [IsValid, setIsValid] = useState(true);
 
-    const { currentFile, setCurrentFile } = useContext(VideoUploadContext);
+    const {setCurrentFile} = useContext(VideoUploadContext);
 
     const inputRef = useRef<HTMLInputElement>(null);
 

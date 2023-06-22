@@ -50,6 +50,10 @@
         border-color: #b2c2e4;
         border: 1px solid #b2c2e4;
         border-radius: 12px;
+
+        &_wrong{
+            border: 2px solid #FF4E78;
+        }
     }
     &-input::placeholder{
         font-family: 'Onest';
@@ -156,5 +160,39 @@
             }
         }
 
+        &_hidden{
+            display: none;
+        }
+
+    }
+
+    &-loading{
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        // width: 100%;
+        gap: 10px;
+
+        &-title{
+            color: #37476A;
+            font-size: 24px;
+            font-family: Montserrat Alternates;
+            font-weight: 600;
+
+            &-error{
+                color: #FF4E78;
+                font-size: 24px;
+                font-family: Montserrat Alternates;
+                font-weight: 600;
+            }
+        }
+
+        &-description{
+            color: #7C8EB5;
+            font-size: 16px;
+            font-family: Montserrat Alternates;
+            font-weight: 500;
+        }
     }
 }

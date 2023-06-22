@@ -12,8 +12,8 @@ type Props = {
 export default function BasicTextPlan(props: Props) {
     const cnBasicTextPlan = cn("BasicTextPlan");
 
-    const textPlan = props.textPlan;
-    const max_steps = props.textPlan.length - 1;
+    const textPlan = props.textPlan.filter(el=>el.length>0);
+    const max_steps = textPlan.length - 1;
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const showLeftItem = () => {
