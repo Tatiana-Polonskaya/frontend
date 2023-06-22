@@ -24,21 +24,21 @@ export default function Menu() {
             img: images.Home,
             onClick: () => navigate(RoutesEnum.HOME),
         },
-        {
-            title: "Обучение",
-            onClick: () => navigate(RoutesEnum.LEARNING),
-            img: images.Teacher,
-        },
+        // {
+        //     title: "Обучение",
+        //     onClick: () => navigate(RoutesEnum.LEARNING),
+        //     img: images.Teacher,
+        // },
         {
             title: "Репетиция",
             onClick: () => navigate(RoutesEnum.REPETITION),
             img: images.Repetition,
         },
-        {
-            title: "Импровизация",
-            onClick: () => navigate(RoutesEnum.IMPROVISATION),
-            img: images.Improvization,
-        },
+        // {
+        //     title: "Импровизация",
+        //     onClick: () => navigate(RoutesEnum.IMPROVISATION),
+        //     img: images.Improvization,
+        // },
         {
             title: "Дневник",
             onClick: () => navigate(RoutesEnum.DIARY),

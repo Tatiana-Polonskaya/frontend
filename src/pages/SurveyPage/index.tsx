@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import CheckboxQuestion from "../../components/CheckboxQuestion";
 import RadioBtnQuestion from "../../components/RadioBtnQuestion";
 import SurveyLayout from "../../layouts/SurveyLayout";
@@ -6,28 +6,34 @@ import "./style.scss";
 import { cn } from "@bem-react/classname";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
-import {
-    updateChoiceAnswers,
-    updateAnotherAnswers,
-} from "../../store/slices/survey";
+import { updateChoiceAnswers } from "../../store/slices/survey";
 
 import TarifPage from "./TarifPage";
 import { useNavigate } from "react-router-dom";
+import {
+    useGetSurveyQuery,
+    useSendAnswersMutation,
+} from "../../store/api/survey";
+import { IAnswer, IQuestion } from "../../models/survey";
+import { UUID } from "crypto";
+
+
+// ПЕРЕДЕЛАТЬ ВСЮ ПРОВЕРКУ НА ПРАВИЛЬНОТЬ ОТВЕТОВ ПО СТАРОМУ ОБРАЗЦУ ОТВЕТОВ, ЗАТЕМ ИЗМЕНИТЬ ФУНКЦИЮ ДОБАВЛЕНИЯ ПОЛЯ ДРУГОЕ
 
 export default function SurveyPage() {
     // const { name, lastName, birthday } = useAppSelector(
     //     (state) => state.register.personal
     // );
 
+    const ALL_STEP = 2;
+    const QUESTIONS_FOR_STEP = [2, 3, 2];
+
+    // const sendd = useSendAnswersMutation();
+
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const storeChoiceAnswers = useAppSelector(
-        (state) => state.survey.choiceAnswers
-    );
-    const storeAnotherAnswers = useAppSelector(
-        (state) => state.survey.anotherAnswers
-    );
+    const storeChoiceAnswers = useAppSelector((state) => state.survey.answers);
 
     enum typeQuestion {
         checkbox = "checkbox",
@@ -287,25 +293,40 @@ export default function SurveyPage() {
         },
     ];
 
+    const { data } = useGetSurveyQuery("anketa");
+    const questions = data?.data?.questions as IQuestion[];
+
+    useEffect(() => {
+        console.log(questions);
+
+        if (questions) {
+            setCurrentQuestions(
+                questions.slice(firstIndex, QUESTIONS_FOR_STEP[step])
+            );
+        }
+    }, [questions]);
+
     const [canMoved, setCanMoved] = useState(false);
     const [step, setStep] = useState(0);
-    const allStep = 2;
 
-    const countQuestionForStep = [2, 3, 2];
-
-    let counts = question.length;
+    // let counts = questions.length;
     let firstIndex = 0;
 
-    const [currentQuestions, setCurrentQuestions] = useState(
-        question.slice(firstIndex, countQuestionForStep[step])
-    );
+    // const [currentQuestions, setCurrentQuestions] = useState(
+    //     Array.isArray(questions) ? Array(questions[0]).slice(firstIndex, QUESTIONS_FOR_STEP[step]) : []
+    // );
 
-    let answers: (number | boolean[])[] = [];
+    // const [currentQuestions, setCurrentQuestions] = useState(
+    //     questions.slice(firstIndex, QUESTIONS_FOR_STEP[step])
+    // );
+    const [currentQuestions, setCurrentQuestions] = useState<IQuestion[]>();
+
+    let answers: IAnswer[] = [];
     let anotherAnswers: string[] = [];
 
-    for (let i = 0; i < counts; i++) {
-        if (question[i].type === typeQuestion.radio) {
-            answers.push(-1);
+    for (let i = 0; i < questions?.length; i++) {
+        if (questions[i].type === typeQuestion.radio) {
+            // answers.push(-1);
         } else {
             let temp: boolean[] = [];
             for (let j = 0; j < question[i].answers.length; j++) {
@@ -314,64 +335,87 @@ export default function SurveyPage() {
             if (question[i].block_another) {
                 temp.push(false);
             }
-            answers.push(temp);
+            // answers.push(temp);
         }
         anotherAnswers.push("");
     }
 
-    const addAnswers = (answer: number | boolean[], idQuestion: number) => {
+    const addAnswers = (newAnswer: IAnswer) => {
+        // взять из стора и проверить есть ли там уже ответы
         answers =
             storeChoiceAnswers.length > 0 ? [...storeChoiceAnswers] : answers;
-        answers[idQuestion] = answer;
 
+        let count_matches = 0;
+
+        answers.forEach((el) => {
+            if (typeof el.choice_id !== null && el.choice_id === newAnswer.choice_id) {
+                el.text = newAnswer.text;
+                count_matches++;
+            }
+        });
+        console.log("count_matches", count_matches);
+        if (count_matches === 0) answers.push(newAnswer);
         dispatch(updateChoiceAnswers(answers));
 
-        let firstIndexQuestion = currentQuestions[0].id - 1;
-        let lastIndex = countQuestionForStep[step] + currentQuestions[0].id - 1;
-        
-        let flag = 0;
+        // let firstIndexQuestion = currentQuestions ? currentQuestions[0] : 0;
+        // console.log("firstIndexQuestion", firstIndexQuestion);
+        // let lastIndex = QUESTIONS_FOR_STEP[step];
 
-        for (let i = firstIndexQuestion; i < lastIndex; i++) {
-            if (typeof answers[i] === "number") {
-                if (answers[i] !== -1) {
-                    flag++;
-                }
-            } else if (Array.isArray(answers[i])) {
-                let temp = answers[i] as Array<boolean>;
-                if (temp.indexOf(true) !== -1) {
-                    flag++;
-                }
-            }
-        }
-        setCanMoved(lastIndex - firstIndexQuestion === flag ? true : false);
+        // let flag = 0;
+
+        // for (let i = firstIndexQuestion; i < lastIndex; i++) {
+        //     if (typeof answers[i] === "number") {
+        //         if (answers[i] !== -1) {
+        //             flag++;
+        //         }
+        //     } else if (Array.isArray(answers[i])) {
+        //         let temp = answers[i] as Array<boolean>;
+        //         if (temp.indexOf(true) !== -1) {
+        //             flag++;
+        //         }
+        //     }
+        // }
+        // setCanMoved(lastIndex - firstIndexQuestion === flag ? true : false);
     };
 
-    const addAnotherAnswers = (idQuestion: number, answer: string) => {
-        anotherAnswers =
-            storeAnotherAnswers.length > 0
-                ? [...storeAnotherAnswers]
-                : anotherAnswers;
+    const addAnotherAnswers = (
+        question_id: UUID,
+        choice_id: UUID,
+        text: string
+    ) => {
+        answers =
+            storeChoiceAnswers.length > 0 ? [...storeChoiceAnswers] : answers;
 
-        anotherAnswers[idQuestion] = answer;
-        dispatch(updateAnotherAnswers(anotherAnswers));
+        let count_matches = 0;
+        answers.forEach((el) => {
+            if (typeof el.choice_id !== null && el.choice_id === choice_id) {
+                el.text = text;
+                count_matches++;
+            }
+        });
+        console.log("count_matches", count_matches);
+        if (count_matches === 0) answers.push({ question_id, choice_id, text });
+        console.log("answers", answers);
+        dispatch(updateChoiceAnswers(answers));
     };
 
     const changeStep = () => {
         if (canMoved) {
-            let firstIndex = countQuestionForStep
-                .slice(0, step + 1)
-                .reduce((sum, elem) => sum + elem, 0);
-            setStep((prev) =>  ++prev);
+            let firstIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
+                (sum, elem) => sum + elem,
+                0
+            );
+            setStep((prev) => ++prev);
 
-            if (step < allStep) {
-                setCurrentQuestions(
-                    question.slice(
-                        firstIndex,
-                        firstIndex + countQuestionForStep[step] + 1
-                    )
-                );
-                setCanMoved(false);
-            }
+            // if (step < ALL_STEP) {
+            //     setCurrentQuestions(
+            //         question.slice(
+            //             firstIndex,
+            //             firstIndex + QUESTIONS_FOR_STEP[step] + 1
+            //         )
+            //     );
+            //     setCanMoved(false);
+            // }
         }
     };
 
@@ -379,62 +423,66 @@ export default function SurveyPage() {
 
     return (
         <SurveyLayout>
-            { step <= allStep && (<div className={cnMain()}>
-                <div className={cnMain("title")}>
-                    Speech Up - один сервис для многих целей
-                </div>
-                <div className={cnMain("description")}>
-                    Пожалуйста, поделитесь своими ожиданиями по использованию
-                    сервиса. Это позволит предлагать вам персонализированные
-                    возможности среди обновлений.
-                </div>
-                <div className={cnMain("questions")}>
-                    {currentQuestions.map((el, id) => (
-                        <>
-                            {el.type === typeQuestion.checkbox && (
-                                <CheckboxQuestion
-                                    key={el.id}
-                                    question={el}
-                                    addAnswers={addAnswers}
-                                    addAnotherAnswers={addAnotherAnswers}
-                                />
-                            )}
-                            {el.type === typeQuestion.radio && (
-                                <RadioBtnQuestion
-                                    key={el.id}
-                                    question={el}
-                                    addAnswers={addAnswers}
-                                    addAnotherAnswers={addAnotherAnswers}
-                                />
-                            )}
-                        </>
-                    ))}
-                </div>
-                <div className={cnMain("footer")}>
-                    <div className={cnMain("footer-block-btn")}>
-                        <button
-                            disabled={!canMoved}
-                            onClick={changeStep}
-                            className={cnMain("btn", { disabled: !canMoved })}
-                        >
-                            {(step === allStep) && (<>Завершить</>)}
-                            {(step !== allStep) && (<>Далее</>)}
-                        </button>
+            {step <= ALL_STEP && (
+                <div className={cnMain()}>
+                    <div className={cnMain("title")}>
+                        Speech Up - один сервис для многих целей
                     </div>
+                    <div className={cnMain("description")}>
+                        Пожалуйста, поделитесь своими ожиданиями по
+                        использованию сервиса. Это позволит предлагать вам
+                        персонализированные возможности среди обновлений.
+                    </div>
+                    <div className={cnMain("questions")}>
+                        {currentQuestions &&
+                            currentQuestions.map((el, idx) => (
+                                <Fragment key={idx}>
+                                    {el.type === typeQuestion.checkbox && (
+                                        <CheckboxQuestion
+                                            key={el.id}
+                                            question={el}
+                                            addAnswers={addAnswers}
+                                            addAnotherAnswers={
+                                                addAnotherAnswers
+                                            }
+                                        />
+                                    )}
+                                    {el.type === typeQuestion.radio && (
+                                        <RadioBtnQuestion
+                                            key={el.id}
+                                            question={el}
+                                            addAnswers={addAnswers}
+                                        />
+                                    )}
+                                </Fragment>
+                            ))}
+                    </div>
+                    <div className={cnMain("footer")}>
+                        <div className={cnMain("footer-block-btn")}>
+                            <button
+                                disabled={!canMoved}
+                                onClick={changeStep}
+                                className={cnMain("btn", {
+                                    disabled: !canMoved,
+                                })}
+                            >
+                                {step === ALL_STEP && <>Завершить</>}
+                                {step !== ALL_STEP && <>Далее</>}
+                            </button>
+                        </div>
 
-                    <div>
-                        <b className={cnMain("footer-current-step")}>
-                            {step + 1}
-                        </b>{" "}
-                        <b className={cnMain("footer-all-step")}>
-                        / {allStep + 1}
-                        </b>
+                        <div>
+                            <b className={cnMain("footer-current-step")}>
+                                {step + 1}
+                            </b>{" "}
+                            <b className={cnMain("footer-all-step")}>
+                                / {ALL_STEP + 1}
+                            </b>
+                        </div>
                     </div>
                 </div>
-            </div>)} 
-            {step > allStep   && (
-                <TarifPage></TarifPage>
             )}
+            {step > ALL_STEP && <TarifPage></TarifPage>}
         </SurveyLayout>
     );
 }

@@ -22,8 +22,9 @@ type InputProps = DetailedHTMLProps<
 >;
 
 type Props = InputProps & {
+    className?: string;
     invalid?: boolean;
-    customRef?: LegacyRef<HTMLInputElement>;
+    customref?: LegacyRef<HTMLInputElement>;
 };
 
 export default function Input({ invalid = false, ...props }: Props) {
@@ -34,7 +35,7 @@ export default function Input({ invalid = false, ...props }: Props) {
         <div className={cnInput()}>
             <input
                 {...(props as InputProps)}
-                ref={props.customRef}
+                ref={props.customref}
                 type={
                     isPassword
                         ? showPassword
@@ -42,11 +43,11 @@ export default function Input({ invalid = false, ...props }: Props) {
                             : "password"
                         : props.type
                 }
-                className={cnInput("input", {
+                className={`${props.className} ${cnInput("input", {
                     password: isPassword,
                     invalid: invalid,
                     numeric: props.type === "number",
-                })}
+                })}` }
             />
             {isPassword && (
                 <ReactSVG
@@ -65,6 +66,6 @@ export default function Input({ invalid = false, ...props }: Props) {
 const ForwardedInputFunc: ForwardRefRenderFunction<HTMLInputElement, Props> = (
     props,
     ref
-) => <Input customRef={ref} {...props} />;
+) => <Input customref={ref} {...props} />;
 
 export const ForwardedInput = forwardRef(ForwardedInputFunc);

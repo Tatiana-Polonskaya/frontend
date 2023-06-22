@@ -1,27 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IAnswer } from "../../../models/survey";
 
-// Define a type for the slice state
-interface Answers {
-    choiceAnswers: Array<number | boolean[]>,
-    anotherAnswers: Array<string>,
-}
   
 // Define the initial state using that type
-const initialState: Answers = {
-    choiceAnswers: [],
-    anotherAnswers: [],
+const initialState: IAnswer = {
+    question_id: null,
+    choice_id: null,
+    text: ""
 }
   
 
 const surveySlice = createSlice({
     name: "survey",
-    initialState,
+    initialState:{answers: [initialState]},
     reducers: {
-        updateChoiceAnswers: (state, action: PayloadAction<Array<number | boolean[]>>) => {
-            state.choiceAnswers = action.payload;
-        },
-        updateAnotherAnswers: (state, action: PayloadAction<Array<string>>) => {
-            state.anotherAnswers = action.payload;
+        updateChoiceAnswers: (state, action: PayloadAction<Array<IAnswer>>) => {
+            state.answers = action.payload;
         },
         // decrement: (state) => {
         //     state.value -= 1
@@ -35,4 +29,4 @@ const surveySlice = createSlice({
 
 export default surveySlice.reducer;
 
-export const { updateChoiceAnswers, updateAnotherAnswers } = surveySlice.actions;
+export const { updateChoiceAnswers } = surveySlice.actions;

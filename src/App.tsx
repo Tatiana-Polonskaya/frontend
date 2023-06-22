@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import DiaryPage from "./pages/DiaryPage";
@@ -18,64 +18,93 @@ import RoutesEnum from "./models/routes";
 import TestPage from "./pages/TestPage";
 
 import SurveyPage from "./pages/SurveyPage";
-import Rep from "./components/Rep";
+import RepetitionStart from "./components/RepetitionComponents/RepetitionStart";
 import About from "./components/About";
+import RecodingSetup from "./components/RepetitionComponents/Setup";
+import RecodingPage from "./pages/RecodingPage";
 
 
 export default function App() {
     return (
         <div className="wrapper">
-            <Routes>
-                <Route path={RoutesEnum.LANDING} element={<LandingPage />} />
-                <Route element={<UnauthorizedRoute />}>
-                    <Route path={RoutesEnum.LOGIN} element={<LoginPage />} />
+                <Routes>
                     <Route
-                        path={RoutesEnum.REGISTER}
-                        element={<RegisterPage />}
+                        path={RoutesEnum.LANDING}
+                        element={<LandingPage />}
                     />
-                    <Route
-                        path={RoutesEnum.ACTIVATION}
-                        element={<ActivationPage />}
-                    />
-                    <Route
-                        path={RoutesEnum.RESTORE}
-                        element={<PasswordRestorePage />}
-                    />
-                </Route>
-
-                <Route
-                    element={
-                        // process.env.NODE_ENV === "production" ? (
-                        <AuthorizedRoute />
-                        // ) : (
-                        //     <Outlet />
-                        // )
-                    }
-                >
-                    <Route path={RoutesEnum.SURVEY} element={<SurveyPage />} />
-                    <Route path={RoutesEnum.ROOT} element={<HomePage />} />
-                    <Route path={RoutesEnum.HOME} element={<HomePage />} />
-                    <Route path={RoutesEnum.DIARY} element={<DiaryPage />} />
-                    <Route
-                        path={RoutesEnum.IMPROVISATION}
-                        element={<ImprovisationPage />}
-                    />
-                    <Route
-                        path={RoutesEnum.LEARNING}
-                        element={<LearningPage />}
-                    />
-                    <Route
-                        path={RoutesEnum.REPETITION}
-                        element={<RepetitionPage />}
-                    >
-                        <Route path="about" element={<About />} />
-                        <Route path="" element={<Rep />} />
+                    <Route element={<UnauthorizedRoute />}>
+                        <Route
+                            path={RoutesEnum.LOGIN}
+                            element={<LoginPage />}
+                        />
+                        <Route
+                            path={RoutesEnum.REGISTER}
+                            element={<RegisterPage />}
+                        />
+                        <Route
+                            path={RoutesEnum.ACTIVATION}
+                            element={<ActivationPage />}
+                        />
+                        <Route
+                            path={RoutesEnum.RESTORE}
+                            element={<PasswordRestorePage />}
+                        />
                     </Route>
+
                     <Route
-                        path={RoutesEnum.SETTINGS}
-                        element={<SettingsPage />}
-                    />
-                </Route>
+                        element={
+                            // process.env.NODE_ENV === "production" ? (
+                            <AuthorizedRoute />
+                            // ) : (
+                            //     <Outlet />
+                            // )
+                        }
+                    >
+                        <Route
+                            path={RoutesEnum.SURVEY}
+                            element={<SurveyPage />}
+                        />
+                        <Route path={RoutesEnum.ROOT} element={<HomePage />} />
+                        <Route path={RoutesEnum.HOME} element={<HomePage />} />
+                        <Route
+                            path={RoutesEnum.DIARY}
+                            element={<DiaryPage />}
+                        />
+                        <Route
+                            path={RoutesEnum.IMPROVISATION}
+                            element={<ImprovisationPage />}
+                        />
+                        <Route
+                            path={RoutesEnum.LEARNING}
+                            element={<LearningPage />}
+                        />   
+
+                        <Route
+                            path={RoutesEnum.RECODING}
+                            element={<RecodingPage />}
+                        />
+
+                        <Route
+                            path={RoutesEnum.REPETITION}
+                            element={<RepetitionPage />}
+                        >
+                            <Route index={true} element={<RepetitionStart />} />
+                            <Route
+                                index={false}
+                                path="about"
+                                element={<About />}
+                            />
+                            <Route
+                                index={false}
+                                path="setup"
+                                element={<RecodingSetup />}
+                            /> 
+                        </Route>
+                        <Route
+                            path={RoutesEnum.SETTINGS}
+                            element={<SettingsPage />}
+                        />
+                    </Route>
 
                 <Route
                     path={RoutesEnum.ALL}
