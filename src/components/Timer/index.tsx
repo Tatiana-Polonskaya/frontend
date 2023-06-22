@@ -8,6 +8,7 @@ type Props = {
     seconds: number;
     isStart: boolean;
     setIsStart:Function;
+    timerOver:Function;
 };
 
 export default function Timer(props: Props) {
@@ -32,7 +33,7 @@ export default function Timer(props: Props) {
                     if (seconds === 0) {
                         if (minutes === 0) {
                             clearInterval(myInterval);
-                            updateStatus(TIMER_STATUS.STOP);
+                            props.timerOver();
                         } else {
                             setMinutes(minutes - 1);
                             setSeconds(59);

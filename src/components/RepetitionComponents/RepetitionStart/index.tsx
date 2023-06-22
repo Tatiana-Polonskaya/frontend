@@ -1,6 +1,3 @@
-import { cn } from "@bem-react/classname";
-import "./style.scss";
-
 import {
     Dispatch,
     SetStateAction,
@@ -8,21 +5,20 @@ import {
     useEffect,
     useState,
 } from "react";
-import { ReactSVG } from "react-svg";
-
-import downloand_btn from "./img/download_btn.svg";
-import online_btn from "./img/online_btn.svg";
 
 import { Link } from "react-router-dom";
+
 import ModalWindow from "../../ModalWindow/ModalWindow";
-
 import Upload from "../../Upload";
-
 import PreviewBlock from "../../PreviewBlock";
-import {
-    useGetVideoByIdQuery,
-    useLazyGetVideoByIdQuery,
-} from "../../../store/api/userVideo";
+
+import { cn } from "@bem-react/classname";
+import "./style.scss";
+
+import { ReactSVG } from "react-svg";
+import downloand_btn from "./img/download_btn.svg";
+import online_btn from "./img/online_btn.svg";
+import notice_btn from "../Setup/icons/note_icon.svg";
 
 export const VideoUploadContext = createContext({
     currentFile: new File([], "empty"),
@@ -57,9 +53,9 @@ export default function RepetitionStart() {
 
     return (
         <div className={cnRepetitionStart()}>
-            {/* <video src={`api/video/feb81d20-2bb0-4622-b41a-3c6d50c6b3f8.mp4`} controls></video> */}
             <div className={cnRepetitionStart("text")}>
                 <div className={cnRepetitionStart("text-dark-blue")}>
+                    <ReactSVG src={notice_btn} />
                     Подготовка к репетиции
                 </div>
                 <div className={cnRepetitionStart("text-black")}>

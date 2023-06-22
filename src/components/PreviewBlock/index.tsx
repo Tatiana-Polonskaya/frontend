@@ -1,8 +1,17 @@
 import { cn } from "@bem-react/classname";
 import "./style.scss";
-import rerecordIcon from "./rerecoding.svg";
+import rerecordIcon from "./icon/rerecoding.svg";
+import videoRemoveIcon from "./icon/video-remove.svg";
 
-import { LegacyRef, ReactNode, RefObject, useContext, useEffect, useRef, useState } from "react";
+import {
+    LegacyRef,
+    ReactNode,
+    RefObject,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 
 import { ForwardedInput } from "../ui-kit/Input";
 import Button from "../ui-kit/Button";
@@ -22,9 +31,32 @@ type IPreviewBlock = {
     titleHelpForInput?: string;
     onClickRerecordBtn: Function;
 };
-type propFuncSize ={
-    titleSize: string,
-    titleNameSize: string,
+type propFuncSize = {
+    titleSize: string;
+    titleNameSize: string;
+};
+
+const NORM_COUNT_MINUTES = 15;
+
+function getPrettyDuration(seconds: number): number {
+    return Math.ceil(seconds / 60);
+}
+
+// get number of bytes, return Кб or МБ or ГБ
+function getPrettySizeFile(size: number, decimals = 2): string {
+    if (size === 0) {
+        return "0";
+    } else {
+        const info_for_step = 1024;
+        var dm = decimals < 0 ? 0 : decimals;
+        var sizes = ["байт", "КБ", "МБ", "ГБ", "ТБ"];
+        var i = Math.floor(Math.log(size) / Math.log(info_for_step));
+        return (
+            parseFloat((size / Math.pow(info_for_step, i)).toFixed(dm)) +
+            " " +
+            sizes[i]
+        );
+    }
 }
 
 export default function PreviewBlock({
@@ -36,13 +68,18 @@ export default function PreviewBlock({
     const cnPreview = cn("cnPreview");
     const navigate = useNavigate();
 
+    //for content modal
+    const [isSendVideo, setIsSendVideo] = useState(false);
+
     // for input
     const [isFileNameValid, setFilenamevalid] = useState(true);
     const [fileName, setFileName] = useState("");
 
     // get videofile from content
     const { currentFile, setCurrentFile } = useContext(VideoUploadContext);
-
+    const [durationVideo, setDurationVideo] = useState(0);
+    const [sizeVideo, setSizeVideo] = useState(0);
+    const [canMoved, setCanMoved] = useState(false);
 
     //  for sending video to server
     const [videoSendRequest, videoSendResponse] = useSendVideoMutation();
@@ -53,7 +90,7 @@ export default function PreviewBlock({
     const mimeCodec = "video/mp4";
 
     function sourceOpen() {
-        console.log(mediaSource.readyState); // open
+        // console.log(mediaSource.readyState); // open
         const sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
 
         const getBuff = async () => {
@@ -62,20 +99,14 @@ export default function PreviewBlock({
 
             sourceBuffer.addEventListener("updateend", () => {
                 mediaSource.endOfStream();
-                videoRef.current ?.play();
-                console.log(mediaSource.readyState); // ended
+                // console.log(mediaSource.readyState); // ended
             });
         };
         getBuff();
     }
 
     useEffect(() => {
-        if (
-            "MediaSource" in window &&
-            videoRef.current
-        ) {
-            console.log(mediaSource.readyState); // closed
-            
+        if ("MediaSource" in window && videoRef.current) {
             try {
                 videoRef.current.srcObject = mediaSource;
                 // console.log(videoRef.current)
@@ -87,58 +118,47 @@ export default function PreviewBlock({
         } else {
             // console.error("Unsupported MIME type or codec: ", mimeCodec);
         }
-
-        
     }, [videoRef.current]);
 
-    // mediaSource.addEventListener("sourceopen", () => {
-    //     // Await sourceopen on MediaSource before creating SourceBuffers
-    //     // and populating them with fetched media — MediaSource won't
-    //     // accept creation of SourceBuffers until it is attached to the
-    //     // HTMLMediaElement and its readyState is "open"
-    //     const getSourceBuffers = async () => {
-    //         const vidBuff = await currentFile.arrayBuffer();
-    //         const sourceBuffer: SourceBuffer = await new Promise(
-    //             (resolve, reject) => {
-    //                 const getSourceBuffer = () => {
-    //                     try {
-    //                         const sourceBuffer =
-    //                             mediaSource.addSourceBuffer(mimeCodec);
+    const getDurationVideo = (n: number) => {
+        
+        if (!n) return;
+        console.log(n)
+        if (n === 0 && (currentFile.size === 0)) return;
+        if(n === Infinity) setDurationVideo(0);
+        else setDurationVideo(n);
+        const normDuration = getPrettyDuration(durationVideo);
+        if (normDuration < NORM_COUNT_MINUTES) setCanMoved(true);
+    };
 
-    //                         resolve(sourceBuffer);
-    //                     } catch (e) {
-    //                         reject(e);
-    //                     }
-    //                 };
-    //                 getSourceBuffer();
-    //             }
-    //         );
-    //         sourceBuffer.appendBuffer(vidBuff);
-    //         sourceBuffer.onupdateend = () => {
-    //             // Nothing else to load
-    //             mediaSource.endOfStream();
-    //         };
-    //     };
-    //     getSourceBuffers();
-    // });
+    useEffect(() => {
+        if (currentFile && currentFile.size > 0) setSizeVideo(currentFile.size);
+    }, [currentFile]);
 
     const clickUpload = async () => {
-        await videoSendRequest({
-            title: fileName,
-            duration: "string",
-            description: "string",
-            file: currentFile,
-        });
-        navigate(RoutesEnum.DIARY);
+        if (canMoved) {
+            setIsSendVideo(true);
+            await videoSendRequest({
+                title: fileName,
+                duration: durationVideo + "",
+                description: "",
+                file: currentFile,
+            });
+            navigate(RoutesEnum.DIARY)
+        }
     };
+
+    useEffect(() => {
+        console.log(isLoading);
+    }, [isLoading]);
 
     // answers from back
     useEffect(() => {
         if (isSuccess) {
             const data = videoSendResponse.data;
             if (data.success) {
-                console.log(data);
-                setCurrentFile(new File([], "empty"));
+                // console.log(data);
+                setCurrentFile(new File([], "empty")); //
             } else {
                 alert(data.error?.msg);
             }
@@ -159,18 +179,14 @@ export default function PreviewBlock({
                 <div className={cnPreview("col")}>
                     <div className={cnPreview("video-block")}>
                         <ReactPlayer
-                            width={'100%'} 
-                            height='100%'
+                            width={"100%"}
+                            height="100%"
                             ref={videoRef}
-                            url={ URL.createObjectURL(currentFile)}
+                            url={URL.createObjectURL(currentFile)}
                             muted={true}
                             controls={true}
+                            onDuration={getDurationVideo}
                         />
-                        {/* <video id="myVideo" 
-                            controls
-                        />
-                        <video src={URL.createObjectURL(currentFile)} /> */}
-
                     </div>
                 </div>
 
@@ -180,7 +196,9 @@ export default function PreviewBlock({
                             {currentFile.name}
                         </span>
                         <span className={cnPreview("title-characters")}>
-                            {/* продолжительность и размер файла */}
+                            {sizeVideo && getPrettySizeFile(sizeVideo)} •{" "}
+                            {durationVideo && getPrettyDuration(durationVideo)}{" "}
+                            минут
                         </span>
                     </div>
                     <div className={cnPreview("input-block")}>
@@ -217,7 +235,24 @@ export default function PreviewBlock({
                     </div>
                 </div>
             </div>
-
+            {!canMoved && (
+                <div className={cnPreview("error")}>
+                    <div className={cnPreview("row")}>
+                        <div className={cnPreview("error-icon")}>
+                            <ReactSVG src={videoRemoveIcon} />
+                        </div>
+                        <div className={cnPreview("col")}>
+                            <span className={cnPreview("error-text-red")}>
+                                Ой, кажется, это видео слишком длинное!
+                            </span>
+                            <span className={cnPreview("error-text")}>
+                                Мы можем проанализировать ваше видео, только
+                                если его длительность не превышает 15 минут.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            )}
             <div className={cnPreview("row")}>
                 <div className={cnPreview("col")}>
                     <div className={cnPreview("btn")}>
@@ -235,7 +270,9 @@ export default function PreviewBlock({
                 <div className={cnPreview("col")}>
                     <div className={cnPreview("btn")}>
                         <Button
-                            className={cnPreview("btn-blue")}
+                            className={cnPreview("btn-blue", {
+                                error: !canMoved,
+                            })}
                             onClick={clickUpload}
                         >
                             {titleContinueBtn}

@@ -85,12 +85,19 @@
             justify-content: center;
             background: #F3F5F9;
             border: 3px dashed #D0D8E8;
+            
             border-radius: 28px;
+
+            &_drag-active {
+                background-color: #ffffff;
+            }
+
+            &_wrong{
+                border-color: #FF4E78;
+            }
         }
 
-        &_drag-active {
-            background-color: #ffffff;
-        }
+
 
         &-text-upload{
             font-family: 'Onest';
@@ -99,6 +106,15 @@
             font-size: 20px;
             line-height: 26px;
             color: #4B5F8A;
+
+            &-wrong{
+                font-family: 'Onest';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 26px;
+                color: #FF4E78;
+            }
         }
 
         &-upload-button {

@@ -27,6 +27,8 @@ export const TIMER_STATUS = {
     STOP: false,
 };
 
+const LIMIT_TIMER = 15;
+
 export default function RecodingPage() {
     const navigate = useNavigate();
     const cnRecoding = cn("RecodingPage");
@@ -38,14 +40,12 @@ export default function RecodingPage() {
     const isShowBasicPlan =
         basicPlan && basicPlan.length > 0 && basicPlan[0] !== "" ? true : false;
     const [isTimerStart, setIsTimerStart] = useState(false);
+
     const updateIsTimerStart = (value: boolean) => {
         setIsTimerStart(value);
     };
 
     // modal params
-
-    const cnModalTitle = cn("ModalTitle");
-
     const [isModal, setModal] = useState(false);
     const [currentFile, setCurrentFile] = useState<File>(new File([], "empty"));
 
@@ -62,14 +62,15 @@ export default function RecodingPage() {
     const [recordedChunks, setRecordedChunks] = useState([]);
 
     const handleDataAvailable = useCallback(
-        ({ data }:any) => {
+        ({ data }: any) => {
             console.log("handleDataAvailable", data);
             if (data.size > 0) {
                 console.log("size", data.size);
                 setRecordedChunks((prev) => prev.concat(data));
             }
         },
-        [setRecordedChunks]);
+        [setRecordedChunks]
+    );
 
     const handleStartCaptureClick = useCallback(() => {
         updateIsTimerStart(TIMER_STATUS.START);
@@ -77,7 +78,7 @@ export default function RecodingPage() {
         mediaRecorderRef.current = new MediaRecorder(
             webcamRef?.current?.stream as MediaStream,
             {
-                mimeType: "video/mp4",
+                mimeType: "video/webm",
             }
         );
         mediaRecorderRef.current.addEventListener(
@@ -93,21 +94,20 @@ export default function RecodingPage() {
         setCapturing(false);
     }, [mediaRecorderRef, setCapturing]);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (recordedChunks.length > 0) {
-            const file = new File(recordedChunks, "filename", {
-                type: "video/mp4",
+            const file = new Blob(recordedChunks, {
+                type: "video/webm",
             });
-            setCurrentFile(file);
+            setCurrentFile(new File([file], "Recoding Repetition"));
             setRecordedChunks([]);
         }
-    },[recordedChunks])
+    }, [recordedChunks]);
 
     useLayoutEffect(() => {
         if (currentFile.size !== 0) {
             setModal(true);
-        }
-        else{
+        } else {
             setModal(false);
         }
     }, [currentFile]);
@@ -167,17 +167,19 @@ export default function RecodingPage() {
                                 </>
                             )}
                         </div>
-
-                        {isTimer && (
-                            <div className={cnRecoding("right-block")}>
-                                <Timer
-                                    minutes={15}
-                                    seconds={0}
-                                    isStart={isTimerStart}
-                                    setIsStart={updateIsTimerStart}
-                                />
-                            </div>
-                        )}
+                        <div
+                            className={cnRecoding("right-block", {
+                                "hidden": !isTimer,
+                            })}
+                        >
+                            <Timer
+                                minutes={LIMIT_TIMER}
+                                seconds={0}
+                                isStart={isTimerStart}
+                                setIsStart={updateIsTimerStart}
+                                timerOver={handleStopCaptureClick}
+                            />
+                        </div>
 
                         {isShowBasicPlan && (
                             <div className={cnRecoding("bottom-block")}>
@@ -201,7 +203,7 @@ export default function RecodingPage() {
                                     titleHelpForInput={
                                         "Задайте название репетиции"
                                     }
-                                    onClickRerecordBtn={()=>{}}
+                                    onClickRerecordBtn={closeModal}
                                 />
                             )}
                         </VideoUploadContext.Provider>

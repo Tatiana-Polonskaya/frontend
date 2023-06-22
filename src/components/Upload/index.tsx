@@ -11,13 +11,21 @@ import {
 import { VideoUploadContext } from "../RepetitionComponents/RepetitionStart";
 
 export default function Upload() {
+
     const cnUpload = cn("cnUpload");
     const [dragActive, setDragActive] = useState(false);
     const [videoFile, setVideoFile] = useState<File>();
+    const [IsValid, setIsValid] = useState(true);
+
+    const { currentFile, setCurrentFile } = useContext(VideoUploadContext);
+
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleFile = (file: any) => {
-        setVideoFile(file);
-        console.log("Upload: videoFile ok", videoFile, file);
+        if(file.type === "video/mp4") setVideoFile(file);
+        else{
+            setIsValid(false);
+        }
     };
 
     // handle drag events
@@ -53,10 +61,6 @@ export default function Upload() {
         if (videoFile) setCurrentFile(videoFile);
     }, [videoFile]);
 
-    const { currentFile, setCurrentFile } = useContext(VideoUploadContext);
-
-    const inputRef = useRef<HTMLInputElement>(null);
-
     const onButtonClick = () => {
         inputRef.current?.click();
     };
@@ -85,10 +89,12 @@ export default function Upload() {
                         className={cnUpload("dropdown-input-file-upload")}
                         accept="video/mp4"
                         onChange={handleChange}
+                        
                     />
                     <label
                         className={cnUpload("dropdown-label-file-upload", {
                             "drag-active": dragActive,
+                            "wrong":!IsValid,
                         })}
                         id="label-file-upload"
                         htmlFor="input-file-upload"
@@ -105,6 +111,8 @@ export default function Upload() {
                                     загрузите файл
                                 </span>
                             </p>
+                            {!IsValid && (<span className={cnUpload("dropdown-text-upload-wrong")}>Выберите файл c расширением mp4</span>)}
+                            
                         </div>
                     </label>
                     {dragActive && (
