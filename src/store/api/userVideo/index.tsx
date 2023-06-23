@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 import { IResponse } from "../../../models/api";
-import { IVideoApiReq, IVideoUser } from "../../../models/video";
+import { IVideoApiReq, IVideoInfo, IVideoUploadItem, IVideoUser } from "../../../models/video";
 import customFetchBase from "../utils/customFetchBase";
 import { UUID } from "crypto";
 
@@ -24,10 +24,10 @@ export const videoApi = createApi({
                 };
             },
         }),
-        getVideoById: build.query<Response, string>({
+        getVideoById: build.query<IResponse<void>, string>({
             query: (videoId) => {
                 return {
-                    url: `api/video/${videoId}.mp4`,
+                    url: `api/video/${videoId}`,
                     method: "GET",
                 };
             },
@@ -40,10 +40,37 @@ export const videoApi = createApi({
                 };
             },
         }),
+        getVideoInfoById: build.query<IResponse<IVideoInfo>, string>({
+            query: (id) => {
+                return {
+                    url: `/api/video/`,
+                    params: { id },
+                    method: "GET",
+                };
+            },
+        }),
+        updateVideoInfoById: build.mutation<IResponse<void>, IVideoUploadItem>({
+            query: ({id,title, description}) => {
+                return {
+                    url: `api/video/`,
+                    params: {id,title, description},
+                    method: "PUT",
+                };
+            },
+        }),
+        deleteVideoById: build.mutation<IResponse<void>, string>({
+            query: (id) => {
+                return {
+                    url: `api/video/`,
+                    params: { id },
+                    method: "DELETE",
+                };
+            },
+        }),
     }),
 });
 
-export const { useSendVideoMutation, useGetVideoByIdQuery, useLazyGetVideoByIdQuery, useGetVideoByUserQuery } =
+export const { useSendVideoMutation, useGetVideoByIdQuery, useLazyGetVideoByIdQuery, useGetVideoByUserQuery, useGetVideoInfoByIdQuery, useUpdateVideoInfoByIdMutation, useDeleteVideoByIdMutation  } =
     videoApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = videoApi;
