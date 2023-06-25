@@ -1,28 +1,42 @@
-import { Fragment } from "react";
+// import { Fragment } from "react";
+// import ReactPlayer from "react-player";
 import MainLayout from "../../layouts/MainLayout";
 import { IVideoFromBack } from "../../models/video";
 
 import {
-    useGetVideoByIdQuery,
+    // useGetVideoByIdQuery,
     useGetVideoByUserQuery,
 } from "../../store/api/userVideo";
-import ReactPlayer from "react-player";
 import ArchiveVideo from "../../components/Archive/ArchiveVideo";
+import ArchiveSearch from "../../components/Archive/ArchiveSearch";
+import { useEffect, useState } from "react";
 
 export default function DiaryPage() {
     const { data } = useGetVideoByUserQuery();
     const userVideos = data?.data?.videos as IVideoFromBack[];
 
+    const [currentUserVideo, setCurrentUserVideo] = useState(userVideos);
+
+    const [searchVideo, setSearchVideo] = useState("");
+    const updateSearch = (value: string) => {
+        setSearchVideo(value);
+    };
+
+    let result = currentUserVideo;
+    if (userVideos && searchVideo !== "") {
+        // сделать частичное совпадение
+        result = userVideos.filter((el) => el.title === searchVideo);
+    }
+
+    // useEffect(() => {
+    //     setCurrentUserVideo(result);
+    // }, searchVideo);
+
     return (
         <MainLayout>
-            {/* {userVideos &&
-                userVideos.map((el) => (
-                    <Fragment key={el.id}>
-                        <ReactPlayer url={`api/video/${el.id}`} />
-                    </Fragment>
-                ))} */}
-            {/* <ArchiveVideo video={data?.data?.videos[0]} /> */}
-            <ArchiveVideo />
+            <ArchiveSearch updateSearch={updateSearch} />
+
+            {userVideos && <ArchiveVideo video={result} />}
         </MainLayout>
     );
 }

@@ -10,41 +10,86 @@ import More from "./icon/more.svg";
 import { ReactSVG } from "react-svg";
 import ArchivePopup from "../ArchivePopup";
 
+import { convertTime, convertDate } from "../helpers";
+
 type Props = {
-    video?: IVideoFromBack | undefined;
+    video: IVideoFromBack[];
 };
 
 export default function ArchiveVideo({ video }: Props) {
     const cnArchiveVideo = cn("archive-video");
 
-    const [popupState, setPopupState] = useState("d-n");
+    let [popupState, setPopupState] = useState("d-n");
 
     const changePopup = () => {
-        popupState !== "d-n" ? setPopupState("d-n") : setPopupState("");
+        popupState === "d-n" ? setPopupState("") : setPopupState("d-n");
     };
 
-    return (
-        <div className={cnArchiveVideo()}>
-            <div className={cnArchiveVideo("el")}>
-                {/* <Fragment key={video!.id}>
-                    <ReactPlayer url={`api/video/${video!.id}`} />
-                </Fragment> */}
-            </div>
-            <DescriptionArchiveVideo
-                title={"Название видео"}
-                time={"3:56"}
-                date={"02.04.2023"}
-            />
-            <div className={cnArchiveVideo("panel")}>
-                <VideoProgressPanel
-                    result={[10, 20, 30, 40, 50, 60]}
-                    type={"small"}
-                />
-                <div className={cnArchiveVideo("panel-more")}>
-                    <ReactSVG src={More} onClick={changePopup} />
-                    <ArchivePopup state={popupState} />
+    return video.length !== 0 ? (
+        <>
+            {video.map((el, ind) => (
+                <div key={ind} className={cnArchiveVideo()}>
+                    <div className={cnArchiveVideo("el")}>
+                        <Fragment key={el.id}>
+                            <ReactPlayer
+                                url={`api/video/${el.id}`}
+                                width={"100%"}
+                                height={"100%"}
+                            />
+                        </Fragment>
+                    </div>
+                    <DescriptionArchiveVideo
+                        title={`${el.title}`}
+                        time={convertTime(el.duration)}
+                        date={convertDate(el.upload_date)}
+                    />
+                    <div className={cnArchiveVideo("panel")}>
+                        <VideoProgressPanel
+                            result={[10, 20, 30, 40, 50, 60]}
+                            type={"small"}
+                        />
+                        <div className={cnArchiveVideo("panel-more")}>
+                            <ReactSVG src={More} onClick={changePopup} />
+                            <ArchivePopup state={popupState} />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            ))}
+        </>
+    ) : (
+        <>{"Упс, что-то пошло не по плану"}</>
     );
+    // <>
+    //     {video.map((el, ind) => (
+    //         <div key={ind} className={cnArchiveVideo()}>
+    //             <div className={cnArchiveVideo("el")}>
+    //                 <Fragment key={el.id}>
+    //                     <ReactPlayer
+    //                         url={`api/video/${el.id}`}
+    //                         width={"100%"}
+    //                         height={"100%"}
+    //                     />
+    //                 </Fragment>
+    //             </div>
+    //             <DescriptionArchiveVideo
+    //                 title={`${el.title}`}
+    //                 time={convertTime(el.duration)}
+    //                 date={convertDate(el.upload_date)}
+    //             />
+    //             <div className={cnArchiveVideo("panel")}>
+    //                 <VideoProgressPanel
+    //                     result={[10, 20, 30, 40, 50, 60]}
+    //                     type={"small"}
+    //                 />
+    //                 <div className={cnArchiveVideo("panel-more")}>
+    //                     <ReactSVG src={More} onClick={changePopup} />
+    //                     <ArchivePopup state={popupState} />
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     ))}
+    // </>
 }
+// function seUpdateVideoInfoByIdMutation(arg0: string): { data: any } {
+//     throw new Error("Function not implemented.");
+// }
