@@ -7,25 +7,22 @@ import {
     useGetVideoByUserQuery,
 } from "../../store/api/userVideo";
 import ReactPlayer from "react-player";
-import VideoProgressPanel from "../../components/VideoProgressPanel";
+import ArchiveVideo from "../../components/Archive/ArchiveVideo";
 
 export default function DiaryPage() {
     const { data } = useGetVideoByUserQuery();
     const userVideos = data?.data?.videos as IVideoFromBack[];
-    // console.log(userVideos);
 
     return (
         <MainLayout>
-            {userVideos &&
+            {/* {userVideos &&
                 userVideos.map((el) => (
                     <Fragment key={el.id}>
                         <ReactPlayer url={`api/video/${el.id}`} />
                     </Fragment>
-                ))}
-            <VideoProgressPanel
-                result={[10, 20, 30, 40, 50, 60]}
-                type={"small"}
-            />
+                ))} */}
+            {/* <ArchiveVideo video={data?.data?.videos[0]} /> */}
+            <ArchiveVideo />
         </MainLayout>
     );
 }

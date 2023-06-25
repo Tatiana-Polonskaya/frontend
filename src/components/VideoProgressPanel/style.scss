@@ -25,11 +25,13 @@
     --g: 1em;
     --w: 1248px;
 
+    padding-top: 8px;
+
     &-analyze-row {
         // width: 100%;
         width: var(--w);
-        margin-right: 32px;
-        padding-top: 20px;
+        padding-top: 19.5px;
+
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         gap: var(--g);

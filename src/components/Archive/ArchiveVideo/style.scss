@@ -1,0 +1,22 @@
+.archive-video {
+    display: flex;
+    gap: 8px;
+    border-radius: 16px;
+    background: #fff;
+    padding-right: 12px;
+
+    &-el {
+        height: 149px;
+        width: 260px;
+        background-color: rgb(222, 222, 228);
+        border-radius: 12px;
+    }
+    &-panel {
+        display: flex;
+        gap: 8px;
+
+        &-more {
+            position: relative;
+        }
+    }
+}
