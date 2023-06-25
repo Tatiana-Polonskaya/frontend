@@ -44,7 +44,7 @@ export default function VideoProgressPanel({ result, type = "big" }: Props) {
             }
         >
             {analyzeItem.criteria.map((item, ind) => (
-                <div key={1} className={cnVideoPanel("analyze-row-item")}>
+                <div key={ind} className={cnVideoPanel("analyze-row-item")}>
                     <div
                         className="pie animate"
                         style={

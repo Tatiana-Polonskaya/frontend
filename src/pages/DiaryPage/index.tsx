@@ -24,7 +24,7 @@ export default function DiaryPage() {
 
     let result = currentUserVideo;
     if (userVideos && searchVideo !== "") {
-        // сделать частичное совпадение
+        // сделать частичное совпадение динамичным
         result = userVideos.filter(
             (el) => el.title.indexOf(searchVideo) !== -1
         );

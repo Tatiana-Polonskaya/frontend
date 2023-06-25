@@ -19,10 +19,15 @@ type Props = {
 export default function ArchiveVideo({ video }: Props) {
     const cnArchiveVideo = cn("archive-video");
 
-    let [popupState, setPopupState] = useState("d-n");
+    let [openPopup, setOpenPopup] = useState<number[]>([]);
 
-    const changePopup = () => {
-        popupState === "d-n" ? setPopupState("") : setPopupState("d-n");
+    const changePopup = (ind: number) => {
+        let copy: number[] = Object.assign([], openPopup);
+        !openPopup.includes(ind)
+            ? copy.push(ind)
+            : copy.splice(copy.indexOf(ind), 1);
+
+        setOpenPopup([...copy]);
     };
 
     return video.length !== 0 ? (
@@ -49,8 +54,13 @@ export default function ArchiveVideo({ video }: Props) {
                             type={"small"}
                         />
                         <div className={cnArchiveVideo("panel-more")}>
-                            <ReactSVG src={More} onClick={changePopup} />
-                            <ArchivePopup state={popupState} />
+                            <ReactSVG
+                                src={More}
+                                onClick={() => changePopup(ind)}
+                            />
+                            <ArchivePopup
+                                state={openPopup.includes(ind) ? "" : "d-n"}
+                            />
                         </div>
                     </div>
                 </div>
