@@ -1,16 +1,19 @@
 import { cn } from "@bem-react/classname";
+import { Fragment, useState } from "react";
+import { ReactSVG } from "react-svg";
+import ReactPlayer from "react-player";
+import { IVideoFromBack } from "../../../models/video";
 import "./style.scss";
 import VideoProgressPanel from "../../VideoProgressPanel";
 import DescriptionArchiveVideo from "../DescriptionVideo";
-import { IVideoFromBack } from "../../../models/video";
-import { Fragment, useState } from "react";
-import ReactPlayer from "react-player";
-
-import More from "./icon/more.svg";
-import { ReactSVG } from "react-svg";
 import ArchivePopup from "../ArchivePopup";
 
+import More from "./icon/more.svg";
+import Participation from "./icon/archive-participation.svg";
+import Tick from "./icon/archive-tick.svg";
+
 import { convertTime, convertDate } from "../helpers";
+import { useDeleteVideoByIdMutation } from "../../../store/api/userVideo";
 
 type Props = {
     video: IVideoFromBack[];
@@ -21,6 +24,10 @@ export default function ArchiveVideo({ video }: Props) {
 
     let [openPopup, setOpenPopup] = useState<number[]>([]);
 
+    let [deleteArchiveVideo, setdeleteArchiveVideo] = useState<number>();
+
+    let [tickedVideo, setTickedVideo] = useState<number[]>([]);
+
     const changePopup = (ind: number) => {
         let copy: number[] = Object.assign([], openPopup);
         !openPopup.includes(ind)
@@ -30,11 +37,35 @@ export default function ArchiveVideo({ video }: Props) {
         setOpenPopup([...copy]);
     };
 
+    const GetDeleteArchiveVideo = (id: number) => {
+        setdeleteArchiveVideo(id);
+        console.log(video[id].id);
+        // useDeleteVideoByIdMutation(`${video[id].id}`);
+    };
+
+    // поменять, от обратного
+    const changeTickVideo = (ind: number) => {
+        let copy: number[] = Object.assign([], openPopup);
+        !tickedVideo.includes(ind)
+            ? copy.push(ind)
+            : copy.splice(copy.indexOf(ind), 1);
+
+        setTickedVideo([...copy]);
+        console.log(tickedVideo);
+    };
+
     return video.length !== 0 ? (
         <>
             {video.map((el, ind) => (
                 <div key={ind} className={cnArchiveVideo()}>
                     <div className={cnArchiveVideo("el")}>
+                        <ReactSVG
+                            src={
+                                !tickedVideo.includes(ind)
+                                    ? Tick
+                                    : Participation
+                            }
+                        />
                         <Fragment key={el.id}>
                             <ReactPlayer
                                 url={`api/video/${el.id}`}
@@ -59,6 +90,9 @@ export default function ArchiveVideo({ video }: Props) {
                                 onClick={() => changePopup(ind)}
                             />
                             <ArchivePopup
+                                id={ind}
+                                getDeleteArchiveVideo={GetDeleteArchiveVideo}
+                                changeTickVideo={changeTickVideo}
                                 state={openPopup.includes(ind) ? "" : "d-n"}
                             />
                         </div>

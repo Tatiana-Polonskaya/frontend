@@ -6,9 +6,20 @@ import { ReactSVG } from "react-svg";
 import DeleteIcon from "./icon/trash.svg";
 import ChooseIcon from "./icon/archive-add.svg";
 
-type Props = { state: string };
+type Props = {
+    id: number;
+    changeTickVideo: any;
+    getDeleteArchiveVideo: any;
+    state: string;
+};
 
-export default function ArchivePopup({ state }: Props) {
+export default function ArchivePopup({
+    id,
+    changeTickVideo,
+
+    getDeleteArchiveVideo,
+    state,
+}: Props) {
     const cnArchivePopup = cn("archive-popup");
 
     const valuesPopup = [
@@ -24,10 +35,23 @@ export default function ArchivePopup({ state }: Props) {
         },
     ];
 
+    const getIdVideo = (id: number) => {
+        getDeleteArchiveVideo(id);
+    };
+
+    const getTick = (id: number) => {
+        changeTickVideo(id);
+    };
+
     return (
-        <div className={cnArchivePopup("", cnArchivePopup(state))}>
+        // разделить  методы
+        <div key={id} className={cnArchivePopup("", cnArchivePopup(state))}>
             {valuesPopup.map((el, index) => (
-                <div key={index} className={cnArchivePopup("item")}>
+                <div
+                    key={index}
+                    className={cnArchivePopup("item")}
+                    onClick={() => (index === 0 ? getTick(id) : getIdVideo(id))}
+                >
                     <ReactSVG
                         className={cnArchivePopup("icon")}
                         src={el.icon}
