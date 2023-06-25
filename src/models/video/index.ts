@@ -23,3 +23,21 @@ export interface IVideoFromBack {
     channel_title: string,
     file_path: string
 }
+
+export interface IVideoInfo {
+    title: string,
+    duration: string,
+    description: string,
+    id: UUID,
+    user_id: UUID,
+    channel_title: string,
+    upload_date: string,
+    file_name: string,
+    file_path: string
+}
+
+export interface IVideoUploadItem {
+    id: string,
+    title: string,
+    description: string
+}
