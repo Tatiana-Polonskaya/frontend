@@ -1,5 +1,5 @@
 import { cn } from "@bem-react/classname";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import ReactPlayer from "react-player";
 import { IVideoFromBack } from "../../../models/video";
@@ -13,7 +13,11 @@ import Participation from "./icon/archive-participation.svg";
 import Tick from "./icon/archive-tick.svg";
 
 import { convertTime, convertDate } from "../helpers";
-import { useDeleteVideoByIdMutation } from "../../../store/api/userVideo";
+import {
+    useDeleteVideoByIdMutation,
+    useGetVideoByIdQuery,
+    useGetVideoInfoByIdQuery,
+} from "../../../store/api/userVideo";
 
 type Props = {
     video: IVideoFromBack[];
@@ -39,8 +43,17 @@ export default function ArchiveVideo({ video }: Props) {
 
     const GetDeleteArchiveVideo = (id: number) => {
         setdeleteArchiveVideo(id);
-        console.log(video[id].id);
-        // useDeleteVideoByIdMutation(`${video[id].id}`);
+        // console.log(video[id]);
+        // console.log(video[id].id);
+        const { data } = useGetVideoInfoByIdQuery(video[id].id);
+        console.log(data);
+        // const [deleteVideo, results] = useDeleteVideoByIdMutation();
+
+        // useEffect(() => {
+        //     if (results && results.data) {
+        //         console.log(results);
+        //     }
+        // }, [results]);
     };
 
     // поменять, от обратного

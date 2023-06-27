@@ -11,6 +11,10 @@ import ArchiveVideo from "../../components/Archive/ArchiveVideo";
 import ArchiveSearch from "../../components/Archive/ArchiveSearch";
 import { useEffect, useState } from "react";
 
+import stats from "./../../plugs/stats.json";
+import StatsGraph from "../../components/Graphs/Stats";
+import ConfidenceGraph from "../../components/Graphs/Confidence";
+
 export default function DiaryPage() {
     const { data } = useGetVideoByUserQuery();
     const userVideos = data?.data?.videos as IVideoFromBack[];
@@ -29,15 +33,10 @@ export default function DiaryPage() {
             (el) => el.title.indexOf(searchVideo) !== -1
         );
     }
-
-    // useEffect(() => {
-    //     setCurrentUserVideo(result);
-    // }, searchVideo);
-
     return (
         <MainLayout>
+            <StatsGraph data={stats.data.values} />
             <ArchiveSearch updateSearch={updateSearch} />
-
             {userVideos && <ArchiveVideo video={result} />}
         </MainLayout>
     );
