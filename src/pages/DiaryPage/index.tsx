@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 import stats from "./../../plugs/stats.json";
 import StatsGraph from "../../components/Graphs/Stats";
 import ConfidenceGraph from "../../components/Graphs/Confidence";
+import VideoBlock from "../../components/VideoBlock";
+import Padination from "../../components/Pagination";
 
 export default function DiaryPage() {
     const { data } = useGetVideoByUserQuery();
@@ -33,11 +35,41 @@ export default function DiaryPage() {
             (el) => el.title.indexOf(searchVideo) !== -1
         );
     }
+    //useState for paggination
+    const [videos, setVideos] = useState<IVideoFromBack[]>([]);
+    // const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [videosPerPage] = useState(6);
+
+    //paggination
+    const lastVideoIndex = currentPage * videosPerPage;
+    const firsrtVideoIndex = lastVideoIndex - videosPerPage;
+    const currentVideos = videos.slice(firsrtVideoIndex, lastVideoIndex);
+
+    const paginate = (pageNumber: number) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const nextPage = (maxPage: number) =>
+        setCurrentPage((prev) => (prev < maxPage ? prev + 1 : prev));
+
+    const prevPage = () =>
+        setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
     return (
         <MainLayout>
             <StatsGraph data={stats.data.values} />
             <ArchiveSearch updateSearch={updateSearch} />
             {userVideos && <ArchiveVideo video={result} />}
+            {/* {userVideos &&
+                currentVideos.map((el, ind) => <ArchiveVideo video={result} />)} */}
+            <Padination
+                videosPerPage={videosPerPage}
+                totalVideos={videos.length}
+                paginate={paginate}
+                funcNextPage={nextPage}
+                funcPrevPage={prevPage}
+                currentPage={currentPage}
+            />
         </MainLayout>
     );
 }

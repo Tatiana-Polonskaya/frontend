@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
 import VideoItem from "./VideoItem";
-import Padination from "./Pagination";
+import Padination from "../Pagination";
 import { cn } from "@bem-react/classname";
 import ModalWindow from "../ModalWindow/ModalWindow";
 
@@ -106,7 +106,6 @@ const analyzeItem = {
 };
 
 export default function VideoBlock() {
-    
     //useState for paggination
     const [videos, setVideos] = useState<Item[]>([]);
     const [loading, setLoading] = useState(false);
@@ -176,10 +175,7 @@ export default function VideoBlock() {
                 currentPage={currentPage}
             />
 
-            <ModalWindow 
-                isVisible={isModal} 
-                onClose={() => setModal(false)}
-            >
+            <ModalWindow isVisible={isModal} onClose={() => setModal(false)}>
                 <div className={cnModalContent()}>
                     <div className={cnModalContent("video-row")}>
                         <div
