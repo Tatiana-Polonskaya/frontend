@@ -22,6 +22,7 @@ import RepetitionStart from "./components/RepetitionComponents/RepetitionStart";
 import About from "./components/About";
 import RecodingSetup from "./components/RepetitionComponents/Setup";
 import RecodingPage from "./pages/RecodingPage";
+import DiaryStart from "./components/DiaryStart";
 
 
 export default function App() {
@@ -69,7 +70,14 @@ export default function App() {
                         <Route
                             path={RoutesEnum.DIARY}
                             element={<DiaryPage />}
-                        />
+                        >
+                            <Route index={true} element={<DiaryStart />} />
+                            <Route
+                                index={false}
+                                path=":id"
+                                element={<About />}
+                            />
+                        </Route>
                         <Route
                             path={RoutesEnum.IMPROVISATION}
                             element={<ImprovisationPage />}
