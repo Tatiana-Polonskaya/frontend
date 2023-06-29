@@ -15,7 +15,7 @@ type Props = {
     currentPage: number;
 };
 
-export default function Padination(props: Props) {
+export default function Pagination(props: Props) {
     const pageNumbers = [];
     const maxPage = Math.ceil(props.totalVideos / props.videosPerPage);
 

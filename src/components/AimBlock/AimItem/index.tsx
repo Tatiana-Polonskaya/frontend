@@ -13,6 +13,7 @@ import arrowNorm from "../icons/arrow-down.svg";
 import worningIcon from "../icons/danger.svg";
 import tickIcon from "../icons/more-circle.svg";
 import tickDone from "../icons/tick-circle.svg";
+import Button from "../../ui-kit/Button";
 
 type Props = {
     textPlan: string[];
@@ -21,7 +22,6 @@ type Props = {
 export default function AimItem() {
     const cnAimItem = cn("AimItem");
 
-    const [currentIndex, setCurrentIndex] = useState(0);
     const statusAim = "в процессе";
     const typeAim = "личная цель";
     const messageAim = "выберите параметры для оценки цели";
@@ -35,16 +35,19 @@ export default function AimItem() {
         "Увеличить показатель параметра ясность на 0.2",
         "Увеличить показатель параметра аргументированность на 0.1",
     ];
-    const params = new Array(18).fill("Последовательность");
+    const params = new Array(18)
+        .fill("Последовательность")
+        .map((el, i) => el + "" + i);
     const choosedStep = 1;
 
     const [isShowTasks, setIsShowTasks] = useState(false);
     const titleForBtn = isShowTasks ? "Свернуть" : "Развернуть цель";
 
+    const [canSave, setCanSave] = useState(true);
+
     const [isShowParams, setIsShowParams] = useState(true);
 
     const [checkedParams, setCheckedParams] = useState<Array<string>>([]);
-
 
     const changeCheckedState = (el: string) => {
         const indexParam = checkedParams.findIndex((item) => item === el);
@@ -63,6 +66,10 @@ export default function AimItem() {
 
     const handleOnChange = (elem: string) => {
         changeCheckedState(elem);
+    };
+
+    const saveParams = () => {
+        console.log("params werebeen saved");
     };
 
     return (
@@ -187,9 +194,19 @@ export default function AimItem() {
                         <div className={cnAimItem("params-block-grow")}>
                             {""}
                         </div>
-                        <div className={cnAimItem("params-block-message")}>
-                            Параметры этой цели изменить нельзя
-                        </div>
+
+                        {canSave ? (
+                            <div
+                                className={cnAimItem("params-block-btn")}
+                                onClick={saveParams}
+                            >
+                                Сохранить
+                            </div>
+                        ) : (
+                            <div className={cnAimItem("params-block-message")}>
+                                Параметры этой цели изменить нельзя
+                            </div>
+                        )}
                     </div>
                     {isShowParams && (
                         <div className={cnAimItem("params-block-grid")}>

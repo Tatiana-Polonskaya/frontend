@@ -30,45 +30,44 @@ export default function AimBlock() {
     const [choosenAim, setChoosenAim] = useState(0);
     const [isModal, setIsModal] = useState(false);
 
-    const count_aims = new Array(3).fill(1).map((e,i)=>e+i);
+    const count_aims = new Array(3).fill(1).map((e, i) => e + i);
 
     const closeModal = () => {
-        setIsModal(false)
-    }
+        setIsModal(false);
+    };
 
     const showModal = () => {
-        setIsModal(true)
-    }
+        setIsModal(true);
+    };
 
     // ---------------------------- TEST START
-
 
     const choicesAim = [
         {
             id: "1",
             title: "Повысить уверенность в себе и в своих навыках публичного выступления",
             icon: "",
-            another: false
+            another: false,
         },
         {
             id: "2",
             title: "Улучшить качество презентаций в рамках учебных и профессиональных мероприятий",
             icon: "",
-            another: false
+            another: false,
         },
         {
             id: "3",
             title: "Подготовиться к важному профессиональному или личному мероприятию, такому как конференция, выставка, презентация проекта",
             icon: "",
-            another: false
+            another: false,
         },
         {
             id: "4",
             title: "Опишите цель использования сервиса",
             icon: "",
-            another: true
+            another: true,
         },
-    ]
+    ];
 
     const questionAim = {
         id: "dvdvd-dvdvd-dvvdv-dvdvd-dvdvd" as UUID,
@@ -76,44 +75,57 @@ export default function AimBlock() {
         type: "checkbox",
         icons: false,
         type_choice: "block-answers",
-        choices: choicesAim
+        choices: choicesAim,
     } as IQuestion;
 
     // ---------------------------- TEST END
-
 
     return (
         <div className={cnAimBlock()}>
             <div className={cnAimBlock("row")}>
                 <div className={cnAimBlock("title")}>
-                <ReactSVG src={gpsIcon}/>
+                    <ReactSVG src={gpsIcon} />
                     Цели
-                    </div>
+                </div>
                 <div className={cnAimBlock("aims-count")}>
-                    {count_aims.map(el=>(
-                        <div className={cnAimBlock("aims-count-circle",{active: choosenAim===el-1})}
-                            onClick={()=>setChoosenAim(el-1)}>
+                    {count_aims.map((el) => (
+                        <div
+                            className={cnAimBlock("aims-count-circle", {
+                                active: choosenAim === el - 1,
+                            })}
+                            onClick={() => setChoosenAim(el - 1)}
+                        >
                             {el}
                         </div>
                     ))}
                 </div>
                 <div className={cnAimBlock("grow")}></div>
-                <div className={cnAimBlock("btn")}
-                onClick={showModal}>
-                    <ReactSVG src={addIcon}/>
+                <div className={cnAimBlock("btn")} onClick={showModal}>
+                    <ReactSVG src={addIcon} />
                     Добавить цель
-                    </div>
+                </div>
             </div>
-            {count_aims.map(el=>(
-                <>{(el-1) === choosenAim? <AimItem key={el}/>: null}</>
+            {count_aims.map((el) => (
+                <>{el - 1 === choosenAim ? <AimItem key={el} /> : null}</>
             ))}
-            <ModalWindow title="Выберите цель или введите собственную" icon={gpsIcon} isVisible={isModal} onClose={()=>closeModal()}>
+            <ModalWindow
+                title="Выберите цель или введите собственную"
+                icon={gpsIcon}
+                isVisible={isModal}
+                onClose={() => closeModal()}
+            >
                 <div className={cnAimBlock("modal")}>
-                    <CheckboxQuestion question={questionAim} addAnotherAnswers={()=>{}} addAnswers={()=>{}} />
+                    <CheckboxQuestion
+                        question={questionAim}
+                        addAnotherAnswers={() => {}}
+                        addAnswers={() => {}}
+                    />
                     <Button className={cnAimBlock("modal-btn")}>
-                        <ReactSVG src={addIcon}/>
-                        <span className={cnAimBlock("modal-btn-text")}>Добавить цель</span>
-                        </Button>
+                        <ReactSVG src={addIcon} />
+                        <span className={cnAimBlock("modal-btn-text")}>
+                            Добавить цель
+                        </span>
+                    </Button>
                 </div>
             </ModalWindow>
             {/* <CheckBoxItem id={0} value="sss" name="vdvdv" checked={false} handleOnChange={()=>{}}>
