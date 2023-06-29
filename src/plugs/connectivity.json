@@ -1,0 +1,190 @@
+{
+    "data": {
+        "values": [
+            {
+                "seq_number": 0,
+                "text": "In hendrerit gravida rutrum quisque non, tellus orci. Ultricies integer quis, auctor elit sed vulputate.",
+                "value": 2,
+                "time_start": 0,
+                "time_end": 10
+            },
+            {
+                "seq_number": 10,
+                "text": "Sit amet volutpat, consequat mauris nunc congue nisi. Nunc pulvinar sapien, et ligula ullamcorper.",
+                "value": 0,
+                "time_start": 11,
+                "time_end": 25
+            },
+            {
+                "seq_number": 20,
+                "text": "Egestas dui id ornare arcu. Arcu non sodales, neque sodales ut. Magnis dis parturient, montes nascetur ridiculus.",
+                "value": 1,
+                "time_start": 25,
+                "time_end": 28
+            },
+            {
+                "seq_number": 30,
+                "text": "Cras sed felis eget velit, aliquet sagittis. Dui ut ornare lectus sit amet, est placerat in.",
+                "value": 0,
+                "time_start": 30,
+                "time_end": 38
+            },
+            {
+                "seq_number": 40,
+                "text": "Dui accumsan sit amet, nulla facilisi morbi. Quisque id diam, vel quam elementum pulvinar.",
+                "value": 1,
+                "time_start": 40,
+                "time_end": 48
+            },
+            {
+                "seq_number": 50,
+                "text": "Duis ultricies lacus, sed turpis tincidunt. Fermentum dui faucibus in ornare quam. Adipiscing commodo elit at imperdiet dui accumsan sit.",
+                "value": 2,
+                "time_start": 50,
+                "time_end": 58
+            },
+            {
+                "seq_number": 60,
+                "text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                "value": 0,
+                "time_start": 60,
+                "time_end": 68
+            },
+            {
+                "seq_number": 70,
+                "text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                "value": 0,
+                "time_start": 70,
+                "time_end": 78
+            },
+            {
+                "seq_number": 80,
+                "text": "In mollis nunc sed id, semper risus in. Aliquam etiam, erat velit scelerisque.",
+                "value": 0,
+                "time_start": 80,
+                "time_end": 88
+            },
+            {
+                "seq_number": 90,
+                "text": "Egestas dui id ornare arcu. Arcu non sodales, neque sodales ut. Magnis dis parturient, montes nascetur ridiculus.",
+                "value": 0,
+                "time_start": 90,
+                "time_end": 98
+            },
+            {
+                "seq_number": 100,
+                "text": "Consequat semper viverra nam, libero justo laoreet sit amet. Egestas integer eget aliquet nibh praesent tristique.",
+                "value": 1,
+                "time_start": 100,
+                "time_end": 108
+            },
+            {
+                "seq_number": 110,
+                "text": "Egestas dui id ornare arcu. Arcu non sodales, neque sodales ut. Magnis dis parturient, montes nascetur ridiculus.",
+                "value": 1,
+                "time_start": 110,
+                "time_end": 118
+            },
+            {
+                "seq_number": 120,
+                "text": "Felis imperdiet proin fermentum leo vel orci. Lectus urna duis convallis convallis tellus.",
+                "value": 1,
+                "time_start": 120,
+                "time_end": 128
+            },
+            {
+                "seq_number": 130,
+                "text": "Ornare aenean, euismod elementum nisi. Pharetra magna ac placerat, vestibulum lectus mauris ultrices.",
+                "value": 0,
+                "time_start": 130,
+                "time_end": 138
+            },
+            {
+                "seq_number": 140,
+                "text": "Tristique senectus et netus, et malesuada fames. Molestie nunc non, blandit massa enim nec.",
+                "value": 1,
+                "time_start": 140,
+                "time_end": 148
+            },
+            {
+                "seq_number": 150,
+                "text": "Est placerat in egestas erat, imperdiet sed euismod.",
+                "value": 0,
+                "time_start": 150,
+                "time_end": 158
+            },
+            {
+                "seq_number": 160,
+                "text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                "value": 1,
+                "time_start": 160,
+                "time_end": 168
+            },
+            {
+                "seq_number": 170,
+                "text": "Faucibus a pellentesque, sit amet porttitor eget dolor morbi. Dui ut ornare, lectus sit amet est placerat.",
+                "value": 1,
+                "time_start": 170,
+                "time_end": 178
+            },
+            {
+                "seq_number": 180,
+                "text": "Nisl nunc mi ipsum faucibus vitae. Nulla, pellentesque dignissim enim sit amet venenatis urna cursus.",
+                "value": 0,
+                "time_start": 180,
+                "time_end": 188
+            },
+            {
+                "seq_number": 190,
+                "text": "Scelerisque fermentum, dui faucibus in ornare quam, viverra orci. Nisl nunc mi ipsum faucibus vitae.",
+                "value": 0,
+                "time_start": 190,
+                "time_end": 198
+            },
+            {
+                "seq_number": 200,
+                "text": "Posuere urna nec tincidunt praesent, semper. Id ornare arcu odio ut, sem nulla pharetra.",
+                "value": 0,
+                "time_start": 200,
+                "time_end": 208
+            },
+            {
+                "seq_number": 210,
+                "text": "Nunc sed velit dignissim, sodales ut eu sem integer. Natoque penatibus et magnis dis, parturient montes nascetur ridiculus.",
+                "value": 0,
+                "time_start": 210,
+                "time_end": 218
+            },
+            {
+                "seq_number": 220,
+                "text": "Nisl nunc mi ipsum faucibus vitae. Nulla, pellentesque dignissim enim sit amet venenatis urna cursus.",
+                "value": 2,
+                "time_start": 220,
+                "time_end": 228
+            },
+            {
+                "seq_number": 230,
+                "text": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                "value": 1,
+                "time_start": 230,
+                "time_end": 238
+            },
+            {
+                "seq_number": 240,
+                "text": "Magnis dis parturient montes nascetur, ridiculus mus mauris vitae ultricies.",
+                "value": 1,
+                "time_start": 240,
+                "time_end": 248
+            },
+            {
+                "seq_number": 250,
+                "text": "Habitant morbi tristique, senectus et netus et. Justo laoreet sit amet cursus sit amet, dictum sit. Elit sed vulputate mi sit.",
+                "value": 0,
+                "time_start": 250,
+                "time_end": 258
+            }
+        ]
+    },
+    "error": null,
+    "success": true
+}

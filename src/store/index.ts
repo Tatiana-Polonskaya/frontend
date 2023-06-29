@@ -9,16 +9,24 @@ import userReducer from "./slices/user";
 import registerReducer from "./slices/register";
 import surveyReducer from "./slices/survey";
 import { userApi } from "./api/user";
+
+import { reportApi } from "./api/report";
+
 import { surveyApi } from "./api/survey";
 import { videoApi } from "./api/userVideo";
+
 
 export const store = configureStore({
     reducer: {
         [registerApi.reducerPath]: registerApi.reducer,
         [accountApi.reducerPath]: accountApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
+
+        [reportApi.reducerPath]: reportApi.reducer,
+
         [surveyApi.reducerPath]: surveyApi.reducer,
         [videoApi.reducerPath]: videoApi.reducer,
+
         register: registerReducer,
         test: testSlice,
         profile: profileSlice,
@@ -31,8 +39,12 @@ export const store = configureStore({
             registerApi.middleware,
             accountApi.middleware,
             userApi.middleware,
+
+            reportApi.middleware
+
             surveyApi.middleware,
             videoApi.middleware,
+
         ),
     devTools: process.env.NODE_ENV !== "production",
 });

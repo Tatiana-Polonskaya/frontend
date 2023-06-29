@@ -1,0 +1,13 @@
+{
+  "data": {
+    "values": {
+      "scientific": 90,
+      "official": 7,
+      "publicistic": 17,
+      "colloquial": 96,
+      "artistic": 67
+    }
+  },
+  "error": null,
+  "success": true
+}

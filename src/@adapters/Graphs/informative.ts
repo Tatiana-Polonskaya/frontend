@@ -15,10 +15,18 @@ const convertInformativeData = (
         raw.type === "main-text"
             ? GraphColor.DARKGRAY
             : raw.type === "unconfirmed"
-            ? GraphColor.ORANGE
-            : raw.type === "parasite-words"
-            ? GraphColor.PURPLE
-            : GraphColor.RED,
+                ? GraphColor.ORANGE
+                : raw.type === "parasite-words"
+                    ? GraphColor.BLUE
+                    : raw.type === "parasite"
+                        ? GraphColor.PURPLE
+                        : raw.type === "informative"
+                            ? GraphColor.GRAY
+                            : raw.type === "empty"
+                                ? GraphColor.ORANGE
+                                : raw.type === "sounds"
+                                    ? GraphColor.RED
+                                    : GraphColor.RED,
 });
 
 export default convertInformativeData;

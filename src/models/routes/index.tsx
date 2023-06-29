@@ -14,11 +14,16 @@ enum RoutesEnum {
     SETTINGS = "/settings",
     RECODING="/recoding",
 
-
     TEST_GRAPH = "/test-graph",
 
-    SURVEY ="/survey",
+    SURVEY = "/survey",
 
+    // CONNECTEDNESS = "/repetition/connectedness",
+    // ARGUMENTATION = "/repetition/argumentation",
+    CLARITY = "/repetition/clarity",
+    // DYNAMISM = "/repetition/dynamism",
+    // PERSUASIVENESS = "/repetition/persuasiveness",
+    // COMMUNICATION = "/repetition/communication",
 }
 
 export default RoutesEnum;

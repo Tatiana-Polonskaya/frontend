@@ -10,10 +10,10 @@ import "./style.scss";
 
 const CN = cn("confidence-graph");
 
-type Props = { data: ConfidenceDataItem[] };
+type Props = { data: ConfidenceDataItem[]; average: number };
 
 const X = "value";
-export default function ConfidenceGraph({ data }: Props) {
+export default function ConfidenceGraph({ data, average }: Props) {
     return (
         <LineGraph
             items={data.map((x) => ({ [X]: x.value }))}
@@ -21,6 +21,7 @@ export default function ConfidenceGraph({ data }: Props) {
             descriptionX={createXDescriptionFromData(data)}
             descriptionY={[0, 0.2, 0.4, 0.6, 0.8, 1]}
             range={{ min: 0, max: 1 }}
+            average={average}
             background={
                 <div className={CN("bg")}>
                     <div className={CN("bg", { high: true })} />

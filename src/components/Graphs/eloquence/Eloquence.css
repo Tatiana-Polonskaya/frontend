@@ -1,0 +1,71 @@
+svg.injected-svg {
+        fill: #F8FAFF;
+}
+.allEloquence{
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        align-items: flex-start;
+
+}
+.allImg{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+}
+
+
+.parasitic_words, .short_sentences, .short_words, .active_words {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5%;
+}
+.textparasitic_words, .textshort_sentences, .textshort_words, .textactive_words   {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+}
+
+.bubbles{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: auto;
+        padding: 20px 0px 0px 40px;
+        position: absolute;
+        z-index: 1;
+}
+.imgbigCloud{
+        display: flex;
+        justify-content: end;
+}
+.txt{
+        font-family: 'Onest';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 31px;
+        display: flex;
+        align-items: center;
+
+        color: #FFFFFF;
+}
+.txt2{
+
+
+        font-family: 'Onest';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+
+        display: flex;
+        align-items: center;
+
+        color: #FFFFFF;
+}

@@ -1,0 +1,26 @@
+.containerScale{
+    display: flex;
+    background: #D4DFF4;
+    border-radius: 20px;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    border-color: inherit;
+
+}
+.contentScale{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.textScale{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}

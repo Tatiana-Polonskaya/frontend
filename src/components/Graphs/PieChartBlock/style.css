@@ -1,0 +1,88 @@
+.textPieChart{
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #37476A;
+}
+.textPieChartBlock{
+    padding: 16px;
+    gap: 16px;
+    width: 100%;
+    background: #F7FAFF;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #17282F;
+    overflow: auto;
+
+}
+.textInfTitle{
+    font-weight: 500;
+}
+
+
+
+
+.precentPieChart{
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #2477F4;
+}
+.allPieChart{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1200px;
+
+}
+.PieChart{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+}
+.imkPie0{
+    mask-image: conic-gradient(#fff 0%, #fff1 1%, #fff1 100%);
+}
+.imkPie1{
+    mask-image: conic-gradient(#fff 5%, #fff1 1%, #fff1 100%);
+}
+.imkPie2{
+    mask-image: conic-gradient(#fff 10%, #fff1 1%, #fff1 100%);
+}
+.imkPie3{
+    mask-image: conic-gradient(#fff 20%, #fff1 1%, #fff1 100%);
+}
+.imkPie4{
+    mask-image: conic-gradient(#fff 30%, #fff1 1%, #fff1 100%);
+}
+.imkPie5{
+    mask-image: conic-gradient(#fff 40%, #fff1 1%, #fff1 100%);
+}
+.imkPie6{
+    mask-image: conic-gradient(#fff 50%, #fff1 1%, #fff1 100%);
+}
+.imkPie7{
+    mask-image: conic-gradient(#fff 60%, #fff1 1%, #fff1 100%);
+}
+.imkPie8{
+    mask-image: conic-gradient(#fff 70%, #fff1 1%, #fff1 100%);
+}
+.imkPie9{
+    mask-image: conic-gradient(#fff 80%, #fff1 1%, #fff1 100%);
+}
+.imkPie10{
+    mask-image: conic-gradient(#fff 90%, #fff1 1%, #fff1 100%);
+}
+.imkPie11{
+    mask-image: conic-gradient(#fff 100%, #fff1 1%, #fff1 100%);
+}

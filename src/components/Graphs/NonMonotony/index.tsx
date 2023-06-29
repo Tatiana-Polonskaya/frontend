@@ -22,9 +22,9 @@ export default function NonMonotonyGraph({ data, param = null }: Props) {
             range={{ min: 0, max: 1 }}
             descriptionY={[0, 0.2, 0.4, 0.6, 0.8, 1]}
             colors={{
-                [NonMonotonyType.RATE]: GraphColor.RED,
-                [NonMonotonyType.VOLUME]: GraphColor.GREEN,
-                [NonMonotonyType.TONE]: GraphColor.DARKGRAY,
+                [NonMonotonyType.RATE]: GraphColor.BLUE,
+                [NonMonotonyType.VOLUME]: GraphColor.RED,
+                [NonMonotonyType.TONE]: GraphColor.ORANGE,
             }}
         />
     );

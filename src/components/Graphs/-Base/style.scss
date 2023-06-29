@@ -3,8 +3,10 @@
 
     background-color: #f7faff;
 
-    height: 230px;
-    width: 1000px;
+    // height: 230px;
+    height: 237px;
+    // width: 1000px;
+    width: 1200px;
 
     padding: 16px 0;
     overflow: auto;
@@ -40,6 +42,7 @@
         flex: 0 0 auto;
         overflow: auto;
         position: relative;
+        overflow: hidden;
 
         &_bordered {
             $line: thin solid #b2c2e4;

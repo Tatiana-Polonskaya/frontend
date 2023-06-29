@@ -1,0 +1,19 @@
+{
+  "data": {
+    "values": {
+      "parasitic_words": 43,
+      "short_sentences": 7,
+      "short_words": 2,
+      "active_words": 2,
+      "parasitic_words_list": {
+        "слово": 15,
+        "ещеслово": 2,
+        "ещеслололово": 6,
+        "что-то": 6
+      }
+    }
+  },
+  "error": null,
+  "success": true
+}
+

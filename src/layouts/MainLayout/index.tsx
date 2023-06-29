@@ -22,7 +22,7 @@ export default function MainLayout(props: Props) {
             <div className={cnContent()}>
                 <Menu />
                 <div className={cnContent("wrapper")}>
-                    <Header displayName={`${name} ${lastName}`}/>
+                    <Header displayName={`${name} ${lastName}`} />
                     <section className={cnContent("main")}>
                         {props.children}
                     </section>

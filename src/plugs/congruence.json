@@ -1,0 +1,499 @@
+{
+  "data": {
+    "values": {
+      "A-V": [
+        {
+          "time_start": 4,
+          "value": 0.9019039223333383,
+          "type": "happiness",
+          "time_end": 8
+        },
+        {
+          "time_start": 12,
+          "value": 0.3124522929725225,
+          "type": "happiness",
+          "time_end": 19
+        },
+        {
+          "time_start": 24,
+          "value": 0.5683638263046555,
+          "type": "angry",
+          "time_end": 26
+        },
+        {
+          "time_start": 32,
+          "value": 0.4287408515451623,
+          "type": "happiness",
+          "time_end": 39
+        },
+        {
+          "time_start": 41,
+          "value": 0.7500871186048006,
+          "type": "happiness",
+          "time_end": 48
+        },
+        {
+          "time_start": 51,
+          "value": 0.35495908897186723,
+          "type": "angry",
+          "time_end": 56
+        },
+        {
+          "time_start": 63,
+          "value": 0.7050290768703411,
+          "type": "angry",
+          "time_end": 66
+        },
+        {
+          "time_start": 72,
+          "value": 0.25557130527083793,
+          "type": "happiness",
+          "time_end": 78
+        },
+        {
+          "time_start": 81,
+          "value": 0.9658747807700936,
+          "type": "happiness",
+          "time_end": 88
+        },
+        {
+          "time_start": 94,
+          "value": 0.8891730406607433,
+          "type": "angry",
+          "time_end": 98
+        },
+        {
+          "time_start": 104,
+          "value": 0.44079126222222376,
+          "type": "happiness",
+          "time_end": 106
+        },
+        {
+          "time_start": 112,
+          "value": 0.8549449774014538,
+          "type": "angry",
+          "time_end": 118
+        },
+        {
+          "time_start": 125,
+          "value": 0.9345417198281684,
+          "type": "happiness",
+          "time_end": 126
+        },
+        {
+          "time_start": 132,
+          "value": 0.4128795502240844,
+          "type": "angry",
+          "time_end": 138
+        },
+        {
+          "time_start": 144,
+          "value": 0.27488592098840803,
+          "type": "angry",
+          "time_end": 147
+        },
+        {
+          "time_start": 151,
+          "value": 0.2739768238912358,
+          "type": "angry",
+          "time_end": 157
+        },
+        {
+          "time_start": 160,
+          "value": 0.14167799788472646,
+          "type": "angry",
+          "time_end": 169
+        },
+        {
+          "time_start": 172,
+          "value": 0.1709169894477044,
+          "type": "angry",
+          "time_end": 178
+        },
+        {
+          "time_start": 182,
+          "value": 0.7292474375746731,
+          "type": "angry",
+          "time_end": 186
+        },
+        {
+          "time_start": 192,
+          "value": 0.16428509813721648,
+          "type": "angry",
+          "time_end": 196
+        },
+        {
+          "time_start": 202,
+          "value": 0.749687762011645,
+          "type": "happiness",
+          "time_end": 207
+        },
+        {
+          "time_start": 213,
+          "value": 0.7270585491711614,
+          "type": "angry",
+          "time_end": 219
+        },
+        {
+          "time_start": 224,
+          "value": 0.7328989482825873,
+          "type": "angry",
+          "time_end": 226
+        },
+        {
+          "time_start": 234,
+          "value": 0.4569463768682632,
+          "type": "angry",
+          "time_end": 239
+        },
+        {
+          "time_start": 242,
+          "value": 0.44577161745039273,
+          "type": "angry",
+          "time_end": 246
+        },
+        {
+          "time_start": 251,
+          "value": 0.8121620101045136,
+          "type": "angry",
+          "time_end": 257
+        }
+      ],
+      "A-T": [
+        {
+          "time_start": 2,
+          "value": 0.25223529306393244,
+          "type": "angry",
+          "time_end": 10
+        },
+        {
+          "time_start": 11,
+          "value": 0.1216445858888614,
+          "type": "angry",
+          "time_end": 19
+        },
+        {
+          "time_start": 25,
+          "value": 0.6490650333831882,
+          "type": "happiness",
+          "time_end": 28
+        },
+        {
+          "time_start": 31,
+          "value": 0.13244219938457935,
+          "type": "angry",
+          "time_end": 36
+        },
+        {
+          "time_start": 45,
+          "value": 0.3421762765999746,
+          "type": "angry",
+          "time_end": 50
+        },
+        {
+          "time_start": 51,
+          "value": 0.8048679769805348,
+          "type": "happiness",
+          "time_end": 60
+        },
+        {
+          "time_start": 62,
+          "value": 0.17348051368032047,
+          "type": "happiness",
+          "time_end": 69
+        },
+        {
+          "time_start": 72,
+          "value": 0.8883025923194284,
+          "type": "angry",
+          "time_end": 77
+        },
+        {
+          "time_start": 83,
+          "value": 0.8235131252046725,
+          "type": "angry",
+          "time_end": 87
+        },
+        {
+          "time_start": 93,
+          "value": 0.47164567616063524,
+          "type": "angry",
+          "time_end": 97
+        },
+        {
+          "time_start": 104,
+          "value": 0.19491687037800387,
+          "type": "angry",
+          "time_end": 109
+        },
+        {
+          "time_start": 114,
+          "value": 0.11564950868646662,
+          "type": "happiness",
+          "time_end": 119
+        },
+        {
+          "time_start": 125,
+          "value": 0.023272921931729695,
+          "type": "happiness",
+          "time_end": 127
+        },
+        {
+          "time_start": 134,
+          "value": 0.6595576756755545,
+          "type": "happiness",
+          "time_end": 137
+        },
+        {
+          "time_start": 145,
+          "value": 0.2309164800734903,
+          "type": "happiness",
+          "time_end": 147
+        },
+        {
+          "time_start": 155,
+          "value": 0.7097276494438645,
+          "type": "happiness",
+          "time_end": 159
+        },
+        {
+          "time_start": 160,
+          "value": 0.011127429208226736,
+          "type": "angry",
+          "time_end": 168
+        },
+        {
+          "time_start": 173,
+          "value": 0.014257417190007393,
+          "type": "angry",
+          "time_end": 179
+        },
+        {
+          "time_start": 182,
+          "value": 0.6035967320719119,
+          "type": "happiness",
+          "time_end": 189
+        },
+        {
+          "time_start": 195,
+          "value": 0.31567855512115595,
+          "type": "angry",
+          "time_end": 196
+        },
+        {
+          "time_start": 201,
+          "value": 0.0465966337733118,
+          "type": "happiness",
+          "time_end": 209
+        },
+        {
+          "time_start": 213,
+          "value": 0.8732380779337929,
+          "type": "happiness",
+          "time_end": 219
+        },
+        {
+          "time_start": 223,
+          "value": 0.8495892095222415,
+          "type": "happiness",
+          "time_end": 228
+        },
+        {
+          "time_start": 230,
+          "value": 0.28783138064253844,
+          "type": "angry",
+          "time_end": 236
+        },
+        {
+          "time_start": 243,
+          "value": 0.3117232717710393,
+          "type": "angry",
+          "time_end": 249
+        },
+        {
+          "time_start": 252,
+          "value": 0.36340239190249646,
+          "type": "happiness",
+          "time_end": 257
+        }
+      ],
+      "V-T": [
+        {
+          "time_start": 0,
+          "value": 0.04546387403855068,
+          "type": "angry",
+          "time_end": 9
+        },
+        {
+          "time_start": 11,
+          "value": 0.6505061118457639,
+          "type": "happiness",
+          "time_end": 18
+        },
+        {
+          "time_start": 21,
+          "value": 0.987214701561942,
+          "type": "angry",
+          "time_end": 29
+        },
+        {
+          "time_start": 33,
+          "value": 0.6190228583646997,
+          "type": "angry",
+          "time_end": 37
+        },
+        {
+          "time_start": 45,
+          "value": 0.7134438461064208,
+          "type": "angry",
+          "time_end": 46
+        },
+        {
+          "time_start": 52,
+          "value": 0.166811947198656,
+          "type": "happiness",
+          "time_end": 56
+        },
+        {
+          "time_start": 61,
+          "value": 0.5681796916984275,
+          "type": "angry",
+          "time_end": 67
+        },
+        {
+          "time_start": 73,
+          "value": 0.32359027498365156,
+          "type": "happiness",
+          "time_end": 79
+        },
+        {
+          "time_start": 82,
+          "value": 0.8688438047702908,
+          "type": "happiness",
+          "time_end": 88
+        },
+        {
+          "time_start": 94,
+          "value": 0.0018687259012224455,
+          "type": "happiness",
+          "time_end": 99
+        },
+        {
+          "time_start": 102,
+          "value": 0.08701621360138245,
+          "type": "happiness",
+          "time_end": 109
+        },
+        {
+          "time_start": 110,
+          "value": 0.750230133118245,
+          "type": "happiness",
+          "time_end": 116
+        },
+        {
+          "time_start": 125,
+          "value": 0.30222143686547853,
+          "type": "happiness",
+          "time_end": 129
+        },
+        {
+          "time_start": 133,
+          "value": 0.2687631752624229,
+          "type": "happiness",
+          "time_end": 138
+        },
+        {
+          "time_start": 145,
+          "value": 0.6351251026041311,
+          "type": "happiness",
+          "time_end": 146
+        },
+        {
+          "time_start": 150,
+          "value": 0.7575740593120479,
+          "type": "happiness",
+          "time_end": 157
+        },
+        {
+          "time_start": 165,
+          "value": 0.9708999896780448,
+          "type": "angry",
+          "time_end": 169
+        },
+        {
+          "time_start": 170,
+          "value": 0.2810307243503021,
+          "type": "happiness",
+          "time_end": 176
+        },
+        {
+          "time_start": 181,
+          "value": 0.23070176015000698,
+          "type": "angry",
+          "time_end": 188
+        },
+        {
+          "time_start": 192,
+          "value": 0.9132071424156113,
+          "type": "happiness",
+          "time_end": 197
+        },
+        {
+          "time_start": 205,
+          "value": 0.18339776406295139,
+          "type": "angry",
+          "time_end": 208
+        },
+        {
+          "time_start": 215,
+          "value": 0.5574067481004751,
+          "type": "angry",
+          "time_end": 219
+        },
+        {
+          "time_start": 225,
+          "value": 0.8287050107959593,
+          "type": "angry",
+          "time_end": 227
+        },
+        {
+          "time_start": 234,
+          "value": 0.9001562937413442,
+          "type": "angry",
+          "time_end": 239
+        },
+        {
+          "time_start": 244,
+          "value": 0.061171397563394736,
+          "type": "angry",
+          "time_end": 246
+        },
+        {
+          "time_start": 251,
+          "value": 0.46531362312394986,
+          "type": "happiness",
+          "time_end": 257
+        }
+      ]
+    },
+    "diameter": {
+      "video": {
+        "neutral": 0.010166057667709172,
+        "happiness": 0.37248804747548214,
+        "anger": 0.750602185790858
+      },
+      "audio": {
+        "neutral": 0.5556183870601473,
+        "happiness": 0.6869523805691279,
+        "anger": 0.2780979193594093
+      },
+      "text": {
+        "neutral": 0.6456405982201678,
+        "happiness": 0.799819098733062,
+        "anger": 0.5714807010783959
+      }
+    }
+  },
+  "error": null,
+  "success": true
+}

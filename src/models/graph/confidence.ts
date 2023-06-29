@@ -3,4 +3,11 @@ export type ConfidenceDataItem = {
     text: string;
     value: number;
     time_start: number;
+    time_end: number;
 };
+
+export type ConfidenceJSON = {
+    values:ConfidenceDataItem[],
+    average_value: number,
+    uncertainty: number
+}

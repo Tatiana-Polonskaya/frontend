@@ -11,9 +11,10 @@ type Props = {
     img: string;
 };
 
-const cnMenuItem = cn("menu-item");
+
 
 export default function MenuItem(props: Props) {
+    const cnMenuItem = cn("MenuItem");
 
     return (
         <div className={cnMenuItem()} onClick={props.onClick}>

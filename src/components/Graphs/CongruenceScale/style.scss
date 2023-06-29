@@ -1,0 +1,145 @@
+.container{
+  display: flex;
+  border: 3px solid #D4DFF4 ;
+  background: #D4DFF4;
+  border-radius: 20px;
+  flex-direction: row;
+  align-items: center;
+  height: 100px;
+  overflow: hidden;
+  width: 100%;
+}
+.content{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  height: 100px;
+  align-items: end;
+  width: 100%;
+
+}
+.content > div{
+  border-radius: 6px;
+}
+.text{
+  font-style: normal;
+  font-size: 100%;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  padding-left:5px;
+}
+.congruenceScale{
+  &-textBloc{
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    gap: 16px;
+    width: 100%;
+    background: #F7FAFF;
+    border-radius: 12px;
+  }
+  &-text{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #17282F;
+    padding-top: 10px;
+  }
+  &-textInfTitle{
+    font-weight: 500;
+  }
+  &-block{
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin: 5px;
+  }
+  &-blockText{
+    display: flex;
+    flex-direction: row;
+  }
+  &-Text{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #37476A;
+  }
+}
+.tabs {
+  display: flex;
+  width: 40%;
+}
+.tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 6px;
+  width: 20%;
+  border: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  background: rgba(36, 119, 244, 0.13);
+  border-radius: 8px;
+  color: #2477F4;
+  margin: 8px;
+}
+.tab:not(:last-child) {
+}
+.tab.active {
+  color: #7C8EB5;
+  background: rgba(36, 119, 244, 0);
+  display: flex;
+}
+
+.panel {
+  display: none;
+  padding: 10px;
+
+}
+.panel.active {
+  display: block;
+  flex-direction: row;
+}
+.EmotionalScale{
+  &-textBloc{
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    gap: 16px;
+    width: 100%;
+    background: #F7FAFF;
+    border-radius: 12px;
+    margin-bottom: 15px ;
+  }
+  &-text{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #17282F;
+    padding-top: 10px;
+  }
+  &-block{
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin: 5px;
+  }
+  &-blockText{
+    display: flex;
+    flex-direction: row;
+  }
+  &-Text{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #37476A;
+  }
+}

@@ -1,0 +1,26 @@
+.allEmotionality{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: flex-start;
+    padding: 16px 8px;
+    gap: 16px;
+    isolation: isolate;
+    width:100%;
+    background: #FFFFFF;
+}
+.imgAllEmotionality{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    width:100%;
+}
+.textEmotionality{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+}
+

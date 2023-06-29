@@ -1,0 +1,136 @@
+.CommonAnalitics {
+    font-family: "Montserrat Alternates";
+    font-size: 20px;
+    line-height: 26px;
+
+    &-title {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: start;
+        align-items: start;
+        gap: 8px;
+
+        font-family: "Montserrat Alternates";
+        font-style: normal;
+        color: #37476a;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    &-col {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin: 0 10px;
+    }
+
+    &-col-grow {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-grow: 1;
+    }
+
+    &-common-result {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 5px;
+        margin: 0 10px;
+
+        &-title {
+            font-family: "Onest";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 26px;
+            color: #37476a;
+        }
+
+        &-value {
+            font-family: "Montserrat Alternates";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 44px;
+            color: #2477f4;
+        }
+    }
+
+    &-row {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    &-row-justify {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    &-blue-bold {
+        font-family: "Montserrat Alternates";
+        font-style: normal;
+        color: #37476a;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 39px;
+    }
+
+    &-gray-txt {
+        font-family: "Onest";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 26px;
+        color: #7c8eb5;
+    }
+
+    &-pic {
+        width: 100%;
+    }
+
+    &-panel {
+        margin-top: 16px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    &-item {
+        position: relative;
+        display: flex;
+        width: 16.6%;
+        flex-direction: column;
+        align-items: center;
+        & > svg {
+            margin: 0 auto;
+        }
+    }
+    &-icon {
+        position: absolute;
+        top: 82px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &-smile-title {
+        word-wrap: break-word;
+        text-align: center;
+        font-family: "Montserrat Alternates";
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        color: #37476a;
+    }
+    &-percent {
+        text-align: center;
+        font-family: "Montserrat Alternates";
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
