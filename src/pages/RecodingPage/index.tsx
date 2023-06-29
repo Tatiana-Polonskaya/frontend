@@ -9,12 +9,8 @@ import {
     useState,
 } from "react";
 
-import "./style.scss";
-import { useLocation, useNavigate } from "react-router-dom";
 
-import sss from "./assets/Vector.svg";
-import vvvv from "./assets/video-play.svg";
-import { ReactSVG } from "react-svg";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import Timer from "../../components/Timer";
 import BasicTextPlan from "../../components/BasicTextPlan";
@@ -27,6 +23,14 @@ import {
 import PreviewBlock from "../../components/PreviewBlock";
 import { useSendVideoMutation } from "../../store/api/userVideo";
 import RoutesEnum from "../../models/routes";
+
+import backIcon from "./assets/Vector.svg";
+import startRecordIcon from "./assets/video-play.svg";
+import dangerIcon from "./assets/danger.svg";
+
+import { ReactSVG } from "react-svg";
+
+import "./style.scss";
 
 export const TIMER_STATUS = {
     START: true,
@@ -63,7 +67,14 @@ export default function RecodingPage() {
         setModal(false);
     };
 
+    const [isWarning, setIsWarning] = useState(true); // поменять когда будет доступ к камере на false и использовать при колбэке от камеры
+    const closeWarningModal = () => {
+        setIsWarning(false);
+    };
+
     // webcam params
+
+    const [canStart, setCanStart] = useState(false);
 
     const webcamRef = useRef<Webcam>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -80,6 +91,7 @@ export default function RecodingPage() {
     );
 
     const handleStartCaptureClick = useCallback(() => {
+        if(canStart){
         updateIsTimerStart(TIMER_STATUS.START);
         setCapturing(true);
         mediaRecorderRef.current = new MediaRecorder(
@@ -93,6 +105,7 @@ export default function RecodingPage() {
             handleDataAvailable
         );
         mediaRecorderRef.current.start();
+        console.log(mediaRecorderRef.current)}
     }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
 
     const handleStopCaptureClick = useCallback(() => {
@@ -194,6 +207,8 @@ export default function RecodingPage() {
                             ref={webcamRef}
                             muted={true}
                             videoConstraints={videoConstraints}
+                            onUserMediaError={e=> console.log("onUserMediaError", e)}
+                            onUserMedia={e=>console.log("onUserMedia", e)}
                         />
 
                         <div className={cnRecoding("button-block")}>
@@ -207,11 +222,11 @@ export default function RecodingPage() {
                             ) : (
                                 <>
                                     <button
-                                        className={cnRecoding("button")}
+                                        className={cnRecoding("button", {disable: !canStart})}
                                         onClick={handleStartCaptureClick}
                                     >
                                         <ReactSVG
-                                            src={vvvv}
+                                            src={startRecordIcon}
                                             className={cnRecoding("icon")}
                                         />
                                         Начать репетицию
@@ -223,7 +238,7 @@ export default function RecodingPage() {
                                         onClick={() => navigate(-1)}
                                     >
                                         <ReactSVG
-                                            src={sss}
+                                            src={backIcon}
                                             className={cnRecoding("icon")}
                                         />
                                         Вернуться к настройкам
@@ -360,6 +375,17 @@ export default function RecodingPage() {
                                 </>
                             </div>
                         )}
+                    </ModalWindow>
+
+
+                    <ModalWindow
+                        isVisible={isWarning}
+                        onClose={closeWarningModal}
+                        title={"Предупреждение"}
+                    >
+                        <div className={cnRecoding("warning-message")}>
+                            Невозможно подключиться к камере, попробуйте позже или <Link to={RoutesEnum.REPETITION}>загрузите</Link> уже готовую репетицию.
+                        </div>
                     </ModalWindow>
                 </div>
             </div>

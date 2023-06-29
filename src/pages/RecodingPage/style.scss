@@ -122,6 +122,10 @@
         border: none;
         border-radius: 16px;
         cursor: pointer;
+
+        &_disable{
+            cursor: not-allowed;
+        }
     }
 
     &-icon{
@@ -170,6 +174,14 @@
             font-family: Montserrat Alternates;
             font-weight: 500;
         }
+    }
+
+    &-warning-message{
+        padding: 16px 20px;
+        color: #37476A;
+        font-size: 16px;
+        font-family: Montserrat Alternates;
+        font-weight: 500;
     }
 
 }
