@@ -1,0 +1,42 @@
+.RollUp {
+    &-header {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: start;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    &-icon {
+        svg {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+
+    &-title {
+        color: #37476A;
+        font-size: 16px;
+        font-family: "Montserrat Alternates";
+        font-weight: 600;
+
+    }
+
+    &-btn {
+        cursor: pointer;
+        padding: 0 20px  ;
+        color: #2477F4;
+        font-size: 16px;
+        font-family: "Montserrat Alternates";
+        font-weight: 500;
+    }
+
+    &-content {
+        padding:  20px 0;
+    }
+
+}

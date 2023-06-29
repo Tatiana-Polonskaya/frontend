@@ -1,0 +1,11 @@
+.text1{
+    height: 40px;
+
+    font-family: 'Onest';
+    font-style: normal;
+    font-size: 20px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    color: #7C8EB5;
+}

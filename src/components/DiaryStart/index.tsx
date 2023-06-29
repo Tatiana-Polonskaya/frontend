@@ -13,9 +13,16 @@ import stats from "./../../plugs/stats.json";
 import StatsGraph from "../Graphs/Stats";
 import ArchiveSearch from "../Archive/ArchiveSearch";
 import ArchiveVideo from "../Archive/ArchiveVideo";
-import Padination from "../Pagination";
+import Pagination from "../Pagination";
+import RollUp from "../RollUp";
+
+import statisticIcon from "./icons/statistic.svg";
+import videoListIcon from "./icons/videolist.svg";
+import { cn } from "@bem-react/classname";
+import AimBlock from "../AimBlock";
 
 export default function DiaryStart() {
+    const cnDiaryStart = cn("DiaryStart");
     const { data } = useGetVideoByUserQuery();
     const userVideos = data?.data?.videos as IVideoFromBack[];
 
@@ -56,20 +63,48 @@ export default function DiaryStart() {
 
     return (
         <div>
-            <StatsGraph data={stats.data.values} />
+            <div className={cnDiaryStart("text-h1")}>Достижения</div>
+            <div className={cnDiaryStart("banner")}>
+                {/* -------------------------------- Баннер -------------------------------- */}
+            </div>
+
+            <div className={cnDiaryStart("aims")}>
+                <AimBlock />
+            </div>
+
+            <RollUp title="Видео на анализе" icon={videoListIcon}>
+                <div>Нет видео на анализе</div>
+            </RollUp>
+            <RollUp title="Статистика за неделю" icon={statisticIcon}>
+                <StatsGraph data={stats.data.values} />
+            </RollUp>
+
+            <div>
+                <div className={cnDiaryStart("text-h1")}>
+                    Архив проверок{" "}
+                    {videos && (
+                        <span className={cnDiaryStart("text-gray")}>
+                            {videos.length}{" "}
+                        </span>
+                    )}
+                </div>
+            </div>
+
             <ArchiveSearch updateSearch={updateSearch} />
 
             {userVideos && <ArchiveVideo video={result} />}
             {/* {userVideos &&
                 currentVideos.map((el, ind) => <ArchiveVideo video={result} />)} */}
-            <Padination
-                videosPerPage={videosPerPage}
-                totalVideos={videos.length}
-                paginate={paginate}
-                funcNextPage={nextPage}
-                funcPrevPage={prevPage}
-                currentPage={currentPage}
-            />
+            {videos && (
+                <Pagination
+                    videosPerPage={videosPerPage}
+                    totalVideos={videos.length}
+                    paginate={paginate}
+                    funcNextPage={nextPage}
+                    funcPrevPage={prevPage}
+                    currentPage={currentPage}
+                />
+            )}
         </div>
     );
 }

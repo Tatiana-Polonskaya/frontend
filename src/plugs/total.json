@@ -1,0 +1,17 @@
+{
+    "data": {
+        "values": {
+            "connectedness": 3,
+            "argumentativeness": 28,
+            "clarity": 34,
+            "dynamism": 51,
+            "persuasiveness": 73,
+            "communicative": 99,
+            "total_result": 55,
+            "big_conclusion": "Растущий талант выступлений",
+            "conclusion": "Вы уже достигли значительных успехов! Продолжайте в том же духе!"
+        }
+    },
+    "error": null,
+    "success": true
+}

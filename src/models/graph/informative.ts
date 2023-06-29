@@ -5,3 +5,11 @@ export type InformativeDataItem = {
     time_start: number;
     time_end: number;
 };
+
+export type InformativeJSON = {
+    values: InformativeDataItem[];
+    informative: number;
+    parasite: number; 
+    sounds: number;
+    empty: number;
+};

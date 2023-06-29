@@ -1,0 +1,60 @@
+.energy {
+    width: 100%;
+
+    &-marker {
+        display: flex;
+        background: #f7faff;
+        border-radius: 12px;
+        font-family: "Onest";
+        padding: 1rem;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    &-description {
+        // надо сделать динамически
+        width: 80%;
+        display: inline-block;
+        overflow: auto;
+        font-size: 16px;
+        line-height: 20px;
+        color: #17282f;
+        font-weight: 400;
+
+        &-bold {
+            font-weight: 500;
+        }
+    }
+
+    &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 0 0.5rem;
+        width: 190px;
+    }
+
+    &-color {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 10px;
+
+        &-item {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+    }
+
+    &-text {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: #37476a;
+    }
+
+    &-graph > img {
+        width: 100%;
+    }
+}

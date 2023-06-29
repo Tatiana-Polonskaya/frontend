@@ -1,0 +1,72 @@
+.TabItem {
+    font-family: "Montserrat Alternates";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+
+    &-value {
+        align-items: center;
+        padding: 6px 12px;
+        gap: 4px;
+        background: #4a1193;
+        border-radius: 40px;
+        color: #ffffff;
+        font-size: 14px;
+        line-height: 16px;
+    }
+    &-percent{
+        font-size: 20px;
+        font-family: Montserrat Alternates;
+        font-weight: 600; 
+    }
+
+    &-icon {
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &-tab-list-item {
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+
+        padding: 10px 10px;
+        margin-bottom: 8px;
+
+        gap: 10px;
+
+        cursor: pointer;
+
+        background: #e3e9f6;
+        box-shadow: 3px -1px 4px rgba(134, 151, 187, 0.3);
+        border-radius: 8px 8px 8px 8px;
+
+        font-family: "Montserrat Alternates";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: #37476a;
+
+        &_active {
+            cursor: pointer;
+
+            background-color: white;
+            border: solid white;
+            border-width: 1px 1px 0 1px;
+            border-radius: 8px 8px 0 0;
+
+            margin-bottom: 0;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 24px;
+            color: #37476a;
+        }
+    }
+}

@@ -1,0 +1,49 @@
+.blockEmotionalArousal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    gap: 16px;
+    width: 33.3%;
+    background: #F7FAFF;
+    border-radius: 32px;
+    margin: 5px;
+}
+.allEmotionalArousal{
+    display: flex;
+    justify-content: space-between ;
+    width: 100%;
+    background: #ffffff;
+}
+.textEmotionalArousal{
+
+
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #37476A;}
+.tEmotionalArousal{
+    font-family: 'Onest';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #7C8EB5;
+}
+.imkEmotionalArousal{
+    mask-image: linear-gradient(rgba( 0, 0, 0, 0.5) 0%, black 0);
+}
+.imkEmotionalArousal1{
+    mask-image: linear-gradient(rgba( 0, 0, 0, 0.5) 100%, black 0);
+}

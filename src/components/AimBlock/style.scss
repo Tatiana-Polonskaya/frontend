@@ -1,0 +1,141 @@
+.AimBlock {
+
+    &-row {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: start;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0;
+    }
+
+    &-title {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        gap:8px;
+        color: #37476A;
+        font-size: 16px;
+        font-family: "Montserrat Alternates";
+        font-weight: 600;
+        margin-right: 10px;
+    }
+
+    &-aims-count {
+        display: flex;
+        flex-flow: row nowrap;
+        gap:10px;
+
+        &-circle {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        
+            color: #7C8EB5;
+            font-size: 20px;
+            font-family: "Montserrat Alternates";
+            font-weight: 600;
+
+            border-radius: 70px;
+            background: rgba(173, 185, 212, 0.50);
+
+            cursor: pointer;
+
+            &_active {
+                color: #fff;
+                background: #2477F4;
+            }
+        }
+    }
+
+    &-grow {
+        flex-grow: 1;
+
+    }
+
+    &-btn {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        gap:10px;
+        color: #FFF;
+        font-size: 14px;
+        font-family: "Montserrat Alternates";
+        font-weight: 600;
+        border-radius: 8px;
+        background: #FFB800;
+        padding: 6px 8px 6px 12px;
+
+        cursor: pointer;
+
+    }
+
+
+
+    &-steps {
+        margin: 10px 0;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        gap: 10px;
+        width: 100%;
+
+        &-item {
+            padding: 4px;
+            border-radius: 8px;
+            color: #7C8EB5;
+            font-size: 20px;
+            font-family: "Onest";
+            font-weight: 500;
+            flex-grow: 1;
+            text-align: center;
+
+            &_active {
+                background: rgba(36, 119, 244, 0.10);
+                color: #2477F4;
+            }
+        }
+    }
+
+    &-modal{
+        max-width: 800px;
+        padding: 0 16px;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        &-btn{
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+
+            gap: 8px;
+            height: 40px;
+            width: 100%;
+            border-radius: 9px;
+
+            svg{
+                display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            }
+
+
+            &-text{
+                font-size: 16px;
+                font-family: "Montserrat Alternates";
+                font-weight: 500;
+            }
+
+        }
+    }
+
+}

@@ -1,0 +1,17 @@
+export enum TYPE_REPORT {
+    argumentativeness = "argumentativeness",
+    clarity = "clarity",
+    communicative = "communicative",
+    confidence = "confidence",
+    congruence = "congruence",
+    connectivity = "connectivity",
+    eloquence = "eloquence",
+    emotional_arousal = "emotional-arousal",
+    emotionality = "emotionality",
+    energy = "energy",
+    expressiveness = "expressiveness",
+    informative = "informative",
+    non_monotony = "non-monotony",
+    total = "total",
+    unity_of_style = "unity-of-style",
+}

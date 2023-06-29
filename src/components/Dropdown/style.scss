@@ -1,4 +1,5 @@
 .dropdown {
+    font-family: "Onest";
     width: 100%;
     // height: 100%;
     position: relative;
@@ -27,6 +28,7 @@
     }
 
     &-header {
+        font-family: "Onest";
         width: 100%;
         display: flex;
         align-items: center;
@@ -44,10 +46,14 @@
     }
 
     &-subtitle {
+        font-family: "Onest";
         width: 100%;
         font-weight: 400;
         font-size: 20px;
         line-height: 25px;
         color: #7c8eb5;
+    }
+    &-invisible {
+        width: 100%;
     }
 }

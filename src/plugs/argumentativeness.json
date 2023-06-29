@@ -1,0 +1,193 @@
+{
+  "data": {
+    "values": [
+      {
+        "seq_number": 0,
+        "time_start": "00:00",
+        "text": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "value": 3,
+        "link": "http://0.0.0.0/iaculis."
+      },
+      {
+        "seq_number": 10,
+        "time_start": "00:10",
+        "text": "In mollis nunc sed id, semper risus in. Aliquam etiam, erat velit scelerisque.",
+        "value": 1,
+        "link": "http://0.0.0.0/facilisis"
+      },
+      {
+        "seq_number": 20,
+        "time_start": "00:20",
+        "text": "Habitant morbi tristique, senectus et netus et. Justo laoreet sit amet cursus sit amet, dictum sit. Elit sed vulputate mi sit.",
+        "value": 3,
+        "link": "http://0.0.0.0/duis"
+      },
+      {
+        "seq_number": 30,
+        "time_start": "00:30",
+        "text": "In mollis nunc sed id, semper risus in. Aliquam etiam, erat velit scelerisque.",
+        "value": 0,
+        "link": "http://0.0.0.0/commodo,"
+      },
+      {
+        "seq_number": 40,
+        "time_start": "00:40",
+        "text": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "value": 2,
+        "link": "http://0.0.0.0/commodo,"
+      },
+      {
+        "seq_number": 50,
+        "time_start": "00:50",
+        "text": "Egestas dui id ornare arcu. Arcu non sodales, neque sodales ut. Magnis dis parturient, montes nascetur ridiculus.",
+        "value": 3,
+        "link": "http://0.0.0.0/rhoncus."
+      },
+      {
+        "seq_number": 60,
+        "time_start": "01:00",
+        "text": "Habitant morbi tristique senectus et netus et. Sit amet nulla, facilisi morbi tempus iaculis.",
+        "value": 1,
+        "link": "http://0.0.0.0/veniam,"
+      },
+      {
+        "seq_number": 70,
+        "time_start": "01:10",
+        "text": "Tempor orci dapibus, ultrices in. Mus mauris vitae, ultricies leo integer.",
+        "value": 3,
+        "link": "http://0.0.0.0/sit."
+      },
+      {
+        "seq_number": 80,
+        "time_start": "01:20",
+        "text": "Facilisi nullam vehicula, ipsum a arcu cursus. Ultricies lacus sed turpis, tincidunt id aliquet risus feugiat. Vel pretium lectus quam id.",
+        "value": 0,
+        "link": "http://0.0.0.0/magna"
+      },
+      {
+        "seq_number": 90,
+        "time_start": "01:30",
+        "text": "Neque aliquam, vestibulum morbi blandit cursus risus, at. Fames ac turpis egestas, maecenas pharetra.",
+        "value": 1,
+        "link": "http://0.0.0.0/ornare"
+      },
+      {
+        "seq_number": 100,
+        "time_start": "01:40",
+        "text": "Scelerisque fermentum, dui faucibus in ornare quam, viverra orci. Nisl nunc mi ipsum faucibus vitae.",
+        "value": 3,
+        "link": "http://0.0.0.0/ultrices."
+      },
+      {
+        "seq_number": 110,
+        "time_start": "01:50",
+        "text": "Habitant morbi tristique senectus et netus et. Sit amet nulla, facilisi morbi tempus iaculis.",
+        "value": 0,
+        "link": "http://0.0.0.0/sit"
+      },
+      {
+        "seq_number": 120,
+        "time_start": "02:00",
+        "text": "A diam maecenas, sed enim ut sem. Vel risus commodo, viverra maecenas.",
+        "value": 3,
+        "link": "http://0.0.0.0/nulla"
+      },
+      {
+        "seq_number": 130,
+        "time_start": "02:10",
+        "text": "Tristique senectus et netus, et malesuada fames. Molestie nunc non, blandit massa enim nec.",
+        "value": 2,
+        "link": "http://0.0.0.0/vel"
+      },
+      {
+        "seq_number": 140,
+        "time_start": "02:20",
+        "text": "Arcu risus quis varius quam. Dignissim, enim sit amet venenatis urna cursus eget nunc. Ac tortor dignissim convallis aenean et tortor at.",
+        "value": 1,
+        "link": "http://0.0.0.0/laoreet"
+      },
+      {
+        "seq_number": 150,
+        "time_start": "02:30",
+        "text": "Scelerisque fermentum, dui faucibus in ornare quam, viverra orci. Nisl nunc mi ipsum faucibus vitae.",
+        "value": 3,
+        "link": "http://0.0.0.0/ultricies"
+      },
+      {
+        "seq_number": 160,
+        "time_start": "02:40",
+        "text": "Egestas dui id ornare arcu. Arcu non sodales, neque sodales ut. Magnis dis parturient, montes nascetur ridiculus.",
+        "value": 3,
+        "link": "http://0.0.0.0/est"
+      },
+      {
+        "seq_number": 170,
+        "time_start": "02:50",
+        "text": "Duis ultricies lacus, sed turpis tincidunt. Fermentum dui faucibus in ornare quam. Adipiscing commodo elit at imperdiet dui accumsan sit.",
+        "value": 1,
+        "link": "http://0.0.0.0/vestibulum"
+      },
+      {
+        "seq_number": 180,
+        "time_start": "03:00",
+        "text": "Dui accumsan sit amet, nulla facilisi morbi. Quisque id diam, vel quam elementum pulvinar.",
+        "value": 2,
+        "link": "http://0.0.0.0/commodo,"
+      },
+      {
+        "seq_number": 190,
+        "time_start": "03:10",
+        "text": "Sit amet mattis vulputate, enim nulla aliquet porttitor lacus. Risus viverra, adipiscing at in tellus integer.",
+        "value": 1,
+        "link": "http://0.0.0.0/mauris"
+      },
+      {
+        "seq_number": 200,
+        "time_start": "03:20",
+        "text": "Ornare aenean, euismod elementum nisi. Pharetra magna ac placerat, vestibulum lectus mauris ultrices.",
+        "value": 1,
+        "link": "http://0.0.0.0/eget"
+      },
+      {
+        "seq_number": 210,
+        "time_start": "03:30",
+        "text": "In mollis nunc sed id, semper risus in. Aliquam etiam, erat velit scelerisque.",
+        "value": 2,
+        "link": "http://0.0.0.0/ultricies."
+      },
+      {
+        "seq_number": 220,
+        "time_start": "03:40",
+        "text": "Cras sed felis eget velit, aliquet sagittis. Dui ut ornare lectus sit amet, est placerat in.",
+        "value": 0,
+        "link": "http://0.0.0.0/Duis"
+      },
+      {
+        "seq_number": 230,
+        "time_start": "03:50",
+        "text": "Cras sed felis eget velit, aliquet sagittis. Dui ut ornare lectus sit amet, est placerat in.",
+        "value": 1,
+        "link": "http://0.0.0.0/mus"
+      },
+      {
+        "seq_number": 240,
+        "time_start": "04:00",
+        "text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "value": 2,
+        "link": "http://0.0.0.0/enim"
+      },
+      {
+        "seq_number": 250,
+        "time_start": "04:10",
+        "text": "Neque aliquam, vestibulum morbi blandit cursus risus, at. Fames ac turpis egestas, maecenas pharetra.",
+        "value": 2,
+        "link": "http://0.0.0.0/at"
+      }
+    ],
+    "originality": 5.215350501608118,
+    "borrowing": 67.52924048188392,
+    "citation": 57.93850847297279
+  },
+  "error": null,
+  "success": true
+}

@@ -16,7 +16,7 @@ export const videoApi = createApi({
                 bodyFormData.append("file", file);
                 console.log({ bodyFormData, file });
                 return {
-                    url: "api/video/upload",
+                    url: "/api/video/upload",
                     method: "POST",
                     params: { title, duration, description },
                     body: bodyFormData,
@@ -27,7 +27,7 @@ export const videoApi = createApi({
         getVideoById: build.query<IResponse<void>, string>({
             query: (videoId) => {
                 return {
-                    url: `api/video/${videoId}`,
+                    url: `/api/video/${videoId}`,
                     method: "GET",
                 };
             },
@@ -35,7 +35,7 @@ export const videoApi = createApi({
         getVideoByUser: build.query<IResponse<IVideoUser>, void>({
             query: () => {
                 return {
-                    url: `api/video/user`,
+                    url: `/api/video/user`,
                     method: "GET",
                 };
             },
@@ -52,7 +52,7 @@ export const videoApi = createApi({
         updateVideoInfoById: build.mutation<IResponse<void>, IVideoUploadItem>({
             query: ({id,title, description}) => {
                 return {
-                    url: `api/video/`,
+                    url: `/api/video/`,
                     params: {id,title, description},
                     method: "PUT",
                 };
@@ -61,7 +61,7 @@ export const videoApi = createApi({
         deleteVideoById: build.mutation<IResponse<void>, string>({
             query: (id) => {
                 return {
-                    url: `api/video/`,
+                    url: `/api/video/`,
                     params: { id },
                     method: "DELETE",
                 };

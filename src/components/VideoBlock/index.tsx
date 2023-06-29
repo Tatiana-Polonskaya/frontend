@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
 import VideoItem from "./VideoItem";
-import Padination from "../Pagination";
+import Pagination from "../Pagination";
 import { cn } from "@bem-react/classname";
 import ModalWindow from "../ModalWindow/ModalWindow";
 
@@ -166,7 +166,7 @@ export default function VideoBlock() {
                 ))}
             </div>
 
-            <Padination
+            <Pagination
                 videosPerPage={videosPerPage}
                 totalVideos={videos.length}
                 paginate={paginate}

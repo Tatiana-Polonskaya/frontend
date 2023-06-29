@@ -1,27 +1,35 @@
 import { cn } from "@bem-react/classname";
-
 import GraphHelp from "../-Base/-Help";
 import GraphColor from "../../../models/graph/_colors";
 
 import "./style.scss";
-import { TimelineItem } from "../../../models/graph/timeline";
+import { convertTime } from "../../Analytics/helpers";
+// import { TimelineItem } from "../../../models/graph/timeline";
 
 const CN = cn("timeline-graph");
 
 type Props = {
-    startTime?: string;
-    endTime?: string;
+    startTime?: number;
+    endTime?: number;
     data: TimelineItem[];
 };
 
+type TimelineItem = {
+    id?: number;
+    text?: string;
+    time?: number;
+    color?: string;
+};
 export default function TimelineGraph({
-    startTime = "00:00",
-    endTime = "00:00",
+    startTime = 0,
+    endTime = 0,
     data,
 }: Props) {
+    const convertStart = convertTime(startTime);
+    const convertEnd = convertTime(endTime);
     return (
         <div className={CN()}>
-            <div className={CN("time")}>{startTime}</div>
+            <div className={CN("time")}>{convertStart}</div>
             <div className={CN("body")}>
                 {data.map((el) => (
                     <div
@@ -47,7 +55,7 @@ export default function TimelineGraph({
                     </div>
                 ))}
             </div>
-            <div className={CN("time")}>{endTime}</div>
+            <div className={CN("time")}>{convertEnd}</div>
         </div>
     );
 }

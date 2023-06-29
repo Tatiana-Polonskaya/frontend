@@ -1,0 +1,43 @@
+.ColorfulTabItem {
+    font-family: "Montserrat Alternates";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+
+    &-icon {
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &-tab-list-item {
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap:8px;
+        flex-grow: 1;
+
+        cursor: pointer;
+
+        color: #7c8eb5;
+        font-size: 14px;
+        font-family: "Montserrat Alternates";
+        font-weight: 600;
+
+        &_active {
+
+            background-color: #37476A;
+            border-radius: 8px; 
+            padding: 8px;
+
+            color: #fff;
+            font-size: 14px;
+            font-family: "Montserrat Alternates";
+            font-weight: 600;
+        }
+    }
+}

@@ -1,0 +1,119 @@
+.definition-description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: #f7faff;
+    border-radius: 12px;
+    margin-bottom: 8px;
+
+    &-description {
+        font-family: "Onest";
+        // надо сделать динамически
+        width: 80%;
+        display: inline-block;
+        overflow: auto;
+        font-size: 16px;
+        line-height: 20px;
+        color: #17282f;
+        font-weight: 400;
+
+        &-bold {
+            font-weight: 500;
+        }
+    }
+
+    &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 0 0.5rem;
+    }
+    &-marker {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        & > div:first-child {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+    }
+
+    &-title {
+        font-family: "Onest";
+
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: #37476a;
+
+        &-count {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+            color: #37476a;
+        }
+    }
+
+    &-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &-time {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 15px;
+        width: 50px;
+        height: 20px;
+        border-radius: 4px;
+    }
+
+    &-original {
+        background: #f7faff;
+        color: #7c8eb5;
+    }
+
+    &-citation {
+        color: #ffffff;
+        background: linear-gradient(48.4deg, #ffb800 -18.18%, #ff9900 105.3%);
+    }
+
+    &-selfCitation {
+        color: #ffffff;
+        background: linear-gradient(42.13deg, #8540fd -25.36%, #af1ff2 130.25%);
+    }
+
+    &-borrowing {
+        color: #ffffff;
+        background: linear-gradient(
+            32.08deg,
+            rgb(36, 119, 244) 0%,
+            rgb(58, 134, 250) 100%
+        );
+    }
+
+    &-citation_text {
+        & > a {
+            color: #f5b40c;
+        }
+    }
+
+    &-selfCitation_text {
+        & > a {
+            color: #9532f8;
+        }
+    }
+
+    &-borrowing_text {
+        & > a {
+            color: #2477f4;
+        }
+    }
+}

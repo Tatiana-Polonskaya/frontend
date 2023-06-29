@@ -17,6 +17,7 @@ type Props = {
     items: Record<string, number>[];
     colors?: Record<string, string>;
     range?: { min: number; max: number };
+    average?: number;
 };
 
 export default function LineGraph({
@@ -27,10 +28,12 @@ export default function LineGraph({
     colors,
     background,
     range,
+    average,
 }: Props) {
     return (
         <GraphBase descriptionX={descriptionX} descriptionY={descriptionY}>
-            {withMedian && <GraphMedian top="50%" />}
+            {/* придумать как тут задать медиану */}
+            {withMedian && <GraphMedian top={`${average}%`} />}
             <div className={CN("background")}>{background}</div>
             <ResponsiveContainer
                 width="100%"

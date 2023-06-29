@@ -18,3 +18,10 @@ export type EmotionalityDataItem = {
     seq_number: number;
     time_start: number;
 } & ChannelInfo;
+
+type Toteltem = Record<EmotionalityItem, number>;
+
+export type EmotionalityJSON = {
+    total: Toteltem,
+    values:EmotionalityDataItem[],
+}

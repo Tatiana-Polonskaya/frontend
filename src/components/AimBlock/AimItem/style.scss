@@ -1,0 +1,374 @@
+.AimItem {
+    padding: 16px;
+    border-radius: 16px;
+    background-color: #FFF;
+    width: 100%;
+
+    &-header {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 10px;
+
+        &-status {
+
+            border-radius: 6px;
+            background: #7C8EB5;
+            padding: 4px 12px;
+            color: #FFF;
+            font-size: 16px;
+            font-family: "Onest";
+            font-weight: 700;
+
+        }
+
+        &-type {
+            color: #7C8EB5;
+            font-size: 16px;
+            font-family: "Onest";
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 6px;
+            background: rgba(124, 142, 181, 0.20);
+        }
+
+        &-message {
+            flex-grow: 1;
+
+
+            &-text {
+                display: flex;
+                flex-flow: row nowrap;
+                gap: 6px;
+                color: #F35B60;
+                font-size: 16px;
+                font-family: "Onest";
+                padding: 4px 12px;
+                border-radius: 6px;
+                background: rgba(243, 91, 96, 0.05);
+
+
+            }
+
+        }
+
+        &-btn-show {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            color: #7C8EB5;
+            font-size: 14px;
+            padding: 4px 12px;
+            font-family: "Montserrat Alternates";
+            font-weight: 500;
+
+            cursor: pointer;
+
+            &-icon {
+                svg {
+                    display: flex;
+                    justify-content: start;
+                    align-items: start;
+                }
+
+                &_rotated {
+
+                    transform: rotate(-180deg);
+
+
+                }
+
+            }
+
+        }
+
+        &-title {
+            color: #37476A;
+            font-size: 20px;
+            font-family: "Montserrat Alternates";
+            font-weight: 600;
+        }
+
+        &-phrase {
+            color: #7C8EB5;
+            font-size: 16px;
+            font-family: "Onest";
+        }
+
+    }
+
+    &-row {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: start;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    &-padding {
+        margin: 40px 0 10px;
+        align-items: center;
+    }
+
+    &-steps {
+        margin: 10px 0;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        gap: 10px;
+        width: 100%;
+
+        &-item {
+            padding: 4px;
+            border-radius: 8px;
+            color: #7C8EB5;
+            font-size: 20px;
+            font-family: "Onest";
+            font-weight: 500;
+            flex-grow: 1;
+            text-align: center;
+
+            &_active {
+                background: rgba(36, 119, 244, 0.10);
+                color: #2477F4;
+            }
+        }
+    }
+
+    &-warning {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 6px;
+        margin: 8px 0;
+        border-radius: 6px;
+        background: rgba(255, 184, 0, 0.05);
+        padding: 4px 12px;
+        color: #D69C09;
+        font-size: 16px;
+        font-family: "Onest";
+    }
+
+    &-error-block{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: center;
+        gap:10px;
+        margin-top: 15px;
+
+        &-text{
+            color: #F35B60;
+            font-size: 20px;
+            font-family: "Onest";
+            text-align: center;
+        }
+    }
+
+    &-task-block {
+        margin: 15px 0;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: start;
+        gap: 10px;
+
+        &-item {
+            color: #37476A;
+            font-size: 20px;
+            font-family: "Onest";
+
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 10px;
+
+            &_done {
+                color: #07D07C;
+                font-size: 20px;
+                font-family: "Onest";
+                text-decoration: line-through;
+            }
+
+            svg {
+                display: flex;
+                justify-content: start;
+                align-items: start;
+                width: 20px;
+            }
+        }
+    }
+
+    &-params-block {
+        width: 400px;
+
+        &-arrow {
+            svg {
+                display: flex;
+                justify-content: start;
+                align-items: start;
+            }
+
+            &_rotated {
+                transform: rotate(-180deg);
+            }
+        }
+
+        &-grow {
+            flex-grow: 1;
+        }
+
+        &-title {
+            color: #7C8EB5;
+            font-size: 16px;
+            font-family: "Montserrat Alternates";
+            font-weight: 600;
+
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            cursor: pointer;
+        }
+
+        &-message {
+            color: #37476A;
+            font-size: 16px;
+            font-family: "Montserrat Alternates";
+            font-weight: 500;
+        }
+
+        &-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: repeat(6, 1fr);
+            gap: 10px 20px;
+            justify-items: start;
+            align-items: stretch;
+
+            &-item {
+                color: #37476A;
+                font-size: 14px;
+                font-family: "Montserrat Alternates";
+                font-weight: 500;
+
+                &-label {
+                    font-size: 14px;
+                    line-height: 21px;
+                    display: inline-block;
+                    vertical-align: top;
+                    cursor: pointer;
+                    display: inline-block;
+
+                }
+
+                &-input {
+                    --active: #37476A;
+                    --active-inner: #fff;
+                    --border: #BBC1E1;
+                    --border-hover: #275EFE;
+                    --background: #fff;
+                    --disabled: #F6F8FF;
+                    --disabled-inner: #E1E6F9;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    height: 21px;
+                    width: 21px;
+                    outline: none;
+                    display: inline-block;
+                    vertical-align: top;
+                    position: relative;
+                    margin-right: 8px;
+                    cursor: pointer;
+                    border: 1px solid var(--bc, var(--border));
+                    background: var(--b, var(--background));
+                    transition: background .3s, border-color .3s, box-shadow .2s;
+
+                    &:after {
+                        content: '';
+                        display: block;
+                        opacity: var(--o, 0);
+                        left: 0;
+                        top: 0;
+                        position: absolute;
+                        transition: transform var(--d-t, .3s) var(--d-t-e, ease), opacity var(--d-o, .2s);
+                    }
+
+                    &:checked {
+                        --o: 1;
+                        --b: var(--active);
+                        --bc: var(--active);
+                        --d-o: .3s;
+                        --d-t: .6s;
+                        --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+                    }
+
+                    &:disabled {
+                        --b: var(--disabled);
+                        cursor: not-allowed;
+                        opacity: .9;
+
+                        &:checked {
+                            --b: var(--disabled-inner);
+                            --bc: var(--border);
+                        }
+
+                        &+label {
+                            cursor: not-allowed;
+                        }
+                    }
+                }
+
+                // внутренности
+                &-input {
+                    border-radius: 4px;
+                    border: 2px solid #B2C2E4;
+
+                    &:after {
+                        width: 5px;
+                        height: 9px;
+                        border: 2px solid var(--active-inner);
+                        border-top: 0;
+                        border-left: 0;
+                        left: 5px;
+                        top: 3px;
+                        transform: rotate(var(--r, 20deg));
+                    }
+
+                    &:checked {
+                        --r: 45deg;
+                    }
+                }
+
+            }
+        }
+
+        &-btn{
+            gap:10px;
+            color: #FFF;
+            font-size: 14px;
+            font-family: "Montserrat Alternates";
+            font-weight: 600;
+            border-radius: 8px;
+            background: #FFB800;
+            padding: 6px 8px 6px 12px;
+    
+            cursor: pointer;
+        }
+    }
+
+    &-tooltip {
+        padding: 8px 12px;
+        max-width: 450px;
+        z-index: 1;
+        color: #37476A;
+        font-size: 12px;
+        font-family: "Onest";
+        font-weight: 500;
+        border-radius: 12px;
+        border: 1px solid #7C8EB5;
+        background: #FFF;
+        box-shadow: 2px 2px 12px 0px rgba(173, 185, 212, 0.30);
+    }
+
+}

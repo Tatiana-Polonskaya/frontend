@@ -23,6 +23,7 @@ import About from "./components/About";
 import RecodingSetup from "./components/RepetitionComponents/Setup";
 import RecodingPage from "./pages/RecodingPage";
 import DiaryStart from "./components/DiaryStart";
+import AnalysisReport from "./components/Report";
 
 
 export default function App() {
@@ -75,7 +76,7 @@ export default function App() {
                             <Route
                                 index={false}
                                 path=":id"
-                                element={<About />}
+                                element={<AnalysisReport />}
                             />
                         </Route>
                         <Route

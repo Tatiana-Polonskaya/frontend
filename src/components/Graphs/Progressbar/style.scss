@@ -1,0 +1,27 @@
+.ProgressBar {
+    height: 25px;
+    width: 100%;
+    background-color: #D4DFF4;
+    border-radius: 50px;
+
+    &-line{
+        height: 100%;
+        width:var(--value_line);
+        background-color: var(--color_line);
+        border-radius: 50px 0 0 50px;
+    }
+
+    &-label{
+        padding: 15px;
+        color: white;
+        font-weight: "bold";
+    }
+}
+
+@keyframes value_line {
+    from{--value_line:0px}
+}
+
+@keyframes color_line {
+    from{--color_line:#000}
+}

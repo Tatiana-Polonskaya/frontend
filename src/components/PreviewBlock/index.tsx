@@ -20,7 +20,7 @@ type IPreviewBlock = {
 
 const NORM_COUNT_MINUTES = 15;
 
-function getPrettyDuration(seconds: number): number {
+export function getPrettyDuration(seconds: number): number {
     return Math.floor((seconds + 1) / 60);
 }
 

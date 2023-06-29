@@ -33,7 +33,7 @@ const customFetchBase: BaseQueryFn<
 
     // condition for token refreshing
     if (
-        // (data &&
+        data &&
         !data.success &&
         (data.error?.code === 10009 || data.error?.code === 403)
         // || [4, 5].includes(+(result.meta!.response!.status / 100).toFixed(0)) // check if status code starts with 4 or 5

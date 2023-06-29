@@ -11,8 +11,6 @@ import emotionalityMockData from "./mocks/_emotionality";
 import nonMonotonyMockData from "./mocks/_non_monotony";
 import souseijiMockData from "./mocks/_souseiji";
 import confidenceMockData from "./mocks/_confidence";
-
-import InformativeGraph from "../../components/Graphs/Informative";
 import ConnectivityGraph from "../../components/Graphs/Connectivity";
 import ClarityGraph from "../../components/Graphs/Clarity";
 import NonMonotonyGraph from "../../components/Graphs/NonMonotony";
@@ -46,16 +44,16 @@ export default function TestPage() {
                 <br />
                 <br />
             </p>
-            <TimelineGraph
+            {/* <TimelineGraph
                 data={souseijiMockData}
                 startTime="00:00"
                 endTime="15:00"
-            />
+            /> */}
             <br />
             <GraphContext.Provider value={{ currentTime, setCurrentTime }}>
                 <div>
                     <span>Уверенность</span>
-                    <ConfidenceGraph data={confidenceMockData} />
+                    <ConfidenceGraph data={confidenceMockData} average={30} />
                 </div>
                 <div>
                     <span>немонотонность</span>
@@ -122,7 +120,6 @@ export default function TestPage() {
 
                 <div>
                     <span>информативность</span>
-                    <InformativeGraph items={informativeMockData} />
                 </div>
                 <div>
                     <span>связность</span>

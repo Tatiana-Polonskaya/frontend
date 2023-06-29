@@ -1,0 +1,28 @@
+.ColorfulTabs{
+
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #37476A;
+    width: 100%;
+
+    &-list {
+        display: flex;
+        justify-content: space-around;
+        flex-flow: row nowrap;
+        gap: 25px;
+        width: 100%;
+        padding: 6px; 
+
+        border-radius: 12px;
+        background: #E4EAF5; 
+    }
+
+    &-content {
+        width: 100%;
+        display: flex;
+        padding: 16px;
+    }
+}

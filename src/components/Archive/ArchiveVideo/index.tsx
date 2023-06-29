@@ -67,7 +67,7 @@ export default function ArchiveVideo({ video }: Props) {
         console.log(tickedVideo);
     };
 
-    return video.length !== 0 ? (
+    return video && video.length !== 0 ? (
         <>
             {video.map((el, ind) => (
                 <div key={ind} className={cnArchiveVideo()}>
@@ -88,6 +88,7 @@ export default function ArchiveVideo({ video }: Props) {
                         </Fragment>
                     </div>
                     <DescriptionArchiveVideo
+                        id={el.id}
                         title={`${el.title}`}
                         time={convertTime(el.duration)}
                         date={convertDate(el.upload_date)}
