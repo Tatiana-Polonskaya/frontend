@@ -5,7 +5,6 @@ enum HType {
 }
 type HItemValues = Record<HType, number>;
 
-
 export enum NonMonotonyType {
     RATE = "rate",
     VOLUME = "volume",
@@ -20,5 +19,5 @@ export type NonMonotonyDataItem = {
 } & ExtendWithType;
 
 export type NonMonotonyJSON = {
-    values:NonMonotonyDataItem;
+    values: NonMonotonyDataItem[];
 } & HItemValues;
