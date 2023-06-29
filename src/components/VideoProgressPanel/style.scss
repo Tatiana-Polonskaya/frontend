@@ -1,0 +1,148 @@
+@property --fs-t {
+    syntax: "<string>";
+    inherits: true;
+    initial-value: 0;
+}
+@property --lh-t {
+    syntax: "<string>";
+    inherits: true;
+    initial-value: 0;
+}
+@property --w {
+    syntax: "<string>";
+    inherits: true;
+    initial-value: 0;
+}
+@property --g {
+    syntax: "<string>";
+    inherits: true;
+    initial-value: 0;
+}
+
+.video-panel {
+    --fs-t: 16px;
+    --lh-t: 17px;
+    --g: 1em;
+    --w: 1248px;
+
+    padding-top: 8px;
+
+    &-analyze-row {
+        // width: 100%;
+        width: var(--w);
+        padding-top: 19.5px;
+
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: var(--g);
+        justify-items: stretch;
+        align-items: start;
+        justify-content: space-between;
+
+        font-family: "Montserrat Alternates";
+
+        &-item {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            p {
+                font-style: normal;
+                font-weight: 600;
+                font-size: var(--fs-t);
+                line-height: var(--lh-t);
+
+                display: flex;
+                align-items: center;
+                text-align: center;
+                color: #37476a;
+            }
+        }
+    }
+}
+
+@property --p {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+@property --w-i {
+    syntax: "<string>";
+    inherits: true;
+    initial-value: 0;
+}
+@property --b {
+    syntax: "<string>";
+    inherits: true;
+    initial-value: 0;
+}
+@property --fs-v {
+    syntax: "<string>";
+    inherits: true;
+    initial-value: 0;
+}
+@property --lh-v {
+    syntax: "<string>";
+    inherits: true;
+    initial-value: 0;
+}
+
+.pie {
+    --p: 10;
+    --b: 15px;
+    --c: #2477f4;
+    --w-i: 100px;
+    --fs-v: 16px;
+    --lh-v: 20px;
+
+    width: var(--w-i);
+    aspect-ratio: 1;
+    position: relative;
+    display: inline-grid;
+    margin: 5px;
+    place-content: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--fs-v);
+    line-height: var(--lh-v);
+    color: #2477f4;
+}
+.pie:before,
+.pie:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+.pie:before {
+    inset: 0;
+    background: radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b)
+            var(--b) no-repeat,
+        conic-gradient(var(--c) calc(var(--p) * 1%), #0000 0);
+    -webkit-mask: radial-gradient(
+        farthest-side,
+        #0000 calc(99% - var(--b)),
+        #000 calc(100% - var(--b))
+    );
+    mask: radial-gradient(
+        farthest-side,
+        #0000 calc(99% - var(--b)),
+        #000 calc(100% - var(--b))
+    );
+}
+.pie:after {
+    inset: calc(50% - var(--b) / 2);
+    background: var(--c);
+    transform: rotate(calc(var(--p) * 3.6deg))
+        translateY(calc(50% - var(--w-i) / 2));
+}
+.animate {
+    animation: p 1s 0.4s both;
+}
+
+@keyframes p {
+    from {
+        --p: 0;
+    }
+}

@@ -24,4 +24,29 @@
             color: white;
         }
     }
+    &-item-stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 4px;
+        margin: 6px;
+        width: 60px;
+        gap: 1px;
+
+        color: #adb9d4;
+        background-color: #fff;
+
+        &_first {
+            // margin-left: 10px;
+        }
+        & > span {
+            color: #adb9d480;
+        }
+
+        &_selected {
+            background-color: #ffb800;
+            color: white;
+        }
+    }
 }

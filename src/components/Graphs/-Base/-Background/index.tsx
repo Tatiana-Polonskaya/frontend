@@ -7,11 +7,13 @@ const CN = cn("base-graph-background");
 type Props = {
     sectionsVert?: number;
     sectionsHorz?: number;
+    stats: string;
 };
 
 export default function BaseGraphBackground({
     sectionsVert = 1,
     sectionsHorz = 0,
+    stats,
 }: Props) {
     return (
         <div className={CN()}>
@@ -19,7 +21,10 @@ export default function BaseGraphBackground({
                 .fill(null)
                 .map((_, idx) => (
                     <div
-                        className={CN("section", { first: idx === 0 })}
+                        className={CN(
+                            stats !== "st" ? "section" : "section-stats",
+                            { first: idx === 0 }
+                        )}
                         key={idx}
                     >
                         {!!sectionsHorz && (

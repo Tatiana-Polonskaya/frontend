@@ -1,0 +1,52 @@
+.archive-video-description {
+    font-family: "Onest";
+    width: 180px;
+    padding: 16px 0px 8px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-title {
+        color: #000;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    &-time-block {
+        margin-top: 8px;
+        display: flex;
+        gap: 10px;
+    }
+
+    &-date {
+        color: #7c8eb5;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    &-time {
+        color: #2477f4;
+        font-size: 16px;
+    }
+
+    &-btn {
+        margin-top: auto;
+        display: flex;
+        width: 120px;
+        padding: 6px 8px 6px 12px;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        border-radius: 8px;
+        background: #ffb800;
+
+        &-descr {
+            color: #fff;
+            font-size: 14px;
+            font-family: "Montserrat Alternates";
+            font-weight: 600;
+        }
+        &-icon {
+        }
+    }
+}

@@ -79,6 +79,7 @@ export default function GraphBase({
                     <BaseGraphBackground
                         sectionsVert={descriptionX?.length}
                         sectionsHorz={descriptionY?.length}
+                        stats={""}
                     />
                     {props.children}
                 </div>
@@ -94,6 +95,7 @@ export default function GraphBase({
                 <BaseGraphXDescription
                     data={descriptionX}
                     selected={Math.floor(currentTime / 10)}
+                    stats={""}
                 />
             </div>
         </div>
