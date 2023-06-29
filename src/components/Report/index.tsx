@@ -102,7 +102,10 @@ import noteIcon from "./assets/note.svg";
 import arrowLeft from "./assets/arrowLeft.svg";
 import "./style.scss";
 import { TotalGraphJSON } from "../../models/graph/total";
-import { useGetVideoByIdQuery, useGetVideoInfoByIdQuery } from "../../store/api/userVideo";
+import {
+    useGetVideoByIdQuery,
+    useGetVideoInfoByIdQuery,
+} from "../../store/api/userVideo";
 import { IVideoInfo } from "../../models/video";
 import { getPrettyDuration } from "../PreviewBlock";
 import ReactPlayer from "react-player";
@@ -117,9 +120,11 @@ export default function AnalysisReport() {
     const cnReport = cn("AnalysisReport");
 
     const params = useParams();
-    const idVideo = params.id ? params.id : "ec9a839f-55c4-4504-9fdf-e6ff3c49766f"; 
-    
-    const {data} = useGetVideoInfoByIdQuery(idVideo);
+    const idVideo = params.id
+        ? params.id
+        : "ec9a839f-55c4-4504-9fdf-e6ff3c49766f";
+
+    const { data } = useGetVideoInfoByIdQuery(idVideo);
     const videoInfo = data?.data as IVideoInfo;
 
     const navigate = useNavigate();
@@ -248,6 +253,7 @@ export default function AnalysisReport() {
             setTotalData(TotalDataFromBack.data.data);
     }, [TotalDataFromBack]);
 
+    // console.log(connectivityData);
     return (
         <div className={cnReport()}>
             <div className={cnReport("btn-back")}>
@@ -264,19 +270,22 @@ export default function AnalysisReport() {
                 <div className={cnReport("whiteBlock")}>
                     <div className={cnReport("video-block")}>
                         <ReactPlayer
-                                className={cnReport("video")}
-                                width={"100%"}
-                                height="100%"
-                                url={`api/video/${idVideo}`}
-                                controls={true}
+                            className={cnReport("video")}
+                            width={"100%"}
+                            height="100%"
+                            url={`api/video/${idVideo}`}
+                            controls={true}
                         />
 
-
                         <div className={cnReport("video-block-title")}>
-                            {videoInfo ? videoInfo.title: ""}
+                            {videoInfo ? videoInfo.title : ""}
                         </div>
                         <div className={cnReport("video-block-description")}>
-                            {videoInfo ? videoInfo.upload_date: ""} • {videoInfo?getPrettyDuration(Number(videoInfo.duration)): ""} минут
+                            {videoInfo ? videoInfo.upload_date : ""} •{" "}
+                            {videoInfo
+                                ? getPrettyDuration(Number(videoInfo.duration))
+                                : ""}{" "}
+                            минут
                         </div>
                     </div>
                 </div>
@@ -324,7 +333,7 @@ export default function AnalysisReport() {
                         {connectivityData && (
                             <Dropdown
                                 title={"Последовательность"}
-                                subtitle={`Потеря логической связи в ...${"*"} высказываниях`}
+                                subtitle={`Потеря логической связи в ${connectivityData.controversy} высказываниях`}
                                 visible={
                                     <MainSubsequence
                                         data={connectivityData.values.map(

@@ -82,9 +82,9 @@ export default function DiaryStart() {
             <div>
                 <div className={cnDiaryStart("text-h1")}>
                     Архив проверок{" "}
-                    {videos && (
+                    {userVideos && (
                         <span className={cnDiaryStart("text-gray")}>
-                            {videos.length}{" "}
+                            {userVideos.length}
                         </span>
                     )}
                 </div>

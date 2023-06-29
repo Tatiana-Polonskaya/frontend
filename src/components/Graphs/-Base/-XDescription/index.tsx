@@ -21,8 +21,6 @@ export default function BaseGraphXDescription({
         };
     });
 
-    console.log(curTime!.reverse());
-
     return (
         <div className={CN()}>
             {/* {data?.map((el, idx) => ( */}
