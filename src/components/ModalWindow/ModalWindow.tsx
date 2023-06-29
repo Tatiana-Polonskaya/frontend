@@ -6,6 +6,7 @@ import { cn } from "@bem-react/classname";
 interface IWindowModalProps {
     isVisible: boolean;
     title?: string;
+    icon?:string;
     footer?: ReactElement;
     onClose: Function;
     children?: ReactNode;
@@ -15,6 +16,7 @@ interface IWindowModalProps {
 export default function ModalWindow({
     isVisible = false,
     title,
+    icon=process.env.PUBLIC_URL +"/images/upload-icon.svg",
     footer,
     onClose,
     children,
@@ -43,10 +45,7 @@ export default function ModalWindow({
                 {title && (
                     <div className={cnModalWindow("header")}>
                         <ReactSVG
-                            src={
-                                process.env.PUBLIC_URL +
-                                "/images/upload-icon.svg"
-                            }
+                            src={icon}
                             className={cnModalWindow("header-icon")}
                         />
                         <span className={cnModalWindow("header-title")}>

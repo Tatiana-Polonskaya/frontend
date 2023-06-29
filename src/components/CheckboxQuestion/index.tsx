@@ -77,7 +77,7 @@ export default function CheckboxQuestion(props: Props) {
 
     return (
         <div className={cnMain()}>
-            <h3 className={cnMain("title")}>{props.question.title}</h3>
+            {props.question.title.length > 0 && (<h3 className={cnMain("title")}>{props.question.title}</h3>)}
             <div className={cnMain(`${props.question.type_choice}`)}>
                 {props.question.choices.map((el, index) => (
                     <div key={el.id} className={cnMain("block-answers-item")}>
