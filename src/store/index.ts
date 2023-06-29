@@ -40,7 +40,7 @@ export const store = configureStore({
             accountApi.middleware,
             userApi.middleware,
 
-            reportApi.middleware
+            reportApi.middleware,
 
             surveyApi.middleware,
             videoApi.middleware,

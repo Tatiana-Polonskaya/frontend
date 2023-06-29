@@ -21,7 +21,7 @@ import { ExpressivenessJSON } from "../../../models/graph/expressiveness";
 import { CongruenceJSON } from "../../../models/graph/congruence";
 
 export const reportApi = createApi({
-    reducerPath: "api/video/",
+    reducerPath: "/api/video/",
     baseQuery: customFetchBase,
     endpoints: (build) => ({
         getArgumentativenessById: build.query<
@@ -29,14 +29,14 @@ export const reportApi = createApi({
             string
         >({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.argumentativeness}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.argumentativeness}`,
                 params: { id },
                 method: "GET",
             }),
         }),
         getClarityById: build.query<IResponse<ClarityJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.clarity}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.clarity}`,
                 params: { id },
                 method: "GET",
             }),
@@ -44,7 +44,7 @@ export const reportApi = createApi({
         getCommunicativeById: build.query<IResponse<CommunicativeJSON>, string>(
             {
                 query: (id) => ({
-                    url: `api/video/${id}/report/${TYPE_REPORT.communicative}`,
+                    url: `/api/video/${id}/report/${TYPE_REPORT.communicative}`,
                     params: { id },
                     method: "GET",
                 }),
@@ -52,28 +52,28 @@ export const reportApi = createApi({
         ),
         getConfidenceById: build.query<IResponse<ConfidenceJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.confidence}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.confidence}`,
                 params: { id },
                 method: "GET",
             }),
         }),
         getCongruenceById: build.query<IResponse<CongruenceJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.congruence}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.congruence}`,
                 params: { id },
                 method: "GET",
             }),
         }),
         getConnectivityById: build.query<IResponse<ConnectivityJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.connectivity}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.connectivity}`,
                 params: { id },
                 method: "GET",
             }),
         }),
         getEloquenceById: build.query<IResponse<EloquenceJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.eloquence}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.eloquence}`,
                 params: { id },
                 method: "GET",
             }),
@@ -83,21 +83,21 @@ export const reportApi = createApi({
             string
         >({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.emotional_arousal}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.emotional_arousal}`,
                 params: { id },
                 method: "GET",
             }),
         }),
         getEmotionalityById: build.query<IResponse<EmotionalityJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.emotionality}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.emotionality}`,
                 params: { id },
                 method: "GET",
             }),
         }),
         getEnergyById: build.query<IResponse<EnergyJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.energy}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.energy}`,
                 params: { id },
                 method: "GET",
             }),
@@ -107,35 +107,35 @@ export const reportApi = createApi({
             string
         >({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.expressiveness}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.expressiveness}`,
                 params: { id },
                 method: "GET",
             }),
         }),
         getInformativeById: build.query<IResponse<InformativeJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.informative}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.informative}`,
                 params: { id },
                 method: "GET",
             }),
         }),
         getNonMonotonyById: build.query<IResponse<NonMonotonyJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.non_monotony}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.non_monotony}`,
                 params: { id },
                 method: "GET",
             }),
         }),
         getTotalById: build.query<IResponse<TotalGraphJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.total}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.total}`,
                 params: { id },
                 method: "GET",
             }),
         }),
         getUnityOfStyleById: build.query<IResponse<UnityOfStyleJSON>, string>({
             query: (id) => ({
-                url: `api/video/${id}/report/${TYPE_REPORT.unity_of_style}`,
+                url: `/api/video/${id}/report/${TYPE_REPORT.unity_of_style}`,
                 params: { id },
                 method: "GET",
             }),

@@ -13,6 +13,7 @@ enum RoutesEnum {
     REPETITION = "/repetition",
     SETTINGS = "/settings",
     RECODING="/recoding",
+    REPORT="/report",
 
     TEST_GRAPH = "/test-graph",
 

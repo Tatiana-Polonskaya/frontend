@@ -44,7 +44,7 @@ import {
 } from "react";
 import SpeechTranscription from "../SpeechTranscription";
 import VideoNotice from "../VideoNotice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import CommunicativeNorm from "../Graphs/communicativeNorm";
 import Eloquence from "../Graphs/eloquence";
@@ -102,6 +102,10 @@ import noteIcon from "./assets/note.svg";
 import arrowLeft from "./assets/arrowLeft.svg";
 import "./style.scss";
 import { TotalGraphJSON } from "../../models/graph/total";
+import { useGetVideoByIdQuery, useGetVideoInfoByIdQuery } from "../../store/api/userVideo";
+import { IVideoInfo } from "../../models/video";
+import { getPrettyDuration } from "../PreviewBlock";
+import ReactPlayer from "react-player";
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
@@ -112,7 +116,11 @@ export const VideoTimeContext = createContext({
 export default function AnalysisReport() {
     const cnReport = cn("AnalysisReport");
 
-    const idVideo = "ec9a839f-55c4-4504-9fdf-e6ff3c49766f"; // get from GET PARAMS ACCODING TO PAGE
+    const params = useParams();
+    const idVideo = params.id ? params.id : "ec9a839f-55c4-4504-9fdf-e6ff3c49766f"; 
+    
+    const {data} = useGetVideoInfoByIdQuery(idVideo);
+    const videoInfo = data?.data as IVideoInfo;
 
     const navigate = useNavigate();
 
@@ -255,18 +263,20 @@ export default function AnalysisReport() {
             <div className={cnReport("header")}>
                 <div className={cnReport("whiteBlock")}>
                     <div className={cnReport("video-block")}>
-                        <img
-                            className={cnReport("video")}
-                            src={videoPic}
-                            alt="videoPic"
+                        <ReactPlayer
+                                className={cnReport("video")}
+                                width={"100%"}
+                                height="100%"
+                                url={`api/video/${idVideo}`}
+                                controls={true}
                         />
 
+
                         <div className={cnReport("video-block-title")}>
-                            РОДИТЕЛИ И ДЕТИ - ПРИЧИНЫ ПРОБЛЕМ ВО
-                            ВЗАИМООТНОШЕНИЯХ | Ошибки Родителей | Психология
+                            {videoInfo ? videoInfo.title: ""}
                         </div>
                         <div className={cnReport("video-block-description")}>
-                            1.2 Гб • 28 минут
+                            {videoInfo ? videoInfo.upload_date: ""} • {videoInfo?getPrettyDuration(Number(videoInfo.duration)): ""} минут
                         </div>
                     </div>
                 </div>

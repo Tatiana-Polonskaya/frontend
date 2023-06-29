@@ -20,10 +20,9 @@ import convertTotalData from "../../../@adapters/Graphs/total";
 import { useGetTotalByIdQuery } from "../../../store/api/report";
 import { useEffect, useState } from "react";
 import { TotalDataItem, TotalType } from "../../../models/graph/total";
-import { UUID } from "crypto";
 
 type Props = {
-    idVideo: UUID;
+    idVideo: string;
 }
 
 const DECIMAL = 2;
