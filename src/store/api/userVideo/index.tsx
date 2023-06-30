@@ -32,10 +32,11 @@ export const videoApi = createApi({
                 };
             },
         }),
-        getVideoByUser: build.query<IResponse<IVideoUser>, void>({
-            query: () => {
+        getVideoByUser: build.query<IResponse<IVideoUser>, number>({
+            query: (limit=6) => {
                 return {
                     url: `/api/video/user`,
+                    params: {limit},
                     method: "GET",
                 };
             },

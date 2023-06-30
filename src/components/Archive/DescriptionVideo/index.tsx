@@ -19,6 +19,8 @@ export default function DescriptionArchiveVideo({ id, title, date, time }: Props
     const cnDescriptionArchiveVideo = cn("archive-video-description");
     const navigate = useNavigate();
 
+    console.log(time)
+
     return (
         <div className={cnDescriptionArchiveVideo()}>
             <div>

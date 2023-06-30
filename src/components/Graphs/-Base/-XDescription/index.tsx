@@ -21,7 +21,7 @@ export default function BaseGraphXDescription({
         };
     });
 
-    console.log(curTime!.reverse());
+    // console.log(curTime!.reverse());
 
     return (
         <div className={CN()}>

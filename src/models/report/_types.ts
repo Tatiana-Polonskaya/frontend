@@ -12,6 +12,7 @@ export enum TYPE_REPORT {
     expressiveness = "expressiveness",
     informative = "informative",
     non_monotony = "non-monotony",
+    text="text",
     total = "total",
     unity_of_style = "unity-of-style",
 }

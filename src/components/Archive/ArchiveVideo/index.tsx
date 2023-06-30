@@ -115,7 +115,8 @@ export default function ArchiveVideo({ video }: Props) {
             ))}
         </>
     ) : (
-        <>{"Упс, что-то пошло не по плану"}</>
+        // <>{"Упс, что-то пошло не по плану"}</>
+        <>{"Не удалось выполнить операцию, попробуйте обновить страницу"}</>
     );
 }
 // function seUpdateVideoInfoByIdMutation(arg0: string): { data: any } {

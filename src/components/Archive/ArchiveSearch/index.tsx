@@ -12,6 +12,15 @@ export default function ArchiveSearch({ updateSearch }: Props) {
     const handleChange = () => {
         updateSearch(value);
     };
+    const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        switch(event.code){
+            case "Enter":
+                handleChange();
+                break;
+            default:
+                break;
+        }
+      };
 
     const [value, setValue] = useState("");
 
@@ -28,6 +37,7 @@ export default function ArchiveSearch({ updateSearch }: Props) {
                 onChange={(event) => {
                     setValue(event.target.value);
                 }}
+                onKeyDown={keyDownHandler}
             />
             <button
                 type="button"

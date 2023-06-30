@@ -106,6 +106,7 @@ import { useGetVideoByIdQuery, useGetVideoInfoByIdQuery } from "../../store/api/
 import { IVideoInfo } from "../../models/video";
 import { getPrettyDuration } from "../PreviewBlock";
 import ReactPlayer from "react-player";
+import VideoPlayer, { getPrettyDataTime } from "../VideoPlayer";
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
@@ -119,11 +120,13 @@ export default function AnalysisReport() {
     const params = useParams();
     const idVideo = params.id ? params.id : "ec9a839f-55c4-4504-9fdf-e6ff3c49766f"; 
     
+    // common info about video: title, date, duration
     const {data} = useGetVideoInfoByIdQuery(idVideo);
     const videoInfo = data?.data as IVideoInfo;
 
     const navigate = useNavigate();
 
+    // state for video playing
     const [currentTime, setCurrentTime] = useState("00:00");
 
     // all states for showing it on the page
@@ -263,20 +266,20 @@ export default function AnalysisReport() {
             <div className={cnReport("header")}>
                 <div className={cnReport("whiteBlock")}>
                     <div className={cnReport("video-block")}>
-                        <ReactPlayer
+                        <VideoPlayer url={`/api/video/${idVideo}`}/>
+                        {/* <ReactPlayer
                                 className={cnReport("video")}
                                 width={"100%"}
                                 height="100%"
-                                url={`api/video/${idVideo}`}
+                                url={`/api/video/${idVideo}`}
                                 controls={true}
-                        />
-
+                        /> */}
 
                         <div className={cnReport("video-block-title")}>
                             {videoInfo ? videoInfo.title: ""}
                         </div>
                         <div className={cnReport("video-block-description")}>
-                            {videoInfo ? videoInfo.upload_date: ""} • {videoInfo?getPrettyDuration(Number(videoInfo.duration)): ""} минут
+                            {videoInfo ? getPrettyDataTime(videoInfo.upload_date): ""} • {videoInfo?getPrettyDuration(Number(videoInfo.duration)): ""} минут
                         </div>
                     </div>
                 </div>
@@ -297,7 +300,7 @@ export default function AnalysisReport() {
                                 <VideoTimeContext.Provider
                                     value={{ currentTime, setCurrentTime }}
                                 >
-                                    <SpeechTranscription />
+                                    <SpeechTranscription idVideo={idVideo}/>
                                 </VideoTimeContext.Provider>
                             </div>
                         </ColorfulTabs>

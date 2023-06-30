@@ -5,6 +5,7 @@ import { IResponse } from "../../../models/api";
 import { IUser } from "../../../models/entry/user";
 import customFetchBase from "../utils/customFetchBase";
 import { logout, setUser } from "../../slices/user";
+import { setLastNameProfile, setNameProfile } from "../../slices/profileSlice";
 
 export const userApi = createApi({
     reducerPath: "api/user",
@@ -21,6 +22,8 @@ export const userApi = createApi({
                     const { data } = await queryFulfilled;
                     if (data.success) {
                         await dispatch(setUser(data.data!));
+                        await dispatch(setNameProfile(data.data!.firstname));
+                        await dispatch(setLastNameProfile(data.data!.lastname));
                     }
                 } catch (error) {
                     await dispatch(logout());
