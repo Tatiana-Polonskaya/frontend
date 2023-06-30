@@ -32,10 +32,16 @@ export default function BaseGraphXDescription({
                     })}
                     key={idx}
                 >
-                    {el.day}{" "}
-                    <span>{` ${el.date}:${
-                        el.month >= 10 ? el.month : "0" + el.month
-                    }`}</span>
+                    {stats === "st" ? (
+                        <>
+                            {el.day}
+                            <span>{` ${el.date}:${
+                                el.month >= 10 ? el.month : "0" + el.month
+                            }`}</span>
+                        </>
+                    ) : (
+                        <span>{data![idx]}</span>
+                    )}
                 </div>
             ))}
         </div>

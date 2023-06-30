@@ -40,7 +40,7 @@ let subsequence: propsSubsequence = {
 
 export default function SecondarySubsequence(props: Props) {
     return (
-        <Invisible>
+        <>
             {/* <ConnectivityGraph items={[]} /> */}
             <div className={cnSubsequence()}>
                 <p className={cnSubsequence("description")}>
@@ -63,6 +63,6 @@ export default function SecondarySubsequence(props: Props) {
                 </div>
             </div>
             <ConnectivityGraph items={props.data} />
-        </Invisible>
+        </>
     );
 }
