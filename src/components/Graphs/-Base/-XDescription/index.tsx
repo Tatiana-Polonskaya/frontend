@@ -20,7 +20,7 @@ export default function BaseGraphXDescription({
             month: new Date().getMonth(),
         };
     });
-
+    curTime?.reverse();
     return (
         <div className={CN()}>
             {/* {data?.map((el, idx) => ( */}
