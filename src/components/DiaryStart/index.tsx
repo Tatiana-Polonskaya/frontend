@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { IVideoFromBack } from "../../models/video";
 
-import {
-    useGetVideoByUserQuery,
-} from "../../store/api/userVideo";
+import { useGetVideoByUserQuery } from "../../store/api/userVideo";
 
 import stats from "./../../plugs/stats.json";
 
@@ -19,6 +17,10 @@ import statisticIcon from "./icons/statistic.svg";
 import videoListIcon from "./icons/videolist.svg";
 
 import { cn } from "@bem-react/classname";
+
+import BadGoodBlock from "../BadGoodBlock";
+import BlockGeneralAnalytics from "../BlockGeneralAnalytics";
+
 import "./style.scss";
 
 const sectionNames = [
@@ -28,8 +30,7 @@ const sectionNames = [
     "Ясность",
     "Убедительность",
     "Коммуникативные нормы",
-]
-
+];
 
 export default function DiaryStart() {
     const cnDiaryStart = cn("DiaryStart");
@@ -107,6 +108,7 @@ export default function DiaryStart() {
         <div>
             <div className={cnDiaryStart("text-h1")}>Достижения</div>
             <div className={cnDiaryStart("banner")}>
+                <BlockGeneralAnalytics N={9} rank={"sdvsd"} />
                 {/* -------------------------------- Баннер -------------------------------- */}
             </div>
 
@@ -118,14 +120,18 @@ export default function DiaryStart() {
                 <div>Нет видео на анализе</div>
             </RollUp>
             <RollUp title="Статистика за неделю" icon={statisticIcon}>
+                <div className={cnDiaryStart("row")}>
+                    <BadGoodBlock />
+                    <BadGoodBlock />
+                </div>
+
                 <Tabs type={TYPE_TABS.PERCENT}>
-                    {sectionNames.map((el,idx)=>(
+                    {sectionNames.map((el, idx) => (
                         <div key={idx} data-title={el} data-value="0%">
-                        <StatsGraph data={stats.data.values} />
-                    </div>
+                            <StatsGraph data={stats.data.values} />
+                        </div>
                     ))}
                 </Tabs>
-                
             </RollUp>
 
             <div>

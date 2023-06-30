@@ -6,8 +6,6 @@ export default function SettingsPage() {
     return (
         <MainLayout>
             <div>SettingsPage</div>
-            <BadGoodBlock/>
-            <BlockGeneralAnalytics N={9}  rank={"sdvsd"}/>
         </MainLayout>
     );
 }

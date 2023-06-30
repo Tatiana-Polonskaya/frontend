@@ -36,13 +36,11 @@
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
-
+    padding: 0 10px;
     color: #37476A;
   }
   &-list{
-    width: 446px;
-    height: 20px;
-
+    padding: 0 10px;
     font-family: 'Onest';
     font-style: normal;
     font-weight: 400;
@@ -50,7 +48,6 @@
     line-height: 20px;
     display: flex;
     align-items: center;
-
     color: #7C8EB5;
   }
 
