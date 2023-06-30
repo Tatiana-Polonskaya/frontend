@@ -20,9 +20,7 @@ export default function BaseGraphXDescription({
             month: new Date().getMonth(),
         };
     });
-
-    // console.log(curTime!.reverse());
-
+    curTime?.reverse();
     return (
         <div className={CN()}>
             {/* {data?.map((el, idx) => ( */}
@@ -34,10 +32,16 @@ export default function BaseGraphXDescription({
                     })}
                     key={idx}
                 >
-                    {el.day}{" "}
-                    <span>{` ${el.date}:${
-                        el.month >= 10 ? el.month : "0" + el.month
-                    }`}</span>
+                    {stats === "st" ? (
+                        <>
+                            {el.day}
+                            <span>{` ${el.date}:${
+                                el.month >= 10 ? el.month : "0" + el.month
+                            }`}</span>
+                        </>
+                    ) : (
+                        <span>{data![idx]}</span>
+                    )}
                 </div>
             ))}
         </div>

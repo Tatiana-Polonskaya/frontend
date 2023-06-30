@@ -50,3 +50,18 @@
         }
     }
 }
+.graph-help-line {
+    height: 100%;
+
+    &-content {
+        z-index: 1;
+        position: absolute;
+        background-color: white;
+        padding: 8px 12px;
+        border-radius: 12px;
+        width: max-content;
+
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+}

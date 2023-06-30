@@ -1,6 +1,7 @@
 export function convertTime(value: number | string) {
     console.log(value)
     value = typeof value !== "number" ? +value : value;
+    value = Number.isInteger(value) ? value : Math.ceil(value);
     return value < 10
         ? `00:0${value}`
         : value < 60
