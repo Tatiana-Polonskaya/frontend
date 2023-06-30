@@ -70,14 +70,20 @@ export default function ArchiveVideoItem({ el, ind }: Props) {
     };
 
     const totalData = useGetTotalByIdQuery(el.id).data?.data?.values;
-    const result = [
-        totalData!.connectedness,
-        totalData!.argumentativeness,
-        totalData!.clarity,
-        totalData!.dynamism,
-        totalData!.persuasiveness,
-        totalData!.communicative,
-    ];
+    const [result, setResult] = useState<number[]>([]);
+
+    useEffect(() => {
+        if (totalData) {
+            setResult([
+                totalData!.connectedness,
+                totalData!.argumentativeness,
+                totalData!.clarity,
+                totalData!.dynamism,
+                totalData!.persuasiveness,
+                totalData!.communicative,
+            ]);
+        }
+    }, [totalData]);
     return (
         <div className={cnArchiveVideo()}>
             <div className={cnArchiveVideo("el")}>
