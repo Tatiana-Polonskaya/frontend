@@ -23,11 +23,6 @@ export default function HomePage() {
                     <div>Лучшие выступления</div>
                 </div>
                 <div className={cnHome("content")}>
-                    <p>
-                        Lorem ipsum dolor sit amet consecteturblanditiis facilis
-                        sunt laudantium earum beatae, in nesciunt. Sed placeat
-                        fugit vel repellat!
-                    </p>
                 </div>
 
                 <VideoBlock></VideoBlock>

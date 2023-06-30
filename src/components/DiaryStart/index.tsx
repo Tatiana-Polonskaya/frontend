@@ -1,55 +1,98 @@
-import { Fragment, useState } from "react";
-import MainLayout from "../../layouts/MainLayout";
+import { useEffect, useState } from "react";
 import { IVideoFromBack } from "../../models/video";
 
-import {
-    useGetVideoByIdQuery,
-    useGetVideoByUserQuery,
-} from "../../store/api/userVideo";
-import ReactPlayer from "react-player";
+import { useGetVideoByUserQuery } from "../../store/api/userVideo";
 
-import "./style.scss";
 import stats from "./../../plugs/stats.json";
+
 import StatsGraph from "../Graphs/Stats";
 import ArchiveSearch from "../Archive/ArchiveSearch";
 import ArchiveVideo from "../Archive/ArchiveVideo";
 import Pagination from "../Pagination";
 import RollUp from "../RollUp";
+import AimBlock from "../AimBlock";
+import Tabs, { TYPE_TABS } from "../Tabs";
 
 import statisticIcon from "./icons/statistic.svg";
 import videoListIcon from "./icons/videolist.svg";
+
 import { cn } from "@bem-react/classname";
-import AimBlock from "../AimBlock";
+
+import BadGoodBlock from "../BadGoodBlock";
+import BlockGeneralAnalytics from "../BlockGeneralAnalytics";
+
+import "./style.scss";
+
+const sectionNames = [
+    "Общий результат",
+    "Связность",
+    "Аргументированность",
+    "Ясность",
+    "Убедительность",
+    "Коммуникативные нормы",
+];
 
 export default function DiaryStart() {
     const cnDiaryStart = cn("DiaryStart");
-    const { data } = useGetVideoByUserQuery();
-    const userVideos = data?.data?.videos as IVideoFromBack[];
 
-    const [currentUserVideo, setCurrentUserVideo] = useState(userVideos);
+    /* ----------------------- GETTING VIDEO BLOCK -----------------------*/
+    // getting all video for users
+    const videosDataFromBack = useGetVideoByUserQuery(100);
+    const [allUserVideos, setAllUserVideos] = useState<IVideoFromBack[]>();
 
-    const [searchVideo, setSearchVideo] = useState("");
+    useEffect(() => {
+        if (videosDataFromBack && videosDataFromBack.data) {
+            setAllUserVideos(videosDataFromBack.data!.data!.videos);
+        }
+    }, [videosDataFromBack]);
+
+    // const userVideos = data?.data?.videos as IVideoFromBack[];
+
+    /* ----------------------- RESEARCH BLOCK -----------------------*/
+    // researching video
+    const [searchValue, setSearchValue] = useState("");
+    const [searchVideos, setSearchVideos] = useState<IVideoFromBack[]>();
+
     const updateSearch = (value: string) => {
-        setSearchVideo(value);
+        setSearchValue(value);
     };
 
-    let result = currentUserVideo;
-    if (userVideos && searchVideo !== "") {
-        // сделать частичное совпадение динамичным
-        result = userVideos.filter(
-            (el) => el.title.indexOf(searchVideo) !== -1
-        );
-    }
+    useEffect(() => {
+        if (allUserVideos) {
+            if (searchValue.length > 0)
+                setSearchVideos(
+                    allUserVideos.filter(
+                        (el) => el.title.indexOf(searchValue) !== -1
+                    )
+                );
+            else setSearchVideos(allUserVideos);
+        }
+    }, [allUserVideos, searchValue]);
+
+    // let result = allUserVideos;
+    // if (allUserVideos && searchValue !== "") {
+    //     // сделать частичное совпадение динамичным
+    //     result =
+    // }
+
+    /* ----------------------- PAGINATION BLOCK -----------------------*/
     //useState for paggination
-    const [videos, setVideos] = useState<IVideoFromBack[]>([]);
+    // const [videos, setVideos] = useState<IVideoFromBack[]>([]);
     // const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [videosPerPage] = useState(6);
+    const videosPerPage = 6;
 
     //paggination
     const lastVideoIndex = currentPage * videosPerPage;
     const firsrtVideoIndex = lastVideoIndex - videosPerPage;
-    const currentVideos = videos.slice(firsrtVideoIndex, lastVideoIndex);
+    const [currentVideos, setCurrentVideos] = useState<IVideoFromBack[]>();
+
+    useEffect(() => {
+        if (searchVideos)
+            setCurrentVideos(
+                searchVideos.slice(firsrtVideoIndex, lastVideoIndex)
+            );
+    }, [searchVideos, firsrtVideoIndex, lastVideoIndex]);
 
     const paginate = (pageNumber: number) => {
         setCurrentPage(pageNumber);
@@ -65,6 +108,7 @@ export default function DiaryStart() {
         <div>
             <div className={cnDiaryStart("text-h1")}>Достижения</div>
             <div className={cnDiaryStart("banner")}>
+                <BlockGeneralAnalytics N={9} rank={"sdvsd"} />
                 {/* -------------------------------- Баннер -------------------------------- */}
             </div>
 
@@ -76,15 +120,26 @@ export default function DiaryStart() {
                 <div>Нет видео на анализе</div>
             </RollUp>
             <RollUp title="Статистика за неделю" icon={statisticIcon}>
-                <StatsGraph data={stats.data.values} />
+                <div className={cnDiaryStart("row")}>
+                    <BadGoodBlock />
+                    <BadGoodBlock />
+                </div>
+
+                <Tabs type={TYPE_TABS.PERCENT}>
+                    {sectionNames.map((el, idx) => (
+                        <div key={idx} data-title={el} data-value="0%">
+                            <StatsGraph data={stats.data.values} />
+                        </div>
+                    ))}
+                </Tabs>
             </RollUp>
 
             <div>
                 <div className={cnDiaryStart("text-h1")}>
                     Архив проверок{" "}
-                    {userVideos && (
+                    {allUserVideos && (
                         <span className={cnDiaryStart("text-gray")}>
-                            {userVideos.length}
+                            {allUserVideos.length}
                         </span>
                     )}
                 </div>
@@ -92,13 +147,13 @@ export default function DiaryStart() {
 
             <ArchiveSearch updateSearch={updateSearch} />
 
-            {userVideos && <ArchiveVideo video={result} />}
+            {currentVideos && <ArchiveVideo video={currentVideos} />}
             {/* {userVideos &&
                 currentVideos.map((el, ind) => <ArchiveVideo video={result} />)} */}
-            {videos && (
+            {currentVideos && searchVideos && (
                 <Pagination
                     videosPerPage={videosPerPage}
-                    totalVideos={videos.length}
+                    totalVideos={searchVideos.length}
                     paginate={paginate}
                     funcNextPage={nextPage}
                     funcPrevPage={prevPage}

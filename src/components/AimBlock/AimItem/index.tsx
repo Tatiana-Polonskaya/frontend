@@ -109,7 +109,7 @@ export default function AimItem() {
                 </div>
                 <div className={cnAimItem("row")}>
                     {all_steps.map((el, idx) => (
-                        <EnergyLine maxValue={100} value={95} />
+                        <EnergyLine maxValue={100} value={95} key={idx}/>
                     ))}
                 </div>
             </div>

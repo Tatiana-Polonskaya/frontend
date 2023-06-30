@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import { Tooltip } from "react-tooltip";
 
@@ -90,6 +90,7 @@ export default function AimBlock() {
                 <div className={cnAimBlock("aims-count")}>
                     {count_aims.map((el) => (
                         <div
+                            key={el}
                             className={cnAimBlock("aims-count-circle", {
                                 active: choosenAim === el - 1,
                             })}
@@ -105,8 +106,8 @@ export default function AimBlock() {
                     Добавить цель
                 </div>
             </div>
-            {count_aims.map((el) => (
-                <>{el - 1 === choosenAim ? <AimItem key={el} /> : null}</>
+            {count_aims.map((el,i) => (
+                <Fragment key={i}>{el - 1 === choosenAim ? <AimItem /> : null}</Fragment>
             ))}
             <ModalWindow
                 title="Выберите цель или введите собственную"

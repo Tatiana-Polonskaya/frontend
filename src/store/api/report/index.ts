@@ -19,6 +19,7 @@ import { EmotionalArousalJSON } from "../../../models/graph/emotional_arousal";
 import { TotalGraphJSON } from "../../../models/graph/total";
 import { ExpressivenessJSON } from "../../../models/graph/expressiveness";
 import { CongruenceJSON } from "../../../models/graph/congruence";
+import { TranscriptionJSON } from "../../../models/report/transcription";
 
 export const reportApi = createApi({
     reducerPath: "/api/video/",
@@ -133,6 +134,13 @@ export const reportApi = createApi({
                 method: "GET",
             }),
         }),
+        getTranscriptionById: build.query<IResponse<TranscriptionJSON>, string>({
+            query: (id) => ({
+                url: `/api/video/${id}/report/${TYPE_REPORT.text}`,
+                params: { id },
+                method: "GET",
+            }),
+        }),
         getUnityOfStyleById: build.query<IResponse<UnityOfStyleJSON>, string>({
             query: (id) => ({
                 url: `/api/video/${id}/report/${TYPE_REPORT.unity_of_style}`,
@@ -157,6 +165,7 @@ export const {
     useGetEloquenceByIdQuery,
     useGetEmotionalArousalByIdQuery,
     useGetTotalByIdQuery,
+    useGetTranscriptionByIdQuery,
     useGetCongruenceByIdQuery,
     useGetExpressivenessByIdQuery,
     useLazyGetConnectivityByIdQuery,

@@ -23,6 +23,8 @@ export default function DescriptionArchiveVideo({
     const cnDescriptionArchiveVideo = cn("archive-video-description");
     const navigate = useNavigate();
 
+    console.log(time)
+
     return (
         <div className={cnDescriptionArchiveVideo()}>
             <div>

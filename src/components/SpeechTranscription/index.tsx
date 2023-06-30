@@ -1,71 +1,54 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { VideoTimeContext } from "../Report";
 import { cn } from "@bem-react/classname";
 import "./style.scss";
+import { useGetTranscriptionByIdQuery } from "../../store/api/report";
+import { TranscriptionValue } from "../../models/report/transcription";
 
 type Props = {
-    items?: TexttoTime[];
+    idVideo: string;
 };
 
-type TexttoTime = {
-    time: "";
-    text: string;
-};
+export function getPrettyTimeBySeconds(seconds:number){
+    if (seconds< 60){
+        return `00:${seconds<10? "0"+seconds: seconds}`
+    }else{
+        const minutes = ~~(seconds/60);
+        return `${minutes<10? "0"+minutes: minutes}:${seconds%60===0? "00": seconds%60}`
+    }
+}
+
+// TO DO: CHANGE ACCODING VIDEO PLAYING CURRENT TIME AND ACTIVE CLASS ----------------------------
 
 export default function SpeechTranscription(props: Props) {
     const { currentTime } = useContext(VideoTimeContext);
 
-    const texts = [
-        {
-            time: "00:00",
-            text: "Причины возникновения конфликтов могут быть самыми разными.",
-        },
-        {
-            time: "00:10",
-            text: "Иногда родительские требования слишком далеки от представлений ребенка о том, что ему “положено” по возрасту.",
-        },
-        {
-            time: "00:30",
-            text: "Например, во сколько возвращаться домой, на что тратить карманные деньги.",
-        },
-        {
-            time: "00:50",
-            text: "texИногда родителям просто не удается донести свои взгляды до ребенка в той форме, которая не заденет его чувства.t4",
-        },
-        {
-            time: "01:00",
-            text: "texИногда родителям просто не удается донести свои взгляды до ребенка в той форме, которая не заденет его чувства.t4",
-        },
-        {
-            time: "01:10",
-            text: "texИногда родителям просто не удается донести свои взгляды до ребенка в той форме, которая не заденет его чувства.t4",
-        },
-        {
-            time: "01:20",
-            text: "texИногда родителям просто не удается донести свои взгляды до ребенка в той форме, которая не заденет его чувства.t4",
-        },
-        {
-            time: "01:30",
-            text: "texИногда родителям просто не удается донести свои взгляды до ребенка в той форме, которая не заденет его чувства.t4",
-        },
-    ];
+    const [transcriptionData, setTranscriptionData] = useState<TranscriptionValue[]>();
+
+    // all queries
+    const TranscriptionDataFromBack = useGetTranscriptionByIdQuery(props.idVideo);
+
+    useEffect(() => {
+        if (TranscriptionDataFromBack && TranscriptionDataFromBack.data)
+            setTranscriptionData(TranscriptionDataFromBack.data.data!.values);
+    }, [TranscriptionDataFromBack]);
 
     const cnTranscription = cn("SpeechTranscription");
     return (
         <div className={cnTranscription()}>
-            {texts.map((el, idx) => (
+            {transcriptionData && transcriptionData.map((el, idx) => (
                 <div className={cnTranscription("row")} key={idx}>
                     <div
                         className={cnTranscription("time", {
-                            active: currentTime == el.time,
+                            active: currentTime === ""+el.time_start,
                         })}
                     >
-                        {el.time}
+                        {getPrettyTimeBySeconds(el.time_start)}
                     </div>
                     <div className={cnTranscription("buble")}>
                         <div
                             className={cnTranscription("buble-text", {
-                                active: currentTime === el.time,
+                                active: currentTime === ""+el.time_start,
                             })}
                         >
                             {el.text}

@@ -15,8 +15,10 @@ type Props = {
 const cnContent = cn("mainLayout");
 
 export default function MainLayout(props: Props) {
+
     const lastName = useSelector((state: RootState) => state.profile.lastName);
-    const name = useSelector((state: RootState) => state.profile.name);
+    const name = useSelector((state: RootState) => state.profile.name);    
+
     return (
         <>
             <div className={cnContent()}>
