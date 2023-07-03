@@ -102,10 +102,15 @@ import noteIcon from "./assets/note.svg";
 import arrowLeft from "./assets/arrowLeft.svg";
 import "./style.scss";
 import { TotalGraphJSON } from "../../models/graph/total";
-import { useGetVideoByIdQuery, useGetVideoInfoByIdQuery } from "../../store/api/userVideo";
+import {
+    useGetVideoByIdQuery,
+    useGetVideoInfoByIdQuery,
+} from "../../store/api/userVideo";
 import { IVideoInfo } from "../../models/video";
 import { getPrettyDuration } from "../PreviewBlock";
 import ReactPlayer from "react-player";
+import MainNonMonotony from "../Analytics/-Block/Dinamism/NonMonotony/Main";
+import SecondaryNonMonotony from "../Analytics/-Block/Dinamism/NonMonotony/Secondary";
 import VideoPlayer, { getPrettyDataTime } from "../VideoPlayer";
 
 // provider for setting the current time in graphs and others elements accoding to the video element
@@ -118,10 +123,12 @@ export default function AnalysisReport() {
     const cnReport = cn("AnalysisReport");
 
     const params = useParams();
-    const idVideo = params.id ? params.id : "ec9a839f-55c4-4504-9fdf-e6ff3c49766f"; 
-    
+    const idVideo = params.id
+        ? params.id
+        : "ec9a839f-55c4-4504-9fdf-e6ff3c49766f";
+
     // common info about video: title, date, duration
-    const {data} = useGetVideoInfoByIdQuery(idVideo);
+    const { data } = useGetVideoInfoByIdQuery(idVideo);
     const videoInfo = data?.data as IVideoInfo;
 
     const navigate = useNavigate();
@@ -251,6 +258,7 @@ export default function AnalysisReport() {
             setTotalData(TotalDataFromBack.data.data);
     }, [TotalDataFromBack]);
 
+    // console.log(connectivityData);
     return (
         <div className={cnReport()}>
             <div className={cnReport("btn-back")}>
@@ -266,7 +274,7 @@ export default function AnalysisReport() {
             <div className={cnReport("header")}>
                 <div className={cnReport("whiteBlock")}>
                     <div className={cnReport("video-block")}>
-                        <VideoPlayer url={`/api/video/${idVideo}`}/>
+                        <VideoPlayer url={`/api/video/${idVideo}`} />
                         {/* <ReactPlayer
                                 className={cnReport("video")}
                                 width={"100%"}
@@ -276,10 +284,17 @@ export default function AnalysisReport() {
                         /> */}
 
                         <div className={cnReport("video-block-title")}>
-                            {videoInfo ? videoInfo.title: ""}
+                            {videoInfo ? videoInfo.title : ""}
                         </div>
                         <div className={cnReport("video-block-description")}>
-                            {videoInfo ? getPrettyDataTime(videoInfo.upload_date): ""} • {videoInfo?getPrettyDuration(Number(videoInfo.duration)): ""} минут
+                            {videoInfo
+                                ? getPrettyDataTime(videoInfo.upload_date)
+                                : ""}{" "}
+                            •{" "}
+                            {videoInfo
+                                ? getPrettyDuration(Number(videoInfo.duration))
+                                : ""}{" "}
+                            минут
                         </div>
                     </div>
                 </div>
@@ -300,7 +315,7 @@ export default function AnalysisReport() {
                                 <VideoTimeContext.Provider
                                     value={{ currentTime, setCurrentTime }}
                                 >
-                                    <SpeechTranscription idVideo={idVideo}/>
+                                    <SpeechTranscription idVideo={idVideo} />
                                 </VideoTimeContext.Provider>
                             </div>
                         </ColorfulTabs>
@@ -327,7 +342,7 @@ export default function AnalysisReport() {
                         {connectivityData && (
                             <Dropdown
                                 title={"Последовательность"}
-                                subtitle={`Потеря логической связи в ...${"*"} высказываниях`}
+                                subtitle={`Потеря логической связи в ${connectivityData.controversy} высказываниях`}
                                 visible={
                                     <MainSubsequence
                                         data={connectivityData.values.map(
@@ -578,67 +593,74 @@ export default function AnalysisReport() {
                         color={getTotalResult(totalData!.values.dynamism)[0]}
                     >
                         {/* -------------------------- DONT WORK - WHY? ------------------------------------------------------------------------------- */}
-                        {/* {nonMonotonyData && (
-                        <Dropdown
-                            title={"Немонотонность"}
-                            subtitle={`Уровни параметров немонотонности.`}
-                            visible={
-                                <MainNonMonotony
-                                    info={[
-                                        {
-                                            title: "Темп речи",
-                                            subtitle:
-                                                "Темп речи средний, ровный и без пауз.",
-                                            result: "норма",
-                                            fill: "#2477F4",
-                                            dotfill: "#2477F4",
-                                            shadow: "0.663492px 0.663492px 3.4619px #2477F4",
-                                            img: "",
-                                            value: 10,
-                                        },
-                                        {
-                                            title: "Громкость голоса",
-                                            subtitle:
-                                                "Выглядит так, как будто Вы проявляете агрессию.",
-                                            result: "Слишком громко",
-                                            fill: "#F35B60",
-                                            dotfill: "#F35B60",
-                                            img: "",
-                                            shadow: "0.663492px 0.663492px 3.4619px #F35B60",
-                                            value: 10,
-                                        },
-                                        {
-                                            title: "Диапазон изменения тона",
-                                            subtitle:
-                                                "Однообразие звучания притупляет восприятие.",
-                                            result: "Маленький",
-                                            fill: "#FFB800",
-                                            dotfill: "#FFB800",
-                                            img: "",
-                                            shadow: "0.663492px 0.663492px 7.9619px #FFB800",
-                                            value: 10,
-                                        },
-                                    ]}
-                                />
-                            }
-                            invisible={
-                                // сюда надо добавить data
-                                <SecondaryNonMonotony
-                                    graphs={[
-                                        {
-                                            link: "Темп речи",
-                                        },
-                                        {
-                                            link: "Громкость голоса",
-                                        },
-                                        {
-                                            link: "Тон речи",
-                                        },
-                                    ]}
-                                />
-                            }
-                        />
-                    )} */}
+                        {nonMonotonyData && (
+                            <Dropdown
+                                title={"Немонотонность"}
+                                subtitle={`Уровни параметров немонотонности.`}
+                                visible={
+                                    <MainNonMonotony
+                                        info={[
+                                            {
+                                                title: "Темп речи",
+                                                subtitle:
+                                                    "Темп речи средний, ровный и без пауз.",
+                                                result: "норма",
+                                                fill: "#2477F4",
+                                                dotfill: "#2477F4",
+                                                shadow: "0.663492px 0.663492px 3.4619px #2477F4",
+                                                img: "",
+                                                value: nonMonotonyData[
+                                                    "h-temp"
+                                                ],
+                                            },
+                                            {
+                                                title: "Громкость голоса",
+                                                subtitle:
+                                                    "Выглядит так, как будто Вы проявляете агрессию.",
+                                                result: "Слишком громко",
+                                                fill: "#F35B60",
+                                                dotfill: "#F35B60",
+                                                img: "",
+                                                shadow: "0.663492px 0.663492px 3.4619px #F35B60",
+                                                value: nonMonotonyData[
+                                                    "h-volume"
+                                                ],
+                                            },
+                                            {
+                                                title: "Диапазон изменения тона",
+                                                subtitle:
+                                                    "Однообразие звучания притупляет восприятие.",
+                                                result: "Маленький",
+                                                fill: "#FFB800",
+                                                dotfill: "#FFB800",
+                                                img: "",
+                                                shadow: "0.663492px 0.663492px 7.9619px #FFB800",
+                                                value: nonMonotonyData[
+                                                    "h-tone"
+                                                ],
+                                            },
+                                        ]}
+                                    />
+                                }
+                                invisible={
+                                    // сюда надо добавить data
+                                    <SecondaryNonMonotony
+                                        data={nonMonotonyData.values}
+                                        graphs={[
+                                            {
+                                                link: "Темп речи",
+                                            },
+                                            {
+                                                link: "Громкость голоса",
+                                            },
+                                            {
+                                                link: "Тон речи",
+                                            },
+                                        ]}
+                                    />
+                                }
+                            />
+                        )}
                         {emotionalityData && (
                             <Dropdown
                                 title={"Эмоциональность"}

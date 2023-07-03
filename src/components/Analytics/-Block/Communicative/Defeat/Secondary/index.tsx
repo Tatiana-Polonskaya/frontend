@@ -70,6 +70,7 @@ export default function SecondaryDefeat(props: Props) {
 
         Object.entries(arrS).forEach((e, ind) => {
             e[1].forEach((subStr, ind) => {
+                subStr = subStr.trim();
                 // сюда надо вставить перебор по массиву входящих
                 if (!subStr.includes(" ")) {
                     // если одно слово
@@ -107,8 +108,12 @@ export default function SecondaryDefeat(props: Props) {
                             if (j === subStrArr.length - 1) {
                             }
                             if (
-                                j === subStrArr.length - 1 &&
-                                strArr[i + j] === subStrArr[j]
+                                (j === subStrArr.length - 1 &&
+                                    strArr[i + j] === subStrArr[j]) ||
+                                (j === subStrArr.length - 1 &&
+                                    strArr[i + j] === `${subStrArr[j]},`) ||
+                                (j === subStrArr.length - 1 &&
+                                    strArr[i + j] === `${subStrArr[j]}.`)
                             ) {
                                 flag = !flag;
                                 break;

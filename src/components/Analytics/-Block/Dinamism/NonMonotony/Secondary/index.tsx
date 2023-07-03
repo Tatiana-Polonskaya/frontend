@@ -6,18 +6,16 @@ import "./style.scss";
 import { useState } from "react";
 
 import NonMonotonyGraph from "../../../../../Graphs/NonMonotony";
-import data from "../../../../../../plugs/non-monotony.json";
-import { NonMonotonyType } from "../../../../../../models/graph/monotony";
+// import data from "../../../../../../plugs/non-monotony.json";
+import {
+    NonMonotonyDataItem,
+    NonMonotonyType,
+} from "../../../../../../models/graph/monotony";
 import GraphColor from "../../../../../../models/graph/_colors";
-import Invisible from "../../../../../Dropdown/-Invisible";
-
-// import { IBreakdown } from "../../../models/IBreakdown";
-// import { IСitation } from "../../../models/ICitation";
 
 type Props = {
-    // name?: string;
     graphs: Graph[];
-    //     state: string;
+    data: NonMonotonyDataItem[];
 };
 
 type Graph = {
@@ -50,7 +48,6 @@ export default function SecondaryNonMonotony(props: Props) {
             {
                 type: "основной график",
                 color: GraphColor.ORANGE,
-                // color: "linear-gradient(32.08deg, #2477F4 0%, #3A86FA 100%)",
             },
             {
                 type: "среднее значение",
@@ -116,7 +113,7 @@ export default function SecondaryNonMonotony(props: Props) {
             <div className={cnNonMon("graph")}>
                 {/* сюда передавать state для того тчобы отображать 1 график */}
                 <NonMonotonyGraph
-                    data={data.data.values}
+                    data={props.data}
                     param={
                         // топорно, подумать как сделать красиво
                         graph === 0

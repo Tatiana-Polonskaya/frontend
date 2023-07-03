@@ -13,7 +13,7 @@ type Props = {
 type TimelineItem = {
     id?: number;
     text?: string;
-    time?: number;
+    time: number;
     color?: string;
 };
 

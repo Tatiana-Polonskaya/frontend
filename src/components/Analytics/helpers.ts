@@ -85,8 +85,10 @@ export const convertTime = (time: number): string => {
         return `00:0${time}`;
     } else if (time < 60) {
         return `00:${time}`;
-    } else if (time < 600) {
+    } else if (time < 600 && time % 60 !== 0) {
         return `0${Math.floor(time / 60)}:${time % 60}`;
+    } else if (time < 600 && time % 60 === 0) {
+        return `0${Math.floor(time / 60)}:${time % 60}0`;
     } else {
         return `${Math.floor(time / 60)}:${time % 60}`;
     }

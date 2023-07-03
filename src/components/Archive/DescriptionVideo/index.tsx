@@ -8,14 +8,18 @@ import RoutesEnum from "../../../models/routes";
 import { Link, useNavigate } from "react-router-dom";
 
 type Props = {
-    id:UUID;
+    id: UUID;
     title: string;
     time: string;
     date: string;
 };
 
-export default function DescriptionArchiveVideo({ id, title, date, time }: Props) {
-    
+export default function DescriptionArchiveVideo({
+    id,
+    title,
+    date,
+    time,
+}: Props) {
     const cnDescriptionArchiveVideo = cn("archive-video-description");
     const navigate = useNavigate();
 
@@ -35,7 +39,12 @@ export default function DescriptionArchiveVideo({ id, title, date, time }: Props
                     </span>
                 </div>
             </div>
-            <div className={cnDescriptionArchiveVideo("btn")} onClick={()=>{navigate(RoutesEnum.DIARY+"/"+id)}}>
+            <div
+                className={cnDescriptionArchiveVideo("btn")}
+                onClick={() => {
+                    navigate(RoutesEnum.DIARY + "/" + id);
+                }}
+            >
                 <div className={cnDescriptionArchiveVideo("btn-descr")}>
                     {"Перейти"}
                 </div>
