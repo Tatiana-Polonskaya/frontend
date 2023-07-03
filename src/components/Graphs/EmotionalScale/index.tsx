@@ -8,7 +8,6 @@ import {IScaleDataType} from "../../../models/graph/inteface/scale";
 import {ReactSVG} from "react-svg";
 import GraphColor from "../../../models/graph/_colors";
 import { cn } from "@bem-react/classname";
-import {IDescriptionScale} from "../../../models/graph/inteface/IDescriptionScale";
 
 type item = {
     seq_number: number,
@@ -34,23 +33,7 @@ type Props = {
 }
 const CN = cn("EmotionalScale");
 export default function EmotionalScale(props :Props) {
-    let data = {
-        video: {
-            neutral: 0.31088790033522173,
-            happiness: 0.1134941425858611,
-            anger: 0.21956464855564162
-        },
-        audio: {
-            neutral: 0.4709934930855798,
-            happiness: 0.4409310919012528,
-            anger: 0.24028107719972214
-        },
-        text: {
-            neutral: 0.46526399818719966,
-            happiness: 0.4987118248855501,
-            anger: 0.8640703366803603
-        }
-    }
+
     const [activeIndex, setActiveIndex] = useState(1);
     const handleClick = (index:any) => setActiveIndex(index);
     const checkActive = (index:any, className:any) => activeIndex === index ? className : "";
@@ -139,10 +122,10 @@ export default function EmotionalScale(props :Props) {
     return (
         <>
             <div className={CN("textBloc")}>
-                <div className={CN("text")}>
-                    <b className="textInfTitle"> Эмоциональность</b> - способность выражать свои мысли и идеи с помощью энергичного, живого стиля выступления, который передает позитивную эмоциональную окраску и воодушевление.
+                <div className={CN("text1")}>
+                    <b className="textInfTitle1"> Эмоциональность</b> - способность выражать свои мысли и идеи с помощью энергичного, живого стиля выступления, который передает позитивную эмоциональную окраску и воодушевление.
                 </div>
-                <div className={CN("bocksAll")}>
+                <div className={CN("blocksAll")}>
                     <div className={CN('blockText')}>
                         <div className={CN('block')} style={{background:"#7C8EB5"}}/>
                         <div className={CN('Text')}> нейтральная</div>

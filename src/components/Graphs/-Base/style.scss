@@ -6,10 +6,12 @@
     // height: 230px;
     height: 237px;
     // width: 1000px;
-    width: 1200px;
+    // min-width: 1200px;
+    width: 100%;
 
     padding: 16px 0;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     display: flex;
     flex-direction: column;

@@ -352,15 +352,14 @@ export default function RecodingPage() {
                                     <div
                                         className={cnRecoding("loading-title")}
                                     >
-                                        Загрузка видео успешно закончена и
-                                        отправлена на анализ
+                                        Загрузка видео успешно завершена и отправлена на анализ
                                     </div>
                                     <div
                                         className={cnRecoding(
                                             "loading-description"
                                         )}
                                     >
-                                        Анализ вы можете посмотреть на странице{" "}
+                                        По его окончании вы сможете ознакомиться с результатами в разделе{" "}
                                         <span
                                             className={cnRecoding(
                                                 "loading-title-link"

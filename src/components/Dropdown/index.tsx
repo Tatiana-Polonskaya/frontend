@@ -33,16 +33,16 @@ export default function DropDown(props: IDropdown) {
     return (
         <div className={`${cnDropDown()}`}>
             <div className={`${cnDropDown("block")}`}>
-                <div className={cnDropDown("header")}>
+                <div className={cnDropDown("header")} >
                     <ReactSVG
                         onClick={openDrop}
                         style={{ transform: `rotate(${angle}deg)` }}
                         className={cnDropDown("icon")}
                         src={Arrow}
                     />
-                    <div className={cnDropDown("title")}>{props.title}</div>
+                    <div className={cnDropDown("title")} onClick={openDrop}>{props.title}</div>
                 </div>
-                <div className={cnDropDown("subtitle")}>
+                <div className={cnDropDown("subtitle")} >
                     <p>{props.subtitle}</p>
                 </div>
             </div>

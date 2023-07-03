@@ -109,7 +109,6 @@ export default function DiaryStart() {
             <div className={cnDiaryStart("text-h1")}>Достижения</div>
             <div className={cnDiaryStart("banner")}>
                 <BlockGeneralAnalytics N={9} rank={"sdvsd"} />
-                {/* -------------------------------- Баннер -------------------------------- */}
             </div>
 
             <div className={cnDiaryStart("aims")}>
@@ -148,8 +147,7 @@ export default function DiaryStart() {
             <ArchiveSearch updateSearch={updateSearch} />
 
             {currentVideos && <ArchiveVideo video={currentVideos} />}
-            {/* {userVideos &&
-                currentVideos.map((el, ind) => <ArchiveVideo video={result} />)} */}
+
             {currentVideos && searchVideos && (
                 <Pagination
                     videosPerPage={videosPerPage}

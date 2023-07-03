@@ -2,14 +2,16 @@
     background-color: #e4eaf5;
     flex: 0 0 auto;
     padding: 0 0 0 120px;
-    width: 100%;
+    margin: 0 auto;
     height: 154px;
+    width: 100%;
 }
 
 .footer-content {
     height: 100%;
-    display: flex;
+    width: 100%;
     padding: 0 40px 0 40px;
+    display: flex;
     align-items: center;
     justify-content: space-between;
 }

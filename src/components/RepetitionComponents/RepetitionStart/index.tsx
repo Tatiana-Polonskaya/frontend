@@ -242,15 +242,14 @@ export default function RepetitionStart() {
                                         "loading-title"
                                     )}
                                 >
-                                    Загрузка видео успешно закончена и
-                                    отправлена на анализ
+                                    Загрузка видео успешно завершена и отправлена на анализ
                                 </div>
                                 <div
                                     className={cnRepetitionStart(
                                         "loading-description"
                                     )}
                                 >
-                                    Анализ вы можете посмотреть на странице{" "}
+                                    По его окончании вы сможете ознакомиться с результатами в разделе{" "}
                                     
                                     <span className={cnRepetitionStart(
                                         "loading-title-link"

@@ -2,8 +2,6 @@ import { cn } from "@bem-react/classname";
 
 import Tabs, { TYPE_TABS } from "../Tabs";
 
-import videoPic from "./assets/video.png";
-
 import lamp from "../../components/Analytics/-Block/Argumentation/icons/lamp-on.svg";
 import caps from "../../components/Analytics/-Block/Argumentation/icons/smallcaps.svg";
 import quote from "../../components/Analytics/-Block/Argumentation/icons/quote-down-square.svg";
@@ -30,8 +28,6 @@ import {
     convertExpressivenessDataLine,
 } from "../Analytics/helpers";
 
-import totalData from "../../plugs/total.json";
-
 import { getTotalResult } from "./helpers";
 
 import ColorfulTabs from "../ColorfulTabs";
@@ -40,6 +36,7 @@ import {
     SetStateAction,
     createContext,
     useEffect,
+    useRef,
     useState,
 } from "react";
 import SpeechTranscription from "../SpeechTranscription";
@@ -80,10 +77,7 @@ import {
 
 import { InformativeJSON } from "../../models/graph/informative";
 import Dropdown from "../Dropdown";
-import {
-    UnityOfStyleDataItem,
-    UnityOfStyleJSON,
-} from "../../models/graph/unity_of_style";
+import { UnityOfStyleDataItem } from "../../models/graph/unity_of_style";
 
 import { ConnectivityJSON } from "../../models/graph/connectivity";
 import { ArgumentativenessJSON } from "../../models/graph/argumentativeness";
@@ -98,20 +92,18 @@ import { ConfidenceJSON } from "../../models/graph/confidence";
 import { EmotionalArousalJSON } from "../../models/graph/emotional_arousal";
 import { CommunicativeJSON } from "../../models/graph/communicative";
 
-import noteIcon from "./assets/note.svg";
-import arrowLeft from "./assets/arrowLeft.svg";
-import "./style.scss";
 import { TotalGraphJSON } from "../../models/graph/total";
-import {
-    useGetVideoByIdQuery,
-    useGetVideoInfoByIdQuery,
-} from "../../store/api/userVideo";
+import { useGetVideoInfoByIdQuery } from "../../store/api/userVideo";
 import { IVideoInfo } from "../../models/video";
 import { getPrettyDuration } from "../PreviewBlock";
-import ReactPlayer from "react-player";
 import MainNonMonotony from "../Analytics/-Block/Dinamism/NonMonotony/Main";
 import SecondaryNonMonotony from "../Analytics/-Block/Dinamism/NonMonotony/Secondary";
 import VideoPlayer, { getPrettyDataTime } from "../VideoPlayer";
+import textForEnergySmile from "../Graphs/EnergySmile/text";
+
+import noteIcon from "./assets/note.svg";
+import arrowLeft from "./assets/arrowLeft.svg";
+import "./style.scss";
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
@@ -258,7 +250,7 @@ export default function AnalysisReport() {
             setTotalData(TotalDataFromBack.data.data);
     }, [TotalDataFromBack]);
 
-    // console.log(connectivityData);
+
     return (
         <div className={cnReport()}>
             <div className={cnReport("btn-back")}>
@@ -272,35 +264,24 @@ export default function AnalysisReport() {
             </div>
 
             <div className={cnReport("header")}>
-                <div className={cnReport("whiteBlock")}>
-                    <div className={cnReport("video-block")}>
-                        <VideoPlayer url={`/api/video/${idVideo}`} />
-                        {/* <ReactPlayer
-                                className={cnReport("video")}
-                                width={"100%"}
-                                height="100%"
-                                url={`/api/video/${idVideo}`}
-                                controls={true}
-                        /> */}
-
-                        <div className={cnReport("video-block-title")}>
-                            {videoInfo ? videoInfo.title : ""}
-                        </div>
-                        <div className={cnReport("video-block-description")}>
-                            {videoInfo
-                                ? getPrettyDataTime(videoInfo.upload_date)
-                                : ""}{" "}
-                            •{" "}
-                            {videoInfo
-                                ? getPrettyDuration(Number(videoInfo.duration))
-                                : ""}{" "}
-                            минут
-                        </div>
+                <div className={cnReport("whiteBlock")} style={{height:"500px"}}>
+                    <VideoPlayer url={`/api/video/${idVideo}`} />
+                    <div className={cnReport("video-block-title")}>
+                        {videoInfo ? videoInfo.title : ""}
+                    </div>
+                    <div className={cnReport("video-block-description")}>
+                        {videoInfo
+                            ? getPrettyDataTime(videoInfo.upload_date)
+                            : ""}{" "}
+                        •{" "}
+                        {videoInfo
+                            ? getPrettyDuration(Number(videoInfo.duration))
+                            : ""}{" "}
+                        минут
                     </div>
                 </div>
-
-                <div className={cnReport("whiteBlock")}>
-                    <div className={cnReport("video-block")}>
+                <div className={cnReport("whiteBlock")} style={{height:"500px"}}>
+                    
                         <ColorfulTabs>
                             <div
                                 className={cnReport("width")}
@@ -309,7 +290,7 @@ export default function AnalysisReport() {
                                 <VideoNotice description="" />
                             </div>
                             <div
-                                className={cnReport("width")}
+                                className={cnReport("transrciption")}
                                 title="Транскрипция речи"
                             >
                                 <VideoTimeContext.Provider
@@ -319,7 +300,7 @@ export default function AnalysisReport() {
                                 </VideoTimeContext.Provider>
                             </div>
                         </ColorfulTabs>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -339,6 +320,12 @@ export default function AnalysisReport() {
                             getTotalResult(totalData!.values.connectedness)[0]
                         }
                     >
+                        <div className={cnReport("conclusion-desciption-text")}>
+                            Логичная и последовательная связь компонентов
+                            выступления между собой, которые служат для передачи
+                            определенного сообщения и обеспечивают единое
+                            понимание темы выступления у слушателей
+                        </div>
                         {connectivityData && (
                             <Dropdown
                                 title={"Последовательность"}
@@ -397,7 +384,6 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-
                         {unityOfStyleData && (
                             <Dropdown
                                 title={"Единство стиля"}
@@ -442,10 +428,21 @@ export default function AnalysisReport() {
                             )[0]
                         }
                     >
+                        <div className={cnReport("conclusion-desciption-text")}>
+                            Способность выступающего подтверждать свои
+                            утверждения обоснованными фактами, доказательствами,
+                            примерами и логическими операциями, умение логически
+                            связывать свои мысли со свидетельствами и
+                            доказательствами.
+                        </div>
                         {argumentativenessData && (
                             <Dropdown
-                                title={"Аргументированность"}
-                                subtitle={"Аргументированность"}
+                                title={
+                                    "Оригинальность, заимствования и цитирование"
+                                }
+                                subtitle={
+                                    "Отношение параметров относительно общего объема текста."
+                                }
                                 visible={
                                     <MainOriginally
                                         info={[
@@ -507,6 +504,10 @@ export default function AnalysisReport() {
                         }
                         color={getTotalResult(totalData!.values.clarity)[0]}
                     >
+                        <div className={cnReport("conclusion-desciption-text")}>
+                            Способность выразить свои мысли в ясной, доходчивой
+                            и понятной форме.
+                        </div>
                         {clarityData && (
                             <Dropdown
                                 title={"Четкость речи"}
@@ -592,7 +593,11 @@ export default function AnalysisReport() {
                         }
                         color={getTotalResult(totalData!.values.dynamism)[0]}
                     >
-                        {/* -------------------------- DONT WORK - WHY? ------------------------------------------------------------------------------- */}
+                        <div className={cnReport("conclusion-desciption-text")}>
+                            Способность выражать свои мысли и идеи с помощью
+                            энергичного и живого выступления, проявление
+                            активности, энтузиазма в речи.
+                        </div>
                         {nonMonotonyData && (
                             <Dropdown
                                 title={"Немонотонность"}
@@ -680,7 +685,9 @@ export default function AnalysisReport() {
                         {energyData && (
                             <Dropdown
                                 title={"Энергичность"}
-                                subtitle={`Ваше выступление недостаточно энергичное.`}
+                                subtitle={textForEnergySmile(
+                                    energyData.total_energy
+                                )}
                                 visible={
                                     <EnergySmile
                                         energy={energyData.total_energy}
@@ -702,6 +709,11 @@ export default function AnalysisReport() {
                             getTotalResult(totalData!.values.persuasiveness)[0]
                         }
                     >
+                        <div className={cnReport("conclusion-desciption-text")}>
+                            Способность выступающего эффективно выражать свои
+                            мысли, оказывать влияние на аудиторию и уверить ее в
+                            правильности своих аргументов и доказательств.
+                        </div>
                         {congruenceData && (
                             <Dropdown
                                 title={"Конгруэнтность"}
@@ -801,12 +813,18 @@ export default function AnalysisReport() {
                         }
                         className={cnReport("width")}
                     >
+                        <div className={cnReport("conclusion-desciption-text")}>
+                            Умение правильно и эффективно использовать язык и
+                            другие коммуникативные инстументы для того, чтобы
+                            эффективно общаться с аудиторией и передавать свои
+                            мысли и идеи.
+                        </div>
                         {communicativeData && (
                             <Dropdown
                                 title={
                                     "Слова паразиты, когнитивные искажения, агрессивность"
                                 }
-                                subtitle={``}
+                                subtitle={`Умение правильно и эффективно использовать язык и другие коммуникативные инстументы для того, чтобы эффективно общаться с аудиторией и передавать свои мысли и идеи.`}
                                 visible={
                                     <CommunicativeNorm
                                         aggression={

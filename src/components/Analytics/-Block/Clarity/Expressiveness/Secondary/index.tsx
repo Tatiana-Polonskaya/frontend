@@ -56,6 +56,7 @@ export default function SecondaryExpressiveness(props: Props) {
             : setGraph(0);
         return;
     };
+    console.log(props)
     const openMiddle = (ind: number) => {
         const openEl = document.querySelector(".expressiveness-item-open");
         openEl!.classList.toggle("expressiveness-choise");
@@ -130,7 +131,7 @@ export default function SecondaryExpressiveness(props: Props) {
                 </ul>
                 <div className={cnExpressiveness("analysis-open")}>
                     <span className={cnExpressiveness("set")}>
-                        Нейтральная эмоция в текстовом канале::
+                        Нейтральная эмоция в текстовом канале:
                     </span>
                     <ul className={cnExpressiveness("menu")}>
                         <li

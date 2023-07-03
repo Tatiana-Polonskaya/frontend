@@ -47,17 +47,13 @@
     border-radius: 12px;
     margin-bottom: 15px ;
   }
-  &-text{
-
+  &-text1{
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
     color: #17282F;
     padding-top: 10px;
-  }
-  &-textInfTitle{
-    font-weight: 500;
   }
   &-block{
     width: 20px;
@@ -76,4 +72,7 @@
     line-height: 18px;
     color: #37476A;
   }
+}
+b.textInfTitle1 {
+  font-weight: 500;
 }

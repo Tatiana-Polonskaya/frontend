@@ -31,20 +31,20 @@ function paint(energy:number){
     if (energy === 0.5){
         return <div className={cnEnergySmile()}>
 
-            {paintSmile(slip, "smile","Спящий2")}
+            {paintSmile(slip, "smile","Спящий")}
             <EnergyLine value={50} maxValue={50}/>
-            {paintSmile(medium, "smile","Энергичный2")}
+            {paintSmile(medium, "smile","Энергичный")}
             <EnergyLine value={0} maxValue={50}/>
-            {paintSmile(crazy, "smile1","Безумный2")}
+            {paintSmile(crazy, "smile1","Безумный")}
         </div>
     }
     if (energy > 0.5){
         return <div className={cnEnergySmile()}>
-            {paintSmile(slip, "smile","Спящий1")}
+            {paintSmile(slip, "smile","Спящий")}
             <EnergyLine value={50} maxValue={50}/>
-            {paintSmile(medium, "smile","Энергичный1")}
+            {paintSmile(medium, "smile","Энергичный")}
             <EnergyLine value={energy*50} maxValue={50}/>
-            {paintSmile(crazy, "smile1","Безумный1")}
+            {paintSmile(crazy, "smile1","Безумный")}
         </div>
     }
 }

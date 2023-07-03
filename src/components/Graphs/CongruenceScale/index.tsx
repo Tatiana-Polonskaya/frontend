@@ -31,7 +31,7 @@ export default function CongruenceScale( props: Props) {
             let height = item.value < 0.65 ? 0.6 : 0.9;
             let color = (item.type == "angry") ? "#FE6972" : "#24F19B";
             if (item.time_start > previous) {
-                buffer = <div style={{backgroundColor: GraphColor.GRAY, height: '30%',
+                buffer = <div style={{margin:"2px", backgroundColor: GraphColor.GRAY, height: '30%',
                     width:((item.time_start - previous))+"%"}}>
                 </div>
             }
@@ -49,7 +49,7 @@ export default function CongruenceScale( props: Props) {
             let height = item.value < 0.65 ? 0.6 : 0.9;
             let color = (item.type == "angry") ? "#FE6972" : "#24F19B";
             if (item.time_start > previous) {
-                buffer = <div style={{backgroundColor: GraphColor.GRAY, height: '30%',
+                buffer = <div style={{margin:"2px",backgroundColor: GraphColor.GRAY, height: '30%',
                     width:((item.time_start - previous))+"%"}}>
                 </div>
             }
@@ -67,7 +67,7 @@ export default function CongruenceScale( props: Props) {
             let height = item.value < 0.65 ? 0.6 : 0.9;
             let color = (item.type == "angry") ? "#FE6972" : "#24F19B";
             if (item.time_start > previous) {
-                buffer = <div style={{backgroundColor: GraphColor.GRAY, height: '30%',
+                buffer = <div style={{margin:"2px",backgroundColor: GraphColor.GRAY, height: '30%',
                     width:((item.time_start - previous))+"%"}}>
                 </div>
             }

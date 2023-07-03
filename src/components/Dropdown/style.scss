@@ -32,10 +32,12 @@
         width: 100%;
         display: flex;
         align-items: center;
+        
     }
 
     &-icon {
         margin-right: 10px;
+        cursor: pointer;
     }
 
     &-title {
@@ -43,6 +45,7 @@
         font-size: 24px;
         line-height: 31px;
         color: #37476a;
+        cursor: pointer;
     }
 
     &-subtitle {

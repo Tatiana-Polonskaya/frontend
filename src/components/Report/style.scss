@@ -24,12 +24,14 @@
         padding: 10px;
         margin: 20px 0;
         width: 100%;
+        overflow: hidden;
     }
 
     &-header {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: start;
         gap: 15px;
         width: 100%;
     }
@@ -61,11 +63,6 @@
             padding: 0 10px;
         }
     }
-
-    &-video {
-        width: 100%;
-    }
-
     &-col {
         display: flex;
         flex-direction: column;
@@ -93,28 +90,6 @@
         align-items: center;
         gap: 10px;
         width: 100%;
-    }
-
-    &-pic {
-        width: 100%;
-    }
-
-    &-text {
-        font-family: "Montserrat Alternates";
-        font-style: normal;
-        color: #37476a;
-        font-size: 1em;
-        line-height: 1em;
-        font-weight: 400;
-    }
-
-    &-big_blue_text {
-        font-family: "Montserrat Alternates";
-        font-style: normal;
-        font-weight: 700;
-        font-size: 36px;
-        line-height: 44px;
-        color: #2477f4;
     }
 
     &-conclusion {
@@ -146,19 +121,9 @@
                 color: #37476a;
                 font-size: 16px;
                 font-family: "Onest";
+                font-weight: 400;
                 
             }
-        }
-    }
-
-    &-icon {
-        display: inline-flex;
-        justify-content: start;
-        align-items: center;
-        align-content: center;
-        svg {
-            width: 28px;
-            height: 28px;
         }
     }
 
@@ -169,5 +134,13 @@
 
     &-width-max {
         width: 100%;
+    }
+
+    &-transrciption{
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 10px;
+        overflow:auto;
+        height: 85%;
     }
 }

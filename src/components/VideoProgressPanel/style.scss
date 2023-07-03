@@ -28,15 +28,15 @@
     padding-top: 8px;
 
     &-analyze-row {
-        // width: 100%;
-        width: var(--w);
-        padding-top: 19.5px;
+        width: 100%;
+        // width: var(--w);
+        // padding-top: 19.5px;
 
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         gap: var(--g);
         justify-items: stretch;
-        align-items: start;
+        align-items: center;
         justify-content: space-between;
 
         font-family: "Montserrat Alternates";
