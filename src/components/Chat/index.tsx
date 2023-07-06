@@ -1,5 +1,5 @@
 import { cn } from "@bem-react/classname";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { Dispatch, Fragment, SetStateAction, useContext, useState } from "react";
 import { createContext } from "react";
 
 import ChatFooter from "./-Footer";
@@ -91,14 +91,14 @@ export default function Chat(props: Props) {
             <div className={cnChat({expanded: isExpanded})}>
                 <ChatHeader />
                 {isExpanded && (
-                    <>
-                        <div className={cnChat("content")}>
+                    <Fragment>
+                        <div className={cnChat("content",{expanded: !isExpanded})}>
                             {messages.reverse().map((msg, idx) => (
                                 <ChatMessage key={idx} {...msg} />
                             ))}
                         </div>
                         <ChatFooter />
-                    </>
+                    </Fragment>
                 )}
             </div>
         </ChatContext.Provider>

@@ -1,0 +1,101 @@
+.NotificationItem {
+    border-radius: 12px;
+    background: #F3F5F9;
+
+    width: 100%;
+    padding: 8px;
+    gap: 16px;
+    position: relative;
+    font-size: 14px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+
+    &_blue {
+        background: #2477F4;
+        color: #FFF;
+    }
+
+    &-circle {
+        z-index: -1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: .7em;
+        width: .7em;
+        background: #FFB800;
+        border-radius: 50%;
+
+        &_visible {
+            z-index: 1;
+        }
+    }
+
+    &-icon {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+    }
+
+    &-col {
+        display: flex;
+        flex-flow: column nowrap;
+        padding-left: 8px;
+    }
+
+    &-title {
+        color: #37476A;
+        font-family: "Montserrat Alternates";
+        font-size: 14px;
+        font-weight: 600;
+        line-height: normal;
+
+
+        &_white {
+            color: #FFF;
+        }
+    }
+
+    &-description {
+        color: #7C8EB5;
+        font-family: "Onest";
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+
+        &_white {
+            color: rgba(255, 255, 255, 0.70);
+        }
+    }
+
+    &-link {
+        display: flex;
+        width: auto;
+        padding: 6px 6px 6px 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        border-radius: 6px;
+        background: #FFB800;
+        font-family: "Montserrat Alternates";
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+
+        cursor: pointer;
+
+        &-icon {
+            rotate: -90deg;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            svg{
+                width: 10px;
+            }
+        }
+    }
+
+}
