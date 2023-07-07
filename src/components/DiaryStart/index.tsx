@@ -126,7 +126,12 @@ export default function DiaryStart() {
 
                 <Tabs type={TYPE_TABS.PERCENT}>
                     {sectionNames.map((el, idx) => (
-                        <div key={idx} data-title={el} data-value="0%">
+                        <div
+                            key={idx}
+                            data-title={el}
+                            data-value="0%"
+                            style={{ width: "100%" }}
+                        >
                             <StatsGraph data={stats.data.values} />
                         </div>
                     ))}

@@ -72,6 +72,7 @@ export default function TestPage() {
                     <NonMonotonyGraph
                         data={nonMonotonyMockData}
                         param={nonMonotonyType}
+                        average={0}
                     />
                 </div>
                 <div>

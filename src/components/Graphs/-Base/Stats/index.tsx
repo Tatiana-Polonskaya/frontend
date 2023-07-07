@@ -7,24 +7,44 @@ import BaseGraphXDescription from "./../-XDescription";
 import BaseGraphBackground from "./../-Background";
 
 import "./style.scss";
+import Good from "./icons/good.svg";
+import Bad from "./icons/bad.svg";
+import Perfect from "./icons/perfect.svg";
+import Terrible from "./icons/terrible.svg";
+import Average from "./icons/average.svg";
+import Ellipse from "./icons/Ellipse50.svg";
+
+import { ReactSVG } from "react-svg";
 
 const cnStrangeGraph = cn("strange-graph-stats");
 
 type Props = {
     descriptionX?: string[] | number[];
     descriptionY?: string[] | number[];
+    items: Record<string, number>[];
     selectedX?: number;
     visible?: boolean;
 } & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 export default function GraphBaseStats({
     className,
+    items,
     descriptionX,
     descriptionY,
     selectedX,
     visible = true,
     ...props
 }: Props) {
+    console.log(items);
+    const frameArr = [Terrible, Bad, Average, Good, Perfect, Ellipse];
+
+    const frameHelper = (value: number) => {
+        if (value === -1) {
+            return frameArr[5];
+        } else if (value === 1) {
+            return frameArr[4];
+        } else return frameArr[Math.floor((value * 100) / 20)];
+    };
     return (
         <div className={cnStrangeGraph()} {...props}>
             {visible && (
@@ -34,34 +54,43 @@ export default function GraphBaseStats({
                     </p>
                     <p className={cnStrangeGraph("subtitle")}>
                         {
-                            "Начните загружать видео на сервис и уже через неделю здесь появятся первые результаты!"
+                            "Начните загружать видео, учитывать их в статистике и уже через неделю здесь появятся первые результаты!"
                         }
                     </p>
                 </div>
             )}
             <div className={cnStrangeGraph("wrapper")}>
-                <div
-                    className={cnStrangeGraph("graph", {})}
-                    style={{
-                        width: `${(descriptionX?.length || 0) * 71.9}px`,
-                    }}
-                >
-                    {/* херня с  сеткой */}
-                    <BaseGraphBackground
-                        sectionsVert={descriptionX?.length}
-                        sectionsHorz={descriptionY?.length}
+                <div className={cnStrangeGraph("wrapper-frame")}>
+                    {items.map((el, ind) =>
+                        ind !== 0 ? (
+                            <div
+                                key={ind}
+                                className={cnStrangeGraph("frame")}
+                                style={{
+                                    top: `${
+                                        190 - (34 * (el.value * 100)) / 20
+                                    }px`,
+                                    left:
+                                        ind === 1
+                                            ? `${8.75 * ind}%`
+                                            : `${12.9 * ind - 4.15}%`,
+                                }}
+                            >
+                                <ReactSVG src={frameHelper(el.prev)} />
+                            </div>
+                        ) : (
+                            <></>
+                        )
+                    )}
+                </div>
+                {props.children}
+                <div className={cnStrangeGraph("description-y")}>
+                    <BaseGraphXDescription
+                        data={descriptionX}
+                        selected={descriptionX!.length - 2}
                         stats={"st"}
                     />
-                    {props.children}
                 </div>
-            </div>
-            <div className={cnStrangeGraph("description-y")}>
-                <BaseGraphXDescription
-                    data={descriptionX}
-                    // selected={Math.floor(currentTime / 10)}
-                    selected={descriptionX!.length - 1}
-                    stats={"st"}
-                />
             </div>
         </div>
     );

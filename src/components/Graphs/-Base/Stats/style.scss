@@ -3,10 +3,6 @@
 
     background-color: #f7faff;
 
-    height: 230px;
-    // width: 1200px;
-
-    padding: 16px 0;
     overflow: auto;
 
     display: flex;
@@ -44,11 +40,36 @@
     }
 
     &-wrapper {
-        padding-left: 30px;
+        position: relative;
         display: flex;
         width: 100%;
         height: 100%;
         flex-grow: 1 0 auto;
+
+        &-frame {
+            // position: absolute;
+            display: flex;
+            // top: 20px;
+            top: 120px;
+            left: 90%;
+            z-index: 100;
+        }
+    }
+    &-frame {
+        position: absolute;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 24px;
+        width: 26px;
+
+        & > div {
+            & > div {
+                display: flex;
+                align-items: center;
+            }
+        }
     }
 
     &-description-x {
@@ -58,9 +79,10 @@
     }
 
     &-description-y {
-        height: 50px;
-        display: flex;
-        // padding: 0 0 0 25px;
+        width: 82.9%;
+        left: 6.9%;
+        top: 195px;
+        position: absolute;
     }
 
     &-graph {

@@ -22,6 +22,7 @@ export default function ExpressivenessGraph({ data, param = null }: Props) {
             descriptionX={createXDescriptionFromData(data)}
             range={{ min: 0, max: 1 }}
             descriptionY={[0, 0.2, 0.4, 0.6, 0.8, 1]}
+            withMedian={false}
             colors={{
                 [ExpressivenessType.NEUTRAL]: GraphColor.DARKGRAY,
                 [ExpressivenessType.HAPPINESS]: GraphColor.GREEN,

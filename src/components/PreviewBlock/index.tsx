@@ -4,7 +4,6 @@ import Button from "../ui-kit/Button";
 import { VideoUploadContext } from "../RepetitionComponents/RepetitionStart";
 import ReactPlayer from "react-player";
 
-
 import { ReactSVG } from "react-svg";
 import { cn } from "@bem-react/classname";
 import "./style.scss";
@@ -54,14 +53,11 @@ export default function PreviewBlock({
     const fileName = useRef<HTMLInputElement>(null);
 
     // get videofile from content
-    const { currentFile, setCurrentInfoData } =
-        useContext(VideoUploadContext);
+    const { currentFile, setCurrentInfoData } = useContext(VideoUploadContext);
 
     const [durationVideo, setDurationVideo] = useState(0);
     const [sizeVideo, setSizeVideo] = useState(0);
     const [canMoved, setCanMoved] = useState(false);
-
-
 
     const videoRef = useRef<HTMLVideoElement | any>();
     let mediaSource = new MediaSource();
@@ -100,7 +96,7 @@ export default function PreviewBlock({
 
     const getDurationVideo = (n: number) => {
         if (!n) return;
-        console.log(n);
+        // console.log(n);
         if (n === 0 && currentFile.size === 0) return;
         if (n === Infinity) setDurationVideo(0);
         else setDurationVideo(n);
@@ -121,8 +117,8 @@ export default function PreviewBlock({
                     description: "",
                     file: currentFile,
                 });
-            }else{
-                setFilenamevalid(false)
+            } else {
+                setFilenamevalid(false);
             }
         }
     };
@@ -176,7 +172,9 @@ export default function PreviewBlock({
                                     </span>
                                 </div>
                                 <ForwardedInput
-                                    className={cnPreview("input",{"wrong":!isFileNameValid})}
+                                    className={cnPreview("input", {
+                                        wrong: !isFileNameValid,
+                                    })}
                                     required
                                     placeholder="Название файла"
                                     maxLength={80}

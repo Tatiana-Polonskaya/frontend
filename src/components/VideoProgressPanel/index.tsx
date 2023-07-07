@@ -57,7 +57,7 @@ export default function VideoProgressPanel({ result, type = "big" }: Props) {
                             } as React.CSSProperties
                         }
                     >
-                        {result[ind]}%
+                        {result[ind]}%<div className="pie-helper"></div>
                     </div>
                     <p
                         style={

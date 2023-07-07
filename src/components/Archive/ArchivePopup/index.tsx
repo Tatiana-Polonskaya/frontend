@@ -1,4 +1,5 @@
 import { cn } from "@bem-react/classname";
+import { UUID } from "crypto";
 import "./style.scss";
 
 import { ReactSVG } from "react-svg";
@@ -7,17 +8,18 @@ import DeleteIcon from "./icon/trash.svg";
 import ChooseIcon from "./icon/archive-add.svg";
 
 type Props = {
-    id: number;
-    changeTickVideo: any;
-    getDeleteArchiveVideo: any;
+    ind: number;
+    id: UUID;
+    changeTickVideo: Function;
     state: string;
+    handleClick: Function;
 };
 
 export default function ArchivePopup({
+    ind,
     id,
     changeTickVideo,
-
-    getDeleteArchiveVideo,
+    handleClick,
     state,
 }: Props) {
     const cnArchivePopup = cn("archive-popup");
@@ -35,22 +37,22 @@ export default function ArchivePopup({
         },
     ];
 
-    const getIdVideo = (id: number) => {
-        getDeleteArchiveVideo(id);
-    };
-
     const getTick = (id: number) => {
         changeTickVideo(id);
     };
 
+    const delVideo = (id: string) => {
+        handleClick(id);
+    };
+
     return (
         // разделить  методы
-        <div key={id} className={cnArchivePopup("", cnArchivePopup(state))}>
+        <div key={ind} className={cnArchivePopup("", cnArchivePopup(state))}>
             {valuesPopup.map((el, index) => (
                 <div
                     key={index}
                     className={cnArchivePopup("item")}
-                    onClick={() => (index === 0 ? getTick(id) : getIdVideo(id))}
+                    onClick={() => (index === 0 ? getTick(ind) : delVideo(id))}
                 >
                     <ReactSVG
                         className={cnArchivePopup("icon")}

@@ -8,12 +8,14 @@ import convertEnergyData from "../../../@adapters/Graphs/energy";
 type Props = {
     data: EnergyDataItem[];
     param: EnergyType | null;
+    average: number;
 };
 
-export default function EnergyGraph({ data, param = null }: Props) {
+export default function EnergyGraph({ data, param = null, average }: Props) {
     const data2 = convertEnergyData(data, param);
     return (
         <LineGraph
+            average={100 - average}
             items={data2}
             descriptionX={createXDescriptionFromData(data)}
             range={{ min: 0, max: 1 }}

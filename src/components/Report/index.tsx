@@ -250,7 +250,6 @@ export default function AnalysisReport() {
             setTotalData(TotalDataFromBack.data.data);
     }, [TotalDataFromBack]);
 
-
     return (
         <div className={cnReport()}>
             <div className={cnReport("btn-back")}>
@@ -264,7 +263,10 @@ export default function AnalysisReport() {
             </div>
 
             <div className={cnReport("header")}>
-                <div className={cnReport("whiteBlock")} style={{height:"500px"}}>
+                <div
+                    className={cnReport("whiteBlock")}
+                    style={{ height: "500px" }}
+                >
                     <VideoPlayer url={`/api/video/${idVideo}`} />
                     <div className={cnReport("video-block-title")}>
                         {videoInfo ? videoInfo.title : ""}
@@ -280,27 +282,28 @@ export default function AnalysisReport() {
                         минут
                     </div>
                 </div>
-                <div className={cnReport("whiteBlock")} style={{height:"500px"}}>
-                    
-                        <ColorfulTabs>
-                            <div
-                                className={cnReport("width")}
-                                title="Личная заметка"
+                <div
+                    className={cnReport("whiteBlock")}
+                    style={{ height: "500px" }}
+                >
+                    <ColorfulTabs>
+                        <div
+                            className={cnReport("width")}
+                            title="Личная заметка"
+                        >
+                            <VideoNotice description="" />
+                        </div>
+                        <div
+                            className={cnReport("transrciption")}
+                            title="Транскрипция речи"
+                        >
+                            <VideoTimeContext.Provider
+                                value={{ currentTime, setCurrentTime }}
                             >
-                                <VideoNotice description="" />
-                            </div>
-                            <div
-                                className={cnReport("transrciption")}
-                                title="Транскрипция речи"
-                            >
-                                <VideoTimeContext.Provider
-                                    value={{ currentTime, setCurrentTime }}
-                                >
-                                    <SpeechTranscription idVideo={idVideo} />
-                                </VideoTimeContext.Provider>
-                            </div>
-                        </ColorfulTabs>
-                    
+                                <SpeechTranscription idVideo={idVideo} />
+                            </VideoTimeContext.Provider>
+                        </div>
+                    </ColorfulTabs>
                 </div>
             </div>
 
@@ -651,6 +654,11 @@ export default function AnalysisReport() {
                                     // сюда надо добавить data
                                     <SecondaryNonMonotony
                                         data={nonMonotonyData.values}
+                                        averages={[
+                                            nonMonotonyData["h-temp"],
+                                            nonMonotonyData["h-volume"],
+                                            nonMonotonyData["h-tone"],
+                                        ]}
                                         graphs={[
                                             {
                                                 link: "Темп речи",
@@ -694,7 +702,10 @@ export default function AnalysisReport() {
                                     />
                                 }
                                 invisible={
-                                    <SecondaryEnergy data={energyData.values} />
+                                    <SecondaryEnergy
+                                        data={energyData.values}
+                                        average={energyData.total_energy}
+                                    />
                                 }
                             />
                         )}
@@ -735,7 +746,7 @@ export default function AnalysisReport() {
                         {confidenceData && (
                             <Dropdown
                                 title={"Уверенность"}
-                                subtitle={`Зафиксирована неуверенность в суждениях ***${2}раз/а`}
+                                subtitle={`Зафиксирована неуверенность в суждениях ${confidenceData.uncertainty} раз/а`}
                                 visible={
                                     <MainConfidence
                                         data={confidenceData.values}

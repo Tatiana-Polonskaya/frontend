@@ -2,18 +2,14 @@ import { Fragment, ReactNode } from "react";
 import {
     ResponsiveContainer,
     Area,
-    AreaChart,
-    Tooltip,
     XAxis,
     CartesianGrid,
     YAxis,
-    Text,
-    LineChart,
-    Line,
+    ComposedChart,
+    LabelList,
+    Label,
 } from "recharts";
 import { cn } from "@bem-react/classname";
-
-import GraphBase from "..";
 
 import "./style.scss";
 import { StatsDataItem } from "../../../../models/graph/stats";
@@ -43,59 +39,89 @@ export default function StatsLineGraph({
     range,
 }: // data,
 Props) {
+    const size = [0, 1];
+    console.log(items);
     return (
-        // <AreaChart
-        //     width={1248}
-        //     height={250}
-        //     data={data}
-        //     margin={{
-        //         top: 0,
-        //         right: 0,
-        //         bottom: 0,
-        //         left: 0,
-        //     }}
-        // >
-        //     <defs>
-        //         <linearGradient id="colorUv" x1="0" y1="0.6" x2="0" y2="0">
-        //             <stop offset="5%" stopColor="#084CA5" stopOpacity={0.8} />
-        //             <stop offset="95%" stopColor="#084CA5" stopOpacity={0} />
-        //         </linearGradient>
-        //     </defs>
-        // {/* <XAxis dataKey="date" /> */}
-        // {/* <YAxis /> */}
-        //
-        <GraphBaseStats
-            descriptionX={descriptionX}
-            descriptionY={descriptionY}
-            visible={true}
-        >
-            <ResponsiveContainer
-                width="100%"
-                height="100%"
-                className={CN("recharts-wrapper")}
+        <div className={CN()}>
+            <GraphBaseStats
+                items={items}
+                descriptionX={descriptionX}
+                descriptionY={descriptionY}
+                visible={visible}
             >
-                {/* <LineChart data={items} margin={{ right: 60, left: 60 }}> */}
-                <LineChart data={items} margin={{ right: 60 }}>
-                    {Object.keys(items[0]).map((key) => (
-                        <Fragment key={key}>
-                            {range && (
-                                <YAxis domain={[range.min, range.max]} hide />
-                            )}
-                            {visible && (
-                                <Line
-                                    type="linear"
-                                    dataKey={key}
-                                    // dot={false}
-                                    dot={true}
-                                    stroke={colors ? colors[key] : "#000"}
-                                    strokeWidth={1}
-                                    isAnimationActive={false}
+                <ResponsiveContainer
+                    width="100%"
+                    height={230}
+                    className={CN("recharts-wrapper")}
+                >
+                    {/* <AreaChart */}
+                    <ComposedChart
+                        style={{ outline: "none", background: "#F7FAFF" }}
+                        data={items}
+                        margin={{
+                            top: 0,
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
+                        }}
+                    >
+                        <defs>
+                            <linearGradient
+                                id="colorUv"
+                                x1="0"
+                                y1="0"
+                                x2="0"
+                                y2="1"
+                            >
+                                <stop
+                                    offset="5%"
+                                    stopColor="#2477F4"
+                                    stopOpacity={0.6}
                                 />
-                            )}
-                        </Fragment>
-                    ))}
-                </LineChart>
-            </ResponsiveContainer>
-        </GraphBaseStats>
+                                <stop
+                                    offset="95%"
+                                    stopColor="#2477F4"
+                                    stopOpacity={1}
+                                />
+                            </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="4 3" />
+                        <XAxis
+                            type="number"
+                            dataKey="name"
+                            domain={[1, 8]}
+                            padding={{ left: -50 }}
+                            tickCount={9}
+                            height={0}
+                        />
+                        <YAxis
+                            allowDataOverflow={true}
+                            type="number"
+                            domain={[...size]}
+                            padding={{ bottom: 40, top: 20 }}
+                            tickCount={6}
+                            width={0}
+                        />
+                        {/*  добавить в area label={<CustomizedLabel />} */}
+                        {!visible && (
+                            <Area
+                                dataKey="value"
+                                stroke="#084CA5"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                            />
+                        )}
+                        {!visible && (
+                            <Area
+                                dataKey="vv"
+                                stroke="#084CA5"
+                                fillOpacity={1}
+                                fill="#2477F4"
+                            />
+                        )}
+                    </ComposedChart>
+                </ResponsiveContainer>
+            </GraphBaseStats>
+        </div>
     );
 }

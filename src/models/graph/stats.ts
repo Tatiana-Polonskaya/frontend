@@ -1,7 +1,7 @@
 export type StatsDataItem = {
     seq_number: number;
     text: string;
-    value: number;
+    value: number | null;
     date: string;
     time_start: number;
 };

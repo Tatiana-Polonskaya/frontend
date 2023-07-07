@@ -1,10 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 import { IResponse } from "../../../models/api";
-import { IVideoApiReq, IVideoInfo, IVideoUploadItem, IVideoUser } from "../../../models/video";
+import {
+    IVideoApiReq,
+    IVideoInfo,
+    IVideoUploadItem,
+    IVideoUser,
+} from "../../../models/video";
 import customFetchBase from "../utils/customFetchBase";
 import { UUID } from "crypto";
-
 
 export const videoApi = createApi({
     reducerPath: "api/video",
@@ -33,10 +37,10 @@ export const videoApi = createApi({
             },
         }),
         getVideoByUser: build.query<IResponse<IVideoUser>, number>({
-            query: (limit=6) => {
+            query: (limit = 6) => {
                 return {
                     url: `/api/video/user`,
-                    params: {limit},
+                    params: { limit },
                     method: "GET",
                 };
             },
@@ -51,10 +55,10 @@ export const videoApi = createApi({
             },
         }),
         updateVideoInfoById: build.mutation<IResponse<void>, IVideoUploadItem>({
-            query: ({id,title, description}) => {
+            query: ({ id, title, description }) => {
                 return {
                     url: `/api/video/`,
-                    params: {id,title, description},
+                    params: { id, title, description },
                     method: "PUT",
                 };
             },
@@ -71,7 +75,14 @@ export const videoApi = createApi({
     }),
 });
 
-export const { useSendVideoMutation, useGetVideoByIdQuery, useLazyGetVideoByIdQuery, useGetVideoByUserQuery, useGetVideoInfoByIdQuery, useUpdateVideoInfoByIdMutation, useDeleteVideoByIdMutation  } =
-    videoApi;
+export const {
+    useSendVideoMutation,
+    useGetVideoByIdQuery,
+    useLazyGetVideoByIdQuery,
+    useGetVideoByUserQuery,
+    useGetVideoInfoByIdQuery,
+    useUpdateVideoInfoByIdMutation,
+    useDeleteVideoByIdMutation,
+} = videoApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = videoApi;

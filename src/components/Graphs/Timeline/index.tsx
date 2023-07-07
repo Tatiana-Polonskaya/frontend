@@ -76,28 +76,30 @@ export default function TimelineGraph({
                             className={cnGraphHelp()}
                             ref={wrapperRef}
                         >
-                            {isOpened && el.id === indOpened && (
-                                <div
-                                    style={{
-                                        top: "110px",
-                                        right,
-                                        border: `thin solid ${el.color}`,
-                                    }}
-                                    className={cnGraphHelp("content")}
-                                    ref={helpRef}
-                                >
-                                    <div>
-                                        <span
-                                            className={CN("help", {
-                                                time: true,
-                                            })}
-                                        >
-                                            {convertTime(el.time)}
-                                        </span>
-                                        <span>{el.text}</span>
+                            {isOpened &&
+                                el.id === indOpened &&
+                                (el.text !== "" || el.text?.length !== 0) && (
+                                    <div
+                                        style={{
+                                            top: "110px",
+                                            right,
+                                            border: `thin solid ${el.color}`,
+                                        }}
+                                        className={cnGraphHelp("content")}
+                                        ref={helpRef}
+                                    >
+                                        <div>
+                                            <span
+                                                className={CN("help", {
+                                                    time: true,
+                                                })}
+                                            >
+                                                {convertTime(el.time)}
+                                            </span>
+                                            <span>{el.text}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
                         </div>
                     </div>
                 ))}

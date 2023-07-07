@@ -16,6 +16,7 @@ import GraphColor from "../../../../../../models/graph/_colors";
 type Props = {
     graphs: Graph[];
     data: NonMonotonyDataItem[];
+    averages: number[];
 };
 
 type Graph = {
@@ -59,6 +60,7 @@ export default function SecondaryNonMonotony(props: Props) {
     // сюда передавать значение графика
     // изначально поставить 2
     const [graph, setGraph] = useState(0);
+    const [temp, volume, tone] = props.averages;
     return (
         <>
             <div className={cnNonMon("marker")}>
@@ -125,6 +127,7 @@ export default function SecondaryNonMonotony(props: Props) {
                         // ? NonMonotonyType.TONE
                         // : null
                     }
+                    average={graph === 0 ? temp : graph === 1 ? volume : tone}
                 />
             </div>
         </>

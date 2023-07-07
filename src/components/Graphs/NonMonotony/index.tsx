@@ -11,12 +11,18 @@ import convertMonotonyData from "../../../@adapters/Graphs/monotony";
 type Props = {
     data: NonMonotonyDataItem[];
     param: NonMonotonyType | null;
+    average: number;
 };
 
-export default function NonMonotonyGraph({ data, param = null }: Props) {
+export default function NonMonotonyGraph({
+    data,
+    param = null,
+    average,
+}: Props) {
     const data2 = convertMonotonyData(data, param);
     return (
         <LineGraph
+            average={100 - average}
             items={data2}
             descriptionX={createXDescriptionFromData(data)}
             range={{ min: 0, max: 1 }}

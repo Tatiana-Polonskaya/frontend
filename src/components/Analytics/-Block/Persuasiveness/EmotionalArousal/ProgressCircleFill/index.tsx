@@ -87,9 +87,11 @@ export default function ProgressCircleFill(props: Props) {
                                     61 +
                                     61 * +Math.sin(Math.PI * k).toFixed(5)
                                 }
-                                r={0.1}
+                                r={4.3}
                                 style={{
                                     stroke: `#ADB9D4`,
+                                    strokeWidth: 0.1,
+                                    fill: `#ADB9D4`,
                                     zIndex: 1000,
                                 }}
                             ></circle>
@@ -118,9 +120,15 @@ export default function ProgressCircleFill(props: Props) {
                             <circle
                                 cx={19 + 61 + 61 * x}
                                 cy={14 + 61 + 61 * y}
-                                r={2.5}
+                                r={8}
                                 style={{
                                     stroke: `${
+                                        props.info.result < props.info.limit
+                                            ? fill[0]
+                                            : fill[1]
+                                    }`,
+                                    strokeWidth: 0.1,
+                                    fill: `${
                                         props.info.result < props.info.limit
                                             ? fill[0]
                                             : fill[1]
@@ -132,9 +140,15 @@ export default function ProgressCircleFill(props: Props) {
                             <circle
                                 cx={141}
                                 cy={75}
-                                r={0.1}
+                                r={4.3}
                                 style={{
                                     stroke: `${
+                                        props.info.result < props.info.limit
+                                            ? fill[0]
+                                            : fill[1]
+                                    }`,
+                                    strokeWidth: 0.1,
+                                    fill: `${
                                         props.info.result < props.info.limit
                                             ? fill[0]
                                             : fill[1]

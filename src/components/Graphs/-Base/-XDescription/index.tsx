@@ -1,6 +1,7 @@
 import { cn } from "@bem-react/classname";
 
 import "./style.scss";
+import { Fragment } from "react";
 
 const CN = cn("base-graph-x-description");
 
@@ -22,28 +23,35 @@ export default function BaseGraphXDescription({
     });
     curTime?.reverse();
     return (
-        <div className={CN()}>
+        <div className={stats !== "st" ? CN() : CN("stats")}>
             {/* {data?.map((el, idx) => ( */}
-            {curTime!.map((el, idx) => (
-                <div
-                    className={CN(stats !== "st" ? "item" : "item-stats", {
-                        first: idx === 0,
-                        selected: idx === selected,
-                    })}
-                    key={idx}
-                >
-                    {stats === "st" ? (
-                        <>
-                            {el.day}
-                            <span>{` ${el.date}:${
-                                el.month >= 10 ? el.month : "0" + el.month
-                            }`}</span>
-                        </>
-                    ) : (
-                        <span>{data![idx]}</span>
-                    )}
-                </div>
-            ))}
+            {curTime!.map((el, idx) =>
+                idx !== 7 ? (
+                    <div
+                        className={CN(stats !== "st" ? "item" : "item-stats", {
+                            first: idx === 0,
+                            selected: idx === selected,
+                        })}
+                        key={idx}
+                    >
+                        {stats === "st" ? (
+                            <>
+                                {/* <span>{el.day}</span> */}
+                                {el.day}
+                                <span>{`${
+                                    el.date >= 10 ? el.date : "0" + el.date
+                                }:${
+                                    el.month >= 10 ? el.month : "0" + el.month
+                                }`}</span>
+                            </>
+                        ) : (
+                            <span>{data![idx]}</span>
+                        )}
+                    </div>
+                ) : (
+                    <Fragment key={idx} />
+                )
+            )}
         </div>
     );
 }

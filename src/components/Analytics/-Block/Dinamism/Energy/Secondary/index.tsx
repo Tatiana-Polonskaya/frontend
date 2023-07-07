@@ -13,6 +13,7 @@ import EnergyGraph from "../../../../../Graphs/Energy";
 type Props = {
     data: EnergyDataItem[];
     graphs?: string;
+    average: number;
 };
 
 const cnEnergy = cn("energy");
@@ -65,7 +66,11 @@ export default function SecondaryEnergy(props: Props) {
 
             <div className={cnEnergy("graph")}>
                 {/* сюда передавать state для того тчобы отображать 1 график */}
-                <EnergyGraph data={props.data} param={EnergyType.ENERGY} />
+                <EnergyGraph
+                    data={props.data}
+                    param={EnergyType.ENERGY}
+                    average={props.average}
+                />
             </div>
         </>
     );

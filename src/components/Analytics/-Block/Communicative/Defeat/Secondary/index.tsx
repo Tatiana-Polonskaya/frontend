@@ -56,7 +56,7 @@ type Param = {
     description: string[];
 };
 export default function SecondaryDefeat(props: Props) {
-    function determ(str: string, arrS: Priority) {
+    function determ(str: string, arrS: Priority, index: number) {
         let arrParam: Param[] = [];
         let strArr = str.split(" ");
 
@@ -158,13 +158,16 @@ export default function SecondaryDefeat(props: Props) {
             <div className={cnDefeat("description")}>
                 {arrParam.map((el, ind) => (
                     <span key={ind} className={`${cnDefeat(el.type[0])}_text`}>
-                        {ind === 0 ? strArr[ind] : ` ${strArr[ind]}`}
+                        {` ${strArr[ind]}`}
                         {el.description.length !== 0 ? (
                             <div
                                 className={cnDefeat("help-content")}
                                 style={{
                                     borderColor: el.color[0],
-                                    top: "20px",
+                                    top:
+                                        index === props.breakdown?.length - 1
+                                            ? "-40px"
+                                            : "20px",
                                     left: "0px",
                                 }}
                             >
@@ -234,7 +237,7 @@ export default function SecondaryDefeat(props: Props) {
                         >
                             {el.time_start}
                         </div>
-                        {determ(el.text, el.value)}
+                        {determ(el.text, el.value, index)}
                     </div>
                 ))}
             </div>

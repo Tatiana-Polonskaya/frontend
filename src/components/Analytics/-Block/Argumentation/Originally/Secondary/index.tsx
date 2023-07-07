@@ -17,6 +17,7 @@ interface IBreakdown {
     text: string;
     value: number;
     link: string;
+    allocated: string;
 }
 
 const cnBreakdown = cn("breakdown_block");
@@ -108,7 +109,7 @@ export default function SecondaryOriginally(props: Props) {
                             )}_text`}
                         >
                             {/* подкинуть строку для сравнения el.modification.str */}
-                            {determ(el, el.text, "insdf")}
+                            {determ(el, el.text, el.allocated)}
                         </div>
                     </div>
                 ))}

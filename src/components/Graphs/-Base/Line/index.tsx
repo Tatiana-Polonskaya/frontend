@@ -49,8 +49,8 @@ export default function LineGraph({
                             <Line
                                 type="linear"
                                 dataKey={key}
-                                // dot={false}
-                                dot={true}
+                                dot={false}
+                                // dot={true}
                                 stroke={colors ? colors[key] : "#000"}
                                 strokeWidth={1}
                                 isAnimationActive={false}

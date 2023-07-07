@@ -108,12 +108,23 @@
     font-size: var(--fs-v);
     line-height: var(--lh-v);
     color: #2477f4;
+
+    &-helper {
+        position: absolute;
+        height: 60px;
+        width: 60px;
+        border: 10px solid #d9e0ef;
+        border-radius: 50%;
+
+        z-index: 10;
+    }
 }
 .pie:before,
 .pie:after {
     content: "";
     position: absolute;
     border-radius: 50%;
+    z-index: 100;
 }
 .pie:before {
     inset: 0;

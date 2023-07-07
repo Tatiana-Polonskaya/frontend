@@ -76,8 +76,13 @@ export default function CommonAnalitics(props: Props) {
             </div>
             <div className={cnCommon("row-justify")}>
                 <div>
-                    {allValues && <ReactSVG src={getPictureByConclusion(allValues.big_conclusion)} />}
-                    
+                    {allValues && (
+                        <ReactSVG
+                            src={getPictureByConclusion(
+                                allValues.big_conclusion
+                            )}
+                        />
+                    )}
                 </div>
                 <div className={cnCommon("col-grow")}>
                     <span className={cnCommon("blue-bold")}>
@@ -125,15 +130,6 @@ export default function CommonAnalitics(props: Props) {
                                     arcWidth={25}
                                     // lineCap={}
                                 />
-                                {/* стрелка */}
-                                <Needle
-                                    offset={35}
-                                    baseWidth={12}
-                                    // baseOffset={-30}
-                                    baseOffset={0}
-                                    color={"#7C8EB5"}
-                                    circleRadius={0}
-                                />
                                 {/* шкала заполнения */}
                                 <Progress
                                     color={
@@ -173,6 +169,15 @@ export default function CommonAnalitics(props: Props) {
                                         y2="82.5"
                                         stroke="#FFF"
                                         strokeWidth="1"
+                                    />
+                                    {/* стрелка */}
+                                    <Needle
+                                        offset={35}
+                                        baseWidth={12}
+                                        // baseOffset={-30}
+                                        baseOffset={0}
+                                        color={"#7C8EB5"}
+                                        circleRadius={0}
                                     />
                                 </svg>
                             </Speedometer>
