@@ -1,45 +1,39 @@
 import { cn } from "@bem-react/classname";
 
+import { IVideoFromBack } from "../../../models/video";
+import VideoPlayer, { getPrettyDataTime } from "../../VideoPlayer";
 
+import NoPhoto from "../../ProfilePreview/assets/no-photo.png";
 import "./style.scss";
 
 type Props = {
-    item: Item;
+    item: IVideoFromBack;
     clickFunction: Function;
 };
 
-type Item = {
-    img: string;
-    title: string;
-    author: string;
-    avatar: string;
-    views: number;
-    publication_time: string;
-    annotation?: string;
-};
-
 export default function VideoItem(props: Props) {
-    
     const cnVideoItem = cn("video-item");
 
     return (
         <div className={cnVideoItem()}>
-
-            <img src={props.item.img} alt='' className={cnVideoItem("picture")} onClick={()=>props.clickFunction()}/>
+            <div
+                className={cnVideoItem("video-block")}
+                onClick={() => props.clickFunction()}
+            >
+                <VideoPlayer url={`/api/video/${props.item.id}`} controls={false}/>
+            </div>
 
             <div className={cnVideoItem("author-block")}>
-
                 <div className={cnVideoItem("author-block-title")}>
+                    { !props.item.channel_title && (<div className={cnVideoItem("logo")}>
+                        <img className={cnVideoItem("logo-pic")} src={NoPhoto} alt=''/>
+                    </div>)}
                     
-                    <div className={cnVideoItem("logo")}>
-                        <img className={cnVideoItem("logo-pic")} src={props.item.avatar} alt=''/>
-                    </div>
-                    <p>{props.item.author}</p>
+                    <p>{props.item.channel_title ? props.item.channel_title: "Источник" }</p>
                 </div>
-
-                <p>{props.item.publication_time}</p>
+                <p>{getPrettyDataTime(props.item.upload_date)}</p>
             </div>
-            
+
             <p className={cnVideoItem("title")}>{props.item.title}</p>
         </div>
     );

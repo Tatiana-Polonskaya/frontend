@@ -22,21 +22,24 @@ export default function ColorfulTabs(props: Props) {
         <div className={cnColorfulTab()}>
             <ul className={cnColorfulTab("list")}>
                 {children.map((child) => {
-                    return (
+                    return child? (
                         <ColorfulTab
                             key={child.props.title}
                             activeTab={activeTab}
                             label={child.props.title}
                             onClick={onClickTabItem}
                         />
-                    );
+                    ) : undefined;
                 })}
             </ul>
 
             <div className={cnColorfulTab("content")}>
                 {children.map((child) => {
-                    if (child.props.title !== activeTab) return undefined;
-                    return child;
+                    if(child){
+                        if (child.props.title !== activeTab) return undefined;
+                        return child;
+                    }
+                    return undefined;
                 })}
             </div>
         </div>

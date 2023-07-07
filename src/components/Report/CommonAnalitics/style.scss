@@ -7,7 +7,7 @@
         display: flex;
         flex-flow: row nowrap;
         justify-content: start;
-        align-items: start;
+        align-items: flex-start;
         gap: 8px;
 
         font-family: "Montserrat Alternates";
@@ -35,7 +35,7 @@
     &-common-result {
         display: flex;
         flex-direction: column;
-        align-items: end;
+        align-items: flex-end;
         gap: 5px;
         margin: 0 10px;
 

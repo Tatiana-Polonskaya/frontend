@@ -23,8 +23,8 @@
         display: flex;
         flex-flow: column nowrap;
         width: 100%;
-        gap: 15px;
-        padding-top: 5px;
+        gap: 10px;
+
 
         &-item{
 
@@ -109,6 +109,11 @@
                 color: #7C8EB5;
             }
         }
+    }
+
+    &-another-block{
+        padding: 0;
+        margin: 0 auto;
     }
 }
   

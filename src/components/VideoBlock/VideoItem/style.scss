@@ -5,11 +5,16 @@
     display: flex;
     flex-flow: column nowrap;
 
-    &-picture{
+    &-video-block{
         width: 400px;
-        height: 220px;
+        height: 225px;
         border-radius: 5%;
         cursor: pointer;
+
+        video{
+            width: 400px !important;
+            height: 225px !important;
+        }
     }
 
     &-author-block{
@@ -18,15 +23,11 @@
         justify-content: space-between;
         align-items: center;
         padding-top: 10px;
-        padding-bottom: 5px;
-
         
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 15px;
-        display: flex;
-        align-items: center;
         color: #7C8EB5;
 
         &-title{
@@ -71,5 +72,7 @@
         font-size: 14px;
         line-height: 18px;
         color: #000000;
+        font-family: "Onest";
+
     }
 }

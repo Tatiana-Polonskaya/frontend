@@ -41,7 +41,7 @@ import {
 } from "react";
 import SpeechTranscription from "../SpeechTranscription";
 import VideoNotice from "../VideoNotice";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import CommunicativeNorm from "../Graphs/communicativeNorm";
 import Eloquence from "../Graphs/eloquence";
@@ -111,6 +111,8 @@ export const VideoTimeContext = createContext({
     setCurrentTime: (() => {}) as Dispatch<SetStateAction<string>>,
 });
 
+
+
 export default function AnalysisReport() {
     const cnReport = cn("AnalysisReport");
 
@@ -119,9 +121,25 @@ export default function AnalysisReport() {
         ? params.id
         : "ec9a839f-55c4-4504-9fdf-e6ff3c49766f";
 
+    const locationParams = useLocation();
+    const [isMainVideo, setIsMainVideo] = useState(false);
+
+    useEffect(()=>{
+        if(locationParams && locationParams.state && ("main" in locationParams.state)) {
+            setIsMainVideo(true);
+        }
+    },[locationParams])
+
     // common info about video: title, date, duration
-    const { data } = useGetVideoInfoByIdQuery(idVideo);
-    const videoInfo = data?.data as IVideoInfo;
+    const videoInfoFromBack = useGetVideoInfoByIdQuery(idVideo);
+    const [videoInfo, setVideoInfo] = useState<IVideoInfo>();
+
+    useEffect(()=>{
+        if(videoInfoFromBack && videoInfoFromBack.data){
+            setVideoInfo(videoInfoFromBack.data!.data);
+        }
+    },[videoInfoFromBack]);
+   
 
     const navigate = useNavigate();
 
@@ -263,11 +281,10 @@ export default function AnalysisReport() {
             </div>
 
             <div className={cnReport("header")}>
-                <div
-                    className={cnReport("whiteBlock")}
-                    style={{ height: "500px" }}
-                >
-                    <VideoPlayer url={`/api/video/${idVideo}`} />
+                <div className={cnReport("whiteBlock")}>
+                    <div className={cnReport("video-block-video")}>
+                    <VideoPlayer url={`/api/video/${idVideo}`} controls={true}/>
+                    </div>
                     <div className={cnReport("video-block-title")}>
                         {videoInfo ? videoInfo.title : ""}
                     </div>
@@ -282,21 +299,21 @@ export default function AnalysisReport() {
                         минут
                     </div>
                 </div>
-                <div
-                    className={cnReport("whiteBlock")}
-                    style={{ height: "500px" }}
-                >
-                    <ColorfulTabs>
-                        <div
-                            className={cnReport("width")}
-                            title="Личная заметка"
-                        >
-                            <VideoNotice description="" />
-                        </div>
-                        <div
-                            className={cnReport("transrciption")}
-                            title="Транскрипция речи"
-                        >
+
+                <div className={cnReport("whiteBlock")}>
+                    
+                        <ColorfulTabs>
+                            {!isMainVideo && <div
+                                className={cnReport("width")}
+                                title="Личная заметка"
+                            >
+                                <VideoNotice description="" />
+                            </div>}
+                            <div
+                                className={cnReport("transrciption")}
+                                title="Транскрипция речи">
+
+             
                             <VideoTimeContext.Provider
                                 value={{ currentTime, setCurrentTime }}
                             >

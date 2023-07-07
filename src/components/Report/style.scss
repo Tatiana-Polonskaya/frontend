@@ -28,10 +28,10 @@
     }
 
     &-header {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: center;
-        align-items: start;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 550px;
+
         gap: 15px;
         width: 100%;
     }
@@ -40,7 +40,16 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: start;
+        align-items: flex-start;
+
+        &-video{
+            overflow: hidden;
+            border-radius: 10px;
+
+            video{
+                max-height: 420px;
+            }
+        }
 
         &-title {
             max-width: 700px;
@@ -55,7 +64,7 @@
             display: flex;
             flex-direction: row;
             justify-content: start;
-            align-items: start;
+            align-items: flex-start;
 
             color: #7c8eb5;
             font-size: 16px;

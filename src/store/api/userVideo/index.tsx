@@ -1,14 +1,14 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { createApi } from "@reduxjs/toolkit/dist/query/react";
 
 import { IResponse } from "../../../models/api";
 import {
+    IParamsForQueryUserVideo,
     IVideoApiReq,
     IVideoInfo,
     IVideoUploadItem,
     IVideoUser,
 } from "../../../models/video";
 import customFetchBase from "../utils/customFetchBase";
-import { UUID } from "crypto";
 
 export const videoApi = createApi({
     reducerPath: "api/video",
@@ -28,6 +28,18 @@ export const videoApi = createApi({
                 };
             },
         }),
+        getMainVideo: build.query<
+            IResponse<IVideoUser>,
+            IParamsForQueryUserVideo
+        >({
+            query: ({ page = 0, limit = 6 }) => {
+                return {
+                    url: "/api/video/main-page",
+                    params: { page, limit },
+                    method: "GET",
+                };
+            },
+        }),
         getVideoById: build.query<IResponse<void>, string>({
             query: (videoId) => {
                 return {
@@ -36,11 +48,14 @@ export const videoApi = createApi({
                 };
             },
         }),
-        getVideoByUser: build.query<IResponse<IVideoUser>, number>({
-            query: (limit = 6) => {
+        getVideoByUser: build.query<
+            IResponse<IVideoUser>,
+            IParamsForQueryUserVideo
+        >({
+            query: ({ page = 0, limit = 6 }) => {
                 return {
                     url: `/api/video/user`,
-                    params: { limit },
+                    params: { page, limit },
                     method: "GET",
                 };
             },
@@ -77,6 +92,8 @@ export const videoApi = createApi({
 
 export const {
     useSendVideoMutation,
+    useGetMainVideoQuery,
+    useLazyGetMainVideoQuery,
     useGetVideoByIdQuery,
     useLazyGetVideoByIdQuery,
     useGetVideoByUserQuery,

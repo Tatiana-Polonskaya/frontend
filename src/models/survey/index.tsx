@@ -1,24 +1,22 @@
-import { UUID } from "crypto";
-
-enum typeQuestion {
+export enum typeQuestion {
     checkbox = "checkbox",
     radio = "radio",
 }
 
-enum typeStyleAnswers {
+export enum typeStyleAnswers {
     row = "block-answers",
     column = "col-answers",
     icon_row = "icon-rows",
 }
 
 export interface ISurvey {
-    id: UUID;
+    id: string;
     title: string;
     questions: IQuestion[];
 }
 
 export interface IQuestion {
-    id: UUID;
+    id: string;
     title: string;
     type: typeQuestion;
     icons: boolean;
@@ -27,14 +25,19 @@ export interface IQuestion {
 }
 
 export interface IChoice {
-    id: UUID;
+    id: string;
     title: string;
     icon: string;
     another: boolean;
 }
 
 export interface IAnswer {
-    question_id: UUID | null;
-    choice_id: UUID | null;
+    question_id: string;
+    choice_id: string;
     text: string;
+}
+
+export interface IAnswerBack {
+    questionnaire_title: string,
+    answers: IAnswer[],
 }

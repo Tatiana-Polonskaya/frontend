@@ -9,6 +9,7 @@ export interface IVideoApiReq {
 
 export interface IVideoUser {
     videos: IVideoFromBack[];
+    total_videos:number;
 }
 
 export interface IVideoFromBack {
@@ -39,4 +40,9 @@ export interface IVideoUploadItem {
     id: string;
     title: string;
     description: string;
+}
+
+export interface IParamsForQueryUserVideo{
+    page: number,
+    limit:number,
 }

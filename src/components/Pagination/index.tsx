@@ -69,7 +69,7 @@ export default function Pagination(props: Props) {
                         className={cnPagination("number", {
                             current: number === props.currentPage,
                         })}
-                        onClick={() => props.paginate(number)}
+                        onClick={() => props.paginate(number-1)}
                     >
                         {number}
                     </div>

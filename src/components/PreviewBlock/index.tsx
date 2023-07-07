@@ -20,11 +20,12 @@ type IPreviewBlock = {
 const NORM_COUNT_MINUTES = 15;
 
 export function getPrettyDuration(seconds: number): number {
-    return Math.floor((seconds + 1) / 60);
+    return seconds ? Math.floor((seconds + 1) / 60) : 0;
 }
 
 // get number of bytes, return Кб or МБ or ГБ
 function getPrettySizeFile(size: number, decimals = 2): string {
+    
     if (size === 0) {
         return "0";
     } else {

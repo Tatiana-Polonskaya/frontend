@@ -37,7 +37,7 @@ export default function DiaryStart() {
 
     /* ----------------------- GETTING VIDEO BLOCK -----------------------*/
     // getting all video for users
-    const videosDataFromBack = useGetVideoByUserQuery(100);
+    const videosDataFromBack = useGetVideoByUserQuery({page:0,limit:6});
     const [allUserVideos, setAllUserVideos] = useState<IVideoFromBack[]>();
 
     useEffect(() => {

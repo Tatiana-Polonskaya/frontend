@@ -18,3 +18,14 @@ export type TotalDataItem = {
 export type TotalGraphJSON = {
     values: TotalDataItem;
 };
+
+/* ---------------------------- TITLE TYPE IN RUSSIAN ---------------------------- */
+
+export enum TotalTypeInRussian {
+    CONNECTEDNESS = "связность",
+    ARGUMENTATIVE = "аргументированность",
+    CLARITY = "ясность",
+    DYNAMISM = "динамизм",
+    PERSUASIVENESS = "убедительность",
+    COMMUNICATIVE = "соблюдение коммуникативной нормы",
+}

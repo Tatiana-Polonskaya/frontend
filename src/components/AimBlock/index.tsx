@@ -13,10 +13,11 @@ import gpsIcon from "./icons/gps.svg";
 
 import AimItem from "./AimItem";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import CheckboxQuestion, { IQuestion } from "../CheckboxQuestion";
+import CheckboxQuestion from "../CheckboxQuestion";
 import { UUID } from "crypto";
 import Button from "../ui-kit/Button";
 import CheckBoxItem from "../CheckboxQuestion/CheckboxItem";
+import { IQuestion } from "../../models/survey";
 
 type Props = {
     textPlan: string[];
@@ -70,7 +71,7 @@ export default function AimBlock() {
     ];
 
     const questionAim = {
-        id: "dvdvd-dvdvd-dvvdv-dvdvd-dvdvd" as UUID,
+        id: "dvdvd-dvdvd-dvvdv-dvdvd-dvdvd",
         title: "",
         type: "checkbox",
         icons: false,

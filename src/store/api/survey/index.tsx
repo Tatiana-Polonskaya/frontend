@@ -1,37 +1,26 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 import { IResponse } from "../../../models/api";
-import { IAnswer, ISurvey } from "../../../models/survey";
+import { IAnswer, IAnswerBack, ISurvey } from "../../../models/survey";
+import customFetchBase from "../utils/customFetchBase";
 
 export const surveyApi = createApi({
-    reducerPath: "api/survey",
-    baseQuery: fetchBaseQuery({ baseUrl: "" }),
+    reducerPath: "/api/survey",
+    baseQuery: customFetchBase,
     endpoints: (build) => ({
         getSurvey: build.query<IResponse<ISurvey>, string>({
             query: (title) => ({
-                url: "questionnaire",
+                url: "/api/users/questionnaire",
                 method: "GET",
                 params: {title},
             }),
         }),
-        sendAnswers: build.mutation<IResponse<void>, IAnswer[]>({
-            query: (answers) => ({
-                url: "/register/complete",
+        sendAnswers: build.mutation<IResponse<void>, IAnswerBack>({
+            query: ({answers, questionnaire_title}) => ({
+                url: "/api/users/register/complete",
                 method: "POST",
+                params: {questionnaire_title},
                 body: { answers },
-            }),
-        }),
-        confirm: build.query<IResponse<void>, string>({
-            query: (token) => ({
-                url: `confirm/${token}`,
-                method: "GET",
-            }),
-        }),
-        resendEmail: build.mutation<IResponse<void>, string>({
-            query: (email) => ({
-                url: "resend-email",
-                params: { email },
-                method: "POST",
             }),
         }),
     }),

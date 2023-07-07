@@ -1,20 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IAnswer } from "../../../models/survey";
+import { IAnswer, typeQuestion } from "../../../models/survey";
 
   
 // Define the initial state using that type
-const initialState: IAnswer = {
-    question_id: null,
-    choice_id: null,
-    text: ""
+export type LocalAnswer = {
+    id_question: string;
+    type_question: typeQuestion;
+    id_choices: Array<string>;
+    another_choices: string;
+}
+
+// Define the initial state using that type
+const initialState: LocalAnswer = {
+    id_question: "",
+    type_question: typeQuestion.radio,
+    id_choices: [],
+    another_choices: "",
 }
   
 
 const surveySlice = createSlice({
     name: "survey",
-    initialState:{answers: [initialState]},
+    initialState:{answers:[initialState]},
     reducers: {
-        updateChoiceAnswers: (state, action: PayloadAction<Array<IAnswer>>) => {
+        updateChoiceAnswers: (state, action: PayloadAction<LocalAnswer[]>) => {
             state.answers = action.payload;
         },
         // decrement: (state) => {
@@ -29,4 +38,4 @@ const surveySlice = createSlice({
 
 export default surveySlice.reducer;
 
-export const { updateChoiceAnswers } = surveySlice.actions;
+export const { updateChoiceAnswers  } = surveySlice.actions;

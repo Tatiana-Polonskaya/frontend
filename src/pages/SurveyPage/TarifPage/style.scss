@@ -1,4 +1,4 @@
-.tarifPage{
+.TarifPage {
     font-size: 20px;
 
     display: flex;
@@ -6,8 +6,8 @@
     padding-left: 10%;
     padding-top: 10%;
     gap: 10px;
-    
-    &-header{
+
+    &-header {
         display: flex;
         flex-flow: column nowrap;
         gap: 10px;
@@ -20,7 +20,7 @@
         line-height: 25px;
         color: #37476A;
 
-        &-thanks{
+        &-thanks {
             font-weight: 700;
             font-size: 40px;
             line-height: 49px;
@@ -28,12 +28,12 @@
             color: #031C3D;
         }
 
-        &-bold{
+        &-bold {
             font-family: 'Onest';
             font-weight: 700;
         }
 
-        &-link{
+        &-link {
             font-family: 'Montserrat Alternates';
             font-weight: 500;
             font-size: 20px;
@@ -43,23 +43,35 @@
 
     }
 
-    &-cards{
+    &-cards {
+        width: 100%;
+        overflow-x: auto;
         display: flex;
         flex-flow: row nowrap;
-        height: 40vh;
-        gap: 50px;
+        justify-content: space-between;
+        align-items: stretch;
+        align-content: stretch;
+        gap: 15px;
         cursor: pointer;
 
-        &-trial{
+        &-item {
+            flex-grow: 1;
             width: 100%;
-            &-img{
+            
+        }
+
+        &-trial {
+            width: 100%;
+
+            &-img {
                 width: 100%;
                 height: 100%;
             }
         }
 
-        &-tarif{
+        &-tarif {
             width: 100%;
+            padding: 10px;
             display: flex;
             flex-flow: column nowrap;
             justify-content: start;
@@ -71,56 +83,77 @@
             height: 100%;
             color: #031C3D;
 
-
-            &-period{
-                padding-top: 0.5em;
-                padding-bottom: 1em;
+            &-title {
+                color: #031C3D;
                 font-size: 24px;
-                line-height: 29px;
-                
+                font-family: "Montserrat Alternates";    
+                font-weight: 700;
             }
 
-            &-money{
+            &-counts {
+
+                display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            gap:10px;
+                color: #4B5F8A;
+                font-size: 20px;
+                font-family: "Montserrat Alternates";
+                font-weight: 500;
+
+                &-bold {
+
+                    font-weight: 700;
+
+                }
+            }
+
+
+            &-money {
                 padding-bottom: 5em;
                 font-size: 32px;
                 line-height: 39px;
                 color: #2477F4;
-                flex-shrink: 0;
-                span{
+
+                span {
                     display: block;
                 }
-                &-text{
+
+                &-text {
                     font-size: 20px;
                     line-height: 24px;
                 }
             }
 
-            &-money-for-period{
+            &-money-for-period {
                 font-size: 20px;
                 line-height: 24px;
                 color: #4B5F8A;
             }
 
-            &_checked{
+            &_checked {
                 background: #2477F4;
                 box-shadow: 0px 0px 24px rgba(36, 119, 244, 0.4);
                 border-radius: 24px;
-                div,span{
+
+                div,
+                span {
                     color: #FFFFFF;
                 }
-                
+
             }
         }
 
     }
 
-    &-footer{
+    &-footer {
 
         display: flex;
         flex-flow: column nowrap;
         justify-content: flex-start;
         align-items: flex-start;
-        gap:10px;
+        gap: 10px;
 
         font-family: 'Onest';
         font-style: normal;
@@ -129,7 +162,7 @@
         line-height: 15px;
         color: #7C8EB5;
 
-        &-btn{
+        &-btn {
 
             font-family: 'Montserrat Alternates';
             font-style: normal;
@@ -154,7 +187,7 @@
             border-radius: 14px;
             border: none;
 
-            &_canClicked{
+            &_canClicked {
                 opacity: 1;
             }
         }

@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import "./style.scss";
 import { cn } from "@bem-react/classname";
 import { ReactSVG } from "react-svg";
@@ -10,45 +10,46 @@ import {
     EnumStringBody,
     EnumStringMember,
 } from "@babel/types";
-import { IQuestion } from "../CheckboxQuestion";
-import { UUID } from "crypto";
+
+import { IQuestion, typeQuestion } from "../../models/survey";
+import { LocalAnswer } from "../../store/slices/survey";
 
 type Props = {
     question: IQuestion;
     addAnswers: Function;
 };
 
-type Question = {
-    id: number;
-    title: string;
-    answers: Answer[];
-    block_another?: boolean;
-    placeholder_another?: string;
-    icons?: boolean;
-    type?: string;
-    type_answer?: string;
-};
-
-type Answer = {
-    id: number;
-    title: string;
-    icon?: string;
-};
-
 export default function RadioBtnQuestion(props: Props) {
     const cnMain = cn("radio-main");
 
-    const [selectedOption, setSelectedOption] = useState<UUID>();
+    const [selectedOption, setSelectedOption] = useState<string>();
+    const anotherValue = useRef<HTMLInputElement>(null);
 
-    function handleChange(id: UUID) {
+    function handleChange(id: string) {
         setSelectedOption(id);
-        props.addAnswers(id, props.question.id);
-    }
-    const index_another = props.question.choices.length;
+        let isAnother = props.question.choices.filter(el=>el.id === id)[0].another;
 
-    const addText = (value: string) => {
-        // props.addAnotherAnswers(props.question.id, value);
-    };
+        if (!isAnother){
+            if(anotherValue && anotherValue.current) anotherValue.current!.value = "";
+            props.addAnswers({
+                id_question: props.question.id,
+                type_question: typeQuestion.radio,
+                id_choices: [id],
+                another_choices: "",
+            } as LocalAnswer);
+        }
+    }
+
+    const changeAnotherAnswer = (id: string) => {
+        if(anotherValue && anotherValue.current!.value.length !== 0){
+            props.addAnswers({
+                id_question: props.question.id,
+                type_question: typeQuestion.radio,
+                id_choices: [id],
+                another_choices: anotherValue.current!.value,
+            } as LocalAnswer);
+        }
+    }
 
     return (
         <div className={cnMain()}>
@@ -108,12 +109,8 @@ export default function RadioBtnQuestion(props: Props) {
                                         className={cnMain(
                                             "another-label-radio"
                                         )}
-                                        checked={
-                                            selectedOption === el.id
-                                        }
-                                        onChange={() =>
-                                            handleChange(el.id)
-                                        }
+                                        checked={selectedOption === el.id}
+                                        onChange={() => handleChange(el.id)}
                                     />
                                     <div
                                         className={cnMain(
@@ -124,18 +121,13 @@ export default function RadioBtnQuestion(props: Props) {
                                     </div>
                                     <input
                                         type="text"
-                                        placeholder={
-                                            el.title
-                                        }
+                                        placeholder={el.title}
                                         className={cnMain(
                                             "another-label-input-text"
                                         )}
-                                        disabled={
-                                            selectedOption !== el.id
-                                        }
-                                        onChange={(e) =>
-                                            addText(e.target.value)
-                                        }
+                                        disabled={selectedOption !== el.id}
+                                        ref={anotherValue}
+                                        onChange={()=>changeAnotherAnswer(el.id)}
                                     />
                                 </label>
                             </div>

@@ -4,9 +4,15 @@ import { useRef } from "react";
 import ReactPlayer from "react-player";
 
 import "./style.scss";
+import { BaseReactPlayerProps } from "react-player/base";
+
+interface VideoPlayerProps extends BaseReactPlayerProps {
+    title?: string,
+}
 
 type Props = {
     url: string;
+    controls?:boolean;
 };
 
 /**
@@ -44,19 +50,18 @@ export function getPrettyDataTime(timestring: string) {
 
 // TO DO: ADD STYLES AND SOME CONTROLS COMPONENT
 
-export default function VideoPlayer(props: Props) {
+export default function VideoPlayer({title="",...props}:VideoPlayerProps) {
     const cnVideoPlayer = cn("VideoPlayer");
     const videoRef = useRef<HTMLVideoElement | any>();
 
     return (
         <div className={cnVideoPlayer()}>
             <ReactPlayer
+                {...(props as VideoPlayerProps)}
                 width="720"
                 height="480"
                 ref={videoRef}
-                url={props.url}
                 muted={true}
-                controls={true}
             />
         </div>
     );

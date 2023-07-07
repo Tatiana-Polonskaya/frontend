@@ -43,7 +43,7 @@
             display: flex;
             flex-flow: column nowrap;
             justify-content: space-between;
-            align-items: start;
+            align-items: flex-start;
         }
 
         &-current-step{

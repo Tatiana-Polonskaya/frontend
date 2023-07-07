@@ -56,7 +56,7 @@ export default function SecondaryExpressiveness(props: Props) {
             : setGraph(0);
         return;
     };
-    console.log(props)
+    // console.log(props)
     const openMiddle = (ind: number) => {
         const openEl = document.querySelector(".expressiveness-item-open");
         openEl!.classList.toggle("expressiveness-choise");

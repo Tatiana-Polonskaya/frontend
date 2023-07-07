@@ -1,47 +1,30 @@
 import { useState } from "react";
-import "./style.scss";
 import { cn } from "@bem-react/classname";
 import firstTarifNotChecked from "./firstTarifNotChecked.png";
 import firstTarifChecked from "./firstTarifChechedd.png";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 
-import userSlice from "../../../store/slices/user";
-import { IUser } from "../../../models/entry/user";
 import { useNavigate } from "react-router-dom";
 import RoutesEnum from "../../../models/routes";
+
+import "./style.scss";
 
 export default function TarifPage() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [checkedTarif, setCheckedTarif] = useState(-1);
 
-    const tarifs = [
-        {
-            id: 0,
-            name: "Trial",
-            money: 0,
-            moneyInMonth: "неделя бесплатно",
-        },
-        {
-            id: 1,
-            name: "1 месяц",
-            money: 790,
-            moneyInMonth: "",
-        },
-        {
-            id: 2,
-            name: "3 месяца",
-            money: 2190,
-            moneyInMonth: "730 руб/мес",
-        },
-        {
-            id: 3,
-            name: "6 месяцев",
-            money: 3990,
-            moneyInMonth: "665 руб/мес",
-        },
-    ];
-    let trialIndex = tarifs.filter((el) => el.name === "Trial")[0].id;
+    const tarifs = new Array(5).fill({
+        id: 0,
+        title: "Mini",
+        count_rep: 5,
+        money: 599,
+        moneyForOneRep: "119,80 руб",
+    }).map((el,i)=>{return {...el, id:el.id+i}});
+
+
+    console.log(tarifs)
+    let trialIndex = tarifs.filter((el) => el.title === "Trial")[0] ? tarifs.filter((el) => el.title === "Trial")[0].id : -1;
 
     const user = useAppSelector((state) => state.user.user?.id);
 
@@ -60,64 +43,60 @@ export default function TarifPage() {
         setCheckedTarif(id);
     };
 
-    const cnMain = cn("tarifPage");
+    const cnTarif = cn("TarifPage");
 
     return (
-        <div className={cnMain()}>
-            <div className={cnMain("header")}>
-                <div className={cnMain("header-thanks")}>
+        <div className={cnTarif()}>
+            <div className={cnTarif("header")}>
+                <div className={cnTarif("header-thanks")}>
                     Спасибо за ваши ответы!
                 </div>
                 Пора начинать подготовку!
-                <div className={cnMain("header-bold")}>
+                <div className={cnTarif("header-bold")}>
                     Выберите подходящий тариф и используйте все возможности
                     подготовки к выступлениям со Speech Up.
                 </div>
                 Первую неделю вы можете репетировать абсолютно бесплатно и без
                 ограничений.
-                <div className={cnMain("header-link")}>
+                <div className={cnTarif("header-link")}>
                     Узнать подробнее о сервисе{" "}
                 </div>
             </div>
-            <div className={cnMain("cards")}>
+            <div className={cnTarif("cards")}>
                 {tarifs.map((el, index) => (
-                    <div key={index}>
+                    <div key={index} className={cnTarif("cards-item")}>
                         {el.id === trialIndex && (
                             <div
                                 key={el.id}
-                                className={cnMain("cards-trial", {
+                                className={cnTarif("cards-trial", {
                                     checked: checkedTarif === el.id,
                                 })}
                                 onClick={() => clickOnCard(el.id)}
                             >
-                                <img
-                                    className={cnMain("cards-trial-img")}
-                                    src={
-                                        checkedTarif === el.id
-                                            ? firstTarifChecked
-                                            : firstTarifNotChecked
-                                    }
-                                />
+                                <img className={cnTarif("cards-trial-img")} src={firstTarifNotChecked}/>
                             </div>
                         )}
                         {el.id !== trialIndex && (
                             <div
                                 key={el.id}
-                                className={cnMain("cards-tarif", {
+                                className={cnTarif("cards-tarif", {
                                     checked: checkedTarif === el.id,
                                 })}
                                 onClick={() => clickOnCard(el.id)}
                             >
-                                <div className={cnMain("cards-tarif-period")}>
-                                    {el.name}
+                                <div className={cnTarif("cards-tarif-title")}>
+                                    {el.title}
+                                </div>
+                                <div className={cnTarif("cards-tarif-counts")}>
+                                    <span className={cnTarif("cards-tarif-counts-bold")}>{el.count_rep}</span>{" "+" репетиций"}
                                 </div>
                                 {el.money !== 0 && (
                                     <div
-                                        className={cnMain("cards-tarif-money")}
+                                        className={cnTarif("cards-tarif-money")}
                                     >
                                         <span>{el.money}</span>
                                         <span
-                                            className={cnMain(
+                                            className={cnTarif(
                                                 "cards-tarif-money-text"
                                             )}
                                         >
@@ -127,20 +106,20 @@ export default function TarifPage() {
                                 )}
 
                                 <div
-                                    className={cnMain(
+                                    className={cnTarif(
                                         "cards-tarif-money-for-period"
                                     )}
                                 >
-                                    {el.moneyInMonth && <>{el.moneyInMonth}</>}
+                                    {el.moneyForOneRep && <>{el.moneyForOneRep}</>}
                                 </div>
                             </div>
                         )}
                     </div>
                 ))}
             </div>
-            <div className={cnMain("footer")}>
+            <div className={cnTarif("footer")}>
                 <button
-                    className={cnMain("footer-btn", {
+                    className={cnTarif("footer-btn", {
                         canClicked: checkedTarif !== -1,
                     })}
                     onClick={clickOnButton}
