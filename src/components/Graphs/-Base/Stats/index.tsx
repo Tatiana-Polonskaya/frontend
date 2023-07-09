@@ -35,7 +35,7 @@ export default function GraphBaseStats({
     visible = true,
     ...props
 }: Props) {
-    console.log(items);
+    // console.log(items);
     const frameArr = [Terrible, Bad, Average, Good, Perfect, Ellipse];
 
     const frameHelper = (value: number) => {
@@ -79,7 +79,7 @@ export default function GraphBaseStats({
                                 <ReactSVG src={frameHelper(el.prev)} />
                             </div>
                         ) : (
-                            <></>
+                            undefined
                         )
                     )}
                 </div>

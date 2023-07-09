@@ -52,9 +52,10 @@
         }
 
         &-btn-show {
+            flex-grow: 1;
             display: flex;
             flex-flow: row nowrap;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
             gap: 10px;
             color: #7C8EB5;
@@ -251,15 +252,20 @@
                 font-size: 14px;
                 font-family: "Montserrat Alternates";
                 font-weight: 500;
+                cursor: pointer;
+
+                
 
                 &-label {
                     font-size: 14px;
                     line-height: 21px;
                     display: inline-block;
                     vertical-align: top;
-                    cursor: pointer;
+                    
                     display: inline-block;
-
+                    &_active{
+                        cursor: default;
+                    }
                 }
 
                 &-input {
@@ -279,7 +285,6 @@
                     vertical-align: top;
                     position: relative;
                     margin-right: 8px;
-                    cursor: pointer;
                     border: 1px solid var(--bc, var(--border));
                     background: var(--b, var(--background));
                     transition: background .3s, border-color .3s, box-shadow .2s;

@@ -4,24 +4,24 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 
 type Props = {
-    bgcolor: string;
+    bgcolor?: string;
     completed: number;
+    maxValue?:number;
 };
 
-export default function ProgressBar(props: Props) {
+export default function ProgressBar({ bgcolor="rgb(36, 119, 244)", completed, maxValue=100 }: Props) {
 
     const cnProgressBar = cn("ProgressBar");
-
-    const { bgcolor, completed } = props;
-
+    const currentValue = (completed * 100) / maxValue;
     return (
         <div className={cnProgressBar()}>
             <div
                 className={cnProgressBar("line")}
                 style={
                     {
-                        "--value_line": (completed+"%"),
+                        "--value_line": (currentValue>maxValue? maxValue: currentValue+"%"),
                         "--color_line": bgcolor,
+                        "--border_radius": (maxValue - currentValue > 10)?  "50px 0 0 50px" : "50px"
                     } as React.CSSProperties
                 }
             >

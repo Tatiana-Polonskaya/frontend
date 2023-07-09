@@ -8,7 +8,7 @@
         height: 100%;
         width:var(--value_line);
         background-color: var(--color_line);
-        border-radius: 50px 0 0 50px;
+        border-radius: var(--border_radius);
     }
 
     &-label{
@@ -24,4 +24,8 @@
 
 @keyframes color_line {
     from{--color_line:#000}
+}
+
+@keyframes border_radius {
+    from{--border_radius:50px 0 0 50px}
 }

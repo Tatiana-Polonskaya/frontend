@@ -31,7 +31,7 @@ export default function ArchiveVideo({ video }: Props) {
     };
 
     useEffect(() => {
-        if (state) console.log(state);
+        // if (state) console.log(state);
     }, [state]);
 
     return video && video.length !== 0 ? (

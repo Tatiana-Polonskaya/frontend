@@ -5,6 +5,7 @@
     flex-direction: column;
     border-radius: 18px;
     position: relative;
+   
 
     &_expanded {
         z-index: 1;
@@ -12,6 +13,7 @@
 
     &-content {
         height: 100%;
+        max-height: 80vh;
         overflow: auto;
         border-radius: 20px;
         background: #FFF;

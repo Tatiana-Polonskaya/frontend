@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useMemo, useState } from "react";
 
 import { Tooltip } from "react-tooltip";
 
@@ -7,47 +7,108 @@ import "./style.scss";
 import { cn } from "@bem-react/classname";
 
 import { ReactSVG } from "react-svg";
-import EnergyLine from "../../Graphs/EnergyLine";
+
 import arrowThin from "../icons/chevron-down.svg";
 import arrowNorm from "../icons/arrow-down.svg";
 import worningIcon from "../icons/danger.svg";
 import tickIcon from "../icons/more-circle.svg";
 import tickDone from "../icons/tick-circle.svg";
-import Button from "../../ui-kit/Button";
+import {
+    useLazyGetParamsQuery,
+    useSendUserPurposeMutation,
+} from "../../../store/api/diary";
+import {
+    AIM_PARAMETERS,
+    IAimItem,
+    IAimParameters,
+} from "../../../models/aim";
+import ProgressBar from "../../Graphs/Progressbar";
+import {  NewAimContext } from "..";
 
 type Props = {
-    textPlan: string[];
+    item: IAimItem;
 };
 
-export default function AimItem() {
+// TO DO : CHANGE VALUE PARAMS FOR SAVING sendPurposeRequest FROM resParams TO checkedParams
+
+export default function AimItem({ item }: Props) {
     const cnAimItem = cn("AimItem");
 
-    const statusAim = "в процессе";
+    const {updateAims } = useContext(NewAimContext);
+
+    /* ------------------------------ AIM ------------------------------ */
+
+    const statusAim = item ? (item.is_done ? "завершено" : "в процессе") : "";
     const typeAim = "личная цель";
     const messageAim = "выберите параметры для оценки цели";
 
-    const titleAim = "Избавиться от слов-паразитов";
+    const titleAim = item ? item.title : "";
     const phraseAim = "Мотивирующая фраза, зависящая от прогресса!";
-    const count_steps: number = 2;
-    const all_steps = new Array(count_steps).fill(1).map((_, i) => i + 1);
-    const tasks = [
-        "Уменьшить эмоцию “агрессия” в течении выступления на 0.1 ",
-        "Увеличить показатель параметра ясность на 0.2",
-        "Увеличить показатель параметра аргументированность на 0.1",
-    ];
-    const params = new Array(18)
-        .fill("Последовательность")
-        .map((el, i) => el + "" + i);
+
+    const [sendPurposeRequest, sendPurposeResponse] =
+        useSendUserPurposeMutation();
+    const { isSuccess, isError } = sendPurposeResponse;
+
+    /* ------------------------------ STEPS ------------------------------ */
+
+    const count_steps = useMemo(
+        () =>
+            item
+                ? item.tasks
+                      .map((el) => el.step)
+                      .filter((item, i, ar) => ar.indexOf(item) === i)
+                : [],
+        [item]
+    );
+
     const choosedStep = 1;
+
+    /* ------------------------------ TASKS ------------------------------ */
+
+    const allTasks = item ? item.tasks : [];
 
     const [isShowTasks, setIsShowTasks] = useState(false);
     const titleForBtn = isShowTasks ? "Свернуть" : "Развернуть цель";
 
-    const [canSave, setCanSave] = useState(true);
+    /* ------------------------------ PARAMS ------------------------------ */
+
+    const [getParams, resultParams] = useLazyGetParamsQuery();
+    const [listParams, setListParams] = useState<IAimParameters>();
+
+    useEffect(() => {
+        if (resultParams && resultParams.data) {
+            setListParams(resultParams.data!.data!);
+        }
+    }, [resultParams]);
+
+    /* ------------------------------ SAVED PARAMS ------------------------------ */
+
+    const [canSave, setCanSave] = useState(
+        count_steps.length > 0 ? false : true
+    );
+
+    useEffect(() => {
+        if (count_steps && count_steps.length === 0) return setCanSave(true);
+        return setCanSave(false);
+    }, [count_steps]);
 
     const [isShowParams, setIsShowParams] = useState(true);
 
     const [checkedParams, setCheckedParams] = useState<Array<string>>([]);
+
+    // for existed params from user aim
+    useEffect(() => {
+        if (listParams) {
+            Object.entries(listParams).map(([key, value]) => {
+                let rest = item.parameters.filter(
+                    (el) => el.title === value.title
+                );
+                if (rest.length > 0) {
+                    setCheckedParams((prev) => [...prev, key]);
+                }
+            });
+        }
+    }, [listParams, item.parameters]);
 
     const changeCheckedState = (el: string) => {
         const indexParam = checkedParams.findIndex((item) => item === el);
@@ -65,12 +126,32 @@ export default function AimItem() {
     };
 
     const handleOnChange = (elem: string) => {
-        changeCheckedState(elem);
+        if (canSave) changeCheckedState(elem);
     };
 
-    const saveParams = () => {
-        console.log("params werebeen saved");
+    const saveParams = async () => {
+
+        let resParams = [
+            AIM_PARAMETERS.consistency,
+            AIM_PARAMETERS.informative,
+            AIM_PARAMETERS.originality,
+        ];
+
+        await sendPurposeRequest({
+            title: item.title,
+            params: resParams, // checkedParams
+        });
     };
+
+    useEffect(() => {
+        if (isSuccess) {
+            updateAims();
+        }
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) alert("Something was wrong!");
+    }, [isError]);
 
     return (
         <div className={cnAimItem()}>
@@ -80,15 +161,21 @@ export default function AimItem() {
                         {statusAim}
                     </div>
                     <div className={cnAimItem("header-type")}>{typeAim}</div>
-                    <div className={cnAimItem("header-message")}>
-                        <span className={cnAimItem("header-message-text")}>
-                            <ReactSVG src={worningIcon} />
-                            {messageAim}
-                        </span>
-                    </div>
+                    {count_steps.length < 1 && (
+                        <div className={cnAimItem("header-message")}>
+                            <span className={cnAimItem("header-message-text")}>
+                                <ReactSVG src={worningIcon} />
+                                {messageAim}
+                            </span>
+                        </div>
+                    )}
+
                     <div
                         className={cnAimItem("header-btn-show")}
-                        onClick={() => setIsShowTasks((prev) => !prev)}
+                        onClick={() => {
+                            setIsShowTasks((prev) => !prev);
+                            getParams(null, true);
+                        }}
                     >
                         {titleForBtn}
                         <ReactSVG
@@ -108,18 +195,37 @@ export default function AimItem() {
                     </div>
                 </div>
                 <div className={cnAimItem("row")}>
-                    {all_steps.map((el, idx) => (
-                        <EnergyLine maxValue={100} value={95} key={idx}/>
-                    ))}
+                    {item &&
+                        count_steps.length > 0 &&
+                        count_steps.map((el, idx) => {
+                            let itemProgress = 100 / count_steps.length;
+                            let prevMax =
+                                idx > 0 ? (100 / count_steps.length) * idx : 0;
+                            let currentMax = itemProgress * (idx + 1);
+                            let currV = item.progress;
+                            let currentValue =
+                                currV >= currentMax
+                                    ? currentMax
+                                    : currV - prevMax > 0
+                                    ? currV - prevMax
+                                    : 0;
+                            return (
+                                <ProgressBar
+                                    completed={currentValue}
+                                    maxValue={currentMax}
+                                    key={idx}
+                                />
+                            );
+                        })}
                 </div>
             </div>
             {isShowTasks && (
                 <>
-                    {count_steps > 0 && (
+                    {count_steps.length > 0 && (
                         <div>
                             <div className={cnAimItem("row")}>
                                 <div className={cnAimItem("steps")}>
-                                    {all_steps.map((el, idx) => (
+                                    {count_steps.map((el, idx) => (
                                         <div
                                             key={idx}
                                             className={cnAimItem("steps-item", {
@@ -143,27 +249,36 @@ export default function AimItem() {
                                 <span className={cnAimItem("header-phrase")}>
                                     Задачи:
                                 </span>
-                                {tasks.map((el, idx) => (
-                                    <div
-                                        className={cnAimItem(
-                                            "task-block-item",
-                                            {
-                                                done: idx === 0,
-                                            }
-                                        )}
-                                    >
-                                        <ReactSVG
-                                            src={
-                                                idx === 0 ? tickDone : tickIcon
-                                            }
-                                        />
-                                        <span>{el}</span>
-                                    </div>
-                                ))}
+                                {allTasks &&
+                                    allTasks.map((el, idx) => (
+                                        <Fragment key={idx}>
+                                            {choosedStep === el.step ? (
+                                                <div
+                                                    className={cnAimItem(
+                                                        "task-block-item",
+                                                        {
+                                                            done: el.is_done,
+                                                        }
+                                                    )}
+                                                >
+                                                    <ReactSVG
+                                                        src={
+                                                            el.is_done
+                                                                ? tickDone
+                                                                : tickIcon
+                                                        }
+                                                    />
+                                                    <span>
+                                                        {el.description}
+                                                    </span>
+                                                </div>
+                                            ) : undefined}
+                                        </Fragment>
+                                    ))}
                             </div>
                         </div>
                     )}
-                    {count_steps === 0 && (
+                    {count_steps.length === 0 && (
                         <div className={cnAimItem("error-block")}>
                             <span className={cnAimItem("header-phrase")}>
                                 Задачи:
@@ -208,53 +323,65 @@ export default function AimItem() {
                             </div>
                         )}
                     </div>
-                    {isShowParams && (
+                    {isShowParams && listParams && (
                         <div className={cnAimItem("params-block-grid")}>
-                            {params.map((el, idx) => (
-                                <div
-                                    className={cnAimItem(
-                                        "params-block-grid-item"
-                                    )}
-                                >
-                                    <label
-                                        className={cnAimItem(
-                                            "params-block-grid-item-label"
-                                        )}
-                                        data-tooltip-id={"params-input-" + idx}
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            className={cnAimItem(
-                                                "params-block-grid-item-input"
-                                            )}
-                                            checked={checkedParams.includes(el)}
-                                            name={el}
-                                            value={el}
-                                            onChange={() => handleOnChange(el)}
-                                        ></input>
-                                        <span
-                                            className={cnAimItem(
-                                                "params-block-grid-item-span"
-                                            )}
-                                        >
-                                            {el}
-                                        </span>
-                                    </label>
-                                    <Tooltip
-                                        id={"params-input-" + idx}
-                                        place={"right-start"}
-                                        noArrow={true}
-                                        className={cnAimItem("tooltip")}
-                                    >
-                                        Информативность - предоставление полной
-                                        и точной информации, наличие в
-                                        выступлении фактов и деталей, которые
-                                        помогут аудитории понять тему
-                                        выступления и принять выдвинутые
-                                        аргументы."
-                                    </Tooltip>
-                                </div>
-                            ))}
+                            {listParams &&
+                                Object.entries(listParams).map(
+                                    ([key, value], idx) => {
+                                        return (
+                                            <div
+                                                key={idx}
+                                                className={cnAimItem(
+                                                    "params-block-grid-item"
+                                                )}
+                                            >
+                                                <label
+                                                    className={cnAimItem(
+                                                        "params-block-grid-item-label",
+                                                        {
+                                                            active: !canSave,
+                                                        }
+                                                    )}
+                                                    data-tooltip-id={
+                                                        "params-input-" + key
+                                                    }
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        className={cnAimItem(
+                                                            "params-block-grid-item-input"
+                                                        )}
+                                                        checked={checkedParams.includes(
+                                                            key
+                                                        )}
+                                                        name={key}
+                                                        value={key}
+                                                        onChange={() =>
+                                                            handleOnChange(key)
+                                                        }
+                                                    ></input>
+                                                    <span
+                                                        className={cnAimItem(
+                                                            "params-block-grid-item-span"
+                                                        )}
+                                                    >
+                                                        {value.title}
+                                                    </span>
+                                                </label>
+                                                <Tooltip
+                                                    id={"params-input-" + key}
+                                                    place={"right-start"}
+                                                    noArrow={true}
+                                                    className={cnAimItem(
+                                                        "tooltip"
+                                                    )}
+                                                >
+                                                    {value.description}
+                                                </Tooltip>
+                                            </div>
+                                        );
+                                    }
+                                )}
                         </div>
                     )}
                 </>

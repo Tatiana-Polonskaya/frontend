@@ -4,6 +4,7 @@ import { accountApi } from "./api/account";
 
 import testSlice from "./slices/testSlice";
 import profileSlice from "./slices/profileSlice";
+import diarySlice from "./slices/diary";
 import entryReducer from "./slices/entry";
 import userReducer from "./slices/user";
 import registerReducer from "./slices/register";
@@ -14,6 +15,7 @@ import { reportApi } from "./api/report";
 
 import { surveyApi } from "./api/survey";
 import { videoApi } from "./api/userVideo";
+import { diaryApi } from "./api/diary";
 
 
 export const store = configureStore({
@@ -26,6 +28,7 @@ export const store = configureStore({
 
         [surveyApi.reducerPath]: surveyApi.reducer,
         [videoApi.reducerPath]: videoApi.reducer,
+        [diaryApi.reducerPath]: diaryApi.reducer,
 
         register: registerReducer,
         test: testSlice,
@@ -33,6 +36,7 @@ export const store = configureStore({
         entry: entryReducer,
         user: userReducer,
         survey: surveyReducer,
+        diary: diarySlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
@@ -41,7 +45,7 @@ export const store = configureStore({
             userApi.middleware,
 
             reportApi.middleware,
-
+            diaryApi.middleware,
             surveyApi.middleware,
             videoApi.middleware,
 
