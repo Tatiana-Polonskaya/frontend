@@ -101,9 +101,13 @@ import SecondaryNonMonotony from "../Analytics/-Block/Dinamism/NonMonotony/Secon
 import VideoPlayer, { getPrettyDataTime } from "../VideoPlayer";
 import textForEnergySmile from "../Graphs/EnergySmile/text";
 
+import AddTextUnityOfStyle from "../Graphs/unityOfStyle/text";
+
+
 import noteIcon from "./assets/note.svg";
 import arrowLeft from "./assets/arrowLeft.svg";
 import "./style.scss";
+
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
@@ -407,15 +411,17 @@ export default function AnalysisReport() {
                         {unityOfStyleData && (
                             <Dropdown
                                 title={"Единство стиля"}
-                                subtitle={`Ярко выражен публицестический стиль, но преобладание других превышает рекомендованное значение.`}
+                                subtitle={AddTextUnityOfStyle(unityOfStyleData.scientific,
+                                                                unityOfStyleData.official,
+                                                                unityOfStyleData.publicistic,
+                                                                unityOfStyleData.colloquial,
+                                                                unityOfStyleData.artistic)}
                                 visible={
                                     <UnityOfStylScale
                                         scientific={unityOfStyleData.scientific}
                                         artistic={unityOfStyleData.artistic}
                                         official={unityOfStyleData.official}
-                                        publicistic={
-                                            unityOfStyleData.publicistic
-                                        }
+                                        publicistic={unityOfStyleData.publicistic}
                                         colloquial={unityOfStyleData.colloquial}
                                     />
                                 }
@@ -424,9 +430,7 @@ export default function AnalysisReport() {
                                         scientific={unityOfStyleData.scientific}
                                         artistic={unityOfStyleData.artistic}
                                         official={unityOfStyleData.official}
-                                        publicistic={
-                                            unityOfStyleData.publicistic
-                                        }
+                                        publicistic={unityOfStyleData.publicistic}
                                         colloquial={unityOfStyleData.colloquial}
                                     />
                                 }
@@ -710,9 +714,7 @@ export default function AnalysisReport() {
                         {energyData && (
                             <Dropdown
                                 title={"Энергичность"}
-                                subtitle={textForEnergySmile(
-                                    energyData.total_energy
-                                )}
+                                subtitle= {textForEnergySmile(energyData.total_energy)}
                                 visible={
                                     <EnergySmile
                                         energy={energyData.total_energy}

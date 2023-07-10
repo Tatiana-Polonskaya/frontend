@@ -141,23 +141,23 @@ export default function EmotionalScale(props :Props) {
                 </div>
 
             </div>
-            <div className="tabs">
+            <div className="EmotionalScaletabs">
                 <button
-                    className={`tab ${checkActive(1, "active")}`}
+                    className={`EmotionalScaletab ${checkActive(1, "EmotionalScaleactive")}`}
                     onClick={() => handleClick(1)}
                 >
                     <ReactSVG src={video}/>
                     Видео
                 </button>
                 <button
-                    className={`tab ${checkActive(2, "active")}`}
+                    className={`EmotionalScaletab ${checkActive(2, "EmotionalScaleactive")}`}
                     onClick={() => handleClick(2)}
                 >
                     <ReactSVG src={volume_high}/>
                     Аудио
                 </button>
                 <button
-                    className={`tab ${checkActive(3, "active")}`}
+                    className={`EmotionalScaletab ${checkActive(3, "EmotionalScaleactive")}`}
                     onClick={() => handleClick(3)}
                 >
                     <ReactSVG src={text}/>
@@ -165,13 +165,13 @@ export default function EmotionalScale(props :Props) {
                 </button>
             </div>
             <div className="panels">
-                <div className={`panel ${checkActive(1, "active")}`}>
+                <div className={`panel ${checkActive(1, "EmotionalScaleactive")}`}>
                     <Scale component={infVideo}/>
                 </div>
-                <div className={`panel ${checkActive(2, "active")}`}>
+                <div className={`panel ${checkActive(2, "EmotionalScaleactive")}`}>
                     <Scale component={infAudio}/>
                 </div>
-                <div className={`panel ${checkActive(3, "active")}`}>
+                <div className={`panel ${checkActive(3, "EmotionalScaleactive")}`}>
                     <Scale component={infText}/>
                 </div>
             </div>

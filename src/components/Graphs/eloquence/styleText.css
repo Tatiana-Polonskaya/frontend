@@ -36,6 +36,7 @@
 }
 .textInfTitle1{
     color: #17282F;
+    margin-right: 5px ;
 }
 
 .EloquenceTextBloc{
@@ -70,15 +71,38 @@
     font-weight: 400;
 }
 .blocWords{
-    align-items: center;
+    display: flex;
     padding: 4px 12px;
+    align-items: center;
     gap: 8px;
-    height: 34px;
-    background: #FFFFFF;
     border-radius: 8px;
-    margin: 5px;
+    background: #FFF;
+    margin-right: 16px;
+    color: #37476A;
+    font-size: 20px;
+    font-family: Onest;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 .EloquenceTextWords{
     display: flex;
     justify-content: start;
+}
+.countWords{
+    color: rgba(53, 10, 142, 0.50);
+    font-size: 16px;
+    font-family: Montserrat Alternates;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-left: 6px;
+}
+.strings{
+    color: rgba(3, 28, 61, 0.70);
+    font-size: 20px;
+    font-family: Onest;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }

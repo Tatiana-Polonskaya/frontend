@@ -2,30 +2,48 @@ import React from "react";
 import "./style.scss";
 import { cn } from "@bem-react/classname";
 import { ReactSVG } from "react-svg";
-import ThoroughSpeaker from "./img/ThoroughSpeaker.svg";
-import SerialChrysostom from "./img/SerialChrysostom.svg";
-import EloquentTalker from "./img/EloquentTalker.svg";
+import Speaker from "./img/оратор.svg";
+import Chrysostom from "./img/слиток.svg";
+import Talker from "./img/говорун.svg";
+import Thorough from './img/облако.svg';
+import Eloquent from './img/облако (1).svg'
+import Serial from './img/следы.svg'
 
 const CN = cn("blockGeneralAnalytics");
 
 type Props = {
     N: number;
     rank: string;
+    text: string;
 };
 
+function checkRank(rank:string){
+    if (rank == `Последовательный` || rank == `Информативный` || rank == `Закономерный`){
+        return <ReactSVG src={Serial}/>;
+    }else if (rank == `оригинальный` || rank == `обоснованный` || rank == `логичный`){
+        return <ReactSVG src={Thorough}/>;
+    }else if (rank == `доходчивый` || rank == `продуманный` || rank == `уверенный`){
+        return <ReactSVG src={Eloquent}/>;
+    }
+    else {
+        return <div></div>
+    }
+
+}
+
 export default function BlockGeneralAnalytics(props: Props) {
-    let N = 9;
+
     let degree: string = "";
     let image: string = "";
     if (props.N > 8) {
         degree = "Говорун";
-        image = EloquentTalker;
+        image = Talker;
     } else if (props.N > 6 || props.N <= 8) {
         degree = "Златоуст";
-        image = SerialChrysostom;
+        image = Chrysostom;
     } else if (props.N || props.N <= 6) {
         degree = "Оратор";
-        image = ThoroughSpeaker;
+        image = Speaker;
     } else if (props.N > 2 || props.N <= 4) {
         degree = "Спикер";
     } else if (props.N >= 2) {
@@ -41,16 +59,16 @@ export default function BlockGeneralAnalytics(props: Props) {
             <div className={CN()}>
                 <div className={CN("text")}>
                     <div className={CN("rank")}>Текущее звание</div>
-                    <div className={CN("degree")}>Основательный {degree}</div>
+                    <div className={CN("degree")}>{props.rank} {degree}</div>
                     <div className={CN("previous")}>
                         Предыдущее: последовательный {degree}
                     </div>
                     <div className={"tagline"}>
-                        Твои аргументы прочны как скала. Продолжай идти к своей
-                        цели!
+                        {props.text}
                     </div>
                 </div>
                 <div className={CN("img")}>
+                    {checkRank(props.rank)}
                     <ReactSVG src={image} />
                 </div>
             </div>

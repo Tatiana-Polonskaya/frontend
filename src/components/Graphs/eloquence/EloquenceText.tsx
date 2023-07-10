@@ -27,7 +27,7 @@ function paintWords( data: TinfEloquence){
         if (data.data.values.parasitic_words_list == null){
             return <div className='blocWords'> {("слов-паразитов не найдено")} </div>
         }
-         a[i] = <div className='blocWords'> {( key + " "+ data.data.values.parasitic_words_list[key] )} </div>
+        a[i] = <div className='blocWords' key={key}> {(key)} <div className="strings">{(data.data.values.parasitic_words_list[key])}</div></div>
         i++;
     }
     return a;
@@ -66,7 +66,7 @@ function EloquenceText(props: TinfEloquence) {
 
             <div className='EloquenceTextBloc'>
                 <div className='EloquenceTextTitle'>
-                    Слова-паразиты {countWords}
+                    Слова-паразиты <div className='countWords'> {countWords}</div>
                 </div>
                 <div className='EloquenceTexts'>
                     <b className="textInfTitle"> Слова-паразиты</b> - лингвистическое явление, которое выражается вупотреблении лишних и бессмысленных слов в речи.

@@ -1,0 +1,56 @@
+.BannerPersonalAreaBlock{
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 24px;
+  background: #2477F4;
+  &-text{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    font-family: Montserrat Alternates;
+    color: #FFF;
+    font-size: 16px;
+    font-style: normal;
+
+    line-height: normal;
+  }
+  &-textTariff{
+    font-weight: 700;
+  }
+  &-tariff{
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.64px;
+  }
+  &-inf{
+    font-weight: 500;
+    letter-spacing: 0.32px;
+  }
+  &-btn{
+    display: flex;
+    padding: 8px 8px 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+    background: #FFB800;
+    border: none;
+  }
+  &-textBtn{
+    color: #FFF;
+    font-family: Montserrat Alternates;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  &-imgText{
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+}

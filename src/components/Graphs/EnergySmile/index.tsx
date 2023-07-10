@@ -30,7 +30,6 @@ function paint(energy:number){
     }
     if (energy === 0.5){
         return <div className={cnEnergySmile()}>
-
             {paintSmile(slip, "smile","Спящий")}
             <EnergyLine value={50} maxValue={50}/>
             {paintSmile(medium, "smile","Энергичный")}

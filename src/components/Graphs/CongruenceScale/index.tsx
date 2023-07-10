@@ -31,12 +31,12 @@ export default function CongruenceScale( props: Props) {
             let height = item.value < 0.65 ? 0.6 : 0.9;
             let color = (item.type == "angry") ? "#FE6972" : "#24F19B";
             if (item.time_start > previous) {
-                buffer = <div style={{margin:"2px", backgroundColor: GraphColor.GRAY, height: '30%',
+                buffer = <div style={{marginLeft:"2px", backgroundColor: GraphColor.GRAY, height: '30%',
                     width:((item.time_start - previous))+"%"}}>
                 </div>
             }
             previous = item.time_end
-            block = <div style={{backgroundColor: color, height: ((height * 100).toString()+"%"),
+            block = <div style={{marginLeft:"2px",backgroundColor: color, height: ((height * 100).toString()+"%"),
                 width:((item.time_end-item.time_start)*2)+"%"}}>
             </div>
         }
@@ -49,12 +49,12 @@ export default function CongruenceScale( props: Props) {
             let height = item.value < 0.65 ? 0.6 : 0.9;
             let color = (item.type == "angry") ? "#FE6972" : "#24F19B";
             if (item.time_start > previous) {
-                buffer = <div style={{margin:"2px",backgroundColor: GraphColor.GRAY, height: '30%',
+                buffer = <div style={{marginLeft:"2px",backgroundColor: GraphColor.GRAY, height: '30%',
                     width:((item.time_start - previous))+"%"}}>
                 </div>
             }
             previous = item.time_end
-            block = <div style={{backgroundColor: color, height: ((height * 100).toString()+"%"),
+            block = <div style={{marginLeft:"2px",backgroundColor: color, height: ((height * 100).toString()+"%"),
                 width:((item.time_end-item.time_start)*2)+"%"}}>
             </div>
         }
@@ -67,12 +67,12 @@ export default function CongruenceScale( props: Props) {
             let height = item.value < 0.65 ? 0.6 : 0.9;
             let color = (item.type == "angry") ? "#FE6972" : "#24F19B";
             if (item.time_start > previous) {
-                buffer = <div style={{margin:"2px",backgroundColor: GraphColor.GRAY, height: '30%',
+                buffer = <div style={{marginLeft:"2px",backgroundColor: GraphColor.GRAY, height: '30%',
                     width:((item.time_start - previous))+"%"}}>
                 </div>
             }
             previous = item.time_end
-            block = <div style={{backgroundColor: color, height: ((height * 100).toString()+"%"),
+            block = <div style={{marginLeft:"2px",backgroundColor: color, height: ((height * 100).toString()+"%"),
                 width:((item.time_end-item.time_start)*2)+"%"}}>
             </div>
         }
@@ -103,23 +103,23 @@ export default function CongruenceScale( props: Props) {
                     </div>
                 </div>
             </div>
-            <div className="tabs">
+            <div className="congruenceScaletabs">
                 <button
-                    className={`tab ${checkActive(1, "active")}`}
+                    className={`congruenceScaletab ${checkActive(1, "congruenceScaleactive")}`}
                     onClick={() => handleClick(1)}
                 >
                     <ReactSVG src={video}/>
                     Видео
                 </button>
                 <button
-                    className={`tab ${checkActive(2, "active")}`}
+                    className={`congruenceScaletab ${checkActive(2, "congruenceScaleactive")}`}
                     onClick={() => handleClick(2)}
                 >
                     <ReactSVG src={volume_high}/>
                     Аудио
                 </button>
                 <button
-                    className={`tab ${checkActive(3, "active")}`}
+                    className={`congruenceScaletab ${checkActive(3, "congruenceScaleactive")}`}
                     onClick={() => handleClick(3)}
                 >
                     <ReactSVG src={text}/>
@@ -127,17 +127,17 @@ export default function CongruenceScale( props: Props) {
                 </button>
             </div>
             <div className="panels">
-                <div className={`panel ${checkActive(1, "active")}`}>
+                <div className={`panel ${checkActive(1, "congruenceScaleactive")}`}>
                     <div className="content">
                         {listItemA_T}
                     </div>
                 </div>
-                <div className={`panel ${checkActive(2, "active")}`}>
+                <div className={`panel ${checkActive(2, "congruenceScaleactive")}`}>
                     <div className="content">
                         {listItemV_T}
                     </div>
                 </div>
-                <div className={`panel ${checkActive(3, "active")}`}>
+                <div className={`panel ${checkActive(3, "congruenceScaleactive")}`}>
                     <div className="content">
                         {listItemA_V}
                     </div>

@@ -1,11 +1,11 @@
 import MainLayout from "../../layouts/MainLayout";
-import BadGoodBlock from "../../components/BadGoodBlock";
-import BlockGeneralAnalytics from "../../components/BlockGeneralAnalytics";
+import BannerPersonalArea from "../../components/BannerPersonalArea";
 
 export default function SettingsPage() {
     return (
         <MainLayout>
             <div>SettingsPage</div>
+            <BannerPersonalArea tariff={"Maxi"} countRep={10} />
         </MainLayout>
     );
 }

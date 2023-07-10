@@ -1,8 +1,8 @@
-.tabs {
+.EmotionalScaletabs {
   display: flex;
   width: 40%;
 }
-.tab {
+.EmotionalScaletab {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -17,10 +17,16 @@
   color: #7C8EB5;
   background: rgba(36, 119, 244, 0);
   margin: 8px;
+  svg{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 }
-.tab:not(:last-child) {
+.EmotionalScaletab:not(:last-child) {
 }
-.tab.active {
+.EmotionalScaletab.EmotionalScaleactive {
   background: rgba(36, 119, 244, 0.13);
   border-radius: 8px;
   color: #2477F4;
@@ -32,7 +38,7 @@
   padding: 10px;
 
 }
-.panel.active {
+.panel.EmotionalScaleactive {
   display: block;
   flex-direction: row;
 }
@@ -64,6 +70,8 @@
   &-blockText{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
   &-Text{
     font-style: normal;
