@@ -45,4 +45,5 @@ export interface IVideoUploadItem {
 export interface IParamsForQueryUserVideo{
     page: number,
     limit:number,
+    tutorial?:boolean,
 }

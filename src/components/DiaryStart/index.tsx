@@ -107,7 +107,7 @@ export default function DiaryStart() {
 
     return (
         <div>
-            <div className={cnDiaryStart("text-h1")}>Достижения</div>
+            <div className={cnDiaryStart("text-h1",{margin_bottom: true})}>Достижения</div>
             <div className={cnDiaryStart("banner")}>
                 <BlockGeneralAnalytics N={9} rank={"Последовательный"} text={'Твои аргументы прочны как скала. Продолжай идти к своей цели!'} />
             </div>

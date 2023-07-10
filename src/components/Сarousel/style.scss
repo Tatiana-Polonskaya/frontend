@@ -1,12 +1,12 @@
-.carouse{
+.Carousel{
 
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
     align-content: center;
-}
 
-.main-container{
-    width: 79vw;
+    &-main-container{
+        width: 79vw;
+    }
+    
 }
-

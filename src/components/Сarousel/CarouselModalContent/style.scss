@@ -1,0 +1,183 @@
+.CarouselModalContent{
+    max-width: 1200px;
+
+    &-video-row {
+        display: grid;
+        grid-template-columns: 800px 1fr;
+        grid-template-rows: min-content;
+        gap:14px;
+        
+        
+        &-videoplayer {
+            width: auto;
+            height: auto;
+            overflow: hidden;
+            max-height: 450px;
+
+            video{
+                max-height: 450px;
+                // height: auto !important;
+                // width: 800px !important;
+            }
+        }
+
+        &-description {
+
+            &-title-row {
+
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                gap: 10px;
+                align-items: flex-start;
+
+                &-text {
+                    padding-bottom: 10px;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 1.5rem;
+                    line-height: 24px;
+                    color: #000000;
+                }
+
+                &-closebutton {
+                    align-self: flex-start;
+                    cursor: pointer;
+                    fill: #7C8EB5;
+                }
+
+                &-closebutton:hover {
+                    fill: #000b22;
+                }
+
+            }
+
+            &-times {
+                font-family: "Onest";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                color: #7C8EB5;
+            }
+
+            &-author-block {
+
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: start;
+                align-items: center;
+                padding:  8px 0;
+
+                &-logo {
+
+                    height: 28px;
+                    width: 28px;
+                    margin-right: 10px;
+                    border-radius: 100%;
+                    overflow: hidden;
+                    justify-content: center;
+                    align-items: center;
+                    display: flex;
+
+                    &-img {
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+
+                &-name {
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 17px;
+                    color: #37476A;
+                    font-family: "Montserrat Alternates";
+                }
+            }
+
+            &-annotation {
+
+                &-title {
+                    font-family: "Onest";
+                    padding: 10px 0;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 13px;
+                    color: #7C8EB5;
+                }
+
+                &-text {
+                    height: 270px;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 20px;
+                    color: #000000;
+                    overflow-y: auto;
+                }
+            }
+
+            &-btn-info {
+
+                // margin-top: 20px;
+                padding: 16px;
+                gap: 8px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #FFB800;
+                border: 0;
+                border-radius: 9px;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 1rem;
+                color: #FFFFFF;
+                font-family: "Montserrat Alternates";
+
+                &-icon svg{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+
+    &-analyze-row {
+        width: 100%;
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1em;
+        justify-items: stretch;
+        align-items: start;
+        justify-content: space-between;
+        font-family: "Montserrat Alternates";
+
+        &-item {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            p {
+
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 17px;
+
+                display: flex;
+                align-items: center;
+                text-align: center;
+                color: #37476A;
+            }
+        }
+
+    }
+}
+

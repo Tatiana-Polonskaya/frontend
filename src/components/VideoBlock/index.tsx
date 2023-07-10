@@ -33,6 +33,7 @@ export default function VideoBlock() {
 
     const [getCurrentMainVideos, currentMainVideos] =
         useLazyGetMainVideoQuery();
+
     const { data } = useGetMainVideoQuery({
         page: currentPage,
         limit: videosPerPage,
@@ -42,6 +43,7 @@ export default function VideoBlock() {
         if (data && data?.data) {
             setCurrentVideos(data!.data!.videos);
             setCountAllVideos(data!.data!.total_videos);
+            // console.log(data!.data!); //tutorial
         }
     }, [data]);
 
@@ -70,7 +72,7 @@ export default function VideoBlock() {
     };
 
     const nextPage = (maxPage: number) => {
-        setCurrentPage((prev) => (prev < (maxPage-1) ? prev + 1 : prev));
+        setCurrentPage((prev) => (prev < maxPage - 1 ? prev + 1 : prev));
     };
 
     const prevPage = () =>

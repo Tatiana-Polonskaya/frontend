@@ -11,7 +11,14 @@
             font-weight: 600;
             line-height: normal;
 
-            padding: 10px 0;
+            padding: 10px ;
+            // margin-bottom: -30px;
+
+            &_margin_bottom{
+                padding: 0;
+                padding-top: 10px;
+                margin-bottom: -30px;
+            }
         }
 
         &-gray {

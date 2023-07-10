@@ -4,7 +4,7 @@
     align-self: flex-start;
     align-items: center;
     justify-content: space-around;
-
+    cursor: pointer;
     width: 180px;
 
     &-img-block{
@@ -15,12 +15,28 @@
         background-size: 120px 120px;
         border-radius: 100% 100% 100% 100%;
     }
+    &-video-block{
+        height: 120px;
+        width: 120px;
+        border-radius: 100%;
+        overflow: hidden;
+        -o-object-fit: cover;
+        object-fit: cover;
+        position: relative;
+
+        video {
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+    }
 
     &-button{
+        position: absolute;
         display: flex;
-        height: 100%;
-        width: 100%;
-        cursor: pointer;
+        top: 47px;
+        left: 75px;
+
+        
         justify-content: center;
         align-items: center;
 

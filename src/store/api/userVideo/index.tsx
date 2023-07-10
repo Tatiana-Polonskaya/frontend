@@ -32,10 +32,10 @@ export const videoApi = createApi({
             IResponse<IVideoUser>,
             IParamsForQueryUserVideo
         >({
-            query: ({ page = 0, limit = 6 }) => {
+            query: ({ page = 0, limit = 6, tutorial = false }) => {
                 return {
                     url: "/api/video/main-page",
-                    params: { page, limit },
+                    params: { page, limit,tutorial },
                     method: "GET",
                 };
             },
