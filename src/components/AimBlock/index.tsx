@@ -52,12 +52,14 @@ export default function AimBlock() {
             allUsersPurposes.data &&
             allUsersPurposes.data.data
         ) {
+            if(storePurposes.length > 0){
             if (storePurposes[0].title.length === 0) {
                 setAllPurposes(allUsersPurposes.data!.data!.purposes);
                 dispatch(updateUserAims(allUsersPurposes.data!.data!.purposes));
             } else {
                 setAllPurposes(storePurposes);
             }
+        }
         }
     }, [allUsersPurposes]);
 
@@ -225,7 +227,7 @@ export default function AimBlock() {
                         </Fragment>
                     ))}
             </NewAimContext.Provider>
-
+            {allPurposes && allPurposes.length===0 && (<span>Целей еще нет</span>)}
             <ModalWindow
                 title="Выберите цель или введите собственную"
                 icon={gpsIcon}
