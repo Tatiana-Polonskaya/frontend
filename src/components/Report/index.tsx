@@ -108,7 +108,6 @@ import noteIcon from "./assets/note.svg";
 import arrowLeft from "./assets/arrowLeft.svg";
 import "./style.scss";
 
-
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
     currentTime: "00:00",

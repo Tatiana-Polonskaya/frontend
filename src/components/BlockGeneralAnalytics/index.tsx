@@ -25,10 +25,6 @@ function checkRank(rank:string){
     }else if (rank == `доходчивый` || rank == `продуманный` || rank == `уверенный`){
         return <ReactSVG src={Eloquent}/>;
     }
-    else {
-        return <div></div>
-    }
-
 }
 
 export default function BlockGeneralAnalytics(props: Props) {
