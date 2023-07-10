@@ -1,11 +1,10 @@
 import MainLayout from "../../layouts/MainLayout";
-import BannerPersonalArea from "../../components/BannerPersonalArea";
+import { Outlet } from "react-router-dom";
 
 export default function SettingsPage() {
     return (
         <MainLayout>
-            <div>SettingsPage</div>
-            <BannerPersonalArea tariff={"Maxi"} countRep={10} />
+            <Outlet />
         </MainLayout>
     );
 }

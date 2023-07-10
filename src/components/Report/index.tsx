@@ -114,8 +114,6 @@ export const VideoTimeContext = createContext({
     setCurrentTime: (() => {}) as Dispatch<SetStateAction<string>>,
 });
 
-
-
 export default function AnalysisReport() {
     const cnReport = cn("AnalysisReport");
 
@@ -127,22 +125,25 @@ export default function AnalysisReport() {
     const locationParams = useLocation();
     const [isMainVideo, setIsMainVideo] = useState(false);
 
-    useEffect(()=>{
-        if(locationParams && locationParams.state && ("main" in locationParams.state)) {
+    useEffect(() => {
+        if (
+            locationParams &&
+            locationParams.state &&
+            "main" in locationParams.state
+        ) {
             setIsMainVideo(true);
         }
-    },[locationParams])
+    }, [locationParams]);
 
     // common info about video: title, date, duration
     const videoInfoFromBack = useGetVideoInfoByIdQuery(idVideo);
     const [videoInfo, setVideoInfo] = useState<IVideoInfo>();
 
-    useEffect(()=>{
-        if(videoInfoFromBack && videoInfoFromBack.data){
+    useEffect(() => {
+        if (videoInfoFromBack && videoInfoFromBack.data) {
             setVideoInfo(videoInfoFromBack.data!.data);
         }
-    },[videoInfoFromBack]);
-   
+    }, [videoInfoFromBack]);
 
     const navigate = useNavigate();
 
@@ -286,7 +287,10 @@ export default function AnalysisReport() {
             <div className={cnReport("header")}>
                 <div className={cnReport("whiteBlock")}>
                     <div className={cnReport("video-block-video")}>
-                    <VideoPlayer url={`/api/video/${idVideo}`} controls={true}/>
+                        <VideoPlayer
+                            url={`/api/video/${idVideo}`}
+                            controls={true}
+                        />
                     </div>
                     <div className={cnReport("video-block-title")}>
                         {videoInfo ? videoInfo.title : ""}
@@ -304,19 +308,19 @@ export default function AnalysisReport() {
                 </div>
 
                 <div className={cnReport("whiteBlock")}>
-                    
-                        <ColorfulTabs>
-                            {!isMainVideo && <div
+                    <ColorfulTabs>
+                        {!isMainVideo && (
+                            <div
                                 className={cnReport("width")}
                                 title="Личная заметка"
                             >
                                 <VideoNotice description="" />
-                            </div>}
-                            <div
-                                className={cnReport("transrciption")}
-                                title="Транскрипция речи">
-
-             
+                            </div>
+                        )}
+                        <div
+                            className={cnReport("transrciption")}
+                            title="Транскрипция речи"
+                        >
                             <VideoTimeContext.Provider
                                 value={{ currentTime, setCurrentTime }}
                             >

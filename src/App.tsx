@@ -24,96 +24,83 @@ import RecodingSetup from "./components/RepetitionComponents/Setup";
 import RecodingPage from "./pages/RecodingPage";
 import DiaryStart from "./components/DiaryStart";
 import AnalysisReport from "./components/Report";
-
+import SettingsStart from "./components/SettingsStart";
 
 export default function App() {
     return (
         <div className="wrapper">
-                <Routes>
+            <Routes>
+                <Route path={RoutesEnum.LANDING} element={<LandingPage />} />
+                <Route element={<UnauthorizedRoute />}>
+                    <Route path={RoutesEnum.LOGIN} element={<LoginPage />} />
                     <Route
-                        path={RoutesEnum.LANDING}
-                        element={<LandingPage />}
+                        path={RoutesEnum.REGISTER}
+                        element={<RegisterPage />}
                     />
-                    <Route element={<UnauthorizedRoute />}>
+                    <Route
+                        path={RoutesEnum.ACTIVATION}
+                        element={<ActivationPage />}
+                    />
+                    <Route
+                        path={RoutesEnum.RESTORE}
+                        element={<PasswordRestorePage />}
+                    />
+                </Route>
+
+                <Route
+                    element={
+                        // process.env.NODE_ENV === "production" ? (
+                        <AuthorizedRoute />
+                        // ) : (
+                        //     <Outlet />
+                        // )
+                    }
+                >
+                    <Route path={RoutesEnum.SURVEY} element={<SurveyPage />} />
+                    <Route path={RoutesEnum.ROOT} element={<HomePage />} />
+                    <Route path={RoutesEnum.HOME} element={<HomePage />} />
+                    <Route path={RoutesEnum.DIARY} element={<DiaryPage />}>
+                        <Route index={true} element={<DiaryStart />} />
                         <Route
-                            path={RoutesEnum.LOGIN}
-                            element={<LoginPage />}
-                        />
-                        <Route
-                            path={RoutesEnum.REGISTER}
-                            element={<RegisterPage />}
-                        />
-                        <Route
-                            path={RoutesEnum.ACTIVATION}
-                            element={<ActivationPage />}
-                        />
-                        <Route
-                            path={RoutesEnum.RESTORE}
-                            element={<PasswordRestorePage />}
+                            index={false}
+                            path=":id"
+                            element={<AnalysisReport />}
                         />
                     </Route>
+                    <Route
+                        path={RoutesEnum.IMPROVISATION}
+                        element={<ImprovisationPage />}
+                    />
+                    <Route
+                        path={RoutesEnum.LEARNING}
+                        element={<LearningPage />}
+                    />
 
                     <Route
-                        element={
-                            // process.env.NODE_ENV === "production" ? (
-                            <AuthorizedRoute />
-                            // ) : (
-                            //     <Outlet />
-                            // )
-                        }
+                        path={RoutesEnum.RECODING}
+                        element={<RecodingPage />}
+                    />
+
+                    <Route
+                        path={RoutesEnum.REPETITION}
+                        element={<RepetitionPage />}
                     >
+                        <Route index={true} element={<RepetitionStart />} />
+                        <Route index={false} path="about" element={<About />} />
                         <Route
-                            path={RoutesEnum.SURVEY}
-                            element={<SurveyPage />}
-                        />
-                        <Route path={RoutesEnum.ROOT} element={<HomePage />} />
-                        <Route path={RoutesEnum.HOME} element={<HomePage />} />
-                        <Route
-                            path={RoutesEnum.DIARY}
-                            element={<DiaryPage />}
-                        >
-                            <Route index={true} element={<DiaryStart />} />
-                            <Route
-                                index={false}
-                                path=":id"
-                                element={<AnalysisReport />}
-                            />
-                        </Route>
-                        <Route
-                            path={RoutesEnum.IMPROVISATION}
-                            element={<ImprovisationPage />}
-                        />
-                        <Route
-                            path={RoutesEnum.LEARNING}
-                            element={<LearningPage />}
-                        />   
-
-                        <Route
-                            path={RoutesEnum.RECODING}
-                            element={<RecodingPage />}
-                        />
-
-                        <Route
-                            path={RoutesEnum.REPETITION}
-                            element={<RepetitionPage />}
-                        >
-                            <Route index={true} element={<RepetitionStart />} />
-                            <Route
-                                index={false}
-                                path="about"
-                                element={<About />}
-                            />
-                            <Route
-                                index={false}
-                                path="setup"
-                                element={<RecodingSetup />}
-                            /> 
-                        </Route>
-                        <Route
-                            path={RoutesEnum.SETTINGS}
-                            element={<SettingsPage />}
+                            index={false}
+                            path="setup"
+                            element={<RecodingSetup />}
                         />
                     </Route>
+                    <Route
+                        path={RoutesEnum.SETTINGS}
+                        element={<SettingsPage />}
+                    >
+                        <Route index={true} element={<SettingsStart />} />
+                        {/* <Route index={false} element={<SettingsStart />} /> */}
+                    </Route>
+                </Route>
 
                 <Route
                     path={RoutesEnum.ALL}

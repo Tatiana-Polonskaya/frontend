@@ -1,0 +1,41 @@
+{
+    "values": [
+        {
+            "date": "00.00.0000",
+            "tariff": "opti",
+            "repetition": "00 репетиций",
+            "sum": "0000",
+            "period": "00.00.0000-00.00.0000"
+        },
+        {
+            "date": "01.01.0001",
+            "tariff": "mini",
+            "repetition": "01 репетиций",
+            "sum": "0001",
+            "period": "-"
+        },
+        {
+            "date": "02.02.0002",
+            "tariff": "unlim",
+            "repetition": "unlim",
+            "sum": "0002",
+            "period": "02.02.0002-02.02.0002"
+        },
+        {
+            "date": "03.03.0003",
+            "tariff": "maxi",
+            "repetition": "03 репетиций",
+            "sum": "0003",
+            "period": "-"
+        },
+        {
+            "date": "04.04.0004",
+            "tariff": "maxi",
+            "repetition": "04 репетиций",
+            "sum": "0004",
+            "period": "04.04.0004-04.04.0004"
+        }
+    ],
+    "error": null,
+    "success": true
+}

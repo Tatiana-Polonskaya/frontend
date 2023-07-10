@@ -60,7 +60,7 @@ export default function GraphBaseStats({
                 </div>
             )}
             <div className={cnStrangeGraph("wrapper")}>
-                <div className={cnStrangeGraph("wrapper-frame")}>
+                <div>
                     {items.map((el, ind) =>
                         ind !== 0 ? (
                             <div
@@ -70,10 +70,11 @@ export default function GraphBaseStats({
                                     top: `${
                                         190 - (34 * (el.value * 100)) / 20
                                     }px`,
-                                    left:
-                                        ind === 1
-                                            ? `${8.75 * ind}%`
-                                            : `${12.9 * ind - 4.15}%`,
+
+                                    right: `calc(${12.5 * (8 - ind)}% +  ${
+                                        (50 / 8) * (8 - ind)
+                                    }px)`,
+                                    transform: "translate(50%, -50%)",
                                 }}
                             >
                                 <ReactSVG src={frameHelper(el.prev)} />

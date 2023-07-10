@@ -1,6 +1,8 @@
 import { UUID } from "crypto";
 
 export interface IUser {
+    phone: any;
+    city: any;
     id: UUID;
     firstname: string;
     lastname: string;
@@ -11,4 +13,3 @@ export interface IUser {
     status: string;
     tarif_active: boolean;
 }
-

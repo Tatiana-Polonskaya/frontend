@@ -38,11 +38,22 @@ export default function BaseGraphXDescription({
                             <>
                                 {/* <span>{el.day}</span> */}
                                 {el.day}
-                                <span>{`${
-                                    el.date >= 10 ? el.date : "0" + el.date
-                                }:${
-                                    el.month >= 10 ? el.month : "0" + el.month
-                                }`}</span>
+                                <span
+                                    style={{
+                                        color:
+                                            idx === selected
+                                                ? "white"
+                                                : "#adb9d480",
+                                    }}
+                                >
+                                    {`${
+                                        el.date >= 10 ? el.date : "0" + el.date
+                                    }:${
+                                        el.month >= 10
+                                            ? el.month
+                                            : "0" + el.month
+                                    }`}
+                                </span>
                             </>
                         ) : (
                             <span>{data![idx]}</span>
