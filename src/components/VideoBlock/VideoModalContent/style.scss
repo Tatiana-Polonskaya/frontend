@@ -6,7 +6,7 @@
         grid-template-columns: 800px 1fr;
         grid-template-rows: min-content;
         gap:14px;
-        
+        max-height: 450px;
         
         &-videoplayer {
             width: auto;
@@ -109,7 +109,7 @@
                 }
 
                 &-text {
-                    height: 270px;
+                    // height: 30;
                     font-style: normal;
                     font-weight: 400;
                     font-size: 18px;
