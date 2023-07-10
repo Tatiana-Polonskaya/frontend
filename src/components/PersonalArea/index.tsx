@@ -60,11 +60,12 @@ export default function PersonalArea({ isArchive = false }: Props) {
                     <div className={cnPersonalUser("photo")}>
                         {storeUser && (
                             <img
-                                src={
-                                    !storeUser || storeUser!.avatar === null
-                                        ? User
-                                        : storeUser!.avatar
-                                }
+                                src= {User}
+                                // src={
+                                //     !storeUser || storeUser!.avatar === null
+                                //         ? User
+                                //         : storeUser!.avatar
+                                // }
                                 alt={storeUser!.firstname}
                             />
                         )}
