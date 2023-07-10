@@ -30,8 +30,29 @@ export const userApi = createApi({
                 }
             },
         }),
+        getUserAvatar: build.query<IResponse<void>, void>({
+            query: () => {
+                return {
+                    url: `/api/users/account/avatar`,
+                    method: "GET",
+                };
+            },
+        }),
+        sendUserAvatar: build.mutation<IResponse<void>, File>({
+            query: (avatar) => {
+                var bodyFormData = new FormData();
+                bodyFormData.append("file", avatar);
+                console.log({ bodyFormData, avatar });
+                return {
+                    url:  `/api/users/account/avatar`,
+                    method: "POST",
+                    body: bodyFormData,
+                    formData: true,
+                };
+            },
+        }),
     }),
 });
 
-export const { useGetMeQuery } = userApi;
+export const { useGetMeQuery, useGetUserAvatarQuery, useLazyGetUserAvatarQuery, useSendUserAvatarMutation } = userApi;
 export const { endpoints, reducerPath, reducer, middleware } = userApi;

@@ -39,7 +39,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
     const [iconArr, setIconArr] = useState<IconsArr[]>([]);
 
     useEffect(() => {
-        if (store && store!.firstname) {
+        if (store && typeof store !== null && store!.firstname) {
             setStoreUser(store);
             setIconArr([
                 {
@@ -58,19 +58,23 @@ export default function PersonalArea({ isArchive = false }: Props) {
             <div className={cnPersonalSettings("left")}>
                 <div className={cnPersonalUser("")}>
                     <div className={cnPersonalUser("photo")}>
-                        <img
-                            src={
-                                !storeUser || storeUser!.avatar === null
-                                    ? User
-                                    : storeUser!.avatar
-                            }
-                            alt={storeUser!.firstname}
-                        />
+                        {storeUser && (
+                            <img
+                                src={
+                                    !storeUser || storeUser!.avatar === null
+                                        ? User
+                                        : storeUser!.avatar
+                                }
+                                alt={storeUser!.firstname}
+                            />
+                        )}
                     </div>
                     <div className={cnPersonalUser("name")}>
-                        <span>{`${storeUser!.firstname} ${
-                            storeUser!.lastname
-                        }`}</span>{" "}
+                        {storeUser && (
+                            <span>{`${storeUser!.firstname} ${
+                                storeUser!.lastname
+                            }`}</span>
+                        )}{" "}
                     </div>
                     <button className={cnPersonalUser("btn")}>
                         <ReactSVG src={Gallery} />
