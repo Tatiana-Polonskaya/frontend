@@ -23,6 +23,9 @@
 
         &-description {
 
+            display: flex;
+            flex-flow: column nowrap;
+
             &-title-row {
 
                 display: flex;
@@ -109,7 +112,7 @@
                 }
 
                 &-text {
-                    // height: 30;
+                    flex-grow:1;
                     font-style: normal;
                     font-weight: 400;
                     font-size: 18px;
