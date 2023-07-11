@@ -42,7 +42,8 @@ export default function DiaryStart() {
     const [allUserVideos, setAllUserVideos] = useState<IVideoFromBack[]>();
 
     useEffect(() => {
-        if (videosDataFromBack && videosDataFromBack.data) {
+        if (videosDataFromBack && videosDataFromBack.data && videosDataFromBack.data!.data) {
+            console.log(videosDataFromBack.data!.data!)
             setAllUserVideos(videosDataFromBack.data!.data!.videos);
         }
     }, [videosDataFromBack]);

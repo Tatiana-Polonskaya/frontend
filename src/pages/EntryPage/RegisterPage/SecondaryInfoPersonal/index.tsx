@@ -93,7 +93,10 @@ export default function SecondaryInfoPersonal() {
                 lastname: lastName,
                 birthday: birthday,
                 email: email,
+                phone: tel,
+                avatar: null,
                 password: password,
+                city: "Санкт-Петербург",
             });
         }
     };
