@@ -208,7 +208,7 @@ export default function RepetitionStart() {
                                         "loading-title"
                                     )}
                                 >
-                                    Идет загрузка видео...
+                                    Идет загрузка видео <span className={cnRepetitionStart("loading-title-animate")}> . . .</span>
                                 </div>
                                 <div
                                     className={cnRepetitionStart(

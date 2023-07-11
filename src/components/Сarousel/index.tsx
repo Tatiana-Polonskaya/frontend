@@ -16,7 +16,6 @@ import { useEffect, useState } from "react";
 import { IVideoFromBack } from "../../models/video";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { ModalWindowContext } from "../VideoBlock";
-import VideoModalContent from "../VideoBlock/VideoModalContent";
 import CarouselModalContent from "./CarouselModalContent";
 
 type ArrowProps = {

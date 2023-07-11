@@ -143,17 +143,12 @@ export default function DiaryStart() {
             <div>
                 <div className={cnDiaryStart("text-h1")}>
                     Архив проверок{" "}
-                    {allUserVideos && (
-                        <span className={cnDiaryStart("text-gray")}>
-                            {allUserVideos.length}
-                        </span>
-                    )}
+                    <span className={cnDiaryStart("text-gray")}>
+                        {allUserVideos ? allUserVideos.length : 0}    
+                    </span>
                 </div>
             </div>
-
-            <ArchiveSearch updateSearch={updateSearch} />
-
-            {currentVideos && <ArchiveVideo video={currentVideos} />}
+            {currentVideos ? (<><ArchiveSearch updateSearch={updateSearch} /><ArchiveVideo video={currentVideos} /></>) : <div className={cnDiaryStart("text-empty-msg")}>Видео не найдено</div>}
 
             {currentVideos && searchVideos && (
                 <Pagination

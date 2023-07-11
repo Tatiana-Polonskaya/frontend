@@ -52,15 +52,17 @@
     &-btn-block {
         display: flex;
         flex-flow: row wrap;
-        gap: 25px;
+        justify-content: start;
+        width: 100%;
+        
+        gap: 40px;
         margin-top: 30px;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
 
         &-link {
             cursor: pointer;
-            max-width: 600px;
-
-
+            flex-grow: 1;
+            max-width: 700px;
 
             &-svg {
                 width: 100%;
@@ -87,11 +89,29 @@
             font-family: Montserrat Alternates;
             font-weight: 600;
 
+            &-animate {
+                color: #37476A;
+                font-size: 24px;
+                font-family: Montserrat Alternates;
+                font-weight: 600;
+
+                display:inline-block;
+                clip-path: inset(0 30px 0 0);
+                animation: fade-out 2s infinite ease-in-out;
+            }
+
+            @keyframes fade-out {
+                to {
+                  clip-path: inset(0 -24px 0 0);
+                }
+              }
+
             &-error {
                 color: #FF4E78;
                 font-size: 24px;
                 font-family: Montserrat Alternates;
                 font-weight: 600;
+                
             }
 
             &-link {
@@ -101,6 +121,7 @@
                 font-weight: 500;
                 cursor: pointer;
             }
+
         }
 
         &-description {
@@ -111,6 +132,13 @@
         }
     }
 }
+
+@keyframes l {
+    to {
+      clip-path: inset(0 -1ch 0 0)
+    }
+  }
+
 
 .ModalTitle {
     &-header {

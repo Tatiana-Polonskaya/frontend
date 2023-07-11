@@ -187,6 +187,7 @@ export default function AimBlock() {
 
         setHasNewAim(true);
         setChoosenAim(0);
+        setCheckedState(new Array(existedAims.length).fill(false))
         closeModal();
     };
 
