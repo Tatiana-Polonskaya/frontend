@@ -25,7 +25,6 @@ export function getPrettyDuration(seconds: number): number {
 
 // get number of bytes, return Кб or МБ or ГБ
 function getPrettySizeFile(size: number, decimals = 2): string {
-    
     if (size === 0) {
         return "0";
     } else {
@@ -59,6 +58,7 @@ export default function PreviewBlock({
     const [durationVideo, setDurationVideo] = useState(0);
     const [sizeVideo, setSizeVideo] = useState(0);
     const [canMoved, setCanMoved] = useState(false);
+    const [isNormDuration, setIsNormDuration] = useState(true);
 
     const videoRef = useRef<HTMLVideoElement | any>();
     let mediaSource = new MediaSource();
@@ -102,7 +102,12 @@ export default function PreviewBlock({
         if (n === Infinity) setDurationVideo(0);
         else setDurationVideo(n);
         const normDuration = getPrettyDuration(durationVideo);
-        if (normDuration < NORM_COUNT_MINUTES) setCanMoved(true);
+        if (normDuration <= NORM_COUNT_MINUTES) {
+            setCanMoved(true);
+        } else {
+            setIsNormDuration(false);
+            setCanMoved(false);
+        }
     };
 
     useEffect(() => {
@@ -128,17 +133,19 @@ export default function PreviewBlock({
         <>
             <div className={cnPreview()}>
                 <div className={cnPreview("row")}>
-                    <div className={cnPreview("col")}>
+                 <div className={cnPreview("col")}>
                         <div className={cnPreview("video-block")}>
-                            <ReactPlayer
-                                width={"100%"}
-                                height="100%"
-                                ref={videoRef}
-                                url={URL.createObjectURL(currentFile)}
-                                muted={true}
-                                controls={true}
-                                onDuration={getDurationVideo}
-                            />
+                            {currentFile && (
+                                <ReactPlayer
+                                    width={"100%"}
+                                    height={"100%"}
+                                    ref={videoRef}
+                                    url={URL.createObjectURL(currentFile)}
+                                    muted={true}
+                                    controls={true}
+                                    onDuration={getDurationVideo}
+                                />
+                            )}
                         </div>
                     </div>
 
@@ -192,7 +199,9 @@ export default function PreviewBlock({
                     </div>
                 </div>
 
-                <div className={cnPreview("error", { hidden: canMoved })}>
+                <div
+                    className={cnPreview("error", { visible: !isNormDuration })}
+                >
                     <div className={cnPreview("row")}>
                         <div className={cnPreview("error-icon")}>
                             <ReactSVG src={videoRemoveIcon} />
@@ -208,6 +217,7 @@ export default function PreviewBlock({
                         </div>
                     </div>
                 </div>
+
                 <div className={cnPreview("row")}>
                     <div className={cnPreview("col")}>
                         <div className={cnPreview("btn")}>
