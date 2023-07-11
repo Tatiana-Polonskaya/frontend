@@ -30,7 +30,7 @@ export default function Menu() {
         //     img: images.Teacher,
         // },
         {
-            title: "Репетиция",
+            title: "Репетиции",
             onClick: () => navigate(RoutesEnum.REPETITION),
             img: images.Repetition,
         },
