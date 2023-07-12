@@ -38,10 +38,8 @@ export default function BlockGeneralAnalytics(props: Props) {
     if (props.N > 8) {
         degree = "Говорун";
         image = Talker;
-        image = Talker;
     } else if (props.N > 6 || props.N <= 8) {
         degree = "Златоуст";
-        image = Chrysostom;
         image = Chrysostom;
     } else if (props.N || props.N <= 6) {
         degree = "Оратор";
@@ -62,17 +60,14 @@ export default function BlockGeneralAnalytics(props: Props) {
                 <div className={CN("text")}>
                     <div className={CN("rank")}>Текущее звание</div>
                     <div className={CN("degree")}>{props.rank} {degree}</div>
-                    <div className={CN("degree")}>{props.rank} {degree}</div>
                     <div className={CN("previous")}>
                         Предыдущее: последовательный {degree}
                     </div>
                     <div className={"tagline"}>
                         {props.text}
-                        {props.text}
                     </div>
                 </div>
                 <div className={CN("img")}>
-                    {checkRank(props.rank)}
                     {checkRank(props.rank)}
                     <ReactSVG src={image} />
                 </div>
