@@ -1,15 +1,9 @@
-import {
-    BaseQueryFn,
-    FetchArgs,
-    fetchBaseQuery,
-    FetchBaseQueryError,
-} from "@reduxjs/toolkit/query";
+import { BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { RootState } from "../..";
 import { Mutex } from "async-mutex";
-
+import { logout, setAccessToken } from "../../slices/user";
 import { IResponse } from "../../../models/api";
 import { ILoginResponse } from "../../../models/entry/login";
-import { logout, setAccessToken } from "../../slices/user";
-import { RootState } from "../..";
 
 const mutex = new Mutex();
 
@@ -22,23 +16,17 @@ const baseQuery = fetchBaseQuery({
     },
 });
 
-const customFetchBase: BaseQueryFn<
+const myFetchBase: BaseQueryFn<
     string | FetchArgs,
     unknown,
     FetchBaseQueryError
 > = async (args, api, extraOptions) => {
     await mutex.waitForUnlock();
     let result = await baseQuery(args, api, extraOptions);
-    // console.log("customFetchBase result",result)
-    const data = result.data as IResponse<any>;
+    console.log("myFetchBase result",result.meta!.response)
 
     // condition for token refreshing
-    if (
-        data &&
-        !data.success &&
-        (data.error?.code === 10009 || data.error?.code === 403)
-        // || [4, 5].includes(+(result.meta!.response!.status / 100).toFixed(0)) // check if status code starts with 4 or 5
-    ) {
+    if ((result.error?.data as any)?.message === 'You are not logged in'){
         if (!mutex.isLocked()) {
             const release = await mutex.acquire();
 
@@ -77,4 +65,31 @@ const customFetchBase: BaseQueryFn<
     return result;
 };
 
-export default customFetchBase;
+
+export const apiWithDifAnswers = createApi({
+    reducerPath: "api/apiWithDifAnswers",
+    baseQuery: myFetchBase,
+    endpoints: (build) => ({
+        getVideoById: build.query<any, string>({
+            query: (id) => ({
+                url: `/api/video/test/${id}`,
+                method: "GET",
+                transform: async (response:any) => {
+                    let fileBlob = response.blob();
+                    console.log("fileBlob", fileBlob)
+                    return fileBlob;
+                },
+            }),
+            transformResponse: async (response: any)=>{
+                console.log("transformResponse",response)
+                return await response.body.blob();
+            }
+        }),
+    }),
+});
+
+export const {
+    useGetVideoByIdQuery
+} = apiWithDifAnswers;
+
+export const { endpoints, reducerPath, reducer, middleware } = apiWithDifAnswers;

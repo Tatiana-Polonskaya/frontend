@@ -16,15 +16,16 @@ const cnContent = cn("mainLayout");
 
 export default function MainLayout(props: Props) {
 
-    const lastName = useSelector((state: RootState) => state.profile.lastName);
-    const name = useSelector((state: RootState) => state.profile.name);    
+    const lastName = useSelector((state: RootState) => state.profile.user.firstname);
+    const name = useSelector((state: RootState) => state.profile.user.lastname);    
+    const avatar = useSelector((state: RootState) => state.profile.avatar);  
 
     return (
         <>
             <div className={cnContent()}>
                 <Menu />
                 <div className={cnContent("wrapper")}>
-                    <Header displayName={`${name} ${lastName}`} />
+                    <Header displayName={`${name} ${lastName}`} imageUrl={avatar}/>
                     <section className={cnContent("main")}>
                         {props.children}
                     </section>

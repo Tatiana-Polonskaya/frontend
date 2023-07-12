@@ -57,9 +57,7 @@
                 "date": "1234",
                 "time_start": 70
             }
-        ],
-        "average_value": 99,
-        "uncertainty": 5
+        ]
     },
     "error": null,
     "success": true

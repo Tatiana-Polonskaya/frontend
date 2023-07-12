@@ -35,7 +35,7 @@ export const videoApi = createApi({
             query: ({ page = 0, limit = 6, tutorial = false }) => {
                 return {
                     url: "/api/video/main-page",
-                    params: { page, limit,tutorial },
+                    params: { page, limit, tutorial },
                     method: "GET",
                 };
             },
@@ -87,6 +87,20 @@ export const videoApi = createApi({
                 };
             },
         }),
+        getTestVideoById: build.query<any, string>({
+            query: (id) => ({
+                url: `/api/video/test/${id}`,
+                method: "GET",
+            }),
+            transformResponse: async (response: any) => {
+                console.log("response", response)
+                return {
+                    data: await response.blob(),
+                    error: {code:response.status, msg:response.statusText},
+                    success: response.ok,
+                };
+            },
+        }),
     }),
 });
 
@@ -100,6 +114,7 @@ export const {
     useGetVideoInfoByIdQuery,
     useUpdateVideoInfoByIdMutation,
     useDeleteVideoByIdMutation,
+    useGetTestVideoByIdQuery,
 } = videoApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = videoApi;

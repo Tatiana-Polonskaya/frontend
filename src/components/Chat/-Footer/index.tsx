@@ -14,8 +14,8 @@ export default function ChatFooter() {
     const [message, setMessage] = useState(String());
     const { addMessage } = useContext(ChatContext);
 
-    const lastName = useSelector((state: RootState) => state.profile.lastName);
-    const name = useSelector((state: RootState) => state.profile.name);
+    const lastName = useSelector((state: RootState) => state.profile.user.firstname);
+    const name = useSelector((state: RootState) => state.profile.user.lastname);
 
     const textAreaRef = useRef(null);
 

@@ -5,7 +5,7 @@ import { IResponse } from "../../../models/api";
 import { IUser } from "../../../models/entry/user";
 import customFetchBase from "../utils/customFetchBase";
 import { logout, setUser } from "../../slices/user";
-import { setLastNameProfile, setNameProfile } from "../../slices/profileSlice";
+import { setProfile } from "../../slices/profileSlice";
 
 export const userApi = createApi({
     reducerPath: "api/user",
@@ -22,8 +22,7 @@ export const userApi = createApi({
                     const { data } = await queryFulfilled;
                     if (data.success) {
                         await dispatch(setUser(data.data!));
-                        await dispatch(setNameProfile(data.data!.firstname));
-                        await dispatch(setLastNameProfile(data.data!.lastname));
+                        await dispatch(setProfile(data.data!));
                     }
                 } catch (error) {
                     await dispatch(logout());
@@ -39,10 +38,9 @@ export const userApi = createApi({
             },
         }),
         sendUserAvatar: build.mutation<IResponse<void>, File>({
-            query: (avatar) => {
-                var bodyFormData = new FormData();
-                bodyFormData.append("file", avatar);
-                console.log({ bodyFormData, avatar });
+            query: (file) => {
+                let bodyFormData = new FormData();
+                bodyFormData.append("avatar", file);
                 return {
                     url:  `/api/users/account/avatar`,
                     method: "POST",
@@ -50,9 +48,17 @@ export const userApi = createApi({
                     formData: true,
                 };
             },
+            // transformResponse:(response:File )=>{
+            //     console.log(response)
+            //     return {
+            //         data: {img:response},
+            //         error: {code: 500, msg:""},
+            //         success: true,
+            //     } as IResponse<any>
+            // },
         }),
     }),
 });
 
-export const { useGetMeQuery, useGetUserAvatarQuery, useLazyGetUserAvatarQuery, useSendUserAvatarMutation } = userApi;
+export const { useGetMeQuery, useLazyGetMeQuery, useGetUserAvatarQuery, useLazyGetUserAvatarQuery, useSendUserAvatarMutation } = userApi;
 export const { endpoints, reducerPath, reducer, middleware } = userApi;

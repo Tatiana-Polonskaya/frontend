@@ -228,7 +228,7 @@ export default function AimBlock() {
                         </Fragment>
                     ))}
             </NewAimContext.Provider>
-            {allPurposes && allPurposes.length===0 && (<span>Целей еще нет</span>)}
+            {count_purposes===0 && (<span>Целей еще нет</span>)}
             <ModalWindow
                 title="Выберите цель или введите собственную"
                 icon={gpsIcon}

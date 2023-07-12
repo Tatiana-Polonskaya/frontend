@@ -16,6 +16,7 @@ import { reportApi } from "./api/report";
 import { surveyApi } from "./api/survey";
 import { videoApi } from "./api/userVideo";
 import { diaryApi } from "./api/diary";
+import { apiWithDifAnswers } from "./api/apiWithDifAnswers";
 
 
 export const store = configureStore({
@@ -25,6 +26,7 @@ export const store = configureStore({
         [userApi.reducerPath]: userApi.reducer,
 
         [reportApi.reducerPath]: reportApi.reducer,
+        [apiWithDifAnswers.reducerPath]: apiWithDifAnswers.reducer,
 
         [surveyApi.reducerPath]: surveyApi.reducer,
         [videoApi.reducerPath]: videoApi.reducer,
@@ -43,7 +45,7 @@ export const store = configureStore({
             registerApi.middleware,
             accountApi.middleware,
             userApi.middleware,
-
+            apiWithDifAnswers.middleware,
             reportApi.middleware,
             diaryApi.middleware,
             surveyApi.middleware,

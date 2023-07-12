@@ -33,6 +33,22 @@ const sectionNames = [
     "Коммуникативные нормы",
 ];
 
+const achievementsData = [
+    {
+        rank: "Основательный оратор",
+        previous_rank: "последовательный говорун",
+        text:"Твои аргументы прочны как скала. Продолжай идти к своей цели!",
+    }
+];
+
+const weeklyStatistics=[
+    {
+        improvements:["Связность твоих высказываний увеличилась","Темп речи выровнялся","Ты чаще проявляешь положительные эмоции"],
+        deterioration:[],
+    }
+]
+
+
 export default function DiaryStart() {
     const cnDiaryStart = cn("DiaryStart");
 

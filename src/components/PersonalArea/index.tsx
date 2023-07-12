@@ -16,7 +16,11 @@ import Tag from "./icon/tag.svg";
 import Arrow from "./icon/arrow.svg";
 import Receive from "./icon/receive.svg";
 import { useAppSelector } from "../../hooks/redux";
-import { useEffect, useState } from "react";
+import { ChangeEvent, InputHTMLAttributes, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { useGetMeQuery, useLazyGetMeQuery, useSendUserAvatarMutation } from "../../store/api/user";
+import { randomInt } from "crypto";
+import { useDispatch } from "react-redux";
+import { setProfileAvatar } from "../../store/slices/profileSlice";
 
 type Props = {
     isArchive: boolean;
@@ -27,13 +31,19 @@ type IconsArr = {
     value: string;
 };
 
+const AVATAR_TYPES = ["image/jpeg","image/png", "image/jpg"]
+
 export default function PersonalArea({ isArchive = false }: Props) {
+
+    const dispatch = useDispatch();
+
     const cnPersonalSettings = cn("personal-settings");
     const cnPersonalUser = cn("personal-area");
     const cnTariffBlock = cn("tariff-block");
     const cnArchiveTariff = cn("archive-tariff");
 
-    const store = useAppSelector((state) => state.user.user);
+    const store = useAppSelector((state) => state.profile.user);
+    const storeAvatar = useAppSelector((state) => state.profile.avatar);
 
     const [storeUser, setStoreUser] = useState(store);
     const [iconArr, setIconArr] = useState<IconsArr[]>([]);
@@ -53,6 +63,32 @@ export default function PersonalArea({ isArchive = false }: Props) {
         }
     }, [store]);
 
+    // const avatarRef = useRef<HTMLImageElement>(null);
+   
+    const [sendUserAvatar, userAvatarResponse] = useSendUserAvatarMutation();
+    const { isSuccess, isError } = userAvatarResponse;
+
+    const changeAvatar = async (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const newAvatarFile = e.target.files[0];
+            if(AVATAR_TYPES.includes(newAvatarFile.type)) {
+                await sendUserAvatar(newAvatarFile);
+                await dispatch(setProfileAvatar(URL.createObjectURL(newAvatarFile)));
+                // avatarRef!.current!.src = URL.createObjectURL(newAvatarFile);
+            }
+        }
+    };
+
+    useEffect(()=>{
+        if(isSuccess) {
+            console.log("isSuccess", isSuccess);
+        }
+    },[isSuccess]);
+
+    useEffect(()=>{
+        if(isError) console.log(userAvatarResponse)
+    },[isError])
+
     return (
         <div className={cnPersonalSettings()}>
             <div className={cnPersonalSettings("left")}>
@@ -60,12 +96,8 @@ export default function PersonalArea({ isArchive = false }: Props) {
                     <div className={cnPersonalUser("photo")}>
                         {storeUser && (
                             <img
-                                src= {User}
-                                // src={
-                                //     !storeUser || storeUser!.avatar === null
-                                //         ? User
-                                //         : storeUser!.avatar
-                                // }
+                                key={storeUser.id}
+                                src={storeAvatar}
                                 alt={storeUser!.firstname}
                             />
                         )}
@@ -77,10 +109,16 @@ export default function PersonalArea({ isArchive = false }: Props) {
                             }`}</span>
                         )}{" "}
                     </div>
-                    <button className={cnPersonalUser("btn")}>
+                    <label className={cnPersonalUser("btn")}>
                         <ReactSVG src={Gallery} />
                         <span>{"Изменить фото"}</span>
-                    </button>
+                        <input
+                            type="file"
+                            accept="image/png, image/jpeg, image/jpg"
+                            style={{ display: "none" }}
+                            onChange={changeAvatar}
+                        />
+                    </label>
                     <ul className={cnPersonalUser("list")}>
                         {storeUser &&
                             iconArr.map((el, ind) => (
@@ -188,3 +226,5 @@ export default function PersonalArea({ isArchive = false }: Props) {
         </div>
     );
 }
+
+
