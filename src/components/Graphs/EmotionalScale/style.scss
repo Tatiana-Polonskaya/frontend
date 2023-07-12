@@ -1,7 +1,9 @@
+
 .EmotionalScaletabs {
   display: flex;
   width: 40%;
 }
+
 .EmotionalScaletab {
   display: flex;
   flex-direction: row;
@@ -17,15 +19,11 @@
   color: #7C8EB5;
   background: rgba(36, 119, 244, 0);
   margin: 8px;
-  svg{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
 }
+
 .EmotionalScaletab:not(:last-child) {
 }
+
 .EmotionalScaletab.EmotionalScaleactive {
   background: rgba(36, 119, 244, 0.13);
   border-radius: 8px;
@@ -38,6 +36,7 @@
   padding: 10px;
 
 }
+
 .panel.EmotionalScaleactive {
   display: block;
   flex-direction: row;
@@ -52,7 +51,9 @@
     background: #F7FAFF;
     border-radius: 12px;
     margin-bottom: 15px ;
+
   }
+
   &-text1{
     font-style: normal;
     font-weight: 400;
@@ -72,6 +73,8 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    align-items: center;
+    gap: 10px;
   }
   &-Text{
     font-style: normal;
@@ -81,6 +84,10 @@
     color: #37476A;
   }
 }
+b.textInfTitle1 {
+  font-weight: 500;
+}
+
 b.textInfTitle1 {
   font-weight: 500;
 }

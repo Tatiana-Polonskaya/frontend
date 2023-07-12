@@ -11,13 +11,25 @@ import { logout } from "../../store/slices/user";
 import RoutesEnum from "../../models/routes";
 import { userApi } from "../../store/api/user";
 import { accountApi } from "../../store/api/account";
-
+import React, {useState} from "react";
+import logoutImg from "./ModalExit/img/logout.svg";
+import exitImg from "./ModalExit/img/exit.svg";
+import Button from "../ui-kit/Button";
+import ModalWindow from "../ModalWindow/ModalWindow";
 const cnMenu = cn("menuStyle");
 
 export default function Menu() {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const [isModal, setIsModal] = useState(false);
 
+    const closeModal = () => {
+        setIsModal(false);
+    };
+
+    const showModal = () => {
+        setIsModal(true);
+    };
     const items = [
         {
             title: "Главная",
@@ -50,12 +62,15 @@ export default function Menu() {
             img: images.Setting,
         },
         {
-            title: "Выход",
+           /* title: "Выход",
             onClick: async () => {
                 await dispatch(accountApi.endpoints.logout.initiate(null));
                 await dispatch(logout());
                 navigate(RoutesEnum.LOGIN);
             },
+            img: images.Logout,*/
+            title: "Выход",
+            onClick: showModal,
             img: images.Logout,
         },
     ];
@@ -70,6 +85,33 @@ export default function Menu() {
                     </li>
                 ))}
             </ul>
+            <ModalWindow
+                title="Выход"
+                icon={logoutImg}
+                isVisible={isModal}
+                onClose={() => closeModal()}
+            >
+                <div className={cnMenu("modal")}>
+                    <div className={cnMenu("ImgText")}>
+                        <ReactSVG src={exitImg}/>
+                        <span className={cnMenu("textQ")}>Вы уверены что хотите выйти из аккаунта?</span>
+                        <span className={cnMenu("text")}>Вы всегда сможете вернуться и продолжить тренировки с нами, но к чему останавливаться?</span>
+                    </div>
+                    <div className={cnMenu("modalBtn")}>
+                        <Button className={cnMenu("Btn")} style={{background: "#2477F4"}}>
+                            <span className="" onClick={() => closeModal()}>Хочу остаться</span>
+                        </Button>
+                        <Button className={cnMenu("Btn")} style={{background: "#F3F5F9", color: "#37476A"}}>
+                            <span className="" onClick={async () => {
+                                // await dispatch(accountApi.endpoints.logout.initiate(null));
+                                await dispatch(logout());
+                                navigate(RoutesEnum.LOGIN);
+                            }}>Выйти из аккаунта</span>
+                        </Button>
+                    </div>
+
+                </div>
+            </ModalWindow>
         </div>
     );
 }

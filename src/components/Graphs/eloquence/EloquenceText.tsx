@@ -27,7 +27,7 @@ function paintWords( data: TinfEloquence){
         if (data.data.values.parasitic_words_list == null){
             return <div className='blocWords'> {("слов-паразитов не найдено")} </div>
         }
-        a[i] = <div className='blocWords'> {(key)} <div className="strings">{(data.data.values.parasitic_words_list[key])}</div></div>
+        a[i] = <div className='blocWords' key={key}> {(key)} <div className="strings">{(data.data.values.parasitic_words_list[key])}</div></div>
         i++;
     }
     return a;

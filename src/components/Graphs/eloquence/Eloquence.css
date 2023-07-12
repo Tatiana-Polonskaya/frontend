@@ -1,6 +1,4 @@
-.injected-svg svg{
-        fill: #F8FAFF;
-}
+
 .allEloquence{
         display: flex;
         flex-direction: column;
@@ -36,7 +34,7 @@
         flex-direction: row;
         align-items: center;
         margin: auto;
-        padding: 20px 0px 0px 40px;
+        padding: 20px 0 0 40px;
         position: absolute;
         z-index: 1;
 }
