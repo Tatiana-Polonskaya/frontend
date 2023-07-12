@@ -27,7 +27,7 @@ export default function Pagination(props: Props) {
     const numbersPerPagination = 5;
     const deltaPages = Math.floor(numbersPerPagination / 2);
 
-    if (props.currentPage < numbersPerPagination - 1) {
+    if (props.currentPage <= numbersPerPagination - 1) {
         currentPageNumbers = pageNumbers.slice(0, numbersPerPagination);
     } else if (props.currentPage + deltaPages > maxPage) {
         let tempDelta =

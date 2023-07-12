@@ -60,6 +60,18 @@ export const videoApi = createApi({
                 };
             },
         }),
+        getVideoByUserSearch: build.query<
+            IResponse<IVideoUser>,
+            IParamsForQueryUserVideo
+        >({
+            query: ({ page = 0, limit = 6, search="" }) => {
+                return {
+                    url: `/api/video/user`,
+                    params: { page, limit,search },
+                    method: "GET",
+                };
+            },
+        }),
         getVideoInfoById: build.query<IResponse<IVideoInfo>, string>({
             query: (id) => {
                 return {
@@ -111,6 +123,9 @@ export const {
     useGetVideoByIdQuery,
     useLazyGetVideoByIdQuery,
     useGetVideoByUserQuery,
+    useGetVideoByUserSearchQuery,
+    useLazyGetVideoByUserQuery,
+    useLazyGetVideoByUserSearchQuery,
     useGetVideoInfoByIdQuery,
     useUpdateVideoInfoByIdMutation,
     useDeleteVideoByIdMutation,

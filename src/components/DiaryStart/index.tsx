@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IVideoFromBack } from "../../models/video";
 
-import { useGetVideoByUserQuery } from "../../store/api/userVideo";
+import {
+    useGetVideoByUserQuery,
+    useLazyGetVideoByUserSearchQuery,
+} from "../../store/api/userVideo";
 
 import stats from "./../../plugs/stats.json";
 
@@ -22,6 +25,8 @@ import BadGoodBlock from "../BadGoodBlock";
 import BlockGeneralAnalytics from "../BlockGeneralAnalytics";
 
 import "./style.scss";
+import ArchiveVideoItem from "../Archive/ArchiveVideoItem";
+
 
 const sectionNames = [
     "Общий результат",
@@ -37,96 +42,114 @@ const achievementsData = [
     {
         rank: "Основательный оратор",
         previous_rank: "последовательный говорун",
-        text:"Твои аргументы прочны как скала. Продолжай идти к своей цели!",
-    }
+        text: "Твои аргументы прочны как скала. Продолжай идти к своей цели!",
+    },
 ];
 
-const weeklyStatistics=[
+const weeklyStatistics = [
     {
-        improvements:["Связность твоих высказываний увеличилась","Темп речи выровнялся","Ты чаще проявляешь положительные эмоции"],
-        deterioration:[],
-    }
-]
-
+        improvements: [
+            "Связность твоих высказываний увеличилась",
+            "Темп речи выровнялся",
+            "Ты чаще проявляешь положительные эмоции",
+        ],
+        deterioration: [],
+    },
+];
 
 export default function DiaryStart() {
     const cnDiaryStart = cn("DiaryStart");
 
+    const [currentPage, setCurrentPage] = useState(0);
+    const videosPerPage = 6;
+
     /* ----------------------- GETTING VIDEO BLOCK -----------------------*/
-    // getting all video for users
-    const videosDataFromBack = useGetVideoByUserQuery({page:0,limit:6});
-    const [allUserVideos, setAllUserVideos] = useState<IVideoFromBack[]>();
+
+    const [countUserVideos, setCountUserVideos] = useState<number>(0);
+
+    const videosDataFromBack = useGetVideoByUserQuery({
+        page: currentPage,
+        limit: videosPerPage,
+    });
 
     useEffect(() => {
-        if (videosDataFromBack && videosDataFromBack.data && videosDataFromBack.data!.data) {
-            console.log(videosDataFromBack.data!.data!)
-            setAllUserVideos(videosDataFromBack.data!.data!.videos);
+        if (
+            videosDataFromBack &&
+            videosDataFromBack.data &&
+            videosDataFromBack.data!.data
+        ) {
+            setCountUserVideos(videosDataFromBack.data!.data!.total_videos);
+            setCountSearchVideos(videosDataFromBack.data!.data!.total_videos);
+            setSearchVideos(videosDataFromBack.data!.data!.videos);
         }
     }, [videosDataFromBack]);
 
-    // const userVideos = data?.data?.videos as IVideoFromBack[];
-
     /* ----------------------- RESEARCH BLOCK -----------------------*/
-    // researching video
-    const [searchValue, setSearchValue] = useState("");
+
+    const [searchValue, setSearchValue] = useState<string>();
     const [searchVideos, setSearchVideos] = useState<IVideoFromBack[]>();
+
+    const [countSearchVideos, setCountSearchVideos] = useState<number>(0);
+
+    const [getVideosBySearch, videosBySearch] =
+        useLazyGetVideoByUserSearchQuery();
 
     const updateSearch = (value: string) => {
         setSearchValue(value);
     };
 
     useEffect(() => {
-        if (allUserVideos) {
-            if (searchValue.length > 0)
-                setSearchVideos(
-                    allUserVideos.filter(
-                        (el) => el.title.indexOf(searchValue) !== -1
-                    )
-                );
-            else setSearchVideos(allUserVideos);
+        if (typeof searchValue === "string") {
+            getVideosBySearch({
+                page: currentPage,
+                limit: videosPerPage,
+                search: searchValue,
+            });
         }
-    }, [allUserVideos, searchValue]);
-
-    // let result = allUserVideos;
-    // if (allUserVideos && searchValue !== "") {
-    //     // сделать частичное совпадение динамичным
-    //     result =
-    // }
-
-    /* ----------------------- PAGINATION BLOCK -----------------------*/
-    //useState for paggination
-    // const [videos, setVideos] = useState<IVideoFromBack[]>([]);
-    // const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const videosPerPage = 6;
-
-    //paggination
-    const lastVideoIndex = currentPage * videosPerPage;
-    const firsrtVideoIndex = lastVideoIndex - videosPerPage;
-    const [currentVideos, setCurrentVideos] = useState<IVideoFromBack[]>();
+    }, [currentPage, getVideosBySearch, searchValue]);
 
     useEffect(() => {
-        if (searchVideos)
-            setCurrentVideos(
-                searchVideos.slice(firsrtVideoIndex, lastVideoIndex)
-            );
-    }, [searchVideos, firsrtVideoIndex, lastVideoIndex]);
+        if (
+            videosBySearch &&
+            videosBySearch.isSuccess &&
+            videosBySearch.data &&
+            videosBySearch.data!.data
+        ) {
+            console.log(videosBySearch.data!.data!);
+            setSearchVideos(videosBySearch.data!.data!.videos);
+            setCountSearchVideos(videosBySearch.data!.data!.total_videos);
+        }
+    }, [videosBySearch]);
+
+    /* ----------------------- PAGINATION BLOCK -----------------------*/
 
     const paginate = (pageNumber: number) => {
         setCurrentPage(pageNumber);
     };
 
     const nextPage = (maxPage: number) =>
-        setCurrentPage((prev) => (prev < maxPage ? prev + 1 : prev));
+        setCurrentPage((prev) => (prev < maxPage - 1 ? prev + 1 : prev));
 
     const prevPage = () =>
-        setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
+        setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
+
+    const removeItem = (id: string) => {
+        console.log("removed");
+    };
 
     return (
         <div>
-            <div className={cnDiaryStart("text-h1",{margin_bottom: true})}>Достижения</div>
+            <div className={cnDiaryStart("text-h1", { margin_bottom: true })}>
+                Достижения
+            </div>
             <div className={cnDiaryStart("banner")}>
-                <BlockGeneralAnalytics N={9} rank={"Последовательный"} text={'Твои аргументы прочны как скала. Продолжай идти к своей цели!'} />
+                <BlockGeneralAnalytics
+                    N={9}
+                    rank={"Последовательный"}
+                    text={
+                        "Твои аргументы прочны как скала. Продолжай идти к своей цели!"
+                    }
+                />
             </div>
 
             <div className={cnDiaryStart("aims")}>
@@ -159,21 +182,51 @@ export default function DiaryStart() {
             <div>
                 <div className={cnDiaryStart("text-h1")}>
                     Архив проверок{" "}
-                    <span className={cnDiaryStart("text-gray")}>
-                        {allUserVideos ? allUserVideos.length : 0}    
-                    </span>
+                    {countUserVideos && (
+                        <span className={cnDiaryStart("text-gray")}>
+                            {countUserVideos}
+                        </span>
+                    )}
                 </div>
             </div>
-            {currentVideos ? (<><ArchiveSearch updateSearch={updateSearch} /><ArchiveVideo video={currentVideos} /></>) : <div className={cnDiaryStart("text-empty-msg")}>Видео не найдено</div>}
 
-            {currentVideos && searchVideos && (
+            {/* <ArchiveSearch updateSearch={updateSearch} />
+
+            {searchVideos &&
+                searchVideos.map((el, idx) => (
+                    <ArchiveVideoItem
+                        handleClick={removeItem}
+                        key={el.id}
+                        el={el}
+                        ind={idx}
+                    />
+                ))} */}
+            {searchVideos ? (
+                <>
+                    <ArchiveSearch updateSearch={updateSearch} />
+                    {searchVideos.map((el, ind) => (
+                        <ArchiveVideoItem
+                            handleClick={removeItem}
+                            key={el.id}
+                            el={el}
+                            ind={ind}
+                        />
+                    ))}
+                </>
+            ) : (
+                <div className={cnDiaryStart("text-empty-msg")}>
+                    Видео не найдено
+                </div>
+            )}
+
+            {searchVideos && (
                 <Pagination
                     videosPerPage={videosPerPage}
-                    totalVideos={searchVideos.length}
+                    totalVideos={countSearchVideos}
                     paginate={paginate}
                     funcNextPage={nextPage}
                     funcPrevPage={prevPage}
-                    currentPage={currentPage}
+                    currentPage={currentPage + 1}
                 />
             )}
         </div>

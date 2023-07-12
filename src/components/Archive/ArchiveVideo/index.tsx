@@ -39,7 +39,7 @@ export default function ArchiveVideo({ video }: Props) {
             {state.map((el, ind) => (
                 <ArchiveVideoItem
                     handleClick={removeItem}
-                    key={ind}
+                    key={el.id}
                     el={el}
                     ind={ind}
                 />

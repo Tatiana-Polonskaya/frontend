@@ -46,4 +46,5 @@ export interface IParamsForQueryUserVideo{
     page: number,
     limit:number,
     tutorial?:boolean,
+    search?:string,
 }

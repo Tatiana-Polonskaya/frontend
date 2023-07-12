@@ -227,6 +227,7 @@ export default function AimBlock() {
                             {i === choosenAim ? <AimItem item={el} /> : null}
                         </Fragment>
                     ))}
+                    
             </NewAimContext.Provider>
             {count_purposes===0 && (<span>Целей еще нет</span>)}
             <ModalWindow
