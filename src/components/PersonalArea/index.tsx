@@ -81,7 +81,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
 
     useEffect(()=>{
         if(isSuccess) {
-            console.log("isSuccess", isSuccess);
+            // console.log("isSuccess", isSuccess);
         }
     },[isSuccess]);
 
