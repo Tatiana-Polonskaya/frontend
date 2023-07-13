@@ -2,12 +2,12 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 // import photo from "../../plugs/personalArea/icon/user.png";
 
+// import ReactAvatarEditor from "react-avatar-editor";
 import CurrentTariff from "../../plugs/personalArea/currentTariff.json";
 import AllTariffs from "../../plugs/personalArea/allTariffs.json";
 import { ReactSVG } from "react-svg";
 
 import User from "./icon/user.png";
-import Gallery from "./icon/gallery.svg";
 import Cake from "./icon/cake.svg";
 import Building from "./icon/building.svg";
 import Message from "./icon/sms.svg";
@@ -16,11 +16,17 @@ import Tag from "./icon/tag.svg";
 import Arrow from "./icon/arrow.svg";
 import Receive from "./icon/receive.svg";
 import { useAppSelector } from "../../hooks/redux";
-import { ChangeEvent, InputHTMLAttributes, ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { useGetMeQuery, useLazyGetMeQuery, useSendUserAvatarMutation } from "../../store/api/user";
+import { useEffect, useState } from "react";
+import {
+    useGetMeQuery,
+    useLazyGetMeQuery,
+    useSendUserAvatarMutation,
+} from "../../store/api/user";
 import { randomInt } from "crypto";
 import { useDispatch } from "react-redux";
 import { setProfileAvatar } from "../../store/slices/profileSlice";
+import LoadImage from "./LoadImage";
+import Gallery from "./icon/gallery.svg";
 
 type Props = {
     isArchive: boolean;
@@ -31,10 +37,7 @@ type IconsArr = {
     value: string;
 };
 
-const AVATAR_TYPES = ["image/jpeg","image/png", "image/jpg"]
-
 export default function PersonalArea({ isArchive = false }: Props) {
-
     const dispatch = useDispatch();
 
     const cnPersonalSettings = cn("personal-settings");
@@ -47,9 +50,10 @@ export default function PersonalArea({ isArchive = false }: Props) {
 
     const [storeUser, setStoreUser] = useState(store);
     const [iconArr, setIconArr] = useState<IconsArr[]>([]);
+    const [active, setActive] = useState<string>();
 
     useEffect(() => {
-        if (store && typeof store !== null && store!.firstname) {
+        if (store && store!.firstname) {
             setStoreUser(store);
             setIconArr([
                 {
@@ -63,34 +67,69 @@ export default function PersonalArea({ isArchive = false }: Props) {
         }
     }, [store]);
 
-    // const avatarRef = useRef<HTMLImageElement>(null);
-   
     const [sendUserAvatar, userAvatarResponse] = useSendUserAvatarMutation();
     const { isSuccess, isError } = userAvatarResponse;
 
-    const changeAvatar = async (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            const newAvatarFile = e.target.files[0];
-            if(AVATAR_TYPES.includes(newAvatarFile.type)) {
-                await sendUserAvatar(newAvatarFile);
-                await dispatch(setProfileAvatar(URL.createObjectURL(newAvatarFile)));
-                // avatarRef!.current!.src = URL.createObjectURL(newAvatarFile);
-            }
+    useEffect(() => {
+        if (isSuccess) {
+        }
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) console.log(userAvatarResponse);
+    }, [isError]);
+
+    const changeActive = () => {
+        !active ? setActive("active") : setActive("");
+    };
+
+    const closePopup = () => {
+        changeActive();
+    };
+
+    const [editor, setEditor] = useState<any>();
+    const [scaleValue, setScaleValue] = useState<number>();
+    const [userPic, setUserPic] = useState<string>();
+    const [selectedImg, setSelectedImg] = useState<string>();
+
+    const setEditorRef = (editor: string) => {
+        setEditor(editor);
+    };
+
+    const onCrop = () => {
+        if (editor !== null) {
+            const url = editor!.getImageScaledToCanvas().toDataURL();
+            setUserPic(url);
+            sendUserAvatar(url);
+            dispatch(setProfileAvatar(url));
         }
     };
 
-    useEffect(()=>{
-        if(isSuccess) {
-            // console.log("isSuccess", isSuccess);
+    const onScaleChange = (scaleValue: number) => {
+        setScaleValue(scaleValue);
+    };
+
+    const profileImageChange = (fileChangeEvent: any) => {
+        fileChangeEvent.preventDefault();
+        const file = fileChangeEvent.target.files![0];
+        const { type } = file;
+        if (
+            type.endsWith("jpeg") ||
+            type.endsWith("jpg") ||
+            type.endsWith("png")
+        ) {
+            setSelectedImg(file);
         }
-    },[isSuccess]);
-
-    useEffect(()=>{
-        if(isError) console.log(userAvatarResponse)
-    },[isError])
-
+    };
     return (
         <div className={cnPersonalSettings()}>
+            <div
+                className={cnPersonalUser(
+                    "shield",
+                    cnPersonalUser(`shield-${active}`)
+                )}
+                onClick={closePopup}
+            ></div>
             <div className={cnPersonalSettings("left")}>
                 <div className={cnPersonalUser("")}>
                     <div className={cnPersonalUser("photo")}>
@@ -109,16 +148,44 @@ export default function PersonalArea({ isArchive = false }: Props) {
                             }`}</span>
                         )}{" "}
                     </div>
-                    <label className={cnPersonalUser("btn")}>
-                        <ReactSVG src={Gallery} />
-                        <span>{"Изменить фото"}</span>
+                    <form>
                         <input
+                            className={cnPersonalUser("input")}
+                            id="image"
                             type="file"
-                            accept="image/png, image/jpeg, image/jpg"
-                            style={{ display: "none" }}
-                            onChange={changeAvatar}
+                            name="img"
+                            accept="image/jpeg,image/png"
+                            onChange={profileImageChange}
+                            onClick={changeActive}
                         />
-                    </label>
+                        <label
+                            htmlFor="image"
+                            className={cnPersonalUser(
+                                "btn",
+                                cnPersonalUser("label")
+                            )}
+                        >
+                            <ReactSVG src={Gallery} />
+                            <span>{"Изменить фото"}</span>
+                        </label>
+                        <div
+                            className={cnPersonalUser(
+                                "change",
+                                cnPersonalUser(`change-${active}`)
+                            )}
+                        >
+                            <div className={cnPersonalUser("current-photo")}>
+                                <LoadImage
+                                    imageSrc={selectedImg}
+                                    scaleValue={scaleValue}
+                                    onScaleChange={onScaleChange}
+                                    setEditorRef={setEditorRef}
+                                    onCrop={onCrop}
+                                    closePopup={closePopup}
+                                />
+                            </div>
+                        </div>
+                    </form>
                     <ul className={cnPersonalUser("list")}>
                         {storeUser &&
                             iconArr.map((el, ind) => (
@@ -226,5 +293,3 @@ export default function PersonalArea({ isArchive = false }: Props) {
         </div>
     );
 }
-
-
