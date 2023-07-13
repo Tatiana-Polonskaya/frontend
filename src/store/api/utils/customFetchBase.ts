@@ -29,7 +29,7 @@ const customFetchBase: BaseQueryFn<
 > = async (args, api, extraOptions) => {
     await mutex.waitForUnlock();
     let result = await baseQuery(args, api, extraOptions);
-    console.log("customFetchBase result",result)
+    // console.log("customFetchBase result",result)
     const data = result.data as IResponse<any>;
 
     // condition for token refreshing
