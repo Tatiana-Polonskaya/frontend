@@ -42,6 +42,7 @@ export default function ArchiveVideo({ video }: Props) {
                     key={el.id}
                     el={el}
                     ind={ind}
+                    visible={ind === 0 ? true : false}
                 />
             ))}
         </>

@@ -27,7 +27,6 @@ import BlockGeneralAnalytics from "../BlockGeneralAnalytics";
 import "./style.scss";
 import ArchiveVideoItem from "../Archive/ArchiveVideoItem";
 
-
 const sectionNames = [
     "Общий результат",
     "Связность",
@@ -210,6 +209,7 @@ export default function DiaryStart() {
                             key={el.id}
                             el={el}
                             ind={ind}
+                            visible={ind !== 0 ? true : false}
                         />
                     ))}
                 </>
