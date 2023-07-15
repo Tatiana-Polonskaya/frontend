@@ -18,6 +18,7 @@ import { videoApi } from "./api/userVideo";
 import { diaryApi } from "./api/diary";
 import { apiWithDifAnswers } from "./api/apiWithDifAnswers";
 import { chatApi } from "./api/chat";
+import { notificationApi } from "./api/notification";
 
 
 export const store = configureStore({
@@ -33,6 +34,7 @@ export const store = configureStore({
         [videoApi.reducerPath]: videoApi.reducer,
         [diaryApi.reducerPath]: diaryApi.reducer,
         [chatApi.reducerPath]: chatApi.reducer,
+        [notificationApi.reducerPath]: notificationApi.reducer,
 
         register: registerReducer,
         test: testSlice,
@@ -53,6 +55,7 @@ export const store = configureStore({
             surveyApi.middleware,
             videoApi.middleware,
             chatApi.middleware,
+            notificationApi.middleware,
 
         ),
     devTools: process.env.NODE_ENV !== "production",

@@ -13,7 +13,7 @@ export default function BaseGraphXDescription({
     stats,
 }: Props) {
     const curTime = data?.map((el, ind) => {
-        const curDate = new Date(Date.now() - ind * 86400000);
+        const curDate = new Date(el);
         const days = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
         return {
             day: days[curDate.getDay()],
@@ -21,7 +21,6 @@ export default function BaseGraphXDescription({
             month: new Date().getMonth(),
         };
     });
-    curTime?.reverse();
     return (
         <div className={stats !== "st" ? CN() : CN("stats")}>
             {/* {data?.map((el, idx) => ( */}
@@ -48,7 +47,7 @@ export default function BaseGraphXDescription({
                                 >
                                     {`${
                                         el.date >= 10 ? el.date : "0" + el.date
-                                    }:${
+                                    }.${
                                         el.month >= 10
                                             ? el.month
                                             : "0" + el.month

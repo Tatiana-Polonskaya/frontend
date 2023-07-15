@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { IVideoFromBack } from "../../models/video";
 
 import {
@@ -6,11 +6,9 @@ import {
     useLazyGetVideoByUserSearchQuery,
 } from "../../store/api/userVideo";
 
-import stats from "./../../plugs/stats.json";
-
 import StatsGraph from "../Graphs/Stats";
 import ArchiveSearch from "../Archive/ArchiveSearch";
-import ArchiveVideo from "../Archive/ArchiveVideo";
+
 import Pagination from "../Pagination";
 import RollUp from "../RollUp";
 import AimBlock from "../AimBlock";
@@ -26,18 +24,24 @@ import BlockGeneralAnalytics from "../BlockGeneralAnalytics";
 
 import "./style.scss";
 import ArchiveVideoItem from "../Archive/ArchiveVideoItem";
+
+import { useGetStatisticDataQuery } from "../../store/api/diary";
+import { IStatisticItem, TYPE_DIARY } from "../../models/diary";
+
+const sectionTitles = {
+    total: "Общий результат",
+    connectivity: "Связность",
+    argumentativeness: "Аргументированность",
+    clarity: "Ясность",
+    dynamism: "Динамизм",
+    persuasiveness: "Убедительность",
+    communicative: "Коммуникативные нормы",
+};
+
 import lampСharge from './icons/lampСharge.svg'
 import RecommendationDairyGraph from "../RecommendationDairyGraph";
 
-const sectionNames = [
-    "Общий результат",
-    "Связность",
-    "Аргументированность",
-    "Ясность",
-    "Динамизм",
-    "Убедительность",
-    "Коммуникативные нормы",
-];
+
 
 const achievementsData = [
     {
@@ -63,6 +67,110 @@ export default function DiaryStart() {
 
     const [currentPage, setCurrentPage] = useState(0);
     const videosPerPage = 6;
+
+    /* ----------------------- STATS GRAPH BLOCK -----------------------*/
+    const [statsData, setStatsData] = useState({
+        total: [] as IStatisticItem[],
+        connectivity: [] as IStatisticItem[],
+        argumentativeness: [] as IStatisticItem[],
+        clarity: [] as IStatisticItem[],
+        dynamism: [] as IStatisticItem[],
+        persuasiveness: [] as IStatisticItem[],
+        communicative: [] as IStatisticItem[],
+    });
+
+    const totalJSON = useGetStatisticDataQuery(TYPE_DIARY.total);
+    const connectivityJSON = useGetStatisticDataQuery(TYPE_DIARY.connectivity);
+    const argumentativenessJSON = useGetStatisticDataQuery(
+        TYPE_DIARY.argumentativeness
+    );
+    const clarityJSON = useGetStatisticDataQuery(TYPE_DIARY.clarity);
+    const dynamismJSON = useGetStatisticDataQuery(TYPE_DIARY.dynamism);
+    const persuasivenessJSON = useGetStatisticDataQuery(
+        TYPE_DIARY.persuasiveness
+    );
+    const communicativeJSON = useGetStatisticDataQuery(
+        TYPE_DIARY.communicative
+    );
+
+    useEffect(() => {
+        if (totalJSON && totalJSON.isSuccess && totalJSON.data.data) {
+            setStatsData((prev) => ({
+                ...prev,
+                total: totalJSON.data.data!.values,
+            }));
+        }
+    }, [totalJSON]);
+
+    useEffect(() => {
+        if (
+            connectivityJSON &&
+            connectivityJSON.isSuccess &&
+            connectivityJSON.data.data
+        ) {
+            setStatsData((prev) => ({
+                ...prev,
+                connectivity: connectivityJSON.data.data!.values,
+            }));
+        }
+    }, [connectivityJSON]);
+
+    useEffect(() => {
+        if (
+            argumentativenessJSON &&
+            argumentativenessJSON.isSuccess &&
+            argumentativenessJSON.data.data
+        ) {
+            setStatsData((prev) => ({
+                ...prev,
+                argumentativeness: argumentativenessJSON.data.data!.values,
+            }));
+        }
+    }, [argumentativenessJSON]);
+
+    useEffect(() => {
+        if (clarityJSON && clarityJSON.isSuccess && clarityJSON.data.data) {
+            setStatsData((prev) => ({
+                ...prev,
+                clarity: clarityJSON.data.data!.values,
+            }));
+        }
+    }, [clarityJSON]);
+
+    useEffect(() => {
+        if (dynamismJSON && dynamismJSON.isSuccess && dynamismJSON.data.data) {
+            setStatsData((prev) => ({
+                ...prev,
+                dynamism: dynamismJSON.data.data!.values,
+            }));
+        }
+    }, [dynamismJSON]);
+
+    useEffect(() => {
+        if (
+            persuasivenessJSON &&
+            persuasivenessJSON.isSuccess &&
+            persuasivenessJSON.data.data
+        ) {
+            setStatsData((prev) => ({
+                ...prev,
+                persuasiveness: persuasivenessJSON.data.data!.values,
+            }));
+        }
+    }, [persuasivenessJSON]);
+
+    useEffect(() => {
+        if (
+            communicativeJSON &&
+            communicativeJSON.isSuccess &&
+            communicativeJSON.data.data
+        ) {
+            setStatsData((prev) => ({
+                ...prev,
+                communicative: communicativeJSON.data.data!.values,
+            }));
+        }
+    }, [communicativeJSON]);
 
     /* ----------------------- GETTING VIDEO BLOCK -----------------------*/
 
@@ -168,17 +276,27 @@ export default function DiaryStart() {
                 </div>
 
                 <Tabs type={TYPE_TABS.PERCENT}>
-                    {sectionNames.map((el, idx) => (
-                        <div
-                            key={idx}
-                            data-title={el}
-                            data-value="0%"
-                            style={{ width: "100%" }}
-                        >
-                            <StatsGraph data={stats.data.values} />
-                            <RecommendationDairyGraph icon={lampСharge}/>
-                        </div>
-                    ))}
+                    {statsData &&
+                        sectionTitles &&
+                        Object.entries(sectionTitles).map(
+                            ([key, value], idx) => (
+                                <div
+                                    key={idx}
+                                    data-title={value}
+                                    data-value="0%"
+                                    style={{ width: "100%" }}
+                                >
+                                    <StatsGraph
+                                        data={[
+                                            ...statsData[
+                                                key as keyof typeof statsData
+                                            ],
+                                        ].reverse()}
+                                    />
+                                  <RecommendationDairyGraph icon={lampСharge}/>
+                                </div>
+                            )
+                        )}
                 </Tabs>
             </RollUp>
 
@@ -193,17 +311,6 @@ export default function DiaryStart() {
                 </div>
             </div>
 
-            {/* <ArchiveSearch updateSearch={updateSearch} />
-
-            {searchVideos &&
-                searchVideos.map((el, idx) => (
-                    <ArchiveVideoItem
-                        handleClick={removeItem}
-                        key={el.id}
-                        el={el}
-                        ind={idx}
-                    />
-                ))} */}
             {searchVideos ? (
                 <>
                     <ArchiveSearch updateSearch={updateSearch} />
