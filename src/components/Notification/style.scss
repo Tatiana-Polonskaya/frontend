@@ -4,7 +4,8 @@
     display: flex;
     flex-direction: column;
     border-radius: 18px;
-    position: relative;
+    // position: relative;
+    z-index: 100;
    
 
     &_expanded {
@@ -22,6 +23,8 @@
         padding: 24px 8px 24px 24px;
         align-items: flex-start;
         gap: 8px;
+
+        z-index: 100;
 
         flex-direction: column;
         font-size: 0.8rem;

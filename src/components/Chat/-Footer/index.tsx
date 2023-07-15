@@ -3,21 +3,18 @@ import { ReactSVG } from "react-svg";
 import SendIcon from "./icons/send.svg";
 
 import "./style.scss";
-import { useCallback, useEffect, useRef, useContext, useState } from "react";
-import { ChatContext } from "..";
-import { RootState } from "../../../store";
-import { useSelector } from "react-redux";
+import { useRef, useState } from "react";
+import { useSendMessageMutation } from "../../../store/api/chat";
 
 const cnFooter = cn("chat-footer");
 
 export default function ChatFooter() {
     const [message, setMessage] = useState(String());
-    const { addMessage } = useContext(ChatContext);
-
-    const lastName = useSelector((state: RootState) => state.profile.user.firstname);
-    const name = useSelector((state: RootState) => state.profile.user.lastname);
 
     const textAreaRef = useRef(null);
+
+    const [sendRequest, sendResponse] = useSendMessageMutation();
+    const { isLoading } = sendResponse;
 
     const onKeyUp: React.KeyboardEventHandler<HTMLDivElement> = (event) => {
         const target = event.target as HTMLDivElement;
@@ -32,38 +29,43 @@ export default function ChatFooter() {
         setMessage(target.innerText);
     };
 
-    const newMessageHandler = () => {
+    const newMessageHandler = async () => {
         if (!message) return;
-        addMessage({
-            message,
-            mine: true,
-            senderName: `${name} ${lastName}`,
-            time: "XX:YY",
-        });
+        let current_message = message;
         setMessage("");
         if (textAreaRef.current)
             (textAreaRef.current as HTMLDivElement).innerText = "";
+
+        await sendRequest(current_message);
     };
 
     return (
-        <div className={cnFooter()}>
-            <div className={cnFooter("send-area")}>
-                <div
-                    contentEditable
-                    onKeyUp={onKeyUp}
-                    placeholder="Задай свой вопрос..."
-                    className={cnFooter("textarea")}
-                    suppressContentEditableWarning={true}
-                    ref={textAreaRef}
-                ></div>
+        <>
+       
+            <div className={cnFooter()}>
+            
+            <div className={cnFooter("row")}>
+                <div className={cnFooter("send-area")}>
+                    <div
+                        contentEditable
+                        onKeyUp={onKeyUp}
+                        placeholder="Задай свой вопрос..."
+                        className={cnFooter("textarea")}
+                        suppressContentEditableWarning={true}
+                        ref={textAreaRef}
+                    ></div>
+                    <ReactSVG
+                    beforeInjection={(svg) =>
+                        svg.addEventListener("click", newMessageHandler)
+                    }
+                    src={SendIcon}
+                    className={cnFooter("send-btn")}
+                />
+                </div>
+                
+                </div>
+                {isLoading && <div  className={cnFooter("loading")}>Отправление<span className={cnFooter("loading-animate")}> . . .</span></div>}
             </div>
-            <ReactSVG
-                beforeInjection={(svg) =>
-                    svg.addEventListener("click", newMessageHandler)
-                }
-                src={SendIcon}
-                className={cnFooter("send-btn")}
-            />
-        </div>
+        </>
     );
 }
