@@ -104,6 +104,8 @@ export default function RepetitionStart() {
                 setCurrentInfoData(initialInfoVideo);
             } else {
                 setIsErrorWithSuccess(true);
+                setCurrentFile(new File([], "empty")); 
+                setCurrentInfoData(initialInfoVideo);
             }
         }
     }, [isSuccess]);
@@ -116,6 +118,7 @@ export default function RepetitionStart() {
             setCurrentInfoData(initialInfoVideo);
         }
     }, [isError]);
+    
 
     // const videoData  = useGetVideoQuery("feb81d20-2bb0-4622-b41a-3c6d50c6b3f8");
 
@@ -196,12 +199,12 @@ export default function RepetitionStart() {
             </ModalWindow>
 
             <ModalWindow isVisible={isLoadingModal} onClose={closeLoadingModal}
-            closeOnClickOutside={!isLoading}
+            closeOnClickOutside={(!isLoading || isErrorWithSuccess)}
             >
                 {(isLoading || isErrorWithSuccess || isError) &&  (
                     <div className={cnRepetitionStart("loading")}>
                         <ReactSVG src={loadingPic} className={cnRepetitionStart("loading-img")}/>
-                        {isLoading && (
+                        {isLoading && !(isErrorWithSuccess || isError) && (
                             <>
                                 <div
                                     className={cnRepetitionStart(
@@ -233,7 +236,7 @@ export default function RepetitionStart() {
                         )}
                     </div>
                 )}
-                {isSuccess && (
+                {isSuccess && !isErrorWithSuccess && (
                     <div className={cnRepetitionStart("loading")}>
                         <ReactSVG src={loadingPic} className={cnRepetitionStart("loading-img")}/>
                             <>

@@ -15,6 +15,11 @@
   }
   &-nameIcon{
     display: flex;
+    svg{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   &-btn{
     color: #2477F4;
@@ -23,6 +28,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
   }
   &-title{
     color: #37476A;
@@ -31,6 +37,8 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
+    padding: 0 10px;
   }
   &-content{
     display: flex;
