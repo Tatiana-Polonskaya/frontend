@@ -20,7 +20,7 @@ export const surveyApi = createApi({
                 url: "/api/users/register/complete",
                 method: "POST",
                 params: {questionnaire_title},
-                body: { answers },
+                body: answers,
             }),
         }),
     }),

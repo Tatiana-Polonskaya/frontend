@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 
-import picture from "./right_pic.jpg";
+import picture from "./assets/surveyPic.svg";
 
 type Props = {
     children?: ReactNode;
@@ -21,7 +21,7 @@ export default function SurveyLayout(props: Props) {
                     <div className={cnContent("right-content")}>
                         <img
                             src={picture}
-                            alt="picture"
+                            alt="pic for survey"
                             className={cnContent("right-content-img")}
                         ></img>
                     </div>

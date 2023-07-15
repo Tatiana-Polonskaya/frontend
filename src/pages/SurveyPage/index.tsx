@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import CheckboxQuestion from "../../components/CheckboxQuestion";
 import RadioBtnQuestion from "../../components/RadioBtnQuestion";
 import SurveyLayout from "../../layouts/SurveyLayout";
@@ -15,7 +15,7 @@ import {
     useSendAnswersMutation,
 } from "../../store/api/survey";
 import { IAnswer, IQuestion, typeQuestion } from "../../models/survey";
-import { useGetMeQuery } from "../../store/api/user";
+
 
 // post api/users  /register/complete
 // [
@@ -25,7 +25,7 @@ import { useGetMeQuery } from "../../store/api/user";
 //       "text": "string"
 //     }
 //   ]
-// get tarifs 
+// get tarifs
 //{
 //     "title": "string",
 //     "price": 0,
@@ -33,7 +33,7 @@ import { useGetMeQuery } from "../../store/api/user";
 //     "loads_limit": 0
 //   }
 
-// set tarif  tarif_id  user_id 
+// set tarif  tarif_id  user_id
 //{
 //     "title": "string",
 //     "price": 0,
@@ -41,7 +41,7 @@ import { useGetMeQuery } from "../../store/api/user";
 //     "loads_limit": 0
 //   }
 
-// TO DO: SEND ANSWERS CORRECTLY AND CHECK TARIFS 
+// TO DO: SEND ANSWERS CORRECTLY AND CHECK TARIFS
 
 export default function SurveyPage() {
     const [sendAnswersRequest, sendAnswersResponse] = useSendAnswersMutation();
@@ -70,10 +70,11 @@ export default function SurveyPage() {
 
     useEffect(() => {
         if (questions) {
-            let lastIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce((sum, elem) => sum + elem,0);
-            setCurrentQuestions(
-                questions.slice(firstIndex, lastIndex)
+            let lastIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
+                (sum, elem) => sum + elem,
+                0
             );
+            setCurrentQuestions(questions.slice(firstIndex, lastIndex));
         }
     }, [firstIndex, questions, step]);
 
@@ -95,7 +96,6 @@ export default function SurveyPage() {
                 temp_arr.push(temp);
             }
             setAnswers(temp_arr);
-            // console.log("create answers", temp_arr);
         }
     }, [questions]);
 
@@ -104,19 +104,26 @@ export default function SurveyPage() {
 
         let currentAnswers = answers.map((el) => {
             if (el.id_question === newAnswer.id_question) {
-                    return {...el, id_choices:newAnswer.id_choices, another_choices:newAnswer.another_choices};
+                return {
+                    ...el,
+                    id_choices: newAnswer.id_choices,
+                    another_choices: newAnswer.another_choices,
+                };
             }
             return el;
         });
 
         setAnswers(currentAnswers);
-        
+
         dispatch(updateChoiceAnswers(answers));
     };
 
     useEffect(() => {
         if (answers && answers[0]) {
-            let lastIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce((sum, elem) => sum + elem,0);
+            let lastIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
+                (sum, elem) => sum + elem,
+                0
+            );
             let flag = 0;
             for (let i = firstIndex; i < lastIndex; i++) {
                 if (answers[i].id_choices.length > 0) flag++;
@@ -127,50 +134,62 @@ export default function SurveyPage() {
 
     const changeStep = async () => {
         if (canMoved) {
-            setFirstIndex(QUESTIONS_FOR_STEP.slice(0, step + 1).reduce((sum, elem) => sum + elem,0))
+            setFirstIndex(
+                QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
+                    (sum, elem) => sum + elem,
+                    0
+                )
+            );
             setStep((prev) => ++prev);
 
-            if((step+1) > ALL_STEP){
-                
-                let body = convertAnswersForServerFormat(answers);
+            if (step + 1 > ALL_STEP) {
+                let body: Array<IAnswer> =
+                    convertAnswersForServerFormat(answers);
                 console.log("ended", body);
-                if(body) await sendAnswersRequest({questionnaire_title: TITLE_ANKETA, answers:body});
+                if (body)
+                    await sendAnswersRequest({
+                        questionnaire_title: TITLE_ANKETA,
+                        answers: body,
+                    });
             }
         }
     };
 
-    useEffect(()=>{
-        if(isSuccess) console.log(sendAnswersResponse);
-    },[isSuccess])
+    useEffect(() => {
+        if (isSuccess) console.log(sendAnswersResponse);
+    }, [isSuccess]);
 
-    useEffect(()=>{
-        if(isError) console.log(sendAnswersResponse.error);
-    },[isError])
-
-    // const storeUser = useAppSelector((state) => state.user.user);
-    // console.log(storeUser)
+    useEffect(() => {
+        if (isError) console.log(sendAnswersResponse.error);
+    }, [isError]);
 
     // id
     // "63cdf876-01ae-482d-bc98-2de6b541246b"
 
     const convertAnswersForServerFormat = (currentAnswers: LocalAnswer[]) => {
-        if(questions){
-            let finalArray = currentAnswers.map(el=>{
-
-                let current_question = questions.filter(q=>q.id===el.id_question)[0];
-                let current_another = current_question.choices.filter(ch=>ch.another)[0];
-                return el.id_choices.map(choice=>{
+        if (questions) {
+            let finalArray = currentAnswers.map((el) => {
+                let current_question = questions.filter(
+                    (q) => q.id === el.id_question
+                )[0];
+                let current_another = current_question.choices.filter(
+                    (ch) => ch.another
+                )[0];
+                return el.id_choices.map((choice) => {
                     return {
-                        "question_id": current_question.id,
-                        "choice_id": choice,
-                        "text": (current_another && current_another.id === choice) ? el.another_choices : "" ,
-                    }
-                })
+                        question_id: current_question.id,
+                        choice_id: choice,
+                        text:
+                            current_another && current_another.id === choice
+                                ? el.another_choices
+                                : "",
+                    };
+                });
             });
+            console.log("before finalArray.flat(1)", finalArray);
             return finalArray.flat(1);
-        }
-    }
-
+        } else return [];
+    };
 
     const cnMain = cn("survey");
 
@@ -231,7 +250,7 @@ export default function SurveyPage() {
                         </div>
                     </div>
                 </div>
-            )} 
+            )}
             {step > ALL_STEP && <TarifPage></TarifPage>}
         </SurveyLayout>
     );
