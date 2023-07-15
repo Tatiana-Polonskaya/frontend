@@ -28,6 +28,9 @@ import ArchiveVideoItem from "../Archive/ArchiveVideoItem";
 import { useGetStatisticDataQuery } from "../../store/api/diary";
 import { IStatisticItem, TYPE_DIARY } from "../../models/diary";
 
+import lampСharge from "./icons/lampСharge.svg";
+import RecommendationDairyGraph from "../RecommendationDairyGraph";
+
 const sectionTitles = {
     total: "Общий результат",
     connectivity: "Связность",
@@ -37,11 +40,6 @@ const sectionTitles = {
     persuasiveness: "Убедительность",
     communicative: "Коммуникативные нормы",
 };
-
-import lampСharge from './icons/lampСharge.svg'
-import RecommendationDairyGraph from "../RecommendationDairyGraph";
-
-
 
 const achievementsData = [
     {
@@ -293,7 +291,9 @@ export default function DiaryStart() {
                                             ],
                                         ].reverse()}
                                     />
-                                  <RecommendationDairyGraph icon={lampСharge}/>
+                                    <RecommendationDairyGraph
+                                        icon={lampСharge}
+                                    />
                                 </div>
                             )
                         )}
