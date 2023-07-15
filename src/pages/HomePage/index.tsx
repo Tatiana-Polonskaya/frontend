@@ -9,6 +9,7 @@ import "./style.scss";
 import { ReactSVG } from "react-svg";
 import VideoBlock from "../../components/VideoBlock";
 
+
 const cnHome = cn("home");
 
 export default function HomePage() {
@@ -16,7 +17,7 @@ export default function HomePage() {
         <MainLayout>
             <div className={cnHome()}>
                 <div className={cnHome("chat")}>
-                    <Chat />
+                    <Chat/>
                 </div>
                 <div className={cnHome("header")}>
                     <ReactSVG src={ElementEqual} />

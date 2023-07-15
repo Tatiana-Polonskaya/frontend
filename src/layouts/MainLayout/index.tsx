@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Fragment, ReactNode } from "react";
 import { cn } from "@bem-react/classname";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -15,13 +15,14 @@ type Props = {
 const cnContent = cn("mainLayout");
 
 export default function MainLayout(props: Props) {
-
+    
+    
     const lastName = useSelector((state: RootState) => state.profile.user.firstname);
     const name = useSelector((state: RootState) => state.profile.user.lastname);    
     const avatar = useSelector((state: RootState) => state.profile.avatar);  
 
     return (
-        <>
+        <Fragment >
             <div className={cnContent()}>
                 <Menu />
                 <div className={cnContent("wrapper")}>
@@ -32,6 +33,6 @@ export default function MainLayout(props: Props) {
                 </div>
             </div>
             <Footer />
-        </>
+        </Fragment>
     );
 }
