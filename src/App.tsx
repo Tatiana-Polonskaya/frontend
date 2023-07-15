@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import DiaryPage from "./pages/DiaryPage";
@@ -25,10 +25,12 @@ import RecodingPage from "./pages/RecodingPage";
 import DiaryStart from "./components/DiaryStart";
 import AnalysisReport from "./components/Report";
 import SettingsStart from "./components/SettingsStart";
+import ScrollToTop from "./tools/ScrollToTop";
 
 export default function App() {
     return (
         <div className="wrapper">
+            <ScrollToTop />
             <Routes>
                 <Route path={RoutesEnum.LANDING} element={<LandingPage />} />
                 <Route element={<UnauthorizedRoute />}>
@@ -59,7 +61,9 @@ export default function App() {
                     <Route path={RoutesEnum.SURVEY} element={<SurveyPage />} />
                     <Route path={RoutesEnum.ROOT} element={<HomePage />} />
                     <Route path={RoutesEnum.HOME} element={<HomePage />} />
+
                     <Route path={RoutesEnum.DIARY} element={<DiaryPage />}>
+
                         <Route index={true} element={<DiaryStart />} />
                         <Route
                             index={false}

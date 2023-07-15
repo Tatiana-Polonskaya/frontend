@@ -26,7 +26,8 @@ import BlockGeneralAnalytics from "../BlockGeneralAnalytics";
 
 import "./style.scss";
 import ArchiveVideoItem from "../Archive/ArchiveVideoItem";
-
+import lampСharge from './icons/lampСharge.svg'
+import RecommendationDairyGraph from "../RecommendationDairyGraph";
 
 const sectionNames = [
     "Общий результат",
@@ -159,6 +160,7 @@ export default function DiaryStart() {
             <RollUp title="Видео на анализе" icon={videoListIcon}>
                 <div>Нет видео на анализе</div>
             </RollUp>
+
             <RollUp title="Статистика за неделю" icon={statisticIcon}>
                 <div className={cnDiaryStart("row")}>
                     <BadGoodBlock />
@@ -174,6 +176,7 @@ export default function DiaryStart() {
                             style={{ width: "100%" }}
                         >
                             <StatsGraph data={stats.data.values} />
+                            <RecommendationDairyGraph icon={lampСharge}/>
                         </div>
                     ))}
                 </Tabs>
