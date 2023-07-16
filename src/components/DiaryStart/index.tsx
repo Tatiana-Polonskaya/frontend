@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { IVideoFromBack } from "../../models/video";
+import { IVideoFromBack, IVideoStatus } from "../../models/video";
 
 import {
     useGetVideoByUserQuery,
+    useGetVideoStatusByUserQuery,
     useLazyGetVideoByUserSearchQuery,
 } from "../../store/api/userVideo";
 
@@ -30,6 +31,8 @@ import { IStatisticItem, TYPE_DIARY } from "../../models/diary";
 
 import lampСharge from "./icons/lampСharge.svg";
 import RecommendationDairyGraph from "../RecommendationDairyGraph";
+import VideoLoad from "../VideoLoad";
+import ArchiveVideo from "../Archive/ArchiveVideo";
 
 const sectionTitles = {
     total: "Общий результат",
@@ -240,9 +243,19 @@ export default function DiaryStart() {
     const prevPage = () =>
         setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
 
-    const removeItem = (id: string) => {
-        console.log("removed");
-    };
+    /* ----------------------------- STATUS ------------------------------*/
+    const [currentStatus, setCurrentStatus] = useState<IVideoStatus[]>([]);
+
+    const { data } = useGetVideoStatusByUserQuery({
+        page: 1,
+        limit: 6,
+    });
+
+    useEffect(() => {
+        if (data && data?.data) {
+            setCurrentStatus(data!.data!.videos);
+        }
+    }, [data]);
 
     return (
         <div>
@@ -264,7 +277,19 @@ export default function DiaryStart() {
             </div>
 
             <RollUp title="Видео на анализе" icon={videoListIcon}>
-                <div>Нет видео на анализе</div>
+                {/* данные по видосикам на анализе которые */}
+                {currentStatus ? (
+                    currentStatus.map((el, ind) => (
+                        <VideoLoad
+                            key={ind}
+                            el={el}
+                            ind={ind}
+                            percent={el.status_percent}
+                        />
+                    ))
+                ) : (
+                    <div>Нет видео на анализе</div>
+                )}
             </RollUp>
 
             <RollUp title="Статистика за неделю" icon={statisticIcon}>
@@ -314,14 +339,7 @@ export default function DiaryStart() {
             {searchVideos ? (
                 <>
                     <ArchiveSearch updateSearch={updateSearch} />
-                    {searchVideos.map((el, ind) => (
-                        <ArchiveVideoItem
-                            handleClick={removeItem}
-                            key={el.id}
-                            el={el}
-                            ind={ind}
-                        />
-                    ))}
+                    <ArchiveVideo video={searchVideos} />
                 </>
             ) : (
                 <div className={cnDiaryStart("text-empty-msg")}>

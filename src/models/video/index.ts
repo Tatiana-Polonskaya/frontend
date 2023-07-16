@@ -9,7 +9,7 @@ export interface IVideoApiReq {
 
 export interface IVideoUser {
     videos: IVideoFromBack[];
-    total_videos:number;
+    total_videos: number;
 }
 
 export interface IVideoFromBack {
@@ -36,15 +36,33 @@ export interface IVideoInfo {
     file_path: string;
 }
 
+export interface IVideoUserStatus {
+    videos: IVideoStatus[];
+    total_videos: number;
+}
+export interface IVideoStatus {
+    title: string;
+    duration: string;
+    description: string;
+    id: UUID;
+    user_id: UUID;
+    channel_title: string;
+    upload_date: string;
+    file_name: string;
+    file_path: string;
+    status_percent: string;
+    status_video: string;
+}
+
 export interface IVideoUploadItem {
     id: string;
     title: string;
     description: string;
 }
 
-export interface IParamsForQueryUserVideo{
-    page: number,
-    limit:number,
-    tutorial?:boolean,
-    search?:string,
+export interface IParamsForQueryUserVideo {
+    page: number;
+    limit: number;
+    tutorial?: boolean;
+    search?: string;
 }

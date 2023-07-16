@@ -14,14 +14,21 @@ import Tick from "./icon/archive-tick.svg";
 
 import { convertTime, convertDate } from "../helpers";
 import { useGetTotalByIdQuery } from "../../../store/api/report";
+// import VideoLoadProgress from "../../VideoLoadProgress";
 
 type Props = {
     el: IVideoFromBack;
     ind: number;
-    handleClick: Function;
+    handleClick?: Function;
+    visible?: boolean;
 };
 
-export default function ArchiveVideoItem({ el, ind, handleClick }: Props) {
+export default function ArchiveVideoItem({
+    el,
+    ind,
+    handleClick,
+    visible = true,
+}: Props) {
     // export default function ArchiveVideoItem({ el, ind }: Props) {
     const cnArchiveVideo = cn("archive-video");
 
@@ -47,7 +54,6 @@ export default function ArchiveVideoItem({ el, ind, handleClick }: Props) {
             : copy.splice(copy.indexOf(ind), 1);
 
         setTickedVideo([...copy]);
-        console.log(tickedVideo);
     };
 
     const totalData = useGetTotalByIdQuery(el.id).data?.data?.values;
@@ -69,6 +75,7 @@ export default function ArchiveVideoItem({ el, ind, handleClick }: Props) {
         <div className={cnArchiveVideo()}>
             <div className={cnArchiveVideo("el")}>
                 <ReactSVG
+                    className={cnArchiveVideo("tick")}
                     src={!tickedVideo.includes(ind) ? Tick : Participation}
                 />
                 <Fragment key={el.id}>
@@ -86,14 +93,17 @@ export default function ArchiveVideoItem({ el, ind, handleClick }: Props) {
                 date={convertDate(el.upload_date)}
             />
             <div className={cnArchiveVideo("panel")}>
-                <VideoProgressPanel result={result} type={"small"} />
+                {/* {!visible && <VideoLoadProgress />} */}
+                {visible && (
+                    <VideoProgressPanel result={result} type={"small"} />
+                )}
                 <div className={cnArchiveVideo("panel-more")}>
                     <ReactSVG src={More} onClick={() => changePopup(ind)} />
                     <ArchivePopup
                         ind={ind}
                         id={el.id}
                         changeTickVideo={changeTickVideo}
-                        handleClick={handleClick}
+                        handleClick={handleClick!}
                         state={openPopup.includes(ind) ? "" : "d-n"}
                     />
                 </div>

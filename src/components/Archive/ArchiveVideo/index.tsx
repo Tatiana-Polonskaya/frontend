@@ -22,7 +22,7 @@ export default function ArchiveVideo({ video }: Props) {
     useEffect(() => {
         if (isError) alert("Something was wrong!");
     }, [isError]);
-    // отсюда можно забирать данных которые остались или надо удалить на бэке
+
     const [state, setState] = useState(video);
 
     const removeItem = (id: string) => {
@@ -30,9 +30,7 @@ export default function ArchiveVideo({ video }: Props) {
         func(id);
     };
 
-    useEffect(() => {
-        // if (state) console.log(state);
-    }, [state]);
+    useEffect(() => {}, [state]);
 
     return video && video.length !== 0 ? (
         <>
@@ -42,6 +40,7 @@ export default function ArchiveVideo({ video }: Props) {
                     key={el.id}
                     el={el}
                     ind={ind}
+                    visible={true}
                 />
             ))}
         </>

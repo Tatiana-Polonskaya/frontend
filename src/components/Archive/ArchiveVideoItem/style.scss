@@ -13,16 +13,16 @@
         background-color: rgb(222, 222, 228);
         border-radius: 12px;
         overflow: hidden;
-
-        & > div:first-child {
-            position: absolute;
-            left: 16px;
-            top: 16px;
-        }
+    }
+    &-tick {
+        position: absolute;
+        left: 16px;
+        top: 16px;
     }
     &-panel {
         display: flex;
         gap: 8px;
+        width: 100%;
 
         &-more {
             position: relative;
