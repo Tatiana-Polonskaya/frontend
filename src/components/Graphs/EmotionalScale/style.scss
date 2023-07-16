@@ -1,4 +1,3 @@
-
 .EmotionalScaletabs {
   display: flex;
   width: 40%;
@@ -19,10 +18,16 @@
   color: #7C8EB5;
   background: rgba(36, 119, 244, 0);
   margin: 8px;
+
+  svg {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-.EmotionalScaletab:not(:last-child) {
-}
+.EmotionalScaletab:not(:last-child) {}
 
 .EmotionalScaletab.EmotionalScaleactive {
   background: rgba(36, 119, 244, 0.13);
@@ -41,8 +46,9 @@
   display: block;
   flex-direction: row;
 }
-.EmotionalScale{
-  &-textBloc{
+
+.EmotionalScale {
+  &-textBloc {
     display: flex;
     flex-direction: row;
     padding: 16px;
@@ -50,11 +56,11 @@
     width: 100%;
     background: #F7FAFF;
     border-radius: 12px;
-    margin-bottom: 15px ;
+    margin-bottom: 15px;
 
   }
 
-  &-text1{
+  &-text1 {
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -62,13 +68,15 @@
     color: #17282F;
     padding-top: 10px;
   }
-  &-block{
+
+  &-block {
     width: 20px;
     height: 20px;
     border-radius: 4px;
     margin: 5px;
   }
-  &-blockText{
+
+  &-blockText {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -76,7 +84,8 @@
     align-items: center;
     gap: 10px;
   }
-  &-Text{
+
+  &-Text {
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -84,6 +93,7 @@
     color: #37476A;
   }
 }
+
 b.textInfTitle1 {
   font-weight: 500;
 }

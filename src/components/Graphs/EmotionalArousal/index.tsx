@@ -13,7 +13,6 @@ const textForMedium :string = 'Позволит наиболее успешно 
 const textForSurplusTitle:string = 'Излишнее эмоциональное возбуждение';
 const textForSurplus:string = 'Снижается способность контролировать результат выступления.';
 function check(data:number){
-    console.log(data);
     if(data<= 0.4){
         return <div className='allEmotionalArousal'>
             {paint(flaw,"imkEmotionalArousal", textForFlaw, textForFlawTitle)}

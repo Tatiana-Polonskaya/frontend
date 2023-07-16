@@ -12,75 +12,71 @@ import Serial from "./img/следы.svg";
 const CN = cn("blockGeneralAnalytics");
 
 type Props = {
-    N: number;
     rank: string;
+    previous_rank: string;
     text: string;
 };
 
-function checkRank(rank: string) {
-    if (
-        rank == `Последовательный` ||
-        rank == `Информативный` ||
-        rank == `Закономерный`
-    ) {
-        return <ReactSVG src={Serial} />;
-    } else if (
-        rank == `оригинальный` ||
-        rank == `обоснованный` ||
-        rank == `логичный`
-    ) {
-        return <ReactSVG src={Thorough} />;
-    } else if (
-        rank == `доходчивый` ||
-        rank == `продуманный` ||
-        rank == `уверенный`
-    ) {
-        return <ReactSVG src={Eloquent} />;
-    } else {
-        return <div></div>;
+// TO DO: добавить такую же функцию для поиска картинки для переданного существительного
+function checkRank(adjective: string) {
+    if ([`последовательный`, `информативный`, `закономерный`].includes(adjective))
+    {
+        return Serial;
+    } else if ([`оригинальный`, `обоснованный`, `логичный`].includes(adjective))
+    {
+        return Thorough;
+    } else if ([`доходчивый`, `продуманный`, `уверенный`].includes(adjective))
+    {
+        return Eloquent;
+    } else
+    {
+        return "";
+    }
+}
+
+function checkAdjective(adjective:string){
+    if ([`оратор`].includes(adjective))
+    {
+        return Speaker;
+    } else if ([`златоуст`].includes(adjective))
+    {
+        return Chrysostom;
+    } else if ([`говорун`].includes(adjective))
+    {
+        return Talker;
+    } else
+    {
+        return "";
     }
 }
 
 export default function BlockGeneralAnalytics(props: Props) {
-    let degree: string = "";
-    let image: string = "";
-    if (props.N > 8) {
-        degree = "Говорун";
-        image = Talker;
-        image = Talker;
-    } else if (props.N > 6 || props.N <= 8) {
-        degree = "Златоуст";
-        image = Chrysostom;
-        image = Chrysostom;
-    } else if (props.N || props.N <= 6) {
-        degree = "Оратор";
-        image = Speaker;
-    } else if (props.N > 2 || props.N <= 4) {
-        degree = "Спикер";
-    } else if (props.N >= 2) {
-        degree = "Выступающий";
-    } else if (props.N <= 1) {
-        degree = "В режиме ожидания ";
-    } else if (props.N > -1) {
-        degree = "Неизвестный новичок";
-    }
+    
+    const rank_words = props.rank
+        .split(" ")
+        .map((el) => el.toLocaleLowerCase());
+
+    const image_for_adjective = checkRank(rank_words[0]);
+    const image_for_noun = checkAdjective(rank_words[1]);
 
     return (
         <>
             <div className={CN()}>
                 <div className={CN("text")}>
                     <div className={CN("rank")}>Текущее звание</div>
-                    <div className={CN("degree")}>
-                        {props.rank} {degree}
-                    </div>
+                    <div className={CN("degree")}>{props.rank}</div>
                     <div className={CN("previous")}>
-                        Предыдущее: последовательный {degree}
+                        Предыдущее: {props.previous_rank}
                     </div>
                     <div className={"tagline"}>{props.text}</div>
                 </div>
                 <div className={CN("img")}>
-                    {checkRank(props.rank)}
-                    <ReactSVG src={image} />
+                    {image_for_adjective && (
+                        <ReactSVG src={image_for_adjective} />
+                    )}
+                    {image_for_noun && (
+                        <ReactSVG src={image_for_noun} />
+                    )}
                 </div>
             </div>
         </>

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IResponse } from "../../../models/api";
 import { IAimFromBack, IAimParameters, ISendUserPurpose } from "../../../models/aim";
 import customFetchBase from "../utils/customFetchBase";
-import { IStatisticJSON, TYPE_DIARY } from "../../../models/diary";
+import { IAchievement, IStatisticJSON, TYPE_DIARY } from "../../../models/diary";
 
 export const diaryApi = createApi({
     reducerPath: "api/diary",
@@ -34,6 +34,12 @@ export const diaryApi = createApi({
                 method: "GET",
             }),
         }),
+        getAchievements: build.query<IResponse<IAchievement>, void>({
+            query: () => ({
+                url: `/api/video/user/achievements`,
+                method: "GET",
+            }),
+        })
     }),
 });
 
@@ -44,7 +50,9 @@ export const {
     useLazyGetUserPurposesQuery,
     useSendUserPurposeMutation,
     useGetStatisticDataQuery,
-    useLazyGetStatisticDataQuery
+    useLazyGetStatisticDataQuery,
+    useGetAchievementsQuery,
+    useLazyGetAchievementsQuery
 } = diaryApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = diaryApi;
