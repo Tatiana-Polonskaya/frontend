@@ -103,7 +103,7 @@ export const videoApi = createApi({
             query: ({ id, title, description }) => {
                 return {
                     url: `/api/video/`,
-                    params: { id, title, description },
+                    body: { id, title, description },
                     method: "PUT",
                 };
             },

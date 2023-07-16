@@ -309,12 +309,12 @@ export default function AnalysisReport() {
 
                 <div className={cnReport("whiteBlock")}>
                     <ColorfulTabs>
-                        {!isMainVideo && (
+                        {!isMainVideo && videoInfo && (
                             <div
                                 className={cnReport("width")}
                                 title="Личная заметка"
                             >
-                                <VideoNotice description="" />
+                                <VideoNotice idVideo={videoInfo.id} description={videoInfo.description} title={videoInfo.title}/>
                             </div>
                         )}
                         <div
