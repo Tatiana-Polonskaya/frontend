@@ -44,15 +44,42 @@ let citations: propsCitation = {
 };
 
 export default function SecondaryOriginally(props: Props) {
-    function determ(el: IBreakdown, str: string, s: string) {
+    function determ(el: IBreakdown, str: string, s: string, index: number) {
         if (str.includes(s) && s.length > 0) {
             let t = str.split(s);
             return (
                 <>
                     {t[0]}
                     {/* нужно подкинуть класс на ссылку */}
-                    <a href={el.link} className="link">
+                    <a
+                        href={el.link}
+                        className={cnCitation("link")}
+                        style={{
+                            color:
+                                el.value !== 0
+                                    ? citations.typeCitation[el.value - 1].color
+                                    : "",
+                            position: "relative",
+                        }}
+                    >
                         {s}
+                        <div
+                            className={cnCitation("help-content")}
+                            style={{
+                                borderColor:
+                                    el.value !== 0
+                                        ? citations.typeCitation[el.value - 1]
+                                              .color
+                                        : "",
+                                top:
+                                    index === props.breakdown?.length - 1
+                                        ? "-40px"
+                                        : "20px",
+                                left: "0px",
+                            }}
+                        >
+                            {el.link}
+                        </div>
                     </a>
                     {t[1]}
                 </>
@@ -108,8 +135,7 @@ export default function SecondaryOriginally(props: Props) {
                                 }`
                             )}_text`}
                         >
-                            {/* подкинуть строку для сравнения el.modification.str */}
-                            {determ(el, el.text, el.allocated)}
+                            {determ(el, el.text, el.allocated, index)}
                         </div>
                     </div>
                 ))}
