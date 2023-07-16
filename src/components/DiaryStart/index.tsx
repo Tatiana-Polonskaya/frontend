@@ -20,14 +20,17 @@ import videoListIcon from "./icons/videolist.svg";
 
 import { cn } from "@bem-react/classname";
 
-import BadGoodBlock from "../BadGoodBlock";
+import BadGoodBlock, { TYPE_ACHIEVEMENTS } from "../BadGoodBlock";
 import BlockGeneralAnalytics from "../BlockGeneralAnalytics";
 
 import "./style.scss";
 import ArchiveVideoItem from "../Archive/ArchiveVideoItem";
 
-import { useGetStatisticDataQuery } from "../../store/api/diary";
-import { IStatisticItem, TYPE_DIARY } from "../../models/diary";
+import {
+    useGetAchievementsQuery,
+    useGetStatisticDataQuery,
+} from "../../store/api/diary";
+import { IAchievement, IStatisticItem, TYPE_DIARY } from "../../models/diary";
 
 import lampСharge from "./icons/lampСharge.svg";
 import RecommendationDairyGraph from "../RecommendationDairyGraph";
@@ -44,30 +47,27 @@ const sectionTitles = {
     communicative: "Коммуникативные нормы",
 };
 
-const achievementsData = [
-    {
-        rank: "Основательный оратор",
-        previous_rank: "последовательный говорун",
-        text: "Твои аргументы прочны как скала. Продолжай идти к своей цели!",
-    },
-];
-
-const weeklyStatistics = [
-    {
-        improvements: [
-            "Связность твоих высказываний увеличилась",
-            "Темп речи выровнялся",
-            "Ты чаще проявляешь положительные эмоции",
-        ],
-        deterioration: [],
-    },
-];
-
 export default function DiaryStart() {
     const cnDiaryStart = cn("DiaryStart");
 
     const [currentPage, setCurrentPage] = useState(0);
     const videosPerPage = 6;
+
+    /* ----------------------- ACHIEVEMENTS BLOCK -----------------------*/
+    const achievementsJSON = useGetAchievementsQuery();
+    const [achievementsData, setAchievementsData] = useState<IAchievement>();
+
+    useEffect(() => {
+        if (
+            achievementsJSON &&
+            achievementsJSON.isSuccess &&
+            achievementsJSON.data &&
+            achievementsJSON.data.data
+        ) {
+            // console.log(achievementsJSON.data!.data!);
+            setAchievementsData(achievementsJSON.data!.data!);
+        }
+    }, [achievementsJSON]);
 
     /* ----------------------- STATS GRAPH BLOCK -----------------------*/
     const [statsData, setStatsData] = useState({
@@ -263,13 +263,13 @@ export default function DiaryStart() {
                 Достижения
             </div>
             <div className={cnDiaryStart("banner")}>
-                <BlockGeneralAnalytics
-                    N={9}
-                    rank={"Последовательный"}
-                    text={
-                        "Твои аргументы прочны как скала. Продолжай идти к своей цели!"
-                    }
-                />
+                {achievementsData && (
+                    <BlockGeneralAnalytics
+                        rank={achievementsData.rank}
+                        previous_rank={achievementsData.previous_rank}
+                        text={achievementsData.text}
+                    />
+                )}
             </div>
 
             <div className={cnDiaryStart("aims")}>
@@ -294,8 +294,12 @@ export default function DiaryStart() {
 
             <RollUp title="Статистика за неделю" icon={statisticIcon}>
                 <div className={cnDiaryStart("row")}>
-                    <BadGoodBlock />
-                    <BadGoodBlock />
+                    {achievementsData && (
+                        <>
+                            <BadGoodBlock type={TYPE_ACHIEVEMENTS.improvements} text={achievementsData.improvements}/>
+                            <BadGoodBlock type={TYPE_ACHIEVEMENTS.deterioration} text={achievementsData.deterioration}/>
+                        </>
+                    )}
                 </div>
 
                 <Tabs type={TYPE_TABS.PERCENT}>

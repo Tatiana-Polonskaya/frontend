@@ -18,3 +18,11 @@ export interface IStatisticItem {
 export interface IStatisticJSON {
     values: IStatisticItem[];
 }
+
+export interface IAchievement {
+    rank: string,
+    previous_rank: string,
+    text: string
+    improvements: string[],
+    deterioration: string[]
+}
