@@ -253,8 +253,6 @@ export default function DiaryStart() {
         page: 1,
         limit: 6,
     });
-    console.log("status");
-    console.log(currentStatus);
 
     useEffect(() => {
         if (data && data?.data) {
@@ -350,7 +348,7 @@ export default function DiaryStart() {
                             key={el.id}
                             el={el}
                             ind={ind}
-                            visible={ind !== 0 ? true : false}
+                            visible={true}
                         />
                     ))}
                 </>

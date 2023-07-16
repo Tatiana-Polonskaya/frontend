@@ -27,7 +27,7 @@ export default function ArchiveVideoItem({
     el,
     ind,
     handleClick,
-    visible,
+    visible = true,
 }: Props) {
     // export default function ArchiveVideoItem({ el, ind }: Props) {
     const cnArchiveVideo = cn("archive-video");
@@ -54,7 +54,6 @@ export default function ArchiveVideoItem({
             : copy.splice(copy.indexOf(ind), 1);
 
         setTickedVideo([...copy]);
-        // console.log(tickedVideo);
     };
 
     const totalData = useGetTotalByIdQuery(el.id).data?.data?.values;
@@ -76,6 +75,7 @@ export default function ArchiveVideoItem({
         <div className={cnArchiveVideo()}>
             <div className={cnArchiveVideo("el")}>
                 <ReactSVG
+                    className={cnArchiveVideo("tick")}
                     src={!tickedVideo.includes(ind) ? Tick : Participation}
                 />
                 <Fragment key={el.id}>
