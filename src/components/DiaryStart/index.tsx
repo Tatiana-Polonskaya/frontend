@@ -32,6 +32,7 @@ import { IStatisticItem, TYPE_DIARY } from "../../models/diary";
 import lampСharge from "./icons/lampСharge.svg";
 import RecommendationDairyGraph from "../RecommendationDairyGraph";
 import VideoLoad from "../VideoLoad";
+import ArchiveVideo from "../Archive/ArchiveVideo";
 
 const sectionTitles = {
     total: "Общий результат",
@@ -242,10 +243,6 @@ export default function DiaryStart() {
     const prevPage = () =>
         setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
 
-    const removeItem = (id: string) => {
-        console.log("removed");
-    };
-
     /* ----------------------------- STATUS ------------------------------*/
     const [currentStatus, setCurrentStatus] = useState<IVideoStatus[]>([]);
 
@@ -342,15 +339,7 @@ export default function DiaryStart() {
             {searchVideos ? (
                 <>
                     <ArchiveSearch updateSearch={updateSearch} />
-                    {searchVideos.map((el, ind) => (
-                        <ArchiveVideoItem
-                            handleClick={removeItem}
-                            key={el.id}
-                            el={el}
-                            ind={ind}
-                            visible={true}
-                        />
-                    ))}
+                    <ArchiveVideo video={searchVideos} />
                 </>
             ) : (
                 <div className={cnDiaryStart("text-empty-msg")}>
