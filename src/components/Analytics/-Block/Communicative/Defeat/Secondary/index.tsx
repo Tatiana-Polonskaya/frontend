@@ -57,6 +57,7 @@ type Param = {
 };
 export default function SecondaryDefeat(props: Props) {
     function determ(str: string, arrS: Priority, index: number) {
+        console.log("---------------------determ---------------------");
         let arrParam: Param[] = [];
         let strArr = str.split(" ");
 
@@ -67,90 +68,120 @@ export default function SecondaryDefeat(props: Props) {
                 description: [],
             });
         });
+        console.log("==========================================");
+        console.log("arrParam");
+        console.log(arrParam);
+        for (let index = 0; index < strArr.length; index++) {
+            console.log(index);
+            console.log(arrParam[index]);
+        }
+        console.log("==========================================");
 
         Object.entries(arrS).forEach((e, ind) => {
+            console.log("e");
+            console.log(e);
             e[1].forEach((subStr, ind) => {
                 subStr = subStr.trim();
+
                 // сюда надо вставить перебор по массиву входящих
                 if (!subStr.includes(" ")) {
                     // если одно слово
-                    arrParam[strArr.indexOf(subStr)].type.push(
-                        e[0] === "0"
-                            ? "filler"
-                            : e[0] === "1"
-                            ? "cognitive"
-                            : e[0] === "2"
-                            ? "agression"
-                            : "original"
-                    );
-                    arrParam[strArr.indexOf(subStr)].color.push(
-                        e[0] === "0"
-                            ? GraphColor.BLUE
-                            : e[0] === "1"
-                            ? GraphColor.ORANGE
-                            : e[0] === "2"
-                            ? GraphColor.RED
-                            : GraphColor.DARKGRAY
-                    );
-                    arrParam[strArr.indexOf(subStr)].description.push(
-                        e[0] === "0"
-                            ? "слова-паразиты"
-                            : e[0] === "1"
-                            ? "когнитивные искажения"
-                            : "агрессивность"
-                    );
+                    console.log("--слово--");
+                    console.log(subStr);
+                    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    console.log("arrParam");
+                    console.log(arrParam);
+                    console.log("str.indexOf(subStr)");
+                    console.log(strArr.indexOf(subStr));
+
+                    console.log("arrParam[str.indexOf(subStr)]");
+                    console.log(arrParam[str.indexOf(subStr)]);
+                    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    // console.log("arrParam[str.indexOf(subStr)].type");
+                    // console.log(arrParam[str.indexOf(subStr)].type);
+
+                    // // arrParam[strArr.indexOf(subStr)].type.push(
+                    // arrParam[str.indexOf(subStr)].type.push(
+                    //     e[0] === "0"
+                    //         ? "filler"
+                    //         : e[0] === "1"
+                    //         ? "cognitive"
+                    //         : e[0] === "2"
+                    //         ? "agression"
+                    //         : "original"
+                    // );
+                    // // arrParam[strArr.indexOf(subStr)].color.push(
+                    // arrParam[str.indexOf(subStr)].color.push(
+                    //     e[0] === "0"
+                    //         ? GraphColor.BLUE
+                    //         : e[0] === "1"
+                    //         ? GraphColor.ORANGE
+                    //         : e[0] === "2"
+                    //         ? GraphColor.RED
+                    //         : GraphColor.DARKGRAY
+                    // );
+                    // // arrParam[strArr.indexOf(subStr)].description.push(
+                    // arrParam[str.indexOf(subStr)].description.push(
+                    //     e[0] === "0"
+                    //         ? "слова-паразиты"
+                    //         : e[0] === "1"
+                    //         ? "когнитивные искажения"
+                    //         : "агрессивность"
+                    // );
                 } else if (subStr.includes(" ")) {
                     // если подстрока
-                    let subStrArr = subStr.split(" ");
-                    for (let i = 0; i < strArr.length; i++) {
-                        let flag: boolean = false;
-                        for (let j = 0; j < subStrArr.length; j++) {
-                            if (j === subStrArr.length - 1) {
-                            }
-                            if (
-                                (j === subStrArr.length - 1 &&
-                                    strArr[i + j] === subStrArr[j]) ||
-                                (j === subStrArr.length - 1 &&
-                                    strArr[i + j] === `${subStrArr[j]},`) ||
-                                (j === subStrArr.length - 1 &&
-                                    strArr[i + j] === `${subStrArr[j]}.`)
-                            ) {
-                                flag = !flag;
-                                break;
-                            } else if (strArr[i + j] !== subStrArr[j]) {
-                                break;
-                            }
-                        }
-                        if (flag) {
-                            for (let k = 0; k < subStrArr.length; k++) {
-                                arrParam[i + k].type.push(
-                                    e[0] === "0"
-                                        ? "filler"
-                                        : e[0] === "1"
-                                        ? "cognitive"
-                                        : e[0] === "2"
-                                        ? "agression"
-                                        : "original"
-                                );
-                                arrParam[i + k].color.push(
-                                    e[0] === "0"
-                                        ? GraphColor.BLUE
-                                        : e[0] === "1"
-                                        ? GraphColor.ORANGE
-                                        : e[0] === "2"
-                                        ? GraphColor.RED
-                                        : GraphColor.DARKGRAY
-                                );
-                                arrParam[i + k].description.push(
-                                    e[0] === "0"
-                                        ? "слова-паразиты"
-                                        : e[0] === "1"
-                                        ? "когнитивные искажения"
-                                        : "агрессивность"
-                                );
-                            }
-                        }
-                    }
+                    console.log("----подстрока--");
+                    console.log(subStr);
+                    // let subStrArr = subStr.split(" ");
+                    // for (let i = 0; i < strArr.length; i++) {
+                    //     let flag: boolean = false;
+                    //     for (let j = 0; j < subStrArr.length; j++) {
+                    //         if (j === subStrArr.length - 1) {
+                    //         }
+                    //         if (
+                    //             (j === subStrArr.length - 1 &&
+                    //                 strArr[i + j] === subStrArr[j]) ||
+                    //             (j === subStrArr.length - 1 &&
+                    //                 strArr[i + j] === `${subStrArr[j]},`) ||
+                    //             (j === subStrArr.length - 1 &&
+                    //                 strArr[i + j] === `${subStrArr[j]}.`)
+                    //         ) {
+                    //             flag = !flag;
+                    //             break;
+                    //         } else if (strArr[i + j] !== subStrArr[j]) {
+                    //             break;
+                    //         }
+                    //     }
+                    //     if (flag) {
+                    //         for (let k = 0; k < subStrArr.length; k++) {
+                    //             arrParam[i + k].type.push(
+                    //                 e[0] === "0"
+                    //                     ? "filler"
+                    //                     : e[0] === "1"
+                    //                     ? "cognitive"
+                    //                     : e[0] === "2"
+                    //                     ? "agression"
+                    //                     : "original"
+                    //             );
+                    //             arrParam[i + k].color.push(
+                    //                 e[0] === "0"
+                    //                     ? GraphColor.BLUE
+                    //                     : e[0] === "1"
+                    //                     ? GraphColor.ORANGE
+                    //                     : e[0] === "2"
+                    //                     ? GraphColor.RED
+                    //                     : GraphColor.DARKGRAY
+                    //             );
+                    //             arrParam[i + k].description.push(
+                    //                 e[0] === "0"
+                    //                     ? "слова-паразиты"
+                    //                     : e[0] === "1"
+                    //                     ? "когнитивные искажения"
+                    //                     : "агрессивность"
+                    //             );
+                    //         }
+                    //     }
+                    // }
                 }
             });
         });
