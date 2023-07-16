@@ -30,6 +30,7 @@ import { IStatisticItem, TYPE_DIARY } from "../../models/diary";
 
 import lampСharge from "./icons/lampСharge.svg";
 import RecommendationDairyGraph from "../RecommendationDairyGraph";
+import VideoLoad from "../VideoLoad";
 
 const sectionTitles = {
     total: "Общий результат",
@@ -264,6 +265,14 @@ export default function DiaryStart() {
             </div>
 
             <RollUp title="Видео на анализе" icon={videoListIcon}>
+                {/* данные по видосикам на анализе которые */}
+                {/* {AnalysisVideosData ? (
+                    AnalysisVideosData.map((el, ind) => (
+                        <VideoLoad el={el} ind={ind} percent={}/>
+                    ))
+                ) : (
+                    <div>Нет видео на анализе</div>
+                )} */}
                 <div>Нет видео на анализе</div>
             </RollUp>
 
