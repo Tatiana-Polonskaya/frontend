@@ -82,18 +82,21 @@ export default function PrimaryInfoBusiness() {
     return (
         <>
             <UserTypeSwitch />
-            <LoginRegisterChanger pageType={PageType.Register} />
-            {userType === UserType.Personal ? (
-                <InfoFragment
-                    phrase="Станьте успешнее и увереннее в себе"
-                    subphrase="Совершенствуйте навыки выступлений, репетируя наедине с собой без какого-либо смущения."
-                />
-            ) : (
-                <InfoFragment
-                    phrase="Автоматизируйте первичный отбор"
-                    subphrase="Оставьте свою заявку на присоединение к сервису, заполнив форму ниже."
-                />
-            )}
+            {/* <LoginRegisterChanger pageType={PageType.Register} /> */}
+            <div className={cnPrimaryInfo("padding")}>
+                {userType === UserType.Personal ? (
+                    <InfoFragment
+                        phrase="Станьте успешнее и увереннее в себе"
+                        subphrase="Совершенствуйте навыки выступлений, репетируя наедине с собой без какого-либо смущения."
+                    />
+                ) : (
+                    <InfoFragment
+                        phrase="РАЗВИВАЙТЕ ПУБЛИЧНОСТЬ"
+                        subphrase="Оставьте свою заявку на присоединение вашей компании к сервису, заполнив форму ниже."
+                    />
+                )}
+            </div>
+
             <div className={cnPrimaryInfo("inputs")}>
                 <label>
                     <InputHeader

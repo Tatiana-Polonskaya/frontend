@@ -62,13 +62,13 @@ export default function PrimaryInfo() {
             <LoginRegisterChanger pageType={PageType.Register} />
             {userType === UserType.Personal ? (
                 <InfoFragment
-                    phrase="Станьте успешнее и увереннее в себе"
+                    phrase={"Станьте успешнее \n и увереннее в себе"}
                     subphrase="Совершенствуйте навыки выступлений, репетируя наедине с собой без какого-либо смущения."
                 />
             ) : (
                 <InfoFragment
-                    phrase="Автоматизируйте первичный отбор"
-                    subphrase="Оставьте свою заявку на присоединение к сервису, заполнив форму ниже."
+                    phrase="РАЗВИВАЙТЕ ПУБЛИЧНОСТЬ"
+                    subphrase="Оставьте свою заявку на присоединение вашей компании к сервису, заполнив форму ниже."
                 />
             )}
             <div className={cnPrimaryInfo("inputs")}>

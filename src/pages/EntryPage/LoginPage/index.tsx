@@ -17,9 +17,11 @@ import InputHeader from "../../../components/ui-kit/InputHeader";
 import Input from "../../../components/ui-kit/Input";
 
 import LoginImage from "./assets/login.svg";
+import RegisterImageBusiness from "../RegisterPage/assets/reg-image-business.svg";
 
 import "./style.scss";
 import RoutesEnum from "../../../models/routes";
+import PrimaryInfoBusiness from "../RegisterPage/PrimaryInfoBusiness";
 
 enum UserType {
     Personal,
@@ -85,71 +87,85 @@ export default function LoginPage() {
     }
 
     return (
-        <EntryLayout image={<ReactSVG src={LoginImage} />}>
-            <UserTypeSwitch />
-            <LoginRegisterChanger pageType={PageType.Login} />
-            <div className={cnLoginPage()}>
-                <InfoFragment
-                    phrase={
-                        userType === UserType.Personal
-                            ? "Готовы всех поразить?"
-                            : "Путь к лучшему коллективу"
-                    }
-                    subphrase={
-                        userType === UserType.Personal
-                            ? "Каждое ваше выступление может быть лучшим."
-                            : "Поможем сделать правильный выбор."
-                    }
-                />
-                <div className={cnLoginPage("inputs")}>
-                    <label>
-                        <InputHeader
-                            text="Почта"
-                            wrong={isEmailWrong}
-                            wrongText={wrongEmailText}
-                        />
-                        <Input
-                            placeholder="Введите электронную почту"
-                            value={email}
-                            type="email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            invalid={isEmailWrong}
-                        />
-                    </label>
-                    <label>
-                        <InputHeader
-                            text="Пароль"
-                            wrong={isPasswordWrong}
-                            wrongText={wrongPasswordText}
-                        />
-                        <Input
-                            placeholder="Введите пароль"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            type="password"
-                            invalid={isPasswordWrong}
-                        />
-                    </label>
+        <EntryLayout image={<ReactSVG src={
+            userType === UserType.Personal
+                ? LoginImage
+                : RegisterImageBusiness
+        } />}>
+            {userType === UserType.Personal ? (
+                <>
+                    <UserTypeSwitch />
 
-                    <Button
-                        className={cnLoginPage("next-button")}
-                        disabled={isFetching || !(email && password)}
-                        onClick={onSubmit}
-                        // onClick={() => loginRequest({ email, password })}
-                    >
-                        Продолжить
-                    </Button>
-                </div>
-                <p>
-                    <span>Забыли пароль?</span>&nbsp;
-                    <Link
-                        className={cnLoginPage("link")}
-                        onClick={() => navigate(RoutesEnum.RESTORE)}
-                    >
-                        Восстановить
-                    </Link>
-                </p>
-            </div>
+                    <LoginRegisterChanger pageType={PageType.Login} />
+                    <div className={cnLoginPage()}>
+                        <InfoFragment
+                            phrase={
+                                userType === UserType.Personal
+                                    ? "Готовы всех поразить?"
+                                    : "Путь к лучшему коллективу"
+                            }
+                            subphrase={
+                                userType === UserType.Personal
+                                    ? "Каждое ваше выступление может быть лучшим."
+                                    : "Поможем сделать правильный выбор."
+                            }
+                        />
+
+                        <div className={cnLoginPage("inputs")}>
+                            <label>
+                                <InputHeader
+                                    text="Почта"
+                                    wrong={isEmailWrong}
+                                    wrongText={wrongEmailText}
+                                />
+                                <Input
+                                    placeholder="Введите электронную почту"
+                                    value={email}
+                                    type="email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    invalid={isEmailWrong}
+                                />
+                            </label>
+                            <label>
+                                <InputHeader
+                                    text="Пароль"
+                                    wrong={isPasswordWrong}
+                                    wrongText={wrongPasswordText}
+                                />
+                                <Input
+                                    placeholder="Введите пароль"
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                    type="password"
+                                    invalid={isPasswordWrong}
+                                />
+                            </label>
+
+                            <Button
+                                className={cnLoginPage("next-button")}
+                                disabled={isFetching || !(email && password)}
+                                onClick={onSubmit}
+                                // onClick={() => loginRequest({ email, password })}
+                            >
+                                Продолжить
+                            </Button>
+                        </div>
+                        <p>
+                            <span>Забыли пароль?</span>&nbsp;
+                            <Link
+                                className={cnLoginPage("link")}
+                                onClick={() => navigate(RoutesEnum.RESTORE)}
+                            >
+                                Восстановить
+                            </Link>
+                        </p>
+                    </div>
+                </>
+            ) : (
+                <PrimaryInfoBusiness />
+            )}
         </EntryLayout>
     );
 }

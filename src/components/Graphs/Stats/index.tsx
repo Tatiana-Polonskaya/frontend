@@ -8,13 +8,19 @@ import { StatsDataItem } from "../../../models/graph/stats";
 
 import "./style.scss";
 import LineGraph from "../-Base/Line";
+import { IStatisticItem } from "../../../models/diary";
 
 const CN = cn("stats-graph");
 
-type Props = { data: StatsDataItem[] };
+type Props = { data: IStatisticItem[] };
 
 const X = "value";
 const pX = "prev";
+
+function createXDataDescriptionFromData(data: IStatisticItem[]) {
+    return data.map(el=>el.date);
+}
+
 export default function StatsGraph({ data }: Props) {
     const restruction = () => {
         const arr: number[] = [];
@@ -32,6 +38,7 @@ export default function StatsGraph({ data }: Props) {
         }
         return arr;
     };
+
     return (
         <StatsLineGraph
             items={restruction().map((x, ind) => ({
@@ -42,7 +49,7 @@ export default function StatsGraph({ data }: Props) {
                 vv: -0.3,
             }))}
             colors={{ [X]: GraphColor.BLUE }}
-            descriptionX={createXDescriptionFromData(data)}
+            descriptionX={createXDataDescriptionFromData(data)}
             descriptionY={[0, 0.2, 0.4, 0.6, 0.8, 1]}
             withMedian={false}
             visible={restruction().length > 0 ? false : true}

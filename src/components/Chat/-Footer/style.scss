@@ -1,38 +1,64 @@
 .chat-footer {
-    height: 72px;
+
     flex: 0 0 auto;
     display: flex;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+
     background: white;
     border-radius: 0 0 32px 32px;
+    z-index: 10;
 
-    &-send-area {
-        background-color: #f3f5f9;
-        height: 50%;
-        width: 75%;
-        overflow: hidden;
-        border-radius: 8px 0 0 8px;
+
+
+    &-row {
         display: flex;
         align-items: center;
-        padding: 0 5px;
+        justify-content: center;
+        flex-direction: row;
+        flex-grow: 1;
+        width: 100%;
+        gap: 10px;
+    }
+
+    &-send-area {
+        display: flex;
+
+        align-content: center;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+
+        background-color: #f3f5f9;
+
+        width: 85%;
+
+        border-radius: 8px;
+
+
         flex: 0 0 auto;
         max-width: 90%;
-        overflow: hidden;
+
         font-size: 0.75rem;
+        height: 50px;
     }
 
     &-textarea {
-        flex: 1 0 auto;
-        padding: 0 0 0 8px;
+       width: 100%;
+        flex: 0 auto;
+        height: 50px;
+        padding: 20px 0 0 8px;
         word-break: break-word;
+        font-family: "Onest";
+        overflow: auto;
 
         &[contenteditable="true"]:empty:before {
             // https://stackoverflow.com/a/61659129
             content: attr(placeholder);
             pointer-events: none;
-            display: block; /* For Firefox */
+            display: block;
+            /* For Firefox */
             color: #7c8eb5;
         }
     }
@@ -48,6 +74,29 @@
 
         & svg {
             cursor: pointer;
+        }
+    }
+
+    &-loading {
+        display: flex;
+        justify-content: center;
+        font-family: "Onest";
+        color: #7c8eb5;
+        font-size: 0.75rem;
+
+        &-animate {
+            font-family: "Onest";
+            color: #7c8eb5;
+            font-size: 0.75rem;
+            display: inline-block;
+            clip-path: inset(0 30px 0 0);
+            animation: fade-out 2s infinite ease-in-out;
+        }
+
+        @keyframes fade-out {
+            to {
+                clip-path: inset(0 -24px 0 0);
+            }
         }
     }
 }

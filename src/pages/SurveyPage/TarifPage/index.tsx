@@ -23,7 +23,7 @@ export default function TarifPage() {
     }).map((el,i)=>{return {...el, id:el.id+i}});
 
 
-    console.log(tarifs)
+    // console.log(tarifs)
     let trialIndex = tarifs.filter((el) => el.title === "Trial")[0] ? tarifs.filter((el) => el.title === "Trial")[0].id : -1;
 
     const user = useAppSelector((state) => state.user.user?.id);

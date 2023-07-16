@@ -2,12 +2,13 @@ import { createApi } from "@reduxjs/toolkit/dist/query/react";
 
 import { IResponse } from "../../../models/api";
 import customFetchBase from "../utils/customFetchBase";
+import { IMessageItem } from "../../../models/chat";
 
 export const chatApi = createApi({
     reducerPath: "/api/chat",
     baseQuery: customFetchBase,
     endpoints: (build) => ({
-        getMessages: build.query<IResponse<any>, void>({
+        getMessages: build.query<IResponse<Array<IMessageItem>>, null>({
             query: () => ({
                 url: "/api/support/messages",
                 method: "GET",
@@ -31,6 +32,7 @@ export const chatApi = createApi({
 
 export const {
     useGetMessagesQuery,
+    useLazyGetMessagesQuery,
     useGetSSEConnectionQuery,
     useSendMessageMutation
 } = chatApi;

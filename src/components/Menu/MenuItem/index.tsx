@@ -1,6 +1,5 @@
 import { ReactSVG } from "react-svg";
 import { cn } from "@bem-react/classname";
-import { useNavigate } from "react-router-dom";
 
 import "./style.scss";
 import { MouseEventHandler } from "react";
@@ -9,15 +8,14 @@ type Props = {
     title: string;
     onClick: MouseEventHandler<HTMLElement>;
     img: string;
+    current: boolean;
 };
-
-
 
 export default function MenuItem(props: Props) {
     const cnMenuItem = cn("MenuItem");
 
     return (
-        <div className={cnMenuItem()} onClick={props.onClick}>
+        <div className={cnMenuItem({selected:props.current})} onClick={props.onClick}>
             <span className={cnMenuItem("span-logo")}>
                 <ReactSVG
                     src={props.img}

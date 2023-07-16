@@ -1,0 +1,68 @@
+.Recommend{
+  margin: 16px 0 0 0 ;
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  align-self: stretch;
+  background: #F7FAFF;
+  &-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    justify-content: space-between;
+  }
+  &-nameIcon{
+    display: flex;
+    svg{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  &-btn{
+    color: #2477F4;
+    font-family: Montserrat Alternates;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+  }
+  &-title{
+    color: #37476A;
+    font-family: Montserrat Alternates;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    padding: 0 10px;
+  }
+  &-content{
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    font-size: 16px;
+    font-style: normal;
+    font-family: Onest;
+    color: #37476A;
+  }
+  &-text{
+    font-weight: 500;
+  }
+  &-text1{
+    margin:  16px  0 0 0;
+    font-weight: 400;
+  }
+  &-textDark{
+    color: #37476A;
+    font-weight: 500;
+  }
+  &-textBlue{
+    color: #2477F4;
+    font-weight: 500;
+  }
+
+}

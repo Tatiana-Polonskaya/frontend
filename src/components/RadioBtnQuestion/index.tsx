@@ -3,13 +3,6 @@ import "./style.scss";
 import { cn } from "@bem-react/classname";
 import { ReactSVG } from "react-svg";
 import svgg from "../Menu/icons/book.svg";
-import {
-    EnumBody,
-    EnumDeclaration,
-    EnumMember,
-    EnumStringBody,
-    EnumStringMember,
-} from "@babel/types";
 
 import { IQuestion, typeQuestion } from "../../models/survey";
 import { LocalAnswer } from "../../store/slices/survey";
