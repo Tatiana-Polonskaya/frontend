@@ -11,10 +11,13 @@
     font-weight: 600;
     font-size: 20px;
     display: flex;
-    align-items: center;
+    // align-items: center;
     flex-direction: column;
     color: #37476A;
     width: 20%;
+  }
+  &-center-smile{
+    text-align: center;
   }
   &-smile1{
     font-family: 'Montserrat Alternates';
@@ -30,4 +33,6 @@
 
 
   }
+
+
 }
