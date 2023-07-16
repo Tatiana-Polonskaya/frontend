@@ -5,8 +5,10 @@ import {
     IParamsForQueryUserVideo,
     IVideoApiReq,
     IVideoInfo,
+    IVideoStatus,
     IVideoUploadItem,
     IVideoUser,
+    IVideoUserStatus,
 } from "../../../models/video";
 import customFetchBase from "../utils/customFetchBase";
 
@@ -48,6 +50,20 @@ export const videoApi = createApi({
                 };
             },
         }),
+        // заменить интерфейсы
+        getVideoStatusByUser: build.query<
+            // IResponse<IVideoStatus>,
+            IResponse<IVideoUserStatus>,
+            IParamsForQueryUserVideo
+        >({
+            query: ({ page = 0, limit = 6 }) => {
+                return {
+                    url: `/api/video/status`,
+                    params: { page, limit },
+                    method: "GET",
+                };
+            },
+        }),
         getVideoByUser: build.query<
             IResponse<IVideoUser>,
             IParamsForQueryUserVideo
@@ -60,14 +76,15 @@ export const videoApi = createApi({
                 };
             },
         }),
+
         getVideoByUserSearch: build.query<
             IResponse<IVideoUser>,
             IParamsForQueryUserVideo
         >({
-            query: ({ page = 0, limit = 6, search="" }) => {
+            query: ({ page = 0, limit = 6, search = "" }) => {
                 return {
                     url: `/api/video/user`,
-                    params: { page, limit,search },
+                    params: { page, limit, search },
                     method: "GET",
                 };
             },
@@ -81,6 +98,7 @@ export const videoApi = createApi({
                 };
             },
         }),
+
         updateVideoInfoById: build.mutation<IResponse<void>, IVideoUploadItem>({
             query: ({ id, title, description }) => {
                 return {
@@ -105,10 +123,10 @@ export const videoApi = createApi({
                 method: "GET",
             }),
             transformResponse: async (response: any) => {
-                console.log("response", response)
+                console.log("response", response);
                 return {
                     data: await response.blob(),
-                    error: {code:response.status, msg:response.statusText},
+                    error: { code: response.status, msg: response.statusText },
                     success: response.ok,
                 };
             },
@@ -122,6 +140,8 @@ export const {
     useLazyGetMainVideoQuery,
     useGetVideoByIdQuery,
     useLazyGetVideoByIdQuery,
+    useGetVideoStatusByUserQuery,
+    useLazyGetVideoStatusByUserQuery,
     useGetVideoByUserQuery,
     useGetVideoByUserSearchQuery,
     useLazyGetVideoByUserQuery,

@@ -4,13 +4,13 @@ import "./style.scss";
 type Props = {
     citation?: string;
     advice?: string;
-    percent?: number;
+    percent?: string;
 };
 
 export default function VideoLoadProgress({
     citation = "Идет анализ видео...",
     advice = "Какие-то советики",
-    percent = 33,
+    percent = "33",
 }: Props) {
     const cnVideoLoadProgress = cn("load-progress");
 
@@ -23,7 +23,6 @@ export default function VideoLoadProgress({
                     className={cnVideoLoadProgress("bar-fill")}
                     style={{ width: `${percent}%` }}
                 ></div>
-                {"Прогресс панелька"}
             </div>
         </div>
     );

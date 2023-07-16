@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { IVideoFromBack } from "../../models/video";
+import { IVideoFromBack, IVideoStatus } from "../../models/video";
 
 import {
     useGetVideoByUserQuery,
+    useGetVideoStatusByUserQuery,
     useLazyGetVideoByUserSearchQuery,
 } from "../../store/api/userVideo";
 
@@ -245,6 +246,22 @@ export default function DiaryStart() {
         console.log("removed");
     };
 
+    /* ----------------------------- STATUS ------------------------------*/
+    const [currentStatus, setCurrentStatus] = useState<IVideoStatus[]>([]);
+
+    const { data } = useGetVideoStatusByUserQuery({
+        page: 1,
+        limit: 6,
+    });
+    console.log("status");
+    console.log(currentStatus);
+
+    useEffect(() => {
+        if (data && data?.data) {
+            setCurrentStatus(data!.data!.videos);
+        }
+    }, [data]);
+
     return (
         <div>
             <div className={cnDiaryStart("text-h1", { margin_bottom: true })}>
@@ -266,14 +283,18 @@ export default function DiaryStart() {
 
             <RollUp title="Видео на анализе" icon={videoListIcon}>
                 {/* данные по видосикам на анализе которые */}
-                {/* {AnalysisVideosData ? (
-                    AnalysisVideosData.map((el, ind) => (
-                        <VideoLoad el={el} ind={ind} percent={}/>
+                {currentStatus ? (
+                    currentStatus.map((el, ind) => (
+                        <VideoLoad
+                            key={ind}
+                            el={el}
+                            ind={ind}
+                            percent={el.status_percent}
+                        />
                     ))
                 ) : (
                     <div>Нет видео на анализе</div>
-                )} */}
-                <div>Нет видео на анализе</div>
+                )}
             </RollUp>
 
             <RollUp title="Статистика за неделю" icon={statisticIcon}>

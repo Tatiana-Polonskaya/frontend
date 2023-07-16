@@ -2,7 +2,7 @@ import { cn } from "@bem-react/classname";
 import { Fragment, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { IVideoFromBack } from "../../models/video";
-import "./style.scss";
+// import "./style.scss";
 import DescriptionArchiveVideo from "../Archive/DescriptionVideo";
 
 import { convertTime, convertDate } from "../Archive/helpers";
@@ -13,9 +13,16 @@ type Props = {
     ind: number;
     handleClick?: Function;
     visible?: boolean;
+    percent: string;
 };
 
-export default function VideoLoad({ el, ind, handleClick, visible }: Props) {
+export default function VideoLoad({
+    el,
+    ind,
+    handleClick,
+    visible,
+    percent,
+}: Props) {
     const cnArchiveVideo = cn("archive-video");
     return (
         <div className={cnArchiveVideo()}>
@@ -36,7 +43,17 @@ export default function VideoLoad({ el, ind, handleClick, visible }: Props) {
             />
             <div className={cnArchiveVideo("panel")}>
                 {/* сюда передавать процент прогресса */}
-                {!visible && <VideoLoadProgress />}
+                {!visible && (
+                    <VideoLoadProgress
+                        citation={
+                            percent < "60"
+                                ? "Идёт анализ видео"
+                                : "Еще чуть-чуть"
+                        }
+                        advice={"чё-т надо умненькое передать"}
+                        percent={percent}
+                    />
+                )}
             </div>
         </div>
     );

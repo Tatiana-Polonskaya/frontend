@@ -16,8 +16,9 @@
 
         & > div:first-child {
             position: absolute;
-            left: 16px;
-            top: 16px;
+            //  для чего я это делал*?
+            // left: 16px;
+            // top: 16px;
         }
     }
     &-panel {
