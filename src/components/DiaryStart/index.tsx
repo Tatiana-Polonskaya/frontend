@@ -284,7 +284,7 @@ export default function DiaryStart() {
 
             <RollUp title="Видео на анализе" icon={videoListIcon}>
                 {/* данные по видосикам на анализе которые */}
-                {currentStatus ? (
+                {currentStatus.length > 0 ? (
                     currentStatus.map((el, ind) => (
                         <VideoLoad
                             key={ind}
