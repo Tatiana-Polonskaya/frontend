@@ -7,7 +7,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 30px;
-
+    margin-bottom: 20px;
     height: 60px;
 
     cursor: pointer;
@@ -16,7 +16,6 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
     line-height: 20px;
     font-family: 'Montserrat Alternates';
 
@@ -29,7 +28,7 @@
         border-right-color: #2477f4;
         border-right-style: solid; 
         border-right-width: 3px; 
-        border-radius: 40px 0px 0px 40px;
+        border-radius: 40px 0 0 40px;
         color: #2477f4;
 
         & svg {
