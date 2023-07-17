@@ -32,6 +32,33 @@ type Props = {
     values : item []
 }
 const CN = cn("EmotionalScale");
+
+
+function covertData(data:any, inf:IScaleDataType){
+    for (let i = 0; i < data.length - 1; i++){
+        if (data[i].neutral){
+            inf.item.push({
+                title:"",
+                value:data[i].neutral * 100,
+                color:GraphColor.GRAY,
+            });
+        }
+        if (data[i].happiness){
+            inf.item.push({
+                title:"",
+                value:data[i].neutral * 100,
+                color:GraphColor.GREEN,
+            });
+        }
+        if (data[i].anger){
+            inf.item.push({
+                title:"",
+                value:data[i].neutral * 100,
+                color:GraphColor.RED,
+            });
+        }
+    }
+}
 export default function EmotionalScale(props :Props) {
 
     const [activeIndex, setActiveIndex] = useState(1);
@@ -39,7 +66,7 @@ export default function EmotionalScale(props :Props) {
     const checkActive = (index:any, className:any) => activeIndex === index ? className : "";
     let dataAudio = props.values.map(n=> n.audio);
     let dataText = props.values.map(n=> n.text);
-    let dataVideo =props.values.map(n=> n.video)
+    let dataVideo =props.values.map(n=> n.video);
     let infVideo: IScaleDataType = ({
         item:[],
     });
@@ -49,75 +76,15 @@ export default function EmotionalScale(props :Props) {
     let infAudio: IScaleDataType = ({
         item:[],
     });
-    for (let dataAudioKey in dataAudio) {
-        if (dataAudioKey == "0"){
-            infAudio.item.push({
-                title:"Нейтральная",
-                value:dataAudio[dataAudioKey].neutral * 100,
-                color:GraphColor.GRAY,
-            });
-        }
-        if (dataAudioKey.toString() == "1"){
-            infAudio.item.push({
-                title:"Радость",
-                value:dataAudio[dataAudioKey].neutral * 100,
-                color:GraphColor.GREEN,
-            });
-        }
-        if (dataAudioKey.toString() == "2"){
-            infAudio.item.push({
-                title:"Злость",
-                value:dataAudio[dataAudioKey].neutral * 100,
-                color:GraphColor.RED,
-            });
-        }
-    }
-    for (let dataTextKey in dataText) {
-        if (dataTextKey == "0"){
-            infText.item.push({
-                title:"Нейтральная",
-                value:dataText[dataTextKey].neutral * 100,
-                color:GraphColor.GRAY,
-            });
-        }
-        if (dataTextKey.toString() == "1"){
-            infText.item.push({
-                title:"Радость",
-                value:dataText[dataTextKey].neutral * 100,
-                color:GraphColor.GREEN,
-            });
-        }
-        if (dataTextKey.toString() == "2"){
-            infText.item.push({
-                title:"Злость",
-                value:dataText[dataTextKey].neutral * 100,
-                color:GraphColor.RED,
-            });
-        }
-    }
-    for (let dataVideoKey in dataText) {
-        if (dataVideoKey == "0"){
-            infVideo.item.push({
-                title:"Нейтральная",
-                value:dataVideo[dataVideoKey].neutral * 100,
-                color:GraphColor.GRAY,
-            });
-        }
-        if (dataVideoKey.toString() == "1"){
-            infVideo.item.push({
-                title:"Радость",
-                value:dataVideo[dataVideoKey].neutral * 100,
-                color:GraphColor.GREEN,
-            });
-        }
-        if (dataVideoKey.toString() == "2"){
-            infVideo.item.push({
-                title:"Злость",
-                value:dataVideo[dataVideoKey].neutral * 100,
-                color:GraphColor.RED,
-            });
-        }
-    }
+    console.log(dataAudio);
+    console.log('45454545454')
+
+    covertData(dataAudio, infAudio);
+    covertData(dataText, infText);
+    covertData(dataVideo, infVideo);
+
+    console.log(infAudio);
+    console.log('232323232')
 
     return (
         <>
