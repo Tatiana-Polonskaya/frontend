@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IVideoFromBack, IVideoStatus } from "../../models/video";
 
 import {
@@ -244,6 +244,7 @@ export default function DiaryStart() {
         setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
 
     /* ----------------------------- STATUS ------------------------------*/
+
     const [currentStatus, setCurrentStatus] = useState<IVideoStatus[]>([]);
 
     const { data } = useGetVideoStatusByUserQuery({
@@ -286,7 +287,7 @@ export default function DiaryStart() {
 
             <RollUp title="Видео на анализе" icon={videoListIcon}>
                 {/* данные по видосикам на анализе которые */}
-                {currentStatus ? (
+                {currentStatus.length > 0 ? (
                     currentStatus.map((el, ind) => (
                         <VideoLoad
                             key={ind}
