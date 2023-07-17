@@ -50,7 +50,7 @@ export default function VideoLoad({
                                 ? "Идёт анализ видео"
                                 : "Еще чуть-чуть"
                         }
-                        advice={"чё-т надо умненькое передать"}
+                        advice={"Какие-то цитатки/советы и тд..."}
                         percent={percent}
                     />
                 )}

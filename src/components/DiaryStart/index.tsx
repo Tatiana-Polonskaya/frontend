@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IVideoFromBack, IVideoStatus } from "../../models/video";
 
 import {
@@ -244,17 +244,23 @@ export default function DiaryStart() {
         setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
 
     /* ----------------------------- STATUS ------------------------------*/
-    const [currentStatus, setCurrentStatus] = useState<IVideoStatus[]>([]);
 
-    const { data } = useGetVideoStatusByUserQuery({
-        page: 1,
-        limit: 6,
-    });
+    const INTERVAL_PULLING = 60000; // milliseconds
 
-    useEffect(() => {
-        if (data && data?.data) {
-            setCurrentStatus(data!.data!.videos);
+    const { data } = useGetVideoStatusByUserQuery(
+        {
+            page: 1,
+            limit: 6,
+        },
+        {
+            pollingInterval: INTERVAL_PULLING,
         }
+    );
+
+    const currentStatus = useMemo(() => {
+        if (data && data?.data) {
+            return data!.data!.videos;
+        } else return [];
     }, [data]);
 
     return (
@@ -296,8 +302,14 @@ export default function DiaryStart() {
                 <div className={cnDiaryStart("row")}>
                     {achievementsData && (
                         <>
-                            <BadGoodBlock type={TYPE_ACHIEVEMENTS.improvements} text={achievementsData.improvements}/>
-                            <BadGoodBlock type={TYPE_ACHIEVEMENTS.deterioration} text={achievementsData.deterioration}/>
+                            <BadGoodBlock
+                                type={TYPE_ACHIEVEMENTS.improvements}
+                                text={achievementsData.improvements}
+                            />
+                            <BadGoodBlock
+                                type={TYPE_ACHIEVEMENTS.deterioration}
+                                text={achievementsData.deterioration}
+                            />
                         </>
                     )}
                 </div>
