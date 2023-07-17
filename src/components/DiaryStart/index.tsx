@@ -247,15 +247,23 @@ export default function DiaryStart() {
     const [currentStatus, setCurrentStatus] = useState<IVideoStatus[]>([]);
 
     const { data } = useGetVideoStatusByUserQuery({
-        page: 1,
-        limit: 6,
+        page: currentPage,
+        limit: videosPerPage,
     });
 
     useEffect(() => {
         if (data && data?.data) {
             setCurrentStatus(data!.data!.videos);
+            setCountAnalysisVideos(data!.data.total_videos);
         }
     }, [data]);
+
+    // console.log("data");
+    // console.log(data);
+    // console.log("currentStatus");
+    // console.log(currentStatus);
+
+    const [countAnalysisVideos, setCountAnalysisVideos] = useState<number>(0);
 
     return (
         <div>
@@ -290,14 +298,32 @@ export default function DiaryStart() {
                 ) : (
                     <div>Нет видео на анализе</div>
                 )}
+                {currentStatus ? (
+                    <Pagination
+                        videosPerPage={videosPerPage}
+                        totalVideos={countAnalysisVideos}
+                        paginate={paginate}
+                        funcNextPage={nextPage}
+                        funcPrevPage={prevPage}
+                        currentPage={currentPage + 1}
+                    />
+                ) : (
+                    <div style={{ display: "none" }}></div>
+                )}
             </RollUp>
 
             <RollUp title="Статистика за неделю" icon={statisticIcon}>
                 <div className={cnDiaryStart("row")}>
                     {achievementsData && (
                         <>
-                            <BadGoodBlock type={TYPE_ACHIEVEMENTS.improvements} text={achievementsData.improvements}/>
-                            <BadGoodBlock type={TYPE_ACHIEVEMENTS.deterioration} text={achievementsData.deterioration}/>
+                            <BadGoodBlock
+                                type={TYPE_ACHIEVEMENTS.improvements}
+                                text={achievementsData.improvements}
+                            />
+                            <BadGoodBlock
+                                type={TYPE_ACHIEVEMENTS.deterioration}
+                                text={achievementsData.deterioration}
+                            />
                         </>
                     )}
                 </div>
