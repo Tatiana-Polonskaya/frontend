@@ -52,6 +52,7 @@ export interface IVideoStatus {
     file_path: string;
     status_percent: string;
     status_video: string;
+    quote: string;
 }
 
 export interface IVideoUploadItem {

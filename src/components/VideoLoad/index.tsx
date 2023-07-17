@@ -1,7 +1,7 @@
 import { cn } from "@bem-react/classname";
 import { Fragment, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import { IVideoFromBack } from "../../models/video";
+import { IVideoStatus } from "../../models/video";
 // import "./style.scss";
 import DescriptionArchiveVideo from "../Archive/DescriptionVideo";
 
@@ -9,7 +9,7 @@ import { convertTime, convertDate } from "../Archive/helpers";
 import VideoLoadProgress from "../VideoLoadProgress";
 
 type Props = {
-    el: IVideoFromBack;
+    el: IVideoStatus;
     ind: number;
     handleClick?: Function;
     visible?: boolean;
@@ -50,7 +50,7 @@ export default function VideoLoad({
                                 ? "Идёт анализ видео"
                                 : "Еще чуть-чуть"
                         }
-                        advice={"Какие-то цитатки/советы и тд..."}
+                        advice={el.quote}
                         percent={percent}
                     />
                 )}
