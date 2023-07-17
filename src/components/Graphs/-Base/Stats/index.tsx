@@ -61,28 +61,27 @@ export default function GraphBaseStats({
             )}
             <div className={cnStrangeGraph("wrapper")}>
                 <div>
-                    {items.map((el, ind) =>
-                        ind !== 0 ? (
-                            <div
-                                key={ind}
-                                className={cnStrangeGraph("frame")}
-                                style={{
-                                    top: `${
-                                        190 - (34 * (el.value * 100)) / 20
-                                    }px`,
+                    {!visible &&
+                        items.map((el, ind) =>
+                            ind !== 0 ? (
+                                <div
+                                    key={ind}
+                                    className={cnStrangeGraph("frame")}
+                                    style={{
+                                        top: `${
+                                            190 - (34 * (el.value * 100)) / 20
+                                        }px`,
 
-                                    right: `calc(${12.5 * (8 - ind)}% +  ${
-                                        (50 / 8) * (8 - ind)
-                                    }px)`,
-                                    transform: "translate(50%, -50%)",
-                                }}
-                            >
-                                <ReactSVG src={frameHelper(el.prev)} />
-                            </div>
-                        ) : (
-                            undefined
-                        )
-                    )}
+                                        right: `calc(${12.5 * (8 - ind)}% +  ${
+                                            (50 / 8) * (8 - ind)
+                                        }px)`,
+                                        transform: "translate(50%, -50%)",
+                                    }}
+                                >
+                                    <ReactSVG src={frameHelper(el.prev)} />
+                                </div>
+                            ) : undefined
+                        )}
                 </div>
                 {props.children}
                 <div className={cnStrangeGraph("description-y")}>

@@ -18,7 +18,7 @@ const X = "value";
 const pX = "prev";
 
 function createXDataDescriptionFromData(data: IStatisticItem[]) {
-    return data.map(el=>el.date);
+    return data.map((el) => el.date);
 }
 
 export default function StatsGraph({ data }: Props) {
@@ -52,8 +52,8 @@ export default function StatsGraph({ data }: Props) {
             descriptionX={createXDataDescriptionFromData(data)}
             descriptionY={[0, 0.2, 0.4, 0.6, 0.8, 1]}
             withMedian={false}
-            visible={restruction().length > 0 ? false : true}
-            // data={data}
+            // поменять по времени, 7 дней
+            visible={restruction().length > 7 ? false : true}
         />
     );
 }
