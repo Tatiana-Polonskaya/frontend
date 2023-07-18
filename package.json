@@ -63,5 +63,5 @@
         "@types/react-slick": "^0.23.10",
         "@types/tiny-slider-react": "^0.3.4"
     },
-    "proxy": "http://dev.speech-up.online"
+    "proxy": "https://dev.speech-up.online"
 }
