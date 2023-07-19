@@ -40,10 +40,11 @@ export const TIMER_STATUS = {
 const LIMIT_TIMER = 15;
 
 export default function RecodingPage() {
-    const navigate = useNavigate();
+    /* ----------------------------------- CONST BLOCK ----------------------------------- */
     const cnRecoding = cn("RecodingPage");
     const loadingPicture = "/images/loading.svg"; //path to public
 
+    const navigate = useNavigate();
     const { state } = useLocation();
     const { basicPlan, isTimer } = state;
 
@@ -58,7 +59,7 @@ export default function RecodingPage() {
         setIsTimerStart(value);
     };
 
-    // modal params
+    /* ----------------------------------- MODAL PARAMS BLOCK ----------------------------------- */
     const [isModal, setModal] = useState(false);
     const [currentFile, setCurrentFile] = useState<File>(new File([], "empty"));
 
@@ -67,19 +68,21 @@ export default function RecodingPage() {
         setModal(false);
     };
 
-    const [isWarning, setIsWarning] = useState(true); // поменять когда будет доступ к камере на false и использовать при колбэке от камеры
+    const [isWarning, setIsWarning] = useState(false); // поменять когда будет доступ к камере на false и использовать при колбэке от камеры
+
     const closeWarningModal = () => {
         setIsWarning(false);
     };
 
-    // webcam params
+    /* ----------------------------------- WEBCAM PARAMS BLOCK ----------------------------------- */
 
-    const [canStart, setCanStart] = useState(false);
+    const [canStart, setCanStart] = useState(true);
 
     const webcamRef = useRef<Webcam>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const [capturing, setCapturing] = useState(false);
     const [recordedChunks, setRecordedChunks] = useState([]);
+
 
     const handleDataAvailable = useCallback(
         ({ data }: any) => {
@@ -91,21 +94,23 @@ export default function RecodingPage() {
     );
 
     const handleStartCaptureClick = useCallback(() => {
-        if(canStart){
-        updateIsTimerStart(TIMER_STATUS.START);
-        setCapturing(true);
-        mediaRecorderRef.current = new MediaRecorder(
-            webcamRef?.current?.stream as MediaStream,
-            {
-                mimeType: "video/webm",
-            }
-        );
-        mediaRecorderRef.current.addEventListener(
-            "dataavailable",
-            handleDataAvailable
-        );
-        mediaRecorderRef.current.start();
-        console.log(mediaRecorderRef.current)}
+        console.log(canStart, "canStart")
+        if (canStart) {
+            updateIsTimerStart(TIMER_STATUS.START);
+            setCapturing(true);
+            mediaRecorderRef.current = new MediaRecorder(
+                webcamRef?.current?.stream as MediaStream,
+                {
+                    mimeType: "video/webm",
+                }
+            );
+            mediaRecorderRef.current.addEventListener(
+                "dataavailable",
+                handleDataAvailable
+            );
+            mediaRecorderRef.current.start();
+            console.log(mediaRecorderRef.current);
+        }
     }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
 
     const handleStopCaptureClick = useCallback(() => {
@@ -119,9 +124,11 @@ export default function RecodingPage() {
             const file = new Blob(recordedChunks, {
                 type: "video/webm",
             });
-            setCurrentFile(new File([file], "Recoding Repetition",{
-                type: "video/webm",
-            }));
+            setCurrentFile(
+                new File([file], "Recoding Repetition", {
+                    type: "video/webm",
+                })
+            );
             setRecordedChunks([]);
         }
     }, [recordedChunks]);
@@ -140,8 +147,29 @@ export default function RecodingPage() {
         facingMode: "user",
     };
 
+    const [devices, setDevices] = useState([]);
 
-    // loading modal
+    const handleDevices = useCallback(
+        (mediaDevices: any) =>
+            setDevices(
+                mediaDevices.filter(({ kind }: any) => kind === "videoinput")
+            ),
+        [setDevices]
+    );
+
+    useEffect(() => {
+        if (devices) {
+            // console.log(devices.length>= 1)
+            if (devices.length >= 1) setCanStart(true);
+            else  setCanStart(false);
+        }
+    }, [devices]);
+
+    useEffect(() => {
+        navigator.mediaDevices.enumerateDevices().then(handleDevices);
+    }, [handleDevices]);
+
+    /* ----------------------------------- LOADING MODAL PARAMS BLOCK ----------------------------------- */
     const [isLoadingModal, setIsLoadingModal] = useState(false);
     const [currentInfoData, setCurrentInfoData] =
         useState<IInfoVideo>(initialInfoVideo);
@@ -172,7 +200,6 @@ export default function RecodingPage() {
         setIsLoadingModal(false);
     };
 
-
     // answers from back
     useEffect(() => {
         if (isSuccess) {
@@ -190,7 +217,7 @@ export default function RecodingPage() {
         if (isError) {
             const error = videoSendResponse.error as Response;
             console.log(videoSendResponse.error);
-            setCurrentFile(new File([], "empty")); 
+            setCurrentFile(new File([], "empty"));
             setCurrentInfoData(initialInfoVideo);
         }
     }, [isError]);
@@ -207,8 +234,12 @@ export default function RecodingPage() {
                             ref={webcamRef}
                             muted={true}
                             videoConstraints={videoConstraints}
-                            onUserMediaError={e=> console.log("onUserMediaError", e)}
-                            onUserMedia={e=>console.log("onUserMedia", e)}
+                            onUserMediaError={(e) => {
+                                setCanStart(false);
+                                setIsWarning(true);
+                                console.log("onUserMediaError", e);
+                            }}
+                            onUserMedia={(e) => console.log("onUserMedia", e)}
                         />
 
                         <div className={cnRecoding("button-block")}>
@@ -222,7 +253,9 @@ export default function RecodingPage() {
                             ) : (
                                 <>
                                     <button
-                                        className={cnRecoding("button", {disable: !canStart})}
+                                        className={cnRecoding("button", {
+                                            disable: !canStart,
+                                        })}
                                         onClick={handleStartCaptureClick}
                                     >
                                         <ReactSVG
@@ -298,48 +331,46 @@ export default function RecodingPage() {
                         onClose={closeLoadingModal}
                         closeOnClickOutside={!isLoading}
                     >
-                        {(isLoading || (isErrorWithSuccess || isError)) && (
-                                <div className={cnRecoding("loading")}>
-                                    <ReactSVG
-                                        src={
-                                            process.env.PUBLIC_URL +
-                                            loadingPicture
-                                        }
-                                        className={cnRecoding("loading-img")}
-                                    />
-                                    {isLoading && (
-                                        <>
-                                            <div
-                                                className={cnRecoding(
-                                                    "loading-title"
-                                                )}
-                                            >
-                                                Идет загрузка видео...
-                                            </div>
-                                            <div
-                                                className={cnRecoding(
-                                                    "loading-description"
-                                                )}
-                                            >
-                                                Пожалуйста, не закрывайте
-                                                вкладку до окончания загрузки.
-                                            </div>
-                                        </>
-                                    )}
-                                    {(isErrorWithSuccess || isError) && (
-                                        <>
-                                            <div
-                                                className={cnRecoding(
-                                                    "loading-title-error"
-                                                )}
-                                            >
-                                                Произошла ошибка, попробуйте еще
-                                                раз
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
-                            )}
+                        {(isLoading || isErrorWithSuccess || isError) && (
+                            <div className={cnRecoding("loading")}>
+                                <ReactSVG
+                                    src={
+                                        process.env.PUBLIC_URL + loadingPicture
+                                    }
+                                    className={cnRecoding("loading-img")}
+                                />
+                                {isLoading && (
+                                    <>
+                                        <div
+                                            className={cnRecoding(
+                                                "loading-title"
+                                            )}
+                                        >
+                                            Идет загрузка видео...
+                                        </div>
+                                        <div
+                                            className={cnRecoding(
+                                                "loading-description"
+                                            )}
+                                        >
+                                            Пожалуйста, не закрывайте вкладку до
+                                            окончания загрузки.
+                                        </div>
+                                    </>
+                                )}
+                                {(isErrorWithSuccess || isError) && (
+                                    <>
+                                        <div
+                                            className={cnRecoding(
+                                                "loading-title-error"
+                                            )}
+                                        >
+                                            Произошла ошибка, попробуйте еще раз
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        )}
                         {isSuccess && (
                             <div className={cnRecoding("loading")}>
                                 <ReactSVG
@@ -352,14 +383,16 @@ export default function RecodingPage() {
                                     <div
                                         className={cnRecoding("loading-title")}
                                     >
-                                        Загрузка видео успешно завершена и отправлена на анализ
+                                        Загрузка видео успешно завершена и
+                                        отправлена на анализ
                                     </div>
                                     <div
                                         className={cnRecoding(
                                             "loading-description"
                                         )}
                                     >
-                                        По его окончании вы сможете ознакомиться с результатами в разделе{" "}
+                                        По его окончании вы сможете ознакомиться
+                                        с результатами в разделе{" "}
                                         <span
                                             className={cnRecoding(
                                                 "loading-title-link"
@@ -376,14 +409,16 @@ export default function RecodingPage() {
                         )}
                     </ModalWindow>
 
-
                     <ModalWindow
                         isVisible={isWarning}
                         onClose={closeWarningModal}
                         title={"Предупреждение"}
                     >
                         <div className={cnRecoding("warning-message")}>
-                            Невозможно подключиться к камере, попробуйте позже или <Link to={RoutesEnum.REPETITION}>загрузите</Link> уже готовую репетицию.
+                            Невозможно подключиться к камере, попробуйте позже
+                            или{" "}
+                            <Link to={RoutesEnum.REPETITION}>загрузите</Link>{" "}
+                            уже готовую репетицию.
                         </div>
                     </ModalWindow>
                 </div>

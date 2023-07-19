@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ForwardedInput } from "../ui-kit/Input";
 import Button from "../ui-kit/Button";
 import { VideoUploadContext } from "../RepetitionComponents/RepetitionStart";
@@ -55,7 +55,6 @@ export default function PreviewBlock({
     // get videofile from content
     const { currentFile, setCurrentInfoData } = useContext(VideoUploadContext);
 
-    const [durationVideo, setDurationVideo] = useState(0);
     const [sizeVideo, setSizeVideo] = useState(0);
     const [canMoved, setCanMoved] = useState(false);
     const [isNormDuration, setIsNormDuration] = useState(true);
@@ -95,23 +94,36 @@ export default function PreviewBlock({
         }
     }, [videoRef.current]);
 
-    const getDurationVideo = (n: number) => {
-        if (!n) return;
-        // console.log(n);
-        if (n === 0 && currentFile.size === 0) return;
-        if (n === Infinity) setDurationVideo(0);
-        else setDurationVideo(n);
-        const normDuration = getPrettyDuration(durationVideo);
-        if (normDuration <= NORM_COUNT_MINUTES) {
-            setCanMoved(true);
-        } else {
-            setIsNormDuration(false);
-            setCanMoved(false);
+    const [durationVideo, setDurationVideo] = useState(0);
+
+    const getDurationVideo = async (n: number) => {
+        if (n) {
+            if (n === 0 && currentFile.size === 0) setDurationVideo(0);
+            if (n === Infinity) setDurationVideo(0);
+            else setDurationVideo(n);
         }
     };
 
     useEffect(() => {
-        if (currentFile && currentFile.size > 0) setSizeVideo(currentFile.size);
+        if (durationVideo > 0) {
+            const normDuration = getPrettyDuration(durationVideo);
+            if (normDuration <= NORM_COUNT_MINUTES) {
+                setCanMoved(true);
+            } else {
+                setIsNormDuration(false);
+                setCanMoved(false);
+            }
+        }
+    }, [durationVideo]);
+
+    // const durationVideoTest = useMemo(() => {
+    //     console
+    // }, [durationVideo]);
+
+    useEffect(() => {
+        if (currentFile && currentFile.size > 0) {
+            setSizeVideo(currentFile.size);
+        }
     }, [currentFile]);
 
     const clickUpload = async () => {
@@ -133,7 +145,7 @@ export default function PreviewBlock({
         <>
             <div className={cnPreview()}>
                 <div className={cnPreview("row")}>
-                 <div className={cnPreview("col")}>
+                    <div className={cnPreview("col")}>
                         <div className={cnPreview("video-block")}>
                             {currentFile && (
                                 <ReactPlayer
@@ -142,6 +154,7 @@ export default function PreviewBlock({
                                     ref={videoRef}
                                     url={URL.createObjectURL(currentFile)}
                                     muted={true}
+                                    
                                     controls={true}
                                     onDuration={getDurationVideo}
                                 />
