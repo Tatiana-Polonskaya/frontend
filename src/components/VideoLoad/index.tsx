@@ -14,6 +14,7 @@ type Props = {
     handleClick?: Function;
     visible?: boolean;
     percent: string;
+    isAllow: boolean;
 };
 
 export default function VideoLoad({
@@ -22,6 +23,7 @@ export default function VideoLoad({
     handleClick,
     visible,
     percent,
+    isAllow,
 }: Props) {
     const cnArchiveVideo = cn("archive-video");
     return (
@@ -40,6 +42,7 @@ export default function VideoLoad({
                 title={`${el.title}`}
                 time={convertTime(el.duration)}
                 date={convertDate(el.upload_date)}
+                isAllow={isAllow}
             />
             <div className={cnArchiveVideo("panel")}>
                 {/* сюда передавать процент прогресса */}

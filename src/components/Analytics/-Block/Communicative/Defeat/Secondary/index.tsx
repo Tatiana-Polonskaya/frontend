@@ -95,13 +95,34 @@ export default function SecondaryDefeat(props: Props) {
                                 ? GraphColor.RED
                                 : GraphColor.DARKGRAY
                         );
-                        arrParam[strArr.indexOf(subStr)].description.push(
+                        if (
+                            !arrParam[
+                                strArr.indexOf(subStr)
+                            ].description.includes("слова-паразиты") &&
                             e[0] === "0"
-                                ? "слова-паразиты"
-                                : e[0] === "1"
-                                ? "когнитивные искажения"
-                                : "агрессивность"
-                        );
+                        ) {
+                            arrParam[strArr.indexOf(subStr)].description.push(
+                                "слова-паразиты"
+                            );
+                        } else if (
+                            !arrParam[
+                                strArr.indexOf(subStr)
+                            ].description.includes("когнитивные искажения") &&
+                            e[0] === "1"
+                        ) {
+                            arrParam[strArr.indexOf(subStr)].description.push(
+                                "когнитивные искажения"
+                            );
+                        } else if (
+                            !arrParam[
+                                strArr.indexOf(subStr)
+                            ].description.includes("агрессивность") &&
+                            e[0] === "2"
+                        ) {
+                            arrParam[strArr.indexOf(subStr)].description.push(
+                                "агрессивность"
+                            );
+                        }
                     }
                 } else if (subStr.includes(" ")) {
                     // если подстрока
@@ -145,13 +166,34 @@ export default function SecondaryDefeat(props: Props) {
                                         ? GraphColor.RED
                                         : GraphColor.DARKGRAY
                                 );
-                                arrParam[i + k].description.push(
+                                if (
+                                    !arrParam[i + k].description.includes(
+                                        "слова-паразиты"
+                                    ) &&
                                     e[0] === "0"
-                                        ? "слова-паразиты"
-                                        : e[0] === "1"
-                                        ? "когнитивные искажения"
-                                        : "агрессивность"
-                                );
+                                ) {
+                                    arrParam[i + k].description.push(
+                                        "слова-паразиты"
+                                    );
+                                } else if (
+                                    !arrParam[i + k].description.includes(
+                                        "когнитивные искажения"
+                                    ) &&
+                                    e[0] === "1"
+                                ) {
+                                    arrParam[i + k].description.push(
+                                        "когнитивные искажения"
+                                    );
+                                } else if (
+                                    !arrParam[i + k].description.includes(
+                                        "агрессивность"
+                                    ) &&
+                                    e[0] === "2"
+                                ) {
+                                    arrParam[i + k].description.push(
+                                        "агрессивность"
+                                    );
+                                }
                             }
                         }
                     }

@@ -31,7 +31,9 @@ export default function MainOriginally(props: Props) {
                     <ProgressLine
                         key={ind}
                         info={el}
-                        value={props.positions[ind]}
+                        // на тест убрать
+                        // value={props.positions[ind]}
+                        value={props.positions[ind] !== 0 ? 0 : 0}
                     />
                 ))}
             </div>

@@ -8,6 +8,7 @@
     padding: 16px;
     gap: 16px;
     font-family: "Onest";
+    margin-top: 1rem;
 
     // width: 1216px;
     // height: 88px;
@@ -43,6 +44,7 @@
         font-size: 16px;
         line-height: 20px;
         color: #2477f4;
+        cursor: pointer;
     }
 
     &-content {
@@ -60,7 +62,7 @@
         }
 
         & > .active {
-            white-space: wrap;
+            white-space: normal;
         }
     }
 }

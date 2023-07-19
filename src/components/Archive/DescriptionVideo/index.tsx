@@ -6,12 +6,14 @@ import { ReactSVG } from "react-svg";
 import { UUID } from "crypto";
 import RoutesEnum from "../../../models/routes";
 import { Link, useNavigate } from "react-router-dom";
+import { Background } from "react-speedometer/dist";
 
 type Props = {
     id: UUID;
     title: string;
     time: string;
     date: string;
+    isAllow: boolean;
 };
 
 export default function DescriptionArchiveVideo({
@@ -19,6 +21,7 @@ export default function DescriptionArchiveVideo({
     title,
     date,
     time,
+    isAllow,
 }: Props) {
     const cnDescriptionArchiveVideo = cn("archive-video-description");
     const navigate = useNavigate();
@@ -39,9 +42,19 @@ export default function DescriptionArchiveVideo({
             </div>
             <div
                 className={cnDescriptionArchiveVideo("btn")}
-                onClick={() => {
-                    navigate(RoutesEnum.DIARY + "/" + id);
+                style={{
+                    backgroundColor: isAllow
+                        ? "#ffb800"
+                        : "rgba(124, 142, 181, 0.2)",
+                    cursor: isAllow ? "pointer" : "default",
                 }}
+                onClick={
+                    isAllow
+                        ? () => {
+                              navigate(RoutesEnum.DIARY + "/" + id);
+                          }
+                        : () => {}
+                }
             >
                 <div className={cnDescriptionArchiveVideo("btn-descr")}>
                     {"Перейти"}

@@ -24,6 +24,7 @@ import BadGoodBlock, { TYPE_ACHIEVEMENTS } from "../BadGoodBlock";
 import BlockGeneralAnalytics from "../BlockGeneralAnalytics";
 
 import "./style.scss";
+import percentHelper from "./helper";
 import ArchiveVideoItem from "../Archive/ArchiveVideoItem";
 
 import {
@@ -37,17 +38,17 @@ import RecommendationDairyGraph from "../RecommendationDairyGraph";
 import VideoLoad from "../VideoLoad";
 import ArchiveVideo from "../Archive/ArchiveVideo";
 
-const sectionTitles = {
-    total: "Общий результат",
-    connectivity: "Связность",
-    argumentativeness: "Аргументированность",
-    clarity: "Ясность",
-    dynamism: "Динамизм",
-    persuasiveness: "Убедительность",
-    communicative: "Коммуникативные нормы",
-};
-
 export default function DiaryStart() {
+    const sectionTitles = {
+        total: "Общий результат",
+        connectivity: "Связность",
+        argumentativeness: "Аргументированность",
+        clarity: "Ясность",
+        dynamism: "Динамизм",
+        persuasiveness: "Убедительность",
+        communicative: "Коммуникативные нормы",
+    };
+
     const cnDiaryStart = cn("DiaryStart");
 
     const [currentPage, setCurrentPage] = useState(0);
@@ -245,26 +246,34 @@ export default function DiaryStart() {
 
     /* ----------------------------- STATUS ------------------------------*/
 
+    const INTERVAL_PULLING = 10000; //milliseconds
+
     const [currentStatus, setCurrentStatus] = useState<IVideoStatus[]>([]);
 
-    const { data } = useGetVideoStatusByUserQuery({
-        page: currentPage,
-        limit: videosPerPage,
-    });
+    const { data } = useGetVideoStatusByUserQuery(
+        {
+            page: currentPage,
+            limit: videosPerPage,
+        },
+        {
+            pollingInterval: INTERVAL_PULLING,
+        }
+    );
+
+    const [countAnalysisVideos, setCountAnalysisVideos] = useState<number>(0);
+
+    const currStatus = useMemo(() => {
+        if (data && data.data) {
+            return data!.data!.videos;
+        } else return [];
+    }, [data]);
 
     useEffect(() => {
         if (data && data?.data) {
             setCurrentStatus(data!.data!.videos);
             setCountAnalysisVideos(data!.data.total_videos);
         }
-    }, [data]);
-
-    // console.log("data");
-    // console.log(data);
-    // console.log("currentStatus");
-    // console.log(currentStatus);
-
-    const [countAnalysisVideos, setCountAnalysisVideos] = useState<number>(0);
+    }, [data, currStatus]);
 
     return (
         <div>
@@ -294,6 +303,7 @@ export default function DiaryStart() {
                             el={el}
                             ind={ind}
                             percent={el.status_percent}
+                            isAllow={false}
                         />
                     ))
                 ) : (
@@ -332,12 +342,16 @@ export default function DiaryStart() {
                 <Tabs type={TYPE_TABS.PERCENT}>
                     {statsData &&
                         sectionTitles &&
+                        totalJSON &&
                         Object.entries(sectionTitles).map(
                             ([key, value], idx) => (
                                 <div
                                     key={idx}
                                     data-title={value}
-                                    data-value="0%"
+                                    data-value={`${percentHelper(
+                                        totalJSON.data?.data,
+                                        key
+                                    )}%`}
                                     style={{ width: "100%" }}
                                 >
                                     <StatsGraph

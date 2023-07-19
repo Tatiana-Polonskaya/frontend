@@ -91,6 +91,7 @@ export default function ArchiveVideoItem({
                 title={`${el.title}`}
                 time={convertTime(el.duration)}
                 date={convertDate(el.upload_date)}
+                isAllow={true}
             />
             <div className={cnArchiveVideo("panel")}>
                 {/* {!visible && <VideoLoadProgress />} */}

@@ -1,7 +1,9 @@
 .load-progress {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 100%;
-    padding-top: 34.5px;
-    padding-bottom: 26.5px;
+    padding: 15px 0;
 
     &-title {
         color: #37476a;
@@ -10,7 +12,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: normal;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.2rem;
     }
 
     &-subtitle {
@@ -20,7 +22,6 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-        margin-bottom: 1rem;
     }
 
     &-bar {

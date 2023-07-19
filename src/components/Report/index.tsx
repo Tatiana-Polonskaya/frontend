@@ -28,7 +28,15 @@ import {
     convertExpressivenessDataLine,
 } from "../Analytics/helpers";
 
-import { getTotalResult } from "./helpers";
+import {
+    ISectionRecomendation,
+    argumentativenessRecomendation,
+    communicativeRecomendation,
+    getTotalResult,
+    judgmentHelper,
+    persuasivenessRecomendation,
+    statmentHelper,
+} from "./helpers";
 
 import ColorfulTabs from "../ColorfulTabs";
 import {
@@ -103,10 +111,10 @@ import textForEnergySmile from "../Graphs/EnergySmile/text";
 
 import AddTextUnityOfStyle from "../Graphs/unityOfStyle/text";
 
-
 import noteIcon from "./assets/note.svg";
 import arrowLeft from "./assets/arrowLeft.svg";
 import "./style.scss";
+import Recomendation from "../Analytics/-Block/-Recomendation";
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
@@ -272,6 +280,34 @@ export default function AnalysisReport() {
             setTotalData(TotalDataFromBack.data.data);
     }, [TotalDataFromBack]);
 
+    // console.log("expressivenessData");
+    // console.log(expressivenessData);
+
+    // ----------------------RECOMENDATION----------------------
+    const [connectivityRec, setConnectivityRec] = useState<string[]>([]);
+    const [argumentativenessRec, setArgumentativenessRec] = useState<string[]>(
+        []
+    );
+    const [clarityRec, setClarityRec] = useState<string[]>([]);
+    const [dynamismRec, setDynamismRec] = useState<string[]>([]);
+    const [persuasivenessRec, setPersuasivenessRec] = useState<string[]>([]);
+    const [communicativeRec, setCommunicativeRec] = useState<string[]>([]);
+
+    useEffect(() => {
+        if (totalData) {
+            const curArgumentativenessRec = argumentativenessRec;
+            curArgumentativenessRec?.push(
+                argumentativenessRecomendation(
+                    totalData!.values.connectedness,
+                    argumentativenessData?.originality!,
+                    argumentativenessData?.citation!,
+                    argumentativenessData?.borrowing!
+                )
+            );
+            setArgumentativenessRec(curArgumentativenessRec);
+        }
+    }, [totalData]);
+
     return (
         <div className={cnReport()}>
             <div className={cnReport("btn-back")}>
@@ -314,7 +350,11 @@ export default function AnalysisReport() {
                                 className={cnReport("width")}
                                 title="Личная заметка"
                             >
-                                <VideoNotice idVideo={videoInfo.id} description={videoInfo.description} title={videoInfo.title}/>
+                                <VideoNotice
+                                    idVideo={videoInfo.id}
+                                    description={videoInfo.description}
+                                    title={videoInfo.title}
+                                />
                             </div>
                         )}
                         <div
@@ -356,7 +396,9 @@ export default function AnalysisReport() {
                         {connectivityData && (
                             <Dropdown
                                 title={"Последовательность"}
-                                subtitle={`Потеря логической связи в ${connectivityData.controversy} высказываниях`}
+                                subtitle={`${statmentHelper(
+                                    connectivityData.controversy
+                                )}`}
                                 visible={
                                     <MainSubsequence
                                         data={connectivityData.values.map(
@@ -414,17 +456,21 @@ export default function AnalysisReport() {
                         {unityOfStyleData && (
                             <Dropdown
                                 title={"Единство стиля"}
-                                subtitle={AddTextUnityOfStyle(unityOfStyleData.scientific,
-                                                                unityOfStyleData.official,
-                                                                unityOfStyleData.publicistic,
-                                                                unityOfStyleData.colloquial,
-                                                                unityOfStyleData.artistic)}
+                                subtitle={AddTextUnityOfStyle(
+                                    unityOfStyleData.scientific,
+                                    unityOfStyleData.official,
+                                    unityOfStyleData.publicistic,
+                                    unityOfStyleData.colloquial,
+                                    unityOfStyleData.artistic
+                                )}
                                 visible={
                                     <UnityOfStylScale
                                         scientific={unityOfStyleData.scientific}
                                         artistic={unityOfStyleData.artistic}
                                         official={unityOfStyleData.official}
-                                        publicistic={unityOfStyleData.publicistic}
+                                        publicistic={
+                                            unityOfStyleData.publicistic
+                                        }
                                         colloquial={unityOfStyleData.colloquial}
                                     />
                                 }
@@ -433,13 +479,21 @@ export default function AnalysisReport() {
                                         scientific={unityOfStyleData.scientific}
                                         artistic={unityOfStyleData.artistic}
                                         official={unityOfStyleData.official}
-                                        publicistic={unityOfStyleData.publicistic}
+                                        publicistic={
+                                            unityOfStyleData.publicistic
+                                        }
                                         colloquial={unityOfStyleData.colloquial}
                                     />
                                 }
                             />
                         )}
-                        {/* <Recomendation /> */}
+                        <Recomendation
+                            recomendation={
+                                connectivityRec.length !== 0
+                                    ? "слепить"
+                                    : "Регулярное чтение позволит обогатить лексические знания и начать внимательно анализировать свои мысли и структурировать высказывания таким образом, чтобы они логически связывались между собой"
+                            }
+                        />
                     </div>
                     <div
                         data-title="Аргументированность"
@@ -456,11 +510,11 @@ export default function AnalysisReport() {
                         }
                     >
                         <div className={cnReport("conclusion-desciption-text")}>
-                            Способность выступающего подтверждать свои
+                            {`Способность выступающего подтверждать свои
                             утверждения обоснованными фактами, доказательствами,
                             примерами и логическими операциями, умение логически
                             связывать свои мысли со свидетельствами и
-                            доказательствами.
+                            доказательствами.`}
                         </div>
                         {argumentativenessData && (
                             <Dropdown
@@ -521,7 +575,15 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-                        {/* <Recomendation /> */}
+                        <Recomendation
+                            recomendation={
+                                argumentativenessRec.length !== 0
+                                    ? `${argumentativenessRec.join(" ")}`
+                                    : // : // ПОСЛЕ ПИЛОТА ВЕРНУТЬ
+                                      "Важно приводить не только аргументы “за” (за свой тезис), но и аргументы “против”. Они должны убеждать аудиторию в том, что аргументы, приводимые в поддержку критикуемого Вами тезиса, слабые и не выдерживают критики."
+                                //   `С целью недопущения попадания информации, возможно носящей характер коммерческой тайны, в систему Антиплагиат на время проведения бета-тестирования параметры "оригинальность", "заимствования" и "цитирования" временно не определяются.`
+                            }
+                        />
                     </div>
                     <div
                         data-title="Ясность"
@@ -532,8 +594,8 @@ export default function AnalysisReport() {
                         color={getTotalResult(totalData!.values.clarity)[0]}
                     >
                         <div className={cnReport("conclusion-desciption-text")}>
-                            Способность выразить свои мысли в ясной, доходчивой
-                            и понятной форме.
+                            {`Способность выразить свои мысли в ясной, доходчивой
+                            и понятной форме.`}
                         </div>
                         {clarityData && (
                             <Dropdown
@@ -578,10 +640,16 @@ export default function AnalysisReport() {
                             />
                         )}
                         {/* TO DO: DELETE ALL WARNING IN CONSOLE */}
+
                         {expressivenessData && (
                             <Dropdown
                                 title={"Экспрессивность"}
-                                subtitle={`Какой-то вывод в мини-форме`}
+                                subtitle={
+                                    expressivenessData.total_expressiveness >=
+                                    0.5
+                                        ? "Наблюдается повышенная выразительность речи"
+                                        : "Наблюдается снижение выразительности речи"
+                                }
                                 visible={
                                     <MainExpressiveness
                                         data={expressivenessData.values.map(
@@ -611,7 +679,13 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-                        {/* <Recomendation /> */}
+                        <Recomendation
+                            recomendation={
+                                clarityRec.length !== 0
+                                    ? "слепить"
+                                    : "Регулярно расширяйте свой словарный запас, поскольку это поможет Вам в выборе более точных и выразительных слов для передачи своих мыслей и эмоций."
+                            }
+                        />
                     </div>
                     <div
                         data-title="Динамизм"
@@ -622,9 +696,9 @@ export default function AnalysisReport() {
                         color={getTotalResult(totalData!.values.dynamism)[0]}
                     >
                         <div className={cnReport("conclusion-desciption-text")}>
-                            Способность выражать свои мысли и идеи с помощью
+                            {`Способность выражать свои мысли и идеи с помощью
                             энергичного и живого выступления, проявление
-                            активности, энтузиазма в речи.
+                            активности, энтузиазма в речи.`}
                         </div>
                         {nonMonotonyData && (
                             <Dropdown
@@ -718,7 +792,9 @@ export default function AnalysisReport() {
                         {energyData && (
                             <Dropdown
                                 title={"Энергичность"}
-                                subtitle= {textForEnergySmile(energyData.total_energy)}
+                                subtitle={textForEnergySmile(
+                                    energyData.total_energy
+                                )}
                                 visible={
                                     <EnergySmile
                                         energy={energyData.total_energy}
@@ -732,6 +808,13 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
+                        <Recomendation
+                            recomendation={
+                                dynamismRec.length !== 0
+                                    ? "слепить"
+                                    : "Динамизм касается в первую очередь интонации речи и связана с эмоциональностью, разнообразием интонационного оформления, отсутствием монотонности, точностью интонационной передачи оратором своей мысли, правильной расстановкой логических ударений и пауз, точностью передачи подтекста. Следует голосом, интонацией подчеркивать основную мысль, делать паузы до и после важных мыслей."
+                            }
+                        />
                     </div>
                     <div
                         data-title="Убедительность"
@@ -744,9 +827,9 @@ export default function AnalysisReport() {
                         }
                     >
                         <div className={cnReport("conclusion-desciption-text")}>
-                            Способность выступающего эффективно выражать свои
-                            мысли, оказывать влияние на аудиторию и уверить ее в
-                            правильности своих аргументов и доказательств.
+                            {
+                                "Способность выступающего эффективно выражать свои мысли, оказывать влияние на аудиторию и уверить ее в правильности своих аргументов и доказательств."
+                            }
                         </div>
                         {congruenceData && (
                             <Dropdown
@@ -769,7 +852,9 @@ export default function AnalysisReport() {
                         {confidenceData && (
                             <Dropdown
                                 title={"Уверенность"}
-                                subtitle={`Зафиксирована неуверенность в суждениях ${confidenceData.uncertainty} раз/а`}
+                                subtitle={judgmentHelper(
+                                    confidenceData.uncertainty
+                                )}
                                 visible={
                                     <MainConfidence
                                         data={confidenceData.values}
@@ -836,6 +921,36 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
+                        <Recomendation
+                            recomendation={
+                                persuasivenessRec.length === 0
+                                    ? persuasivenessRecomendation(
+                                          congruenceData?.diameter.audio.anger,
+                                          congruenceData?.diameter.audio
+                                              .happiness,
+                                          congruenceData?.diameter.audio
+                                              .neutral,
+                                          congruenceData?.diameter.text.anger,
+                                          congruenceData?.diameter.text
+                                              .happiness,
+                                          congruenceData?.diameter.text.neutral,
+                                          congruenceData?.diameter.video.anger,
+                                          congruenceData?.diameter.video
+                                              .happiness,
+                                          congruenceData?.diameter.video
+                                              .neutral,
+                                          confidenceData?.average_value,
+                                          confidenceData?.uncertainty,
+                                          emotionalArousalData?.values
+                                              .trager_coefficient,
+                                          emotionalArousalData?.values
+                                              .action_certainty_factor,
+                                          emotionalArousalData?.values
+                                              .aggressiveness_coefficient
+                                      )
+                                    : "В случае, если Вы ставите себе целью убедить людей в чем-либо, либо Вам надо побудить людей в аудитории к определенным действиям, то Вам лучше всего сконцентрироваться на подробном анализе аудитории (чтобы понять, какие именно факторы повлияют на позицию аудитории), на содержании и структуре презентации с продумыванием аргументов и примеров (чтобы речь была логичной и убедительной) и на тщательной подготовке наглядных пособий (это усилит Ваше влияние на людей)."
+                            }
+                        />
                     </div>
                     <div
                         data-title="Коммуникативные нормы"
@@ -848,10 +963,10 @@ export default function AnalysisReport() {
                         className={cnReport("width")}
                     >
                         <div className={cnReport("conclusion-desciption-text")}>
-                            Умение правильно и эффективно использовать язык и
+                            {`Умение правильно и эффективно использовать язык и
                             другие коммуникативные инстументы для того, чтобы
                             эффективно общаться с аудиторией и передавать свои
-                            мысли и идеи.
+                            мысли и идеи.`}
                         </div>
                         {communicativeData && (
                             <Dropdown
@@ -880,6 +995,17 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
+                        <Recomendation
+                            recomendation={
+                                communicativeRec.length === 0
+                                    ? communicativeRecomendation(
+                                          communicativeData?.filler_words,
+                                          communicativeData?.cognitive_distortion,
+                                          communicativeData?.aggression
+                                      )
+                                    : "Помните, нарушение коммуникативных норм обычно не остается незамеченным. В зависимости от того, насколько грубым было это нарушение, наказания выражаются в отказе адресата от коммуникации вообще, в прерывании общения, в недостижении цели общения."
+                            }
+                        />
                     </div>
                 </Tabs>
             )}
@@ -899,7 +1025,8 @@ export default function AnalysisReport() {
 
                     <div className={cnReport("conclusion-desciption")}>
                         <div className={cnReport("conclusion-desciption-text")}>
-                            Задача организации, в особенности же понимание сути
+                            {/* заменить общий вывод */}
+                            {`Задача организации, в особенности же понимание сути
                             ресурсосберегающих технологий требует определения и
                             уточнения соответствующих условий активизации. Как
                             уже неоднократно упомянуто, интерактивные прототипы
@@ -908,7 +1035,7 @@ export default function AnalysisReport() {
                             степени предоставлены сами себе. Кстати, стремящиеся
                             вытеснить традиционное производство, нанотехнологии
                             лишь добавляют фракционных разногласий и призваны к
-                            ответу.
+                            ответу.`}
                         </div>
                     </div>
                 </div>
