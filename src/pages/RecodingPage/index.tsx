@@ -415,7 +415,7 @@ export default function RecodingPage() {
                         title={"Предупреждение"}
                     >
                         <div className={cnRecoding("warning-message")}>
-                            Невозможно подключиться к камере, попробуйте позже
+                            Камера не найдена, включите камеру и повторите попытку   
                             или{" "}
                             <Link to={RoutesEnum.REPETITION}>загрузите</Link>{" "}
                             уже готовую репетицию.
