@@ -32,6 +32,7 @@ import {
     ISectionRecomendation,
     argumentativenessRecomendation,
     communicativeRecomendation,
+    getTotalDesc,
     getTotalResult,
     judgmentHelper,
     persuasivenessRecomendation,
@@ -44,6 +45,7 @@ import {
     SetStateAction,
     createContext,
     useEffect,
+    useMemo,
     useRef,
     useState,
 } from "react";
@@ -307,6 +309,37 @@ export default function AnalysisReport() {
             setArgumentativenessRec(curArgumentativenessRec);
         }
     }, [totalData]);
+
+    const resultDesc = useMemo(() => {
+        if (energyData && confidenceData && informativeData) {
+            console.log({
+                connectivity: informativeData!.informative,
+                argumentativeness: 0,
+                clarity: 0,
+                dynamism: energyData.total_energy,
+                persuasiveness: confidenceData.average_value,
+                communicative: 0,
+            })
+            return {
+                connectivity: informativeData!.informative,
+                argumentativeness: 0,
+                clarity: 0,
+                dynamism: energyData.total_energy,
+                persuasiveness: confidenceData.average_value,
+                communicative: 0,
+            };
+        } else
+            return {
+                connectivity: 0,
+                argumentativeness: 0,
+                clarity: 0,
+                dynamism: 0,
+                persuasiveness: 0,
+                communicative: 0,
+            };
+    }, [energyData, confidenceData, informativeData]);
+
+    
 
     return (
         <div className={cnReport()}>
@@ -1026,7 +1059,9 @@ export default function AnalysisReport() {
                     <div className={cnReport("conclusion-desciption")}>
                         <div className={cnReport("conclusion-desciption-text")}>
                             {/* заменить общий вывод */}
-                            {`Задача организации, в особенности же понимание сути
+                            {resultDesc && getTotalDesc(resultDesc)}
+                            
+                            {/* {`Задача организации, в особенности же понимание сути
                             ресурсосберегающих технологий требует определения и
                             уточнения соответствующих условий активизации. Как
                             уже неоднократно упомянуто, интерактивные прототипы
@@ -1035,7 +1070,7 @@ export default function AnalysisReport() {
                             степени предоставлены сами себе. Кстати, стремящиеся
                             вытеснить традиционное производство, нанотехнологии
                             лишь добавляют фракционных разногласий и призваны к
-                            ответу.`}
+                            ответу.`} */}
                         </div>
                     </div>
                 </div>

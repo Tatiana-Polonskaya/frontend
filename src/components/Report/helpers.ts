@@ -225,3 +225,79 @@ export const communicativeRecomendation = (
     }
     return recomendation.join("\n");
 };
+
+type totalItemDesc = {
+    connectivity: number;
+    argumentativeness: number;
+    clarity: number;
+    dynamism: number;
+    persuasiveness: number;
+    communicative: number;
+};
+
+const convertTitleToRussian = (title: string) => {
+    switch (title) {
+        case "connectivity":
+            return "связность";
+        case "argumentativeness":
+            return "аргументированность";
+        case "clarity":
+            return "ясность";
+        case "dynamism":
+            return "динамизм";
+        case "persuasiveness":
+            return "убедительность";
+        case "communicative":
+            return `соблюдение \n
+			коммуникативной нормы`;
+        default:
+            return "";
+    }
+};
+
+export const getTotalDesc = (arrayValues: totalItemDesc) => {
+    const MIN_RESULT = 80;
+
+    let tempArr = Object.entries(arrayValues).map(([key, value]) => {
+        return value;
+    });
+
+    const maxArr = Math.max.apply(Math, tempArr);
+    const minArr = Math.min.apply(Math, tempArr);
+
+    if (maxArr >= MIN_RESULT && minArr >= MIN_RESULT) {
+        let minObject = Object.entries(arrayValues).filter(
+            ([key, value]) => minArr === value
+        );
+        let minTitels = minObject.map((el) => convertTitleToRussian(el[0]));
+
+        return `Не смотря на то, что Вы добились очень хороших показателей по основным критериям публичного выступления, в последующих репетициях следует обратить на его ${
+            minTitels.length > 1 ? minTitels.join(", ") : minTitels.at(0)
+        }. Подробные рекомендации даны в соответствующих разделах выше. `;
+    } else if (maxArr >= MIN_RESULT && minArr < MIN_RESULT) {
+        let maxObject = Object.entries(arrayValues).filter(
+            ([key, value]) => maxArr === value
+        );
+        let minObjects = Object.entries(arrayValues).filter(
+            ([key, value]) => value < MIN_RESULT
+        );
+        let minTitels = minObjects.map((el) => convertTitleToRussian(el[0]));
+        let maxTitels = maxObject.map((el) => convertTitleToRussian(el[0]));
+        return `Не смотря на то, что Вы добились хороших результатов по таким критериям публичного выступления, как ${
+            maxTitels.length > 1 ? maxTitels.join(", ") : maxTitels.at(0)
+        }, в последующих репетициях следует обратить внимание на ${
+            minTitels.length > 1 ? minTitels.join(", ") : minTitels.at(0)
+        }`;
+    } else {
+        let minObjects = Object.entries(arrayValues).filter(
+            ([key, value]) => value < MIN_RESULT
+        );
+        let minTitels = minObjects.map((el) => {
+            return convertTitleToRussian(el[0]);
+        });
+
+        return `В последующих репетициях следует обратить внимание на ${
+            minTitels.length > 1 ? minTitels.join(", ") : minTitels.at(0)
+        }. Подробные рекомендации даны в соответствующих разделах выше.`;
+    }
+};
