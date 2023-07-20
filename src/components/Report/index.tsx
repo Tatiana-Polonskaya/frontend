@@ -113,10 +113,18 @@ import textForEnergySmile from "../Graphs/EnergySmile/text";
 
 import AddTextUnityOfStyle from "../Graphs/unityOfStyle/text";
 
+
+
+
 import noteIcon from "./assets/note.svg";
 import arrowLeft from "./assets/arrowLeft.svg";
 import "./style.scss";
-import Recomendation from "../Analytics/-Block/-Recomendation";
+import Recomendation from "../Analytics/-Block/-Recomendation"
+import RecommendConn from "../Analytics/-Block/-Recomendation/recHandler/RecommendConn";
+import RecommendClarity from "../Analytics/-Block/-Recomendation/recHandler/RecommendClarity";
+import RecommendDynamism from "../Analytics/-Block/-Recomendation/recHandler/RecommendDynamism";
+
+
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
@@ -282,8 +290,6 @@ export default function AnalysisReport() {
             setTotalData(TotalDataFromBack.data.data);
     }, [TotalDataFromBack]);
 
-    // console.log("expressivenessData");
-    // console.log(expressivenessData);
 
     // ----------------------RECOMENDATION----------------------
     const [connectivityRec, setConnectivityRec] = useState<string[]>([]);
@@ -339,7 +345,7 @@ export default function AnalysisReport() {
             };
     }, [energyData, confidenceData, informativeData]);
 
-    
+
 
     return (
         <div className={cnReport()}>
@@ -466,13 +472,9 @@ export default function AnalysisReport() {
                                 visible={
                                     informativeData && (
                                         <InformativScale
-                                            informative={
-                                                informativeData.informative
-                                            }
+                                            informative={informativeData.informative }
                                             sounds={informativeData.sounds}
-                                            without_confirmation={
-                                                informativeData.empty
-                                            }
+                                            without_confirmation={ informativeData.empty}
                                             parasite={informativeData.parasite}
                                         />
                                     )
@@ -520,13 +522,19 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-                        <Recomendation
-                            recomendation={
-                                connectivityRec.length !== 0
-                                    ? "слепить"
-                                    : "Регулярное чтение позволит обогатить лексические знания и начать внимательно анализировать свои мысли и структурировать высказывания таким образом, чтобы они логически связывались между собой"
-                            }
-                        />
+
+                        {unityOfStyleData && connectivityData && informativeData && (
+                            <RecommendConn Nprotiv={connectivityData.controversy}
+                                       Tparaz = { informativeData.parasite}
+                                       Tnerech={informativeData.sounds}
+                                       Tpauza={informativeData.empty}
+                                       Tob={100}
+                                       Pnauch={unityOfStyleData.scientific}
+                                       Pofic={unityOfStyleData.official}
+                                       Ppabl={unityOfStyleData.publicistic}
+                                       Prazgovor={unityOfStyleData.colloquial}
+                                       Phud={unityOfStyleData.artistic}/>)}
+
                     </div>
                     <div
                         data-title="Аргументированность"
@@ -712,13 +720,29 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-                        <Recomendation
+
+                        {clarityData && eloquenceData && expressivenessData && (
+                            <RecommendClarity Nitemp={(clarityData.sounds +clarityData.trembling) / (clarityData.basic + clarityData.sounds +clarityData.trembling)}
+                                            Tnerech={clarityData.sounds}
+                                            Tdroz={clarityData.trembling}
+                                            Tob={clarityData.basic + clarityData.sounds +clarityData.trembling}
+                                            Nzpredl={eloquenceData.values.short_words}
+                                            Nparaz={eloquenceData.values.parasitic_words}
+                                            Nkpedl={eloquenceData.values.short_sentences}
+                                            Napredl={eloquenceData.values.active_words}
+                                            Npredl={Math.ceil((((eloquenceData.values.parasitic_words/10)+eloquenceData.values.short_sentences)*2,5))}
+                                            Nvist={Math.ceil((((eloquenceData.values.parasitic_words/10)+eloquenceData.values.short_sentences)*2,5))*25}
+                                            Pekspr={expressivenessData.total_expressiveness}
+                            />)}
+
+        {/*                       <Recomendation
                             recomendation={
                                 clarityRec.length !== 0
                                     ? "слепить"
                                     : "Регулярно расширяйте свой словарный запас, поскольку это поможет Вам в выборе более точных и выразительных слов для передачи своих мыслей и эмоций."
                             }
-                        />
+                        /> */}
+
                     </div>
                     <div
                         data-title="Динамизм"
@@ -841,14 +865,20 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-                        <Recomendation
-                            recomendation={
-                                dynamismRec.length !== 0
-                                    ? "слепить"
-                                    : "Динамизм касается в первую очередь интонации речи и связана с эмоциональностью, разнообразием интонационного оформления, отсутствием монотонности, точностью интонационной передачи оратором своей мысли, правильной расстановкой логических ударений и пауз, точностью передачи подтекста. Следует голосом, интонацией подчеркивать основную мысль, делать паузы до и после важных мыслей."
-                            }
-                        />
+
+
+                        {emotionalityData && nonMonotonyData && energyData && (
+                           <RecommendDynamism htemp={nonMonotonyData["h-temp"]}
+                                               hgromk={nonMonotonyData["h-volume"]}
+                                               hton={nonMonotonyData["h-tone"]}
+                                               pemotion={(emotionalityData.total.anger+emotionalityData.total.neutral+emotionalityData.total.happiness)/3}
+                                               penergi={energyData.total_energy}
+                            />)}
+
+
                     </div>
+
+
                     <div
                         data-title="Убедительность"
                         className={cnReport("width")}

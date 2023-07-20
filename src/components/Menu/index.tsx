@@ -98,7 +98,7 @@ export default function Menu() {
                     <div className={cnMenu("ImgText")}>
                         <ReactSVG src={exitImg} />
                         <span className={cnMenu("textQ")}>
-                            Вы уверены что хотите выйти из аккаунта?
+                            Вы уверены, что хотите выйти из аккаунта?
                         </span>
                         <span className={cnMenu("text")}>
                             Вы всегда сможете вернуться и продолжить тренировки
@@ -124,8 +124,7 @@ export default function Menu() {
                                     // await dispatch(accountApi.endpoints.logout.initiate(null));
                                     await dispatch(logout());
                                     navigate(RoutesEnum.LOGIN);
-                                }}
-                            >
+                                }}>
                                 Выйти из аккаунта
                             </span>
                         </Button>
