@@ -72,6 +72,8 @@ export default function PersonalArea({ isArchive = false }: Props) {
 
     useEffect(() => {
         if (isSuccess) {
+            console.log("reload")
+           window.location.reload()
         }
     }, [isSuccess]);
 

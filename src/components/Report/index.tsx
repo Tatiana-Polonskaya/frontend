@@ -82,6 +82,7 @@ import {
     useGetInformativeByIdQuery,
     useGetNonMonotonyByIdQuery,
     useGetTotalByIdQuery,
+    useGetTotalByIdTestQuery,
     useGetUnityOfStyleByIdQuery,
 } from "../../store/api/report";
 
@@ -210,7 +211,11 @@ export default function AnalysisReport() {
         useGetEmotionalArousalByIdQuery(idVideo);
     const CommunicativeDataFromBack = useGetCommunicativeByIdQuery(idVideo);
     const TotalDataFromBack = useGetTotalByIdQuery(idVideo);
-
+    const TotalTestDataFromBack = useGetTotalByIdTestQuery(idVideo);
+    useEffect(() => {
+        if (TotalTestDataFromBack )
+            console.log("TotalTestDataFromBack",TotalTestDataFromBack.data);
+    }, [TotalTestDataFromBack]);
     useEffect(() => {
         if (ConnectivityDataFromBack && ConnectivityDataFromBack.data)
             setConnectivityData(ConnectivityDataFromBack.data.data);
