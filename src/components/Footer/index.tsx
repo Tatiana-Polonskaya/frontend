@@ -8,14 +8,20 @@ export default function Footer() {
             <div className="footer-content">
                 <img src={LogoTitle} alt="Logo" />
                 <div className="footer-content__links-container">
-                    <a className="footer-content__link" href="http://www.ru">
-                        Политика конфиденциальности
+                    <a
+                        className="footer-content__link"
+                        href="http://speechup.ru/confidential/"
+                    >
+                        {"Политика конфиденциальности"}
                     </a>
-                    <a className="footer-content__link" href="http://www.ru">
-                        Пользовательское соглашение
+                    <a
+                        className="footer-content__link"
+                        href="http://speechup.ru/usersconf/"
+                    >
+                        {"Пользовательское соглашение"}
                     </a>
                 </div>
-                <span>&#169;&nbsp;ООО&nbsp;«Точка инноваций»&nbsp;2023</span>
+                <span>&#169;&nbsp;ООО&nbsp;«Спичап»&nbsp;2023</span>
             </div>
         </footer>
     );
