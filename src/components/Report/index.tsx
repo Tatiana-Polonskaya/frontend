@@ -224,8 +224,8 @@ export default function AnalysisReport() {
     const CongruenceDataFromBack = useGetCongruenceByIdTestQuery(idVideo);
     const ConfidenceDataFromBack = useGetConfidenceByIdTestQuery(idVideo);
     const EmotionalArousalDataFromBack =
-        useGetEmotionalArousalByIdQuery(idVideo);
-    const CommunicativeDataFromBack = useGetCommunicativeByIdQuery(idVideo);
+        useGetEmotionalArousalByIdTestQuery(idVideo);
+    const CommunicativeDataFromBack = useGetCommunicativeByIdTestQuery(idVideo);
     const TotalDataFromBack = useGetTotalByIdTestQuery(idVideo);
 
     useEffect(() => {
