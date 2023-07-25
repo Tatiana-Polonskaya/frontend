@@ -1,18 +1,19 @@
 import { cn } from "@bem-react/classname";
 
-import { useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 
 import "./style.scss";
-import { BaseReactPlayerProps } from "react-player/base";
+import { BaseReactPlayerProps, OnProgressProps } from "react-player/base";
+import { VideoTimeContext } from "../Report";
 
 interface VideoPlayerProps extends BaseReactPlayerProps {
-    title?: string,
+    title?: string;
 }
 
 type Props = {
     url: string;
-    controls?:boolean;
+    controls?: boolean;
 };
 
 /**
@@ -50,9 +51,21 @@ export function getPrettyDataTime(timestring: string) {
 
 // TO DO: ADD STYLES AND SOME CONTROLS COMPONENT
 
-export default function VideoPlayer({title="",...props}:VideoPlayerProps) {
+export default function VideoPlayer({
+    title = "",
+    ...props
+}: VideoPlayerProps) {
     const cnVideoPlayer = cn("VideoPlayer");
     const videoRef = useRef<HTMLVideoElement | any>();
+
+    const [onReady, setOnReady] = useState(false);
+
+    // state for video playing
+    const {setCurrentTime}= useContext(VideoTimeContext);
+
+    const changeCurrentTime = (e: OnProgressProps) => {
+        setCurrentTime(Math.floor(e.playedSeconds));
+    };
 
     return (
         <div className={cnVideoPlayer()}>
@@ -62,6 +75,11 @@ export default function VideoPlayer({title="",...props}:VideoPlayerProps) {
                 height="480"
                 ref={videoRef}
                 muted={true}
+                onStart={() => {
+                    console.log("onStart");
+                }}
+                onReady={() => setOnReady(true)}
+                onProgress={changeCurrentTime}
             />
         </div>
     );

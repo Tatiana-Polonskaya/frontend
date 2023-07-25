@@ -17,7 +17,9 @@ export function getPrettyTimeBySeconds(seconds: number) {
     } else {
         const minutes = ~~(seconds / 60);
         return `${minutes < 10 ? "0" + minutes : minutes}:${
-            seconds % 60 < 10 ? "0"+ (seconds % 60).toFixed(0) : (seconds % 60).toFixed(0)
+            seconds % 60 < 10
+                ? "0" + (seconds % 60).toFixed(0)
+                : (seconds % 60).toFixed(0)
         }`;
     }
 }
@@ -31,11 +33,18 @@ export default function SpeechTranscription(props: Props) {
         useState<TranscriptionValue[]>();
 
     // all queries
-    const TranscriptionDataFromBack = useGetTranscriptionByIdTestQuery(props.idVideo);
+    const TranscriptionDataFromBack = useGetTranscriptionByIdTestQuery(
+        props.idVideo
+    );
 
     useEffect(() => {
-        if (TranscriptionDataFromBack && TranscriptionDataFromBack.data)
+        if (TranscriptionDataFromBack && TranscriptionDataFromBack.data) {
+            console.log(
+                "TranscriptionDataFromBack",
+                TranscriptionDataFromBack.data.data!.values
+            );
             setTranscriptionData(TranscriptionDataFromBack.data.data!.values);
+        }
     }, [TranscriptionDataFromBack]);
 
     const cnTranscription = cn("SpeechTranscription");
@@ -46,7 +55,12 @@ export default function SpeechTranscription(props: Props) {
                     <div className={cnTranscription("row")} key={idx}>
                         <div
                             className={cnTranscription("time", {
-                                active: currentTime === "" + el.time_start,
+                                active:
+                                    currentTime >= el.time_start &&
+                                    ((idx < transcriptionData.length-1 &&
+                                        transcriptionData[idx + 1].time_start >
+                                            currentTime) ||
+                                        idx === transcriptionData.length-1),
                             })}
                         >
                             {getPrettyTimeBySeconds(el.time_start)}
@@ -54,7 +68,12 @@ export default function SpeechTranscription(props: Props) {
                         <div className={cnTranscription("buble")}>
                             <div
                                 className={cnTranscription("buble-text", {
-                                    active: currentTime === "" + el.time_start,
+                                    active:
+                                    currentTime >= el.time_start &&
+                                    ((idx < transcriptionData.length-1 &&
+                                        transcriptionData[idx + 1].time_start >
+                                            currentTime) ||
+                                        idx === transcriptionData.length-1),
                                 })}
                             >
                                 {el.text}

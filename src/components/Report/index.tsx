@@ -144,8 +144,8 @@ import AddTextEloquence from "../Graphs/eloquence/text";
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
-    currentTime: "00:00",
-    setCurrentTime: (() => {}) as Dispatch<SetStateAction<string>>,
+    currentTime: 0,
+    setCurrentTime: (() => {}) as Dispatch<SetStateAction<number>>,
 });
 
 export default function AnalysisReport() {
@@ -182,7 +182,7 @@ export default function AnalysisReport() {
     const navigate = useNavigate();
 
     // state for video playing
-    const [currentTime, setCurrentTime] = useState("00:00");
+    const [currentTime, setCurrentTime] = useState(0);
 
     // all states for showing it on the page
     const [informativeData, setInformativeData] = useState<InformativeJSON>();
@@ -230,14 +230,20 @@ export default function AnalysisReport() {
 
     useEffect(() => {
         if (ConnectivityDataFromBack && ConnectivityDataFromBack.data) {
-            console.log("ConnectivityDataFromBack", ConnectivityDataFromBack.data.data)
+            console.log(
+                "ConnectivityDataFromBack",
+                ConnectivityDataFromBack.data.data
+            );
             setConnectivityData(ConnectivityDataFromBack.data.data);
         }
     }, [ConnectivityDataFromBack]);
 
     useEffect(() => {
         if (InformativeDataFromBack && InformativeDataFromBack.data) {
-            console.log("InformativeDataFromBack", InformativeDataFromBack.data.data)
+            console.log(
+                "InformativeDataFromBack",
+                InformativeDataFromBack.data.data
+            );
             setInformativeData(InformativeDataFromBack.data.data);
         }
     }, [InformativeDataFromBack]);
@@ -248,7 +254,10 @@ export default function AnalysisReport() {
             UnityOfStyleDataFromBack.data &&
             UnityOfStyleDataFromBack.data.data!.values
         ) {
-            console.log("UnityOfStyleDataFromBack", UnityOfStyleDataFromBack.data.data)
+            console.log(
+                "UnityOfStyleDataFromBack",
+                UnityOfStyleDataFromBack.data.data
+            );
             setUnityOfStyleData(UnityOfStyleDataFromBack.data.data!.values);
         }
     }, [UnityOfStyleDataFromBack]);
@@ -258,77 +267,104 @@ export default function AnalysisReport() {
             ArgumentativenessDataFromBack &&
             ArgumentativenessDataFromBack.data
         ) {
-            console.log("ArgumentativenessDataFromBack", ArgumentativenessDataFromBack.data.data)
+            console.log(
+                "ArgumentativenessDataFromBack",
+                ArgumentativenessDataFromBack.data.data
+            );
             setArgumentativenessData(ArgumentativenessDataFromBack.data.data);
         }
     }, [ArgumentativenessDataFromBack]);
 
     useEffect(() => {
         if (ClarityDataFromBack && ClarityDataFromBack.data) {
-            console.log("ClarityDataFromBack", ClarityDataFromBack.data.data)
+            console.log("ClarityDataFromBack", ClarityDataFromBack.data.data);
             setClarityData(ClarityDataFromBack.data.data);
         }
     }, [ClarityDataFromBack]);
 
     useEffect(() => {
         if (EloquenceDataFromBack && EloquenceDataFromBack.data) {
-            console.log("EloquenceDataFromBack", EloquenceDataFromBack.data.data)
+            console.log(
+                "EloquenceDataFromBack",
+                EloquenceDataFromBack.data.data
+            );
             setEloquenceData(EloquenceDataFromBack.data.data);
         }
     }, [EloquenceDataFromBack]);
 
     useEffect(() => {
         if (ExpressivenessDataFromBack && ExpressivenessDataFromBack.data) {
-            console.log("ExpressivenessDataFromBack", ExpressivenessDataFromBack.data)
+            console.log(
+                "ExpressivenessDataFromBack",
+                ExpressivenessDataFromBack.data
+            );
             setExpressivenessData(ExpressivenessDataFromBack.data.data);
         }
     }, [ExpressivenessDataFromBack]);
 
     useEffect(() => {
         if (NonMonotonyDataFromBack && NonMonotonyDataFromBack.data) {
-            console.log("NonMonotonyDataFromBack", NonMonotonyDataFromBack.data.data)
+            console.log(
+                "NonMonotonyDataFromBack",
+                NonMonotonyDataFromBack.data.data
+            );
             setNonMonotonyData(NonMonotonyDataFromBack.data.data);
         }
     }, [NonMonotonyDataFromBack]);
 
     useEffect(() => {
         if (EmotionalityDataFromBack && EmotionalityDataFromBack.data) {
-            console.log("EmotionalityDataFromBack", EmotionalityDataFromBack.data.data)
+            console.log(
+                "EmotionalityDataFromBack",
+                EmotionalityDataFromBack.data.data
+            );
             setEmotionalityData(EmotionalityDataFromBack.data.data);
         }
     }, [EmotionalityDataFromBack]);
 
     useEffect(() => {
         if (EnergyDataFromBack && EnergyDataFromBack.data) {
-            console.log("EnergyDataFromBack", EnergyDataFromBack.data.data)
+            console.log("EnergyDataFromBack", EnergyDataFromBack.data.data);
             setEnergyData(EnergyDataFromBack.data.data);
         }
     }, [EnergyDataFromBack]);
 
     useEffect(() => {
         if (CongruenceDataFromBack && CongruenceDataFromBack.data) {
-            console.log("CongruenceDataFromBack", CongruenceDataFromBack.data.data)
+            console.log(
+                "CongruenceDataFromBack",
+                CongruenceDataFromBack.data.data
+            );
             setCongruenceData(CongruenceDataFromBack.data.data);
         }
     }, [CongruenceDataFromBack]);
 
     useEffect(() => {
         if (ConfidenceDataFromBack && ConfidenceDataFromBack.data) {
-            console.log("ConfidenceDataFromBack", ConfidenceDataFromBack.data.data)
+            console.log(
+                "ConfidenceDataFromBack",
+                ConfidenceDataFromBack.data.data
+            );
             setConfidenceData(ConfidenceDataFromBack.data.data);
         }
     }, [ConfidenceDataFromBack]);
 
     useEffect(() => {
         if (EmotionalArousalDataFromBack && EmotionalArousalDataFromBack.data) {
-            console.log("EmotionalArousalDataFromBack", EmotionalArousalDataFromBack.data.data)
+            console.log(
+                "EmotionalArousalDataFromBack",
+                EmotionalArousalDataFromBack.data.data
+            );
             setEmotionalArousalData(EmotionalArousalDataFromBack.data.data);
         }
     }, [EmotionalArousalDataFromBack]);
 
     useEffect(() => {
         if (CommunicativeDataFromBack && CommunicativeDataFromBack.data) {
-            console.log("CommunicativeDataFromBack", CommunicativeDataFromBack.data.data)
+            console.log(
+                "CommunicativeDataFromBack",
+                CommunicativeDataFromBack.data.data
+            );
             setCommunicativeData(CommunicativeDataFromBack.data.data);
         }
     }, [CommunicativeDataFromBack]);
@@ -366,47 +402,46 @@ export default function AnalysisReport() {
 
     const resultDesc = useMemo(() => {
         if (totalData) {
-            
             return {
                 connectivityTotal: {
                     value: totalData.values.connectedness,
                     params: {
-                        connectivity:0,
+                        connectivity: 0,
                         informative: 0,
                         unityOfStyle: 0,
-                    }
+                    },
                 },
                 argumentativenessTotal: {
                     value: totalData.values.argumentativeness,
-                    params:{}
+                    params: {},
                 },
                 clarityTotal: {
                     value: totalData.values.clarity,
-                    params:{
+                    params: {
                         clarity: 0,
                         eloquence: 0,
                         expressiveness: 0,
-                    }
+                    },
                 },
                 dynamismTotal: {
                     value: totalData.values.dynamism,
-                    params:{
-                        energy:0,
+                    params: {
+                        energy: 0,
                         nonMonotony: 0,
-                        emotionality:0,
-                    }
+                        emotionality: 0,
+                    },
                 },
                 persuasivenessTotal: {
                     value: totalData.values.persuasiveness,
-                    params:{
-                        confidence:0,
-                        emotionalArousal:0,
-                        congruence:0,
-                    }
+                    params: {
+                        confidence: 0,
+                        emotionalArousal: 0,
+                        congruence: 0,
+                    },
                 },
                 communicativeTotal: {
                     value: totalData.values.communicative,
-                    params:{}
+                    params: {},
                 },
             };
         } else
@@ -414,47 +449,45 @@ export default function AnalysisReport() {
                 connectivityTotal: {
                     value: 0,
                     params: {
-                        connectivity:0,
+                        connectivity: 0,
                         informative: 0,
                         unityOfStyle: 0,
-                    }
+                    },
                 },
                 argumentativenessTotal: {
                     value: 0,
-                    params:{}
+                    params: {},
                 },
                 clarityTotal: {
                     value: 0,
-                    params:{
+                    params: {
                         clarity: 0,
                         eloquence: 0,
                         expressiveness: 0,
-                    }
+                    },
                 },
                 dynamismTotal: {
                     value: 0,
-                    params:{
-                        energy:0,
+                    params: {
+                        energy: 0,
                         nonMonotony: 0,
-                        emotionality:0,
-                    }
+                        emotionality: 0,
+                    },
                 },
                 persuasivenessTotal: {
                     value: 0,
-                    params:{
-                        confidence:0,
-                        emotionalArousal:0,
-                        congruence:0,
-                    }
+                    params: {
+                        confidence: 0,
+                        emotionalArousal: 0,
+                        congruence: 0,
+                    },
                 },
                 communicativeTotal: {
                     value: 0,
-                    params:{}
+                    params: {},
                 },
             };
     }, [energyData, confidenceData, informativeData]);
-
-
 
     return (
         <div className={cnReport()}>
@@ -471,10 +504,14 @@ export default function AnalysisReport() {
             <div className={cnReport("header")}>
                 <div className={cnReport("whiteBlock")}>
                     <div className={cnReport("video-block-video")}>
-                        <VideoPlayer
-                            url={`/api/video/${idVideo}`}
-                            controls={true}
-                        />
+                        <VideoTimeContext.Provider
+                            value={{ currentTime, setCurrentTime }}
+                        >
+                            <VideoPlayer
+                                url={`/api/video/${idVideo}`}
+                                controls={true}
+                            />
+                        </VideoTimeContext.Provider>
                     </div>
                     <div className={cnReport("video-block-title")}>
                         {videoInfo ? videoInfo.title : ""}
@@ -585,9 +622,7 @@ export default function AnalysisReport() {
                                                 informativeData.informative
                                             }
                                             sounds={informativeData.sounds}
-                                            empty={
-                                                informativeData.empty
-                                            }
+                                            empty={informativeData.empty}
                                             parasite={informativeData.parasite}
                                         />
                                     )
