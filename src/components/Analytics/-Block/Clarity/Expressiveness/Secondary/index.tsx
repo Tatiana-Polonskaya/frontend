@@ -7,7 +7,7 @@ import {
     ExpressivenessType,
 } from "../../../../../../models/graph/expressiveness";
 import ExpressivenessGraph from "../../../../../Graphs/Expressiveness";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
     data: ExpressivenessDataItem[];
@@ -43,35 +43,20 @@ let expressiveness: propsExpressiveness = {
 };
 
 export default function SecondaryExpressiveness(props: Props) {
-    const choiseLinks = (ind: number) => {
-        const linkEl = document.querySelectorAll(".expressiveness-item");
-        linkEl.forEach((el) => el.classList.remove("expressiveness-choise"));
-        linkEl[ind].classList.add("expressiveness-choise");
-        ind === 1 && graph === 3
-            ? setGraph(4)
-            : ind === 1 && graph === 0
-            ? setGraph(2)
-            : ind === 0 && graph === 4
-            ? setGraph(3)
-            : setGraph(0);
-        return;
-    };
-    // console.log(props)
-    const openMiddle = (ind: number) => {
-        const openEl = document.querySelector(".expressiveness-item-open");
-        openEl!.classList.toggle("expressiveness-choise");
+    // 0 - ExpressivenessType.ANGER
+    // 1 - ExpressivenessType.HAPPINESS
+    // 2 - ExpressivenessType.NEUTRAL + ANGER
+    // any > 2 - ExpressivenessType.NEUTRAL + HAPPINESS
+    const [graph, setGraph] = useState(2);
+    const [choosedEmotion, setChoosedEmotion] = useState(0); // 0 - ANGER or 1 - HAPPINESS
+    const [onNeutral, setOnNeutral] = useState(true);
 
-        graph === 3
-            ? setGraph(0)
-            : graph === 4
-            ? setGraph(2)
-            : graph === 0
-            ? setGraph(3)
-            : setGraph(4);
-        return;
-    };
+    useEffect(() => {
+        if (choosedEmotion % 2 === 0) {
+            setGraph(onNeutral ? 2 : 0);
+        } else setGraph(onNeutral ? 3 : 1);
+    }, [choosedEmotion, onNeutral]);
 
-    const [graph, setGraph] = useState(3);
     return (
         <>
             {/* <ConnectivityGraph items={[]} /> */}
@@ -109,19 +94,14 @@ export default function SecondaryExpressiveness(props: Props) {
                     {props.graphs.map((el, ind) => (
                         <li
                             key={ind}
-                            className={
-                                ind === 0
-                                    ? cnExpressiveness(
-                                          "item",
-                                          cnExpressiveness("choise")
-                                      )
-                                    : cnExpressiveness("item")
-                            }
+                            className={cnExpressiveness("item", {
+                                choised: ind === choosedEmotion,
+                            })}
                         >
                             <div
                                 className={cnExpressiveness("link")}
                                 onClick={() => {
-                                    choiseLinks(ind);
+                                    setChoosedEmotion(ind);
                                 }}
                             >
                                 {el}
@@ -135,16 +115,14 @@ export default function SecondaryExpressiveness(props: Props) {
                     </span>
                     <ul className={cnExpressiveness("menu")}>
                         <li
-                            key={1}
-                            className={cnExpressiveness(
-                                "item-open",
-                                cnExpressiveness("choise")
-                            )}
+                            className={cnExpressiveness("item-open", {
+                                choised: onNeutral,
+                            })}
                         >
                             <div
                                 className={cnExpressiveness("link")}
                                 onClick={() => {
-                                    openMiddle(0);
+                                    setOnNeutral((prev) => !prev);
                                 }}
                             >
                                 {"Вкл"}
@@ -159,9 +137,9 @@ export default function SecondaryExpressiveness(props: Props) {
                     param={
                         graph === 0
                             ? ExpressivenessType.ANGER
-                            : graph === 2
+                            : graph === 1
                             ? ExpressivenessType.HAPPINESS
-                            : graph === 3
+                            : graph === 2
                             ? [
                                   ExpressivenessType.NEUTRAL,
                                   ExpressivenessType.ANGER,

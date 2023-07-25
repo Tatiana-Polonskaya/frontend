@@ -366,48 +366,7 @@ export default function AnalysisReport() {
 
     const resultDesc = useMemo(() => {
         if (totalData) {
-            console.log({
-                connectivityTotal: {
-                    value: totalData.values.connectedness,
-                    params: {
-                        connectivity:0,
-                        informative: 0,
-                        unityOfStyle: 0,
-                    }
-                },
-                argumentativenessTotal: {
-                    value: totalData.values.argumentativeness,
-                    params:{}
-                },
-                clarityTotal: {
-                    value: totalData.values.clarity,
-                    params:{
-                        clarity: 0,
-                        eloquence: 0,
-                        expressiveness: 0,
-                    }
-                },
-                dynamismTotal: {
-                    value: totalData.values.dynamism,
-                    params:{
-                        energy:0,
-                        nonMonotony: 0,
-                        emotionality:0,
-                    }
-                },
-                persuasivenessTotal: {
-                    value: totalData.values.persuasiveness,
-                    params:{
-                        confidence:0,
-                        emotionalArousal:0,
-                        congruence:0,
-                    }
-                },
-                communicativeTotal: {
-                    value: totalData.values.communicative,
-                    params:{}
-                },
-            })
+            
             return {
                 connectivityTotal: {
                     value: totalData.values.connectedness,
