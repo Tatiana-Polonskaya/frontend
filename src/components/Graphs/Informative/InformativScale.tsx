@@ -2,6 +2,9 @@ import React from 'react';
 import './Informative.css'
 import {IScaleDataType} from "../../../models/graph/inteface/scale";
 import Scale from "../Scale";
+import {cn} from "@bem-react/classname";
+
+const CN = cn("inf");
 
 type Props = {
     values?: [],
@@ -38,7 +41,7 @@ function InformativScale(props: Props) {
     });
     return (
         <>
-            <div className="inf">
+            <div className={CN("inf")}>
                 <Scale component={inf}/>
             </div>
         </>

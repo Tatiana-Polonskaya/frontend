@@ -82,7 +82,6 @@ import {
     useGetInformativeByIdQuery,
     useGetNonMonotonyByIdQuery,
     useGetTotalByIdQuery,
-    useGetTotalByIdTestQuery,
     useGetUnityOfStyleByIdQuery,
 } from "../../store/api/report";
 
@@ -124,6 +123,7 @@ import Recomendation from "../Analytics/-Block/-Recomendation"
 import RecommendConn from "../Analytics/-Block/-Recomendation/recHandler/RecommendConn";
 import RecommendClarity from "../Analytics/-Block/-Recomendation/recHandler/RecommendClarity";
 import RecommendDynamism from "../Analytics/-Block/-Recomendation/recHandler/RecommendDynamism";
+import AddTextEloquence from "../Graphs/eloquence/text";
 
 
 
@@ -211,11 +211,7 @@ export default function AnalysisReport() {
         useGetEmotionalArousalByIdQuery(idVideo);
     const CommunicativeDataFromBack = useGetCommunicativeByIdQuery(idVideo);
     const TotalDataFromBack = useGetTotalByIdQuery(idVideo);
-    const TotalTestDataFromBack = useGetTotalByIdTestQuery(idVideo);
-    useEffect(() => {
-        if (TotalTestDataFromBack )
-            console.log("TotalTestDataFromBack",TotalTestDataFromBack.data);
-    }, [TotalTestDataFromBack]);
+
     useEffect(() => {
         if (ConnectivityDataFromBack && ConnectivityDataFromBack.data)
             setConnectivityData(ConnectivityDataFromBack.data.data);
@@ -678,7 +674,11 @@ export default function AnalysisReport() {
                         {eloquenceData && (
                             <Dropdown
                                 title={"Красноречивость"}
-                                subtitle={`Найдено излишнее количество слов-паразитов.`}
+                                subtitle={AddTextEloquence(eloquenceData.values.parasitic_words,
+                                    Math.ceil((((eloquenceData.values.parasitic_words/10)+eloquenceData.values.short_words)*2.5)*25),
+                                    eloquenceData.values.parasitic_words,
+                                    Math.ceil((((eloquenceData.values.parasitic_words/10)+eloquenceData.values.short_sentences)*2,5)),
+                                    eloquenceData.values.short_words,eloquenceData.values.active_words)}
                                 visible={<Eloquence data={eloquenceData} />}
                                 invisible={
                                     <EloquenceText data={eloquenceData} />

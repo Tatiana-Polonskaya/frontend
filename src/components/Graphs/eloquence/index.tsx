@@ -16,18 +16,8 @@ type Props={
             short_words: number,
             active_words: number,
             parasitic_words_list?: {
-
             }
         }
-    }
-}
-
-function colors(num:number){
-    if (num < 10){
-        return "#13D784"
-    }
-    else {
-        return "#F35B60"
     }
 }
 function Eloquence(props: Props) {
@@ -35,7 +25,6 @@ function Eloquence(props: Props) {
     return (
         <>
             <div className='allEloquence'>
-
                 <div className="allImg">
                     <div className="rImg">
                         <ReactSVG src={rupor} />
@@ -47,7 +36,7 @@ function Eloquence(props: Props) {
                                     <p className='txt'>{infEloquence.values.parasitic_words}</p>
                                     <p className='txt2'>слова-паразиты</p>
                                 </div>
-                                <Testt component={colors(infEloquence.values.parasitic_words)}/>
+                                <Testt component={'#F35B60'}/>
                             </div>
                             <div className='short_sentences'>
                                 <div className='textshort_sentences'>
@@ -55,14 +44,14 @@ function Eloquence(props: Props) {
                                     <p className='txt2'>короткие </p>
                                     <p className='txt2'> предложения</p>
                                 </div>
-                                <Bubble2 component={colors(infEloquence.values.short_sentences)}/>
+                                <Bubble2 component={'#13D784'}/>
                             </div>
                             <div className='short_words'>
                                 <div className='textshort_words'>
                                     <p className='txt'>{infEloquence.values.short_words}</p>
                                     <p className='txt2'>короткие слова</p>
                                 </div>
-                                <Bubble3 component={colors(infEloquence.values.short_words)}/>
+                                <Bubble3 component={'#13D784'}/>
                             </div>
                             <div className='active_words'>
                                 <div className='textactive_words'>
@@ -70,7 +59,7 @@ function Eloquence(props: Props) {
                                     <p className='txt2'>активные </p>
                                     <p className='txt2'> слова</p>
                                 </div>
-                                <Bubble4 component={colors(infEloquence.values.active_words)}/>
+                                <Bubble4 component={'#13D784'}/>
                             </div>
                         </div>
                         <div className='imgbigCloud'>

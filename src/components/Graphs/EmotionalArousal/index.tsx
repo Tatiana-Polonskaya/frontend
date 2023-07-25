@@ -38,7 +38,6 @@ function check(data:number){
     }
 }
 function paint (img:string, classN: string, text?: string, textTitle?:string){
-
     return <div className='blockEmotionalArousal'>
         <ReactSVG src={img} className={classN}/>
         <div className='textEmotionalArousal'> {textTitle} </div>

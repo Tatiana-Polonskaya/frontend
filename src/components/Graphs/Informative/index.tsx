@@ -1,7 +1,6 @@
 import BrickedGraph from "../-Base/Bricked";
 import { InformativeDataItem } from "../../../models/graph/informative";
 import convertInformativeData from "../../../@adapters/Graphs/informative";
-import Icons from "../../Menu/icons";
 import InformativeText from "./InformativeText";
 
 type Props = {

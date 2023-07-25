@@ -12,11 +12,9 @@ type Props={
         happiness: number,
         anger: number
     }
-
 }
 
 function Emotionality(props: Props) {
-    let title="Процент ваших эмоций в выступлении";
     let inf: ISimel ={
         items:
         [

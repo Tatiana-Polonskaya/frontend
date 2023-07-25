@@ -1,58 +1,32 @@
 import React from 'react';
 import { ReactSVG } from 'react-svg'
-import './style.css'
+import './style.scss'
 import {ISimelDescription} from "../../../models/graph/inteface/ISimelDescription";
 import {ISimel} from "../../../models/graph/inteface/ISimel";
 
 interface IComponentProps {
     component: ISimel
 }
-function chekPrecent (inf:number){
-    if(inf <= 5){
-        return "imk1"
-    }
-    if(inf <= 10){
-        return "imk2"
-    }
-    if(inf<=20){
-        return "imk3"
-    }
-    if(inf <= 30){
-        return "imk4"
-    }
-    if(inf<=40){
-        return "imk5"
-    }
-    if(inf <= 50){
-        return "imk6"
-    }
-    if(inf<=60){
-        return "imk7"
-    }
-    if(inf<=70){
-        return "imk8"
-    }
-    if(inf<= 80){
-        return "imk9"
-    }
-    if(inf<=90){
-        return "imk10"
-    }
-    if(inf <= 100){
-        return "imk11"
-    }
 
-}
 function paint (item:ISimelDescription, img:string ){
+    let procent
+    if (item.procent > 9 && item.procent<100){
+        procent = item.procent.toString()[0]
+    }else if (item.procent >= 100){
+        procent = "11"
+    }
+    else {
+        procent = "1"
+    }
     return <div className='contentPaint'>
         <div >
-            <ReactSVG className={chekPrecent(100 - item.procent)} src={img}/>
+            <ReactSVG className={'imk'+ procent} src={img}/>
         </div>
         <p className="contentPaintText">
             {item.title}
         </p>
         <p className="contentPaintPercent" style={{color:item.colorProcent}}>
-            {item.procent+'%'} 
+            {item.procent+'%'}
         </p>
     </div>
 }

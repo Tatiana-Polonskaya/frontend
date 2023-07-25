@@ -23,6 +23,7 @@ function paintSmile(img: string, className: string, text: string) {
     );
 }
 function paint(energy: number) {
+    if (energy < 0.01){energy = 0.0136}
     if (energy < 0.5) {
         return (
             <div className={cnEnergySmile()}>

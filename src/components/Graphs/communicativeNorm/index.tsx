@@ -4,7 +4,7 @@ import angryImg from "./img/angry.svg";
 import cognitiveDistortionsImg from'./img/CognitiveDistortions.svg';
 import parasiteWordsImg from './img/ParasiteWords.svg';
 import Smiley from "../smile";
-import './style.css'
+import './style.scss'
 
 type Props={
     filler_words: number,
