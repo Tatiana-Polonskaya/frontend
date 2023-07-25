@@ -224,19 +224,20 @@ export default function AnalysisReport() {
     const CongruenceDataFromBack = useGetCongruenceByIdTestQuery(idVideo);
     const ConfidenceDataFromBack = useGetConfidenceByIdTestQuery(idVideo);
     const EmotionalArousalDataFromBack =
-        useGetEmotionalArousalByIdTestQuery(idVideo);
-    const CommunicativeDataFromBack = useGetCommunicativeByIdTestQuery(idVideo);
+        useGetEmotionalArousalByIdQuery(idVideo);
+    const CommunicativeDataFromBack = useGetCommunicativeByIdQuery(idVideo);
     const TotalDataFromBack = useGetTotalByIdTestQuery(idVideo);
 
     useEffect(() => {
         if (ConnectivityDataFromBack && ConnectivityDataFromBack.data) {
+            console.log("ConnectivityDataFromBack", ConnectivityDataFromBack.data.data)
             setConnectivityData(ConnectivityDataFromBack.data.data);
         }
     }, [ConnectivityDataFromBack]);
 
     useEffect(() => {
         if (InformativeDataFromBack && InformativeDataFromBack.data) {
-            console.log(InformativeDataFromBack.data.data)
+            console.log("InformativeDataFromBack", InformativeDataFromBack.data.data)
             setInformativeData(InformativeDataFromBack.data.data);
         }
     }, [InformativeDataFromBack]);
@@ -247,6 +248,7 @@ export default function AnalysisReport() {
             UnityOfStyleDataFromBack.data &&
             UnityOfStyleDataFromBack.data.data!.values
         ) {
+            console.log("UnityOfStyleDataFromBack", UnityOfStyleDataFromBack.data.data)
             setUnityOfStyleData(UnityOfStyleDataFromBack.data.data!.values);
         }
     }, [UnityOfStyleDataFromBack]);
@@ -256,66 +258,77 @@ export default function AnalysisReport() {
             ArgumentativenessDataFromBack &&
             ArgumentativenessDataFromBack.data
         ) {
+            console.log("ArgumentativenessDataFromBack", ArgumentativenessDataFromBack.data.data)
             setArgumentativenessData(ArgumentativenessDataFromBack.data.data);
         }
     }, [ArgumentativenessDataFromBack]);
 
     useEffect(() => {
         if (ClarityDataFromBack && ClarityDataFromBack.data) {
+            console.log("ClarityDataFromBack", ClarityDataFromBack.data.data)
             setClarityData(ClarityDataFromBack.data.data);
         }
     }, [ClarityDataFromBack]);
 
     useEffect(() => {
         if (EloquenceDataFromBack && EloquenceDataFromBack.data) {
+            console.log("EloquenceDataFromBack", EloquenceDataFromBack.data.data)
             setEloquenceData(EloquenceDataFromBack.data.data);
         }
     }, [EloquenceDataFromBack]);
 
     useEffect(() => {
         if (ExpressivenessDataFromBack && ExpressivenessDataFromBack.data) {
+            console.log("ExpressivenessDataFromBack", ExpressivenessDataFromBack.data)
             setExpressivenessData(ExpressivenessDataFromBack.data.data);
         }
     }, [ExpressivenessDataFromBack]);
 
     useEffect(() => {
         if (NonMonotonyDataFromBack && NonMonotonyDataFromBack.data) {
+            console.log("NonMonotonyDataFromBack", NonMonotonyDataFromBack.data.data)
             setNonMonotonyData(NonMonotonyDataFromBack.data.data);
         }
     }, [NonMonotonyDataFromBack]);
 
     useEffect(() => {
         if (EmotionalityDataFromBack && EmotionalityDataFromBack.data) {
+            console.log("EmotionalityDataFromBack", EmotionalityDataFromBack.data.data)
             setEmotionalityData(EmotionalityDataFromBack.data.data);
         }
     }, [EmotionalityDataFromBack]);
 
     useEffect(() => {
         if (EnergyDataFromBack && EnergyDataFromBack.data) {
+            console.log("EnergyDataFromBack", EnergyDataFromBack.data.data)
             setEnergyData(EnergyDataFromBack.data.data);
         }
     }, [EnergyDataFromBack]);
 
     useEffect(() => {
         if (CongruenceDataFromBack && CongruenceDataFromBack.data) {
+            console.log("CongruenceDataFromBack", CongruenceDataFromBack.data.data)
             setCongruenceData(CongruenceDataFromBack.data.data);
         }
     }, [CongruenceDataFromBack]);
 
     useEffect(() => {
         if (ConfidenceDataFromBack && ConfidenceDataFromBack.data) {
+            console.log("ConfidenceDataFromBack", ConfidenceDataFromBack.data.data)
             setConfidenceData(ConfidenceDataFromBack.data.data);
         }
     }, [ConfidenceDataFromBack]);
 
     useEffect(() => {
         if (EmotionalArousalDataFromBack && EmotionalArousalDataFromBack.data) {
+            console.log("EmotionalArousalDataFromBack", EmotionalArousalDataFromBack.data.data)
             setEmotionalArousalData(EmotionalArousalDataFromBack.data.data);
         }
     }, [EmotionalArousalDataFromBack]);
 
     useEffect(() => {
         if (CommunicativeDataFromBack && CommunicativeDataFromBack.data) {
+            console.log("CommunicativeDataFromBack", CommunicativeDataFromBack.data.data)
             setCommunicativeData(CommunicativeDataFromBack.data.data);
         }
     }, [CommunicativeDataFromBack]);
@@ -352,33 +365,137 @@ export default function AnalysisReport() {
     }, [totalData]);
 
     const resultDesc = useMemo(() => {
-        if (energyData && confidenceData && informativeData) {
-            // console.log({
-            //     connectivity: informativeData!.informative,
-            //     argumentativeness: 0,
-            //     clarity: 0,
-            //     dynamism: energyData.total_energy,
-            //     persuasiveness: confidenceData.average_value,
-            //     communicative: 0,
-            // });
+        if (totalData) {
+            console.log({
+                connectivityTotal: {
+                    value: totalData.values.connectedness,
+                    params: {
+                        connectivity:0,
+                        informative: 0,
+                        unityOfStyle: 0,
+                    }
+                },
+                argumentativenessTotal: {
+                    value: totalData.values.argumentativeness,
+                    params:{}
+                },
+                clarityTotal: {
+                    value: totalData.values.clarity,
+                    params:{
+                        clarity: 0,
+                        eloquence: 0,
+                        expressiveness: 0,
+                    }
+                },
+                dynamismTotal: {
+                    value: totalData.values.dynamism,
+                    params:{
+                        energy:0,
+                        nonMonotony: 0,
+                        emotionality:0,
+                    }
+                },
+                persuasivenessTotal: {
+                    value: totalData.values.persuasiveness,
+                    params:{
+                        confidence:0,
+                        emotionalArousal:0,
+                        congruence:0,
+                    }
+                },
+                communicativeTotal: {
+                    value: totalData.values.communicative,
+                    params:{}
+                },
+            })
             return {
-                connectivity: informativeData!.informative,
-                argumentativeness: 0,
-                clarity: 0,
-                dynamism: energyData.total_energy,
-                persuasiveness: confidenceData.average_value,
-                communicative: 0,
+                connectivityTotal: {
+                    value: totalData.values.connectedness,
+                    params: {
+                        connectivity:0,
+                        informative: 0,
+                        unityOfStyle: 0,
+                    }
+                },
+                argumentativenessTotal: {
+                    value: totalData.values.argumentativeness,
+                    params:{}
+                },
+                clarityTotal: {
+                    value: totalData.values.clarity,
+                    params:{
+                        clarity: 0,
+                        eloquence: 0,
+                        expressiveness: 0,
+                    }
+                },
+                dynamismTotal: {
+                    value: totalData.values.dynamism,
+                    params:{
+                        energy:0,
+                        nonMonotony: 0,
+                        emotionality:0,
+                    }
+                },
+                persuasivenessTotal: {
+                    value: totalData.values.persuasiveness,
+                    params:{
+                        confidence:0,
+                        emotionalArousal:0,
+                        congruence:0,
+                    }
+                },
+                communicativeTotal: {
+                    value: totalData.values.communicative,
+                    params:{}
+                },
             };
         } else
             return {
-                connectivity: 0,
-                argumentativeness: 0,
-                clarity: 0,
-                dynamism: 0,
-                persuasiveness: 0,
-                communicative: 0,
+                connectivityTotal: {
+                    value: 0,
+                    params: {
+                        connectivity:0,
+                        informative: 0,
+                        unityOfStyle: 0,
+                    }
+                },
+                argumentativenessTotal: {
+                    value: 0,
+                    params:{}
+                },
+                clarityTotal: {
+                    value: 0,
+                    params:{
+                        clarity: 0,
+                        eloquence: 0,
+                        expressiveness: 0,
+                    }
+                },
+                dynamismTotal: {
+                    value: 0,
+                    params:{
+                        energy:0,
+                        nonMonotony: 0,
+                        emotionality:0,
+                    }
+                },
+                persuasivenessTotal: {
+                    value: 0,
+                    params:{
+                        confidence:0,
+                        emotionalArousal:0,
+                        congruence:0,
+                    }
+                },
+                communicativeTotal: {
+                    value: 0,
+                    params:{}
+                },
             };
     }, [energyData, confidenceData, informativeData]);
+
+
 
     return (
         <div className={cnReport()}>
