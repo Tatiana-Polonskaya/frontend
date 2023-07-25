@@ -20,7 +20,8 @@ export default function ListInput(props: Props) {
     );
 
     const addInput = () => {
-        if(inputValues.length < LIMIT_POINT_PLAN) setInputValues((inputValues) => [...inputValues, ""]);
+        if (inputValues.length < LIMIT_POINT_PLAN)
+            setInputValues((inputValues) => [...inputValues, ""]);
     };
 
     const removeInput = (index: number) => {
@@ -47,7 +48,7 @@ export default function ListInput(props: Props) {
         <div className={ListInputStyle()}>
             <div className={ListInputStyle("list-block-input")}>
                 {inputValues.map((el, id) => (
-                    <div className={ListInputStyle("block-input")} key={id}>
+                    <div key={id} className={ListInputStyle("block-input")} >
                         <span className={ListInputStyle("index")}>
                             {id + 1}:
                         </span>
@@ -59,12 +60,12 @@ export default function ListInput(props: Props) {
                             onChange={(e) => addInputValues(id, e.target.value)}
                         />
 
-                        <p className={ListInputStyle("block-input-btn")}>
+                        <div className={ListInputStyle("block-input-btn")}>
                             <ReactSVG
                                 src={deleteBtn}
                                 onClick={() => removeInput(id)}
                             />
-                        </p>
+                        </div>
                     </div>
                 ))}
             </div>
