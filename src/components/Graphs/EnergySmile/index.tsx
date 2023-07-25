@@ -16,14 +16,16 @@ function paintSmile(img: string, className: string, text: string) {
     return (
         <>
             <div className={cnEnergySmile(className)}>
-                <ReactSVG src={img} className={cnEnergySmile("center-smile")}/>
+                <ReactSVG src={img} className={cnEnergySmile("center-smile")} />
                 {text}
             </div>
         </>
     );
 }
 function paint(energy: number) {
-    if (energy < 0.01){energy = 0.0136}
+    if (energy < 0.01) {
+        energy = 0.0136;
+    }
     if (energy < 0.5) {
         return (
             <div className={cnEnergySmile()}>

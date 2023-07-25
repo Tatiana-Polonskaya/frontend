@@ -21,6 +21,7 @@ type TimelineItem = {
 const cnProgressLine = cn("progress-time-line");
 
 export default function MainSubsequence(props: Props) {
+    
     return (
         <Visible>
             <div className={cnProgressLine()}>

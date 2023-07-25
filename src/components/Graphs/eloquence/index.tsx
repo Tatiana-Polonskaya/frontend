@@ -59,7 +59,7 @@ function Eloquence(props: Props) {
                                     <p className='txt2'>активные </p>
                                     <p className='txt2'> слова</p>
                                 </div>
-                                <Bubble4 component={colors(infEloquence.values.action_words)}/>
+                                <Bubble4  component={'#13D784'}/>
                             </div>
                         </div>
                         <div className='imgbigCloud'>

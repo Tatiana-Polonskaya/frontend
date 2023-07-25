@@ -31,10 +31,7 @@ export default function SpeechTranscription(props: Props) {
         useState<TranscriptionValue[]>();
 
     // all queries
-    const TranscriptionDataFromBack =
-        props.idVideo === "89dd1171-d9e9-4d65-9730-4a36596a0e84"
-            ? useGetTranscriptionByIdTestQuery(props.idVideo)
-            : useGetTranscriptionByIdQuery(props.idVideo);
+    const TranscriptionDataFromBack = useGetTranscriptionByIdTestQuery(props.idVideo);
 
     useEffect(() => {
         if (TranscriptionDataFromBack && TranscriptionDataFromBack.data)

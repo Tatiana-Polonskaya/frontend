@@ -29,7 +29,7 @@ export default function VideoNotice({ idVideo, title, description }: Props) {
 
 
     const saveDescription = async () => {
-        console.log(textareaRef.current!.value);
+        // console.log(textareaRef.current!.value);
         if (textareaRef.current!.value) {
             const newDescription = textareaRef.current!.value;
             console.log({

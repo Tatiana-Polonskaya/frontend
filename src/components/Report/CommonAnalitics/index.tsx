@@ -53,17 +53,13 @@ type Props = {
 export default function CommonAnalitics(props: Props) {
     const cnCommon = cn("CommonAnalitics");
 
-    const { data } =
-        props.idVideo === "89dd1171-d9e9-4d65-9730-4a36596a0e84"
-            ? useGetTotalByIdTestQuery(props.idVideo)
-            : useGetTotalByIdQuery(props.idVideo);
+    const { data } = useGetTotalByIdTestQuery(props.idVideo);
 
     const [speedArr, setSpeedArr] = useState<TotalType[]>();
     const [allValues, setAllValues] = useState<TotalDataItem>();
 
     useEffect(() => {
         if (data) {
-            console.log("CommonAnalitics",data!.data!.values)
             setSpeedArr(convertTotalData(data!.data!.values));
             setAllValues(data!.data!.values);
         }

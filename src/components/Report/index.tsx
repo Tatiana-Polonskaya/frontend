@@ -224,20 +224,21 @@ export default function AnalysisReport() {
     const CongruenceDataFromBack = useGetCongruenceByIdTestQuery(idVideo);
     const ConfidenceDataFromBack = useGetConfidenceByIdTestQuery(idVideo);
     const EmotionalArousalDataFromBack =
-
         useGetEmotionalArousalByIdTestQuery(idVideo);
     const CommunicativeDataFromBack = useGetCommunicativeByIdTestQuery(idVideo);
     const TotalDataFromBack = useGetTotalByIdTestQuery(idVideo);
 
-
     useEffect(() => {
-        if (ConnectivityDataFromBack && ConnectivityDataFromBack.data)
+        if (ConnectivityDataFromBack && ConnectivityDataFromBack.data) {
             setConnectivityData(ConnectivityDataFromBack.data.data);
+        }
     }, [ConnectivityDataFromBack]);
 
     useEffect(() => {
-        if (InformativeDataFromBack && InformativeDataFromBack.data)
+        if (InformativeDataFromBack && InformativeDataFromBack.data) {
+            console.log(InformativeDataFromBack.data.data)
             setInformativeData(InformativeDataFromBack.data.data);
+        }
     }, [InformativeDataFromBack]);
 
     useEffect(() => {
@@ -245,70 +246,84 @@ export default function AnalysisReport() {
             UnityOfStyleDataFromBack &&
             UnityOfStyleDataFromBack.data &&
             UnityOfStyleDataFromBack.data.data!.values
-        )
+        ) {
             setUnityOfStyleData(UnityOfStyleDataFromBack.data.data!.values);
+        }
     }, [UnityOfStyleDataFromBack]);
 
     useEffect(() => {
-        if (ArgumentativenessDataFromBack && ArgumentativenessDataFromBack.data)
+        if (
+            ArgumentativenessDataFromBack &&
+            ArgumentativenessDataFromBack.data
+        ) {
             setArgumentativenessData(ArgumentativenessDataFromBack.data.data);
+        }
     }, [ArgumentativenessDataFromBack]);
 
     useEffect(() => {
         if (ClarityDataFromBack && ClarityDataFromBack.data) {
-            console.log("ClarityDataFromBack", ClarityDataFromBack.data.data);
             setClarityData(ClarityDataFromBack.data.data);
         }
     }, [ClarityDataFromBack]);
 
     useEffect(() => {
-        if (EloquenceDataFromBack && EloquenceDataFromBack.data)
+        if (EloquenceDataFromBack && EloquenceDataFromBack.data) {
             setEloquenceData(EloquenceDataFromBack.data.data);
+        }
     }, [EloquenceDataFromBack]);
 
     useEffect(() => {
-        if (ExpressivenessDataFromBack && ExpressivenessDataFromBack.data)
+        if (ExpressivenessDataFromBack && ExpressivenessDataFromBack.data) {
             setExpressivenessData(ExpressivenessDataFromBack.data.data);
+        }
     }, [ExpressivenessDataFromBack]);
 
     useEffect(() => {
-        if (NonMonotonyDataFromBack && NonMonotonyDataFromBack.data)
+        if (NonMonotonyDataFromBack && NonMonotonyDataFromBack.data) {
             setNonMonotonyData(NonMonotonyDataFromBack.data.data);
+        }
     }, [NonMonotonyDataFromBack]);
 
     useEffect(() => {
-        if (EmotionalityDataFromBack && EmotionalityDataFromBack.data)
+        if (EmotionalityDataFromBack && EmotionalityDataFromBack.data) {
             setEmotionalityData(EmotionalityDataFromBack.data.data);
+        }
     }, [EmotionalityDataFromBack]);
 
     useEffect(() => {
-        if (EnergyDataFromBack && EnergyDataFromBack.data)
+        if (EnergyDataFromBack && EnergyDataFromBack.data) {
             setEnergyData(EnergyDataFromBack.data.data);
+        }
     }, [EnergyDataFromBack]);
 
     useEffect(() => {
-        if (CongruenceDataFromBack && CongruenceDataFromBack.data)
+        if (CongruenceDataFromBack && CongruenceDataFromBack.data) {
             setCongruenceData(CongruenceDataFromBack.data.data);
+        }
     }, [CongruenceDataFromBack]);
 
     useEffect(() => {
-        if (ConfidenceDataFromBack && ConfidenceDataFromBack.data)
+        if (ConfidenceDataFromBack && ConfidenceDataFromBack.data) {
             setConfidenceData(ConfidenceDataFromBack.data.data);
+        }
     }, [ConfidenceDataFromBack]);
 
     useEffect(() => {
-        if (EmotionalArousalDataFromBack && EmotionalArousalDataFromBack.data)
+        if (EmotionalArousalDataFromBack && EmotionalArousalDataFromBack.data) {
             setEmotionalArousalData(EmotionalArousalDataFromBack.data.data);
+        }
     }, [EmotionalArousalDataFromBack]);
 
     useEffect(() => {
-        if (CommunicativeDataFromBack && CommunicativeDataFromBack.data)
+        if (CommunicativeDataFromBack && CommunicativeDataFromBack.data) {
             setCommunicativeData(CommunicativeDataFromBack.data.data);
+        }
     }, [CommunicativeDataFromBack]);
 
     useEffect(() => {
-        if (TotalDataFromBack && TotalDataFromBack.data)
+        if (TotalDataFromBack && TotalDataFromBack.data) {
             setTotalData(TotalDataFromBack.data.data);
+        }
     }, [TotalDataFromBack]);
 
     // ----------------------RECOMENDATION----------------------
@@ -364,9 +379,6 @@ export default function AnalysisReport() {
                 communicative: 0,
             };
     }, [energyData, confidenceData, informativeData]);
-
-    console.log(confidenceData);
-    console.log(confidenceData?.uncertainty);
 
     return (
         <div className={cnReport()}>
@@ -702,11 +714,27 @@ export default function AnalysisReport() {
                         {eloquenceData && (
                             <Dropdown
                                 title={"Красноречивость"}
-                                subtitle={AddTextEloquence(eloquenceData.values.parasitic_words,
-                                    Math.ceil((((eloquenceData.values.parasitic_words/10)+eloquenceData.values.short_words)*2.5)*25),
+                                subtitle={AddTextEloquence(
                                     eloquenceData.values.parasitic_words,
-                                    Math.ceil((((eloquenceData.values.parasitic_words/10)+eloquenceData.values.short_sentences)*2,5)),
-                                    eloquenceData.values.short_words,eloquenceData.values.active_words)}
+                                    Math.ceil(
+                                        (eloquenceData.values.parasitic_words /
+                                            10 +
+                                            eloquenceData.values.short_words) *
+                                            2.5 *
+                                            25
+                                    ),
+                                    eloquenceData.values.parasitic_words,
+                                    Math.ceil(
+                                        ((eloquenceData.values.parasitic_words /
+                                            10 +
+                                            eloquenceData.values
+                                                .short_sentences) *
+                                            2,
+                                        5)
+                                    ),
+                                    eloquenceData.values.short_words,
+                                    eloquenceData.values.action_words
+                                )}
                                 visible={<Eloquence data={eloquenceData} />}
                                 invisible={
                                     <EloquenceText

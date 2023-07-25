@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function InformativeGraph({ items }: Props) {
-    console.log("items", items)
+    
     return (
         <>
             <InformativeText/>
