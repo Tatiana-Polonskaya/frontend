@@ -56,7 +56,7 @@ export default function PreviewBlock({
     const { currentFile, setCurrentInfoData } = useContext(VideoUploadContext);
 
     const [sizeVideo, setSizeVideo] = useState(0);
-    const [canMoved, setCanMoved] = useState(false);
+    const [canMoved, setCanMoved] = useState(true);
     const [isNormDuration, setIsNormDuration] = useState(true);
 
     const videoRef = useRef<HTMLVideoElement | any>();
@@ -107,9 +107,8 @@ export default function PreviewBlock({
     useEffect(() => {
         if (durationVideo > 0) {
             const normDuration = getPrettyDuration(durationVideo);
-            if (normDuration <= NORM_COUNT_MINUTES) {
-                setCanMoved(true);
-            } else {
+            console.log("normDuration", normDuration)
+            if (normDuration > NORM_COUNT_MINUTES) {
                 setIsNormDuration(false);
                 setCanMoved(false);
             }
@@ -127,7 +126,7 @@ export default function PreviewBlock({
     }, [currentFile]);
 
     const clickUpload = async () => {
-        if (canMoved) {
+        if (canMoved && isFileNameValid) {
             if (fileName.current?.value) {
                 setCurrentInfoData({
                     title: fileName.current?.value,
