@@ -14,7 +14,7 @@ type Props={
             parasitic_words: number,
             short_sentences: number,
             short_words: number,
-            active_words: number,
+            action_words: number,
             parasitic_words_list?: {
             }
         }
@@ -55,11 +55,11 @@ function Eloquence(props: Props) {
                             </div>
                             <div className='active_words'>
                                 <div className='textactive_words'>
-                                    <p className='txt'>{infEloquence.values.active_words}</p>
+                                    <p className='txt'>{infEloquence.values.action_words}</p>
                                     <p className='txt2'>активные </p>
                                     <p className='txt2'> слова</p>
                                 </div>
-                                <Bubble4 component={'#13D784'}/>
+                                <Bubble4 component={colors(infEloquence.values.action_words)}/>
                             </div>
                         </div>
                         <div className='imgbigCloud'>

@@ -1,13 +1,17 @@
 export type ConfidenceDataItem = {
-    seq_number: number;
+    time_sec: number;
+    confidence: number;
+
     text: string;
-    value: number;
-    time_start: number;
-    time_end: number;
+
+    time_start?: number;
+    time_end?: number;
+    seq_number?: number;
+    value?: number;
 };
 
 export type ConfidenceJSON = {
-    values:ConfidenceDataItem[],
-    average_value: number,
-    uncertainty: number
-}
+    values: ConfidenceDataItem[];
+    average_value: number;
+    uncertainty: number;
+};

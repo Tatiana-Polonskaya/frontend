@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import ProgressBar from "../../Graphs/Progressbar";
 import { cn } from "@bem-react/classname";
 
@@ -25,9 +26,10 @@ import convertTotalData from "../../../@adapters/Graphs/total";
 import { useGetTotalByIdQuery } from "../../../store/api/report";
 import { useEffect, useState } from "react";
 import { TotalDataItem, TotalType } from "../../../models/graph/total";
+import { useGetTotalByIdTestQuery } from "../../../store/api/reportTest";
 
-function getPictureByConclusion(conclusion: string) {
-    switch (conclusion) {
+function getPictureByConclussion(conclussion: string) {
+    switch (conclussion) {
         case "Новичок на сцене":
             return face;
         case "Постепенно преодолевающий себя оратор":
@@ -51,13 +53,17 @@ type Props = {
 export default function CommonAnalitics(props: Props) {
     const cnCommon = cn("CommonAnalitics");
 
-    const { data } = useGetTotalByIdQuery(props.idVideo);
+    const { data } =
+        props.idVideo === "89dd1171-d9e9-4d65-9730-4a36596a0e84"
+            ? useGetTotalByIdTestQuery(props.idVideo)
+            : useGetTotalByIdQuery(props.idVideo);
 
     const [speedArr, setSpeedArr] = useState<TotalType[]>();
     const [allValues, setAllValues] = useState<TotalDataItem>();
 
     useEffect(() => {
         if (data) {
+            console.log("CommonAnalitics",data!.data!.values)
             setSpeedArr(convertTotalData(data!.data!.values));
             setAllValues(data!.data!.values);
         }
@@ -78,18 +84,18 @@ export default function CommonAnalitics(props: Props) {
                 <div>
                     {allValues && (
                         <ReactSVG
-                            src={getPictureByConclusion(
-                                allValues.big_conclusion
+                            src={getPictureByConclussion(
+                                allValues.big_conclussion
                             )}
                         />
                     )}
                 </div>
                 <div className={cnCommon("col-grow")}>
                     <span className={cnCommon("blue-bold")}>
-                        {allValues && allValues.big_conclusion}
+                        {allValues && allValues.big_conclussion}
                     </span>
                     <span className={cnCommon("gray-txt")}>
-                        {allValues && allValues.conclusion}
+                        {allValues && allValues.conclussion}
                     </span>
                 </div>
                 <div className={cnCommon("common-result")}>
@@ -196,7 +202,7 @@ export default function CommonAnalitics(props: Props) {
                                         allValues[element]
                                     )[0],
                                 }}
-                            >{`${allValues ? allValues[element] : 0}%`}</div>
+                            >{`${allValues ? allValues[element].toFixed(2) : 0}%`}</div>
                         </div>
                     ))}
             </div>

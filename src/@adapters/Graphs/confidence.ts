@@ -29,12 +29,17 @@ const getTop = (value: number) => {
 };
 
 const convertConfidenceData = (raw: ConfidenceDataItem): BrickedGraphItem => ({
-    id: raw.seq_number,
+    // id: raw.seq_number,
+    id: raw.time_sec,
     text: raw.text,
     // value: raw.value, /// REMOVE THIS
-    top: `${getTop(raw.value)}%`,
-    startTime: raw.time_start,
-    endTime: raw.time_end,
-    color: getColor(raw.value),
+    // top: `${getTop(raw.value)}%`,
+    top: `${getTop(raw.confidence)}%`,
+    // startTime: raw.time_start,
+    startTime: raw.time_sec,
+    // endTime: raw.time_end,
+    endTime: raw.time_sec + 10,
+    // color: getColor(raw.value),
+    color: getColor(raw.confidence),
 });
 export default convertConfidenceData;

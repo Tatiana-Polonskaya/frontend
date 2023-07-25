@@ -200,6 +200,7 @@ export default function SecondaryDefeat(props: Props) {
                 }
             });
         });
+        
         return (
             <div className={cnDefeat("description")}>
                 {arrParam.map((el, ind) => (
@@ -281,7 +282,7 @@ export default function SecondaryDefeat(props: Props) {
                                 )
                             )}
                         >
-                            {el.time_start}
+                            {convertTime(Number(el.time_start))}
                         </div>
                         {determ(el.text, el.value, index)}
                     </div>

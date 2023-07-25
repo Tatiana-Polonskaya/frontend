@@ -145,6 +145,10 @@
                     justify-content: center;
                     align-items: center;
                 }
+
+                &_not_allowed{
+                    cursor: not-allowed;
+                }
             }
         }
     }

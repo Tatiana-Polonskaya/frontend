@@ -6,6 +6,7 @@ import { ConfidenceDataItem } from "../../../../../../models/graph/confidence";
 
 type Props = {
     data: ConfidenceDataItem[];
+    endTime: number;
 };
 
 export default function MainConfidence(props: Props) {
@@ -14,7 +15,7 @@ export default function MainConfidence(props: Props) {
             <ConfidenceLineGraph
                 items={props.data}
                 startTime={0}
-                endTime={250}
+                endTime={props.endTime}
             />
         </>
     );

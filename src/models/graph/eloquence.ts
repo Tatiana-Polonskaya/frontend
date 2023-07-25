@@ -11,8 +11,10 @@ export type EloquenceDataItem = {
     parasitic_words: number;
     short_sentences: number; 
     short_words: number; 
-    active_words: number;
-    parasitic_words_list: ParasiticWordsItem;
+    action_words: number;
+    parasitic_words_list: {
+        [key: string]: number;
+    };
 };
 
 export type EloquenceJSON = {

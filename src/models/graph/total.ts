@@ -10,8 +10,8 @@ export enum TotalType {
 type ExtendWithType = Record<TotalType, number>;
 
 export type TotalDataItem = {
-    big_conclusion: string;
-    conclusion: string;
+    big_conclussion: string;
+    conclussion: string;
     total_result: number;
 } & ExtendWithType;
 

@@ -309,7 +309,7 @@ export default function DiaryStart() {
                 ) : (
                     <div>Нет видео на анализе</div>
                 )}
-                {currentStatus ? (
+                {currentStatus && currentStatus.length > 0 ? (
                     <Pagination
                         videosPerPage={videosPerPage}
                         totalVideos={countAnalysisVideos}

@@ -14,6 +14,7 @@ export default function BrickedGraph({ items }: Props) {
             <GraphMedian top="50%" />
             {items.map((el, idx) => (
                 <SecondBrick
+                    id={idx}
                     key={idx}
                     width={`${
                         (el.endTime - el.startTime) * (_1SEC_PX + 0.05)

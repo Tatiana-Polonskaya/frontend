@@ -12,6 +12,7 @@ import surveyReducer from "./slices/survey";
 import { userApi } from "./api/user";
 
 import { reportApi } from "./api/report";
+import { reportTestApi } from "./api/reportTest";
 
 import { surveyApi } from "./api/survey";
 import { videoApi } from "./api/userVideo";
@@ -19,7 +20,6 @@ import { diaryApi } from "./api/diary";
 import { apiWithDifAnswers } from "./api/apiWithDifAnswers";
 import { chatApi } from "./api/chat";
 import { notificationApi } from "./api/notification";
-
 
 export const store = configureStore({
     reducer: {
@@ -35,6 +35,7 @@ export const store = configureStore({
         [diaryApi.reducerPath]: diaryApi.reducer,
         [chatApi.reducerPath]: chatApi.reducer,
         [notificationApi.reducerPath]: notificationApi.reducer,
+        [reportTestApi.reducerPath]: reportTestApi.reducer,
 
         register: registerReducer,
         test: testSlice,
@@ -56,7 +57,7 @@ export const store = configureStore({
             videoApi.middleware,
             chatApi.middleware,
             notificationApi.middleware,
-
+            reportTestApi.middleware
         ),
     devTools: process.env.NODE_ENV !== "production",
 });

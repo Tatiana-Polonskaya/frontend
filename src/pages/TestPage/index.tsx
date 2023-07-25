@@ -2,7 +2,7 @@ import MainLayout from "../../layouts/MainLayout";
 
 import TimelineGraph from "../../components/Graphs/Timeline";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import connectivityMockData from "./mocks/_connectivity";
 import clarityMockData from "./mocks/_clarity";
@@ -22,6 +22,9 @@ import {
 } from "../../models/graph/emotionality";
 import EmotionalityGraph from "../../components/Graphs/Emotionality";
 import { NonMonotonyType } from "../../models/graph/monotony";
+import { useGetTotalByIdTestQuery } from "../../store/api/reportTest";
+import { TotalType } from "../../models/graph/total";
+import { useGetTotalByIdQuery } from "../../store/api/report";
 
 export default function TestPage() {
     const [currentTime, setCurrentTime] = useState(0);
@@ -36,6 +39,22 @@ export default function TestPage() {
 
     const [nonMonotonyType, setNonMonotonyType] =
         useState<NonMonotonyType | null>(null);
+
+    const data1 = useGetTotalByIdTestQuery(
+        "a80ee628-6520-4734-b99b-008b75bc3fe4"
+    );
+
+    const data2 = useGetTotalByIdQuery("a80ee628-6520-4734-b99b-008b75bc3fe4");
+    // const [dataTest, setDataTest] = useState<TotalType[]>();
+
+    // useEffect(() => {
+    //     if (data) {
+    //         setDataTest(data))
+    //     }
+    // }, [data]);
+
+    // console.log(data);
+    // console.log(dataTest)
 
     return (
         <MainLayout>
@@ -53,7 +72,7 @@ export default function TestPage() {
             <GraphContext.Provider value={{ currentTime, setCurrentTime }}>
                 <div>
                     <span>Уверенность</span>
-                    <ConfidenceGraph data={confidenceMockData} average={30} />
+                    {/* <ConfidenceGraph data={confidenceMockData} average={30} /> */}
                 </div>
                 <div>
                     <span>немонотонность</span>
@@ -129,6 +148,14 @@ export default function TestPage() {
                 <div>
                     <span>четкость</span>
                     <ClarityGraph data={clarityMockData} />
+                </div>
+                <div>
+                    <button onClick={() => console.log(data1)}>
+                        {"ТЕСТ1"}
+                    </button>
+                    <button onClick={() => console.log(data2)}>
+                        {"ТЕСТ2"}
+                    </button>
                 </div>
             </GraphContext.Provider>
         </MainLayout>

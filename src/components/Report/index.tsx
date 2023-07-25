@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { cn } from "@bem-react/classname";
 
 import Tabs, { TYPE_TABS } from "../Tabs";
@@ -113,19 +114,33 @@ import textForEnergySmile from "../Graphs/EnergySmile/text";
 
 import AddTextUnityOfStyle from "../Graphs/unityOfStyle/text";
 
-
-
-
 import noteIcon from "./assets/note.svg";
 import arrowLeft from "./assets/arrowLeft.svg";
 import "./style.scss";
-import Recomendation from "../Analytics/-Block/-Recomendation"
+import Recomendation from "../Analytics/-Block/-Recomendation";
 import RecommendConn from "../Analytics/-Block/-Recomendation/recHandler/RecommendConn";
 import RecommendClarity from "../Analytics/-Block/-Recomendation/recHandler/RecommendClarity";
 import RecommendDynamism from "../Analytics/-Block/-Recomendation/recHandler/RecommendDynamism";
+
+import {
+    useGetArgumentativenessByIdTestQuery,
+    useGetClarityByIdTestQuery,
+    useGetCommunicativeByIdTestQuery,
+    useGetConfidenceByIdTestQuery,
+    useGetCongruenceByIdTestQuery,
+    useGetConnectivityByIdTestQuery,
+    useGetEloquenceByIdTestQuery,
+    useGetEmotionalArousalByIdTestQuery,
+    useGetEmotionalityByIdTestQuery,
+    useGetEnergyByIdTestQuery,
+    useGetExpressivenessByIdTestQuery,
+    useGetInformativeByIdTestQuery,
+    useGetNonMonotonyByIdTestQuery,
+    useGetTotalByIdTestQuery,
+    useGetUnityOfStyleByIdTestQuery,
+} from "../../store/api/reportTest";
+
 import AddTextEloquence from "../Graphs/eloquence/text";
-
-
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
@@ -194,23 +209,26 @@ export default function AnalysisReport() {
     const [totalData, setTotalData] = useState<TotalGraphJSON>();
 
     // all queries
-    const ConnectivityDataFromBack = useGetConnectivityByIdQuery(idVideo);
-    const InformativeDataFromBack = useGetInformativeByIdQuery(idVideo);
-    const UnityOfStyleDataFromBack = useGetUnityOfStyleByIdQuery(idVideo);
+    const ConnectivityDataFromBack = useGetConnectivityByIdTestQuery(idVideo);
+    const InformativeDataFromBack = useGetInformativeByIdTestQuery(idVideo);
+    const UnityOfStyleDataFromBack = useGetUnityOfStyleByIdTestQuery(idVideo);
     const ArgumentativenessDataFromBack =
-        useGetArgumentativenessByIdQuery(idVideo);
-    const ClarityDataFromBack = useGetClarityByIdQuery(idVideo);
-    const EloquenceDataFromBack = useGetEloquenceByIdQuery(idVideo);
-    const ExpressivenessDataFromBack = useGetExpressivenessByIdQuery(idVideo);
-    const NonMonotonyDataFromBack = useGetNonMonotonyByIdQuery(idVideo);
-    const EmotionalityDataFromBack = useGetEmotionalityByIdQuery(idVideo);
-    const EnergyDataFromBack = useGetEnergyByIdQuery(idVideo);
-    const CongruenceDataFromBack = useGetCongruenceByIdQuery(idVideo);
-    const ConfidenceDataFromBack = useGetConfidenceByIdQuery(idVideo);
+        useGetArgumentativenessByIdTestQuery(idVideo);
+    const ClarityDataFromBack = useGetClarityByIdTestQuery(idVideo);
+    const EloquenceDataFromBack = useGetEloquenceByIdTestQuery(idVideo);
+    const ExpressivenessDataFromBack =
+        useGetExpressivenessByIdTestQuery(idVideo);
+    const NonMonotonyDataFromBack = useGetNonMonotonyByIdTestQuery(idVideo);
+    const EmotionalityDataFromBack = useGetEmotionalityByIdTestQuery(idVideo);
+    const EnergyDataFromBack = useGetEnergyByIdTestQuery(idVideo);
+    const CongruenceDataFromBack = useGetCongruenceByIdTestQuery(idVideo);
+    const ConfidenceDataFromBack = useGetConfidenceByIdTestQuery(idVideo);
     const EmotionalArousalDataFromBack =
-        useGetEmotionalArousalByIdQuery(idVideo);
-    const CommunicativeDataFromBack = useGetCommunicativeByIdQuery(idVideo);
-    const TotalDataFromBack = useGetTotalByIdQuery(idVideo);
+
+        useGetEmotionalArousalByIdTestQuery(idVideo);
+    const CommunicativeDataFromBack = useGetCommunicativeByIdTestQuery(idVideo);
+    const TotalDataFromBack = useGetTotalByIdTestQuery(idVideo);
+
 
     useEffect(() => {
         if (ConnectivityDataFromBack && ConnectivityDataFromBack.data)
@@ -237,8 +255,10 @@ export default function AnalysisReport() {
     }, [ArgumentativenessDataFromBack]);
 
     useEffect(() => {
-        if (ClarityDataFromBack && ClarityDataFromBack.data)
+        if (ClarityDataFromBack && ClarityDataFromBack.data) {
+            console.log("ClarityDataFromBack", ClarityDataFromBack.data.data);
             setClarityData(ClarityDataFromBack.data.data);
+        }
     }, [ClarityDataFromBack]);
 
     useEffect(() => {
@@ -291,7 +311,6 @@ export default function AnalysisReport() {
             setTotalData(TotalDataFromBack.data.data);
     }, [TotalDataFromBack]);
 
-
     // ----------------------RECOMENDATION----------------------
     const [connectivityRec, setConnectivityRec] = useState<string[]>([]);
     const [argumentativenessRec, setArgumentativenessRec] = useState<string[]>(
@@ -319,14 +338,14 @@ export default function AnalysisReport() {
 
     const resultDesc = useMemo(() => {
         if (energyData && confidenceData && informativeData) {
-            console.log({
-                connectivity: informativeData!.informative,
-                argumentativeness: 0,
-                clarity: 0,
-                dynamism: energyData.total_energy,
-                persuasiveness: confidenceData.average_value,
-                communicative: 0,
-            })
+            // console.log({
+            //     connectivity: informativeData!.informative,
+            //     argumentativeness: 0,
+            //     clarity: 0,
+            //     dynamism: energyData.total_energy,
+            //     persuasiveness: confidenceData.average_value,
+            //     communicative: 0,
+            // });
             return {
                 connectivity: informativeData!.informative,
                 argumentativeness: 0,
@@ -346,7 +365,8 @@ export default function AnalysisReport() {
             };
     }, [energyData, confidenceData, informativeData]);
 
-
+    console.log(confidenceData);
+    console.log(confidenceData?.uncertainty);
 
     return (
         <div className={cnReport()}>
@@ -473,9 +493,13 @@ export default function AnalysisReport() {
                                 visible={
                                     informativeData && (
                                         <InformativScale
-                                            informative={informativeData.informative }
+                                            informative={
+                                                informativeData.informative
+                                            }
                                             sounds={informativeData.sounds}
-                                            without_confirmation={ informativeData.empty}
+                                            without_confirmation={
+                                                informativeData.empty
+                                            }
                                             parasite={informativeData.parasite}
                                         />
                                     )
@@ -524,18 +548,22 @@ export default function AnalysisReport() {
                             />
                         )}
 
-                        {unityOfStyleData && connectivityData && informativeData && (
-                            <RecommendConn Nprotiv={connectivityData.controversy}
-                                       Tparaz = { informativeData.parasite}
-                                       Tnerech={informativeData.sounds}
-                                       Tpauza={informativeData.empty}
-                                       Tob={100}
-                                       Pnauch={unityOfStyleData.scientific}
-                                       Pofic={unityOfStyleData.official}
-                                       Ppabl={unityOfStyleData.publicistic}
-                                       Prazgovor={unityOfStyleData.colloquial}
-                                       Phud={unityOfStyleData.artistic}/>)}
-
+                        {unityOfStyleData &&
+                            connectivityData &&
+                            informativeData && (
+                                <RecommendConn
+                                    Nprotiv={connectivityData.controversy}
+                                    Tparaz={informativeData.parasite}
+                                    Tnerech={informativeData.sounds}
+                                    Tpauza={informativeData.empty}
+                                    Tob={100}
+                                    Pnauch={unityOfStyleData.scientific}
+                                    Pofic={unityOfStyleData.official}
+                                    Ppabl={unityOfStyleData.publicistic}
+                                    Prazgovor={unityOfStyleData.colloquial}
+                                    Phud={unityOfStyleData.artistic}
+                                />
+                            )}
                     </div>
                     <div
                         data-title="Аргументированность"
@@ -642,7 +670,7 @@ export default function AnalysisReport() {
                         {clarityData && (
                             <Dropdown
                                 title={"Четкость речи"}
-                                subtitle={`Присутствуют лишние звуковые помехи.`}
+                                subtitle={clarityData.expressiveness}
                                 visible={
                                     <MainDefinition
                                         data={clarityData.values.map((el) =>
@@ -681,7 +709,9 @@ export default function AnalysisReport() {
                                     eloquenceData.values.short_words,eloquenceData.values.active_words)}
                                 visible={<Eloquence data={eloquenceData} />}
                                 invisible={
-                                    <EloquenceText data={eloquenceData} />
+                                    <EloquenceText
+                                        data={eloquenceData.values}
+                                    />
                                 }
                             />
                         )}
@@ -727,27 +757,53 @@ export default function AnalysisReport() {
                         )}
 
                         {clarityData && eloquenceData && expressivenessData && (
-                            <RecommendClarity Nitemp={(clarityData.sounds +clarityData.trembling) / (clarityData.basic + clarityData.sounds +clarityData.trembling)}
-                                            Tnerech={clarityData.sounds}
-                                            Tdroz={clarityData.trembling}
-                                            Tob={clarityData.basic + clarityData.sounds +clarityData.trembling}
-                                            Nzpredl={eloquenceData.values.short_words}
-                                            Nparaz={eloquenceData.values.parasitic_words}
-                                            Nkpedl={eloquenceData.values.short_sentences}
-                                            Napredl={eloquenceData.values.active_words}
-                                            Npredl={Math.ceil((((eloquenceData.values.parasitic_words/10)+eloquenceData.values.short_sentences)*2,5))}
-                                            Nvist={Math.ceil((((eloquenceData.values.parasitic_words/10)+eloquenceData.values.short_sentences)*2,5))*25}
-                                            Pekspr={expressivenessData.total_expressiveness}
-                            />)}
+                            <RecommendClarity
+                                Nitemp={
+                                    (clarityData.sounds +
+                                        clarityData.trembling) /
+                                    (clarityData.basic +
+                                        clarityData.sounds +
+                                        clarityData.trembling)
+                                }
+                                Tnerech={clarityData.sounds}
+                                Tdroz={clarityData.trembling}
+                                Tob={
+                                    clarityData.basic +
+                                    clarityData.sounds +
+                                    clarityData.trembling
+                                }
+                                Nzpredl={eloquenceData.values.short_words}
+                                Nparaz={eloquenceData.values.parasitic_words}
+                                Nkpedl={eloquenceData.values.short_sentences}
+                                Napredl={eloquenceData.values.action_words}
+                                Npredl={Math.ceil(
+                                    ((eloquenceData.values.parasitic_words /
+                                        10 +
+                                        eloquenceData.values.short_sentences) *
+                                        2,
+                                    5)
+                                )}
+                                Nvist={
+                                    Math.ceil(
+                                        ((eloquenceData.values.parasitic_words /
+                                            10 +
+                                            eloquenceData.values
+                                                .short_sentences) *
+                                            2,
+                                        5)
+                                    ) * 25
+                                }
+                                Pekspr={expressivenessData.total_expressiveness}
+                            />
+                        )}
 
-        {/*                       <Recomendation
+                        {/*                       <Recomendation
                             recomendation={
                                 clarityRec.length !== 0
                                     ? "слепить"
                                     : "Регулярно расширяйте свой словарный запас, поскольку это поможет Вам в выборе более точных и выразительных слов для передачи своих мыслей и эмоций."
                             }
                         /> */}
-
                     </div>
                     <div
                         data-title="Динамизм"
@@ -871,18 +927,21 @@ export default function AnalysisReport() {
                             />
                         )}
 
-
                         {emotionalityData && nonMonotonyData && energyData && (
-                           <RecommendDynamism htemp={nonMonotonyData["h-temp"]}
-                                               hgromk={nonMonotonyData["h-volume"]}
-                                               hton={nonMonotonyData["h-tone"]}
-                                               pemotion={(emotionalityData.total.anger+emotionalityData.total.neutral+emotionalityData.total.happiness)/3}
-                                               penergi={energyData.total_energy}
-                            />)}
-
-
+                            <RecommendDynamism
+                                htemp={nonMonotonyData["h-temp"]}
+                                hgromk={nonMonotonyData["h-volume"]}
+                                hton={nonMonotonyData["h-tone"]}
+                                pemotion={
+                                    (emotionalityData.total.anger +
+                                        emotionalityData.total.neutral +
+                                        emotionalityData.total.happiness) /
+                                    3
+                                }
+                                penergi={energyData.total_energy}
+                            />
+                        )}
                     </div>
-
 
                     <div
                         data-title="Убедительность"
@@ -926,13 +985,15 @@ export default function AnalysisReport() {
                                 visible={
                                     <MainConfidence
                                         data={confidenceData.values}
+                                        endTime={+videoInfo!.duration}
                                     />
                                 }
                                 invisible={
                                     <SecondaryConfidence
                                         data={confidenceData.values}
                                         average={
-                                            100 - confidenceData.average_value
+                                            100 -
+                                            confidenceData.average_value * 100
                                         }
                                         state={""}
                                     />
@@ -959,8 +1020,20 @@ export default function AnalysisReport() {
                                                 title: "Коэффицент Трейгера",
                                                 subtitle:
                                                     "Отношение количества глаголов к количеству прилагательных в единице текста должно быть близко к 1.",
-                                                result: emotionalArousalData
-                                                    .values.trager_coefficient,
+                                                result:
+                                                    !emotionalArousalData.values
+                                                        .trager_coefficient ||
+                                                    emotionalArousalData.values
+                                                        .trager_coefficient < 0
+                                                        ? 0
+                                                        : emotionalArousalData
+                                                              .values
+                                                              .trager_coefficient >
+                                                          1
+                                                        ? 1
+                                                        : emotionalArousalData
+                                                              .values
+                                                              .trager_coefficient,
                                                 fill: ["#FFDFE1", "#ABFFBE"],
                                                 limit: 0.85,
                                             },
@@ -968,9 +1041,21 @@ export default function AnalysisReport() {
                                                 title: "Коэффицент определенности действия",
                                                 subtitle:
                                                     "Отношение количества глаголов к количеству существительных в единице текста должно быть близко к 1.",
-                                                result: emotionalArousalData
-                                                    .values
-                                                    .action_certainty_factor,
+                                                result:
+                                                    !emotionalArousalData.values
+                                                        .action_certainty_factor ||
+                                                    emotionalArousalData.values
+                                                        .action_certainty_factor <
+                                                        0
+                                                        ? 0
+                                                        : emotionalArousalData
+                                                              .values
+                                                              .action_certainty_factor >
+                                                          1
+                                                        ? 1
+                                                        : emotionalArousalData
+                                                              .values
+                                                              .action_certainty_factor,
                                                 fill: ["#FFDFE1", "#ABFFBE"],
                                                 limit: 0.85,
                                             },
@@ -978,9 +1063,21 @@ export default function AnalysisReport() {
                                                 title: "Коэффицент агрессивности",
                                                 subtitle:
                                                     "Отношение количества глаголов и глагольных форм к общему количеству всех слов не должно превышать 0,6.",
-                                                result: emotionalArousalData
-                                                    .values
-                                                    .aggressiveness_coefficient,
+                                                result:
+                                                    !emotionalArousalData.values
+                                                        .aggressiveness_coefficient ||
+                                                    emotionalArousalData.values
+                                                        .aggressiveness_coefficient <
+                                                        0
+                                                        ? 0
+                                                        : emotionalArousalData
+                                                              .values
+                                                              .aggressiveness_coefficient >
+                                                          1
+                                                        ? 1
+                                                        : emotionalArousalData
+                                                              .values
+                                                              .aggressiveness_coefficient,
                                                 fill: ["#ABFFBE", "#FFDFE1"],
                                                 limit: 0.6,
                                             },
@@ -991,6 +1088,7 @@ export default function AnalysisReport() {
                         )}
                         <Recomendation
                             recomendation={
+                                persuasivenessRec &&
                                 persuasivenessRec.length === 0
                                     ? persuasivenessRecomendation(
                                           congruenceData?.diameter.audio.anger,
@@ -1095,7 +1193,7 @@ export default function AnalysisReport() {
                         <div className={cnReport("conclusion-desciption-text")}>
                             {/* заменить общий вывод */}
                             {resultDesc && getTotalDesc(resultDesc)}
-                            
+
                             {/* {`Задача организации, в особенности же понимание сути
                             ресурсосберегающих технологий требует определения и
                             уточнения соответствующих условий активизации. Как

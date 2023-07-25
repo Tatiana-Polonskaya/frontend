@@ -6,7 +6,7 @@ const convertInformativeData = (
     raw: InformativeDataItem
 ): BrickedGraphItem => ({
     id: raw.seq_number,
-    text: raw.text,
+    text: raw.text === 'Text for sounds' ? "неречевые звуки" : raw.text === 'Text for pauses' ? "пустые паузы" : raw.text,
     top: "42%",
     startTime: raw.time_start,
     endTime: raw.time_end,
@@ -26,7 +26,9 @@ const convertInformativeData = (
                                 ? GraphColor.ORANGE
                                 : raw.type === "sounds"
                                     ? GraphColor.RED
-                                    : GraphColor.RED,
+                                    : raw.type === "pauses"
+                                    ? GraphColor.ORANGE
+                                    : GraphColor.GRAY,
 });
 
 export default convertInformativeData;

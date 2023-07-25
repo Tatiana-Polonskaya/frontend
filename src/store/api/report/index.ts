@@ -149,13 +149,6 @@ export const reportApi = createApi({
             }),
         }),
 
-        getTotalByIdTest: build.query<IResponse<TotalGraphJSON>, string>({
-            query: (id) => ({
-                url: `/api/video/${id}/report/${TYPE_REPORT.total}`,
-                params: { id },
-                method: "GET",
-            }),
-        }),
     }),
 });
 
@@ -188,8 +181,7 @@ export const {
     useLazyGetEloquenceByIdQuery,
     useLazyGetNonMonotonyByIdQuery,
     useLazyGetEmotionalArousalByIdQuery,
-    useLazyGetTotalByIdQuery,
-    useGetTotalByIdTestQuery
+    useLazyGetTotalByIdQuery
 } = reportApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = reportApi;

@@ -1,42 +1,30 @@
 import React from 'react';
 import './styleText.css'
+import { EloquenceDataItem } from '../../../models/graph/eloquence';
 
-type TinfEloquence={
-    "data": {
-        "values": {
-            "parasitic_words": number,
-            "short_sentences":number,
-            "short_words": number,
-            "active_words": number,
-            "parasitic_words_list": {
-                "слово": number,
-                "ещеслово": number,
-                "ещеслололово": number,
-                "что-то": number
-                [index: string]: number;
-            }
-        }
-    },
-    "error"?: null,
-    "success"?: boolean
-};
-function paintWords( data: TinfEloquence){
+
+function paintWords( data: EloquenceDataItem){
     let a=[];
     let i =0;
-    for (let key in data.data.values.parasitic_words_list) {
-        if (data.data.values.parasitic_words_list == null){
+    for (let key in data.parasitic_words_list) {
+        if (data.parasitic_words_list == null){
             return <div className='blocWords'> {("слов-паразитов не найдено")} </div>
         }
-        a[i] = <div className='blocWords' key={key}> {(key)} <div className="strings">{(data.data.values.parasitic_words_list[key])}</div></div>
+        a[i] = <div className='blocWords' key={key}> {(key)} <div className="strings">{(data.parasitic_words_list[key])}</div></div>
         i++;
     }
     return a;
 }
-function EloquenceText(props: TinfEloquence) {
-    let infEloquence:TinfEloquence = props;
+
+type Props = {
+    data: EloquenceDataItem
+}
+
+function EloquenceText(props: Props) {
+    let infEloquence:EloquenceDataItem = props.data;
     let countWords =  0
-    for (let key in infEloquence.data.values.parasitic_words_list) {
-        countWords += infEloquence.data.values.parasitic_words_list[key];
+    for (let key in infEloquence.parasitic_words_list) {
+        countWords += infEloquence.parasitic_words_list[key];
     }
 
         return (

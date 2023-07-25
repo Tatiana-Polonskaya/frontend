@@ -82,15 +82,15 @@ export const convertExpressivenessDataLine = (
 
 export const convertTime = (time: number): string => {
     if (time < 10) {
-        return `00:0${time}`;
+        return `00:0${time.toFixed(0)}`;
     } else if (time < 60) {
-        return `00:${time}`;
+        return `00:${time.toFixed(0)}`;
     } else if (time < 600 && time % 60 !== 0) {
-        return `0${Math.floor(time / 60)}:${time % 60}`;
+        return `0${Math.floor(time / 60)}:${(time % 60).toFixed(0)}`;
     } else if (time < 600 && time % 60 === 0) {
-        return `0${Math.floor(time / 60)}:${time % 60}0`;
+        return `0${Math.floor(time / 60)}:${(time % 60).toFixed(0)}0`;
     } else {
-        return `${Math.floor(time / 60)}:${time % 60}`;
+        return `${Math.floor(time / 60)}:${(time % 60).toFixed(0)}`;
     }
 };
 
@@ -132,20 +132,34 @@ export const convertConfidenceArr = (
 
     items.forEach((el, ind) => {
         if (ind === 0) {
-            resArr.push({ value: el.value, ...getColor(el.value), width: 1 });
+            // resArr.push({ value: el.value, ...getColor(el.value), width: 1 });
+            resArr.push({
+                value: el.confidence,
+                ...getColor(el.confidence),
+                width: 1,
+            });
         } else if (
-            (el.value < lowLevel &&
+            // (el.value < lowLevel &&
+            (el.confidence < lowLevel &&
                 resArr[resArr.length - 1].value < lowLevel) ||
-            (el.value > highLevel &&
+            // (el.value > highLevel &&
+            (el.confidence > highLevel &&
                 resArr[resArr.length - 1].value > highLevel) ||
-            (el.value < highLevel &&
-                el.value > lowLevel &&
+            // (el.value < highLevel &&
+            (el.confidence < highLevel &&
+                // el.value > lowLevel &&
+                el.confidence > lowLevel &&
                 resArr[resArr.length - 1].value < highLevel &&
                 resArr[resArr.length - 1].value > lowLevel)
         ) {
             resArr[resArr.length - 1].width += 1;
         } else {
-            resArr.push({ value: el.value, ...getColor(el.value), width: 1 });
+            // resArr.push({ value: el.value, ...getColor(el.value), width: 1 });
+            resArr.push({
+                value: el.confidence,
+                ...getColor(el.confidence),
+                width: 1,
+            });
         }
     });
     return resArr;

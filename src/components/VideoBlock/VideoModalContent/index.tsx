@@ -13,67 +13,51 @@ import { ModalWindowContext } from "..";
 import { ReactSVG } from "react-svg";
 
 import arrowIcon from "../assets/arrow-down.svg";
+import { useGetTotalByIdTestQuery } from "../../../store/api/reportTest";
+import { TotalDataItem, TotalType } from "../../../models/graph/total";
+import { getTotalTitle } from "../../Report/helpers";
 
 type Props = {
-    modalVideo:IVideoFromBack
-}
+    modalVideo: IVideoFromBack;
+};
 
-export default function VideoModalContent({modalVideo}: Props) {
+export default function VideoModalContent({ modalVideo }: Props) {
+    const navigate = useNavigate();
 
-    const navigate = useNavigate(); 
+    const { setModal } = useContext(ModalWindowContext);
 
-    const {setModal} = useContext(ModalWindowContext);
-
-    const {data} = useGetTotalByIdQuery(modalVideo.id);
-    const [totalVideoInfo, setTotalVideoInfo] = useState<number[]>();
-    
-    let criteria =  [
-        {
-            title: "связность",
-        },
-        {
-            title: "убедительность",
-        },
-        {
-            title: "аргументированность",
-        },
-        {
-            title: "ясность",
-        },
-        {
-            title: "динамизм",
-        },
-        {
-            title: "привлечение внимания аудитории",
-        },
-    ];
+    /* --------------------------- GET TOTAL ---------------------------*/
+    const { data } = useGetTotalByIdTestQuery(modalVideo.id);
+    const [totalVideoInfo, setTotalVideoInfo] = useState<TotalDataItem>();
+    const [canContinue, setCanContinue] = useState(false);
 
     useEffect(() => {
+        console.log(data)
         if (data && data.data) {
-            setTotalVideoInfo([
-                data.data!.values!.connectedness,
-                data.data!.values!.argumentativeness,
-                data.data!.values!.clarity,
-                data.data!.values!.dynamism,
-                data.data!.values!.persuasiveness,
-                data.data!.values!.communicative,
-            ]);
+            
+            setTotalVideoInfo(data.data!.values);
+            setCanContinue(true);
         }
     }, [data]);
 
-    const clickDetailedBtn = () =>{
-        // localStorage.setItem("main-page", "true");
-        navigate(RoutesEnum.DIARY + "/" + modalVideo.id,{state: {"main":true}});
+    const clickDetailedBtn = () => {
+        if (canContinue)
+            navigate(RoutesEnum.DIARY + "/" + modalVideo.id, {
+                state: { main: true },
+            });
     };
 
     const cnModalContent = cn("VideoModalContent");
 
     return (
         <div className={cnModalContent()}>
-
             <div className={cnModalContent("video-row")}>
                 <div className={cnModalContent("video-row-videoplayer")}>
-                    <VideoPlayer url={`/api/video/${modalVideo.id}`} controls={true} muted={true}/>
+                    <VideoPlayer
+                        url={`/api/video/${modalVideo.id}`}
+                        controls={true}
+                        muted={true}
+                    />
                 </div>
                 <div className={cnModalContent("video-row-description")}>
                     <div
@@ -95,7 +79,7 @@ export default function VideoModalContent({modalVideo}: Props) {
                                 className={cnModalContent(
                                     "video-row-description-title-row-closebutton"
                                 )}
-                                onClick={()=>setModal(false)}
+                                onClick={() => setModal(false)}
                                 alt="close"
                             />
                         </p>
@@ -153,41 +137,50 @@ export default function VideoModalContent({modalVideo}: Props) {
 
                     <button
                         className={cnModalContent(
-                            "video-row-description-btn-info"
+                            "video-row-description-btn-info",
+                            { not_allowed: !canContinue }
                         )}
                         onClick={clickDetailedBtn}
                     >
-                        Подробные результаты анализа 
-                        <ReactSVG src={arrowIcon} wrapper="span" className={cnModalContent(
-                            "video-row-description-btn-info-icon"
-                        )}/>
+                        Подробные результаты анализа
+                        <ReactSVG
+                            src={arrowIcon}
+                            wrapper="span"
+                            className={cnModalContent(
+                                "video-row-description-btn-info-icon"
+                            )}
+                        />
                     </button>
                 </div>
             </div>
 
             <div className={cnModalContent("analyze-row")}>
-                {totalVideoInfo && (
-                    <>
-                        {criteria.map((item,idx) => (
-                             <div
-                                 key={idx}
-                                 className={cnModalContent("analyze-row-item")}
-                             >
-                                 <div
-                                     className="pie animate"
-                                     style={
-                                        {
-                                            "--p": totalVideoInfo[idx],
-                                        } as React.CSSProperties
-                                    }
-                                >
-                                    {totalVideoInfo[idx]}%
-                                </div>
-                                <p>{item.title}</p>
+                {totalVideoInfo &&
+                    Object.entries(TotalType).map((el, idx) => (
+                        <div
+                            key={idx}
+                            className={cnModalContent("analyze-row-item")}
+                        >
+                            <div
+                                className="pie animate"
+                                style={
+                                    {
+                                        "--p": totalVideoInfo[
+                                            el[1] as keyof typeof totalVideoInfo
+                                        ],
+                                    } as React.CSSProperties
+                                }
+                            >
+                                {Number(
+                                    totalVideoInfo[
+                                        el[1] as keyof typeof totalVideoInfo
+                                    ]
+                                ).toFixed(2)}
+                                %
                             </div>
-                        ))}   
-                        </>
-                )}
+                            <p>{getTotalTitle(el[1])}</p>
+                        </div>
+                    ))}
             </div>
         </div>
     );
