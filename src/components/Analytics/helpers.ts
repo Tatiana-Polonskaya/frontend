@@ -64,6 +64,14 @@ const getColor = (value: number) => {
     }
 };
 
+const getMaxExpressivenessValueForColor = (anger:number, neutral:number, happiness:number) => {
+    return anger > neutral && anger > happiness
+        ? GraphColor.RED
+        : neutral > anger && neutral > happiness
+        ? GraphColor.GRAY
+        : GraphColor.GREEN;
+};
+
 export const convertExpressivenessDataLine = (
     raw: ExpressivenessDataItem
 ): BrickedGraphItem => ({
@@ -71,13 +79,7 @@ export const convertExpressivenessDataLine = (
     text: raw.text === null ? "" : raw.text,
     // value: raw.value, /// REMOVE THIS
     time: raw.time_start,
-    color: getColor(
-        raw.text === "Эмоционально окрашенная речь"
-            ? 2
-            : raw.text === null
-            ? 1
-            : 0
-    ),
+    color: getMaxExpressivenessValueForColor(raw.anger, raw.neutral, raw.happiness),
 });
 
 export const convertTime = (time: number): string => {
