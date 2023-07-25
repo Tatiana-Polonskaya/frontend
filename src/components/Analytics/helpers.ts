@@ -11,6 +11,19 @@ export const ValueTime = createContext({
     updateTime: (() => {}) as Dispatch<SetStateAction<number>>,
 });
 
+const getColorClarityLine = (value: string) => {
+    switch (value) {
+        case "sounds":
+            return GraphColor.RED;
+        case "basic":
+            return GraphColor.DARKGRAY;
+        case "trembling":
+            return GraphColor.BLUE;
+        default:
+            return GraphColor.DARKGRAY;
+    }
+};
+
 export const convertClarityDataLine = (
     raw: ClarityDataItem
 ): BrickedGraphItem => ({
@@ -26,19 +39,6 @@ type BrickedGraphItem = {
     text: string;
     time: number;
     color: string;
-};
-
-const getColorClarityLine = (value: string) => {
-    switch (value) {
-        case "sounds":
-            return GraphColor.RED;
-        case "basic":
-            return GraphColor.DARKGRAY;
-        case "trembling":
-            return GraphColor.BLUE;
-        default:
-            return GraphColor.DARKGRAY;
-    }
 };
 
 export const convertConnectivityDataLine = (
@@ -64,7 +64,11 @@ const getColor = (value: number) => {
     }
 };
 
-const getMaxExpressivenessValueForColor = (anger:number, neutral:number, happiness:number) => {
+const getMaxExpressivenessValueForColor = (
+    anger: number,
+    neutral: number,
+    happiness: number
+) => {
     return anger > neutral && anger > happiness
         ? GraphColor.RED
         : neutral > anger && neutral > happiness
@@ -79,7 +83,11 @@ export const convertExpressivenessDataLine = (
     text: raw.text === null ? "" : raw.text,
     // value: raw.value, /// REMOVE THIS
     time: raw.time_start,
-    color: getMaxExpressivenessValueForColor(raw.anger, raw.neutral, raw.happiness),
+    color: getMaxExpressivenessValueForColor(
+        raw.anger,
+        raw.neutral,
+        raw.happiness
+    ),
 });
 
 export const convertTime = (time: number): string => {
@@ -88,7 +96,11 @@ export const convertTime = (time: number): string => {
     } else if (time < 60) {
         return `00:${time.toFixed(0)}`;
     } else if (time < 600 && time % 60 !== 0) {
-        return `0${Math.floor(time / 60)}:${(time % 60).toFixed(0)}`;
+        return `0${Math.floor(time / 60)}:${
+            time % 60 < 10
+                ? "0" + (time % 60).toFixed(0)
+                : (time % 60).toFixed(0)
+        }`;
     } else if (time < 600 && time % 60 === 0) {
         return `0${Math.floor(time / 60)}:${(time % 60).toFixed(0)}0`;
     } else {

@@ -62,5 +62,5 @@ function paint(energy: number) {
 }
 
 export default function EnergySmile(props: Props) {
-    return <>{paint(props.energy * 0.01)}</>;
+    return <>{paint(props.energy)}</>;
 }

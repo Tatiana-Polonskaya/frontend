@@ -585,7 +585,7 @@ export default function AnalysisReport() {
                                                 informativeData.informative
                                             }
                                             sounds={informativeData.sounds}
-                                            without_confirmation={
+                                            empty={
                                                 informativeData.empty
                                             }
                                             parasite={informativeData.parasite}

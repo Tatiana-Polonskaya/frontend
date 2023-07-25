@@ -22,37 +22,37 @@ type Props = {
 };
 function ListItemAVT(A_T: item[]) {
     let previous = 0;
-    return A_T.map((item,idx) => {
+
+    return A_T.map((item, idx) => {
         let block;
         let buffer;
 
-        if (item.value > 0.5) {
-            let height = item.value < 0.65 ? 0.6 : 0.9;
-            let color = item.type === "angry" ? "#FE6972" : "#24F19B";
-            if (item.time_start > previous) {
-                buffer = (
-                    <div
-                        style={{
-                            marginLeft: "2px",
-                            backgroundColor: GraphColor.GRAY,
-                            height: "30%",
-                            width: item.time_start - previous + "%",
-                        }}
-                    ></div>
-                );
-            }
-            previous = item.time_end;
-            block = (
+        let height = item.value < 0.2 ? 0.2 : item.value < 0.65 ? 0.5 : 0.8;
+        let color = item.type === "angry" ? GraphColor.RED : item.type === "neutral" ? GraphColor.GRAY : GraphColor.GREEN;
+        if (item.time_start > previous) {
+            buffer = (
                 <div
                     style={{
                         marginLeft: "2px",
-                        backgroundColor: color,
-                        height: (height * 100).toString() + "%",
-                        width: (item.time_end - item.time_start) * 2 + "%",
+                        backgroundColor: GraphColor.GRAY,
+                        height: "20%",
+                        width: item.time_start - previous + "%",
                     }}
                 ></div>
             );
         }
+        previous = item.time_end;
+        block = (
+            <div
+                style={{
+                    marginLeft: "2px",
+                    backgroundColor: color,
+                    height: (height * 100).toString() + "%",
+                    width: (item.time_end - item.time_start) * 2 + "%",
+                }}
+            ></div>
+        );
+
         return (
             <Fragment key={idx}>
                 {" "}
@@ -60,7 +60,6 @@ function ListItemAVT(A_T: item[]) {
             </Fragment>
         );
     });
-
 }
 
 export default function CongruenceScale(props: Props) {

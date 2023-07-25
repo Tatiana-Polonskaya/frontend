@@ -1,30 +1,22 @@
-import React from 'react';
-import './UnityOfStyl.css'
+import React from "react";
+import "./UnityOfStyl.css";
 import PieChartBlock from "../PieChartBlock";
-import {IPieChart} from "../../../models/graph/inteface/IPieChart";
+import { IPieChart } from "../../../models/graph/inteface/IPieChart";
 
-type  Props={
-    scientific: number,
-    official: number,
-    publicistic: number,
-    colloquial: number,
-    artistic: number
-}
-function UnityOfStyl(props:Props) {
-  let inf1:IPieChart = {
-      scientific: props.scientific,
-      official: props.official,
-      publicistic: props.publicistic,
-      colloquial: props.colloquial,
-      artistic: props.artistic
-    }
+type Props = {
+    scientific: number;
+    official: number;
+    publicistic: number;
+    colloquial: number;
+    artistic: number;
+};
 
+function UnityOfStyl(props: Props) {
     return (
         <>
             <div className="inf">
-                <PieChartBlock component={inf1}/>
+                <PieChartBlock component={props} />
             </div>
-
         </>
     );
 }
