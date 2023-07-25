@@ -148,7 +148,6 @@ export const reportApi = createApi({
                 method: "GET",
             }),
         }),
-
     }),
 });
 

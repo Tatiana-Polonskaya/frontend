@@ -24,7 +24,7 @@ import EmotionalityGraph from "../../components/Graphs/Emotionality";
 import { NonMonotonyType } from "../../models/graph/monotony";
 import { useGetTotalByIdTestQuery } from "../../store/api/reportTest";
 import { TotalType } from "../../models/graph/total";
-import { useGetTotalByIdQuery } from "../../store/api/report";
+
 
 export default function TestPage() {
     const [currentTime, setCurrentTime] = useState(0);
@@ -40,11 +40,12 @@ export default function TestPage() {
     const [nonMonotonyType, setNonMonotonyType] =
         useState<NonMonotonyType | null>(null);
 
-    const data1 = useGetTotalByIdTestQuery(
-        "a80ee628-6520-4734-b99b-008b75bc3fe4"
+
+    const { data } = useGetTotalByIdTestQuery(
+        "89dd1171-d9e9-4d65-9730-4a36596a0e84"
     );
 
-    const data2 = useGetTotalByIdQuery("a80ee628-6520-4734-b99b-008b75bc3fe4");
+
     // const [dataTest, setDataTest] = useState<TotalType[]>();
 
     // useEffect(() => {
@@ -150,12 +151,6 @@ export default function TestPage() {
                     <ClarityGraph data={clarityMockData} />
                 </div>
                 <div>
-                    <button onClick={() => console.log(data1)}>
-                        {"ТЕСТ1"}
-                    </button>
-                    <button onClick={() => console.log(data2)}>
-                        {"ТЕСТ2"}
-                    </button>
                 </div>
             </GraphContext.Provider>
         </MainLayout>
