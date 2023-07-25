@@ -121,6 +121,7 @@ import Recomendation from "../Analytics/-Block/-Recomendation";
 import RecommendConn from "../Analytics/-Block/-Recomendation/recHandler/RecommendConn";
 import RecommendClarity from "../Analytics/-Block/-Recomendation/recHandler/RecommendClarity";
 import RecommendDynamism from "../Analytics/-Block/-Recomendation/recHandler/RecommendDynamism";
+import { useGetTotalByIdTestQuery } from "../../store/api/reportTest";
 
 import {
     useGetArgumentativenessByIdTestQuery,

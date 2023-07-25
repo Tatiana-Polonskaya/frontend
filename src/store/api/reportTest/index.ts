@@ -22,7 +22,6 @@ import { CongruenceJSON } from "../../../models/graph/congruence";
 import { TranscriptionJSON } from "../../../models/report/transcription";
 
 export const reportTestApi = createApi({
-    // reducerPath: "/api/video/",
     reducerPath: "/api/reportTest/",
     baseQuery: customFetchBase,
     endpoints: (build) => ({
