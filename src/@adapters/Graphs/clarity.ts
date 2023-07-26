@@ -12,14 +12,14 @@ const convertClarityData = (raws: ClarityDataItem[]): BrickedGraphItem[] => {
         const raw = raws[i];
         const type = raw.type === "basic" ? "solid" : "thin";
         const offset = type === "solid" ? -8 : -3; // for center on center line
-        
+
         if (i !== 0) {
             middleOffset =
                 middleOffset -
                 raw.value * (raws[i - 1].type === "basic" ? 16 : 11);
-        } 
-       
-        const top = `${(middleOffset + offset < 0 ? 0 : middleOffset) }%`;
+        }
+        const diff = middleOffset + offset;
+        const top = `${diff < 0 ? 0 : diff > 74 ? 74 : diff}%`;
 
         const color =
             raw.type === "basic"

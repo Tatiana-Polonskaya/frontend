@@ -88,6 +88,7 @@
 .EloquenceTextWords{
     display: flex;
     justify-content: start;
+    flex-flow: row wrap;
 }
 .countWords{
     color: rgba(53, 10, 142, 0.50);
