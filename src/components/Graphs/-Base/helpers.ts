@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, createContext } from "react";
 export const _1SEC_PX = 6.15;
 
 export const createXDescriptionFromSeconds = (lastSecond: number): string[] => {
+
     const minutes = Math.floor(lastSecond / 60);
     const seconds = Math.ceil((lastSecond - minutes * 60) / 10) + 1;
 

@@ -43,7 +43,6 @@ export default function VideoBlock() {
         if (data && data?.data) {
             setCurrentVideos(data!.data!.videos);
             setCountAllVideos(data!.data!.total_videos);
-            // console.log(data!.data!); //tutorial
         }
     }, [data]);
 

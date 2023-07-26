@@ -32,9 +32,7 @@ export default function VideoModalContent({ modalVideo }: Props) {
     const [canContinue, setCanContinue] = useState(false);
 
     useEffect(() => {
-        console.log(data)
         if (data && data.data) {
-            
             setTotalVideoInfo(data.data!.values);
             setCanContinue(true);
         }
