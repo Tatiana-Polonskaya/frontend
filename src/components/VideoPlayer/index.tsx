@@ -24,14 +24,14 @@ export function getPrettyDataTime(timestring: string) {
     // TO DO: create dict with options for hour, days (1 час назад, 3 часА назад)
     const current = new Date(timestring);
     const now = new Date();
-
-    // Calculating the time difference between two dates
-    const diffInTime = now.getTime() - current.getTime();
-
+    
     // One minute, hour, day in milliseconds
     const oneMinute = 1000 * 60;
     const oneHour = oneMinute * 60;
     const oneDay = oneHour * 24;
+
+    // Calculating the time difference between two dates
+    const diffInTime = now.getTime() - current.getTime() - 3 * oneHour;
 
     // Calculating the no. of days between two dates
     const diffInDays = Math.round(diffInTime / oneDay);
@@ -61,7 +61,7 @@ export default function VideoPlayer({
     const [onReady, setOnReady] = useState(false);
 
     // state for video playing
-    const {setCurrentTime}= useContext(VideoTimeContext);
+    const { setCurrentTime } = useContext(VideoTimeContext);
 
     const changeCurrentTime = (e: OnProgressProps) => {
         setCurrentTime(Math.floor(e.playedSeconds));
