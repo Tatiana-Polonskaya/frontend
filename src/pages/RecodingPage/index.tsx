@@ -9,7 +9,6 @@ import {
     useState,
 } from "react";
 
-
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import Timer from "../../components/Timer";
@@ -83,7 +82,6 @@ export default function RecodingPage() {
     const [capturing, setCapturing] = useState(false);
     const [recordedChunks, setRecordedChunks] = useState([]);
 
-
     const handleDataAvailable = useCallback(
         ({ data }: any) => {
             if (data.size > 0) {
@@ -94,14 +92,15 @@ export default function RecodingPage() {
     );
 
     const handleStartCaptureClick = useCallback(() => {
-        console.log(canStart, "canStart")
+        console.log(canStart, "canStart");
         if (canStart) {
+            const tempCodec = "h264";
             updateIsTimerStart(TIMER_STATUS.START);
             setCapturing(true);
             mediaRecorderRef.current = new MediaRecorder(
                 webcamRef?.current?.stream as MediaStream,
                 {
-                    mimeType: "video/webm",
+                    mimeType: `video/webm;codecs=${tempCodec}`,
                 }
             );
             mediaRecorderRef.current.addEventListener(
@@ -119,25 +118,36 @@ export default function RecodingPage() {
         setCapturing(false);
     }, [mediaRecorderRef, setCapturing]);
 
+    // CHECK :  "vp9", "vp9.0", "vp8", "vp8.0", "avc1", "av1", "h264", "opus", "pcm"
+    // DONE :
     useEffect(() => {
         if (recordedChunks.length > 0) {
+            const tempCodec = "h264";
+            const tempType = `video/webm;codecs=${tempCodec}`; //"video/webm" was
             const file = new Blob(recordedChunks, {
-                type: "video/webm",
+                type: tempType,
             });
             setCurrentFile(
                 new File([file], "Recoding Repetition", {
-                    type: "video/webm",
+                    type: tempType,
                 })
             );
+            const url = URL.createObjectURL(file);
+            const a = document.createElement("a");
+            document.body.appendChild(a);
+            a.href = url;
+            a.download = "react-webcam-stream-capture.webm";
+            a.click();
+            window.URL.revokeObjectURL(url);
             setRecordedChunks([]);
         }
     }, [recordedChunks]);
 
     useLayoutEffect(() => {
         if (currentFile.size !== 0) {
-            setModal(true);
+            // setModal(true);
         } else {
-            setModal(false);
+            // setModal(false);
         }
     }, [currentFile]);
 
@@ -161,7 +171,7 @@ export default function RecodingPage() {
         if (devices) {
             // console.log(devices.length>= 1)
             if (devices.length >= 1) setCanStart(true);
-            else  setCanStart(false);
+            else setCanStart(false);
         }
     }, [devices]);
 
@@ -169,39 +179,59 @@ export default function RecodingPage() {
         navigator.mediaDevices.enumerateDevices().then(handleDevices);
     }, [handleDevices]);
 
-    function getSupportedMimeTypes(media:string, types:string[], codecs:string[]) {
+    function getSupportedMimeTypes(
+        media: string,
+        types: string[],
+        codecs: string[]
+    ) {
         const isSupported = MediaRecorder.isTypeSupported;
-        const supported:any = [];
+        const supported: any = [];
         types.forEach((type) => {
-          const mimeType = `${media}/${type}`;
-          codecs.forEach((codec) => [
-              `${mimeType};codecs=${codec}`,
-              `${mimeType};codecs=${codec.toUpperCase()}`,
-              // /!\ false positive /!\
-              // `${mimeType};codecs:${codec}`,
-              // `${mimeType};codecs:${codec.toUpperCase()}` 
-            ].forEach(variation => {
-              if(isSupported(variation)) 
-                  supported.push(variation);
-          }));
-          if (isSupported(mimeType))
-            supported.push(mimeType);
+            const mimeType = `${media}/${type}`;
+            codecs.forEach((codec) =>
+                [
+                    `${mimeType};codecs=${codec}`,
+                    `${mimeType};codecs=${codec.toUpperCase()}`,
+                    // /!\ false positive /!\
+                    // `${mimeType};codecs:${codec}`,
+                    // `${mimeType};codecs:${codec.toUpperCase()}`
+                ].forEach((variation) => {
+                    if (isSupported(variation)) supported.push(variation);
+                })
+            );
+            if (isSupported(mimeType)) supported.push(mimeType);
         });
         return supported;
-      };
-      
-      // Usage ------------------
-      
-      const videoTypes = ["webm", "ogg", "mp4", "x-matroska"];
-      const audioTypes = ["webm", "ogg", "mp3", "x-matroska"];
-      const codecs = ["should-not-be-supported","vp9", "vp9.0", "vp8", "vp8.0", "avc1", "av1", "h265", "h.265", "h264", "h.264", "opus", "pcm", "aac", "mpeg", "mp4a"];
-      
-      const supportedVideos = getSupportedMimeTypes("video", videoTypes, codecs);
-      const supportedAudios = getSupportedMimeTypes("audio", audioTypes, codecs);
-      
+    }
 
-      console.log('-- All supported Videos : ', supportedVideos)
-      console.log('-- All supported Audios : ', supportedAudios)
+    // Usage ------------------
+
+    const videoTypes = ["webm", "ogg", "mp4", "x-matroska"];
+    const audioTypes = ["webm", "ogg", "mp3", "x-matroska"];
+    const codecs = [
+        "should-not-be-supported",
+        "vp9",
+        "vp9.0",
+        "vp8",
+        "vp8.0",
+        "avc1",
+        "av1",
+        "h265",
+        "h.265",
+        "h264",
+        "h.264",
+        "opus",
+        "pcm",
+        "aac",
+        "mpeg",
+        "mp4a",
+    ];
+
+    // const supportedVideos = getSupportedMimeTypes("video", videoTypes, codecs);
+    // const supportedAudios = getSupportedMimeTypes("audio", audioTypes, codecs);
+
+    // console.log("-- All supported Videos : ", supportedVideos);
+    // console.log("-- All supported Audios : ", supportedAudios);
 
     /* ----------------------------------- LOADING MODAL PARAMS BLOCK ----------------------------------- */
     const [isLoadingModal, setIsLoadingModal] = useState(false);
@@ -237,6 +267,7 @@ export default function RecodingPage() {
     // answers from back
     useEffect(() => {
         if (isSuccess) {
+            console.log("isSuccess", videoSendResponse);
             const data = videoSendResponse.data;
             if (data.success) {
                 setCurrentFile(new File([], "empty"));
@@ -250,7 +281,7 @@ export default function RecodingPage() {
     useEffect(() => {
         if (isError) {
             const error = videoSendResponse.error as Response;
-            console.log(videoSendResponse.error);
+            console.log("isError", videoSendResponse.error);
             setCurrentFile(new File([], "empty"));
             setCurrentInfoData(initialInfoVideo);
         }
@@ -373,7 +404,7 @@ export default function RecodingPage() {
                                     }
                                     className={cnRecoding("loading-img")}
                                 />
-                                {isLoading && (
+                                {isLoading && !(isErrorWithSuccess || isError) && (
                                     <>
                                         <div
                                             className={cnRecoding(
@@ -392,7 +423,7 @@ export default function RecodingPage() {
                                         </div>
                                     </>
                                 )}
-                                {(isErrorWithSuccess || isError) && (
+                                {(isErrorWithSuccess || isError)  && (
                                     <>
                                         <div
                                             className={cnRecoding(
@@ -405,7 +436,7 @@ export default function RecodingPage() {
                                 )}
                             </div>
                         )}
-                        {isSuccess && (
+                        {isSuccess && !isErrorWithSuccess && (
                             <div className={cnRecoding("loading")}>
                                 <ReactSVG
                                     src={
@@ -449,8 +480,8 @@ export default function RecodingPage() {
                         title={"Предупреждение"}
                     >
                         <div className={cnRecoding("warning-message")}>
-                            Камера не найдена, включите камеру и повторите попытку   
-                            или{" "}
+                            Камера не найдена, включите камеру и повторите
+                            попытку или{" "}
                             <Link to={RoutesEnum.REPETITION}>загрузите</Link>{" "}
                             уже готовую репетицию.
                         </div>

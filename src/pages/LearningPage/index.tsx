@@ -151,53 +151,44 @@ export default function LearningPage() {
     //     }
     // }, [token]);
 
+    // Our state to store fetched cache data
+  const [cacheData, setCacheData] = useState();
+
+    const getAllCacheData = async () => {
+        var url = 'https://localhost:300'
+      
+        // List of all caches present in browser
+        var names = await caches.keys()
+      
+        var cacheDataArray:any = []
+      
+        // Iterating over the list of caches
+        names.forEach(async(name) => {
+      
+          // Opening that particular cache
+          const cacheStorage = await caches.open(name);
+      
+          // Fetching that particular cache data
+          const cachedResponse = await cacheStorage.match(url);
+          var data = cachedResponse ? await cachedResponse.json() : undefined;
+      
+          // Pushing fetched data into our cacheDataArray
+          cacheDataArray.push(data)
+          setCacheData(cacheDataArray.join(', '))
+        })
+      };
+
     useEffect(() => {
-        if (someData) {
-            console.log(someData);
-            try {
-                const data = JSON.parse(someData.data);
-                console.log(data);
-            } catch (e) {
-                console.log(e);
-            }
+        if (cacheData) {
+            console.log(cacheData);
         }
-    }, [someData]);
+    }, [cacheData]);
 
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    const sendMessage = async () => {
-        if (inputRef && inputRef.current) {
-            let mess =
-                inputRef.current.value.length > 0
-                    ? inputRef.current.value
-                    : "hello";
-            await sendRequest(mess);
-        }
-    };
-
-    const { data, status, error } = useGetMessagesQuery(null, {
-        pollingInterval: 6000,
-    });
-
-    useEffect(()=>{
-        if (data) {
-            console.log(data.data!)
-        }
-    },[data])
-
-    const allMessagesUser = useMemo(()=>{
-        if (data) {
-            return data.data!
-        }
-    },[data])
+   
 
     return (
         <MainLayout>
-            <input type="text" ref={inputRef} />
-            <button onClick={sendMessage}>Отправить</button>
-            {allMessagesUser && allMessagesUser.map(el=>(
-                <div>{el.is_mine? "me" : el.from_user}: {el.text}</div>
-            ))}
+            
         </MainLayout>
     );
 }

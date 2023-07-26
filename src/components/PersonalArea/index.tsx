@@ -1,8 +1,6 @@
 import { cn } from "@bem-react/classname";
 import "./style.scss";
-// import photo from "../../plugs/personalArea/icon/user.png";
 
-// import ReactAvatarEditor from "react-avatar-editor";
 import CurrentTariff from "../../plugs/personalArea/currentTariff.json";
 import AllTariffs from "../../plugs/personalArea/allTariffs.json";
 import { ReactSVG } from "react-svg";
@@ -17,16 +15,11 @@ import Arrow from "./icon/arrow.svg";
 import Receive from "./icon/receive.svg";
 import { useAppSelector } from "../../hooks/redux";
 import { useEffect, useState } from "react";
-import {
-    useGetMeQuery,
-    useLazyGetMeQuery,
-    useSendUserAvatarMutation,
-} from "../../store/api/user";
-import { randomInt } from "crypto";
-import { useDispatch } from "react-redux";
-import { setProfileAvatar } from "../../store/slices/profileSlice";
+import { useSendUserAvatarMutation } from "../../store/api/user";
+
 import LoadImage from "./LoadImage";
 import Gallery from "./icon/gallery.svg";
+import AvatarEditor from "react-avatar-editor";
 
 type Props = {
     isArchive: boolean;
@@ -38,15 +31,12 @@ type IconsArr = {
 };
 
 export default function PersonalArea({ isArchive = false }: Props) {
-    const dispatch = useDispatch();
-
     const cnPersonalSettings = cn("personal-settings");
     const cnPersonalUser = cn("personal-area");
     const cnTariffBlock = cn("tariff-block");
     const cnArchiveTariff = cn("archive-tariff");
 
     const store = useAppSelector((state) => state.profile.user);
-    const storeAvatar = useAppSelector((state) => state.profile.avatar);
 
     const [storeUser, setStoreUser] = useState(store);
     const [iconArr, setIconArr] = useState<IconsArr[]>([]);
@@ -71,13 +61,6 @@ export default function PersonalArea({ isArchive = false }: Props) {
     const { isSuccess, isError } = userAvatarResponse;
 
     useEffect(() => {
-        if (isSuccess) {
-            console.log("reload")
-           window.location.reload()
-        }
-    }, [isSuccess]);
-
-    useEffect(() => {
         if (isError) console.log(userAvatarResponse);
     }, [isError]);
 
@@ -89,21 +72,29 @@ export default function PersonalArea({ isArchive = false }: Props) {
         changeActive();
     };
 
-    const [editor, setEditor] = useState<any>();
+    const [editor, setEditor] = useState<AvatarEditor>();
     const [scaleValue, setScaleValue] = useState<number>();
-    const [userPic, setUserPic] = useState<string>();
+
     const [selectedImg, setSelectedImg] = useState<string>();
 
-    const setEditorRef = (editor: string) => {
+    const setEditorRef = (editor: AvatarEditor) => {
         setEditor(editor);
     };
 
     const onCrop = () => {
-        if (editor !== null) {
-            const url = editor!.getImageScaledToCanvas().toDataURL();
-            setUserPic(url);
-            sendUserAvatar(url);
-            dispatch(setProfileAvatar(url));
+        if (editor) {
+            editor!
+                .getImage()
+                .toBlob(
+                    (res) => (res ? sendUserAvatar(res) : undefined),
+                    "image/jpeg"
+                );
+            // editor!
+            //     .getImageScaledToCanvas()
+            //     .toBlob(
+            //         (res) => (res ? sendUserAvatar(res) : undefined),
+            //         "image/jpeg"
+            //     );
         }
     };
 
@@ -117,12 +108,15 @@ export default function PersonalArea({ isArchive = false }: Props) {
         const { type } = file;
         if (
             type.endsWith("jpeg") ||
-            type.endsWith("jpg") ||
-            type.endsWith("png")
+            type.endsWith("jpg")
+            // || type.endsWith("png")
         ) {
             setSelectedImg(file);
         }
     };
+
+    const [picAvatar] = useState(`/api/users/account/avatar/${store.id}`);
+
     return (
         <div className={cnPersonalSettings()}>
             <div
@@ -137,8 +131,8 @@ export default function PersonalArea({ isArchive = false }: Props) {
                     <div className={cnPersonalUser("photo")}>
                         {storeUser && (
                             <img
-                                key={storeUser.id}
-                                src={storeAvatar}
+                                key={Date.now()}
+                                src={picAvatar}
                                 alt={storeUser!.firstname}
                             />
                         )}
@@ -156,7 +150,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
                             id="image"
                             type="file"
                             name="img"
-                            accept="image/jpeg,image/png"
+                            accept="image/jpeg"
                             onChange={profileImageChange}
                             onClick={changeActive}
                         />

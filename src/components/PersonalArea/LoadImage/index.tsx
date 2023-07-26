@@ -45,10 +45,6 @@ export default function LoadImage({
                 width={320}
                 height={400}
                 rotate={parseFloat("0")}
-                // borderRadius={
-                //     this.state.width /
-                //     (100 / this.state.borderRadius)
-                // }
                 image={imageSrc ? imageSrc : User}
                 ref={setEditorRef}
                 className={cnChangeFoto("avatar")}

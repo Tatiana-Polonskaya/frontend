@@ -123,7 +123,8 @@ export default function Menu() {
                                 onClick={async () => {
                                     // await dispatch(accountApi.endpoints.logout.initiate(null));
                                     await dispatch(logout());
-                                    navigate(RoutesEnum.LOGIN);
+                                    // navigate(RoutesEnum.LOGIN);
+                                    window.location.reload();
                                 }}>
                                 Выйти из аккаунта
                             </span>
