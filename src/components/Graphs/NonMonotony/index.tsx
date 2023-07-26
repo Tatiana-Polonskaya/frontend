@@ -12,14 +12,21 @@ type Props = {
     data: NonMonotonyDataItem[];
     param: NonMonotonyType | null;
     average: number;
+    value: number;
 };
 
 export default function NonMonotonyGraph({
     data,
     param = null,
     average,
+    value,
 }: Props) {
     const data2 = convertMonotonyData(data, param);
+    console.log("value");
+    console.log(value);
+    console.log("data2");
+    console.log(data2);
+
     return (
         <LineGraph
             average={100 - average}

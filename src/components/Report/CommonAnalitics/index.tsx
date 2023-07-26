@@ -60,6 +60,7 @@ export default function CommonAnalitics(props: Props) {
 
     useEffect(() => {
         if (data) {
+            console.log("CommonAnalitics", data!.data!.values);
             setSpeedArr(convertTotalData(data!.data!.values));
             setAllValues(data!.data!.values);
         }
@@ -198,7 +199,9 @@ export default function CommonAnalitics(props: Props) {
                                         allValues[element]
                                     )[0],
                                 }}
-                            >{`${allValues ? allValues[element].toFixed(2) : 0}%`}</div>
+                            >{`${
+                                allValues ? allValues[element].toFixed(2) : 0
+                            }%`}</div>
                         </div>
                     ))}
             </div>

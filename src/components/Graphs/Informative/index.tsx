@@ -8,12 +8,12 @@ type Props = {
 };
 
 export default function InformativeGraph({ items }: Props) {
-    
     return (
         <>
-            <InformativeText/>
-            <BrickedGraph items={items.map((el) => convertInformativeData(el))} />
+            <InformativeText />
+            <BrickedGraph
+                items={items.map((el) => convertInformativeData(el))}
+            />
         </>
-
     );
 }

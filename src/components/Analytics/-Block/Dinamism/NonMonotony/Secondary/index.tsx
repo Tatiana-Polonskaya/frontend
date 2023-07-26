@@ -66,11 +66,11 @@ export default function SecondaryNonMonotony(props: Props) {
             <div className={cnNonMon("marker")}>
                 <p className={cnNonMon("description")}>
                     <b className={cnNonMon("description-bold")}>
-                        Немонотонность
+                        {"Немонотонность"}
                     </b>{" "}
-                    - способность выражать мысли и идеи с помощью разнообразных
-                    интонаций и тонов голоса, избегая повторения и
-                    однообразности речи.
+                    {
+                        "- способность выражать мысли и идеи с помощью разнообразных интонаций и тонов голоса, избегая повторения и однообразности речи."
+                    }
                 </p>
                 <div className={cnNonMon("list")}>
                     {/* вот тут надо решить вопрос с блоками цветов */}
@@ -89,7 +89,7 @@ export default function SecondaryNonMonotony(props: Props) {
                 </div>
             </div>
             <div className={cnNonMon("analysis")}>
-                <span className={cnNonMon("set")}>Параметры:</span>
+                <span className={cnNonMon("set")}>{"Параметры:"}</span>
                 <ul className={cnNonMon("menu")}>
                     {props.graphs.map((el, ind) => (
                         <li
@@ -128,6 +128,7 @@ export default function SecondaryNonMonotony(props: Props) {
                         // : null
                     }
                     average={graph === 0 ? temp : graph === 1 ? volume : tone}
+                    value={graph === 0 ? 0 : graph === 1 ? 1 : 2}
                 />
             </div>
         </>

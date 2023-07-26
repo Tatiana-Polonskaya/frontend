@@ -53,7 +53,7 @@ export default function StatsGraph({ data }: Props) {
             descriptionY={[0, 0.2, 0.4, 0.6, 0.8, 1]}
             withMedian={false}
             // поменять по времени, 7 дней
-            visible={restruction().length > 7 ? false : true}
+            visible={restruction().length > 8 ? false : true}
         />
     );
 }

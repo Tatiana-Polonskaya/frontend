@@ -141,6 +141,13 @@ import {
 } from "../../store/api/reportTest";
 
 import AddTextEloquence from "../Graphs/eloquence/text";
+import {
+    NonMonotonyTempHelper,
+    NonMonotonyToneHelper,
+    NonMonotonyVolumeHelper,
+} from "../Analytics/-Block/Dinamism/NonMonotony/Main/helper";
+
+import argumentativenessData1 from "./../../plugs/argumentativeness.json";
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
@@ -594,12 +601,7 @@ export default function AnalysisReport() {
                                             connectivityData.values[0]
                                                 .time_start
                                         }
-                                        endTime={
-                                            connectivityData.values[
-                                                connectivityData.values.length -
-                                                    1
-                                            ].time_end
-                                        }
+                                        endTime={+videoInfo!.duration}
                                     />
                                 }
                                 invisible={
@@ -709,7 +711,8 @@ export default function AnalysisReport() {
                             связывать свои мысли со свидетельствами и
                             доказательствами.`}
                         </div>
-                        {argumentativenessData && (
+                        {/* {argumentativenessData && ( */}
+                        {!argumentativenessData && (
                             <Dropdown
                                 title={
                                     "Оригинальность, заимствования и цитирование"
@@ -753,28 +756,44 @@ export default function AnalysisReport() {
                                                 value: 66,
                                             },
                                         ]}
+                                        // _____________________вернуть после теста ____________________
+                                        // positions={[
+                                        //     argumentativenessData.originality,
+                                        //     argumentativenessData.borrowing,
+                                        //     argumentativenessData.citation,
+                                        // ]}
                                         positions={[
-                                            argumentativenessData.originality,
-                                            argumentativenessData.borrowing,
-                                            argumentativenessData.citation,
+                                            argumentativenessData1.data
+                                                .originality,
+                                            argumentativenessData1.data
+                                                .borrowing,
+                                            argumentativenessData1.data
+                                                .citation,
                                         ]}
                                     />
                                 }
                                 invisible={
-                                    <SecondaryOriginally
-                                        breakdown={argumentativenessData.values}
-                                        state={""}
-                                    />
+                                    // _____________________вернуть после теста ____________________
+                                    <></>
+                                    // <SecondaryOriginally
+                                    //     breakdown={
+                                    //         // argumentativenessData.values
+                                    //         argumentativenessData1.data.values
+                                    //     }
+                                    //     state={""}
+                                    // />
                                 }
                             />
                         )}
                         <Recomendation
                             recomendation={
                                 argumentativenessRec.length !== 0
-                                    ? `${argumentativenessRec.join(" ")}`
+                                    ? // ПОСЛЕ ПИЛОТА ВЕРНУТЬ
+                                      // ? `${argumentativenessRec.join(" ")}`
+                                      `С целью недопущения попадания информации, возможно носящей характер коммерческой тайны, в систему Антиплагиат на время проведения бета-тестирования параметры "оригинальность", "заимствования" и "цитирования" временно не определяются.`
                                     : // : // ПОСЛЕ ПИЛОТА ВЕРНУТЬ
-                                      "Важно приводить не только аргументы “за” (за свой тезис), но и аргументы “против”. Они должны убеждать аудиторию в том, что аргументы, приводимые в поддержку критикуемого Вами тезиса, слабые и не выдерживают критики."
-                                //   `С целью недопущения попадания информации, возможно носящей характер коммерческой тайны, в систему Антиплагиат на время проведения бета-тестирования параметры "оригинальность", "заимствования" и "цитирования" временно не определяются.`
+                                      //   "Важно приводить не только аргументы “за” (за свой тезис), но и аргументы “против”. Они должны убеждать аудиторию в том, что аргументы, приводимые в поддержку критикуемого Вами тезиса, слабые и не выдерживают критики."
+                                      `С целью недопущения попадания информации, возможно носящей характер коммерческой тайны, в систему Антиплагиат на время проведения бета-тестирования параметры "оригинальность", "заимствования" и "цитирования" временно не определяются.`
                             }
                         />
                     </div>
@@ -802,11 +821,7 @@ export default function AnalysisReport() {
                                         startTime={
                                             clarityData.values[0].time_start
                                         }
-                                        endTime={
-                                            clarityData.values[
-                                                clarityData.values.length - 1
-                                            ].time_end
-                                        }
+                                        endTime={+videoInfo!.duration}
                                     />
                                 }
                                 invisible={
@@ -877,12 +892,7 @@ export default function AnalysisReport() {
                                             expressivenessData.values[0]
                                                 .time_start
                                         }
-                                        endTime={
-                                            expressivenessData.values[
-                                                expressivenessData.values
-                                                    .length - 1
-                                            ].time_start
-                                        }
+                                        endTime={+videoInfo!.duration}
                                     />
                                 }
                                 invisible={
@@ -966,35 +976,51 @@ export default function AnalysisReport() {
                                         info={[
                                             {
                                                 title: "Темп речи",
-                                                subtitle:
-                                                    "Темп речи средний, ровный и без пауз.",
-                                                result: "норма",
+                                                subtitle: NonMonotonyTempHelper(
+                                                    nonMonotonyData["h-temp"]
+                                                ).subtitle,
+                                                result: NonMonotonyTempHelper(
+                                                    nonMonotonyData["h-temp"]
+                                                ).result,
                                                 fill: "#2477F4",
                                                 dotfill: "#2477F4",
                                                 shadow: "0.663492px 0.663492px 3.4619px #2477F4",
                                                 img: "",
-                                                value: nonMonotonyData[
-                                                    "h-temp"
-                                                ],
+                                                value:
+                                                    (nonMonotonyData["h-temp"] /
+                                                        250) *
+                                                    100,
                                             },
                                             {
                                                 title: "Громкость голоса",
                                                 subtitle:
-                                                    "Выглядит так, как будто Вы проявляете агрессию.",
-                                                result: "Слишком громко",
+                                                    NonMonotonyVolumeHelper(
+                                                        nonMonotonyData[
+                                                            "h-volume"
+                                                        ]
+                                                    ).subtitle,
+                                                result: NonMonotonyVolumeHelper(
+                                                    nonMonotonyData["h-volume"]
+                                                ).result,
                                                 fill: "#F35B60",
                                                 dotfill: "#F35B60",
                                                 img: "",
                                                 shadow: "0.663492px 0.663492px 3.4619px #F35B60",
-                                                value: nonMonotonyData[
-                                                    "h-volume"
-                                                ],
+                                                value:
+                                                    (nonMonotonyData[
+                                                        "h-volume"
+                                                    ] /
+                                                        120) *
+                                                    100,
                                             },
                                             {
                                                 title: "Диапазон изменения тона",
-                                                subtitle:
-                                                    "Однообразие звучания притупляет восприятие.",
-                                                result: "Маленький",
+                                                subtitle: NonMonotonyToneHelper(
+                                                    nonMonotonyData["h-tone"]
+                                                ).subtitle,
+                                                result: NonMonotonyToneHelper(
+                                                    nonMonotonyData["h-tone"]
+                                                ).result,
                                                 fill: "#FFB800",
                                                 dotfill: "#FFB800",
                                                 img: "",
@@ -1011,8 +1037,11 @@ export default function AnalysisReport() {
                                     <SecondaryNonMonotony
                                         data={nonMonotonyData.values}
                                         averages={[
-                                            nonMonotonyData["h-temp"],
-                                            nonMonotonyData["h-volume"],
+                                            (nonMonotonyData["h-temp"] / 250) *
+                                                100,
+                                            (nonMonotonyData["h-volume"] /
+                                                120) *
+                                                100,
                                             nonMonotonyData["h-tone"],
                                         ]}
                                         graphs={[

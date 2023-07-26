@@ -1,193 +1,219 @@
 {
-  "data": {
-    "values": [
-      {
-        "seq_number": 0,
-        "time_start": "00:00",
-        "text": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "value": 3,
-        "link": "http://0.0.0.0/iaculis."
-      },
-      {
-        "seq_number": 10,
-        "time_start": "00:10",
-        "text": "In mollis nunc sed id, semper risus in. Aliquam etiam, erat velit scelerisque.",
-        "value": 1,
-        "link": "http://0.0.0.0/facilisis"
-      },
-      {
-        "seq_number": 20,
-        "time_start": "00:20",
-        "text": "Habitant morbi tristique, senectus et netus et. Justo laoreet sit amet cursus sit amet, dictum sit. Elit sed vulputate mi sit.",
-        "value": 3,
-        "link": "http://0.0.0.0/duis"
-      },
-      {
-        "seq_number": 30,
-        "time_start": "00:30",
-        "text": "In mollis nunc sed id, semper risus in. Aliquam etiam, erat velit scelerisque.",
-        "value": 0,
-        "link": "http://0.0.0.0/commodo,"
-      },
-      {
-        "seq_number": 40,
-        "time_start": "00:40",
-        "text": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "value": 2,
-        "link": "http://0.0.0.0/commodo,"
-      },
-      {
-        "seq_number": 50,
-        "time_start": "00:50",
-        "text": "Egestas dui id ornare arcu. Arcu non sodales, neque sodales ut. Magnis dis parturient, montes nascetur ridiculus.",
-        "value": 3,
-        "link": "http://0.0.0.0/rhoncus."
-      },
-      {
-        "seq_number": 60,
-        "time_start": "01:00",
-        "text": "Habitant morbi tristique senectus et netus et. Sit amet nulla, facilisi morbi tempus iaculis.",
-        "value": 1,
-        "link": "http://0.0.0.0/veniam,"
-      },
-      {
-        "seq_number": 70,
-        "time_start": "01:10",
-        "text": "Tempor orci dapibus, ultrices in. Mus mauris vitae, ultricies leo integer.",
-        "value": 3,
-        "link": "http://0.0.0.0/sit."
-      },
-      {
-        "seq_number": 80,
-        "time_start": "01:20",
-        "text": "Facilisi nullam vehicula, ipsum a arcu cursus. Ultricies lacus sed turpis, tincidunt id aliquet risus feugiat. Vel pretium lectus quam id.",
-        "value": 0,
-        "link": "http://0.0.0.0/magna"
-      },
-      {
-        "seq_number": 90,
-        "time_start": "01:30",
-        "text": "Neque aliquam, vestibulum morbi blandit cursus risus, at. Fames ac turpis egestas, maecenas pharetra.",
-        "value": 1,
-        "link": "http://0.0.0.0/ornare"
-      },
-      {
-        "seq_number": 100,
-        "time_start": "01:40",
-        "text": "Scelerisque fermentum, dui faucibus in ornare quam, viverra orci. Nisl nunc mi ipsum faucibus vitae.",
-        "value": 3,
-        "link": "http://0.0.0.0/ultrices."
-      },
-      {
-        "seq_number": 110,
-        "time_start": "01:50",
-        "text": "Habitant morbi tristique senectus et netus et. Sit amet nulla, facilisi morbi tempus iaculis.",
-        "value": 0,
-        "link": "http://0.0.0.0/sit"
-      },
-      {
-        "seq_number": 120,
-        "time_start": "02:00",
-        "text": "A diam maecenas, sed enim ut sem. Vel risus commodo, viverra maecenas.",
-        "value": 3,
-        "link": "http://0.0.0.0/nulla"
-      },
-      {
-        "seq_number": 130,
-        "time_start": "02:10",
-        "text": "Tristique senectus et netus, et malesuada fames. Molestie nunc non, blandit massa enim nec.",
-        "value": 2,
-        "link": "http://0.0.0.0/vel"
-      },
-      {
-        "seq_number": 140,
-        "time_start": "02:20",
-        "text": "Arcu risus quis varius quam. Dignissim, enim sit amet venenatis urna cursus eget nunc. Ac tortor dignissim convallis aenean et tortor at.",
-        "value": 1,
-        "link": "http://0.0.0.0/laoreet"
-      },
-      {
-        "seq_number": 150,
-        "time_start": "02:30",
-        "text": "Scelerisque fermentum, dui faucibus in ornare quam, viverra orci. Nisl nunc mi ipsum faucibus vitae.",
-        "value": 3,
-        "link": "http://0.0.0.0/ultricies"
-      },
-      {
-        "seq_number": 160,
-        "time_start": "02:40",
-        "text": "Egestas dui id ornare arcu. Arcu non sodales, neque sodales ut. Magnis dis parturient, montes nascetur ridiculus.",
-        "value": 3,
-        "link": "http://0.0.0.0/est"
-      },
-      {
-        "seq_number": 170,
-        "time_start": "02:50",
-        "text": "Duis ultricies lacus, sed turpis tincidunt. Fermentum dui faucibus in ornare quam. Adipiscing commodo elit at imperdiet dui accumsan sit.",
-        "value": 1,
-        "link": "http://0.0.0.0/vestibulum"
-      },
-      {
-        "seq_number": 180,
-        "time_start": "03:00",
-        "text": "Dui accumsan sit amet, nulla facilisi morbi. Quisque id diam, vel quam elementum pulvinar.",
-        "value": 2,
-        "link": "http://0.0.0.0/commodo,"
-      },
-      {
-        "seq_number": 190,
-        "time_start": "03:10",
-        "text": "Sit amet mattis vulputate, enim nulla aliquet porttitor lacus. Risus viverra, adipiscing at in tellus integer.",
-        "value": 1,
-        "link": "http://0.0.0.0/mauris"
-      },
-      {
-        "seq_number": 200,
-        "time_start": "03:20",
-        "text": "Ornare aenean, euismod elementum nisi. Pharetra magna ac placerat, vestibulum lectus mauris ultrices.",
-        "value": 1,
-        "link": "http://0.0.0.0/eget"
-      },
-      {
-        "seq_number": 210,
-        "time_start": "03:30",
-        "text": "In mollis nunc sed id, semper risus in. Aliquam etiam, erat velit scelerisque.",
-        "value": 2,
-        "link": "http://0.0.0.0/ultricies."
-      },
-      {
-        "seq_number": 220,
-        "time_start": "03:40",
-        "text": "Cras sed felis eget velit, aliquet sagittis. Dui ut ornare lectus sit amet, est placerat in.",
-        "value": 0,
-        "link": "http://0.0.0.0/Duis"
-      },
-      {
-        "seq_number": 230,
-        "time_start": "03:50",
-        "text": "Cras sed felis eget velit, aliquet sagittis. Dui ut ornare lectus sit amet, est placerat in.",
-        "value": 1,
-        "link": "http://0.0.0.0/mus"
-      },
-      {
-        "seq_number": 240,
-        "time_start": "04:00",
-        "text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "value": 2,
-        "link": "http://0.0.0.0/enim"
-      },
-      {
-        "seq_number": 250,
-        "time_start": "04:10",
-        "text": "Neque aliquam, vestibulum morbi blandit cursus risus, at. Fames ac turpis egestas, maecenas pharetra.",
-        "value": 2,
-        "link": "http://0.0.0.0/at"
-      }
-    ],
-    "originality": 5.215350501608118,
-    "borrowing": 67.52924048188392,
-    "citation": 57.93850847297279
-  },
-  "error": null,
-  "success": true
+    "data": {
+        "values": [
+            {
+                "seq_number": 0,
+                "time_start": "00:00",
+                "text": "Когда меня нет дома, я всегда думаю о нём: не скучно ли ему, не голоден ли он. Я хочу, чтобы он жил со мной счастливо и был здоров.",
+                "value": 1,
+                "link": "http://0.0.0.0/«Ты",
+                "allocated": " не изменился ли внешний мир"
+            },
+            {
+                "seq_number": 10,
+                "time_start": "00:10",
+                "text": "В поэме Гоголя «Мёртвые души» каждый герой олицетворяет те или иные человеческие пороки. Ноздрёв — авантюрист, игрок, проматывающий состояние, заработанное тяжким чужим трудом. Манилов — пустой мечтатель, любитель громких, напыщенных фраз, нисколько не заботящийся о своём имении.",
+                "value": 2,
+                "link": "http://0.0.0.0/человек",
+                "allocated": " я всегда думаю о нём: не скучно ли ему"
+            },
+            {
+                "seq_number": 20,
+                "time_start": "00:20",
+                "text": "Всего-то и надо — простое сердце.",
+                "value": 3,
+                "link": "http://0.0.0.0/моей",
+                "allocated": "Но кто такая Изора? Где целых восемнадцать лет Сальери хранил яд — в пузырьке? Поэт Арсений Тарковский считал"
+            },
+            {
+                "seq_number": 30,
+                "time_start": "00:30",
+                "text": "И вот четыре года назад  я случайно увидела в зоомагазине кота и полюбила его с первого взгляда, потому что у него были умные глаза и он смотрел на меня, как человек.",
+                "value": 1,
+                "link": "http://0.0.0.0/покупая",
+                "allocated": " и все происходящее мы видим глазами Сальери. Пьеса начинается с его монолога: «Все говорят: нет правды на земле. Но правды нет и выше». Это похоже на речь обвиняемого. Оказывается"
+            },
+            {
+                "seq_number": 40,
+                "time_start": "00:40",
+                "text": "И вот четыре года назад  я случайно увидела в зоомагазине кота и полюбила его с первого взгляда, потому что у него были умные глаза и он смотрел на меня, как человек.",
+                "value": 3,
+                "link": "http://0.0.0.0/сидит",
+                "allocated": " чтобы у нас дома жил домашний питомец: собака"
+            },
+            {
+                "seq_number": 50,
+                "time_start": "00:50",
+                "text": "В детстве у меня была мечта. Я хотела, чтобы у нас дома жил домашний питомец: собака, кошка или птица, которая может научиться говорить – попугай.",
+                "value": 0,
+                "link": "http://0.0.0.0/Настасьей",
+                "allocated": " вообще лишённый каких бы то ни было духовных запросов. Плюшкин и вовсе «прореха на человечестве»"
+            },
+            {
+                "seq_number": 60,
+                "time_start": "01:00",
+                "text": "Тарковский полагал, что это Изора «за дверью трактирной тихонько ждала...» Не было ли сговора между ней и Сальери?",
+                "value": 2,
+                "link": "http://0.0.0.0/Перед",
+                "allocated": " ведь мы с ним японцы. Но недавно я начала учить русский язык"
+            },
+            {
+                "seq_number": 70,
+                "time_start": "01:10",
+                "text": "Перед нами «теоретическое преступление», то есть совершенное ради идеи. «Нет, никогда я зависти не знал», — говорит Сальери. Настоящий завистник не признает гениальности соперника, а Сальери не сомневается в величии Моцарта, но верит, что его смерть принесет человечеству благо.",
+                "value": 2,
+                "link": "http://0.0.0.0/Моцарту",
+                "allocated": " колодец у которого обшит корабельным дубом"
+            },
+            {
+                "seq_number": 80,
+                "time_start": "01:20",
+                "text": "Когда меня нет дома, я всегда думаю о нём: не скучно ли ему, не голоден ли он. Я хочу, чтобы он жил со мной счастливо и был здоров.",
+                "value": 3,
+                "link": "http://0.0.0.0/злодейство",
+                "allocated": " приверженец всего материального"
+            },
+            {
+                "seq_number": 90,
+                "time_start": "01:30",
+                "text": "Тарковский полагал, что это Изора «за дверью трактирной тихонько ждала...» Не было ли сговора между ней и Сальери?",
+                "value": 2,
+                "link": "http://0.0.0.0/маслицем.",
+                "allocated": "Я сразу решила"
+            },
+            {
+                "seq_number": 100,
+                "time_start": "01:40",
+                "text": "И вот четыре года назад  я случайно увидела в зоомагазине кота и полюбила его с первого взгляда, потому что у него были умные глаза и он смотрел на меня, как человек.",
+                "value": 2,
+                "link": "http://0.0.0.0/«Нет,",
+                "allocated": " но в обоих случаях это злодейство. Однако рядом с Раскольниковым окажется не Изора с ее черными очами и черной душой"
+            },
+            {
+                "seq_number": 110,
+                "time_start": "01:50",
+                "text": "Собакевич, напротив, приверженец всего материального, вообще лишённый каких бы то ни было духовных запросов. Плюшкин и вовсе «прореха на человечестве», скупердяй, совершенно потерявший человеческое обличье.",
+                "value": 1,
+                "link": "http://0.0.0.0/вовсе",
+                "allocated": "Тарковский полагал"
+            },
+            {
+                "seq_number": 120,
+                "time_start": "02:00",
+                "text": "По-моему, мой кот Сергей  понимает меня, как никто другой. Когда  мне грустно или когда я готовлюсь к экзамену, он всегда тихо сидит  рядом со мной. Сергей не просто домашний питомец, а настоящий член семьи и мой младший брат. ",
+                "value": 1,
+                "link": "http://0.0.0.0/думаю",
+                "allocated": " помешанного на красоте усадебных строений."
+            },
+            {
+                "seq_number": 130,
+                "time_start": "02:10",
+                "text": "Конечно, будущие чичиковы придумают новые махинации, на первый взгляд бессмысленные, но приносящие вполне ощутимый доход. Однако на всякого хитреца найдётся своя Коробочка, от простых вопросов которой сбежит очередной ловец душ.",
+                "value": 0,
+                "link": "http://0.0.0.0/кто",
+                "allocated": " что я учусь играть на пианино и мои любимые композиторы – Рахманинов и Прокофьев."
+            },
+            {
+                "seq_number": 140,
+                "time_start": "02:20",
+                "text": "Тарковский полагал, что это Изора «за дверью трактирной тихонько ждала...» Не было ли сговора между ней и Сальери?",
+                "value": 1,
+                "link": "http://0.0.0.0/проматывающий",
+                "allocated": " что я учусь играть на пианино и мои любимые композиторы – Рахманинов и Прокофьев."
+            },
+            {
+                "seq_number": 150,
+                "time_start": "02:30",
+                "text": "Обычно я говорю с котом по-японски, ведь мы с ним японцы. Но недавно я начала учить русский язык, и Сергей стал моим партнёром. Он  сидит рядом, учит новые слова вместе со мной  и внимательно слушает, когда я говорю с ним по-русски.",
+                "value": 2,
+                "link": "http://0.0.0.0/чтобы",
+                "allocated": "Их зовут Сергеями. В их честь я и дала  коту-японцу русское имя."
+            },
+            {
+                "seq_number": 160,
+                "time_start": "02:40",
+                "text": "Всего-то и надо — простое сердце.",
+                "value": 3,
+                "link": "http://0.0.0.0/или",
+                "allocated": " но страх перед новым у нее доведен до крайности. Все вокруг меняется"
+            },
+            {
+                "seq_number": 170,
+                "time_start": "02:50",
+                "text": "В результате именно Коробочка ломает изобретённую Чичиковым криминальную схему. Коробочка едет в город, чтобы узнать, не изменился ли внешний мир, не торгуют ли там уже и «мёртвыми душами», не продешевила ли она. Разгорается скандал, вынуждающий Чичикова бежать из города куда глаза глядят. Так консерватор Коробочка побеждает Чичикова-модерниста.",
+                "value": 0,
+                "link": "http://0.0.0.0/он",
+                "allocated": " не голоден ли он. Я хочу"
+            },
+            {
+                "seq_number": 180,
+                "time_start": "03:00",
+                "text": "Тарковский полагал, что это Изора «за дверью трактирной тихонько ждала...» Не было ли сговора между ней и Сальери?",
+                "value": 1,
+                "link": "http://0.0.0.0/дома,",
+                "allocated": " не продешевила ли она. Разгорается скандал"
+            },
+            {
+                "seq_number": 190,
+                "time_start": "03:10",
+                "text": "Сложнее с Настасьей Петровной Коробочкой — единственной женщиной в ряду этих персонажей. В чём её порок и что отличает её от других героев поэмы? Она не фанатик вроде Собакевича, колодец у которого обшит корабельным дубом, и не похожа на Манилова, помешанного на красоте усадебных строений.",
+                "value": 2,
+                "link": "http://0.0.0.0/Он",
+                "allocated": "Их зовут Сергеями. В их честь я и дала  коту-японцу русское имя."
+            },
+            {
+                "seq_number": 200,
+                "time_start": "03:20",
+                "text": "Их зовут Сергеями. В их честь я и дала  коту-японцу русское имя.",
+                "value": 0,
+                "link": "http://0.0.0.0/старинке.",
+                "allocated": " и блины с топлёным маслицем."
+            },
+            {
+                "seq_number": 210,
+                "time_start": "03:30",
+                "text": "Я сразу решила, что возьму его домой и он станет членом нашей семьи. Почему я дала своему японскому коту русское имя Сергей?",
+                "value": 2,
+                "link": "http://0.0.0.0/были",
+                "allocated": " вообще лишённый каких бы то ни было духовных запросов. Плюшкин и вовсе «прореха на человечестве»"
+            },
+            {
+                "seq_number": 220,
+                "time_start": "03:40",
+                "text": "Перед нами «теоретическое преступление», то есть совершенное ради идеи. «Нет, никогда я зависти не знал», — говорит Сальери. Настоящий завистник не признает гениальности соперника, а Сальери не сомневается в величии Моцарта, но верит, что его смерть принесет человечеству благо.",
+                "value": 1,
+                "link": "http://0.0.0.0/и",
+                "allocated": "В результате именно Коробочка ломает изобретённую Чичиковым криминальную схему. Коробочка едет в город"
+            },
+            {
+                "seq_number": 230,
+                "time_start": "03:50",
+                "text": "История предумышленного убийства рассказывается самим преступником: и Моцарта, и все происходящее мы видим глазами Сальери. Пьеса начинается с его монолога: «Все говорят: нет правды на земле. Но правды нет и выше». Это похоже на речь обвиняемого. Оказывается, убийство задумано давно, готово и орудие — «последний дар моей Изоры».",
+                "value": 1,
+                "link": "http://0.0.0.0/и",
+                "allocated": " и Сергей стал моим партнёром. Он  сидит рядом"
+            },
+            {
+                "seq_number": 240,
+                "time_start": "04:00",
+                "text": "Сложнее с Настасьей Петровной Коробочкой — единственной женщиной в ряду этих персонажей. В чём её порок и что отличает её от других героев поэмы? Она не фанатик вроде Собакевича, колодец у которого обшит корабельным дубом, и не похожа на Манилова, помешанного на красоте усадебных строений.",
+                "value": 0,
+                "link": "http://0.0.0.0/Что",
+                "allocated": "Коробочка не транжирит деньги"
+            },
+            {
+                "seq_number": 250,
+                "time_start": "04:10",
+                "text": "История предумышленного убийства рассказывается самим преступником: и Моцарта, и все происходящее мы видим глазами Сальери. Пьеса начинается с его монолога: «Все говорят: нет правды на земле. Но правды нет и выше». Это похоже на речь обвиняемого. Оказывается, убийство задумано давно, готово и орудие — «последний дар моей Изоры».",
+                "value": 1,
+                "link": "http://0.0.0.0/ли",
+                "allocated": " как никто другой. Когда  мне грустно или когда я готовлюсь к экзамену"
+            }
+        ],
+        "originality": 3.0423720218773376,
+        "borrowing": 91.84806132030408,
+        "citation": 30.482012307800698
+    },
+    "error": null,
+    "success": true
 }

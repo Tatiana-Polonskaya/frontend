@@ -57,9 +57,7 @@ export const store = configureStore({
             videoApi.middleware,
             chatApi.middleware,
             notificationApi.middleware,
-
-            reportTestApi.middleware,
-
+            reportTestApi.middleware
         ),
     devTools: process.env.NODE_ENV !== "production",
 });

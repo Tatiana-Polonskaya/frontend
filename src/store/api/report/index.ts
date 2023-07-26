@@ -134,13 +134,15 @@ export const reportApi = createApi({
                 method: "GET",
             }),
         }),
-        getTranscriptionById: build.query<IResponse<TranscriptionJSON>, string>({
-            query: (id) => ({
-                url: `/api/video/${id}/report/${TYPE_REPORT.text}`,
-                params: { id },
-                method: "GET",
-            }),
-        }),
+        getTranscriptionById: build.query<IResponse<TranscriptionJSON>, string>(
+            {
+                query: (id) => ({
+                    url: `/api/video/${id}/report/${TYPE_REPORT.text}`,
+                    params: { id },
+                    method: "GET",
+                }),
+            }
+        ),
         getUnityOfStyleById: build.query<IResponse<UnityOfStyleJSON>, string>({
             query: (id) => ({
                 url: `/api/video/${id}/report/${TYPE_REPORT.unity_of_style}`,
@@ -180,7 +182,7 @@ export const {
     useLazyGetEloquenceByIdQuery,
     useLazyGetNonMonotonyByIdQuery,
     useLazyGetEmotionalArousalByIdQuery,
-    useLazyGetTotalByIdQuery
+    useLazyGetTotalByIdQuery,
 } = reportApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = reportApi;

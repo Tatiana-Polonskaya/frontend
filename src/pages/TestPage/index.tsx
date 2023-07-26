@@ -25,7 +25,6 @@ import { NonMonotonyType } from "../../models/graph/monotony";
 import { useGetTotalByIdTestQuery } from "../../store/api/reportTest";
 import { TotalType } from "../../models/graph/total";
 
-
 export default function TestPage() {
     const [currentTime, setCurrentTime] = useState(0);
 
@@ -40,11 +39,9 @@ export default function TestPage() {
     const [nonMonotonyType, setNonMonotonyType] =
         useState<NonMonotonyType | null>(null);
 
-
     const { data } = useGetTotalByIdTestQuery(
         "89dd1171-d9e9-4d65-9730-4a36596a0e84"
     );
-
 
     // const [dataTest, setDataTest] = useState<TotalType[]>();
 
@@ -93,6 +90,7 @@ export default function TestPage() {
                         data={nonMonotonyMockData}
                         param={nonMonotonyType}
                         average={0}
+                        value={0}
                     />
                 </div>
                 <div>
@@ -150,8 +148,7 @@ export default function TestPage() {
                     <span>четкость</span>
                     <ClarityGraph data={clarityMockData} />
                 </div>
-                <div>
-                </div>
+                <div></div>
             </GraphContext.Provider>
         </MainLayout>
     );
