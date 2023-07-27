@@ -15,6 +15,7 @@ import Tick from "./icon/archive-tick.svg";
 import { convertTime, convertDate } from "../helpers";
 import { useGetTotalByIdQuery } from "../../../store/api/report";
 import ArchiveVideoError from "../ArcviveVideoError";
+import { useDeleteVideoByIdMutation } from "../../../store/api/userVideo";
 // import VideoLoadProgress from "../../VideoLoadProgress";
 
 type Props = {
@@ -72,6 +73,20 @@ export default function ArchiveVideoItem({
             ]);
         }
     }, [totalData]);
+
+    const [deleteRequest, deleteResponse] = useDeleteVideoByIdMutation();
+    const { isLoading, isSuccess, isError } = deleteResponse;
+
+    useEffect(() => {
+        if (isSuccess) console.log("video was deleted", deleteResponse);
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) alert("Something was wrong!");
+    }, [isError]);
+
+    const func = async (id: string) => await deleteRequest(id);
+
     const isAllow = visible;
     return (
         <div className={cnArchiveVideo()}>
@@ -106,7 +121,7 @@ export default function ArchiveVideoItem({
                         ind={ind}
                         id={el.id}
                         changeTickVideo={changeTickVideo}
-                        handleClick={handleClick!}
+                        handleClick={()=>func(el.id)}
                         state={openPopup.includes(ind) ? "" : "d-n"}
                     />
                 </div>

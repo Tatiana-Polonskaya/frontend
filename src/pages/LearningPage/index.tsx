@@ -9,6 +9,9 @@ import {
 } from "../../store/api/chat";
 import { useAppSelector } from "../../hooks/redux";
 
+import "./style.scss";
+import { cn } from "@bem-react/classname";
+
 // import { EventSourcePolyfill } from "event-source-polyfill";
 
 // import {
@@ -45,6 +48,8 @@ import { useAppSelector } from "../../hooks/redux";
 // };
 
 export default function LearningPage() {
+    const cnLearning = cn("LearningPage");
+
     const token: string | null = useAppSelector(
         (state) => state.user.accessToken
     );
@@ -151,44 +156,11 @@ export default function LearningPage() {
     //     }
     // }, [token]);
 
-    // Our state to store fetched cache data
-  const [cacheData, setCacheData] = useState();
-
-    const getAllCacheData = async () => {
-        var url = 'https://localhost:300'
-      
-        // List of all caches present in browser
-        var names = await caches.keys()
-      
-        var cacheDataArray:any = []
-      
-        // Iterating over the list of caches
-        names.forEach(async(name) => {
-      
-          // Opening that particular cache
-          const cacheStorage = await caches.open(name);
-      
-          // Fetching that particular cache data
-          const cachedResponse = await cacheStorage.match(url);
-          var data = cachedResponse ? await cachedResponse.json() : undefined;
-      
-          // Pushing fetched data into our cacheDataArray
-          cacheDataArray.push(data)
-          setCacheData(cacheDataArray.join(', '))
-        })
-      };
-
-    useEffect(() => {
-        if (cacheData) {
-            console.log(cacheData);
-        }
-    }, [cacheData]);
-
-   
-
     return (
         <MainLayout>
-            
+            <div className="animated-background">
+                <div className="background-masker btn-divide-left"></div>
+            </div>
         </MainLayout>
     );
 }

@@ -11,10 +11,10 @@
             font-weight: 600;
             line-height: normal;
 
-            padding: 10px ;
+            padding: 10px;
             // margin-bottom: -30px;
 
-            &_margin_bottom{
+            &_margin_bottom {
                 padding: 0;
                 padding-top: 10px;
                 margin-bottom: -30px;
@@ -30,7 +30,7 @@
             line-height: normal;
         }
 
-        &-empty-msg{
+        &-empty-msg {
             padding: 12px;
             color: #7C8EB5;
             font-size: 16px;
@@ -38,14 +38,31 @@
             font-style: normal;
             font-weight: 500;
             line-height: normal;
+
+            &-animate {
+                color: #7C8EB5;
+                font-size: 16px;
+                font-family: "Montserrat Alternates";
+                font-weight: 500;
+
+                display: inline-block;
+                clip-path: inset(0 30px 0 0);
+                animation: fade-out 2s infinite ease-in-out;
+            }
+
+            @keyframes fade-out {
+                to {
+                    clip-path: inset(0 -24px 0 0);
+                }
+            }
         }
     }
 
-    &-aims{
+    &-aims {
         padding: 10px 0;
     }
 
-    &-row{
+    &-row {
         display: flex;
         flex-flow: row nowrap;
         gap: 20px;

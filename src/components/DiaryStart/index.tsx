@@ -37,6 +37,7 @@ import lampСharge from "./icons/lampСharge.svg";
 import RecommendationDairyGraph from "../RecommendationDairyGraph";
 import VideoLoad from "../VideoLoad";
 import ArchiveVideo from "../Archive/ArchiveVideo";
+import { useLocation } from "react-router-dom";
 
 export default function DiaryStart() {
     const sectionTitles = {
@@ -53,6 +54,22 @@ export default function DiaryStart() {
 
     const [currentPage, setCurrentPage] = useState(0);
     const videosPerPage = 6;
+
+    const { state } = useLocation();
+    const { onAnalisys } = state ? state : false;
+
+    const [waitAnalysisVideo, setWaitAnalysisVideo] = useState(
+        onAnalisys ? onAnalisys : false
+    );
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setWaitAnalysisVideo(false)
+        }, 60000); //milisec
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
     /* ----------------------- ACHIEVEMENTS BLOCK -----------------------*/
     const achievementsJSON = useGetAchievementsQuery();
@@ -197,6 +214,7 @@ export default function DiaryStart() {
 
     useEffect(() => {
         if (analisisVideoByUser.data && analisisVideoByUser.data?.data) {
+            setWaitAnalysisVideo(false);
             setCurrentStatus(analisisVideoByUser.data!.data!.videos);
             setCountAnalysisVideos(analisisVideoByUser.data!.data.total_videos);
             setHasAnalysisVideo(true);
@@ -251,13 +269,7 @@ export default function DiaryStart() {
                 search: searchValue,
             });
         }
-    }, [
-        currentPage,
-        getVideosBySearch,
-        searchValue,
-        hasAnalysisVideo,
-        countAnalysisVideos,
-    ]);
+    }, [currentPage, getVideosBySearch, searchValue, hasAnalysisVideo]);
 
     useEffect(() => {
         if (
@@ -266,7 +278,6 @@ export default function DiaryStart() {
             videosBySearch.data &&
             videosBySearch.data!.data
         ) {
-            // console.log("videosBySearch", videosBySearch.data!.data!);
             setSearchVideos(videosBySearch.data!.data!.videos);
             setCountSearchVideos(videosBySearch.data!.data!.total_videos);
         }
@@ -309,6 +320,8 @@ export default function DiaryStart() {
     const prevPage = () =>
         setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
 
+    /* ----------------------- ArchiveVideo Function -----------------------*/
+
     return (
         <div>
             <div className={cnDiaryStart("text-h1", { margin_bottom: true })}>
@@ -330,28 +343,44 @@ export default function DiaryStart() {
 
             <RollUp title="Видео на анализе" icon={videoListIcon}>
                 {/* данные по видосикам на анализе которые */}
-                {countAnalysisVideos > 0 ? (
-                    <>
-                        {currentStatus.map((el, ind) => (
-                            <VideoLoad
-                                key={ind}
-                                el={el}
-                                ind={ind}
-                                percent={el.status_percent}
-                                isAllow={false}
-                            />
-                        ))}
-                        <Pagination
-                            videosPerPage={videosPerPage}
-                            totalVideos={countAnalysisVideos}
-                            paginate={paginateAnalysis}
-                            funcNextPage={nextPageAnalysis}
-                            funcPrevPage={prevPageAnalysis}
-                            currentPage={currentPageAnalysis + 1}
-                        />
-                    </>
+                {waitAnalysisVideo ? (
+                    <div className={cnDiaryStart("text-empty-msg")}>
+                        Ищем видео
+                        <span
+                            className={cnDiaryStart("text-empty-msg-animate")}
+                        >
+                            {" "}
+                            . . .
+                        </span>
+                    </div>
                 ) : (
-                    <div>Нет видео на анализе</div>
+                    <>
+                        {countAnalysisVideos > 0 ? (
+                            <>
+                                {currentStatus.map((el, ind) => (
+                                    <VideoLoad
+                                        key={ind}
+                                        el={el}
+                                        ind={ind}
+                                        percent={el.status_percent}
+                                        isAllow={false}
+                                    />
+                                ))}
+                                <Pagination
+                                    videosPerPage={videosPerPage}
+                                    totalVideos={countAnalysisVideos}
+                                    paginate={paginateAnalysis}
+                                    funcNextPage={nextPageAnalysis}
+                                    funcPrevPage={prevPageAnalysis}
+                                    currentPage={currentPageAnalysis + 1}
+                                />
+                            </>
+                        ) : (
+                            <div className={cnDiaryStart("text-empty-msg")}>
+                                Нет видео на анализе
+                            </div>
+                        )}
+                    </>
                 )}
             </RollUp>
 
@@ -413,9 +442,10 @@ export default function DiaryStart() {
                 </div>
             </div>
 
-            {countSearchVideos > 0 ? (
+            {countSearchVideos > 0 && searchVideos ? (
                 <>
                     <ArchiveSearch updateSearch={updateSearch} />
+                    {/* <ArchiveVideo video={searchVideos}/> */}
                     {searchVideos.map((el, ind) => (
                         <ArchiveVideoItem
                             handleClick={() => console.log("click")}

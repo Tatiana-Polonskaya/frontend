@@ -66,13 +66,13 @@ export default function RepetitionStart() {
     const [currentInfoData, setCurrentInfoData] =
         useState<IInfoVideo>(initialInfoVideo);
 
-    useEffect(()=>{
-        if(currentInfoData && currentInfoData.title.length>0){
+    useEffect(() => {
+        if (currentInfoData && currentInfoData.title.length > 0) {
             sendVideoData();
             closeModal();
             showLoadingModal();
         }
-    },[currentInfoData])
+    }, [currentInfoData]);
 
     const [videoSendRequest, videoSendResponse] = useSendVideoMutation();
     const { isLoading, isSuccess, isError } = videoSendResponse;
@@ -100,11 +100,11 @@ export default function RepetitionStart() {
         if (isSuccess) {
             const data = videoSendResponse.data;
             if (data.success) {
-                setCurrentFile(new File([], "empty")); 
+                setCurrentFile(new File([], "empty"));
                 setCurrentInfoData(initialInfoVideo);
             } else {
                 setIsErrorWithSuccess(true);
-                setCurrentFile(new File([], "empty")); 
+                setCurrentFile(new File([], "empty"));
                 setCurrentInfoData(initialInfoVideo);
             }
         }
@@ -114,11 +114,10 @@ export default function RepetitionStart() {
         if (isError) {
             const error = videoSendResponse.error as Response;
             console.log(videoSendResponse.error);
-            setCurrentFile(new File([], "empty")); 
+            setCurrentFile(new File([], "empty"));
             setCurrentInfoData(initialInfoVideo);
         }
     }, [isError]);
-    
 
     // const videoData  = useGetVideoQuery("feb81d20-2bb0-4622-b41a-3c6d50c6b3f8");
 
@@ -198,12 +197,17 @@ export default function RepetitionStart() {
                 </VideoUploadContext.Provider>
             </ModalWindow>
 
-            <ModalWindow isVisible={isLoadingModal} onClose={closeLoadingModal}
-            closeOnClickOutside={(!isLoading || isErrorWithSuccess)}
+            <ModalWindow
+                isVisible={isLoadingModal}
+                onClose={closeLoadingModal}
+                closeOnClickOutside={!isLoading || isErrorWithSuccess}
             >
-                {(isLoading || isErrorWithSuccess || isError) &&  (
+                {(isLoading || isErrorWithSuccess || isError) && (
                     <div className={cnRepetitionStart("loading")}>
-                        <ReactSVG src={loadingPic} className={cnRepetitionStart("loading-img")}/>
+                        <ReactSVG
+                            src={loadingPic}
+                            className={cnRepetitionStart("loading-img")}
+                        />
                         {isLoading && !(isErrorWithSuccess || isError) && (
                             <>
                                 <div
@@ -211,7 +215,15 @@ export default function RepetitionStart() {
                                         "loading-title"
                                     )}
                                 >
-                                    Идет загрузка видео <span className={cnRepetitionStart("loading-title-animate")}> . . .</span>
+                                    Идет загрузка видео{" "}
+                                    <span
+                                        className={cnRepetitionStart(
+                                            "loading-title-animate"
+                                        )}
+                                    >
+                                        {" "}
+                                        . . .
+                                    </span>
                                 </div>
                                 <div
                                     className={cnRepetitionStart(
@@ -223,7 +235,7 @@ export default function RepetitionStart() {
                                 </div>
                             </>
                         )}
-                        {(isErrorWithSuccess || isError)  && (
+                        {(isErrorWithSuccess || isError) && (
                             <>
                                 <div
                                     className={cnRepetitionStart(
@@ -238,27 +250,36 @@ export default function RepetitionStart() {
                 )}
                 {isSuccess && !isErrorWithSuccess && (
                     <div className={cnRepetitionStart("loading")}>
-                        <ReactSVG src={loadingPic} className={cnRepetitionStart("loading-img")}/>
-                            <>
-                                <div
+                        <ReactSVG
+                            src={loadingPic}
+                            className={cnRepetitionStart("loading-img")}
+                        />
+                        <>
+                            <div className={cnRepetitionStart("loading-title")}>
+                                Загрузка видео успешно завершена и отправлена на
+                                анализ
+                            </div>
+                            <div
+                                className={cnRepetitionStart(
+                                    "loading-description"
+                                )}
+                            >
+                                По его окончании вы сможете ознакомиться с
+                                результатами в разделе{" "}
+                                <span
                                     className={cnRepetitionStart(
-                                        "loading-title"
-                                    )}
-                                >
-                                    Загрузка видео успешно завершена и отправлена на анализ
-                                </div>
-                                <div
-                                    className={cnRepetitionStart(
-                                        "loading-description"
-                                    )}
-                                >
-                                    По его окончании вы сможете ознакомиться с результатами в разделе{" "}
-                                    
-                                    <span className={cnRepetitionStart(
                                         "loading-title-link"
-                                    )} onClick={()=>navigate(RoutesEnum.DIARY)}>Дневник</span>
-                                </div>
-                            </>
+                                    )}
+                                    onClick={() =>
+                                        navigate(RoutesEnum.DIARY, {
+                                            state: { onAnalisys: true },
+                                        })
+                                    }
+                                >
+                                    Дневник
+                                </span>
+                            </div>
+                        </>
                     </div>
                 )}
             </ModalWindow>
