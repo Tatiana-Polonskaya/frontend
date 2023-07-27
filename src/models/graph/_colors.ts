@@ -1,5 +1,5 @@
 enum GraphColor {
-    GRAY = "#d4dff4",
+    GRAY = "#D4DFF4",
     // RED = "#fe5d74",
     RED = "#F35B60",
     LIGHTRED = "#FF4E78",
@@ -17,6 +17,9 @@ enum GraphColor {
     SYELLOW = "#F4EC1C",
     SGREEN = "#0CCA13",
     SBLUE = "#2477F4",
+
+    IRED = "#FE5D74",
+    WHITE ="#FFFFFF",
 
     // GRAY = "#d4dff4",
     // RED = "linear-gradient(78.41deg, #FE6972 0%, #FF4E78 100%)",

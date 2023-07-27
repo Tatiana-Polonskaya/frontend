@@ -1,74 +1,75 @@
-import React from 'react';
-import './UnityOfStyl.css'
+import "./UnityOfStyl.css";
 import Scale from "../Scale";
-import {IScaleDataType} from "../../../models/graph/inteface/scale";
+import { IScaleDataType } from "../../../models/graph/inteface/scale";
+import GraphColor from "../../../models/graph/_colors";
 
-type  Props={
-    scientific: number,
-    official: number,
-    publicistic: number,
-    colloquial: number,
-    artistic: number
-}
+type Props = {
+    scientific: number;
+    official: number;
+    publicistic: number;
+    colloquial: number;
+    artistic: number;
+};
 
-function recordingInf(max:number, strName:string, sumAnuther:number){
-     let inf: IScaleDataType = ({
-        item:[
-            {
-                title:strName,
-                value:max,
-                color:"#2477F4",
-            },
-            {
-                title:"Другие стили",
-                value:sumAnuther,
-                color:"#D4DFF4",
-            }
-        ]
-    });
-    return inf;
-}
-let inf1:IScaleDataType;
-export default function UnityOfStylScale(props:Props) {
-    if(props.colloquial> props.artistic &&
-        props.colloquial>props.publicistic &&
-        props.colloquial> props.official &&
-        props.colloquial>props.scientific){
-        let sum = props.artistic+props.publicistic+props.official+props.scientific;
-        inf1 = recordingInf(props.colloquial,"Разговорный",sum);
-    }else if(props.scientific > props.colloquial &&
-        props.scientific>props.publicistic &&
-        props.scientific> props.official &&
-        props.scientific>props.artistic){
-        let sum = props.colloquial+props.publicistic+props.official+props.artistic;
-        inf1 = recordingInf(props.scientific,"Научный",sum);
-    } else if(props.publicistic> props.colloquial &&
-        props.publicistic>props.artistic &&
-        props.publicistic> props.official &&
-        props.publicistic>props.scientific){
-        let sum = props.colloquial+props.artistic+props.official+props.scientific;
-        inf1 = recordingInf(props.publicistic,"Публицистический",sum);
-    }else if(props.official> props.colloquial &&
-        props.official>props.publicistic &&
-        props.official> props.artistic &&
-        props.official>props.scientific){
-        let sum = props.colloquial+props.publicistic+props.artistic+props.scientific;
-        inf1 = recordingInf(props.official,"Официально - деловой",sum);
-    }else if(props.artistic> props.colloquial &&
-        props.artistic>props.publicistic &&
-        props.artistic> props.official &&
-        props.artistic>props.scientific){
-        let sum = props.colloquial+props.publicistic+props.official+props.scientific;
-        inf1 = recordingInf(props.artistic,"Художественный",sum);
+const convertUnityOfStyleInTitle = (title: string) => {
+    switch (title) {
+        case "scientific":
+            return "Научный";
+        case "official":
+            return "Официально-деловой";
+        case "publicistic":
+            return "Публицистический";
+        case "colloquial":
+            return "Разговорный";
+        case "artistic":
+            return "Художественный";
+        default:
+            return "";
     }
+};
+
+export default function UnityOfStylScale(props: Props) {
+    const MAX_STYLE = 0.5;
+    const SECOND_MAX_STYLE = 0.2;
+    let maxTitle: string[] = [];
+    let maxSecondTitles: string[] = [];
+
+    Object.entries(props).forEach((el) => {
+        if (el[1] > MAX_STYLE) maxTitle.push(el[0]);
+        else if (el[1] > SECOND_MAX_STYLE) maxSecondTitles.push(el[0]);
+    });
+
+    const res: IScaleDataType =
+        maxTitle.length > 0
+            ? {
+                  item: [
+                      {
+                          title: convertUnityOfStyleInTitle(maxTitle[0]),
+                          value: props[maxTitle[0] as keyof Props],
+                          color: GraphColor.BLUE,
+                      },
+                      {
+                          title: "Другие стили",
+                          value: 1 - props[maxTitle[0] as keyof Props],
+                          color: GraphColor.GRAY,
+                      },
+                  ],
+              }
+            : {
+                  item: [
+                      {
+                          title: "Отсутствует единство стиля",
+                          value: 1,
+                          color: GraphColor.GRAY,
+                      },
+                  ],
+              };
 
     return (
         <>
             <div className="inf">
-                <Scale component={inf1}/>
+                <Scale component={res} />
             </div>
-
         </>
     );
 }
-

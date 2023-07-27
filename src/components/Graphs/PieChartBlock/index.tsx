@@ -14,15 +14,15 @@ function paint(item: (string | number)[], img: string) {
     let precen = Math.round(Number(item[0]));
 
     let procent;
-    if (precen > 9 && precen < 100) {
+    if (precen > 9 && precen < 99) {
         procent = precen.toString();
-    }else if(precen == 0){
-        procent = "000"
+    } else if (precen === 0) {
+        procent = "000";
     } else if (precen <= 5) {
         procent = "0";
     } else if (precen >= 100) {
         procent = "10";
-    }else {
+    } else {
         procent = "00";
     }
     return (

@@ -604,7 +604,8 @@ export default function AnalysisReport() {
                                                 .time_start
                                         }
                                         endTime={
-                                            connectivityData.values.at(-1)!.time_start
+                                            connectivityData.values.at(-1)!
+                                                .time_start
                                         }
                                     />
                                 }
@@ -622,23 +623,19 @@ export default function AnalysisReport() {
                                 subtitle={`Доля неречевых звуков и слов-паразитов превышает допустимый порог. 
                 Не хватает фактов и деталей для подтверждения высказанных аргументов.`}
                                 visible={
-                                    informativeData && (
-                                        <InformativScale
-                                            informative={
-                                                informativeData.informative
-                                            }
-                                            sounds={informativeData.sounds}
-                                            empty={informativeData.empty}
-                                            parasite={informativeData.parasite}
-                                        />
-                                    )
+                                    <InformativScale
+                                        informative={
+                                            informativeData.informative
+                                        }
+                                        sounds={informativeData.sounds}
+                                        empty={informativeData.empty}
+                                        parasite={informativeData.parasite}
+                                    />
                                 }
                                 invisible={
-                                    informativeData && (
-                                        <InformativeGraph
-                                            values={informativeData.values}
-                                        />
-                                    )
+                                    <InformativeGraph
+                                        values={informativeData.values}
+                                    />
                                 }
                             />
                         )}

@@ -270,10 +270,11 @@ export default function DiaryStart() {
 
     useEffect(() => {
         if (data && data?.data) {
+            console.log("new status", data!.data!.videos);
             setCurrentStatus(data!.data!.videos);
             setCountAnalysisVideos(data!.data.total_videos);
         }
-    }, [data, currStatus]);
+    }, [data]);
 
     return (
         <div>
