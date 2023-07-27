@@ -107,7 +107,6 @@ export default function PreviewBlock({
     useEffect(() => {
         if (durationVideo > 0) {
             const normDuration = getPrettyDuration(durationVideo);
-            console.log("normDuration", normDuration)
             if (normDuration > NORM_COUNT_MINUTES) {
                 setIsNormDuration(false);
                 setCanMoved(false);

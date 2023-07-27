@@ -20,7 +20,7 @@ export const videoApi = createApi({
             query: ({ title, duration, description, file }) => {
                 var bodyFormData = new FormData();
                 bodyFormData.append("file", file);
-                console.log({ bodyFormData, file });
+               
                 return {
                     url: "/api/video/upload",
                     method: "POST",
