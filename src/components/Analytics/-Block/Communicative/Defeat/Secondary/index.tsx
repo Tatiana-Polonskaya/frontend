@@ -74,10 +74,17 @@ export default function SecondaryDefeat(props: Props) {
 
                 // сюда надо вставить перебор по массиву входящих
                 if (!subStr.includes(" ")) {
-                    let sexIndex = strArr.indexOf(subStr);
+                    let sexIndex =
+                        strArr.indexOf(`${subStr}.`) !== -1
+                            ? strArr.indexOf(`${subStr}.`)
+                            : strArr.indexOf(`${subStr},`) !== -1
+                            ? strArr.indexOf(`${subStr},`)
+                            : strArr.indexOf(subStr) !== -1
+                            ? strArr.indexOf(subStr)
+                            : -1;
 
                     if (sexIndex !== -1) {
-                        arrParam[strArr.indexOf(subStr)].type.push(
+                        arrParam[sexIndex].type.push(
                             e[0] === "0"
                                 ? "filler"
                                 : e[0] === "1"
@@ -86,7 +93,7 @@ export default function SecondaryDefeat(props: Props) {
                                 ? "agression"
                                 : "original"
                         );
-                        arrParam[strArr.indexOf(subStr)].color.push(
+                        arrParam[sexIndex].color.push(
                             e[0] === "0"
                                 ? GraphColor.BLUE
                                 : e[0] === "1"
@@ -96,30 +103,30 @@ export default function SecondaryDefeat(props: Props) {
                                 : GraphColor.DARKGRAY
                         );
                         if (
-                            !arrParam[
-                                strArr.indexOf(subStr)
-                            ].description.includes("слова-паразиты") &&
+                            !arrParam[sexIndex].description.includes(
+                                "слова-паразиты"
+                            ) &&
                             e[0] === "0"
                         ) {
-                            arrParam[strArr.indexOf(subStr)].description.push(
+                            arrParam[sexIndex].description.push(
                                 "слова-паразиты"
                             );
                         } else if (
-                            !arrParam[
-                                strArr.indexOf(subStr)
-                            ].description.includes("когнитивные искажения") &&
+                            !arrParam[sexIndex].description.includes(
+                                "когнитивные искажения"
+                            ) &&
                             e[0] === "1"
                         ) {
-                            arrParam[strArr.indexOf(subStr)].description.push(
+                            arrParam[sexIndex].description.push(
                                 "когнитивные искажения"
                             );
                         } else if (
-                            !arrParam[
-                                strArr.indexOf(subStr)
-                            ].description.includes("агрессивность") &&
+                            !arrParam[sexIndex].description.includes(
+                                "агрессивность"
+                            ) &&
                             e[0] === "2"
                         ) {
-                            arrParam[strArr.indexOf(subStr)].description.push(
+                            arrParam[sexIndex].description.push(
                                 "агрессивность"
                             );
                         }
@@ -200,7 +207,7 @@ export default function SecondaryDefeat(props: Props) {
                 }
             });
         });
-        
+
         return (
             <div className={cnDefeat("description")}>
                 {arrParam.map((el, ind) => (

@@ -6,7 +6,10 @@ import {
     NonMonotonyDataItem,
     NonMonotonyType,
 } from "../../../models/graph/monotony";
-import convertMonotonyData from "../../../@adapters/Graphs/monotony";
+import {
+    convertMonotonyData,
+    dependenceMonotonyData,
+} from "../../../@adapters/Graphs/monotony";
 
 type Props = {
     data: NonMonotonyDataItem[];
@@ -22,18 +25,21 @@ export default function NonMonotonyGraph({
     value,
 }: Props) {
     const data2 = convertMonotonyData(data, param);
-    console.log("value");
-    console.log(value);
-    console.log("data2");
-    console.log(data2);
+    console.log("param", param);
+    console.log("value", value);
+    console.log("data2", data2);
+    console.log("average", average);
 
+    const dependece = dependenceMonotonyData(param, average);
+    console.log("dependece", dependece);
     return (
         <LineGraph
-            average={100 - average}
+            average={dependece.average}
+            withMedian={dependece.withMedian}
             items={data2}
             descriptionX={createXDescriptionFromData(data)}
-            range={{ min: 0, max: 1 }}
-            descriptionY={[0, 0.2, 0.4, 0.6, 0.8, 1]}
+            range={{ min: dependece.min, max: dependece.max }}
+            descriptionY={dependece.descriptionY}
             colors={{
                 [NonMonotonyType.RATE]: GraphColor.BLUE,
                 [NonMonotonyType.VOLUME]: GraphColor.RED,

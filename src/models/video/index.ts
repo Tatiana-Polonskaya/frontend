@@ -22,6 +22,8 @@ export interface IVideoFromBack {
     id: UUID;
     channel_title: string;
     file_path: string;
+    status_percent: string | number;
+    status_video: string;
 }
 
 export interface IVideoInfo {

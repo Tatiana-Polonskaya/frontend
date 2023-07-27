@@ -30,7 +30,11 @@ export default function ArchiveVideo({ video }: Props) {
         func(id);
     };
 
-    useEffect(() => {}, [state]);
+    useEffect(() => {
+        if (video) {
+            console.log("video", video);
+        }
+    }, [state]);
 
     return video && video.length !== 0 ? (
         <>
@@ -40,7 +44,7 @@ export default function ArchiveVideo({ video }: Props) {
                     key={el.id}
                     el={el}
                     ind={ind}
-                    visible={true}
+                    visible={el.status_video === "ERROR" ? false : true}
                 />
             ))}
         </>
