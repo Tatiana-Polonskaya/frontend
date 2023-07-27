@@ -16,6 +16,7 @@ import { convertTime, convertDate } from "../helpers";
 import { useGetTotalByIdQuery } from "../../../store/api/report";
 import ArchiveVideoError from "../ArcviveVideoError";
 import { useDeleteVideoByIdMutation } from "../../../store/api/userVideo";
+import { useGetTotalByIdTestQuery } from "../../../store/api/reportTest";
 // import VideoLoadProgress from "../../VideoLoadProgress";
 
 type Props = {
@@ -58,11 +59,12 @@ export default function ArchiveVideoItem({
         setTickedVideo([...copy]);
     };
 
-    const totalData = useGetTotalByIdQuery(el.id).data?.data?.values;
+    const totalData = useGetTotalByIdTestQuery(el.id).data?.data?.values;
     const [result, setResult] = useState<number[]>([]);
 
     useEffect(() => {
         if (totalData) {
+            console.log("totalData", totalData)
             setResult([
                 totalData!.connectedness,
                 totalData!.argumentativeness,

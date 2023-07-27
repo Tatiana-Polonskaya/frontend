@@ -94,13 +94,13 @@ export default function RecodingPage() {
     const handleStartCaptureClick = useCallback(() => {
         console.log(canStart, "canStart");
         if (canStart) {
-            const tempCodec = "h264";
+            // const tempCodec = "h264";
             updateIsTimerStart(TIMER_STATUS.START);
             setCapturing(true);
             mediaRecorderRef.current = new MediaRecorder(
                 webcamRef?.current?.stream as MediaStream,
                 {
-                    mimeType: `video/webm;codecs=${tempCodec}`,
+                    mimeType: `video/webm`,
                 }
             );
             mediaRecorderRef.current.addEventListener(
@@ -108,7 +108,7 @@ export default function RecodingPage() {
                 handleDataAvailable
             );
             mediaRecorderRef.current.start();
-            console.log(mediaRecorderRef.current);
+            // console.log(mediaRecorderRef.current);
         }
     }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
 
@@ -122,8 +122,8 @@ export default function RecodingPage() {
     // DONE :
     useEffect(() => {
         if (recordedChunks.length > 0) {
-            const tempCodec = "h264";
-            const tempType = `video/webm;codecs=${tempCodec}`; //"video/webm" was
+            // const tempCodec = "h264";
+            const tempType = `video/webm`; //"video/webm" was
             const file = new Blob(recordedChunks, {
                 type: tempType,
             });
@@ -132,22 +132,15 @@ export default function RecodingPage() {
                     type: tempType,
                 })
             );
-            const url = URL.createObjectURL(file);
-            const a = document.createElement("a");
-            document.body.appendChild(a);
-            a.href = url;
-            a.download = "react-webcam-stream-capture.webm";
-            a.click();
-            window.URL.revokeObjectURL(url);
             setRecordedChunks([]);
         }
     }, [recordedChunks]);
 
     useLayoutEffect(() => {
         if (currentFile.size !== 0) {
-            // setModal(true);
+            setModal(true);
         } else {
-            // setModal(false);
+            setModal(false);
         }
     }, [currentFile]);
 
@@ -169,7 +162,6 @@ export default function RecodingPage() {
 
     useEffect(() => {
         if (devices) {
-            // console.log(devices.length>= 1)
             if (devices.length >= 1) setCanStart(true);
             else setCanStart(false);
         }

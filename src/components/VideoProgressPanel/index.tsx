@@ -14,9 +14,6 @@ export default function VideoProgressPanel({ result, type = "big" }: Props) {
                 title: "связность",
             },
             {
-                title: "убедительность",
-            },
-            {
                 title: "аргументированность",
             },
             {
@@ -26,10 +23,15 @@ export default function VideoProgressPanel({ result, type = "big" }: Props) {
                 title: "динамизм",
             },
             {
-                title: "привлечение внимания аудитории",
+                title: "убедительность",
+            },
+            {
+                title: "соблюдение коммуникативной нормы",
             },
         ],
     };
+
+    console.log("result", result)
 
     const cnVideoPanel = cn("video-panel");
 
@@ -43,7 +45,7 @@ export default function VideoProgressPanel({ result, type = "big" }: Props) {
                 } as React.CSSProperties
             }
         >
-            {analyzeItem.criteria.map((item, ind) => (
+            {result && analyzeItem.criteria.map((item, ind) => (
                 <div key={ind} className={cnVideoPanel("analyze-row-item")}>
                     <div
                         className="pie animate"
@@ -57,7 +59,7 @@ export default function VideoProgressPanel({ result, type = "big" }: Props) {
                             } as React.CSSProperties
                         }
                     >
-                        {result[ind]}%<div className="pie-helper"></div>
+                        {Math.floor(result[ind])}%<div className="pie-helper"></div>
                     </div>
                     <p
                         style={

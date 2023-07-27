@@ -13,7 +13,7 @@ type Props = {
 
 export function getPrettyTimeBySeconds(seconds: number) {
     if (seconds < 60) {
-        return `00:${seconds < 10 ? "0" + seconds : seconds.toFixed(0)}`;
+        return `00:${seconds < 10 ? "0" + seconds.toFixed(0) : seconds.toFixed(0)}`;
     } else {
         const minutes = ~~(seconds / 60);
         return `${minutes < 10 ? "0" + minutes : minutes}:${
