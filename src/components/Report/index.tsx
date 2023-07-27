@@ -1091,7 +1091,7 @@ export default function AnalysisReport() {
                                 invisible={
                                     <SecondaryEnergy
                                         data={energyData.values}
-                                        average={energyData.total_energy}
+                                        average={0.5}
                                     />
                                 }
                             />
