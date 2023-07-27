@@ -61,6 +61,10 @@ export default function PersonalArea({ isArchive = false }: Props) {
     const { isSuccess, isError } = userAvatarResponse;
 
     useEffect(() => {
+        if (isSuccess) window.location.reload();
+    }, [isSuccess]);
+
+    useEffect(() => {
         if (isError) console.log(userAvatarResponse);
     }, [isError]);
 

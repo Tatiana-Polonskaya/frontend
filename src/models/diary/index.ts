@@ -1,11 +1,11 @@
 export enum TYPE_DIARY {
-    connectivity = "connectivity",
+    connectivity = "connectedness",
     dynamism = "dynamism",
     argumentativeness = "argumentativeness",
     clarity = "clarity",
     persuasiveness = "persuasiveness",
     communicative = "communicative",
-    total = "total",
+    total = "total_result",
 }
 
 export interface IStatisticItem {

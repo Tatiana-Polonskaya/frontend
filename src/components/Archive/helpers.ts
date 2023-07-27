@@ -4,7 +4,7 @@ export function convertTime(value: number | string) {
     return value < 10
         ? `00:0${value}`
         : value < 60
-        ? `00:${value.toFixed(2)}`
+        ? `00:${value.toFixed(0)}`
         : value < 600
         ? `0${Math.floor(value / 60)}:${
               value % 60 < 1
