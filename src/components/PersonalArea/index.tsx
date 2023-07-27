@@ -75,7 +75,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
     const [editor, setEditor] = useState<AvatarEditor>();
     const [scaleValue, setScaleValue] = useState<number>();
 
-    const [selectedImg, setSelectedImg] = useState<string>();
+    const [selectedImg, setSelectedImg] = useState<string>(`/api/users/account/avatar/${store.id}`);
 
     const setEditorRef = (editor: AvatarEditor) => {
         setEditor(editor);
@@ -105,13 +105,15 @@ export default function PersonalArea({ isArchive = false }: Props) {
     const profileImageChange = (fileChangeEvent: any) => {
         fileChangeEvent.preventDefault();
         const file = fileChangeEvent.target.files![0];
-        const { type } = file;
-        if (
-            type.endsWith("jpeg") ||
-            type.endsWith("jpg")
-            // || type.endsWith("png")
-        ) {
-            setSelectedImg(file);
+        if (file) {
+            const { type } = file;
+            if (
+                type.endsWith("jpeg") ||
+                type.endsWith("jpg")
+                // || type.endsWith("png")
+            ) {
+                setSelectedImg(file);
+            }
         }
     };
 
