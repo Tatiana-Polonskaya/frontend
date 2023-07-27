@@ -601,7 +601,9 @@ export default function AnalysisReport() {
                                             connectivityData.values[0]
                                                 .time_start
                                         }
-                                        endTime={+videoInfo!.duration}
+                                        endTime={
+                                            connectivityData.values.at(-1)!.time_start
+                                        }
                                     />
                                 }
                                 invisible={

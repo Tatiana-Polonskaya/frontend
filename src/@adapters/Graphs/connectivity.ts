@@ -21,10 +21,10 @@ const getTop = (value: number) => {
     switch (value) {
         case 2:
             return INIT;
+        case 0:
+            return OFFSET * 2 + INIT;
         default:
             return INIT + OFFSET;
-        case 1:
-            return OFFSET * 2 + INIT;
     }
 };
 
