@@ -40,20 +40,26 @@ export default function StatsGraph({ data }: Props) {
     };
 
     return (
-        <StatsLineGraph
-            items={restruction().map((x, ind) => ({
-                name: ind,
-                [X]: x,
-                [pX]:
-                    data[ind].value === null ? -1 : (data[ind].value as number),
-                vv: -0.3,
-            }))}
-            colors={{ [X]: GraphColor.BLUE }}
-            descriptionX={createXDataDescriptionFromData(data)}
-            descriptionY={[0, 0.2, 0.4, 0.6, 0.8, 1]}
-            withMedian={false}
-            // поменять по времени, 7 дней
-            visible={restruction().length > 8 ? false : true}
-        />
+        <>
+            {restruction.length > 0 ? (
+                <StatsLineGraph
+                    items={restruction().map((x, ind) => ({
+                        name: ind,
+                        [X]: x,
+                        [pX]:
+                            data[ind].value === null
+                                ? -1
+                                : (data[ind].value as number),
+                        vv: -0.3,
+                    }))}
+                    colors={{ [X]: GraphColor.BLUE }}
+                    descriptionX={createXDataDescriptionFromData(data)}
+                    descriptionY={[0, 0.2, 0.4, 0.6, 0.8, 1]}
+                    withMedian={false}
+                    // поменять по времени, 7 дней
+                    visible={restruction().length > 8 ? false : true}
+                />
+            ) : undefined}
+        </>
     );
 }

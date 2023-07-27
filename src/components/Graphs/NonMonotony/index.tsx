@@ -25,13 +25,8 @@ export default function NonMonotonyGraph({
     value,
 }: Props) {
     const data2 = convertMonotonyData(data, param);
-    console.log("param", param);
-    console.log("value", value);
-    console.log("data2", data2);
-    console.log("average", average);
 
     const dependece = dependenceMonotonyData(param, average);
-    console.log("dependece", dependece);
     return (
         <LineGraph
             average={dependece.average}

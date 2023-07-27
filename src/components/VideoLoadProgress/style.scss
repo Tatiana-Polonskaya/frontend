@@ -32,6 +32,7 @@
         border-radius: 40px;
         background: #f3f5f9;
         overflow: hidden;
+        transition: 5s;
 
         &-fill {
             position: absolute;
@@ -46,6 +47,8 @@
             animation-timing-function: linear;
             background: linear-gradient(to right, #2477f4 8%, #fff 18%, #2477f4 33%);
             background-size: 800px 104px;
+
+            transition: 5s;
         }
 
         @keyframes placeHolderShimmer {

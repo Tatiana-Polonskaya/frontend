@@ -64,9 +64,6 @@ export default function VideoPlayer({
         setCurrentTime(Math.floor(e.playedSeconds));
     };
 
-    useEffect(() => {
-        if (onReady) console.log("video is ready");
-    }, [onReady]);
 
     return (
         <div className={cnVideoPlayer()}>

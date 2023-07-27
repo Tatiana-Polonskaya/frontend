@@ -49,7 +49,7 @@ export default function VideoLoad({
                 {!visible && (
                     <VideoLoadProgress
                         citation={
-                            percent < "60"
+                            percent < "70"
                                 ? "Идёт анализ видео"
                                 : "Еще чуть-чуть"
                         }

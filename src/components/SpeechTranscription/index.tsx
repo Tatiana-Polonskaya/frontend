@@ -39,10 +39,6 @@ export default function SpeechTranscription(props: Props) {
 
     useEffect(() => {
         if (TranscriptionDataFromBack && TranscriptionDataFromBack.data) {
-            console.log(
-                "TranscriptionDataFromBack",
-                TranscriptionDataFromBack.data.data!.values
-            );
             setTranscriptionData(TranscriptionDataFromBack.data.data!.values);
         }
     }, [TranscriptionDataFromBack]);

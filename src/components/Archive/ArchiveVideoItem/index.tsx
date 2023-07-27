@@ -121,7 +121,7 @@ export default function ArchiveVideoItem({
                         ind={ind}
                         id={el.id}
                         changeTickVideo={changeTickVideo}
-                        handleClick={()=>func(el.id)}
+                        handleClick={handleClick!}
                         state={openPopup.includes(ind) ? "" : "d-n"}
                     />
                 </div>

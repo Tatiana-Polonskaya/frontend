@@ -182,8 +182,6 @@ export default function AnalysisReport() {
 
     useEffect(() => {
         if (videoInfoFromBack && videoInfoFromBack.data) {
-            console.log("videoInfoFromBack", videoInfoFromBack);
-            console.log("videoInfoFromBack.data", videoInfoFromBack.data.data);
             setVideoInfo(videoInfoFromBack.data!.data);
         }
     }, [videoInfoFromBack]);

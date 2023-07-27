@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { IVideoFromBack, IVideoStatus } from "../../models/video";
 
 import {
+    useDeleteVideoByIdMutation,
     useGetVideoByUserQuery,
     useGetVideoStatusByUserQuery,
     useLazyGetVideoByUserSearchQuery,
@@ -64,7 +65,7 @@ export default function DiaryStart() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setWaitAnalysisVideo(false)
+            setWaitAnalysisVideo(false);
         }, 60000); //milisec
         return () => {
             clearInterval(interval);
@@ -322,6 +323,28 @@ export default function DiaryStart() {
 
     /* ----------------------- ArchiveVideo Function -----------------------*/
 
+    const [deleteRequest, deleteResponse] = useDeleteVideoByIdMutation();
+
+    const deleteVideoByID = async (id: string) => await deleteRequest(id);
+
+    const removeItem = async (id: string) => {
+        // setSearchVideos((prevState) => prevState.filter((el) => el.id !== id));
+        // setCountSearchVideos((prev) => prev - 1);
+        deleteVideoByID(id);
+    };
+
+    useEffect(()=>{
+        if(deleteResponse.isSuccess){
+            if(countSearchVideos ===1) window.location.reload();
+            let newvideo = async ()=> await getVideosBySearch({
+                page: currentPage,
+                limit: videosPerPage,
+                search: searchValue,
+            },false);
+            newvideo()
+        }
+    },[deleteResponse])
+
     return (
         <div>
             <div className={cnDiaryStart("text-h1", { margin_bottom: true })}>
@@ -448,29 +471,26 @@ export default function DiaryStart() {
                     {/* <ArchiveVideo video={searchVideos}/> */}
                     {searchVideos.map((el, ind) => (
                         <ArchiveVideoItem
-                            handleClick={() => console.log("click")}
+                            handleClick={() => removeItem(el.id)}
                             key={el.id}
                             el={el}
                             ind={ind}
                             visible={el.status_video === "ERROR" ? false : true}
                         />
                     ))}
+                    <Pagination
+                        videosPerPage={videosPerPage}
+                        totalVideos={countSearchVideos}
+                        paginate={paginate}
+                        funcNextPage={nextPage}
+                        funcPrevPage={prevPage}
+                        currentPage={currentPage + 1}
+                    />
                 </>
             ) : (
                 <div className={cnDiaryStart("text-empty-msg")}>
                     Видео не найдено
                 </div>
-            )}
-
-            {searchVideos && (
-                <Pagination
-                    videosPerPage={videosPerPage}
-                    totalVideos={countSearchVideos}
-                    paginate={paginate}
-                    funcNextPage={nextPage}
-                    funcPrevPage={prevPage}
-                    currentPage={currentPage + 1}
-                />
             )}
         </div>
     );
