@@ -14,6 +14,7 @@ import Tick from "./icon/archive-tick.svg";
 
 import { convertTime, convertDate } from "../helpers";
 import { useGetTotalByIdQuery } from "../../../store/api/report";
+import ArchiveVideoError from "../ArcviveVideoError";
 // import VideoLoadProgress from "../../VideoLoadProgress";
 
 type Props = {
@@ -71,6 +72,7 @@ export default function ArchiveVideoItem({
             ]);
         }
     }, [totalData]);
+    const isAllow = visible;
     return (
         <div className={cnArchiveVideo()}>
             <div className={cnArchiveVideo("el")}>
@@ -91,10 +93,10 @@ export default function ArchiveVideoItem({
                 title={`${el.title}`}
                 time={convertTime(el.duration)}
                 date={convertDate(el.upload_date)}
-                isAllow={true}
+                isAllow={isAllow}
             />
             <div className={cnArchiveVideo("panel")}>
-                {/* {!visible && <VideoLoadProgress />} */}
+                {!visible && <ArchiveVideoError />}
                 {visible && (
                     <VideoProgressPanel result={result} type={"small"} />
                 )}

@@ -69,7 +69,7 @@ export default function SecondaryEnergy(props: Props) {
                 <EnergyGraph
                     data={props.data}
                     param={EnergyType.ENERGY}
-                    average={props.average}
+                    average={props.average * 100}
                 />
             </div>
         </>
