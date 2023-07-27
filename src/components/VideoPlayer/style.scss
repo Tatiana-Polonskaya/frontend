@@ -1,9 +1,21 @@
 .VideoPlayer{
     width: 100%;
+    height: 100%;
     border-radius: 16px;
     overflow: hidden;
 
     video{
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    &_unvisible{
+        display: none;
+    }
+
+    &-gif{
+        width: 100%;
+        height: 100%;
         border-radius: 16px;
         overflow: hidden;
     }

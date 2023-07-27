@@ -1,20 +1,17 @@
 import { cn } from "@bem-react/classname";
 
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 
 import "./style.scss";
 import { BaseReactPlayerProps, OnProgressProps } from "react-player/base";
 import { VideoTimeContext } from "../Report";
 
+import reloadPicture from "./assets/preload1.gif";
+
 interface VideoPlayerProps extends BaseReactPlayerProps {
     title?: string;
 }
-
-type Props = {
-    url: string;
-    controls?: boolean;
-};
 
 /**
  * Function returns pretty data time accoding to rules projects(N hours ago or 30.05.2023)
@@ -24,7 +21,7 @@ export function getPrettyDataTime(timestring: string) {
     // TO DO: create dict with options for hour, days (1 час назад, 3 часА назад)
     const current = new Date(timestring);
     const now = new Date();
-    
+
     // One minute, hour, day in milliseconds
     const oneMinute = 1000 * 60;
     const oneHour = oneMinute * 60;
@@ -67,20 +64,29 @@ export default function VideoPlayer({
         setCurrentTime(Math.floor(e.playedSeconds));
     };
 
+    useEffect(() => {
+        if (onReady) console.log("video is ready");
+    }, [onReady]);
+
     return (
         <div className={cnVideoPlayer()}>
-            <ReactPlayer
-                {...(props as VideoPlayerProps)}
-                width="720"
-                height="480"
-                ref={videoRef}
-                muted={true}
-                onStart={() => {
-                    console.log("onStart");
-                }}
-                onReady={() => setOnReady(true)}
-                onProgress={changeCurrentTime}
-            />
+            <div className={cnVideoPlayer({ unvisible: !onReady })}>
+                <ReactPlayer
+                    {...(props as VideoPlayerProps)}
+                    width="720"
+                    height="480"
+                    ref={videoRef}
+                    muted={true}
+                    onStart={() => {
+                        console.log("onStart");
+                    }}
+                    onReady={() => setOnReady(true)}
+                    onProgress={changeCurrentTime}
+                />
+            </div>
+            <div className={cnVideoPlayer({ unvisible: onReady })}>
+                <img className={cnVideoPlayer("gif")} src={reloadPicture} alt="loading"/>
+            </div>
         </div>
     );
 }
