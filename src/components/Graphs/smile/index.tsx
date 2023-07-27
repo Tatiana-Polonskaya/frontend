@@ -14,6 +14,8 @@ function paint (item:ISimelDescription, img:string ){
         procent = item.procent.toString()[0]
     }else if (item.procent >= 100){
         procent = "11"
+    }else if (item.procent === 0){
+        procent = "12"
     }
     else {
         procent = "1"

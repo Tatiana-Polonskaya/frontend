@@ -11,25 +11,27 @@ interface IComponentProps {
     component: IPieChart;
 }
 function paint(item: (string | number)[], img: string) {
-    let precen = Number(item[0]);
+    let precen = Math.round(Number(item[0]));
+
     let procent;
     if (precen > 9 && precen < 100) {
-        procent = precen.toString()[0];
+        procent = precen.toString();
+    }else if(precen == 0){
+        procent = "000"
     } else if (precen <= 5) {
-        procent = "00";
+        procent = "0";
     } else if (precen >= 100) {
         procent = "10";
-    } else {
-        procent = "0";
+    }else {
+        procent = "00";
     }
-
     return (
         <div className="PieChart">
             <div className="imgPieChartScintific">
                 <ReactSVG className={"imkPie" + procent} src={img} />
             </div>
             <p className="textPieChart">{item[1]}</p>
-            <p className="precentPieChart">{Number(item[0]).toFixed(2)}%</p>
+            <p className="precentPieChart">{Math.round(Number(item[0]))}%</p>
         </div>
     );
 }

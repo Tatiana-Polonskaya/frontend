@@ -19,7 +19,6 @@ function checkSize(n: number) {
 }
 
 export default function Scale({component}: IComponentProps) {
-
     return (
         <div className={CN()}>
             {component.item.map((number, idx) => (
@@ -28,12 +27,12 @@ export default function Scale({component}: IComponentProps) {
                     className={CN("content")}
                     style={{
                         backgroundColor: number.color,
-                        width: (number.value * 100) + "%",
+                        width: (number.value) + "%",
                     }}
                 >
                     <div
                         className={CN("text")}
-                        style={{ fontSize: checkSize(number.value * 100) }}
+                        style={{ fontSize: checkSize(number.value ) }}
                     >
                         {number.title}
                     </div>
