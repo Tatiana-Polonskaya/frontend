@@ -808,7 +808,7 @@ export default function AnalysisReport() {
                             {`Способность выразить свои мысли в ясной, доходчивой
                             и понятной форме.`}
                         </div>
-                        {clarityData && (
+                        {clarityData && videoInfo!.duration && (
                             <Dropdown
                                 title={"Четкость речи"}
                                 subtitle={clarityData.expressiveness}
@@ -870,7 +870,7 @@ export default function AnalysisReport() {
                         )}
                         {/* TO DO: DELETE ALL WARNING IN CONSOLE */}
 
-                        {expressivenessData && (
+                        {expressivenessData && videoInfo!.duration && (
                             <Dropdown
                                 title={"Экспрессивность"}
                                 subtitle={
@@ -1143,7 +1143,7 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-                        {confidenceData && (
+                        {confidenceData && videoInfo!.duration && (
                             <Dropdown
                                 title={"Уверенность"}
                                 subtitle={judgmentHelper(

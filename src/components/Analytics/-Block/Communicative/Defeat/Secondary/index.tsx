@@ -59,6 +59,7 @@ export default function SecondaryDefeat(props: Props) {
     function determ(str: string, arrS: Priority, index: number) {
         let arrParam: Param[] = [];
         let strArr = str.split(" ");
+        const copyStrArr = strArr.map((el) => el.toLowerCase());
 
         strArr.forEach((el) => {
             arrParam.push({
@@ -75,12 +76,13 @@ export default function SecondaryDefeat(props: Props) {
                 // сюда надо вставить перебор по массиву входящих
                 if (!subStr.includes(" ")) {
                     let sexIndex =
-                        strArr.indexOf(`${subStr}.`) !== -1
-                            ? strArr.indexOf(`${subStr}.`)
-                            : strArr.indexOf(`${subStr},`) !== -1
-                            ? strArr.indexOf(`${subStr},`)
-                            : strArr.indexOf(subStr) !== -1
-                            ? strArr.indexOf(subStr)
+                        copyStrArr.indexOf(`${subStr}.`.toLowerCase()) !== -1
+                            ? copyStrArr.indexOf(`${subStr}.`.toLowerCase())
+                            : copyStrArr.indexOf(`${subStr},`.toLowerCase()) !==
+                              -1
+                            ? copyStrArr.indexOf(`${subStr},`.toLowerCase())
+                            : copyStrArr.indexOf(subStr.toLowerCase()) !== -1
+                            ? copyStrArr.indexOf(subStr.toLowerCase())
                             : -1;
 
                     if (sexIndex !== -1) {
@@ -134,27 +136,32 @@ export default function SecondaryDefeat(props: Props) {
                 } else if (subStr.includes(" ")) {
                     // если подстрока
                     let subStrArr = subStr.split(" ");
-                    for (let i = 0; i < strArr.length; i++) {
+                    const copySubStrArr = subStrArr.map((el) =>
+                        el.toLowerCase()
+                    );
+                    for (let i = 0; i < copyStrArr.length; i++) {
                         let flag: boolean = false;
-                        for (let j = 0; j < subStrArr.length; j++) {
-                            if (j === subStrArr.length - 1) {
+                        for (let j = 0; j < copySubStrArr.length; j++) {
+                            if (j === copySubStrArr.length - 1) {
                             }
                             if (
-                                (j === subStrArr.length - 1 &&
-                                    strArr[i + j] === subStrArr[j]) ||
-                                (j === subStrArr.length - 1 &&
-                                    strArr[i + j] === `${subStrArr[j]},`) ||
-                                (j === subStrArr.length - 1 &&
-                                    strArr[i + j] === `${subStrArr[j]}.`)
+                                (j === copySubStrArr.length - 1 &&
+                                    copyStrArr[i + j] === copySubStrArr[j]) ||
+                                (j === copySubStrArr.length - 1 &&
+                                    copyStrArr[i + j] ===
+                                        `${copySubStrArr[j]},`) ||
+                                (j === copySubStrArr.length - 1 &&
+                                    copyStrArr[i + j] ===
+                                        `${copySubStrArr[j]}.`)
                             ) {
                                 flag = !flag;
                                 break;
-                            } else if (strArr[i + j] !== subStrArr[j]) {
+                            } else if (copyStrArr[i + j] !== copySubStrArr[j]) {
                                 break;
                             }
                         }
                         if (flag) {
-                            for (let k = 0; k < subStrArr.length; k++) {
+                            for (let k = 0; k < copySubStrArr.length; k++) {
                                 arrParam[i + k].type.push(
                                     e[0] === "0"
                                         ? "filler"

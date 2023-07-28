@@ -15,24 +15,21 @@ const CN = cn("stats-graph");
 type Props = { data: IStatisticItem[] };
 
 const X = "value";
-const pX = "prev";
+// const pX = "prev";
 
 function createXDataDescriptionFromData(data: IStatisticItem[]) {
     return data.map((el) => el.date);
 }
 
 export default function StatsGraph({ data }: Props) {
-    const restruction = () => {
+    const restruction = (data: IStatisticItem[]) => {
         const arr: number[] = [];
         for (let i = 0; i < data.length; i++) {
             if (data[i].value !== null) {
-                const cur = data[i].value as number;
-                arr.push(cur);
-            } else if (data[i - 1].value !== null) {
-                const cur = data[i - 1].value as number;
+                const cur = (data[i].value / 100) as number;
                 arr.push(cur);
             } else {
-                const cur = 0;
+                const cur = -0.001;
                 arr.push(cur);
             }
         }
@@ -41,15 +38,15 @@ export default function StatsGraph({ data }: Props) {
 
     return (
         <>
-            {restruction.length > 0 ? (
+            {restruction(data).length > 0 ? (
                 <StatsLineGraph
-                    items={restruction().map((x, ind) => ({
+                    items={restruction(data).map((x, ind) => ({
                         name: ind,
                         [X]: x,
-                        [pX]:
-                            data[ind].value === null
-                                ? -1
-                                : (data[ind].value as number),
+                        // [pX]:
+                        //     data[ind].value === null
+                        //         ? -1
+                        //         : (data[ind].value as number),
                         vv: -0.3,
                     }))}
                     colors={{ [X]: GraphColor.BLUE }}
@@ -57,7 +54,8 @@ export default function StatsGraph({ data }: Props) {
                     descriptionY={[0, 0.2, 0.4, 0.6, 0.8, 1]}
                     withMedian={false}
                     // поменять по времени, 7 дней
-                    visible={restruction().length > 8 ? false : true}
+                    visible={restruction(data).length > 7 ? false : true}
+                    // visible={true}
                 />
             ) : undefined}
         </>

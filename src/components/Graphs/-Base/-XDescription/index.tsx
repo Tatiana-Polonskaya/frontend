@@ -23,9 +23,8 @@ export default function BaseGraphXDescription({
     });
     return (
         <div className={stats !== "st" ? CN() : CN("stats")}>
-            {/* {data?.map((el, idx) => ( */}
             {curTime!.map((el, idx) =>
-                idx !== 7 ? (
+                idx !== 0 ? (
                     <div
                         className={CN(stats !== "st" ? "item" : "item-stats", {
                             first: idx === 0,
@@ -35,7 +34,6 @@ export default function BaseGraphXDescription({
                     >
                         {stats === "st" ? (
                             <>
-                                {/* <span>{el.day}</span> */}
                                 {el.day}
                                 <span
                                     style={{

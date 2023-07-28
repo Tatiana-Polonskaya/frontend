@@ -40,7 +40,6 @@ export default function StatsLineGraph({
 }: // data,
 Props) {
     const size = [0, 1];
-    // console.log(items);
     return (
         <div className={CN()}>
             <GraphBaseStats

@@ -35,11 +35,10 @@ export default function GraphBaseStats({
     visible = true,
     ...props
 }: Props) {
-    // console.log(items);
     const frameArr = [Terrible, Bad, Average, Good, Perfect, Ellipse];
 
     const frameHelper = (value: number) => {
-        if (value === -1) {
+        if (value <= 0) {
             return frameArr[5];
         } else if (value === 1) {
             return frameArr[4];
@@ -78,7 +77,7 @@ export default function GraphBaseStats({
                                         transform: "translate(50%, -50%)",
                                     }}
                                 >
-                                    <ReactSVG src={frameHelper(el.prev)} />
+                                    <ReactSVG src={frameHelper(el.value)} />
                                 </div>
                             ) : undefined
                         )}
@@ -87,7 +86,7 @@ export default function GraphBaseStats({
                 <div className={cnStrangeGraph("description-y")}>
                     <BaseGraphXDescription
                         data={descriptionX}
-                        selected={descriptionX!.length - 2}
+                        selected={descriptionX!.length - 1}
                         stats={"st"}
                     />
                 </div>
