@@ -808,7 +808,7 @@ export default function AnalysisReport() {
                             {`Способность выразить свои мысли в ясной, доходчивой
                             и понятной форме.`}
                         </div>
-                        {clarityData && videoInfo!.duration && (
+                        {clarityData && videoInfo && videoInfo!.duration && (
                             <Dropdown
                                 title={"Четкость речи"}
                                 subtitle={clarityData.expressiveness}
@@ -870,39 +870,41 @@ export default function AnalysisReport() {
                         )}
                         {/* TO DO: DELETE ALL WARNING IN CONSOLE */}
 
-                        {expressivenessData && videoInfo!.duration && (
-                            <Dropdown
-                                title={"Экспрессивность"}
-                                subtitle={
-                                    expressivenessData.total_expressiveness >=
-                                    0.5
-                                        ? "Наблюдается повышенная выразительность речи"
-                                        : "Наблюдается снижение выразительности речи"
-                                }
-                                visible={
-                                    <MainExpressiveness
-                                        data={expressivenessData.values.map(
-                                            (el) =>
-                                                convertExpressivenessDataLine(
-                                                    el
-                                                )
-                                        )}
-                                        startTime={
-                                            expressivenessData.values[0]
-                                                .time_start
-                                        }
-                                        endTime={+videoInfo!.duration}
-                                    />
-                                }
-                                invisible={
-                                    <SecondaryExpressiveness
-                                        data={expressivenessData.values}
-                                        graphs={["злость", "радость"]}
-                                        state={""}
-                                    />
-                                }
-                            />
-                        )}
+                        {expressivenessData &&
+                            videoInfo &&
+                            videoInfo!.duration && (
+                                <Dropdown
+                                    title={"Экспрессивность"}
+                                    subtitle={
+                                        expressivenessData.total_expressiveness >=
+                                        0.5
+                                            ? "Наблюдается повышенная выразительность речи"
+                                            : "Наблюдается снижение выразительности речи"
+                                    }
+                                    visible={
+                                        <MainExpressiveness
+                                            data={expressivenessData.values.map(
+                                                (el) =>
+                                                    convertExpressivenessDataLine(
+                                                        el
+                                                    )
+                                            )}
+                                            startTime={
+                                                expressivenessData.values[0]
+                                                    .time_start
+                                            }
+                                            endTime={+videoInfo!.duration}
+                                        />
+                                    }
+                                    invisible={
+                                        <SecondaryExpressiveness
+                                            data={expressivenessData.values}
+                                            graphs={["злость", "радость"]}
+                                            state={""}
+                                        />
+                                    }
+                                />
+                            )}
 
                         {clarityData && eloquenceData && expressivenessData && (
                             <RecommendClarity
@@ -1143,7 +1145,7 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-                        {confidenceData && videoInfo!.duration && (
+                        {confidenceData && videoInfo && videoInfo!.duration && (
                             <Dropdown
                                 title={"Уверенность"}
                                 subtitle={judgmentHelper(
