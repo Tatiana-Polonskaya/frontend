@@ -30,12 +30,6 @@ export default function ArchiveVideo({ video }: Props) {
         func(id);
     };
 
-    useEffect(() => {
-        if (video) {
-            console.log("video", video);
-        }
-    }, [state]);
-
     return video && video.length !== 0 ? (
         <>
             {state.map((el, ind) => (

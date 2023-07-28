@@ -64,7 +64,6 @@ export default function ArchiveVideoItem({
 
     useEffect(() => {
         if (totalData) {
-            console.log("totalData", totalData)
             setResult([
                 totalData!.connectedness,
                 totalData!.argumentativeness,

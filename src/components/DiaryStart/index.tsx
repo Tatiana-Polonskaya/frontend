@@ -219,7 +219,7 @@ export default function DiaryStart() {
             setCurrentStatus(analisisVideoByUser.data!.data!.videos);
             setCountAnalysisVideos(analisisVideoByUser.data!.data.total_videos);
             setHasAnalysisVideo(true);
-            console.log("analisisVideoByUser",analisisVideoByUser.data!.data!.videos)
+            
         } else if (
             analisisVideoByUser.data &&
             analisisVideoByUser.data!.error!.msg === "Video not found"
@@ -282,7 +282,7 @@ export default function DiaryStart() {
         ) {
             setSearchVideos(videosBySearch.data!.data!.videos);
             setCountSearchVideos(videosBySearch.data!.data!.total_videos);
-            console.log("videosBySearch", videosBySearch.data!.data!.videos)
+            
         }
     }, [videosBySearch]);
 

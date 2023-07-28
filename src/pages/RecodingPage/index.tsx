@@ -92,7 +92,7 @@ export default function RecodingPage() {
     );
 
     const handleStartCaptureClick = useCallback(() => {
-        console.log(canStart, "canStart");
+
         if (canStart) {
             // const tempCodec = "h264";
             updateIsTimerStart(TIMER_STATUS.START);

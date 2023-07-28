@@ -60,7 +60,6 @@ export default function CommonAnalitics(props: Props) {
 
     useEffect(() => {
         if (data) {
-            console.log("CommonAnalitics", data!.data!.values);
             setSpeedArr(convertTotalData(data!.data!.values));
             setAllValues(data!.data!.values);
         }

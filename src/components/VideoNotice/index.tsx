@@ -44,7 +44,7 @@ export default function VideoNotice({ idVideo, title, description }: Props) {
             });
             setStateDescription(newDescription);
         }
-
+        
         setIsEditable(false);
     };
 

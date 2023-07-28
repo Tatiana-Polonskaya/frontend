@@ -13,7 +13,6 @@ type Props = {
 
 export default function EnergyGraph({ data, param = null, average }: Props) {
     const data2 = convertEnergyData(data, param);
-    console.log(average,"average")
     return (
         <LineGraph
             average={100-(average*100)}

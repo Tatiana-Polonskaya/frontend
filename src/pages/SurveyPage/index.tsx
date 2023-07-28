@@ -186,7 +186,6 @@ export default function SurveyPage() {
                     };
                 });
             });
-            console.log("before finalArray.flat(1)", finalArray);
             return finalArray.flat(1);
         } else return [];
     };

@@ -74,9 +74,6 @@ export default function VideoPlayer({
                     height="480"
                     ref={videoRef}
                     muted={true}
-                    onStart={() => {
-                        console.log("onStart");
-                    }}
                     onReady={() => setOnReady(true)}
                     onProgress={changeCurrentTime}
                 />

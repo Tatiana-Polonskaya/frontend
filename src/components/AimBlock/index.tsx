@@ -229,7 +229,7 @@ export default function AimBlock() {
                     ))}
                     
             </NewAimContext.Provider>
-            {count_purposes===0 && (<span>Целей еще нет</span>)}
+            {count_purposes===0 && (<span className={cnAimBlock("empty-msg")}>Целей еще нет</span>)}
             <ModalWindow
                 title="Выберите цель или введите собственную"
                 icon={gpsIcon}
