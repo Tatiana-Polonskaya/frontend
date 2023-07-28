@@ -139,7 +139,7 @@ export default function AimItem({ item }: Props) {
 
         await sendPurposeRequest({
             title: item.title,
-            params: resParams, // checkedParams
+            params: checkedParams as AIM_PARAMETERS[], // checkedParams
         });
     };
 
