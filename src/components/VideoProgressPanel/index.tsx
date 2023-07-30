@@ -30,9 +30,6 @@ export default function VideoProgressPanel({ result, type = "big" }: Props) {
             },
         ],
     };
-
-    console.log("result", result)
-
     const cnVideoPanel = cn("video-panel");
 
     return (

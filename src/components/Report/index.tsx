@@ -148,6 +148,7 @@ import {
 } from "../Analytics/-Block/Dinamism/NonMonotony/Main/helper";
 
 import argumentativenessData1 from "./../../plugs/argumentativeness.json";
+import { useGetVideoByIdQuery } from "../../store/api/apiWithDifAnswers";
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
@@ -494,7 +495,17 @@ export default function AnalysisReport() {
                     params: {},
                 },
             };
-    }, [energyData, confidenceData, informativeData]);
+    }, [totalData]);
+
+    // -------------------------------------------- VIDEO BLOCK -------------------------------------------- //
+    const videoFromBack = useGetVideoByIdQuery(idVideo);
+    const [videoURL, setVideoURL] = useState<string>();
+
+    useEffect(() => {
+        if (videoFromBack.data && videoFromBack.isSuccess) {
+            setVideoURL(videoFromBack.data);
+        }
+    }, [videoFromBack]);
 
     return (
         <div className={cnReport()}>
@@ -514,10 +525,9 @@ export default function AnalysisReport() {
                         <VideoTimeContext.Provider
                             value={{ currentTime, setCurrentTime }}
                         >
-                            <VideoPlayer
-                                url={`/api/video/${idVideo}`}
-                                controls={true}
-                            />
+                            {videoURL && (
+                                <VideoPlayer url={videoURL} controls={true} />
+                            )}
                         </VideoTimeContext.Provider>
                     </div>
                     <div className={cnReport("video-block-title")}>

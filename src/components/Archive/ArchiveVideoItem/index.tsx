@@ -17,6 +17,7 @@ import { useGetTotalByIdQuery } from "../../../store/api/report";
 import ArchiveVideoError from "../ArcviveVideoError";
 import { useDeleteVideoByIdMutation } from "../../../store/api/userVideo";
 import { useGetTotalByIdTestQuery } from "../../../store/api/reportTest";
+import { useGetVideoByIdQuery } from "../../../store/api/apiWithDifAnswers";
 // import VideoLoadProgress from "../../VideoLoadProgress";
 
 type Props = {
@@ -89,6 +90,22 @@ export default function ArchiveVideoItem({
     const func = async (id: string) => await deleteRequest(id);
 
     const isAllow = visible;
+
+
+    // getting video by id
+
+    const videoFromBack = useGetVideoByIdQuery(el.id);
+    const [videoURL,setVideoURL] = useState<string>();
+
+
+    useEffect(()=>{
+        if(videoFromBack.data && videoFromBack.isSuccess){
+            setVideoURL(videoFromBack.data)
+        }
+    },[videoFromBack])
+
+
+
     return (
         <div className={cnArchiveVideo()}>
             <div className={cnArchiveVideo("el")}>
@@ -97,11 +114,11 @@ export default function ArchiveVideoItem({
                     src={!tickedVideo.includes(ind) ? Tick : Participation}
                 />
                 <Fragment key={el.id}>
-                    <ReactPlayer
-                        url={`api/video/${el.id}`}
+                    {videoURL && <ReactPlayer
+                        url={videoURL}
                         width={"100%"}
                         height={"100%"}
-                    />
+                    />}
                 </Fragment>
             </div>
             <DescriptionArchiveVideo

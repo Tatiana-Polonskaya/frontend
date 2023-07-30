@@ -1,16 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import AnalysisReport from "../../components/Report";
 import MainLayout from "../../layouts/MainLayout";
-import {
-    useGetMessagesQuery,
-    useGetSSEConnectionQuery,
-    useLazyGetMessagesQuery,
-    useSendMessageMutation,
-} from "../../store/api/chat";
+
 import { useAppSelector } from "../../hooks/redux";
 
 import "./style.scss";
 import { cn } from "@bem-react/classname";
+import { useGetVideoByIdQuery } from "../../store/api/apiWithDifAnswers";
 
 // import { EventSourcePolyfill } from "event-source-polyfill";
 
@@ -61,16 +57,16 @@ export default function LearningPage() {
     //     // this.setState(data);
     // });
 
-    const [isReady, setIsReady] = useState(false);
+    // const [isReady, setIsReady] = useState(false);
 
-    const [getMessages, resultMessages] = useLazyGetMessagesQuery();
+    // const [getMessages, resultMessages] = useLazyGetMessagesQuery();
 
-    const [sendRequest, sendResponse] = useSendMessageMutation();
-    const { isLoading, isSuccess, isError } = sendResponse;
+    // const [sendRequest, sendResponse] = useSendMessageMutation();
+    // const { isLoading, isSuccess, isError } = sendResponse;
 
-    const [someData, setSomeData] = useState<any>();
+    // const [someData, setSomeData] = useState<any>();
 
-    const URl = "/api/support/sse-connection";
+    // const URl = "/api/support/sse-connection";
 
     // useEffect(() => {
     //     if (token) {
@@ -156,11 +152,13 @@ export default function LearningPage() {
     //     }
     // }, [token]);
 
+
+    
+
+
     return (
         <MainLayout>
-            <div className="animated-background">
-                <div className="background-masker btn-divide-left"></div>
-            </div>
+
         </MainLayout>
     );
 }

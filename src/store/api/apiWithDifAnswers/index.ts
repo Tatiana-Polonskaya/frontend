@@ -7,7 +7,7 @@ import { ILoginResponse } from "../../../models/entry/login";
 
 const mutex = new Mutex();
 
-const baseQuery = fetchBaseQuery({
+const baseQ = fetchBaseQuery({
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).user.accessToken;
         if (token) {
@@ -22,8 +22,7 @@ const myFetchBase: BaseQueryFn<
     FetchBaseQueryError
 > = async (args, api, extraOptions) => {
     await mutex.waitForUnlock();
-    let result = await baseQuery(args, api, extraOptions);
-    console.log("myFetchBase result",result.meta!.response)
+    let result = await baseQ(args, api, extraOptions);
 
     // condition for token refreshing
     if ((result.error?.data as any)?.message === 'You are not logged in'){
@@ -31,7 +30,7 @@ const myFetchBase: BaseQueryFn<
             const release = await mutex.acquire();
 
             try {
-                const refreshResult = await baseQuery(
+                const refreshResult = await baseQ(
                     {
                         credentials: "include",
                         url: "/api/users/account/refresh",
@@ -46,7 +45,7 @@ const myFetchBase: BaseQueryFn<
                     api.dispatch(
                         setAccessToken(refreshResultData.data!.access_token)
                     );
-                    result = await baseQuery(args, api, extraOptions);
+                    result = await baseQ(args, api, extraOptions);
                 } else {
                     api.dispatch(logout());
                     window.location.href = "/"; /// to login page
@@ -59,7 +58,7 @@ const myFetchBase: BaseQueryFn<
             }
         } else {
             await mutex.waitForUnlock();
-            result = await baseQuery(args, api, extraOptions);
+            result = await baseQ(args, api, extraOptions);
         }
     }
     return result;
@@ -70,20 +69,16 @@ export const apiWithDifAnswers = createApi({
     reducerPath: "api/apiWithDifAnswers",
     baseQuery: myFetchBase,
     endpoints: (build) => ({
-        getVideoById: build.query<any, string>({
+        getVideoById: build.query<string, string>({
             query: (id) => ({
                 url: `/api/video/test/${id}`,
                 method: "GET",
-                transform: async (response:any) => {
-                    let fileBlob = response.blob();
-                    console.log("fileBlob", fileBlob)
-                    return fileBlob;
+                responseHandler: async (response) => {
+                    let temp = response.blob();
+                    const res = await temp;
+                    return URL.createObjectURL(res);
                 },
             }),
-            transformResponse: async (response: any)=>{
-                console.log("transformResponse",response)
-                return await response.body.blob();
-            }
         }),
     }),
 });
