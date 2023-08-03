@@ -1,4 +1,55 @@
-.TimerRadioBtn{
+.TimerRadioBtn {
     display: flex;
     flex-flow: column nowrap;
+
+    &-row {
+        padding-left: 42px;
+        padding-top: 10px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &-text {
+        color: #37476A;
+        font-family: "Onest";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &-input {
+
+        &-block {
+
+            border-radius: 8px;
+            background: #F3F5F9;
+            display: flex;
+            flex-flow: row nowrap;
+            padding: 3px 10px;
+            margin: 0 10px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        &-field {
+            text-align: center;
+            color: #37476A;
+            font-family: "Montserrat Alternates";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            background: none;
+            border: none;
+            width: 40px;
+
+            &_onblur{
+                color: red;
+            }
+        }
+    }
 }

@@ -45,11 +45,15 @@ export default function RecodingPage() {
 
     const navigate = useNavigate();
     const { state } = useLocation();
-    const { basicPlan, isTimer } = state;
+    const { basicPlan, timerSeconds } = state;
+
+    console.log("timerSeconds", timerSeconds)
 
     // basicPlan params
     const isShowBasicPlan =
         basicPlan && basicPlan.length > 0 && basicPlan[0] !== "" ? true : false;
+
+    const secondsForTimer = timerSeconds ? timerSeconds : 0;
 
     // timer params
     const [isTimerStart, setIsTimerStart] = useState(false);
@@ -336,19 +340,20 @@ export default function RecodingPage() {
                                 </>
                             )}
                         </div>
-                        <div
-                            className={cnRecoding("right-block", {
-                                hidden: !isTimer,
-                            })}
+                        {secondsForTimer>0 && (
+                            <div
+                            className={cnRecoding("right-block")}
                         >
                             <Timer
-                                minutes={LIMIT_TIMER}
-                                seconds={0}
+                                minutes={Math.floor(secondsForTimer/60)}
+                                seconds={secondsForTimer%60}
                                 isStart={isTimerStart}
                                 setIsStart={updateIsTimerStart}
                                 timerOver={handleStopCaptureClick}
                             />
                         </div>
+                        )}
+                        
 
                         {isShowBasicPlan && (
                             <div className={cnRecoding("bottom-block")}>

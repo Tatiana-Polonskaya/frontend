@@ -21,14 +21,14 @@ export default function RecodingSetup() {
     const styleSetup = cn("RecodingSetup");
 
     const [basicPlan, setBasicPlan] = useState<Array<string>>();
-    const [isTimer, setIsTimer] = useState<boolean>(false);
+    const [timerSeconds, setTimerSecond] = useState<number>(0);
 
     const saveBasicPlane = (plan: string[])=>{
         setBasicPlan(plan);
     }
 
-    const saveTimer = (value: boolean)=>{
-        setIsTimer(value);
+    const saveTimer = (value: number)=>{
+        setTimerSecond(value);
     }
 
     return (
@@ -83,7 +83,7 @@ export default function RecodingSetup() {
                 <div className={styleSetup("text-blue")}>
                 Обратите внимание, что длительность репетиции должна составлять не менее 1.5 минуты и не более 15 минут.
                 </div>
-                <TimerRadioBtn setIsTimer={saveTimer}/>
+                <TimerRadioBtn setTimerSeconds={saveTimer}/>
             </div>
 
             <div className={styleSetup("btn-block")}>
@@ -92,7 +92,7 @@ export default function RecodingSetup() {
                     className={styleSetup("btn-block-btn")}
                     onClick={() => navigate(RoutesEnum.RECODING,{state: {
                         basicPlan,
-                        isTimer,
+                        timerSeconds: timerSeconds,
                     }})}
                 >
                     <ReactSVG
