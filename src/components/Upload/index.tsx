@@ -1,29 +1,23 @@
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 
-import {
-    useContext,
-    useEffect,
-    useRef,
-    useState,
-} from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import { VideoUploadContext } from "../RepetitionComponents/RepetitionStart";
 
 export default function Upload() {
-
     const cnUpload = cn("cnUpload");
     const [dragActive, setDragActive] = useState(false);
     const [videoFile, setVideoFile] = useState<File>();
     const [IsValid, setIsValid] = useState(true);
 
-    const {setCurrentFile} = useContext(VideoUploadContext);
+    const { setCurrentFile } = useContext(VideoUploadContext);
 
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleFile = (file: any) => {
-        if(file.type === "video/mp4") setVideoFile(file);
-        else{
+        if (file.type === "video/mp4") setVideoFile(file);
+        else {
             setIsValid(false);
         }
     };
@@ -73,8 +67,18 @@ export default function Upload() {
                     проанализировать - просто загрузите его с устройства.
                 </span>
                 <span className={cnUpload("description-blue")}>
-                    Максимальная длительность видео - 15 минут. Формат видео:
-                    MP4 минимальное разрешение 640х480.
+                    Минимальная длительность видео - 1.5 минуты, максимальная -
+                    15 минут. Формат видео: MP4, минимальное разрешение 640х480.
+                </span>
+                <span className={cnUpload("description-gray")}>
+                    Лицо спикера в кадре должно быть единственным и четко
+                    различимым. Жестикуляция не должна перекрывать лицо.<br/> Видео
+                    должно быть записано в хорошо освещенном и не зашумленном
+                    помещении.
+                </span>
+                <span className={cnUpload("description-blue")} style={{fontSize: "14px"}}>
+                    В случае невыполнения данных требований, результаты анализа
+                    могут оказаться некорректными.
                 </span>
             </div>
             <div className={cnUpload("dropdown")}>
@@ -89,12 +93,11 @@ export default function Upload() {
                         className={cnUpload("dropdown-input-file-upload")}
                         accept="video/mp4"
                         onChange={handleChange}
-                        
                     />
                     <label
                         className={cnUpload("dropdown-label-file-upload", {
                             "drag-active": dragActive,
-                            "wrong":!IsValid,
+                            wrong: !IsValid,
                         })}
                         id="label-file-upload"
                         htmlFor="input-file-upload"
@@ -111,8 +114,15 @@ export default function Upload() {
                                     загрузите файл
                                 </span>
                             </p>
-                            {!IsValid && (<span className={cnUpload("dropdown-text-upload-wrong")}>Выберите файл c расширением mp4</span>)}
-                            
+                            {!IsValid && (
+                                <span
+                                    className={cnUpload(
+                                        "dropdown-text-upload-wrong"
+                                    )}
+                                >
+                                    Выберите файл c расширением mp4
+                                </span>
+                            )}
                         </div>
                     </label>
                     {dragActive && (

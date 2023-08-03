@@ -147,7 +147,8 @@ export default function RepetitionStart() {
                     проанализировать - просто загрузите его с устройства.
                 </div>
                 <div className={cnRepetitionStart("text-blue")}>
-                    Максимальная длительность видео - 15 минут.
+                    Минимальная длительность видео - 1.5 минуты, максимальная -
+                    15 минут.
                 </div>
             </div>
             <div className={cnRepetitionStart("btn-block")}>

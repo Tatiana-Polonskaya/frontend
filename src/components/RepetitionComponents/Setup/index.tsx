@@ -81,8 +81,7 @@ export default function RecodingSetup() {
                     осталось.
                 </div>
                 <div className={styleSetup("text-blue")}>
-                    Обратите внимание, что максимальная длительность репетиции
-                    составляет 15 минут.
+                Обратите внимание, что длительность репетиции должна составлять не менее 1.5 минуты и не более 15 минут.
                 </div>
                 <TimerRadioBtn setIsTimer={saveTimer}/>
             </div>

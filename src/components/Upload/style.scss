@@ -40,15 +40,17 @@
         gap: 10px;
         font-size: 16px;
         line-height: 20px;
+
         
 
         &-gray {
             font-family: 'Onest';
             font-style: normal;
             font-weight: 400;
-            font-size: 1em;
-            line-height: 1em;
+            font-size: 16px;
+            line-height: 20px;
             color: #7C8EB5;
+            word-break: break-all;
         }
 
         &-blue {
