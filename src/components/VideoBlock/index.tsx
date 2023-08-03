@@ -33,6 +33,11 @@ export default function VideoBlock() {
 
     const [getCurrentMainVideos, currentMainVideos] =
         useLazyGetMainVideoQuery();
+    const {isSuccess, isLoading} = currentMainVideos;
+
+    useEffect(()=>{
+        if(isLoading) console.log("isLoading")
+    },[isLoading])
 
     const { data } = useGetMainVideoQuery({
         page: currentPage,
@@ -49,16 +54,14 @@ export default function VideoBlock() {
     useEffect(() => {
         if (currentPage && currentPage > 0) {
             const getVideos = async () => {
-                const restVideos =
-                    countAllVideos - (currentPage - 1) * videosPerPage;
-                if (restVideos > 0) {
-                    const result = await getCurrentMainVideos({
-                        page: currentPage,
-                        limit: restVideos,
-                    });
-                    if (result.data && result.data!.data)
-                        setCurrentVideos(result.data!.data!.videos);
-                }
+
+                const result = await getCurrentMainVideos({
+                    page: currentPage,
+                    limit: videosPerPage,
+                });
+
+                if (result.data && result.data!.data)
+                    setCurrentVideos(result.data!.data!.videos);
             };
             getVideos();
         }
