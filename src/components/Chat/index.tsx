@@ -31,7 +31,7 @@ export default function Chat(props: Props) {
 
     const allMessagesUser = useMemo(() => {
         if (data && data!.data) {
-            console.log(data.data)
+            console.log(data.data);
             return [...data.data!].reverse();
         }
     }, [data]);
@@ -39,7 +39,7 @@ export default function Chat(props: Props) {
     const [isExpanded, setIsExpanded] = useState(Boolean(props.isExpanded));
 
     const firstMsg: IMessageItem = {
-        created_at: (new Date()).toLocaleString("ru"),
+        created_at: new Date().toLocaleString("ru"),
         from_user: "Специалист",
         id: 0,
         is_mine: false,
@@ -63,7 +63,9 @@ export default function Chat(props: Props) {
                                 allMessagesUser.map((msg, idx) => (
                                     <ChatMessage key={msg.id} {...msg} />
                                 ))}
-                               {!allMessagesUser && ( <ChatMessage {...firstMsg} is_first={true}/>)}
+                            {!allMessagesUser && (
+                                <ChatMessage {...firstMsg} is_first={true} />
+                            )}
                             {/* {!allMessagesUser && (
                                 <div className={cnChat("not_messages")}>
                                     {TITLE_NOT_MESSAGES}

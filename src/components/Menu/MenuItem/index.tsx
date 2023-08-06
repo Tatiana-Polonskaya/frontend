@@ -5,6 +5,7 @@ import "./style.scss";
 import { MouseEventHandler } from "react";
 
 type Props = {
+    ind: number;
     title: string;
     onClick: MouseEventHandler<HTMLElement>;
     img: string;
@@ -15,14 +16,17 @@ export default function MenuItem(props: Props) {
     const cnMenuItem = cn("MenuItem");
 
     return (
-        <div className={cnMenuItem({selected:props.current})} onClick={props.onClick}>
+        <div
+            className={cnMenuItem({ selected: props.current })}
+            onClick={props.onClick}
+        >
             <span className={cnMenuItem("span-logo")}>
                 <ReactSVG
                     src={props.img}
                     className={cnMenuItem("span-logo-svg")}
                 />
             </span>
-            <span>{props.title}</span>
+            <span className={cnMenuItem("title")}>{props.title}</span>
         </div>
     );
 }

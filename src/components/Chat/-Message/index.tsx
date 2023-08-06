@@ -23,7 +23,7 @@ const WithArrow = (props: withArrowProps) => (
 const getTimeFromData = (datetime: string) => {
     const newdate = new Date(datetime);
     const minutes = newdate.getMinutes();
-    const hours = newdate.getHours() + 3 > 24 ? 0 : newdate.getHours() + 3;
+    const hours = newdate.getHours() + 3 >= 24 ? 0 : newdate.getHours() + 3;
     return (
         (hours < 10 ? "0" + hours : hours) +
         ":" +

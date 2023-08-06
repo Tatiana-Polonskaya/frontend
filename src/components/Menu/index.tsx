@@ -1,7 +1,7 @@
 import { ReactSVG } from "react-svg";
 import { cn } from "@bem-react/classname";
 import MenuItem from "./MenuItem";
-import iconSrc from "./icons/logo-mini.svg";
+import logoMini from "./icons/logo-micro.svg";
 
 import images from "./icons";
 import "./style.scss";
@@ -80,11 +80,16 @@ export default function Menu() {
 
     return (
         <div className={cnMenu()}>
-            <ReactSVG src={iconSrc} className={cnMenu("logo")} />
+            <div className={cnMenu("logo-item")}>
+                <span>
+                    <ReactSVG src={logoMini} className={cnMenu("logo")} />
+                </span>
+                <span className={cnMenu("slow")}> {"Speech Up"}</span>
+            </div>
             <ul>
                 {items.map((props, idx) => (
                     <li key={idx}>
-                        <MenuItem {...props} />
+                        <MenuItem {...props} ind={idx} />
                     </li>
                 ))}
             </ul>
@@ -116,7 +121,10 @@ export default function Menu() {
                         </Button>
                         <Button
                             className={cnMenu("Btn")}
-                            style={{ background: "#F3F5F9", color: "#37476A" }}
+                            style={{
+                                background: "#F3F5F9",
+                                color: "#37476A",
+                            }}
                         >
                             <span
                                 className=""
@@ -125,7 +133,8 @@ export default function Menu() {
                                     await dispatch(logout());
                                     // navigate(RoutesEnum.LOGIN);
                                     window.location.reload();
-                                }}>
+                                }}
+                            >
                                 Выйти из аккаунта
                             </span>
                         </Button>
