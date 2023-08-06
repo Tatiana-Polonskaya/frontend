@@ -29,10 +29,19 @@ export default function Chat(props: Props) {
         pollingInterval: INTERVAL_PULLING,
     });
 
+    const sortDate = (data: IMessageItem[]) => {
+        const dataSort = [...data];
+        return dataSort.sort((a, b) => a.id - b.id);
+    };
+
+    const replayHelper = (reply: number | null): string => {
+        const message = allMessagesUser!.filter((msg) => msg.id === reply);
+        return message.length > 0 ? message[0].text : "";
+    };
+
     const allMessagesUser = useMemo(() => {
         if (data && data!.data) {
-            console.log(data.data);
-            return [...data.data!].reverse();
+            return sortDate(data.data).reverse();
         }
     }, [data]);
 
@@ -43,7 +52,7 @@ export default function Chat(props: Props) {
         from_user: "Специалист",
         id: 0,
         is_mine: false,
-        reploy_to: null,
+        reply_to: null,
         text: "",
         to_user: null,
     };
@@ -61,7 +70,11 @@ export default function Chat(props: Props) {
                         >
                             {allMessagesUser &&
                                 allMessagesUser.map((msg, idx) => (
-                                    <ChatMessage key={msg.id} {...msg} />
+                                    <ChatMessage
+                                        key={msg.id}
+                                        replay={replayHelper(msg.reply_to)}
+                                        {...msg}
+                                    />
                                 ))}
                             {!allMessagesUser && (
                                 <ChatMessage {...firstMsg} is_first={true} />

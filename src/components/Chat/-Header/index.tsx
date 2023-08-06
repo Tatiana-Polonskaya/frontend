@@ -12,15 +12,17 @@ export default function ChatHeader() {
     const { isExpanded, setIsExpanded } = useContext(ChatContext);
 
     return (
-        <div className={cnChatHeader({ expanded: isExpanded })}>
+        <div
+            className={cnChatHeader({ expanded: isExpanded })}
+            onClick={() => setIsExpanded((prev) => !prev)}
+        >
             <ReactSVG
                 src={ExpandIcon}
-                onClick={() => setIsExpanded((prev) => !prev)}
                 className={cnChatHeader("expand-btn")}
                 wrapper="div"
                 style={{ rotate: isExpanded ? "-90deg" : "90deg" }}
             />
-            <span className={cnChatHeader("title")}>Чат поддержки</span>
+            <span className={cnChatHeader("title")}>{"Чат поддержки"}</span>
         </div>
     );
 }

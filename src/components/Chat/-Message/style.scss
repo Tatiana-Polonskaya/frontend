@@ -42,12 +42,16 @@
         min-width: 50%;
 
         &_mine {
-            background: #E4EAF5;
+            background: #e4eaf5;
             color: #37476a;
         }
 
         &_other {
-            background: linear-gradient(310.91deg, #3aa0ff 0.21%, #0050c9 100.21%);
+            background: linear-gradient(
+                310.91deg,
+                #3aa0ff 0.21%,
+                #0050c9 100.21%
+            );
             color: white;
         }
     }
@@ -70,6 +74,25 @@
                 display: flex;
                 justify-content: space-between;
             }
+        }
+    }
+
+    &-reply {
+        display: flex;
+        gap: 0.3rem;
+        height: 20px;
+
+        &-icon > div > svg {
+            height: 10px;
+            width: 10px;
+            fill: rgba(255, 255, 255, 0.7);
+        }
+
+        &-msg {
+            color: rgba(255, 255, 255, 0.7);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 }

@@ -2,6 +2,9 @@ import { ReactNode } from "react";
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 import { IMessageItem } from "../../../models/chat";
+import { ReactSVG } from "react-svg";
+
+import Reply from "./../icon/reply.svg";
 
 const cnMessage = cn("chat-message");
 
@@ -33,6 +36,7 @@ const getTimeFromData = (datetime: string) => {
 
 type Props = {
     is_first?: boolean;
+    replay?: string;
 } & IMessageItem;
 
 export default function ChatMessage(props: Props) {
@@ -57,6 +61,7 @@ export default function ChatMessage(props: Props) {
                             </span>
                             <span>{getTimeFromData(props.created_at)}</span>
                         </div>
+
                         {!props.is_mine && (
                             <div
                                 className={cnMessage("header", {
@@ -64,6 +69,17 @@ export default function ChatMessage(props: Props) {
                                 })}
                             >
                                 {props.from_user}
+                            </div>
+                        )}
+                        {!props.is_mine && (
+                            <div className={cnMessage("reply")}>
+                                <ReactSVG
+                                    src={Reply}
+                                    className={cnMessage("reply-icon")}
+                                />
+                                <span className={cnMessage("reply-msg")}>
+                                    {props.replay}
+                                </span>
                             </div>
                         )}
                     </div>
@@ -77,7 +93,14 @@ export default function ChatMessage(props: Props) {
                                 публичных выступлений. <br />
                                 <br />
                                 📝 Основные инструкции по работе с сервисом вы
-                                найдете <a href="https://drive.google.com/file/d/1qMtB9VBr70v3aKN08RwBSm28jbKJbGEp/view" target="_blank" rel="noreferrer">здесь</a>
+                                найдете{" "}
+                                <a
+                                    href="https://drive.google.com/file/d/1qMtB9VBr70v3aKN08RwBSm28jbKJbGEp/view"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    здесь
+                                </a>
                                 <br />
                                 <br />
                                 ❗️ Обращаем ваше внимание, что ввиду
