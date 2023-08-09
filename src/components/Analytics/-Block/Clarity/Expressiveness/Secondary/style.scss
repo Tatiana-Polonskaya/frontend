@@ -34,7 +34,7 @@
         flex-direction: row;
         gap: 10px;
 
-        &>div:first-child {
+        & > div:first-child {
             width: 20px;
             height: 20px;
             border-radius: 4px;
@@ -97,6 +97,12 @@
         flex-wrap: nowrap;
         gap: 12px;
     }
+    &-menu:last-child {
+        .expressiveness-link:last-child {
+            text-align: center;
+            width: 40px;
+        }
+    }
 
     &-item,
     &-item-open {
@@ -115,9 +121,7 @@
         }
     }
 
-    &-link {}
-
-    &-graph>img {
+    &-graph > img {
         width: 100%;
     }
 

@@ -49,7 +49,7 @@ export default function SecondaryExpressiveness(props: Props) {
     // any > 2 - ExpressivenessType.NEUTRAL + HAPPINESS
     const [graph, setGraph] = useState(2);
     const [choosedEmotion, setChoosedEmotion] = useState(0); // 0 - ANGER or 1 - HAPPINESS
-    const [onNeutral, setOnNeutral] = useState(true);
+    const [onNeutral, setOnNeutral] = useState(false);
 
     useEffect(() => {
         if (choosedEmotion % 2 === 0) {
@@ -125,7 +125,7 @@ export default function SecondaryExpressiveness(props: Props) {
                                     setOnNeutral((prev) => !prev);
                                 }}
                             >
-                                {"Вкл"}
+                                {onNeutral ? "Выкл" : "Вкл"}
                             </div>
                         </li>
                     </ul>

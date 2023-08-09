@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss";
 import { cn } from "@bem-react/classname";
 import { ReactSVG } from "react-svg";
-import noteIcon from "../icons/note-icon.svg"
+import noteIcon from "../icons/note-icon.svg";
 
 type TabItem = {
     activeTab: string;
@@ -10,7 +10,7 @@ type TabItem = {
     onClick: Function;
     value: string;
     color: string;
-    percent?:boolean;
+    percent?: boolean;
 };
 
 export default function Tab({
@@ -18,10 +18,9 @@ export default function Tab({
     label,
     onClick,
     value,
-    color="#2477F4",
-    percent=false
+    color = "#2477F4",
+    percent = false,
 }: TabItem) {
-
     const cnTabs = cn("TabItem");
 
     const funcClick = () => {
@@ -29,15 +28,15 @@ export default function Tab({
     };
 
     return (
-        <li className={cnTabs("tab-list-item",{active:activeTab === label})} onClick={funcClick}>
+        <li
+            className={cnTabs("tab-list-item", { active: activeTab === label })}
+            onClick={funcClick}
+        >
             {activeTab === label && !percent && (
-                <ReactSVG
-                className={cnTabs("icon")}
-                   src={noteIcon}
-                />
+                <ReactSVG className={cnTabs("icon")} src={noteIcon} />
             )}
             {label}
-            {(activeTab === label && !percent) && (
+            {activeTab === label && !percent && (
                 <span
                     className={cnTabs("value")}
                     style={{ backgroundColor: color }}
@@ -45,11 +44,8 @@ export default function Tab({
                     {value}
                 </span>
             )}
-            {(activeTab === label && percent) && (
-                <span
-                    className={cnTabs("percent")}
-                    style={{ color: color }}
-                >
+            {activeTab === label && percent && (
+                <span className={cnTabs("percent")} style={{ color: color }}>
                     {value}
                 </span>
             )}

@@ -20,20 +20,30 @@ export default function VideoItem(props: Props) {
                 className={cnVideoItem("video-block")}
                 onClick={() => props.clickFunction()}
             >
-                <VideoPlayer url={`/api/video/${props.item.id}`} controls={false}/>
+                <VideoPlayer
+                    url={`/api/video/${props.item.id}`}
+                    controls={false}
+                />
             </div>
-
             <div className={cnVideoItem("author-block")}>
                 <div className={cnVideoItem("author-block-title")}>
-                    { !props.item.channel_title && (<div className={cnVideoItem("logo")}>
-                        <img className={cnVideoItem("logo-pic")} src={NoPhoto} alt=''/>
-                    </div>)}
-                    
-                    <p>{props.item.channel_title ? props.item.channel_title: "Источник" }</p>
+                    {!props.item.channel_title && (
+                        <div className={cnVideoItem("logo")}>
+                            <img
+                                className={cnVideoItem("logo-pic")}
+                                src={NoPhoto}
+                                alt=""
+                            />
+                        </div>
+                    )}
+                    <p>
+                        {props.item.channel_title
+                            ? props.item.channel_title
+                            : "Источник"}
+                    </p>
                 </div>
                 <p>{getPrettyDataTime(props.item.upload_date)}</p>
             </div>
-
             <p className={cnVideoItem("title")}>{props.item.title}</p>
         </div>
     );

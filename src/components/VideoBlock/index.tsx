@@ -33,11 +33,11 @@ export default function VideoBlock() {
 
     const [getCurrentMainVideos, currentMainVideos] =
         useLazyGetMainVideoQuery();
-    const {isSuccess, isLoading} = currentMainVideos;
+    const { isSuccess, isLoading } = currentMainVideos;
 
-    useEffect(()=>{
-        if(isLoading) console.log("isLoading")
-    },[isLoading])
+    useEffect(() => {
+        if (isLoading) console.log("isLoading");
+    }, [isLoading]);
 
     const { data } = useGetMainVideoQuery({
         page: currentPage,
@@ -48,13 +48,15 @@ export default function VideoBlock() {
         if (data && data?.data) {
             setCurrentVideos(data!.data!.videos);
             setCountAllVideos(data!.data!.total_videos);
+            console.log("------------------------------------");
+            console.log("currentVideos", data!.data!.videos);
+            console.log("------------------------------------");
         }
     }, [data]);
 
     useEffect(() => {
         if (currentPage && currentPage > 0) {
             const getVideos = async () => {
-
                 const result = await getCurrentMainVideos({
                     page: currentPage,
                     limit: videosPerPage,
@@ -106,7 +108,6 @@ export default function VideoBlock() {
                     />
                 ))}
             </div>
-
             <Pagination
                 videosPerPage={videosPerPage}
                 totalVideos={countAllVideos}
@@ -115,7 +116,6 @@ export default function VideoBlock() {
                 funcPrevPage={prevPage}
                 currentPage={currentPage + 1}
             />
-
             <ModalWindow isVisible={isModal} onClose={() => setModal(false)}>
                 <ModalWindowContext.Provider value={{ isModal, setModal }}>
                     {modalVideo && (

@@ -13,7 +13,7 @@ export interface IVideoUser {
 }
 
 export interface IVideoFromBack {
-    user_id: UUID;
+    user_id: UUID | string;
     title: string;
     description: string;
     upload_date: string;
@@ -31,7 +31,7 @@ export interface IVideoInfo {
     duration: string;
     description: string;
     id: UUID;
-    user_id: UUID;
+    user_id: UUID | string;
     channel_title: string;
     upload_date: string;
     file_name: string;
@@ -47,7 +47,7 @@ export interface IVideoStatus {
     duration: string;
     description: string;
     id: UUID;
-    user_id: UUID;
+    user_id: UUID | string;
     channel_title: string;
     upload_date: string;
     file_name: string;

@@ -64,7 +64,6 @@ export default function VideoPlayer({
         setCurrentTime(Math.floor(e.playedSeconds));
     };
 
-
     return (
         <div className={cnVideoPlayer()}>
             <div className={cnVideoPlayer({ unvisible: !onReady })}>
@@ -79,7 +78,11 @@ export default function VideoPlayer({
                 />
             </div>
             <div className={cnVideoPlayer({ unvisible: onReady })}>
-                <img className={cnVideoPlayer("gif")} src={reloadPicture} alt="loading"/>
+                <img
+                    className={cnVideoPlayer("gif")}
+                    src={reloadPicture}
+                    alt="loading"
+                />
             </div>
         </div>
     );

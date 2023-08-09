@@ -11,16 +11,16 @@ export enum TYPE_TABS {
 
 type Props = {
     children: Array<ReactNode>;
-    type:TYPE_TABS
+    type: TYPE_TABS;
 };
 
 export default function Tabs(props: Props) {
     const cnTabs = cn("Tabs");
 
     const children = props.children as ReactElement[];
-    const [activeTab, setActiveTab] = useState(children[0].props['data-title']);
+    const [activeTab, setActiveTab] = useState(children[0].props["data-title"]);
 
-    const onClickTabItem = (label: string) => { 
+    const onClickTabItem = (label: string) => {
         setActiveTab(label);
     };
 
@@ -30,10 +30,10 @@ export default function Tabs(props: Props) {
                 {children.map((child) => {
                     return (
                         <Tab
-                            key={child.props['data-title']}
+                            key={child.props["data-title"]}
                             activeTab={activeTab}
-                            label={child.props['data-title']}
-                            value={child.props['data-value']}
+                            label={child.props["data-title"]}
+                            value={child.props["data-value"]}
                             color={child.props.color}
                             onClick={onClickTabItem}
                             percent={props.type === TYPE_TABS.PERCENT}
@@ -42,9 +42,22 @@ export default function Tabs(props: Props) {
                 })}
             </ul>
 
-            <div className={cnTabs("content")}>
+            <div
+                className={cnTabs("content")}
+                style={{
+                    borderTopLeftRadius:
+                        activeTab === children[0].props["data-title"]
+                            ? "0px"
+                            : "16px",
+                    borderTopRightRadius:
+                        activeTab === children[5].props["data-title"]
+                            ? "0px"
+                            : "16px",
+                }}
+            >
                 {children.map((child) => {
-                    if (child.props['data-title'] !== activeTab) return undefined;
+                    if (child.props["data-title"] !== activeTab)
+                        return undefined;
                     return child;
                 })}
             </div>

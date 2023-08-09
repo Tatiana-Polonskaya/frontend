@@ -57,7 +57,7 @@ export default function ChatMessage(props: Props) {
                             >
                                 {props.is_mine
                                     ? "me"
-                                    : "Команда поддержки SpeechUp"}
+                                    : "Команда поддержки Speech Up"}
                             </span>
                             <span>{getTimeFromData(props.created_at)}</span>
                         </div>

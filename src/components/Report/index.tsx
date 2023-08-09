@@ -149,6 +149,7 @@ import {
 
 import argumentativenessData1 from "./../../plugs/argumentativeness.json";
 import { useGetVideoByIdQuery } from "../../store/api/apiWithDifAnswers";
+import { UUID } from "crypto";
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 export const VideoTimeContext = createContext({
@@ -180,10 +181,15 @@ export default function AnalysisReport() {
     // common info about video: title, date, duration
     const videoInfoFromBack = useGetVideoInfoByIdQuery(idVideo);
     const [videoInfo, setVideoInfo] = useState<IVideoInfo>();
+    const [isPrivate, setIsPrivate] = useState<boolean>(false);
 
     useEffect(() => {
         if (videoInfoFromBack && videoInfoFromBack.data) {
             setVideoInfo(videoInfoFromBack.data!.data);
+
+            if (videoInfoFromBack.data!.data?.user_id !== "None") {
+                setIsPrivate(true);
+            }
         }
     }, [videoInfoFromBack]);
 
@@ -595,7 +601,7 @@ export default function AnalysisReport() {
                             определенного сообщения и обеспечивают единое
                             понимание темы выступления у слушателей
                         </div>
-                        {connectivityData && (
+                        {connectivityData && videoInfo!.duration && (
                             <Dropdown
                                 title={"Последовательность"}
                                 subtitle={`${statmentHelper(
@@ -611,10 +617,7 @@ export default function AnalysisReport() {
                                             connectivityData.values[0]
                                                 .time_start
                                         }
-                                        endTime={
-                                            connectivityData.values.at(-1)!
-                                                .time_start
-                                        }
+                                        endTime={+videoInfo!.duration}
                                     />
                                 }
                                 invisible={
@@ -682,7 +685,8 @@ export default function AnalysisReport() {
                             />
                         )}
 
-                        {unityOfStyleData &&
+                        {isPrivate &&
+                            unityOfStyleData &&
                             connectivityData &&
                             informativeData && (
                                 <RecommendConn
@@ -794,17 +798,19 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-                        <Recomendation
-                            recomendation={
-                                argumentativenessRec.length !== 0
-                                    ? // ПОСЛЕ ПИЛОТА ВЕРНУТЬ
-                                      // ? `${argumentativenessRec.join(" ")}`
-                                      `С целью недопущения попадания информации, возможно носящей характер коммерческой тайны, в систему Антиплагиат на время проведения бета-тестирования параметры "оригинальность", "заимствования" и "цитирования" временно не определяются.`
-                                    : // : // ПОСЛЕ ПИЛОТА ВЕРНУТЬ
-                                      //   "Важно приводить не только аргументы “за” (за свой тезис), но и аргументы “против”. Они должны убеждать аудиторию в том, что аргументы, приводимые в поддержку критикуемого Вами тезиса, слабые и не выдерживают критики."
-                                      `С целью недопущения попадания информации, возможно носящей характер коммерческой тайны, в систему Антиплагиат на время проведения бета-тестирования параметры "оригинальность", "заимствования" и "цитирования" временно не определяются.`
-                            }
-                        />
+                        {isPrivate && (
+                            <Recomendation
+                                recomendation={
+                                    argumentativenessRec.length !== 0
+                                        ? // ПОСЛЕ ПИЛОТА ВЕРНУТЬ
+                                          // ? `${argumentativenessRec.join(" ")}`
+                                          `С целью недопущения попадания информации, возможно носящей характер коммерческой тайны, в систему Антиплагиат на время проведения бета-тестирования параметры "оригинальность", "заимствования" и "цитирования" временно не определяются.`
+                                        : // : // ПОСЛЕ ПИЛОТА ВЕРНУТЬ
+                                          //   "Важно приводить не только аргументы “за” (за свой тезис), но и аргументы “против”. Они должны убеждать аудиторию в том, что аргументы, приводимые в поддержку критикуемого Вами тезиса, слабые и не выдерживают критики."
+                                          `С целью недопущения попадания информации, возможно носящей характер коммерческой тайны, в систему Антиплагиат на время проведения бета-тестирования параметры "оригинальность", "заимствования" и "цитирования" временно не определяются.`
+                                }
+                            />
+                        )}
                     </div>
                     <div
                         data-title="Ясность"
@@ -916,46 +922,57 @@ export default function AnalysisReport() {
                                 />
                             )}
 
-                        {clarityData && eloquenceData && expressivenessData && (
-                            <RecommendClarity
-                                Nitemp={
-                                    (clarityData.sounds +
-                                        clarityData.trembling) /
-                                    (clarityData.basic +
+                        {isPrivate &&
+                            clarityData &&
+                            eloquenceData &&
+                            expressivenessData && (
+                                <RecommendClarity
+                                    Nitemp={
+                                        (clarityData.sounds +
+                                            clarityData.trembling) /
+                                        (clarityData.basic +
+                                            clarityData.sounds +
+                                            clarityData.trembling)
+                                    }
+                                    Tnerech={clarityData.sounds}
+                                    Tdroz={clarityData.trembling}
+                                    Tob={
+                                        clarityData.basic +
                                         clarityData.sounds +
-                                        clarityData.trembling)
-                                }
-                                Tnerech={clarityData.sounds}
-                                Tdroz={clarityData.trembling}
-                                Tob={
-                                    clarityData.basic +
-                                    clarityData.sounds +
-                                    clarityData.trembling
-                                }
-                                Nzpredl={eloquenceData.values.short_words}
-                                Nparaz={eloquenceData.values.parasitic_words}
-                                Nkpedl={eloquenceData.values.short_sentences}
-                                Napredl={eloquenceData.values.action_words}
-                                Npredl={Math.ceil(
-                                    ((eloquenceData.values.parasitic_words /
-                                        10 +
-                                        eloquenceData.values.short_sentences) *
-                                        2,
-                                    5)
-                                )}
-                                Nvist={
-                                    Math.ceil(
+                                        clarityData.trembling
+                                    }
+                                    Nzpredl={eloquenceData.values.short_words}
+                                    Nparaz={
+                                        eloquenceData.values.parasitic_words
+                                    }
+                                    Nkpedl={
+                                        eloquenceData.values.short_sentences
+                                    }
+                                    Napredl={eloquenceData.values.action_words}
+                                    Npredl={Math.ceil(
                                         ((eloquenceData.values.parasitic_words /
                                             10 +
                                             eloquenceData.values
                                                 .short_sentences) *
                                             2,
                                         5)
-                                    ) * 25
-                                }
-                                Pekspr={expressivenessData.total_expressiveness}
-                            />
-                        )}
+                                    )}
+                                    Nvist={
+                                        Math.ceil(
+                                            ((eloquenceData.values
+                                                .parasitic_words /
+                                                10 +
+                                                eloquenceData.values
+                                                    .short_sentences) *
+                                                2,
+                                            5)
+                                        ) * 25
+                                    }
+                                    Pekspr={
+                                        expressivenessData.total_expressiveness
+                                    }
+                                />
+                            )}
 
                         {/*                       <Recomendation
                             recomendation={
@@ -1106,20 +1123,23 @@ export default function AnalysisReport() {
                             />
                         )}
 
-                        {emotionalityData && nonMonotonyData && energyData && (
-                            <RecommendDynamism
-                                htemp={nonMonotonyData["h-temp"]}
-                                hgromk={nonMonotonyData["h-volume"]}
-                                hton={nonMonotonyData["h-tone"]}
-                                pemotion={
-                                    (emotionalityData.total.anger +
-                                        emotionalityData.total.neutral +
-                                        emotionalityData.total.happiness) /
-                                    3
-                                }
-                                penergi={energyData.total_energy}
-                            />
-                        )}
+                        {isPrivate &&
+                            emotionalityData &&
+                            nonMonotonyData &&
+                            energyData && (
+                                <RecommendDynamism
+                                    htemp={nonMonotonyData["h-temp"]}
+                                    hgromk={nonMonotonyData["h-volume"]}
+                                    hton={nonMonotonyData["h-tone"]}
+                                    pemotion={
+                                        (emotionalityData.total.anger +
+                                            emotionalityData.total.neutral +
+                                            emotionalityData.total.happiness) /
+                                        3
+                                    }
+                                    penergi={energyData.total_energy}
+                                />
+                            )}
                     </div>
 
                     <div
@@ -1265,37 +1285,43 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-                        <Recomendation
-                            recomendation={
-                                persuasivenessRec &&
-                                persuasivenessRec.length === 0
-                                    ? persuasivenessRecomendation(
-                                          congruenceData?.diameter.audio.anger,
-                                          congruenceData?.diameter.audio
-                                              .happiness,
-                                          congruenceData?.diameter.audio
-                                              .neutral,
-                                          congruenceData?.diameter.text.anger,
-                                          congruenceData?.diameter.text
-                                              .happiness,
-                                          congruenceData?.diameter.text.neutral,
-                                          congruenceData?.diameter.video.anger,
-                                          congruenceData?.diameter.video
-                                              .happiness,
-                                          congruenceData?.diameter.video
-                                              .neutral,
-                                          confidenceData?.average_value,
-                                          confidenceData?.uncertainty,
-                                          emotionalArousalData?.values
-                                              .trager_coefficient,
-                                          emotionalArousalData?.values
-                                              .action_certainty_factor,
-                                          emotionalArousalData?.values
-                                              .aggressiveness_coefficient
-                                      )
-                                    : "В случае, если Вы ставите себе целью убедить людей в чем-либо, либо Вам надо побудить людей в аудитории к определенным действиям, то Вам лучше всего сконцентрироваться на подробном анализе аудитории (чтобы понять, какие именно факторы повлияют на позицию аудитории), на содержании и структуре презентации с продумыванием аргументов и примеров (чтобы речь была логичной и убедительной) и на тщательной подготовке наглядных пособий (это усилит Ваше влияние на людей)."
-                            }
-                        />
+                        {isPrivate && (
+                            <Recomendation
+                                recomendation={
+                                    persuasivenessRec &&
+                                    persuasivenessRec.length === 0
+                                        ? persuasivenessRecomendation(
+                                              congruenceData?.diameter.audio
+                                                  .anger,
+                                              congruenceData?.diameter.audio
+                                                  .happiness,
+                                              congruenceData?.diameter.audio
+                                                  .neutral,
+                                              congruenceData?.diameter.text
+                                                  .anger,
+                                              congruenceData?.diameter.text
+                                                  .happiness,
+                                              congruenceData?.diameter.text
+                                                  .neutral,
+                                              congruenceData?.diameter.video
+                                                  .anger,
+                                              congruenceData?.diameter.video
+                                                  .happiness,
+                                              congruenceData?.diameter.video
+                                                  .neutral,
+                                              confidenceData?.average_value,
+                                              confidenceData?.uncertainty,
+                                              emotionalArousalData?.values
+                                                  .trager_coefficient,
+                                              emotionalArousalData?.values
+                                                  .action_certainty_factor,
+                                              emotionalArousalData?.values
+                                                  .aggressiveness_coefficient
+                                          )
+                                        : "В случае, если Вы ставите себе целью убедить людей в чем-либо, либо Вам надо побудить людей в аудитории к определенным действиям, то Вам лучше всего сконцентрироваться на подробном анализе аудитории (чтобы понять, какие именно факторы повлияют на позицию аудитории), на содержании и структуре презентации с продумыванием аргументов и примеров (чтобы речь была логичной и убедительной) и на тщательной подготовке наглядных пособий (это усилит Ваше влияние на людей)."
+                                }
+                            />
+                        )}
                     </div>
                     <div
                         data-title="Коммуникативные нормы"
@@ -1340,40 +1366,55 @@ export default function AnalysisReport() {
                                 }
                             />
                         )}
-                        <Recomendation
-                            recomendation={
-                                communicativeRec.length === 0
-                                    ? communicativeRecomendation(
-                                          communicativeData?.filler_words,
-                                          communicativeData?.cognitive_distortion,
-                                          communicativeData?.aggression
-                                      )
-                                    : "Помните, нарушение коммуникативных норм обычно не остается незамеченным. В зависимости от того, насколько грубым было это нарушение, наказания выражаются в отказе адресата от коммуникации вообще, в прерывании общения, в недостижении цели общения."
-                            }
-                        />
+                        {isPrivate && (
+                            <Recomendation
+                                recomendation={
+                                    communicativeRec.length === 0
+                                        ? communicativeRecomendation(
+                                              communicativeData?.filler_words,
+                                              communicativeData?.cognitive_distortion,
+                                              communicativeData?.aggression
+                                          )
+                                        : "Помните, нарушение коммуникативных норм обычно не остается незамеченным. В зависимости от того, насколько грубым было это нарушение, наказания выражаются в отказе адресата от коммуникации вообще, в прерывании общения, в недостижении цели общения."
+                                }
+                            />
+                        )}
                     </div>
                 </Tabs>
             )}
 
-            <div className={cnReport("whiteBlock")}>
-                <div className={cnReport("col")}>
-                    <div className={cnReport("row")}>
-                        <div className={cnReport("conclusion-title")}>
-                            <span className={cnReport("conclusion-title-icon")}>
-                                <ReactSVG src={noteIcon} />
-                            </span>
-                            <span className={cnReport("conclusion-title-text")}>
-                                Вывод
-                            </span>
+            {isPrivate && (
+                <div className={cnReport("whiteBlock")}>
+                    <div className={cnReport("col")}>
+                        <div className={cnReport("row")}>
+                            <div className={cnReport("conclusion-title")}>
+                                <span
+                                    className={cnReport(
+                                        "conclusion-title-icon"
+                                    )}
+                                >
+                                    <ReactSVG src={noteIcon} />
+                                </span>
+                                <span
+                                    className={cnReport(
+                                        "conclusion-title-text"
+                                    )}
+                                >
+                                    Вывод
+                                </span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className={cnReport("conclusion-desciption")}>
-                        <div className={cnReport("conclusion-desciption-text")}>
-                            {/* заменить общий вывод */}
-                            {resultDesc && getTotalDesc(resultDesc)}
+                        <div className={cnReport("conclusion-desciption")}>
+                            <div
+                                className={cnReport(
+                                    "conclusion-desciption-text"
+                                )}
+                            >
+                                {/* заменить общий вывод */}
+                                {resultDesc && getTotalDesc(resultDesc)}
 
-                            {/* {`Задача организации, в особенности же понимание сути
+                                {/* {`Задача организации, в особенности же понимание сути
                             ресурсосберегающих технологий требует определения и
                             уточнения соответствующих условий активизации. Как
                             уже неоднократно упомянуто, интерактивные прототипы
@@ -1383,10 +1424,11 @@ export default function AnalysisReport() {
                             вытеснить традиционное производство, нанотехнологии
                             лишь добавляют фракционных разногласий и призваны к
                             ответу.`} */}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }

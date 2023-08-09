@@ -1,65 +1,89 @@
-import React from 'react';
-import './styleText.css'
-import { EloquenceDataItem } from '../../../models/graph/eloquence';
+import React from "react";
+import "./styleText.css";
+import { EloquenceDataItem } from "../../../models/graph/eloquence";
 
-
-function paintWords( data: EloquenceDataItem){
-    let a=[];
-    let i =0;
+function paintWords(data: EloquenceDataItem) {
+    let a = [];
+    let i = 0;
     for (let key in data.parasitic_words_list) {
-        if (data.parasitic_words_list == null){
-            return <div className='blocWords'> {("слов-паразитов не найдено")} </div>
+        if (data.parasitic_words_list == null) {
+            return (
+                <div className="blocWords"> {"слов-паразитов не найдено"} </div>
+            );
         }
-        a[i] = <div className='blocWords' key={key}> {(key)} <div className="strings">{(data.parasitic_words_list[key])}</div></div>
+        a[i] = (
+            <div className="blocWords" key={key}>
+                {" "}
+                {key}{" "}
+                <div className="strings">{data.parasitic_words_list[key]}</div>
+            </div>
+        );
         i++;
     }
     return a;
 }
 
 type Props = {
-    data: EloquenceDataItem
-}
+    data: EloquenceDataItem;
+};
 
 function EloquenceText(props: Props) {
-    let infEloquence:EloquenceDataItem = props.data;
-    let countWords =  0
+    let infEloquence: EloquenceDataItem = props.data;
+    let countWords = 0;
     for (let key in infEloquence.parasitic_words_list) {
         countWords += infEloquence.parasitic_words_list[key];
     }
 
-        return (
+    return (
         <>
-            <div className='EloquenceAllText'>
-                <div className='Eloquencetext1'>
-                    <b className="textInfTitle"> Красноречивость </b> - способность выступающего выражать свои мысли максимально точно и ярко.
+            <div className="EloquenceAllText">
+                <div className="Eloquencetext1">
+                    <b className="textInfTitle"> Красноречивость </b> -
+                    способность выступающего выражать свои мысли максимально
+                    точно и ярко.
                 </div>
-                <span className='Eloquencetext2'>
+                <span className="Eloquencetext2">
                     Она достигается использованием:
                 </span>
-                <div className='ul'>
-                    <div className='li'>
-                        <b className="textInfTitle1">простых коротких предложений </b> (не более 13 слов);
+                <div className="ul">
+                    <div className="li">
+                        <b className="textInfTitle1">
+                            простых коротких предложений{" "}
+                        </b>{" "}
+                        (не более 13 слов);
                     </div>
-                    <div className='li'>
-                        <b className="textInfTitle1">коротких слов, знакомых слушателю </b> (например, “начать” вместо “инициировать”, “двигаться” вместо “перемещаться” и т.п);
+                    <div className="li">
+                        <b className="textInfTitle1">
+                            коротких слов, знакомых слушателю{" "}
+                        </b>{" "}
+                        (например, “начать” вместо “инициировать”, “двигаться”
+                        вместо “перемещаться” и т.п);
                     </div>
-                    <div className='li'>
-                        <b className="textInfTitle1">активных слов, требующих действий </b> (например, “написать”,  “рассмотреть”,  “разрешить” и т.п.).
+                    <div className="li">
+                        <b className="textInfTitle1">
+                            активных слов, требующих действий{" "}
+                        </b>{" "}
+                        (например, “написать”, “рассмотреть”, “разрешить” и
+                        т.п.).
                     </div>
                 </div>
-                <div className='Eloquencetext3'>
-                    Снижает красноречивость использование бессмысленных слов-паразитов.
+                <div className="Eloquencetext3">
+                    Снижает красноречивость использование бессмысленных
+                    слов-паразитов.
                 </div>
             </div>
 
-            <div className='EloquenceTextBloc'>
-                <div className='EloquenceTextTitle'>
-                    Слова-паразиты <div className='countWords'> {countWords}</div>
+            <div className="EloquenceTextBloc">
+                <div className="EloquenceTextTitle">
+                    Слова-паразиты{" "}
+                    <div className="countWords"> {countWords}</div>
                 </div>
-                <div className='EloquenceTexts'>
-                    <b className="textInfTitle"> Слова-паразиты</b> - лингвистическое явление, которое выражается вупотреблении лишних и бессмысленных слов в речи.
+                <div className="EloquenceTexts">
+                    <b className="textInfTitle"> Слова-паразиты</b> -
+                    лингвистическое явление, которое выражается в употреблении
+                    лишних и бессмысленных слов в речи.
                 </div>
-                <div className='EloquenceTextWords'>
+                <div className="EloquenceTextWords">
                     {paintWords(infEloquence)}
                 </div>
             </div>

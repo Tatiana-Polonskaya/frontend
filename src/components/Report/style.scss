@@ -4,13 +4,12 @@
     line-height: 26px;
 
     &-btn-back {
-    
-        &-span{
+        &-span {
             font-family: "Montserrat Alternates";
             color: #37476a;
             font-weight: 600;
-            font-size: 16px; 
-            
+            font-size: 16px;
+
             cursor: pointer;
 
             display: inline-flex;
@@ -22,7 +21,7 @@
         background: #ffffff;
         border-radius: 16px;
         padding: 10px;
-        margin: 20px 0;
+        margin-bottom: 20px;
         width: 100%;
         overflow: hidden;
     }
@@ -42,11 +41,11 @@
         justify-content: center;
         align-items: flex-start;
 
-        &-video{
+        &-video {
             overflow: hidden;
             border-radius: 10px;
 
-            video{
+            video {
                 max-height: 420px;
             }
         }
@@ -131,7 +130,6 @@
                 font-size: 16px;
                 font-family: "Onest";
                 font-weight: 400;
-                
             }
         }
     }
@@ -146,11 +144,11 @@
         width: 100%;
     }
 
-    &-transrciption{
+    &-transrciption {
         display: flex;
         flex-flow: column nowrap;
         gap: 10px;
-        overflow:auto;
+        overflow: auto;
         height: 85%;
     }
 }
