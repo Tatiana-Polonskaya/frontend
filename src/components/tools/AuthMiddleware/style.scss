@@ -1,7 +1,6 @@
 html,
 body {
     height: 100%;
-    background-image: linear-gradient(-105deg, #009acc, #363795);
 }
 
 .spinner {
@@ -15,7 +14,7 @@ body {
     height: 50px;
 
     & .path {
-        stroke: hsl(210, 70, 75);
+        stroke: #363795;
         stroke-linecap: round;
         animation: dash 1.5s ease-in-out infinite;
     }
