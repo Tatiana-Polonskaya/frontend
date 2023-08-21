@@ -1,42 +1,38 @@
 .RepetitionStart {
+    width: 100%;
     font-size: 16px;
     line-height: 20px;
-    width: 100%;
 
 
     &-text {
-
         display: flex;
         flex-flow: column nowrap;
         gap: 8px;
-
-        padding-bottom: 40px;
-        background-color: #fff;
-        border-radius: 16px;
         padding: 10px;
-
+        padding-bottom: 40px;
         font-family: 'Onest';
         font-style: normal;
+        background-color: #fff;
+        border-radius: 16px;
 
         &-dark-blue {
-            font-family: "Montserrat Alternates";
-            font-weight: 600;
-            color: #37476A;
-
             display: flex;
             flex-flow: row nowrap;
-            justify-content: start;
             align-items: center;
+            justify-content: start;
+            color: #37476A;
+            font-weight: 600;
+            font-family: "Montserrat Alternates";
         }
 
         &-black {
+            color: #000;
             font-weight: 400;
-            color: #000000;
         }
 
         &-gray {
-            font-weight: 400;
             color: #7C8EB5;
+            font-weight: 400;
 
             &-bold {
                 font-weight: 500;
@@ -44,25 +40,24 @@
         }
 
         &-blue {
-            font-weight: 500;
             color: #2477F4;
+            font-weight: 500;
         }
     }
 
     &-btn-block {
         display: flex;
         flex-flow: row wrap;
+        gap: 40px;
         justify-content: start;
         width: 100%;
-
-        gap: 40px;
         margin-top: 30px;
         margin-bottom: 50px;
 
         &-link {
-            cursor: pointer;
             flex-grow: 1;
             max-width: 700px;
+            cursor: pointer;
 
             &-svg {
                 width: 100%;
@@ -73,11 +68,11 @@
     &-loading {
         display: flex;
         flex-flow: column nowrap;
-        justify-content: center;
-        align-items: center;
-        padding: 15px;
         // width: 100%;
         gap: 10px;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
 
         &-img {
             padding-bottom: 10px;
@@ -85,19 +80,18 @@
 
         &-title {
             color: #37476A;
+            font-weight: 600;
             font-size: 24px;
             font-family: "Montserrat Alternates";
-            font-weight: 600;
 
             &-animate {
+                display: inline-block;
                 color: #37476A;
+                font-weight: 600;
                 font-size: 24px;
                 font-family: "Montserrat Alternates";
-                font-weight: 600;
-
-                display: inline-block;
-                clip-path: inset(0 30px 0 0);
                 animation: fade-out 2s infinite ease-in-out;
+                clip-path: inset(0 30px 0 0);
             }
 
             @keyframes fade-out {
@@ -108,17 +102,17 @@
 
             &-error {
                 color: #FF4E78;
+                font-weight: 600;
                 font-size: 24px;
                 font-family: "Montserrat Alternates";
-                font-weight: 600;
 
             }
 
             &-link {
                 color: #2477F4;
+                font-weight: 500;
                 font-size: 16px;
                 font-family: "Montserrat Alternates";
-                font-weight: 500;
                 cursor: pointer;
             }
 
@@ -126,9 +120,9 @@
 
         &-description {
             color: #7C8EB5;
+            font-weight: 500;
             font-size: 16px;
             font-family: "Montserrat Alternates";
-            font-weight: 500;
         }
     }
 }
@@ -144,28 +138,28 @@
     &-header {
         display: flex;
         flex-flow: row nowrap;
-        justify-content: start;
+        gap: 10px;
         align-items: center;
+        justify-content: start;
+        padding: 10px;
         font-size: 16px;
         line-height: 20px;
-        padding: 10px;
-        gap: 10px;
 
         &-title {
-            font-family: "Montserrat Alternates";
-            font-style: normal;
+            flex-grow: 1;
+            color: #37476A;
             font-weight: 600;
             font-size: 1em;
+            font-family: "Montserrat Alternates";
+            font-style: normal;
             line-height: 1em;
-            color: #37476A;
-            flex-grow: 1;
         }
 
         &-icon {
             display: flex;
             flex-flow: row nowrap;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             width: 28px;
 
             &-close {

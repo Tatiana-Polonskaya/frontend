@@ -1,24 +1,26 @@
 .Scale{
     display: flex;
-    background: #D4DFF4;
-    border-radius: 20px;
     flex-direction: row;
     align-items: center;
     width: 100%;
     height: 40px;
     overflow: hidden;
+    background: #D4DFF4;
     border-color: inherit;
+    border-radius: 20px;
+
     &-content{
-        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
+        height: 40px;
     }
+
     &-text{
-        font-family: Onest;
-        font-style: normal;
-        font-weight: 400;
         display: flex;
         align-items: center;
+        font-weight: 400;
+        font-family: "Onest";
+        font-style: normal;
     }
 }

@@ -1,20 +1,19 @@
 .CommonAnalitics {
-    font-family: "Montserrat Alternates";
     font-size: 20px;
+    font-family: "Montserrat Alternates";
     line-height: 26px;
 
     &-title {
         display: flex;
         flex-flow: row nowrap;
-        justify-content: start;
-        align-items: flex-start;
         gap: 8px;
-
-        font-family: "Montserrat Alternates";
-        font-style: normal;
+        align-items: flex-start;
+        justify-content: start;
         color: #37476a;
         font-weight: 600;
         font-size: 24px;
+        font-family: "Montserrat Alternates";
+        font-style: normal;
         line-height: 29px;
     }
 
@@ -28,33 +27,33 @@
     &-col-grow {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         flex-grow: 1;
+        align-items: flex-start;
     }
 
     &-common-result {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
         gap: 5px;
+        align-items: flex-end;
         margin: 0 10px;
 
         &-title {
-            font-family: "Onest";
-            font-style: normal;
+            color: #37476a;
             font-weight: 400;
             font-size: 20px;
+            font-family: "Onest";
+            font-style: normal;
             line-height: 26px;
-            color: #37476a;
         }
 
         &-value {
-            font-family: "Montserrat Alternates";
-            font-style: normal;
+            color: #2477f4;
             font-weight: 700;
             font-size: 36px;
+            font-family: "Montserrat Alternates";
+            font-style: normal;
             line-height: 44px;
-            color: #2477f4;
         }
     }
 
@@ -67,28 +66,28 @@
     &-row-justify {
         display: flex;
         flex-direction: row;
-        justify-content: start;
-        align-items: center;
         gap: 10px;
+        align-items: center;
+        justify-content: start;
         width: 100%;
     }
 
     &-blue-bold {
-        font-family: "Montserrat Alternates";
-        font-style: normal;
         color: #37476a;
         font-weight: 600;
         font-size: 32px;
+        font-family: "Montserrat Alternates";
+        font-style: normal;
         line-height: 39px;
     }
 
     &-gray-txt {
-        font-family: "Onest";
-        font-style: normal;
+        color: #7c8eb5;
         font-weight: 400;
         font-size: 20px;
+        font-family: "Onest";
+        font-style: normal;
         line-height: 26px;
-        color: #7c8eb5;
     }
 
     &-pic {
@@ -96,41 +95,46 @@
     }
 
     &-panel {
-        margin-top: 16px;
-        width: 100%;
         display: flex;
         justify-content: space-between;
+        width: 100%;
+        margin-top: 16px;
     }
+
     &-item {
         position: relative;
         display: flex;
-        width: 16.6%;
         flex-direction: column;
         align-items: center;
+        width: 16.6%;
+
         & > svg {
             margin: 0 auto;
         }
     }
+
     &-icon {
         position: absolute;
         top: 82px;
         left: 50%;
         transform: translate(-50%, -50%);
     }
+
     &-smile-title {
-        word-wrap: break-word;
-        text-align: center;
-        font-family: "Montserrat Alternates";
+        color: #37476a;
         font-weight: 600;
         font-size: 14px;
-        line-height: 17px;
-        color: #37476a;
-    }
-    &-percent {
-        text-align: center;
         font-family: "Montserrat Alternates";
+        line-height: 17px;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    &-percent {
         font-weight: 700;
         font-size: 20px;
+        font-family: "Montserrat Alternates";
         line-height: 24px;
+        text-align: center;
     }
 }

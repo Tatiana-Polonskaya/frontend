@@ -32,7 +32,7 @@ export default function PrimaryInfo() {
     const dispatch = useAppDispatch();
 
     const userType = useAppSelector((state) => state.entry.userType);
-    const { name, lastName, birthday } = useAppSelector(
+    const { name, lastName, birthday, city } = useAppSelector(
         (state) => state.register.personal
     );
 
@@ -113,6 +113,15 @@ export default function PrimaryInfo() {
                         max={new Date().toLocaleDateString("fr-ca")}
                         ref={birthdayInputRef}
                         invalid={!isBirthdayValid}
+                    />
+                </label>
+
+                <label>
+                    <InputHeader text="Город" />
+                    <Input
+                        placeholder="Введите свой город"
+                        value={city}
+                        onChange={(e) => dispatch(setCity(e.target.value))}
                     />
                 </label>
             </div>

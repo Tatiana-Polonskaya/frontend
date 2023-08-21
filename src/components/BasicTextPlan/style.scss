@@ -1,37 +1,34 @@
 .BasicTextPlan{
-    width: 100%;
-
     display: grid;
     grid-template-columns: 60px 1fr 60px;
-    justify-items: center;
+    gap: 10px;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    justify-items: center;
+    width: 100%;
 
     &-text{
-
         display: flex;
         flex-flow: row nowrap;
-        justify-content: center;
-        align-items: center;
         gap:20px;
-
-        font-family: 'Onest';
-        font-style: normal;
+        align-items: center;
+        justify-content: center;
         font-weight: 500;
         font-size: 24px;
+        font-family: 'Onest';
+        font-style: normal;
         line-height: 31px;
         
         
         
 
         &-blue{
-            font-family: 'Onest';
-            font-style: normal;
+            color: #5196FF;
             font-weight: 800;
             font-size: 32px;
+            font-family: 'Onest';
+            font-style: normal;
             line-height: 41px;
-            color: #5196FF;
         }
     }
 

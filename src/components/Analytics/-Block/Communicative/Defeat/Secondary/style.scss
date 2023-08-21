@@ -1,7 +1,6 @@
 .breakdown_block {
     display: flex;
-    flex-wrap: nowrap;
-    flex-direction: column;
+    flex-flow: column nowrap;
     gap: 0.25rem;
     width: 100%;
     max-height: 320px;
@@ -11,25 +10,25 @@
 }
 
 .defeat {
-    width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 24px;
     justify-content: space-between;
+    width: 100%;
+    margin-bottom: 8px;
     padding: 1rem 1.5rem;
     background: #f7faff;
     border-radius: 12px;
-    margin-bottom: 8px;
-    gap: 24px;
 
     &-descript {
         // надо сделать динамически
         display: flex;
         flex-direction: column;
         overflow: auto;
-        font-size: 16px;
-        line-height: 20px;
         color: #17282f;
         font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
 
         &-bold {
             font-weight: 500;
@@ -41,6 +40,7 @@
         flex-direction: row;
         justify-content: space-between;
     }
+
     &-marker {
         display: flex;
         flex-direction: row;
@@ -54,90 +54,94 @@
     }
 
     &-title {
+        color: #37476a;
         font-weight: 400;
         font-size: 14px;
         line-height: 18px;
-        color: #37476a;
     }
 
     &-item {
         display: flex;
-        align-items: center;
         gap: 8px;
+        align-items: center;
     }
 
     &-time {
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 50px;
+        height: 20px;
         font-weight: 700;
         font-size: 12px;
         line-height: 15px;
-        width: 50px;
-        height: 20px;
         border-radius: 4px;
     }
 
     &-original {
-        background: #f7faff;
         color: #7c8eb5;
+        background: #f7faff;
     }
 
     &-filler {
-        color: #ffffff;
+        color: #fff;
         background: linear-gradient(32.08deg, #2477f4 0%, #3a86fa 100%);
     }
 
     &-cognitive {
-        color: #ffffff;
-        background: linear-gradient(45deg, #ffb800 0%, #ff9900 100%);
+        color: #fff;
+        background: linear-gradient(45deg, #ffb800 0%, #f90 100%);
     }
 
     &-agression {
-        color: #ffffff;
+        color: #fff;
         background: linear-gradient(45deg, #e23339 0%, #f35b60 100%);
     }
 
     &-description {
         width: 100%;
         padding: 10px;
-        background: #f7faff;
-        border-radius: 8px;
+        color: #37476a;
         font-weight: 400;
         font-size: 14px;
         line-height: 18px;
-        color: #37476a;
+        background: #f7faff;
+        border-radius: 8px;
 
         & > span {
             position: relative;
+
             & > div {
-                display: none;
-                color: #37476a;
-                z-index: 100;
                 position: absolute;
-                background-color: white;
-                padding: 8px 12px;
-                border-radius: 12px;
-                width: max-content;
-                font-size: 0.75rem;
-                font-weight: 500;
                 top: 20px;
                 left: 0;
+                z-index: 100;
+                display: none;
+                width: max-content;
+                padding: 8px 12px;
+                color: #37476a;
+                font-weight: 500;
+                font-size: 0.75rem;
+                background-color: white;
 
                 // top: 137px;
                 // left: 447px;
-                border: thin solid rgb(173, 185, 212);
+                border: thin solid rgb(173 185 212);
+                border-radius: 12px;
             }
         }
+
         & > span:hover {
             & > div {
                 display: block;
             }
         }
     }
+
     &-original_text {
         color: #37476a;
     }
+
     &-filler_text {
         color: #2477f4;
     }

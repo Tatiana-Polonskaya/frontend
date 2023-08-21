@@ -1,47 +1,46 @@
 .personal-area {
-    border-radius: 20px;
-    background: #fff;
     min-width: 320px;
     overflow: hidden;
+    background: #fff;
+    border-radius: 20px;
 
     &-photo {
         display: flex;
-        overflow: hidden;
         align-items: center;
         justify-content: center;
         height: 400px;
+        overflow: hidden;
     }
 
     &-photo > img {
-        max-height: 400px;
         max-width: 320px;
+        max-height: 400px;
     }
 
     &-change {
-        display: none;
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 20px;
-        background: #fff;
+        display: none;
         padding: 2rem;
+        background: #fff;
+        border-radius: 20px;
+        transform: translate(-50%, -50%);
     }
+
     &-change-active {
         display: block;
     }
 
     &-shield {
-        display: none;
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        inset: 0;
+        display: none;
         width: 100%;
         height: 100%;
-        background: rgba(69, 69, 69, 0.7);
+        background: rgb(69 69 69 / 70%);
     }
+
     &-shield-active {
         display: block;
     }
@@ -49,39 +48,39 @@
     &-list {
         display: flex;
         flex-direction: column;
-        padding: 1rem;
         gap: 1rem;
+        padding: 1rem;
     }
 
     &-name {
-        margin: 0.5rem auto 0;
         display: flex;
         justify-content: center;
+        margin: 0.5rem auto 0;
 
         & > span {
             color: #2477f4;
-            font-family: "Montserrat Alternates";
-            font-size: 24px;
             font-weight: 600;
+            font-size: 24px;
+            font-family: "Montserrat Alternates";
         }
     }
 
     &-btn {
-        margin: 1rem auto 0;
         display: flex;
-        padding: 6px 8px 6px 12px;
-        justify-content: center;
-        align-items: center;
         gap: 8px;
-        border-radius: 8px;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem auto 0;
+        padding: 6px 8px 6px 12px;
         background: #ffb800;
         border: 0;
+        border-radius: 8px;
 
         & > span {
             color: #fff;
-            font-family: "Montserrat Alternates";
-            font-size: 14px;
             font-weight: 600;
+            font-size: 14px;
+            font-family: "Montserrat Alternates";
         }
     }
 
@@ -92,22 +91,24 @@
 
         & > span {
             color: #37476a;
-            font-family: "Onest";
-            font-size: 16px;
             font-weight: 400;
+            font-size: 16px;
+            font-family: "Onest";
         }
     }
 
     &-input {
-        opacity: 0;
-        visibility: hidden;
         position: absolute;
+        visibility: hidden;
+        opacity: 0;
     }
+
     &-label {
         width: 180px;
         cursor: pointer;
     }
 }
+
 .change-foto {
     &-range {
         width: 100%;

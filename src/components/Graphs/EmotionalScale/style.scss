@@ -6,34 +6,34 @@
 .EmotionalScaletab {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 12px;
   gap: 6px;
+  align-items: center;
+  justify-content: center;
   width: 20%;
-  border: none;
-  font-style: normal;
+  margin: 8px;
+  padding: 8px 12px;
+  color: #7C8EB5;
   font-weight: 600;
   font-size: 12px;
-  color: #7C8EB5;
-  background: rgba(36, 119, 244, 0);
-  margin: 8px;
+  font-style: normal;
+  background: rgb(36 119 244 / 0%);
+  border: none;
 
   svg {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 }
 
 .EmotionalScaletab:not(:last-child) {}
 
 .EmotionalScaletab.EmotionalScaleactive {
-  background: rgba(36, 119, 244, 0.13);
-  border-radius: 8px;
-  color: #2477F4;
   display: flex;
+  color: #2477F4;
+  background: rgb(36 119 244 / 13%);
+  border-radius: 8px;
 }
 
 .panel {
@@ -51,46 +51,44 @@
   &-textBloc {
     display: flex;
     flex-direction: row;
-    padding: 16px;
     gap: 16px;
     width: 100%;
+    margin-bottom: 15px;
+    padding: 16px;
     background: #F7FAFF;
     border-radius: 12px;
-    margin-bottom: 15px;
 
   }
 
   &-text1 {
-    font-style: normal;
+    padding-top: 10px;
+    color: #17282F;
     font-weight: 400;
     font-size: 16px;
+    font-style: normal;
     line-height: 20px;
-    color: #17282F;
-    padding-top: 10px;
   }
 
   &-block {
     width: 20px;
     height: 20px;
-    border-radius: 4px;
     margin: 5px;
+    border-radius: 4px;
   }
 
   &-blockText {
     display: flex;
     flex-direction: row;
-    align-items: center;
     gap: 10px;
     align-items: center;
-    gap: 10px;
   }
 
   &-Text {
-    font-style: normal;
+    color: #37476A;
     font-weight: 400;
     font-size: 14px;
+    font-style: normal;
     line-height: 18px;
-    color: #37476A;
   }
 }
 

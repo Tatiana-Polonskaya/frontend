@@ -8,7 +8,6 @@ import goodImg from "./img/good.svg";
 
 const CN = cn("BadGoodBlock");
 
-
 export enum TYPE_ACHIEVEMENTS {
     improvements = "improvements",
     deterioration = "deterioration",
@@ -66,7 +65,7 @@ function paintList(a: string[], type: TYPE_ACHIEVEMENTS) {
                 <div className={CN()}>
                     <div className={CN("title")}>{checkTypeTitle(type)}</div>
                     <ul className={CN("listUl")}>
-                        {a.map((elem,idx) => (
+                        {a.map((elem, idx) => (
                             <li className={CN("allLi")} key={idx}>
                                 <div
                                     className={CN("ellipse")}
@@ -80,7 +79,6 @@ function paintList(a: string[], type: TYPE_ACHIEVEMENTS) {
             </div>
         );
 }
-
 
 type Props = {
     type: TYPE_ACHIEVEMENTS;

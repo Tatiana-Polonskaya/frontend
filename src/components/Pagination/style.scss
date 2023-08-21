@@ -1,56 +1,54 @@
 .pagination-block{
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 2rem;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     padding-top: 30px;
     padding-bottom: 30px;
-
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    gap: 2rem;
     
 
     &-button{
-        
-        cursor: pointer;
-        fill: rgba(124, 142, 181, 0.5);
         width: 1.5rem;
+        cursor: pointer;
+        fill: rgb(124 142 181 / 50%);
 
         &-svg div{
             display: flex;
-            width: 1.5rem;
             flex-flow: row nowrap;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            width: 1.5rem;
         }
         
         &_active{
-            fill:rgba(36, 119, 244, 1);
+            fill:rgb(36 119 244 / 100%);
         }
     }
 
     &-number{
-        cursor: pointer;
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
+        color: #7C8EB5;
         font-weight: 500;    
         font-size: 20px;
+        font-family: 'Montserrat Alternates';
+        font-style: normal;
         line-height: 24px;
-        color: #7C8EB5;
+        cursor: pointer;
 
         &_current {
-            font-weight: 700;
             color: #2477F4;
+            font-weight: 700;
         }
     }
 
     &-dot{
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
+        color: #7C8EB5;
         font-weight: 500;    
         font-size: 20px;
+        font-family: 'Montserrat Alternates';
+        font-style: normal;
         line-height: 24px;
-        color: #7C8EB5;
     }
 }

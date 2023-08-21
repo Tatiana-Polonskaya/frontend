@@ -1,12 +1,17 @@
 .input-header {
+    position: relative;
     display: flex;
     justify-content: space-between;
-    position: relative;
 
     &-label-text {
-        padding: 4px 0 4px 16px;
+        padding: 0 10px 0 16px;
+        color: #7C8EB5;
+        font-family: Montserrat Alternates;
+        font-size: 18px;
+        font-style: normal;
         font-weight: 600;
-        color: #7c8eb5;
+        line-height: normal;
+
         &_wrong {
             color: #f35b60;
         }
@@ -14,16 +19,18 @@
 
     &-wrong-text {
         padding: 0 0 0 4px;
+        color: #f35b60;
         font-weight: 500;
         font-size: 0.75rem;
-        color: #f35b60;
     }
 
     &-help-icon {
         color: #b2c2e4;
-        & > * {
+
+        &>* {
             pointer-events: none;
         }
+
         &_selected {
             color: #7c8eb5;
         }
@@ -33,19 +40,16 @@
         position: absolute;
         top: 72px;
         right: 0;
+        z-index: 1;
         width: 385px;
         padding: 16px;
-
+        color: #37476a;
+        font-weight: 400;
+        font-size: 0.75rem;
+        line-height: 16px;
+        background-color: white;
         border: 1px solid #b2c2e4;
         border-radius: 16px;
-        background-color: white;
-        color: #37476a;
-
-        font-size: 0.75rem;
-        font-weight: 400;
-        line-height: 16px;
-
-        z-index: 1;
 
         &_hidden {
             display: none;

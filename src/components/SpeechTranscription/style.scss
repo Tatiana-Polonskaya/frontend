@@ -1,53 +1,48 @@
 .SpeechTranscription {
-
     display: flex;
     flex-flow: column nowrap;
     gap: 10px;
-    overflow:auto;
     height: 100%;
+    overflow:auto;
 
     &-row {
         display: grid;
         grid-template-columns: 50px 1fr;
         gap: 8px;
-        justify-items: start;
-        align-items: center;
         align-content: center;
+        align-items: center;
+        justify-items: start;
 
     }
 
     &-time {
         width: 100%;
-        border-radius: 4px;
-
-        text-align: center;
-
-
-        background: #f3f5f9;
         color: #7c8eb5;
-
+        font-weight: 700;
         font-size: 14px;
         font-family: "Onest";
-        font-weight: 700;
+        text-align: center;
+        background: #f3f5f9;
+        border-radius: 4px;
 
         &_active {
-            border-radius: 4px;
-            background: #ffb800;
             color: #fff;
+            background: #ffb800;
+            border-radius: 4px;
         }
     }
 
     &-buble{
-       
         width: 100%;
+
         &-text {
             padding: 8px;
-            border-radius: 8px;
-            background: #f3f5f9;
             color: #7C8EB5;
+            font-weight: 400;
             font-size: 16px;
             font-family: "Onest";
-            font-weight: 400;
+            background: #f3f5f9;
+            border-radius: 8px;
     
             &_active {
                 color: #37476A; 

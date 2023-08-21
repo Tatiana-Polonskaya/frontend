@@ -1,9 +1,8 @@
 .video-item{
-
-    padding: 0%;
-    width: 400px;
     display: flex;
     flex-flow: column nowrap;
+    width: 400px;
+    padding: 0%;
 
     &-video-block{
         width: 400px;
@@ -20,59 +19,54 @@
     &-author-block{
         display: flex;
         flex-flow: row nowrap;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
         padding-top: 10px;
-        
-        font-style: normal;
+        color: #7C8EB5;
         font-weight: 400;
         font-size: 14px;
+        font-style: normal;
         line-height: 15px;
-        color: #7C8EB5;
 
         &-title{
             display: flex;
             flex-flow: row nowrap;
-            justify-content: start ;
             align-items: center;
-            
+            justify-content: start ;
+            color: #37476A;
             font-weight: 600;
             font-size: 14px;
-            line-height: 15px;
-
             font-family:  "Montserrat Alternates";
-
-            color: #37476A;
+            line-height: 15px;
         }
 
     }
 
 
     &-logo {
-        height: 28px;
-        width: 28px;
-        margin-right: 10px;
-        border-radius: 100%;
-        overflow: hidden;
-        justify-content: center;
-        align-items: center;
         display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+        overflow: hidden;
+        border-radius: 100%;
 
         &-pic{
-            height: 100%;
             width: auto;
+            height: 100%;
         }
 
     }
 
     &-title{
-        
-        font-style: normal;
+        color: #000;
         font-weight: 500;
         font-size: 14px;
-        line-height: 18px;
-        color: #000000;
         font-family: "Onest";
+        font-style: normal;
+        line-height: 18px;
 
     }
 }

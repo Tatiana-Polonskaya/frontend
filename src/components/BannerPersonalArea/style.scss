@@ -1,56 +1,62 @@
 .BannerPersonalAreaBlock{
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   padding: 16px;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 24px;
   background: #2477F4;
+  border-radius: 24px;
+
   &-text{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 16px;
-    font-family: Montserrat Alternates;
+    align-items: flex-start;
     color: #FFF;
     font-size: 16px;
+    font-family: "Montserrat Alternates";
     font-style: normal;
-
     line-height: normal;
   }
+
   &-textTariff{
     font-weight: 700;
   }
+
   &-tariff{
-    font-size: 32px;
     font-weight: 700;
+    font-size: 32px;
     letter-spacing: 0.64px;
   }
+
   &-inf{
     font-weight: 500;
     letter-spacing: 0.32px;
   }
+
   &-btn{
     display: flex;
-    padding: 8px 8px 8px 12px;
-    justify-content: center;
-    align-items: center;
     gap: 8px;
-    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 8px 8px 12px;
     background: #FFB800;
     border: none;
+    border-radius: 10px;
   }
+
   &-textBtn{
     color: #FFF;
-    font-family: Montserrat Alternates;
-    font-size: 20px;
-    font-style: normal;
     font-weight: 600;
+    font-size: 20px;
+    font-family: "Montserrat Alternates";
+    font-style: normal;
     line-height: normal;
   }
+
   &-imgText{
     display: flex;
-    align-items: center;
     gap: 32px;
+    align-items: center;
   }
 }

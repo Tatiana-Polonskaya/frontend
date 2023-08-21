@@ -4,7 +4,7 @@ interface IRegisterPersonal {
     name: string;
     lastName: string;
     birthday: string;
-    city?: string;
+    city: string;
     email: string;
     tel: string;
 }
@@ -13,6 +13,7 @@ const initialState: IRegisterPersonal = {
     name: "",
     lastName: "",
     birthday: "",
+    city: "",
     email: "",
     tel: "",
 };
@@ -31,7 +32,7 @@ const personalRegisterSlice = createSlice({
         setBirthday(state, action: PayloadAction<string>) {
             state.birthday = action.payload;
         },
-        setCity(state, action: PayloadAction<string | undefined>) {
+        setCity(state, action: PayloadAction<string>) {
             state.city = action.payload;
         },
         setEmail(state, action: PayloadAction<string>) {

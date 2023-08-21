@@ -1,14 +1,13 @@
 .dropdown {
-    font-family: "Onest";
-    width: 100%;
     // height: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 8px;
-
+    align-items: flex-start;
+    width: 100%;
     padding: 1rem 0.5rem;
+    font-family: "Onest";
     border-bottom: 1px solid #d4dff4;
 
     .d-n {
@@ -20,18 +19,18 @@
     }
 
     &-block {
-        width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         gap: 8px;
+        align-items: flex-start;
+        width: 100%;
     }
 
     &-header {
-        font-family: "Onest";
-        width: 100%;
         display: flex;
         align-items: center;
+        width: 100%;
+        font-family: "Onest";
         
     }
 
@@ -41,25 +40,27 @@
     }
 
     &-title {
+        color: #37476a;
         font-weight: 400;
         font-size: 24px;
         line-height: 31px;
-        color: #37476a;
         cursor: pointer;
     }
 
     &-subtitle {
-        font-family: "Onest";
         width: 100%;
+        color: #7c8eb5;
         font-weight: 400;
         font-size: 20px;
+        font-family: "Onest";
         line-height: 25px;
-        color: #7c8eb5;
     }
+
     &-invisible {
         width: 100%;
     }
 }
+
 .dropdown:last-child {
     border-bottom: none;
 }

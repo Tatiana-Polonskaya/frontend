@@ -2,28 +2,25 @@
     flex: 0 0 auto;
 
     &-content {
-        width: 100%;
         position: relative;
-
         display: flex;
         align-items: center;
         justify-content: space-between;
+        width: 100%;
         padding: 25px 40px;
     }
 
     &-notifications {
         position: absolute;
-
-        width: 400px;
-        right: 40px;
         top: 40px;
-
+        right: 40px;
         align-items: center;
+        width: 400px;
 
         & span span {
+            margin: 0;
             // из-за двойной обертки ReactSVG
             padding: 0 6px;
-            margin: 0;
         }
     }
 }

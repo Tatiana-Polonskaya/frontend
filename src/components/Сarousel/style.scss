@@ -1,15 +1,13 @@
 .Carousel{
-
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
     align-content: center;
+    justify-content: space-around;
 
     
 
     &-main-container{
         width: 100%;
-
         margin-bottom: 30px;
     }
     

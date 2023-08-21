@@ -1,10 +1,10 @@
 .date-input {
     &-main-field {
-        font-size: 1.25rem;
         display: grid;
         grid-template-columns: 1fr 1fr 2fr;
         gap: 10px;
-        margin: 4px 0 0 0;
+        margin: 4px 0 0;
+        font-size: 1.25rem;
     }
 
     & > input {

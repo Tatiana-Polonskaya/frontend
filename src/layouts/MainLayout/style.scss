@@ -1,20 +1,21 @@
 .mainLayout {
-    width: 100%;
     display: flex;
     flex: 1 0 auto;
+    width: 100%;
 
     &-wrapper {
-        flex: 1 0 auto;
-        display: flex;
-        flex-direction: column;
-        padding-left: 90px;
-        width: 100%;
-        background-color: #f3f5f9;
         z-index: 1;
+        display: flex;
+        flex: 1 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        padding-left: 90px;
+        background-color: #f3f5f9;
     }
 
     &-main {
-        padding: 0 40px;
         flex: 1 0 auto;
+        padding: 0 40px;
     }
 }

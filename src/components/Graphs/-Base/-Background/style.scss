@@ -1,7 +1,7 @@
 .base-graph-background {
-    height: 100%;
     position: absolute;
     display: flex;
+    height: 100%;
 
     // $line-color: black;
     $line-color: #e2e9f7;
@@ -14,15 +14,17 @@
     &-section {
         width: 62px;
     }
+
     &-section-stats {
         width: 72px;
     }
+
     &-section,
     &-section-stats {
         display: flex;
         flex-direction: column;
-
         border-right: 1px dashed $line-color;
+
         &_first {
             border-style: dashed;
             border-left: 1px dashed $line-color;
@@ -30,8 +32,8 @@
     }
 
     &-subsection {
-        border-top: 1px solid $line-color;
-        border-style: dashed;
         flex: 1 0 auto;
+        border-style: dashed;
+        border-top: 1px solid $line-color;
     }
 }

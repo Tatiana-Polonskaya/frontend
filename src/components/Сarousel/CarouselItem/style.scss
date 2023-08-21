@@ -1,61 +1,60 @@
 .carouse-item{
     display: flex;
     flex-flow: column nowrap;
-    align-self: flex-start;
     align-items: center;
+    align-self: flex-start;
     justify-content: space-around;
-    cursor: pointer;
     width: 180px;
+    cursor: pointer;
 
     &-img-block{
-        height: 120px;
         width: 120px;
-        background-position: center;
+        height: 120px;
         background-repeat: no-repeat;
+        background-position: center;
         background-size: 120px 120px;
-        border-radius: 100% 100% 100% 100%;
-    }
-    &-video-block{
-        height: 120px;
-        width: 120px;
         border-radius: 100%;
-        overflow: hidden;
-        -o-object-fit: cover;
-        object-fit: cover;
+    }
+
+    &-video-block{
         position: relative;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 100%;
 
         video {
-            -o-object-fit: cover;
+            object-fit: cover;
             object-fit: cover;
         }
     }
 
     &-button{
         position: absolute;
-        display: flex;
         top: 47px;
         left: 75px;
-
-        
-        justify-content: center;
+        display: flex;
         align-items: center;
+        justify-content: center;
 
         img{
-            height: 32px;
             width: 32px;
+            height: 32px;
         }
         
     }
 
     p{
         padding-top: 10px;
-        font-family: Onest;
-        font-size: 14px;
+        color: #000;
         font-weight: 500;
+        font-size: 14px;
+        font-family: "Onest";
         line-height: 18px;
-        letter-spacing: 0em;
+        letter-spacing: 0;
         text-align: center;
-        color: #000000;
 
     }
     

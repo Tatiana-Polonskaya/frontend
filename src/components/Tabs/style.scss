@@ -1,30 +1,30 @@
 .Tabs {
-    font-family: "Montserrat Alternates";
-    font-style: normal;
+    margin-bottom: 20px;
+    color: #37476a;
     font-weight: 600;
     font-size: 20px;
+    font-family: "Montserrat Alternates";
+    font-style: normal;
     line-height: 24px;
-    color: #37476a;
-    margin-bottom: 20px;
 
     &-list {
         display: flex;
-        justify-content: space-around;
         flex-flow: row nowrap;
         gap: 8px;
+        justify-content: space-around;
         width: 100%;
     }
 
     &-content {
-        width: 100%;
-        background-color: white;
-        border-bottom-left-radius: 16px;
-        border-bottom-right-radius: 16px;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        padding: 16px;
         gap: 16px;
+        align-items: flex-start;
+        width: 100%;
+        padding: 16px;
         overflow: auto;
+        background-color: white;
+        border-bottom-right-radius: 16px;
+        border-bottom-left-radius: 16px;
     }
 }

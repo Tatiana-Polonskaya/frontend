@@ -2,20 +2,20 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 8px;
     padding: 1rem 1.5rem;
     background: #f7faff;
     border-radius: 12px;
-    margin-bottom: 8px;
 
     &-descript {
         // надо сделать динамически
         display: flex;
         flex-direction: column;
         overflow: auto;
-        font-size: 16px;
-        line-height: 20px;
         color: #17282f;
         font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
 
         &-bold {
             font-weight: 500;
@@ -42,21 +42,21 @@
     }
 
     &-title {
+        color: #37476a;
         font-weight: 400;
         font-size: 14px;
         line-height: 18px;
-        color: #37476a;
     }
 
     &-item {
         display: flex;
-        align-items: center;
         gap: 8px;
+        align-items: center;
 
         &_choised {
-            background: rgba(36, 119, 244, 0.1);
-            border-radius: 8px;
             color: #2477f4 !important;
+            background: rgb(36 119 244 / 10%);
+            border-radius: 8px;
         }
     }
 
@@ -64,24 +64,24 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 50px;
+        height: 20px;
         font-weight: 700;
         font-size: 12px;
         line-height: 15px;
-        width: 50px;
-        height: 20px;
         border-radius: 4px;
     }
 
     &-analysis,
     &-analysis-open {
-        font-family: "Montserrat Alternates";
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 20px;
-        padding: 4px 0;
         display: flex;
         align-items: center;
+        padding: 4px 0;
         color: #37476a;
+        font-weight: 700;
+        font-size: 16px;
+        font-family: "Montserrat Alternates";
+        line-height: 20px;
     }
 
     &-analysis-open {
@@ -97,27 +97,27 @@
         flex-wrap: nowrap;
         gap: 12px;
     }
+
     &-menu:last-child {
         .expressiveness-link:last-child {
-            text-align: center;
             width: 40px;
+            text-align: center;
         }
     }
 
     &-item,
     &-item-open {
-        cursor: pointer;
         padding: 8px 12px;
+        color: #7c8eb5;
         font-weight: 600;
         font-size: 14px;
         line-height: 17px;
-
-        color: #7c8eb5;
+        cursor: pointer;
 
         &_choised {
-            background: rgba(36, 119, 244, 0.1);
-            border-radius: 8px;
             color: #2477f4 !important;
+            background: rgb(36 119 244 / 10%);
+            border-radius: 8px;
         }
     }
 
@@ -126,8 +126,8 @@
     }
 
     &-choise {
-        background: rgba(36, 119, 244, 0.1);
-        border-radius: 8px;
         color: #2477f4;
+        background: rgb(36 119 244 / 10%);
+        border-radius: 8px;
     }
 }

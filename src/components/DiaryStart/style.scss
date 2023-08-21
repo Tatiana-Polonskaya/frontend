@@ -1,53 +1,48 @@
 .DiaryStart {
-
-
     &-text {
-
         &-h1 {
+            padding: 10px;
             color: #17282F;
+            font-weight: 600;
             font-size: 24px;
             font-family: "Montserrat Alternates";
             font-style: normal;
-            font-weight: 600;
             line-height: normal;
-
-            padding: 10px;
             // margin-bottom: -30px;
 
             &_margin_bottom {
+                margin-bottom: -30px;
                 padding: 0;
                 padding-top: 10px;
-                margin-bottom: -30px;
             }
         }
 
         &-gray {
             color: #7C8EB5;
+            font-weight: 600;
             font-size: 24px;
             font-family: "Montserrat Alternates";
             font-style: normal;
-            font-weight: 600;
             line-height: normal;
         }
 
         &-empty-msg {
             padding: 12px;
             color: #7C8EB5;
+            font-weight: 500;
             font-size: 16px;
             font-family: "Montserrat Alternates";
             font-style: normal;
-            font-weight: 500;
             line-height: normal;
 
             &-animate {
+                display: inline-block;
                 color: #7C8EB5;
+                font-weight: 500;
                 font-size: 16px;
                 font-family: "Montserrat Alternates";
-                font-weight: 500;
-
-                display: inline-block;
-                clip-path: inset(0 30px 0 0);
                 animation: fade-out 2s infinite ease-in-out;
+                clip-path: inset(0 30px 0 0);
             }
 
             @keyframes fade-out {

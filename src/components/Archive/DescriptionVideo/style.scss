@@ -1,27 +1,27 @@
 .archive-video-description {
-    font-family: "Onest";
-    width: 180px;
-    padding: 16px 0px 8px 8px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 180px;
+    padding: 16px 0 8px 8px;
+    font-family: "Onest";
 
     &-title {
         color: #000;
-        font-size: 14px;
         font-weight: 500;
+        font-size: 14px;
     }
 
     &-time-block {
-        margin-top: 8px;
         display: flex;
         gap: 10px;
+        margin-top: 8px;
     }
 
     &-date {
         color: #7c8eb5;
-        font-size: 16px;
         font-weight: 500;
+        font-size: 16px;
     }
 
     &-time {
@@ -30,24 +30,25 @@
     }
 
     &-btn {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: space-between;
+        width: 120px;
         margin-top: auto;
         margin-right: 44px;
-        display: flex;
-        width: 120px;
         padding: 6px 8px 6px 12px;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-        border-radius: 8px;
         background: #ffb800;
+        border-radius: 8px;
         cursor: pointer;
 
         &-descr {
             color: #fff;
+            font-weight: 600;
             font-size: 14px;
             font-family: "Montserrat Alternates";
-            font-weight: 600;
         }
+
         &-icon {
         }
     }

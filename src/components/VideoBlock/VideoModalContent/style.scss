@@ -3,16 +3,16 @@
 
     &-video-row {
         display: grid;
-        grid-template-columns: 800px 1fr;
         grid-template-rows: min-content;
+        grid-template-columns: 800px 1fr;
         gap:14px;
         max-height: 450px;
         
         &-videoplayer {
             width: auto;
             height: auto;
-            overflow: hidden;
             max-height: 450px;
+            overflow: hidden;
 
             video{
                 max-height: 450px;
@@ -22,25 +22,23 @@
         }
 
         &-description {
-
             display: flex;
             flex-flow: column nowrap;
 
             &-title-row {
-
                 display: flex;
                 flex-flow: row nowrap;
-                justify-content: space-between;
                 gap: 10px;
                 align-items: flex-start;
+                justify-content: space-between;
 
                 &-text {
                     padding-bottom: 10px;
-                    font-style: normal;
+                    color: #000;
                     font-weight: 500;
                     font-size: 1.5rem;
+                    font-style: normal;
                     line-height: 24px;
-                    color: #000000;
                 }
 
                 &-closebutton {
@@ -56,94 +54,91 @@
             }
 
             &-times {
-                font-family: "Onest";
-                font-style: normal;
+                color: #7C8EB5;
                 font-weight: 400;
                 font-size: 16px;
+                font-family: "Onest";
+                font-style: normal;
                 line-height: 20px;
-                color: #7C8EB5;
             }
 
             &-author-block {
-
                 display: flex;
                 flex-flow: row nowrap;
-                justify-content: start;
                 align-items: center;
+                justify-content: start;
                 padding:  8px 0;
 
                 &-logo {
-
-                    height: 28px;
-                    width: 28px;
-                    margin-right: 10px;
-                    border-radius: 100%;
-                    overflow: hidden;
-                    justify-content: center;
-                    align-items: center;
                     display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 28px;
+                    height: 28px;
+                    margin-right: 10px;
+                    overflow: hidden;
+                    border-radius: 100%;
 
                     &-img {
-                        height: 100%;
                         width: 100%;
+                        height: 100%;
                     }
                 }
 
                 &-name {
-                    font-style: normal;
+                    color: #37476A;
                     font-weight: 600;
                     font-size: 16px;
-                    line-height: 17px;
-                    color: #37476A;
                     font-family: "Montserrat Alternates";
+                    font-style: normal;
+                    line-height: 17px;
                 }
             }
 
             &-annotation {
-
                 &-title {
-                    font-family: "Onest";
                     padding: 10px 0;
-                    font-style: normal;
+                    color: #7C8EB5;
                     font-weight: 500;
                     font-size: 12px;
+                    font-family: "Onest";
+                    font-style: normal;
                     line-height: 13px;
-                    color: #7C8EB5;
                 }
 
                 &-text {
                     flex-grow:1;
-                    font-style: normal;
+                    overflow-y: auto;
+                    color: #000;
                     font-weight: 400;
                     font-size: 18px;
+                    font-style: normal;
                     line-height: 20px;
-                    color: #000000;
-                    overflow-y: auto;
                 }
             }
 
             &-btn-info {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
 
                 // margin-top: 20px;
                 padding: 16px;
-                gap: 8px;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                color: #FFF;
+                font-weight: 600;
+                font-size: 1rem;
+                font-family: "Montserrat Alternates";
+                font-style: normal;
                 background-color: #FFB800;
                 border: 0;
                 border-radius: 9px;
-                font-style: normal;
-                font-weight: 600;
-                font-size: 1rem;
-                color: #FFFFFF;
-                font-family: "Montserrat Alternates";
 
                 &-icon svg{
                     display: flex;
-                    justify-content: center;
                     align-items: center;
+                    justify-content: center;
                 }
 
                 &_not_allowed{
@@ -154,34 +149,32 @@
     }
 
     &-analyze-row {
-        width: 100%;
-        padding-top: 20px;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         gap: 1em;
-        justify-items: stretch;
         align-items: start;
         justify-content: space-between;
+        justify-items: stretch;
+        width: 100%;
+        padding-top: 20px;
         font-family: "Montserrat Alternates";
 
         &-item {
             display: flex;
             flex-flow: column nowrap;
-            justify-content: center;
-            align-items: center;
             align-content: center;
+            align-items: center;
+            justify-content: center;
 
             p {
-
-                font-style: normal;
-                font-weight: 600;
-                font-size: 16px;
-                line-height: 17px;
-
                 display: flex;
                 align-items: center;
-                text-align: center;
                 color: #37476A;
+                font-weight: 600;
+                font-size: 16px;
+                font-style: normal;
+                line-height: 17px;
+                text-align: center;
             }
         }
 
@@ -200,36 +193,36 @@
     --c: #2477F4;
     --w: 90px;
 
-    width: var(--w);
-    aspect-ratio: 1;
     position: relative;
     display: inline-grid;
+    width: var(--w);
     margin: 5px;
-    place-content: center;
-    font-style: normal;
+    color: #2477F4;
     font-weight: 600;
     font-size: 16px;
+    font-style: normal;
     line-height: 20px;
-    color: #2477F4;
+    aspect-ratio: 1;
+    place-content: center;
 }
 
-.pie:before,
-.pie:after {
-    content: "";
+.pie::before,
+.pie::after {
     position: absolute;
     border-radius: 50%;
+    content: "";
 }
 
-.pie:before {
+.pie::before {
     inset: 0;
     background:
         radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b) var(--b) no-repeat,
         conic-gradient(var(--c) calc(var(--p)*1%), #0000 0);
-    -webkit-mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
+    mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
     mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
 }
 
-.pie:after {
+.pie::after {
     inset: calc(50% - var(--b)/1.95);
     background: var(--c);
     transform: rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));

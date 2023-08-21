@@ -4,33 +4,31 @@
     gap: 8px;
     align-items: center;
     justify-content: end;
-    cursor: pointer;
-
     padding-bottom: 10px;
     color: #7c8eb5;
+    cursor: pointer;
 
 
     &-title {
+        color: #7c8eb5;
         font-weight: 600;
         font-size: 1.25rem;
-        color: #7c8eb5;
-
         font-family: "Montserrat Alternates";
     }
 
     &-icon {
         display: flex;
         flex-flow: row nowrap;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         width: 28px;
 
         svg {
             // из-за двойной обертки ReactSVG
             display: flex;
             flex-flow: row nowrap;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
     }
 }

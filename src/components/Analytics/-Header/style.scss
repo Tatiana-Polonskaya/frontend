@@ -1,13 +1,13 @@
 .header-analytics {
-    font-family: "Onest";
     position: relative;
+    font-family: "Onest";
 
     &-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         width: 100%;
         font-family: "Montserrat Alternates";
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
 
         & > div:last-child {
             margin-left: auto;
@@ -19,17 +19,17 @@
     }
 
     &-title {
+        color: #37476a;
         font-weight: 600;
         font-size: 24px;
         line-height: 29px;
-        color: #37476a;
     }
 
     &-result {
+        padding: 6px 12px;
         font-weight: 600;
         font-size: 16px;
         line-height: 20px;
-        padding: 6px 12px;
         border-radius: 40px;
         // background: #ffb800;
         // color: #ffffff;

@@ -6,31 +6,28 @@
         justify-items: start;
 
         &-item {
-
-            font-family: 'Montserrat Alternates';
             display: flex;
             flex-direction: row;
-            justify-content: start;
-            align-items: center;
-            padding-top: 10px;
             gap: 12px;
+            align-items: center;
+            justify-content: start;
+            padding-top: 10px;
             color: #7C8EB5;
+            font-family: 'Montserrat Alternates';
 
             &-icon {
-
                 width: 24px;
                 height: 24px;
             }
 
             &-label {
-                cursor: pointer;
-                user-select: none;
-
-                font-family: 'Montserrat Alternates';
-                font-style: normal;
                 font-weight: 500;
                 font-size: 16px;
+                font-family: 'Montserrat Alternates';
+                font-style: normal;
                 line-height: 20px;
+                cursor: pointer;
+                user-select: none;
 
                 // &-radio
                 &-radio:checked,
@@ -41,39 +38,38 @@
                 &-radio:checked+&-custom-radio__label,
                 &-radio:not(:checked)+&-custom-radio__label {
                     position: relative;
-                    padding: 6px 0 0 40px;
                     display: inline-block;
                     margin-bottom: 5px;
+                    padding: 6px 0 0 40px;
                 }
 
-                &-radio:not(:checked)+&-custom-radio__label:before {
-                    content: '';
+                &-radio:not(:checked)+&-custom-radio__label::before {
                     position: absolute;
-                    left: 0;
                     top: 0;
+                    left: 0;
                     width: 28px;
                     height: 28px;
                     border: 2px solid #B2C2E4;
                     border-radius: 8px;
+                    content: '';
 
                 }
 
-                &-radio:checked+&-custom-radio__label:before {
-                    content: '';
+                &-radio:checked+&-custom-radio__label::before {
                     position: absolute;
-                    left: 0;
                     top: 0;
+                    left: 0;
                     width: 32px;
                     height: 32px;
-                    border-radius: 8px;
                     background: #2477F4;
-
-                    outline: 2px solid #FFFFFF;
+                    border-radius: 8px;
+                    outline: 2px solid #FFF;
                     outline-offset: -4px;
+                    content: '';
 
                 }
 
-                &-radio:checked+&-custom-radio__label:after {
+                &-radio:checked+&-custom-radio__label::after {
                     // content: '';
                     // width: 24px;
                     // // width: 1.3em;
@@ -95,11 +91,10 @@
         }
 
         &_checked {
-            background: #2477F4;
-            box-shadow: 0px 0px 14px rgba(124, 142, 181, 0.25);
-            fill: #FFFFFF;
-            color: #FFFFFF;
             color: #031C3D;
+            background: #2477F4;
+            box-shadow: 0 0 14px rgb(124 142 181 / 25%);
+            fill: #FFF;
         }
     }
 }

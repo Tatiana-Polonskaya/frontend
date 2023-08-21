@@ -19,9 +19,10 @@ export default function InfoFragment(props: InfoFragmentProps) {
             <p className={cnLoginFragment("phrase")}>{props.phrase}</p>
             <p className={cnLoginFragment("subphrase")}>{props.subphrase}</p>
             <Link
-                className={cnLoginFragment("subphrase")}
+                className={cnLoginFragment("link")}
                 arrow="right"
-                onClick={() => navigate(RoutesEnum.LANDING)}
+                href="/"
+                target="_blank"
             >
                 Узнать подробнее о сервисе
             </Link>

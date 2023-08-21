@@ -26,7 +26,7 @@ const EMAIL_WRONG_TEXT_INIT = "Неверный формат почты";
 export default function SecondaryInfoPersonal() {
     const dispatch = useAppDispatch();
 
-    const { name, lastName, birthday, email, tel } = useAppSelector(
+    const { name, lastName, birthday, city, email, tel } = useAppSelector(
         (state) => state.register.personal
     );
     const [checkEmailRequest, checkEmailResponse] = useLazyCheckEmailQuery();
@@ -96,7 +96,7 @@ export default function SecondaryInfoPersonal() {
                 phone: tel,
                 avatar: null,
                 password: password,
-                city: "Санкт-Петербург",
+                city: city,
             });
         }
     };

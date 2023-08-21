@@ -1,35 +1,38 @@
 .energy-smile{
   display: flex;
-  justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   padding: 10px;
+
   &-smile{
-    font-family: 'Montserrat Alternates';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
     display: flex;
     // align-items: center;
     flex-direction: column;
-    color: #37476A;
     width: 20%;
+    color: #37476A;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
   }
+
   &-center-smile{
     text-align: center;
   }
+
   &-smile1{
-    font-family: 'Montserrat Alternates';
-    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    color: #37476A80;
     font-weight: 600;
     font-size: 20px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    color: #37476A80;
-    width: 20%;
-    mask-image: linear-gradient(rgba( 0, 0, 0, 0.5) 100%, black 0);
+    font-family: 'Montserrat Alternates';
+    font-style: normal;
+    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 100%, black 0);
 
 
   }

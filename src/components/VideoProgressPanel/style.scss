@@ -28,36 +28,34 @@
     padding-top: 8px;
 
     &-analyze-row {
-        width: 100%;
         // width: var(--w);
         // padding-top: 19.5px;
 
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         gap: var(--g);
-        justify-items: stretch;
         align-items: center;
         justify-content: space-between;
-
+        justify-items: stretch;
+        width: 100%;
         font-family: "Montserrat Alternates";
 
         &-item {
             display: flex;
             flex-flow: column nowrap;
-            justify-content: center;
-            align-items: center;
             align-content: center;
+            align-items: center;
+            justify-content: center;
 
             p {
-                font-style: normal;
-                font-weight: 600;
-                font-size: var(--fs-t);
-                line-height: var(--lh-t);
-
                 display: flex;
                 align-items: center;
-                text-align: center;
                 color: #37476a;
+                font-weight: 600;
+                font-size: var(--fs-t);
+                font-style: normal;
+                line-height: var(--lh-t);
+                text-align: center;
             }
         }
     }
@@ -97,41 +95,42 @@
     --fs-v: 16px;
     --lh-v: 20px;
 
-    width: var(--w-i);
-    aspect-ratio: 1;
     position: relative;
     display: inline-grid;
+    width: var(--w-i);
     margin: 5px;
-    place-content: center;
-    font-style: normal;
+    color: #2477f4;
     font-weight: 600;
     font-size: var(--fs-v);
+    font-style: normal;
     line-height: var(--lh-v);
-    color: #2477f4;
+    aspect-ratio: 1;
+    place-content: center;
 
     &-helper {
         position: absolute;
-        height: 60px;
+        z-index: 10;
         width: 60px;
+        height: 60px;
         border: 10px solid #d9e0ef;
         border-radius: 50%;
-
-        z-index: 10;
     }
 }
-.pie:before,
-.pie:after {
-    content: "";
+
+.pie::before,
+.pie::after {
     position: absolute;
-    border-radius: 50%;
     z-index: 100;
+    border-radius: 50%;
+    content: "";
 }
-.pie:before {
+
+.pie::before {
     inset: 0;
     background: radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b)
             var(--b) no-repeat,
         conic-gradient(var(--c) calc(var(--p) * 1%), #0000 0);
-    -webkit-mask: radial-gradient(
+    mask: radial-gradient(
         farthest-side,
         #0000 calc(99% - var(--b)),
         #000 calc(100% - var(--b))
@@ -142,12 +141,14 @@
         #000 calc(100% - var(--b))
     );
 }
-.pie:after {
+
+.pie::after {
     inset: calc(50% - var(--b) / 2);
     background: var(--c);
     transform: rotate(calc(var(--p) * 3.6deg))
         translateY(calc(50% - var(--w-i) / 2));
 }
+
 .animate {
     animation: p 1s 0.4s both;
 }

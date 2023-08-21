@@ -2,17 +2,15 @@
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-
     justify-content: space-between;
-    padding: 10px 6px 0 0;
     min-width: 40px;
-
-    font-size: 0.75rem;
+    padding: 10px 6px 0 0;
     font-weight: 500;
+    font-size: 0.75rem;
 
     &-item {
         width: inherit;
-        text-align: right;
         color: #b2c2e4;
+        text-align: right;
     }
 }

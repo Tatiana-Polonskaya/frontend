@@ -1,36 +1,33 @@
 .AnalysisReport {
-    font-family: "Montserrat Alternates";
     font-size: 20px;
+    font-family: "Montserrat Alternates";
     line-height: 26px;
 
     &-btn-back {
         &-span {
-            font-family: "Montserrat Alternates";
+            display: inline-flex;
+            gap: 10px;
             color: #37476a;
             font-weight: 600;
             font-size: 16px;
-
+            font-family: "Montserrat Alternates";
             cursor: pointer;
-
-            display: inline-flex;
-            gap: 10px;
         }
     }
 
     &-whiteBlock {
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 10px;
-        margin-bottom: 20px;
         width: 100%;
+        margin-bottom: 20px;
+        padding: 10px;
         overflow: hidden;
+        background: #fff;
+        border-radius: 16px;
     }
 
     &-header {
         display: grid;
-        grid-template-columns: 1fr 1fr;
         grid-template-rows: 550px;
-
+        grid-template-columns: 1fr 1fr;
         gap: 15px;
         width: 100%;
     }
@@ -38,8 +35,8 @@
     &-video-block {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: flex-start;
+        justify-content: center;
 
         &-video {
             overflow: hidden;
@@ -52,37 +49,37 @@
 
         &-title {
             max-width: 700px;
+            padding: 5px 10px;
             color: #000;
+            font-weight: 500;
             font-size: 20px;
             font-family: "Onest";
-            font-weight: 500;
-            padding: 5px 10px;
         }
 
         &-description {
             display: flex;
             flex-direction: row;
-            justify-content: start;
             align-items: flex-start;
-
+            justify-content: start;
+            padding: 0 10px;
             color: #7c8eb5;
             font-size: 16px;
             font-family: "Onest";
-            padding: 0 10px;
         }
     }
+
     &-col {
         display: flex;
         flex-direction: column;
-
         gap: 15px;
         margin: 0 10px;
     }
+
     &-col-grow {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         flex-grow: 1;
+        align-items: flex-start;
     }
 
     &-row {
@@ -94,9 +91,9 @@
     &-row-justify {
         display: flex;
         flex-direction: row;
-        justify-content: start;
-        align-items: center;
         gap: 10px;
+        align-items: center;
+        justify-content: start;
         width: 100%;
     }
 
@@ -108,36 +105,37 @@
 
             &-icon {
                 padding: 0 8px;
+
                 div {
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
                     align-content: center;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
 
             &-text {
                 color: #37476a;
+                font-weight: 600;
                 font-size: 24px;
                 font-family: "Montserrat Alternates";
-                font-weight: 600;
             }
         }
 
         &-desciption {
             &-text {
                 color: #37476a;
+                font-weight: 400;
                 font-size: 16px;
                 font-family: "Onest";
-                font-weight: 400;
             }
         }
     }
 
     &-width {
         width: 100%;
-        padding: 0 20px;
         height: 100%;
+        padding: 0 20px;
     }
 
     &-width-max {
@@ -148,7 +146,7 @@
         display: flex;
         flex-flow: column nowrap;
         gap: 10px;
-        overflow: auto;
         height: 85%;
+        overflow: auto;
     }
 }

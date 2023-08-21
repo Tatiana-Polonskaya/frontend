@@ -6,31 +6,31 @@
     }
 
     &-border {
-        margin-bottom: 0;
         display: flex;
         gap: 8px;
-        border-radius: 33px;
+        margin-bottom: 0;
         background: #f7faff;
+        border-radius: 33px;
     }
 
     &-ls-result {
         position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
         top: 78px;
         left: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 77px;
         height: 36px;
+        text-align: center;
         transform: translateX(-50%);
         transform: translateY(-50%);
 
         & > span {
-            font-family: "Onest";
-            font-style: normal;
             font-weight: 700;
             font-size: 14px;
+            font-family: "Onest";
+            font-style: normal;
             line-height: 18px;
             text-transform: uppercase;
             word-wrap: break-word;
@@ -38,8 +38,8 @@
     }
 
     &-ls-circle {
-        height: 135px;
         width: 150px;
+        height: 135px;
     }
 
     &-ls-percent {
@@ -64,26 +64,26 @@
 
     &-rs {
         display: flex;
-        align-items: center;
         flex-wrap: nowrap;
+        align-items: center;
         // width: 217px;
         font-family: "Onest";
 
         &-title {
             width: 100%;
+            margin-bottom: 0.5rem;
             font-weight: 700;
-            text-transform: uppercase;
             font-size: 20px;
             line-height: 25px;
-            margin-bottom: 0.5rem;
+            text-transform: uppercase;
         }
 
         &-text {
             display: inline-block;
+            color: #7c8eb5;
             font-weight: 400;
             font-size: 16px;
             line-height: 20px;
-            color: #7c8eb5;
         }
     }
 }

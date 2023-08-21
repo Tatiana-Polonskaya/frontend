@@ -3,49 +3,47 @@
     flex-flow: column nowrap;
 
     &-row {
-        padding-left: 42px;
-        padding-top: 10px;
         display: flex;
         flex-flow: row nowrap;
-        justify-content: flex-start;
         align-items: center;
+        justify-content: flex-start;
+        padding-top: 10px;
+        padding-left: 42px;
     }
 
     &-text {
         color: #37476A;
-        font-family: "Onest";
-        font-size: 16px;
-        font-style: normal;
         font-weight: 400;
+        font-size: 16px;
+        font-family: "Onest";
+        font-style: normal;
         line-height: normal;
     }
 
     &-input {
-
         &-block {
-
-            border-radius: 8px;
-            background: #F3F5F9;
             display: flex;
             flex-flow: row nowrap;
-            padding: 3px 10px;
-            margin: 0 10px;
-            justify-content: center;
-            align-items: center;
             gap: 8px;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            padding: 3px 10px;
+            background: #F3F5F9;
+            border-radius: 8px;
         }
 
         &-field {
-            text-align: center;
+            width: 40px;
             color: #37476A;
-            font-family: "Montserrat Alternates";
-            font-size: 16px;
-            font-style: normal;
             font-weight: 600;
+            font-size: 16px;
+            font-family: "Montserrat Alternates";
+            font-style: normal;
             line-height: normal;
+            text-align: center;
             background: none;
             border: none;
-            width: 40px;
 
             &_onblur{
                 color: red;

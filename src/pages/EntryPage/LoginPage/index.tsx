@@ -153,7 +153,7 @@ export default function LoginPage() {
                             </Button>
                         </div>
                         <p>
-                            <span>Забыли пароль?</span>&nbsp;
+                            <span  className={cnLoginPage("span")}>Забыли пароль?</span>&nbsp;
                             <Link
                                 className={cnLoginPage("link")}
                                 onClick={() => navigate(RoutesEnum.RESTORE)}

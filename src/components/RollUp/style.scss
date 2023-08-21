@@ -2,9 +2,9 @@
     &-header {
         display: flex;
         flex-flow: row nowrap;
-        justify-content: start;
-        align-items: center;
         gap: 10px;
+        align-items: center;
+        justify-content: start;
         padding: 10px 0;
     }
 
@@ -12,27 +12,27 @@
         svg {
             display: flex;
             flex-flow: row nowrap;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
     }
 
     &-title {
         color: #37476A;
+        font-weight: 600;
         font-size: 16px;
         font-family: "Montserrat Alternates";
-        font-weight: 600;
 
     }
 
     &-btn {
-        cursor: pointer;
         padding: 0 20px  ;
         color: #2477F4;
+        font-weight: 500;
         font-size: 16px;
         font-family: "Montserrat Alternates";
-        font-weight: 500;
+        cursor: pointer;
     }
 
     &-content {

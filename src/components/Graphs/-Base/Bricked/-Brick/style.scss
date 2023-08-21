@@ -2,8 +2,8 @@
     position: absolute;
 
     &_solid {
-        border-radius: 4px;
         height: 24px;
+        border-radius: 4px;
     }
 
     &_thin {
@@ -16,21 +16,20 @@
     }
 
     &-tooltip {
-        padding: 8px 12px !important;
-        max-width: 450px !important;
         z-index: 100;
-        border-radius: 12px !important;
-        border: 1px solid #7C8EB5;
-        background: #FFF !important;
+        max-width: 450px !important;
+        padding: 8px 12px !important;
         line-height: 12px !important;
-        box-shadow: 2px 2px 12px 0px rgba(173, 185, 212, 0.30);
+        background: #FFF !important;
+        border: 1px solid #7C8EB5;
+        border-radius: 12px !important;
+        box-shadow: 2px 2px 12px 0 rgb(173 185 212 / 30%);
 
         &-text{
             color: #37476A;
-            font-size: 12px;
-            
-            font-family: "Onest";
             font-weight: 500;
+            font-size: 12px;
+            font-family: "Onest";
         }
     }
 }

@@ -6,21 +6,21 @@
     padding: 15px 0;
 
     &-title {
-        color: #37476a;
-        font-family: "Montserrat Alternates";
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
         margin-bottom: 0.2rem;
+        color: #37476a;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: "Montserrat Alternates";
+        font-style: normal;
+        line-height: normal;
     }
 
     &-subtitle {
         color: #7c8eb5;
-        font-family: "Onest";
-        font-size: 16px;
-        font-style: normal;
         font-weight: 400;
+        font-size: 16px;
+        font-family: "Onest";
+        font-style: normal;
         line-height: normal;
     }
 
@@ -28,27 +28,25 @@
         position: relative;
         width: 100%;
         height: 20px;
-        padding-right: 0px;
-        border-radius: 40px;
-        background: #f3f5f9;
+        padding-right: 0;
         overflow: hidden;
+        background: #f3f5f9;
+        border-radius: 40px;
         transition: 5s;
 
         &-fill {
             position: absolute;
-            left: 0;
             top: 0;
+            left: 0;
             height: 100%;
-
-            animation-duration: 5s;
-            animation-fill-mode: forwards;
-            animation-iteration-count: infinite;
-            animation-name: placeHolderShimmer;
-            animation-timing-function: linear;
             background: linear-gradient(to right, #2477f4 8%, #fff 18%, #2477f4 33%);
             background-size: 800px 104px;
-
             transition: 5s;
+            animation-name: placeHolderShimmer;
+            animation-duration: 5s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-fill-mode: forwards;
         }
 
         @keyframes placeHolderShimmer {

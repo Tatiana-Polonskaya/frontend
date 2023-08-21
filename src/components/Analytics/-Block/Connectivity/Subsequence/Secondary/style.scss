@@ -2,21 +2,21 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 8px;
     padding: 1rem 1.5rem;
     background: #f7faff;
     border-radius: 12px;
-    margin-bottom: 8px;
 
     &-description {
-        font-family: "Onest";
+        display: inline-block;
         // надо сделать динамически
         width: 55%;
-        display: inline-block;
         overflow: auto;
-        font-size: 16px;
-        line-height: 20px;
         color: #17282f;
         font-weight: 400;
+        font-size: 16px;
+        font-family: "Onest";
+        line-height: 20px;
 
         &-bold {
             font-weight: 500;
@@ -29,6 +29,7 @@
         gap: 6px;
         padding: 0 0.5rem;
     }
+
     &-marker {
         display: flex;
         flex-direction: row;
@@ -42,51 +43,51 @@
     }
 
     &-title {
+        color: #37476a;
         font-weight: 400;
         font-size: 14px;
         line-height: 18px;
-        color: #37476a;
     }
 
     &-item {
         display: flex;
-        align-items: center;
         gap: 8px;
+        align-items: center;
     }
 
     &-time {
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 50px;
+        height: 20px;
         font-weight: 700;
         font-size: 12px;
         line-height: 15px;
-        width: 50px;
-        height: 20px;
         border-radius: 4px;
     }
 
     &-original {
-        background: #f7faff;
         color: #7c8eb5;
+        background: #f7faff;
     }
 
     &-citation {
-        color: #ffffff;
-        background: linear-gradient(48.4deg, #ffb800 -18.18%, #ff9900 105.3%);
+        color: #fff;
+        background: linear-gradient(48.4deg, #ffb800 -18.18%, #f90 105.3%);
     }
 
     &-selfCitation {
-        color: #ffffff;
+        color: #fff;
         background: linear-gradient(42.13deg, #8540fd -25.36%, #af1ff2 130.25%);
     }
 
     &-borrowing {
-        color: #ffffff;
+        color: #fff;
         background: linear-gradient(
             32.08deg,
-            rgb(36, 119, 244) 0%,
-            rgb(58, 134, 250) 100%
+            rgb(36 119 244) 0%,
+            rgb(58 134 250) 100%
         );
     }
 

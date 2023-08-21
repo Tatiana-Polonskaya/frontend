@@ -1,12 +1,12 @@
 .recomendation {
-    width: 100%;
-    height: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
     gap: 16px;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
     font-family: "Onest";
 
     // width: 1216px;
@@ -16,11 +16,11 @@
     border-radius: 12px;
 
     &-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         width: 100%;
         font-family: "Montserrat Alternates";
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
 
         & > div:last-child {
             margin-left: auto;
@@ -32,31 +32,31 @@
     }
 
     &-title {
+        color: #37476a;
         font-weight: 600;
         font-size: 16px;
         line-height: 20px;
-        color: #37476a;
     }
 
     &-link {
+        color: #2477f4;
         font-weight: 500;
         font-size: 16px;
         line-height: 20px;
-        color: #2477f4;
         cursor:default;
     }
 
     &-content {
         width: 100%;
+        color: #17282f;
         font-weight: 400;
         font-size: 16px;
         line-height: 20px;
-        color: #17282f;
         transition: 0.5s;
 
         & > p {
-            white-space: nowrap;
             overflow: hidden;
+            white-space: nowrap;
             text-overflow: ellipsis;
         }
 

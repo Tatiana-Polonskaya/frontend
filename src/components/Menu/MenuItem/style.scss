@@ -1,36 +1,31 @@
 .MenuItem {
     display: flex;
-    justify-content: start;
-    align-items: center;
     align-content: center;
-
+    align-items: center;
+    justify-content: start;
+    height: 60px;
+    margin-bottom: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-left: 30px;
-    margin-bottom: 20px;
-    height: 60px;
-
-    cursor: pointer;
-
+    padding-left: 32px;
     color: #90a0c1;
-    font-size: 16px;
-    font-style: normal;
     font-weight: 600;
-    line-height: 20px;
+    font-size: 16px;
     font-family: "Montserrat Alternates";
+    font-style: normal;
+    line-height: 20px;
+    cursor: pointer;
 
     &:hover,
     &_selected {
+        color: #2477f4;
         background: linear-gradient(
             270deg,
-            rgba(36, 119, 244, 0.1) 0%,
-            rgba(255, 255, 255, 0) 100%
+            rgb(36 119 244 / 10%) 0%,
+            rgb(255 255 255 / 0%) 100%
         );
-        border-right-color: #2477f4;
-        border-right-style: solid;
-        border-right-width: 3px;
+        border-right: 3px solid #2477f4;
         border-radius: 40px 0 0 40px;
-        color: #2477f4;
 
         & svg {
             fill: #2477f4;
@@ -41,11 +36,12 @@
         padding-right: 5%;
 
         &-svg {
-            height: 25px;
             width: 25px;
+            height: 25px;
             fill: #90a0c1;
         }
     }
+
     &-title {
         margin-left: 30px;
     }

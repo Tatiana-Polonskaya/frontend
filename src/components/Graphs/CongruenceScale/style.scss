@@ -1,107 +1,120 @@
 .container{
   display: flex;
-  border: 3px solid #D4DFF4 ;
-  background: #D4DFF4;
-  border-radius: 20px;
   flex-direction: row;
   align-items: center;
+  width: 100%;
   height: 100px;
   overflow: hidden;
-  width: 100%;
+  background: #D4DFF4;
+  border: 3px solid #D4DFF4 ;
+  border-radius: 20px;
 }
+
 .content{
   display: flex;
   flex-direction: row;
-  justify-content: start;
-  height: 100px;
   align-items: flex-end;
+  justify-content: start;
   width: 100%;
+  height: 100px;
 
 }
+
 .content > div{
   border-radius: 6px;
 }
+
 .text{
-  font-style: normal;
-  font-size: 100%;
   display: flex;
   align-items: center;
-  color: #FFFFFF;
   padding-left:5px;
+  color: #FFF;
+  font-size: 100%;
+  font-style: normal;
 }
+
 .congruenceScale{
   &-textBloc{
     display: flex;
     flex-direction: row;
-    padding: 16px;
     gap: 16px;
     width: 100%;
+    padding: 16px;
     background: #F7FAFF;
     border-radius: 12px;
   }
+
   &-text{
-    font-style: normal;
+    padding-top: 10px;
+    color: #17282F;
     font-weight: 400;
     font-size: 16px;
+    font-style: normal;
     line-height: 20px;
-    color: #17282F;
-    padding-top: 10px;
   }
+
   &-textInfTitle{
     font-weight: 500;
   }
+
   &-block{
     width: 20px;
     height: 20px;
-    border-radius: 4px;
     margin: 5px;
+    border-radius: 4px;
   }
+
   &-blockText{
     display: flex;
     flex-direction: row;
   }
+
   &-Text{
-    font-style: normal;
+    color: #37476A;
     font-weight: 400;
     font-size: 14px;
+    font-style: normal;
     line-height: 18px;
-    color: #37476A;
   }
 }
+
 .congruenceScaletabs {
   display: flex;
   width: 40%;
 }
+
 .congruenceScaletab {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 12px;
   gap: 6px;
+  align-items: center;
+  justify-content: center;
   width: 20%;
-  border: none;
-  font-style: normal;
+  margin: 8px;
+  padding: 6px 12px;
+  color: #2477F4;
   font-weight: 600;
   font-size: 12px;
-  background: rgba(36, 119, 244, 0.13);
+  font-style: normal;
+  background: rgb(36 119 244 / 13%);
+  border: none;
   border-radius: 8px;
-  color: #2477F4;
-  margin: 8px;
 
   svg{
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 }
+
 .congruenceScaletab:not(:last-child) {
 }
+
 .congruenceScaletab.congruenceScaleactive {
-  color: #7C8EB5;
-  background: rgba(36, 119, 244, 0);
   display: flex;
+  color: #7C8EB5;
+  background: rgb(36 119 244 / 0%);
 }
 
 .panel {
@@ -109,18 +122,18 @@
   padding: 10px;
 
 }
+
 .panel.congruenceScaleactive {
   display: block;
   flex-direction: row;
 }
+
 .congruenceScale{
-
-
   &-blockText{
     display: flex;
     flex-direction: row;
-    align-items: center;
     gap: 10px;
+    align-items: center;
   }
 
 }

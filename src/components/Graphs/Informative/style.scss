@@ -1,59 +1,62 @@
 .blocText{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
     gap: 16px;
+    align-items: flex-start;
     width:1200px;
+    padding: 16px;
     background: #F7FAFF;
     border-radius: 12px;
 
 }
+
 .textInf{
-    width: 90%;
-    font-family: 'Onest';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
     display: flex;
     align-items: center;
-
+    width: 90%;
     color: #17282F;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: 'Onest';
+    font-style: normal;
+    line-height: 20px;
 }
+
 .blocColor{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 8px;
     gap: 6px;
-
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
+    padding: 0 8px;
 
 }
+
 .colorSquare1, .colorSquare2,.colorSquare3,.colorSquare4 {
     width: 20px;
     height: 20px;
-
     background: linear-gradient(74.12deg, #410DAE 0%, #7524FA 100%);
     border-radius: 4px;
 }
+
 .colorSquare2{
     background: linear-gradient(78.41deg, #FE6972 0%, #FF4E78 100%);
 }
+
 .colorSquare3{
     background: linear-gradient(32.08deg, #FFB800 0%, #FDA743 100%);
 }
+
 .colorSquare4{
     background: #ADB9D4;
 }
+
 .Square{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    padding: 0;
     gap: 10px;
-
+    align-items: center;
     width:25%;
+    padding: 0;
 }

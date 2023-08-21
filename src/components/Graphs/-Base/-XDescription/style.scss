@@ -1,109 +1,106 @@
 .base-graph-x-description {
-    font-size: 0.75rem;
-    font-weight: 500;
     display: flex;
+    font-weight: 500;
+    font-size: 0.75rem;
 
     &-item {
         display: flex;
         align-items: center;
         justify-content: center;
-
-        border-radius: 4px;
-        margin: 6px;
         width: 50px;
-
+        margin: 6px;
         color: #adb9d4;
         background-color: #f7faff;
+        border-radius: 4px;
 
         &_first {
             margin-left: 14px;
         }
 
         &_selected {
-            background-color: #ffb800;
             color: white;
+            background-color: #ffb800;
         }
     }
+
     &-item-stats {
         display: flex;
+        gap: 1px;
         align-items: center;
         justify-content: space-between;
-
-        border-radius: 4px;
-        padding: 6px;
-        height: 20px;
         width: 70px;
-        gap: 1px;
-
+        height: 20px;
+        padding: 6px;
         color: #adb9d4;
         background-color: #fff;
+        border-radius: 4px;
 
         &_first {
             // margin-left: 10px;
         }
+
         & > span {
             color: #adb9d480;
         }
 
         &_selected {
-            background-color: #ffb800;
             color: white;
+            background-color: #ffb800;
         }
     }
 }
+
 .base-graph-x-description-stats {
-    font-size: 0.75rem;
-    font-weight: 500;
     display: flex;
     justify-content: space-between;
     margin: 6px;
+    font-weight: 500;
+    font-size: 0.75rem;
 
     &-item {
         display: flex;
         align-items: center;
         justify-content: center;
-
-        border-radius: 4px;
-        margin: 6px;
         width: 50px;
-
+        margin: 6px;
         color: #adb9d4;
         background-color: #f7faff;
+        border-radius: 4px;
 
         &_first {
             margin-left: 14px;
         }
 
         &_selected {
-            background-color: #ffb800;
             color: white;
+            background-color: #ffb800;
         }
     }
+
     &-item-stats {
         display: flex;
+        gap: 1px;
         align-items: center;
         justify-content: space-between;
-
-        border-radius: 4px;
-        padding: 6px;
+        width: 70px;
         // margin: 6px;
         height: 20px;
-        width: 70px;
-        gap: 1px;
-
+        padding: 6px;
         color: #adb9d4;
         background-color: #fff;
+        border-radius: 4px;
 
         &_first {
             // margin-left: 10px;
         }
+
         & > span {
             color: #adb9d480;
         }
 
         &_selected {
-            background-color: #ffb800;
             color: white;
+            background-color: #ffb800;
         }
     }
 }

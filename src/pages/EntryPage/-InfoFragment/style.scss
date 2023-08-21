@@ -8,8 +8,21 @@
     }
 
     &-subphrase {
-        font-size: 1.25rem;
+
         padding: 16px 0;
         color: #37476a;
+        font-family: Onest;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+    }
+
+    &-link {
+        color: #2477F4;
+        font-family: Montserrat Alternates;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
     }
 }

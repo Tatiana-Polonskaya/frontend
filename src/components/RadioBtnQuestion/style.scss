@@ -3,13 +3,13 @@
     line-height: 20px;
 
     &-title{
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
         padding-bottom: 10px;
         color: #031C3D;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: 'Montserrat Alternates';
+        font-style: normal;
+        line-height: 24px;
     }
 
     &-col-answers{
@@ -19,31 +19,28 @@
         justify-items: start;
 
         &-item{
-
-            font-family: 'Montserrat Alternates';
             display: flex;
             flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            padding-top: 10px;
             gap: 12px;
+            align-items: center;
+            justify-content: center;
+            padding-top: 10px;
             color: #7C8EB5;
+            font-family: 'Montserrat Alternates';
 
             &-icon{
-                
                 width: 24px;
                 height: 24px;
             }
 
             &-label{
-                cursor: pointer;
-                user-select: none;
-
-                font-family: 'Montserrat Alternates';
-                font-style: normal;
                 font-weight: 600;
                 font-size:  1em;
+                font-family: 'Montserrat Alternates';
+                font-style: normal;
                 line-height:  1em;
+                cursor: pointer;
+                user-select: none;
 
                     // &-radio
                 &-radio:checked, &-radio:not(:checked) {
@@ -52,39 +49,38 @@
     
                 &-radio:checked + &-custom-radio__label, &-radio:not(:checked) + &-custom-radio__label {
                     position: relative;
-                    padding: 6px 0 0 40px;
                     display: inline-block;
                     margin-bottom: 5px;
+                    padding: 6px 0 0 40px;
                 }
     
-                &-radio:not(:checked) + &-custom-radio__label:before  {
-                    content: '';
+                &-radio:not(:checked) + &-custom-radio__label::before  {
                     position: absolute;
-                    left: 0;
                     top: 0;
+                    left: 0;
                     width: 28px;
                     height: 28px;
                     border: 2px solid #B2C2E4;
                     border-radius: 8px;
+                    content: '';
 
                 }
 
-                &-radio:checked + &-custom-radio__label:before {
-                    content: '';
+                &-radio:checked + &-custom-radio__label::before {
                     position: absolute;
-                    left: 0;
                     top: 0;
+                    left: 0;
                     width: 32px;
                     height: 32px;
-                    border-radius: 8px;
                     background: #2477F4;
-                    
-                    outline: 2px solid #FFFFFF; 
-                    outline-offset: -4px; 
+                    border-radius: 8px;
+                    outline: 2px solid #FFF; 
+                    outline-offset: -4px;
+                    content: ''; 
                     
                 }
     
-                &-radio:checked + &-custom-radio__label:after {
+                &-radio:checked + &-custom-radio__label::after {
                     // content: '';
                     // width: 24px;
                     // // width: 1.3em;
@@ -106,33 +102,31 @@
         }
 
         &_checked{
+            color: #FFF;
             background: #2477F4;
-            box-shadow: 0px 0px 14px rgba(124, 142, 181, 0.25);
-            fill: #FFFFFF;
-            color: #FFFFFF;
+            box-shadow: 0 0 14px rgb(124 142 181 / 25%);
+            fill: #FFF;
         }
     }
 
     &-block-answers{
-        
         display: flex;
         flex-flow: row wrap;
+        gap: 12px;
         align-items: center;
         width: 100%;
-        gap: 12px;
 
         &-item{
-
             display: flex;
             flex-direction: row nowrap;
-            justify-content: start;
-            align-items: flex-start;
-            width: 100%;
             gap: 12px;
+            align-items: flex-start;
+            justify-content: start;
+            width: 100%;
+            color: #7C8EB5;
 
             // background: red;
             border-radius: 9px;
-            color: #7C8EB5;
             // fill: #7C8EB5;
 
             &-icon{
@@ -141,14 +135,13 @@
             }
 
             &-label{
-                cursor: pointer;
-                user-select: none;
-
-                font-family: 'Montserrat Alternates';
-                font-style: normal;
                 font-weight: 600;
                 font-size:  1em;
+                font-family: 'Montserrat Alternates';
+                font-style: normal;
                 line-height:  1em;
+                cursor: pointer;
+                user-select: none;
 
                 &-radio{
                     display: none;
@@ -160,35 +153,34 @@
     
                 &-radio:checked + &-custom-radio__label, &-radio:not(:checked) + &-custom-radio__label {
                     position: relative;
-                    padding: 6px 0 0 40px;
                     display: inline-block;
                     margin-bottom: 5px;
+                    padding: 6px 0 0 40px;
                 }
     
-                &-radio:not(:checked) + &-custom-radio__label:before  {
-                    content: '';
+                &-radio:not(:checked) + &-custom-radio__label::before  {
                     position: absolute;
-                    left: 0;
                     top: 0;
+                    left: 0;
                     width: 28px;
                     height: 28px;
                     border: 2px solid #B2C2E4;
                     border-radius: 8px;
+                    content: '';
 
                 }
 
-                &-radio:checked + &-custom-radio__label:before {
-                    content: '';
+                &-radio:checked + &-custom-radio__label::before {
                     position: absolute;
-                    left: 0;
                     top: 0;
+                    left: 0;
                     width: 32px;
                     height: 32px;
-                    border-radius: 8px;
                     background: #2477F4;
-                    
-                    outline: 2px solid #FFFFFF; 
-                    outline-offset: -4px; 
+                    border-radius: 8px;
+                    outline: 2px solid #FFF; 
+                    outline-offset: -4px;
+                    content: ''; 
                     
                 }
             }
@@ -199,23 +191,20 @@
     &-icon-rows{
         display: flex;
         flex-flow: row wrap;
+        gap: 12px;
         align-items: center;
         width: 100%;
-        gap: 12px;
 
         &-item{
-
             display: flex;
             flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            
             gap: 12px;
-
-            background: rgba(36, 119, 244, 0.1);
-            border-radius: 9px;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
             color: #7C8EB5;
+            background: rgb(36 119 244 / 10%);
+            border-radius: 9px;
             fill: #7C8EB5;
 
             &-icon{
@@ -225,14 +214,13 @@
             }
 
             &-label{
-                cursor: pointer;
-                user-select: none;
-
-                font-family: 'Montserrat Alternates';
-                font-style: normal;
                 font-weight: 600;
                 font-size:  1em;
+                font-family: 'Montserrat Alternates';
+                font-style: normal;
                 line-height:  1em;
+                cursor: pointer;
+                user-select: none;
 
                 &-radio{
                     display: none;
@@ -241,10 +229,10 @@
             }
 
             &_checked{
+                color: #FFF;
                 background: #2477F4;
-                box-shadow: 0px 0px 14px rgba(124, 142, 181, 0.25);
-                fill: #FFFFFF;
-                color: #FFFFFF;
+                box-shadow: 0 0 14px rgb(124 142 181 / 25%);
+                fill: #FFF;
             }
 
         }
@@ -256,16 +244,16 @@
         font-family: 'Montserrat Alternates';
 
         &-label{
-            font-style: normal;
-            font-weight: 600;
-            font-size: 1em;
-            line-height: 1em;
-            color: #7C8EB5;
             display: flex;
             flex-flow: row wrap;
+            gap: 10px;
             align-items: center;
             justify-content: flex-start;
-            gap: 10px;
+            color: #7C8EB5;
+            font-weight: 600;
+            font-size: 1em;
+            font-style: normal;
+            line-height: 1em;
 
 
             &-radio:checked, &-radio:not(:checked) {
@@ -274,54 +262,53 @@
 
             &-radio:checked + &-custom-radio__label, &-radio:not(:checked) + &-custom-radio__label {
                 position: relative;
-                padding: 6px 0 0 40px;
                 display: inline-block;
                 margin-bottom: 5px;
+                padding: 6px 0 0 40px;
             }
 
-            &-radio:not(:checked) + &-custom-radio__label:before  {
-                content: '';
+            &-radio:not(:checked) + &-custom-radio__label::before  {
                 position: absolute;
-                left: 0;
                 top: 0;
+                left: 0;
                 width: 28px;
                 height: 28px;
                 border: 2px solid #B2C2E4;
                 border-radius: 8px;
+                content: '';
 
             }
 
-            &-radio:checked + &-custom-radio__label:before {
-                content: '';
+            &-radio:checked + &-custom-radio__label::before {
                 position: absolute;
-                left: 0;
                 top: 0;
+                left: 0;
                 width: 32px;
                 height: 32px;
-                border-radius: 8px;
                 background: #2477F4;
-                
-                outline: 2px solid #FFFFFF; 
-                outline-offset: -4px; 
+                border-radius: 8px;
+                outline: 2px solid #FFF; 
+                outline-offset: -4px;
+                content: ''; 
                 
             }
     
             &-input-text{
-                height: 50px;
-                border: 2px solid #B2C2E4;
-                border-radius: 16px;
-                color: #7C8EB5;
-                font-size: 1em;
                 flex-grow: 1;
                 align-self: stretch;
+                height: 50px;
                 padding-left: 1em;
+                color: #7C8EB5;
+                font-size: 1em;
+                border: 2px solid #B2C2E4;
+                border-radius: 16px;
             }
+
             &-input-text::placeholder{
-                
-                font-style: normal;
+                color: #7C8EB5;
                 font-weight: 500;
                 font-size: 1em;
-                color: #7C8EB5;
+                font-style: normal;
             }
         }
         

@@ -2,10 +2,11 @@
 .allEloquence{
         display: flex;
         flex-direction: column;
-        box-sizing: border-box;
         align-items: flex-start;
+        box-sizing: border-box;
 
 }
+
 .allImg{
         display: flex;
         flex-direction: row;
@@ -17,53 +18,52 @@
 .parasitic_words, .short_sentences, .short_words, .active_words {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         padding: 5%;
 }
+
 .textparasitic_words, .textshort_sentences, .textshort_words, .textactive_words   {
+        position: absolute;
+        z-index: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
-        position: absolute;
-        z-index: 1;
 }
 
 .bubbles{
+        position: absolute;
+        z-index: 1;
         display: flex;
         flex-direction: row;
         align-items: center;
         margin: auto;
         padding: 20px 0 0 40px;
-        position: absolute;
-        z-index: 1;
 }
+
 .imgbigCloud{
         display: flex;
         justify-content: end;
 }
+
 .txt{
-        font-family: 'Onest';
-        font-style: normal;
+        display: flex;
+        align-items: center;
+        color: #FFF;
         font-weight: 700;
         font-size: 24px;
-        line-height: 31px;
-        display: flex;
-        align-items: center;
-
-        color: #FFFFFF;
-}
-.txt2{
-
-
         font-family: 'Onest';
         font-style: normal;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 18px;
+        line-height: 31px;
+}
 
+.txt2{
         display: flex;
         align-items: center;
-
-        color: #FFFFFF;
+        color: #FFF;
+        font-weight: 500;
+        font-size: 14px;
+        font-family: 'Onest';
+        font-style: normal;
+        line-height: 18px;
 }

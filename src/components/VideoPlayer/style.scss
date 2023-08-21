@@ -1,12 +1,12 @@
 .VideoPlayer{
     width: 100%;
     height: 100%;
-    border-radius: 16px;
     overflow: hidden;
+    border-radius: 16px;
 
     video{
-        border-radius: 16px;
         overflow: hidden;
+        border-radius: 16px;
     }
 
     &_unvisible{
@@ -16,7 +16,7 @@
     &-gif{
         width: 100%;
         height: 100%;
-        border-radius: 16px;
         overflow: hidden;
+        border-radius: 16px;
     }
 }

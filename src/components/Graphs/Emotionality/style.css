@@ -1,26 +1,28 @@
 .allEmotionality{
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-    align-items: flex-start;
-    padding: 16px 8px;
     gap: 16px;
-    isolation: isolate;
+    align-items: flex-start;
+    box-sizing: border-box;
     width:100%;
-    background: #FFFFFF;
+    padding: 16px 8px;
+    background: #FFF;
+    isolation: isolate;
 }
+
 .imgAllEmotionality{
     display: flex;
     flex-direction: row;
     justify-content:space-between;
     width:100%;
 }
+
 .textEmotionality{
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 25px;
     display: flex;
     align-items: center;
+    font-weight: 400;
+    font-size: 20px;
+    font-style: normal;
+    line-height: 25px;
 }
 

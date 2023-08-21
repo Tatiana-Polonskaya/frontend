@@ -1,39 +1,40 @@
 .video-error {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
     justify-content: center;
     width: 100%;
     padding: 15px 0;
-    gap: 0.5rem;
 
     &-title {
         display: flex;
         gap: 0.5rem;
         color: #f35b60;
-        font-family: "Montserrat Alternates";
-        font-size: 20px;
-        font-style: normal;
         font-weight: 600;
+        font-size: 20px;
+        font-family: "Montserrat Alternates";
+        font-style: normal;
         line-height: normal;
         text-align: start;
     }
 
     &-subtitle {
         color: #37476a;
-        text-align: start;
-        font-family: "Onest";
-        font-size: 20px;
-        font-style: normal;
         font-weight: 400;
+        font-size: 20px;
+        font-family: "Onest";
+        font-style: normal;
         line-height: normal;
+        text-align: start;
     }
+
     &-text {
         color: #7c8eb5;
-        text-align: start;
-        font-family: "Onest";
-        font-size: 16px;
-        font-style: normal;
         font-weight: 400;
+        font-size: 16px;
+        font-family: "Onest";
+        font-style: normal;
         line-height: normal;
+        text-align: start;
     }
 }

@@ -1,13 +1,13 @@
 .confidence-line {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
     gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 
     &-time {
-        font-size: 0.875rem;
         color: #7c8eb5;
+        font-size: 0.875rem;
     }
 
     &-block {
@@ -18,14 +18,15 @@
         & > div:first-child {
             border-radius: 40% 0 0 40%;
         }
+
         & > div:last-child {
             border-radius: 0 40% 40% 0;
         }
     }
+
     &-element {
         position: relative;
         display: flex;
-
         align-items: center;
         // flex: 1 0 auto;
 
@@ -36,27 +37,30 @@
             border-radius: 60px;
         }
     }
+
     &-help-content {
         position: relative;
         display: none;
+
         & > div {
-            color: #37476a;
-            z-index: 100;
             position: absolute;
-            background-color: white;
-            padding: 8px 12px;
-            border-radius: 12px;
-            width: max-content;
-            font-size: 0.75rem;
-            font-weight: 500;
             top: 20px;
             left: 0;
-            border: thin solid rgb(173, 185, 212);
+            z-index: 100;
+            width: max-content;
+            padding: 8px 12px;
+            color: #37476a;
+            font-weight: 500;
+            font-size: 0.75rem;
+            background-color: white;
+            border: thin solid rgb(173 185 212);
+            border-radius: 12px;
 
             // top: 137px;
             // left: 447px;
         }
     }
+
     &-element-position:hover {
         & > div {
             display: block;
