@@ -43,11 +43,10 @@ export default function SecondaryDefinition(props: Props) {
         <>
             <div className={cnDefinition()}>
                 <p className={cnDefinition("description")}>
-                    <b className={cnDefinition("description-bold")}>
-                        Четкость речи
-                    </b>{" "}
-                    - соответствие речи фонетическим, морфологическим и
-                    синтаксическим стандартам, существующих в рамках языка.
+                    <b className={cnDefinition("description-bold")}>Четкость</b>{" "}
+                    речи снижают нарушения фонетических стандартов (неречевые
+                    звуки, дрожание голоса) и резкие (на 20 и более процентов)
+                    изменения темпа речи.
                 </p>
                 <div className={cnDefinition("list")}>
                     {definition.typeDefinition.map((el, index) => (

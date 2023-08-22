@@ -36,12 +36,12 @@ export function NonMonotonyVolumeHelper(value: number): NonMonotonyHelper {
           };
 }
 export function NonMonotonyToneHelper(value: number): NonMonotonyHelper {
-    return value < 34
+    return value < 0.34
         ? {
               subtitle: "однообразие звучания притупляет восприятие",
               result: "МАЛЕНЬКИЙ",
           }
-        : value > 60
+        : value > 0.6
         ? {
               subtitle: "так Вы оказываете сильное воздействие на аудиторию",
               result: "БОЛЬШОЙ",

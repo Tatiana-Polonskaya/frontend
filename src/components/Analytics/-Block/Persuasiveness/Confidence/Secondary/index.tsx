@@ -46,7 +46,9 @@ export default function SecondaryConfidence(props: Props) {
                     <b className={cnConfidence("description-bold")}>
                         {"Уверенность"}
                     </b>{" "}
-                    {"- убежденность выступающего в своих словах и аргументах."}
+                    {
+                        "определяется таким внутренним состоянием человека, в котором он выражает согласие произносимым высказываниям без боязни возможности ошибки."
+                    }
                 </p>
                 <div className={cnConfidence("list")}>
                     {confidence.typeConfidence.map((el, index) => (

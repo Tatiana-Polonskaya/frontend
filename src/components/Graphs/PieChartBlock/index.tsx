@@ -50,10 +50,10 @@ export default function PieChartBlock(props: IComponentProps) {
     return (
         <>
             <div className="textPieChartBlock">
-                <b className="textInfTitle">Единство стиля </b> - использование
-                определенного набора слов и выражений в зависимости от жанра,
-                формата и стиля речи, с целью достижения определенных
-                коммуникативных целей.
+                Использование определенного набора слов и выражений для
+                достижения заданных коммуникативных целей выступления определяет
+                его
+                <b className="textInfTitle"> стилевое единство.</b>
             </div>
 
             <div className="allPieChart">

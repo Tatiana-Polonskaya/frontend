@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useContext, useEffect, useState } from "react";
-import { VideoTimeContext } from "../Report";
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 import { useGetTranscriptionByIdQuery } from "../../store/api/report";
 import { TranscriptionValue } from "../../models/report/transcription";
 import { useGetTranscriptionByIdTestQuery } from "../../store/api/reportTest";
+import { VideoTimeContext } from "../Context/helpers";
 
 type Props = {
     idVideo: string;
@@ -13,7 +13,9 @@ type Props = {
 
 export function getPrettyTimeBySeconds(seconds: number) {
     if (seconds < 60) {
-        return `00:${seconds < 10 ? "0" + seconds.toFixed(0) : seconds.toFixed(0)}`;
+        return `00:${
+            seconds < 10 ? "0" + seconds.toFixed(0) : seconds.toFixed(0)
+        }`;
     } else {
         const minutes = ~~(seconds / 60);
         return `${minutes < 10 ? "0" + minutes : minutes}:${
@@ -53,10 +55,10 @@ export default function SpeechTranscription(props: Props) {
                             className={cnTranscription("time", {
                                 active:
                                     currentTime >= el.time_start &&
-                                    ((idx < transcriptionData.length-1 &&
+                                    ((idx < transcriptionData.length - 1 &&
                                         transcriptionData[idx + 1].time_start >
                                             currentTime) ||
-                                        idx === transcriptionData.length-1),
+                                        idx === transcriptionData.length - 1),
                             })}
                         >
                             {getPrettyTimeBySeconds(el.time_start)}
@@ -65,11 +67,12 @@ export default function SpeechTranscription(props: Props) {
                             <div
                                 className={cnTranscription("buble-text", {
                                     active:
-                                    currentTime >= el.time_start &&
-                                    ((idx < transcriptionData.length-1 &&
-                                        transcriptionData[idx + 1].time_start >
-                                            currentTime) ||
-                                        idx === transcriptionData.length-1),
+                                        currentTime >= el.time_start &&
+                                        ((idx < transcriptionData.length - 1 &&
+                                            transcriptionData[idx + 1]
+                                                .time_start > currentTime) ||
+                                            idx ===
+                                                transcriptionData.length - 1),
                                 })}
                             >
                                 {el.text}

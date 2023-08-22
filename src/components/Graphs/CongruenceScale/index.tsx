@@ -23,11 +23,14 @@ type Props = {
 function ListItemAVT(difAVT: item[]) {
     let time_now = 0;
     let last = -1;
-    let last_time_end = difAVT[difAVT.length - 1].time_end
+    let last_time_end = difAVT[difAVT.length - 1].time_end;
     let gray;
 
     for (let i = 0; i < difAVT.length; i++) {
-        if (difAVT[i].type === "angry" || difAVT[i].type === "happiness" && difAVT[i].type != "neutral"){
+        if (
+            difAVT[i].type === "angry" ||
+            (difAVT[i].type === "happiness" && difAVT[i].type != "neutral")
+        ) {
             last = i;
         }
     }
@@ -42,12 +45,7 @@ function ListItemAVT(difAVT: item[]) {
                 }}
             ></div>
         );
-        return (
-            <Fragment key={0}>
-                {" "}
-                {gray}{" "}
-            </Fragment>
-        );
+        return <Fragment key={0}> {gray} </Fragment>;
     }
 
     return difAVT.map((item, idx) => {
@@ -55,7 +53,12 @@ function ListItemAVT(difAVT: item[]) {
         let buffer;
         let ending;
         let height = item.value < 0.2 ? 0.2 : item.value < 0.65 ? 0.5 : 0.8;
-        let color = item.type === "angry" ? GraphColor.RED : item.type === "happiness" ? GraphColor.GREEN : GraphColor.GRAY;
+        let color =
+            item.type === "angry"
+                ? GraphColor.RED
+                : item.type === "happiness"
+                ? GraphColor.GREEN
+                : GraphColor.GRAY;
         if (item.type != "neutral") {
             if (item.time_start > time_now) {
                 buffer = (
@@ -64,7 +67,10 @@ function ListItemAVT(difAVT: item[]) {
                             marginLeft: "2px",
                             backgroundColor: GraphColor.GRAY,
                             height: "20%",
-                            width: ((item.time_start - time_now) * 100 / last_time_end) + "%",
+                            width:
+                                ((item.time_start - time_now) * 100) /
+                                    last_time_end +
+                                "%",
                         }}
                     ></div>
                 );
@@ -74,8 +80,11 @@ function ListItemAVT(difAVT: item[]) {
                     style={{
                         marginLeft: "2px",
                         backgroundColor: color,
-                        height: (height * 100) + "%",
-                        width: ((item.time_end - item.time_start) * 100 / last_time_end) + "%",
+                        height: height * 100 + "%",
+                        width:
+                            ((item.time_end - item.time_start) * 100) /
+                                last_time_end +
+                            "%",
                     }}
                 ></div>
             );
@@ -87,7 +96,9 @@ function ListItemAVT(difAVT: item[]) {
                             marginLeft: "2px",
                             backgroundColor: GraphColor.GRAY,
                             height: "20%",
-                            width: ((100 - item.time_end) * 100 / last_time_end) + "%",
+                            width:
+                                ((100 - item.time_end) * 100) / last_time_end +
+                                "%",
                         }}
                     ></div>
                 );
@@ -117,8 +128,9 @@ export default function CongruenceScale(props: Props) {
             <div className={CN("textBloc")}>
                 <div className={CN("text")}>
                     <b className="textInfTitle">Конгруэнтность </b> -
-                    согласованность эмоций, выражаемых в разных коммуникативных
-                    каналах (видео, аудио и текст из речи).
+                    характеризуется согласованностью эмоций, выражаемых
+                    человеком с помощью мимики и речи, а также передаваемых в
+                    тексте выступления.
                 </div>
                 <div className={CN("bocksAll")}>
                     <div className={CN("blockText")}>
@@ -191,13 +203,14 @@ export default function CongruenceScale(props: Props) {
                         "congruenceScaleactive"
                     )}`}
                 >
-                   <div className="content">{listItemV_T}</div>
+                    <div className="content">{listItemV_T}</div>
                 </div>
                 <div
                     className={`panel ${checkActive(
                         3,
                         "congruenceScaleactive"
-                    )}`}>
+                    )}`}
+                >
                     <div className="content">{listItemA_V}</div>
                 </div>
             </div>

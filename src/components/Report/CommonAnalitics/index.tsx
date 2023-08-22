@@ -48,6 +48,7 @@ function getPictureByConclussion(conclussion: string) {
 const DECIMAL = 2;
 type Props = {
     idVideo: string;
+    private: boolean;
 };
 
 export default function CommonAnalitics(props: Props) {
@@ -90,9 +91,11 @@ export default function CommonAnalitics(props: Props) {
                     <span className={cnCommon("blue-bold")}>
                         {allValues && allValues.big_conclussion}
                     </span>
-                    <span className={cnCommon("gray-txt")}>
-                        {allValues && allValues.conclussion}
-                    </span>
+                    {props.private && (
+                        <span className={cnCommon("gray-txt")}>
+                            {allValues && allValues.conclussion}
+                        </span>
+                    )}
                 </div>
                 <div className={cnCommon("common-result")}>
                     <span className={cnCommon("common-result-title")}>

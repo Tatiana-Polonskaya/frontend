@@ -18,7 +18,7 @@ export default function BaseGraphXDescription({
         return {
             day: days[curDate.getDay()],
             date: curDate.getDate(),
-            month: new Date().getMonth(),
+            month: new Date().getMonth()+1,
         };
     });
     return (

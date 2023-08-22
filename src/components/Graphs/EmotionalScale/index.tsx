@@ -8,13 +8,15 @@ import { IScaleDataType } from "../../../models/graph/inteface/scale";
 import { ReactSVG } from "react-svg";
 import GraphColor from "../../../models/graph/_colors";
 import { cn } from "@bem-react/classname";
-import { ChannelItem, EmotionalityDataItem } from "../../../models/graph/emotionality";
+import {
+    ChannelItem,
+    EmotionalityDataItem,
+} from "../../../models/graph/emotionality";
 
 type Props = {
     values: EmotionalityDataItem[];
 };
 const CN = cn("EmotionalScale");
-
 
 function covertvaluesData(data: ChannelItem[]) {
     let result = {
@@ -67,9 +69,8 @@ export default function EmotionalScale(props: Props) {
             <div className={CN("textBloc")}>
                 <div className={CN("text1")}>
                     <b className="textInfTitle1"> Эмоциональность</b> -
-                    способность выражать свои мысли и идеи с помощью
-                    энергичного, живого стиля выступления, который передает
-                    позитивную эмоциональную окраску и воодушевление.
+                    характеризуется долей и распределением базовых эмоций в
+                    выступлении.
                 </div>
                 <div className={CN("blocksAll")}>
                     <div className={CN("blockText")}>

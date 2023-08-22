@@ -45,11 +45,11 @@ export default function SecondarySubsequence(props: Props) {
             <div className={cnSubsequence()}>
                 <p className={cnSubsequence("description")}>
                     <b className={cnSubsequence("description-bold")}>
-                        Последовательность
+                        {"Последовательная"}
                     </b>{" "}
-                    - упорядоченное представление аргументов, при котором
-                    выступление плавно переходит от одной идеи к другой с
-                    предъявлением конкретных фактов и примеров.
+                    {
+                        "речь характеризуется упорядоченным представлением аргументов, при котором высказывания логически не противоречат друг другу."
+                    }
                 </p>
                 <div className={cnSubsequence("list")}>
                     {subsequence.typeSubsequence.map((el, index) => (

@@ -3,9 +3,10 @@ import GraphColor from "../../../models/graph/_colors";
 
 import "./style.scss";
 import { convertTime } from "../../Analytics/helpers";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { getWindowWidth } from "../../../tools/window";
-// import { TimelineItem } from "../../../models/graph/timeline";
+// import { Tooltip } from "react-tooltip";
+// import { VideoTimeContext } from "../../Context/helpers";
 
 type Props = {
     startTime?: number;
@@ -56,6 +57,15 @@ export default function TimelineGraph({
         }
     }, [helpRef.current]);
 
+    // const { setCurrentTime } = useContext(VideoTimeContext);
+
+    // const choiseBlock = (event: React.MouseEvent<HTMLDivElement>) => {
+    //     const dataValue = +event.currentTarget.dataset.time! as number;
+    //     if (dataValue) {
+    //         setCurrentTime(dataValue);
+    //     }
+    // };
+
     return (
         <div className={CN()}>
             <div className={CN("time")}>{convertStart}</div>
@@ -63,8 +73,15 @@ export default function TimelineGraph({
                 {data.map((el) => (
                     <div
                         key={el.id}
-                        style={{ backgroundColor: el.color || GraphColor.GRAY }}
+                        style={{
+                            backgroundColor:
+                                el.color === GraphColor.DARKGRAY
+                                    ? GraphColor.GRAY
+                                    : el.color || GraphColor.GRAY,
+                        }}
                         className={CN("element")}
+                        // onClick={choiseBlock}
+                        // data-time={el.time}
                     >
                         <div
                             onMouseMove={handleMousePosition}
@@ -75,32 +92,19 @@ export default function TimelineGraph({
                             onMouseLeave={() => setIsOpened(false)}
                             className={cnGraphHelp()}
                             ref={wrapperRef}
+                            // data-tooltip-id={"line-brick-" + el.id}
+                        ></div>
+                        {/* <Tooltip
+                            id={"line-brick-" + el.id}
+                            place={"bottom-end"}
+                            noArrow={true}
+                            className={CN("tooltip")}
+                            style={{ borderColor: el.color }}
                         >
-                            {isOpened &&
-                                el.id === indOpened &&
-                                (el.text !== "" || el.text?.length !== 0) && (
-                                    <div
-                                        style={{
-                                            top: "110px",
-                                            right,
-                                            border: `thin solid ${el.color}`,
-                                        }}
-                                        className={cnGraphHelp("content")}
-                                        ref={helpRef}
-                                    >
-                                        <div>
-                                            <span
-                                                className={CN("help", {
-                                                    time: true,
-                                                })}
-                                            >
-                                                {convertTime(el.time)}
-                                            </span>
-                                            <span>{el.text}</span>
-                                        </div>
-                                    </div>
-                                )}
-                        </div>
+                            <span className={CN("tooltip-text")}>
+                                {convertTime(el.time)} {el.text}
+                            </span>
+                        </Tooltip> */}
                     </div>
                 ))}
             </div>

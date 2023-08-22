@@ -5,6 +5,8 @@ import "./style.scss";
 
 import { convertTime } from "../../../../helpers";
 import GraphColor from "../../../../../../models/graph/_colors";
+import { VideoTimeContext } from "../../../../../Context/helpers";
+import { useContext } from "react";
 
 type Props = {
     breakdown: IBreakdown[];
@@ -56,6 +58,15 @@ type Param = {
     description: string[];
 };
 export default function SecondaryDefeat(props: Props) {
+    const { setCurrentTime } = useContext(VideoTimeContext);
+
+    const choiseBlock = (event: React.MouseEvent<HTMLDivElement>) => {
+        const dataValue = +event.currentTarget.dataset.time! as number;
+        if (dataValue || dataValue === 0) {
+            setCurrentTime(dataValue);
+        }
+    };
+
     function determ(str: string, arrS: Priority, index: number) {
         let arrParam: Param[] = [];
         let strArr = str.split(" ");
@@ -248,23 +259,12 @@ export default function SecondaryDefeat(props: Props) {
             <div className={cnDefeat()}>
                 <p className={cnDefeat("descript")}>
                     <span>
+                        {"Нарушением  "}
                         <b className={cnDefeat("descript-bold")}>
-                            {"Коммуникативная норма"}
+                            {"коммуникативной нормы"}
                         </b>{" "}
                         {
-                            "связана с процессом коммуникации, включающем в себя не только вербальные (не несущие смысла слова-паразиты), но и невербальные элементы (когнитивные искажения, проявление агрессивности)."
-                        }
-                    </span>
-                    <br />
-                    <span>
-                        {
-                            "Под когнитивными искажениями понимаются систематические ошибки в мышлении или шаблонные отклонения."
-                        }
-                    </span>
-                    <br />
-                    <span>
-                        {
-                            "Агрессивность отражает предрасположенность человека к поведению, целью которого является причинение вреда себе или окружающим, либо подобное аффетивное состояние (гнев, ярость, злость)."
+                            "является наличие в речи не несущих смысла слов-паразитов, систематических ошибок (отклонений) в мышлении (когнитивных искажений), признаков агрессивного поведения."
                         }
                     </span>
                 </p>
@@ -279,7 +279,12 @@ export default function SecondaryDefeat(props: Props) {
             </div>
             <div className={cnBreakdown()}>
                 {props.breakdown?.map((el, index) => (
-                    <div key={index} className={cnDefeat("item")}>
+                    <div
+                        key={index}
+                        className={cnDefeat("item")}
+                        onClick={choiseBlock}
+                        data-time={el.time_start}
+                    >
                         <div
                             className={cnDefeat(
                                 "time",

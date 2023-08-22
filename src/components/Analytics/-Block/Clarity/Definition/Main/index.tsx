@@ -20,7 +20,6 @@ type TimelineItem = {
 const cnProgressLine = cn("progress-time-line");
 
 export default function MainDefinition(props: Props) {
-
     return (
         <div className={cnProgressLine()}>
             <TimelineGraph

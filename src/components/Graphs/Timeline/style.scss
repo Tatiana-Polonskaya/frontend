@@ -50,6 +50,24 @@
             background: #2477f4;
         }
     }
+    &-tooltip {
+        padding: 8px 12px !important;
+        max-width: 450px !important;
+        z-index: 100;
+        border-radius: 12px !important;
+        border: 1px solid #7c8eb5;
+        background: #fff !important;
+        line-height: 12px !important;
+        box-shadow: 2px 2px 12px 0px rgba(173, 185, 212, 0.3);
+
+        &-text {
+            color: #37476a;
+            font-size: 12px;
+
+            font-family: "Onest";
+            font-weight: 500;
+        }
+    }
 }
 
 .graph-help-line {

@@ -17,6 +17,7 @@ import BaseGraphBackground from "./-Background";
 import GraphPointer from "./-Pointer";
 
 import "./style.scss";
+import { VideoTimeContext } from "../../Context/helpers";
 
 const cnStrangeGraph = cn("strange-graph");
 
@@ -34,8 +35,8 @@ export default function GraphBase({
     ...props
 }: Props) {
     // если ставить обычный useState а не кастомный то цепляет график
-    // // const { currentTime, setCurrentTime } = useContext(GraphContext);
-    const [currentTime, setCurrentTime] = useState(0);
+    const { currentTime, setCurrentTime } = useContext(VideoTimeContext);
+    // const [currentTime, setCurrentTime] = useState(0);
     const [isPointerMoving, setPointerMoving] = useState(false);
     const [pointerX, setPointerX] = useState(0);
     const { updateTime } = useContext(ValueTime);
@@ -70,6 +71,7 @@ export default function GraphBase({
             onMouseDown={() => setPointerMoving(true)}
             onMouseUp={() => setPointerMoving(false)}
             onMouseLeave={() => setPointerMoving(false)}
+            onClick={() => console.log("click")}
             onMouseMove={onMouseMove}
             {...props}
         >

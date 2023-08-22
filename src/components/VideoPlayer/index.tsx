@@ -5,9 +5,10 @@ import ReactPlayer from "react-player";
 
 import "./style.scss";
 import { BaseReactPlayerProps, OnProgressProps } from "react-player/base";
-import { VideoTimeContext } from "../Report";
 
 import reloadPicture from "./assets/preload1.gif";
+import { current } from "@reduxjs/toolkit";
+import { VideoTimeContext } from "../Context/helpers";
 
 interface VideoPlayerProps extends BaseReactPlayerProps {
     title?: string;
@@ -56,13 +57,55 @@ export default function VideoPlayer({
     const videoRef = useRef<HTMLVideoElement | any>();
 
     const [onReady, setOnReady] = useState(false);
-
     // state for video playing
-    const { setCurrentTime } = useContext(VideoTimeContext);
+    const { currentTime, setCurrentTime, isPlaying, setIsPlaying, togglePlay } =
+        useContext(VideoTimeContext);
+    const [prevTime, setPrevTime] = useState(0);
 
     const changeCurrentTime = (e: OnProgressProps) => {
-        setCurrentTime(Math.floor(e.playedSeconds));
+        // setCurrentTime(Math.floor(e.playedSeconds));
+        // console.log("e.played", e.played);
+        setCurrentTime(e.played * duration);
+        // console.log("e.playedSeconds", e.playedSeconds);
+        // setCurrentTime(Math.floor(e.playedSeconds));
     };
+    useEffect(() => {
+        if (currentTime || currentTime === 0) {
+            if (Math.abs(currentTime - prevTime) > 1.1) {
+                console.log("currentTime", currentTime);
+                console.log("prevTime", prevTime);
+                handleSeekTo();
+            }
+            // handleSeekTo();
+            setPrevTime(currentTime);
+        }
+    }, [currentTime]);
+
+    const handleSeekTo = () => {
+        if (videoRef.current) {
+            // console.log("videoRef.current", videoRef.current);
+            videoRef.current.seekTo(currentTime);
+            handlePlayPause();
+        }
+    };
+
+    //  ----------- duration -------------
+
+    const [duration, setDuration] = useState(0);
+
+    //  ----------- play/pause -------------
+
+    const handlePlayPause = () => {
+        if (isPlaying) {
+            togglePlay();
+        }
+    };
+
+    useEffect(() => {
+        if (videoRef.current && isPlaying) {
+            setIsPlaying(true);
+        }
+    }, [isPlaying]);
 
     return (
         <div className={cnVideoPlayer()}>
@@ -75,6 +118,11 @@ export default function VideoPlayer({
                     muted={true}
                     onReady={() => setOnReady(true)}
                     onProgress={changeCurrentTime}
+                    onDuration={(videoDuration) => {
+                        setDuration(videoDuration);
+                    }}
+                    playing={isPlaying}
+                    onPlay={togglePlay}
                 />
             </div>
             <div className={cnVideoPlayer({ unvisible: onReady })}>

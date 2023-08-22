@@ -24,9 +24,16 @@ import EmotionalityGraph from "../../components/Graphs/Emotionality";
 import { NonMonotonyType } from "../../models/graph/monotony";
 import { useGetTotalByIdTestQuery } from "../../store/api/reportTest";
 import { TotalType } from "../../models/graph/total";
+import { VideoTimeContext } from "../../components/Context/helpers";
 
 export default function TestPage() {
     const [currentTime, setCurrentTime] = useState(0);
+    // state for video playing
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const togglePlay = () => {
+        setIsPlaying(!isPlaying);
+    };
 
     const [emotionalityChannel, setEmotionalityChannel] = useState(
         EmotionalityChannel.VIDEO

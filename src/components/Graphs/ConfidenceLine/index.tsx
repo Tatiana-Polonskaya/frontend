@@ -39,7 +39,7 @@ export default function ConfidenceLineGraph({
                                 top: el.position,
                             }}
                         >
-                            <div
+                            {/* <div
                                 className={CN("help-content")}
                                 style={{
                                     top: "20px",
@@ -53,7 +53,7 @@ export default function ConfidenceLineGraph({
                                 >
                                     {el.desc}
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 ))}

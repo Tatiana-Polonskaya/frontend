@@ -30,13 +30,9 @@ import {
 } from "../Analytics/helpers";
 
 import {
-    ISectionRecomendation,
-    argumentativenessRecomendation,
-    communicativeRecomendation,
     getTotalDesc,
     getTotalResult,
     judgmentHelper,
-    persuasivenessRecomendation,
     statmentHelper,
 } from "./helpers";
 
@@ -118,9 +114,6 @@ import noteIcon from "./assets/note.svg";
 import arrowLeft from "./assets/arrowLeft.svg";
 import "./style.scss";
 import Recomendation from "../Analytics/-Block/-Recomendation";
-import RecommendConn from "../Analytics/-Block/-Recomendation/recHandler/RecommendConn";
-import RecommendClarity from "../Analytics/-Block/-Recomendation/recHandler/RecommendClarity";
-import RecommendDynamism from "../Analytics/-Block/-Recomendation/recHandler/RecommendDynamism";
 
 import {
     useGetArgumentativenessByIdTestQuery,
@@ -150,12 +143,7 @@ import {
 import argumentativenessData1 from "./../../plugs/argumentativeness.json";
 import { useGetVideoByIdQuery } from "../../store/api/apiWithDifAnswers";
 import { UUID } from "crypto";
-
-// provider for setting the current time in graphs and others elements accoding to the video element
-export const VideoTimeContext = createContext({
-    currentTime: 0,
-    setCurrentTime: (() => {}) as Dispatch<SetStateAction<number>>,
-});
+import { VideoTimeContext } from "../Context/helpers";
 
 export default function AnalysisReport() {
     const cnReport = cn("AnalysisReport");
@@ -197,6 +185,12 @@ export default function AnalysisReport() {
 
     // state for video playing
     const [currentTime, setCurrentTime] = useState(0);
+    // state for video playing
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const togglePlay = () => {
+        setIsPlaying(!isPlaying);
+    };
 
     // all states for showing it on the page
     const [informativeData, setInformativeData] = useState<InformativeJSON>();
@@ -390,29 +384,6 @@ export default function AnalysisReport() {
     }, [TotalDataFromBack]);
 
     // ----------------------RECOMENDATION----------------------
-    const [connectivityRec, setConnectivityRec] = useState<string[]>([]);
-    const [argumentativenessRec, setArgumentativenessRec] = useState<string[]>(
-        []
-    );
-    const [clarityRec, setClarityRec] = useState<string[]>([]);
-    const [dynamismRec, setDynamismRec] = useState<string[]>([]);
-    const [persuasivenessRec, setPersuasivenessRec] = useState<string[]>([]);
-    const [communicativeRec, setCommunicativeRec] = useState<string[]>([]);
-
-    useEffect(() => {
-        if (totalData) {
-            const curArgumentativenessRec = argumentativenessRec;
-            curArgumentativenessRec?.push(
-                argumentativenessRecomendation(
-                    totalData!.values.connectedness,
-                    argumentativenessData?.originality!,
-                    argumentativenessData?.citation!,
-                    argumentativenessData?.borrowing!
-                )
-            );
-            setArgumentativenessRec(curArgumentativenessRec);
-        }
-    }, [totalData]);
 
     const resultDesc = useMemo(() => {
         if (totalData) {
@@ -529,7 +500,13 @@ export default function AnalysisReport() {
                 <div className={cnReport("whiteBlock")}>
                     <div className={cnReport("video-block-video")}>
                         <VideoTimeContext.Provider
-                            value={{ currentTime, setCurrentTime }}
+                            value={{
+                                currentTime,
+                                setCurrentTime,
+                                isPlaying,
+                                setIsPlaying,
+                                togglePlay,
+                            }}
                         >
                             {videoURL && (
                                 <VideoPlayer url={videoURL} controls={true} />
@@ -570,7 +547,13 @@ export default function AnalysisReport() {
                             title="Транскрипция речи"
                         >
                             <VideoTimeContext.Provider
-                                value={{ currentTime, setCurrentTime }}
+                                value={{
+                                    currentTime,
+                                    setCurrentTime,
+                                    isPlaying,
+                                    setIsPlaying,
+                                    togglePlay,
+                                }}
                             >
                                 <SpeechTranscription idVideo={idVideo} />
                             </VideoTimeContext.Provider>
@@ -578,9 +561,8 @@ export default function AnalysisReport() {
                     </ColorfulTabs>
                 </div>
             </div>
-
             <div className={cnReport("whiteBlock")}>
-                <CommonAnalitics idVideo={idVideo} />
+                <CommonAnalitics idVideo={idVideo} private={isPrivate} />
             </div>
 
             {totalData && (
@@ -601,7 +583,7 @@ export default function AnalysisReport() {
                             определенного сообщения и обеспечивают единое
                             понимание темы выступления у слушателей
                         </div>
-                        {connectivityData && videoInfo!.duration && (
+                        {connectivityData && (
                             <Dropdown
                                 title={"Последовательность"}
                                 subtitle={`${statmentHelper(
@@ -617,14 +599,27 @@ export default function AnalysisReport() {
                                             connectivityData.values[0]
                                                 .time_start
                                         }
-                                        endTime={+videoInfo!.duration}
+                                        endTime={
+                                            connectivityData.values.at(-1)!
+                                                .time_start
+                                        }
                                     />
                                 }
                                 invisible={
-                                    <SecondarySubsequence
-                                        data={connectivityData.values}
-                                        state={""}
-                                    />
+                                    <VideoTimeContext.Provider
+                                        value={{
+                                            currentTime,
+                                            setCurrentTime,
+                                            isPlaying,
+                                            setIsPlaying,
+                                            togglePlay,
+                                        }}
+                                    >
+                                        <SecondarySubsequence
+                                            data={connectivityData.values}
+                                            state={""}
+                                        />
+                                    </VideoTimeContext.Provider>
                                 }
                             />
                         )}
@@ -644,9 +639,19 @@ export default function AnalysisReport() {
                                     />
                                 }
                                 invisible={
-                                    <InformativeGraph
-                                        values={informativeData.values}
-                                    />
+                                    <VideoTimeContext.Provider
+                                        value={{
+                                            currentTime,
+                                            setCurrentTime,
+                                            isPlaying,
+                                            setIsPlaying,
+                                            togglePlay,
+                                        }}
+                                    >
+                                        <InformativeGraph
+                                            values={informativeData.values}
+                                        />
+                                    </VideoTimeContext.Provider>
                                 }
                             />
                         )}
@@ -685,23 +690,17 @@ export default function AnalysisReport() {
                             />
                         )}
 
-                        {isPrivate &&
-                            unityOfStyleData &&
-                            connectivityData &&
-                            informativeData && (
-                                <RecommendConn
-                                    Nprotiv={connectivityData.controversy}
-                                    Tparaz={informativeData.parasite}
-                                    Tnerech={informativeData.sounds}
-                                    Tpauza={informativeData.empty}
-                                    Tob={100}
-                                    Pnauch={unityOfStyleData.scientific}
-                                    Pofic={unityOfStyleData.official}
-                                    Ppabl={unityOfStyleData.publicistic}
-                                    Prazgovor={unityOfStyleData.colloquial}
-                                    Phud={unityOfStyleData.artistic}
-                                />
-                            )}
+                        {isPrivate && (
+                            <Recomendation
+                                recomendation={
+                                    totalData.values
+                                        .connectedness_recommendations
+                                        ? totalData.values
+                                              .connectedness_recommendations
+                                        : "Регулярное чтение позволит обогатить лексические знания и начать внимательно анализировать свои мысли и структурировать высказывания таким образом, чтобы они логически связывались между собой"
+                                }
+                            />
+                        )}
                     </div>
                     <div
                         data-title="Аргументированность"
@@ -801,12 +800,12 @@ export default function AnalysisReport() {
                         {isPrivate && (
                             <Recomendation
                                 recomendation={
-                                    argumentativenessRec.length !== 0
-                                        ? // ПОСЛЕ ПИЛОТА ВЕРНУТЬ
-                                          // ? `${argumentativenessRec.join(" ")}`
-                                          `С целью недопущения попадания информации, возможно носящей характер коммерческой тайны, в систему Антиплагиат на время проведения бета-тестирования параметры "оригинальность", "заимствования" и "цитирования" временно не определяются.`
-                                        : // : // ПОСЛЕ ПИЛОТА ВЕРНУТЬ
-                                          //   "Важно приводить не только аргументы “за” (за свой тезис), но и аргументы “против”. Они должны убеждать аудиторию в том, что аргументы, приводимые в поддержку критикуемого Вами тезиса, слабые и не выдерживают критики."
+                                    totalData.values
+                                        .argumentativeness_recommendations
+                                        ? totalData.values
+                                              .argumentativeness_recommendations
+                                        : // ПОСЛЕ ПИЛОТА ВЕРНУТЬ
+                                          // : "Важно приводить не только аргументы “за” (за свой тезис), но и аргументы “против”. Они должны убеждать аудиторию в том, что аргументы, приводимые в поддержку критикуемого Вами тезиса, слабые и не выдерживают критики."
                                           `С целью недопущения попадания информации, возможно носящей характер коммерческой тайны, в систему Антиплагиат на время проведения бета-тестирования параметры "оригинальность", "заимствования" и "цитирования" временно не определяются.`
                                 }
                             />
@@ -840,15 +839,25 @@ export default function AnalysisReport() {
                                     />
                                 }
                                 invisible={
-                                    <SecondaryDefinition
-                                        data={clarityData.values}
-                                        counts={[
-                                            clarityData.basic,
-                                            clarityData.sounds,
-                                            clarityData.trembling,
-                                        ]}
-                                        state={""}
-                                    />
+                                    <VideoTimeContext.Provider
+                                        value={{
+                                            currentTime,
+                                            setCurrentTime,
+                                            isPlaying,
+                                            setIsPlaying,
+                                            togglePlay,
+                                        }}
+                                    >
+                                        <SecondaryDefinition
+                                            data={clarityData.values}
+                                            counts={[
+                                                clarityData.basic,
+                                                clarityData.sounds,
+                                                clarityData.trembling,
+                                            ]}
+                                            state={""}
+                                        />
+                                    </VideoTimeContext.Provider>
                                 }
                             />
                         )}
@@ -913,74 +922,35 @@ export default function AnalysisReport() {
                                         />
                                     }
                                     invisible={
-                                        <SecondaryExpressiveness
-                                            data={expressivenessData.values}
-                                            graphs={["злость", "радость"]}
-                                            state={""}
-                                        />
+                                        <VideoTimeContext.Provider
+                                            value={{
+                                                currentTime,
+                                                setCurrentTime,
+                                                isPlaying,
+                                                setIsPlaying,
+                                                togglePlay,
+                                            }}
+                                        >
+                                            <SecondaryExpressiveness
+                                                data={expressivenessData.values}
+                                                graphs={["злость", "радость"]}
+                                                state={""}
+                                            />
+                                        </VideoTimeContext.Provider>
                                     }
                                 />
                             )}
 
-                        {isPrivate &&
-                            clarityData &&
-                            eloquenceData &&
-                            expressivenessData && (
-                                <RecommendClarity
-                                    Nitemp={
-                                        (clarityData.sounds +
-                                            clarityData.trembling) /
-                                        (clarityData.basic +
-                                            clarityData.sounds +
-                                            clarityData.trembling)
-                                    }
-                                    Tnerech={clarityData.sounds}
-                                    Tdroz={clarityData.trembling}
-                                    Tob={
-                                        clarityData.basic +
-                                        clarityData.sounds +
-                                        clarityData.trembling
-                                    }
-                                    Nzpredl={eloquenceData.values.short_words}
-                                    Nparaz={
-                                        eloquenceData.values.parasitic_words
-                                    }
-                                    Nkpedl={
-                                        eloquenceData.values.short_sentences
-                                    }
-                                    Napredl={eloquenceData.values.action_words}
-                                    Npredl={Math.ceil(
-                                        ((eloquenceData.values.parasitic_words /
-                                            10 +
-                                            eloquenceData.values
-                                                .short_sentences) *
-                                            2,
-                                        5)
-                                    )}
-                                    Nvist={
-                                        Math.ceil(
-                                            ((eloquenceData.values
-                                                .parasitic_words /
-                                                10 +
-                                                eloquenceData.values
-                                                    .short_sentences) *
-                                                2,
-                                            5)
-                                        ) * 25
-                                    }
-                                    Pekspr={
-                                        expressivenessData.total_expressiveness
-                                    }
-                                />
-                            )}
-
-                        {/*                       <Recomendation
-                            recomendation={
-                                clarityRec.length !== 0
-                                    ? "слепить"
-                                    : "Регулярно расширяйте свой словарный запас, поскольку это поможет Вам в выборе более точных и выразительных слов для передачи своих мыслей и эмоций."
-                            }
-                        /> */}
+                        {isPrivate && (
+                            <Recomendation
+                                recomendation={
+                                    totalData.values.clarity_recommendations
+                                        ? totalData.values
+                                              .clarity_recommendations
+                                        : "Регулярно расширяйте свой словарный запас, поскольку это поможет Вам в выборе более точных и выразительных слов для передачи своих мыслей и эмоций."
+                                }
+                            />
+                        )}
                     </div>
                     <div
                         data-title="Динамизм"
@@ -1053,44 +1023,55 @@ export default function AnalysisReport() {
                                                 dotfill: "#FFB800",
                                                 img: "",
                                                 shadow: "0.663492px 0.663492px 7.9619px #FFB800",
-                                                value: nonMonotonyData[
-                                                    "h-tone"
-                                                ],
+                                                value:
+                                                    nonMonotonyData["h-tone"] *
+                                                    100,
                                             },
                                         ]}
                                     />
                                 }
                                 invisible={
                                     // сюда надо добавить data
-                                    <SecondaryNonMonotony
-                                        data={nonMonotonyData.values}
-                                        averages={[
-                                            (nonMonotonyData["h-temp"] / 250) *
-                                                100,
-                                            (nonMonotonyData["h-volume"] /
-                                                120) *
-                                                100,
-                                            nonMonotonyData["h-tone"],
-                                        ]}
-                                        graphs={[
-                                            {
-                                                link: "Темп речи",
-                                            },
-                                            {
-                                                link: "Громкость голоса",
-                                            },
-                                            {
-                                                link: "Нормированный тон речи",
-                                            },
-                                        ]}
-                                    />
+                                    <VideoTimeContext.Provider
+                                        value={{
+                                            currentTime,
+                                            setCurrentTime,
+                                            isPlaying,
+                                            setIsPlaying,
+                                            togglePlay,
+                                        }}
+                                    >
+                                        <SecondaryNonMonotony
+                                            data={nonMonotonyData.values}
+                                            averages={[
+                                                (nonMonotonyData["h-temp"] /
+                                                    250) *
+                                                    100,
+                                                (nonMonotonyData["h-volume"] /
+                                                    120) *
+                                                    100,
+                                                nonMonotonyData["h-tone"],
+                                            ]}
+                                            graphs={[
+                                                {
+                                                    link: "Темп речи",
+                                                },
+                                                {
+                                                    link: "Громкость голоса",
+                                                },
+                                                {
+                                                    link: "Нормированный тон речи",
+                                                },
+                                            ]}
+                                        />
+                                    </VideoTimeContext.Provider>
                                 }
                             />
                         )}
                         {emotionalityData && (
                             <Dropdown
                                 title={"Эмоциональность"}
-                                subtitle={`Доля ваших эмоций в выступлении.`}
+                                subtitle={`Передача слушателям позитивной эмоциональной окраски и воодушевления.`}
                                 visible={
                                     <Emotionality
                                         total={emotionalityData.total}
@@ -1115,31 +1096,33 @@ export default function AnalysisReport() {
                                     />
                                 }
                                 invisible={
-                                    <SecondaryEnergy
-                                        data={energyData.values}
-                                        average={0.5}
-                                    />
+                                    <VideoTimeContext.Provider
+                                        value={{
+                                            currentTime,
+                                            setCurrentTime,
+                                            isPlaying,
+                                            setIsPlaying,
+                                            togglePlay,
+                                        }}
+                                    >
+                                        <SecondaryEnergy
+                                            data={energyData.values}
+                                            average={0.5}
+                                        />
+                                    </VideoTimeContext.Provider>
                                 }
                             />
                         )}
-
-                        {isPrivate &&
-                            emotionalityData &&
-                            nonMonotonyData &&
-                            energyData && (
-                                <RecommendDynamism
-                                    htemp={nonMonotonyData["h-temp"]}
-                                    hgromk={nonMonotonyData["h-volume"]}
-                                    hton={nonMonotonyData["h-tone"]}
-                                    pemotion={
-                                        (emotionalityData.total.anger +
-                                            emotionalityData.total.neutral +
-                                            emotionalityData.total.happiness) /
-                                        3
-                                    }
-                                    penergi={energyData.total_energy}
-                                />
-                            )}
+                        {isPrivate && (
+                            <Recomendation
+                                recomendation={
+                                    totalData.values.dynamism_recommendations
+                                        ? totalData.values
+                                              .dynamism_recommendations
+                                        : "Динамизм касается в первую очередь интонации речи и связана с эмоциональностью, разнообразием интонационного оформления, отсутствием монотонности, точностью интонационной передачи оратором своей мысли, правильной расстановкой логических ударений и пауз, точностью передачи подтекста. Следует голосом, интонацией подчеркивать основную мысль, делать паузы до и после важных мыслей."
+                                }
+                            />
+                        )}
                     </div>
 
                     <div
@@ -1188,14 +1171,25 @@ export default function AnalysisReport() {
                                     />
                                 }
                                 invisible={
-                                    <SecondaryConfidence
-                                        data={confidenceData.values}
-                                        average={
-                                            100 -
-                                            confidenceData.average_value * 100
-                                        }
-                                        state={""}
-                                    />
+                                    <VideoTimeContext.Provider
+                                        value={{
+                                            currentTime,
+                                            setCurrentTime,
+                                            isPlaying,
+                                            setIsPlaying,
+                                            togglePlay,
+                                        }}
+                                    >
+                                        <SecondaryConfidence
+                                            data={confidenceData.values}
+                                            average={
+                                                100 -
+                                                confidenceData.average_value *
+                                                    100
+                                            }
+                                            state={""}
+                                        />
+                                    </VideoTimeContext.Provider>
                                 }
                             />
                         )}
@@ -1218,7 +1212,7 @@ export default function AnalysisReport() {
                                             {
                                                 title: "Коэффицент Трейгера",
                                                 subtitle:
-                                                    "Отношение количества глаголов к количеству прилагательных в единице текста должно быть близко к 1.",
+                                                    "указывает на склонность к активности, рефлексии и созерцательности.",
                                                 result:
                                                     !emotionalArousalData.values
                                                         .trager_coefficient ||
@@ -1239,7 +1233,7 @@ export default function AnalysisReport() {
                                             {
                                                 title: "Коэффицент определенности действия",
                                                 subtitle:
-                                                    "Отношение количества глаголов к количеству существительных в единице текста должно быть близко к 1.",
+                                                    "характеризует уровень социализированности, синтаксической завершенности высказывания.",
                                                 result:
                                                     !emotionalArousalData.values
                                                         .action_certainty_factor ||
@@ -1261,7 +1255,7 @@ export default function AnalysisReport() {
                                             {
                                                 title: "Коэффицент агрессивности",
                                                 subtitle:
-                                                    "Отношение количества глаголов и глагольных форм к общему количеству всех слов не должно превышать 0,6.",
+                                                    "свидетельствует о готовности к немедленным действиям.",
                                                 result:
                                                     !emotionalArousalData.values
                                                         .aggressiveness_coefficient ||
@@ -1288,36 +1282,10 @@ export default function AnalysisReport() {
                         {isPrivate && (
                             <Recomendation
                                 recomendation={
-                                    persuasivenessRec &&
-                                    persuasivenessRec.length === 0
-                                        ? persuasivenessRecomendation(
-                                              congruenceData?.diameter.audio
-                                                  .anger,
-                                              congruenceData?.diameter.audio
-                                                  .happiness,
-                                              congruenceData?.diameter.audio
-                                                  .neutral,
-                                              congruenceData?.diameter.text
-                                                  .anger,
-                                              congruenceData?.diameter.text
-                                                  .happiness,
-                                              congruenceData?.diameter.text
-                                                  .neutral,
-                                              congruenceData?.diameter.video
-                                                  .anger,
-                                              congruenceData?.diameter.video
-                                                  .happiness,
-                                              congruenceData?.diameter.video
-                                                  .neutral,
-                                              confidenceData?.average_value,
-                                              confidenceData?.uncertainty,
-                                              emotionalArousalData?.values
-                                                  .trager_coefficient,
-                                              emotionalArousalData?.values
-                                                  .action_certainty_factor,
-                                              emotionalArousalData?.values
-                                                  .aggressiveness_coefficient
-                                          )
+                                    totalData.values
+                                        .persuasiveness_recommendations
+                                        ? totalData.values
+                                              .persuasiveness_recommendations
                                         : "В случае, если Вы ставите себе целью убедить людей в чем-либо, либо Вам надо побудить людей в аудитории к определенным действиям, то Вам лучше всего сконцентрироваться на подробном анализе аудитории (чтобы понять, какие именно факторы повлияют на позицию аудитории), на содержании и структуре презентации с продумыванием аргументов и примеров (чтобы речь была логичной и убедительной) и на тщательной подготовке наглядных пособий (это усилит Ваше влияние на людей)."
                                 }
                             />
@@ -1359,22 +1327,30 @@ export default function AnalysisReport() {
                                     />
                                 }
                                 invisible={
-                                    <SecondaryDefeat
-                                        breakdown={communicativeData.values}
-                                        state={""}
-                                    />
+                                    <VideoTimeContext.Provider
+                                        value={{
+                                            currentTime,
+                                            setCurrentTime,
+                                            isPlaying,
+                                            setIsPlaying,
+                                            togglePlay,
+                                        }}
+                                    >
+                                        <SecondaryDefeat
+                                            breakdown={communicativeData.values}
+                                            state={""}
+                                        />
+                                    </VideoTimeContext.Provider>
                                 }
                             />
                         )}
                         {isPrivate && (
                             <Recomendation
                                 recomendation={
-                                    communicativeRec.length === 0
-                                        ? communicativeRecomendation(
-                                              communicativeData?.filler_words,
-                                              communicativeData?.cognitive_distortion,
-                                              communicativeData?.aggression
-                                          )
+                                    totalData.values
+                                        .communicative_recommendations
+                                        ? totalData.values
+                                              .communicative_recommendations
                                         : "Помните, нарушение коммуникативных норм обычно не остается незамеченным. В зависимости от того, насколько грубым было это нарушение, наказания выражаются в отказе адресата от коммуникации вообще, в прерывании общения, в недостижении цели общения."
                                 }
                             />

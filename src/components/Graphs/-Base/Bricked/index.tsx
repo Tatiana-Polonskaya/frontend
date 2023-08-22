@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import SecondBrick from "./-Brick";
 import GraphMedian from "../-Median";
 import GraphBase from "..";
@@ -24,6 +25,7 @@ export default function BrickedGraph({ items }: Props) {
                     color={el.color}
                     text={el.text}
                     type={el.type}
+                    time={el.startTime}
                 />
             ))}
         </GraphBase>

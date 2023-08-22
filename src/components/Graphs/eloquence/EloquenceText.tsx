@@ -39,12 +39,8 @@ function EloquenceText(props: Props) {
             <div className="EloquenceAllText">
                 <div className="Eloquencetext1">
                     <b className="textInfTitle"> Красноречивость </b> -
-                    способность выступающего выражать свои мысли максимально
-                    точно и ярко.
+                    достигается использованием:
                 </div>
-                <span className="Eloquencetext2">
-                    Она достигается использованием:
-                </span>
                 <div className="ul">
                     <div className="li">
                         <b className="textInfTitle1">
