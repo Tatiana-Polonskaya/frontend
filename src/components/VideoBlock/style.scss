@@ -1,14 +1,16 @@
 
 .video-block{
     &-video-grid{
-       display: grid;;
+       display: grid;
+       
        grid-template-rows: repeat(2, 300px);
+       grid-template-columns: repeat(3, 1fr);
        grid-template-columns: repeat(3, 1fr);
        gap: 16px;
        align-content: space-around;
+       align-content: space-around;
        align-items: stretch;
        justify-content: space-between;
-       justify-items: center;
     }
 }
 
