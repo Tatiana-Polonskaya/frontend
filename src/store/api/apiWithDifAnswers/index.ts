@@ -80,11 +80,25 @@ export const apiWithDifAnswers = createApi({
                 },
             }),
         }),
+        getImageById: build.query<string, string>({
+            query: (id) => ({
+                url: `/api/users/account/avatar/${id}`,
+                method: "GET",
+                responseHandler: async (response) => {
+                    let temp = response.blob();
+                    const res = await temp;
+                    return URL.createObjectURL(res);
+                },
+            }),
+            keepUnusedDataFor: 1,
+        }),
     }),
 });
 
 export const {
-    useGetVideoByIdQuery
+    useGetVideoByIdQuery,
+    useGetImageByIdQuery,
+    useLazyGetImageByIdQuery
 } = apiWithDifAnswers;
 
 export const { endpoints, reducerPath, reducer, middleware } = apiWithDifAnswers;

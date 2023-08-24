@@ -13,13 +13,14 @@ import Call from "./icon/call.svg";
 import Tag from "./icon/tag.svg";
 import Arrow from "./icon/arrow.svg";
 import Receive from "./icon/receive.svg";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { useEffect, useState } from "react";
 import { useSendUserAvatarMutation } from "../../store/api/user";
 
 import LoadImage from "./LoadImage";
 import Gallery from "./icon/gallery.svg";
 import AvatarEditor from "react-avatar-editor";
+import { setProfileAvatar } from "../../store/slices/profileSlice";
 
 type Props = {
     isArchive: boolean;
@@ -37,6 +38,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
     const cnArchiveTariff = cn("archive-tariff");
 
     const store = useAppSelector((state) => state.profile.user);
+    const avatar = useAppSelector((state) => state.profile.avatar);
 
     const [storeUser, setStoreUser] = useState(store);
     const [iconArr, setIconArr] = useState<IconsArr[]>([]);
@@ -79,7 +81,9 @@ export default function PersonalArea({ isArchive = false }: Props) {
     const [editor, setEditor] = useState<AvatarEditor>();
     const [scaleValue, setScaleValue] = useState<number>();
 
-    const [selectedImg, setSelectedImg] = useState<string>(`/api/users/account/avatar/${store.id}`);
+    const [selectedImg, setSelectedImg] = useState<string>(
+        `/api/users/account/avatar/${store.id}`,
+    );
 
     const setEditorRef = (editor: AvatarEditor) => {
         setEditor(editor);
@@ -91,8 +95,9 @@ export default function PersonalArea({ isArchive = false }: Props) {
                 .getImage()
                 .toBlob(
                     (res) => (res ? sendUserAvatar(res) : undefined),
-                    "image/jpeg"
+                    "image/jpeg",
                 );
+            setNewPic(true);
             // editor!
             //     .getImageScaledToCanvas()
             //     .toBlob(
@@ -121,25 +126,38 @@ export default function PersonalArea({ isArchive = false }: Props) {
         }
     };
 
-    const [picAvatar] = useState(`/api/users/account/avatar/${store.id}`);
+    const dispatch = useAppDispatch();
+    const [newPic, setNewPic] = useState(false);
+
+    useEffect(() => {
+        if (newPic) {
+            setNewPic(false);
+            const getData = async () => {
+                setTimeout(async () => {
+                    const newkey=Math.ceil(Math.random() * 100);
+                    await dispatch(setProfileAvatar(`/api/users/account/avatar/${store.id}?rnd=${newkey}`));
+                }, 2000);
+            };
+            getData();
+        }
+    }, [newPic]);
 
     return (
         <div className={cnPersonalSettings()}>
             <div
                 className={cnPersonalUser(
                     "shield",
-                    cnPersonalUser(`shield-${active}`)
+                    cnPersonalUser(`shield-${active}`),
                 )}
                 onClick={closePopup}
             ></div>
             <div className={cnPersonalSettings("left")}>
                 <div className={cnPersonalUser("")}>
                     <div className={cnPersonalUser("photo")}>
-                        {storeUser && (
+                        {avatar && (
                             <img
-                                key={Date.now()}
-                                src={picAvatar}
-                                alt={storeUser!.firstname}
+                                src={avatar}
+                                alt={store.lastname}
                             />
                         )}
                     </div>
@@ -164,7 +182,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
                             htmlFor="image"
                             className={cnPersonalUser(
                                 "btn",
-                                cnPersonalUser("label")
+                                cnPersonalUser("label"),
                             )}
                         >
                             <ReactSVG src={Gallery} />
@@ -173,7 +191,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
                         <div
                             className={cnPersonalUser(
                                 "change",
-                                cnPersonalUser(`change-${active}`)
+                                cnPersonalUser(`change-${active}`),
                             )}
                         >
                             <div className={cnPersonalUser("current-photo")}>
@@ -258,14 +276,14 @@ export default function PersonalArea({ isArchive = false }: Props) {
                                     >
                                         <p
                                             className={cnArchiveTariff(
-                                                "item-date"
+                                                "item-date",
                                             )}
                                         >
                                             {el.date}
                                         </p>
                                         <p
                                             className={cnArchiveTariff(
-                                                "item-tariff"
+                                                "item-tariff",
                                             )}
                                         >
                                             {" "}
@@ -274,14 +292,14 @@ export default function PersonalArea({ isArchive = false }: Props) {
                                         </p>
                                         <p
                                             className={cnArchiveTariff(
-                                                "item-sum"
+                                                "item-sum",
                                             )}
                                         >
                                             {el.sum}
                                         </p>
                                         <p
                                             className={cnArchiveTariff(
-                                                "item-period"
+                                                "item-period",
                                             )}
                                         >
                                             {el.period}

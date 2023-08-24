@@ -29,10 +29,12 @@ const profileSlice = createSlice({
     initialState: {user: initialStateForProfile, avatar:`/api/users/account/avatar/${initialStateForProfile.id}`},
     reducers: {
         setProfile:(state, action: PayloadAction<IUser>)=>{
+            
             state.user = action.payload;
             state.avatar = `/api/users/account/avatar/${action.payload.id}`;
         },
         setProfileAvatar:(state, action: PayloadAction<string>)=>{
+            console.log("set avatar", state.avatar, action.payload);
             state.avatar = action.payload;
         }
     },

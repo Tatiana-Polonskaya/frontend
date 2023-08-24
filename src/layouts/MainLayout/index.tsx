@@ -19,15 +19,14 @@ export default function MainLayout(props: Props) {
     
     const lastName = useSelector((state: RootState) => state.profile.user.firstname);
     const name = useSelector((state: RootState) => state.profile.user.lastname);    
-    const idUser = useSelector((state: RootState) => state.profile.user.id);  
-    const [picAvatar] = useState(`/api/users/account/avatar/${idUser}`);
+    const avatar= useSelector((state: RootState) => state.profile.avatar);  
 
     return (
         <Fragment >
             <div className={cnContent()}>
                 <Menu />
                 <div className={cnContent("wrapper")}>
-                    <Header displayName={`${name} ${lastName}`} imageUrl={picAvatar}/>
+                    <Header displayName={`${name} ${lastName}`} imageUrl={avatar}/>
                     <section className={cnContent("main")}>
                         {props.children}
                     </section>
