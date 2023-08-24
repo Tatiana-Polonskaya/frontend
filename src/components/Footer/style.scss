@@ -17,11 +17,13 @@
 }
 
 .footer-content__links-container {
-    padding: 0 20% 0 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .footer-content__link {
-    padding: 0 48px;
     color: #37476a;
     white-space: nowrap;
 }
