@@ -54,9 +54,9 @@ import CommunicativeNorm from "../Graphs/communicativeNorm";
 import Eloquence from "../Graphs/eloquence";
 import EloquenceText from "../Graphs/eloquence/EloquenceText";
 import InformativeGraph from "../Graphs/Informative/InformativeGraph";
-import UnityOfStyl from "../Graphs/unityOfStyle/UnityOfStyl";
+import UnityOfStyl from "../Graphs/UnityOfStyle/UnityOfStyl";
 import InformativScale from "../Graphs/Informative/InformativScale";
-import UnityOfStylScale from "../Graphs/unityOfStyle";
+import UnityOfStylScale from "../Graphs/UnityOfStyle";
 import EnergySmile from "../Graphs/EnergySmile";
 import Emotionality from "../Graphs/Emotionality/Emotionality";
 import EmotionalScale from "../Graphs/EmotionalScale";
@@ -108,7 +108,7 @@ import SecondaryNonMonotony from "../Analytics/-Block/Dinamism/NonMonotony/Secon
 import VideoPlayer, { getPrettyDataTime } from "../VideoPlayer";
 import textForEnergySmile from "../Graphs/EnergySmile/text";
 
-import AddTextUnityOfStyle from "../Graphs/unityOfStyle/text";
+import AddTextUnityOfStyle from "../Graphs/UnityOfStyle/text";
 
 import noteIcon from "./assets/note.svg";
 import arrowLeft from "./assets/arrowLeft.svg";

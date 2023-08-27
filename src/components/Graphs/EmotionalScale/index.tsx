@@ -4,7 +4,6 @@ import "./style.scss";
 import text from "./img/text.svg";
 import video from "./img/video.svg";
 import volume_high from "./img/volume-high.svg";
-import { IScaleDataType } from "../../../models/graph/inteface/scale";
 import { ReactSVG } from "react-svg";
 import GraphColor from "../../../models/graph/_colors";
 import { cn } from "@bem-react/classname";
@@ -12,6 +11,7 @@ import {
     ChannelItem,
     EmotionalityDataItem,
 } from "../../../models/graph/emotionality";
+import { IDescriptionScale } from "../../../models/graph/inteface/IDescriptionScale";
 
 type Props = {
     values: EmotionalityDataItem[];
@@ -19,9 +19,7 @@ type Props = {
 const CN = cn("EmotionalScale");
 
 function covertvaluesData(data: ChannelItem[]) {
-    let result = {
-        item: [],
-    } as IScaleDataType;
+    let result: IDescriptionScale[] = [];
 
     data.forEach((el: any) => {
         let tempMax = 0;
@@ -34,7 +32,7 @@ function covertvaluesData(data: ChannelItem[]) {
             }
         });
 
-        result.item.push({
+        result.push({
             title: "",
             value: tempMax * 100,
             color:
@@ -45,6 +43,7 @@ function covertvaluesData(data: ChannelItem[]) {
                     : GraphColor.GRAY,
         });
     });
+
     return result;
 }
 
@@ -54,14 +53,14 @@ export default function EmotionalScale(props: Props) {
     const checkActive = (index: any, className: any) =>
         activeIndex === index ? className : "";
 
-    let infVideo: IScaleDataType = covertvaluesData(
-        props.values.map((n) => n.video)
+    let infVideo: IDescriptionScale[] = covertvaluesData(
+        props.values.map((n) => n.video),
     );
-    let infText: IScaleDataType = covertvaluesData(
-        props.values.map((n) => n.text)
+    let infText: IDescriptionScale[] = covertvaluesData(
+        props.values.map((n) => n.text),
     );
-    let infAudio: IScaleDataType = covertvaluesData(
-        props.values.map((n) => n.audio)
+    let infAudio: IDescriptionScale[] = covertvaluesData(
+        props.values.map((n) => n.audio),
     );
 
     return (
@@ -100,7 +99,7 @@ export default function EmotionalScale(props: Props) {
                 <button
                     className={`EmotionalScaletab ${checkActive(
                         1,
-                        "EmotionalScaleactive"
+                        "EmotionalScaleactive",
                     )}`}
                     onClick={() => handleClick(1)}
                 >
@@ -110,7 +109,7 @@ export default function EmotionalScale(props: Props) {
                 <button
                     className={`EmotionalScaletab ${checkActive(
                         2,
-                        "EmotionalScaleactive"
+                        "EmotionalScaleactive",
                     )}`}
                     onClick={() => handleClick(2)}
                 >
@@ -120,7 +119,7 @@ export default function EmotionalScale(props: Props) {
                 <button
                     className={`EmotionalScaletab ${checkActive(
                         3,
-                        "EmotionalScaleactive"
+                        "EmotionalScaleactive",
                     )}`}
                     onClick={() => handleClick(3)}
                 >
@@ -132,26 +131,26 @@ export default function EmotionalScale(props: Props) {
                 <div
                     className={`panel ${checkActive(
                         1,
-                        "EmotionalScaleactive"
+                        "EmotionalScaleactive",
                     )}`}
                 >
-                    <Scale component={infVideo} />
+                    <Scale fractions={infVideo} />
                 </div>
                 <div
                     className={`panel ${checkActive(
                         2,
-                        "EmotionalScaleactive"
+                        "EmotionalScaleactive",
                     )}`}
                 >
-                    <Scale component={infAudio} />
+                    <Scale fractions={infAudio} />
                 </div>
                 <div
                     className={`panel ${checkActive(
                         3,
-                        "EmotionalScaleactive"
+                        "EmotionalScaleactive",
                     )}`}
                 >
-                    <Scale component={infText} />
+                    <Scale fractions={infText} />
                 </div>
             </div>
         </>

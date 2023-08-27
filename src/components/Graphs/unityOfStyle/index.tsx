@@ -39,36 +39,32 @@ export default function UnityOfStylScale(props: Props) {
         else if (el[1] > SECOND_MAX_STYLE) maxSecondTitles.push(el[0]);
     });
 
-    const res: IScaleDataType =
+    const res =
         maxTitle.length > 0
-            ? {
-                  item: [
-                      {
-                          title: convertUnityOfStyleInTitle(maxTitle[0]),
-                          value: props[maxTitle[0] as keyof Props],
-                          color: GraphColor.BLUE,
-                      },
-                      {
-                          title: "Другие стили",
-                          value: 1 - props[maxTitle[0] as keyof Props],
-                          color: GraphColor.GRAY,
-                      },
-                  ],
-              }
-            : {
-                  item: [
-                      {
-                          title: "Отсутствует единство стиля",
-                          value: 1,
-                          color: GraphColor.GRAY,
-                      },
-                  ],
-              };
+            ? [
+                  {
+                      title: convertUnityOfStyleInTitle(maxTitle[0]),
+                      value: props[maxTitle[0] as keyof Props],
+                      color: GraphColor.BLUE,
+                  },
+                  {
+                      title: "Другие стили",
+                      value: 1 - props[maxTitle[0] as keyof Props],
+                      color: GraphColor.GRAY,
+                  },
+              ]
+            : [
+                  {
+                      title: "Отсутствует единство стиля",
+                      value: 1,
+                      color: GraphColor.GRAY,
+                  },
+              ];
 
     return (
         <>
             <div className="inf">
-                <Scale component={res} />
+                <Scale fractions={res} />
             </div>
         </>
     );

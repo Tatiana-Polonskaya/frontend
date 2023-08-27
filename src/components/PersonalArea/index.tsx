@@ -133,9 +133,9 @@ export default function PersonalArea({ isArchive = false }: Props) {
         if (newPic) {
             setNewPic(false);
             const getData = async () => {
-                setTimeout(async () => {
+                setTimeout(() => {
                     const newkey=Math.ceil(Math.random() * 100);
-                    await dispatch(setProfileAvatar(`/api/users/account/avatar/${store.id}?rnd=${newkey}`));
+                    dispatch(setProfileAvatar(`/api/users/account/avatar/${store.id}?rnd=${newkey}`));
                 }, 2000);
             };
             getData();

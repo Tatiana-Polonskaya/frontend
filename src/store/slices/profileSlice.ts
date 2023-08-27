@@ -34,7 +34,6 @@ const profileSlice = createSlice({
             state.avatar = `/api/users/account/avatar/${action.payload.id}`;
         },
         setProfileAvatar:(state, action: PayloadAction<string>)=>{
-            console.log("set avatar", state.avatar, action.payload);
             state.avatar = action.payload;
         }
     },

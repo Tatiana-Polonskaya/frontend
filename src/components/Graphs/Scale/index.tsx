@@ -1,22 +1,17 @@
-import React from "react";
 import "./style.scss";
-import { IScaleDataType } from "../../../models/graph/inteface/scale";
 import { cn } from "@bem-react/classname";
 import GraphColor from "../../../models/graph/_colors";
+import { IDescriptionScale } from "../../../models/graph/inteface/IDescriptionScale";
 
 const CN = cn("Scale");
 interface IComponentProps {
-    component: IScaleDataType;
+    fractions: IDescriptionScale[];
 }
 
-function checkSize(n: number) {
-    return n < 15 ? "0px" : "18px";
-}
-
-export default function Scale({ component }: IComponentProps) {
+export default function Scale({ fractions }: IComponentProps) {
     return (
         <div className={CN()}>
-            {component.item.map((number, idx) => (
+            {fractions.map((number, idx) => (
                 <div
                     key={idx}
                     className={CN("content")}
@@ -30,8 +25,7 @@ export default function Scale({ component }: IComponentProps) {
                     }}
                 >
                     <div
-                        className={CN("text")}
-                        style={{ fontSize: checkSize(number.value) }}
+                        className={CN("text",{unvisible: number.value < 15})}
                     >
                         {number.title}
                     </div>

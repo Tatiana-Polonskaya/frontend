@@ -1,16 +1,30 @@
 
 .video-block{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
     &-video-grid{
-       display: grid;
-       
-       grid-template-rows: repeat(2, 300px);
-       grid-template-columns: repeat(3, 1fr);
-       grid-template-columns: repeat(3, 1fr);
-       gap: 16px;
-       align-content: space-around;
+       display: flex;
+       flex-flow: row wrap;
+       gap: 20px;
        align-content: space-around;
        align-items: stretch;
-       justify-content: space-between;
+       justify-content: space-around;
+       max-width: 1600px;
     }
+
+
+    // &-video-grid{
+    //    display: grid;
+    //    grid-template-rows: repeat(2, 300px);
+    //    grid-template-columns: repeat(3, 1fr);
+    //    gap: 16px;
+    //    align-content: space-around;
+    //    align-items: stretch;
+    //    justify-content: space-between;
+    // }
 }
 

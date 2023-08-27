@@ -160,7 +160,7 @@ export default function VideoModalContent({ modalVideo }: Props) {
                             className={cnModalContent("analyze-row-item")}
                         >
                             <div
-                                className="pie animate"
+                                className={cnModalContent("analyze-row-item-pie")}
                                 style={
                                     {
                                         "--p": totalVideoInfo[
@@ -176,7 +176,7 @@ export default function VideoModalContent({ modalVideo }: Props) {
                                 ).toFixed(2)}
                                 %
                             </div>
-                            <p>{getTotalTitle(el[1])}</p>
+                            <p className={cnModalContent("analyze-row-item-pie-text")}>{getTotalTitle(el[1])}</p>
                         </div>
                     ))}
             </div>

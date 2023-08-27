@@ -1,19 +1,13 @@
 .video-item{
     display: flex;
     flex-flow: column nowrap;
-    width: 400px;
+    max-width: 400px;
     padding: 0%;
+    flex-grow: 1;
 
     &-video-block{
-        width: 400px;
-        height: 225px;
         border-radius: 5%;
         cursor: pointer;
-
-        video{
-            width: 400px !important;
-            height: 225px !important;
-        }
     }
 
     &-author-block{

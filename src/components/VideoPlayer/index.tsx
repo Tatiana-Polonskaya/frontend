@@ -7,7 +7,7 @@ import "./style.scss";
 import { BaseReactPlayerProps, OnProgressProps } from "react-player/base";
 
 import reloadPicture from "./assets/preload1.gif";
-import { current } from "@reduxjs/toolkit";
+
 import { VideoTimeContext } from "../Context/helpers";
 
 interface VideoPlayerProps extends BaseReactPlayerProps {
