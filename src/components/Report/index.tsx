@@ -1276,7 +1276,7 @@ export default function AnalysisReport() {
                         )}
                     </div>
                     <div
-                        data-title="Коммуникативные нормы"
+                        data-title="Коммуникативная норма"
                         data-value={
                             getTotalResult(totalData!.values.communicative)[2]
                         }
