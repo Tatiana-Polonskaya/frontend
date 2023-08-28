@@ -64,23 +64,7 @@ import EmotionalArousal from "../Graphs/EmotionalArousal";
 import CongruenceScale from "../Graphs/CongruenceScale";
 import Congruence from "../Graphs/Congruence";
 
-import {
-    useGetArgumentativenessByIdQuery,
-    useGetClarityByIdQuery,
-    useGetCommunicativeByIdQuery,
-    useGetConfidenceByIdQuery,
-    useGetCongruenceByIdQuery,
-    useGetConnectivityByIdQuery,
-    useGetEloquenceByIdQuery,
-    useGetEmotionalArousalByIdQuery,
-    useGetEmotionalityByIdQuery,
-    useGetEnergyByIdQuery,
-    useGetExpressivenessByIdQuery,
-    useGetInformativeByIdQuery,
-    useGetNonMonotonyByIdQuery,
-    useGetTotalByIdQuery,
-    useGetUnityOfStyleByIdQuery,
-} from "../../store/api/report";
+
 
 import { InformativeJSON } from "../../models/graph/informative";
 import Dropdown from "../Dropdown";
