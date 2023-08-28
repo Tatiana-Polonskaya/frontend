@@ -31,6 +31,7 @@ const convertUnityOfStyleInTitle = (title: string) => {
 export default function UnityOfStylScale(props: Props) {
     const MAX_STYLE = 0.5;
     const SECOND_MAX_STYLE = 0.2;
+    
     let maxTitle: string[] = [];
     let maxSecondTitles: string[] = [];
 
@@ -39,33 +40,34 @@ export default function UnityOfStylScale(props: Props) {
         else if (el[1] > SECOND_MAX_STYLE) maxSecondTitles.push(el[0]);
     });
 
-    const res =
-        maxTitle.length > 0
-            ? [
-                  {
-                      title: convertUnityOfStyleInTitle(maxTitle[0]),
-                      value: props[maxTitle[0] as keyof Props],
-                      color: GraphColor.BLUE,
-                  },
-                  {
-                      title: "Другие стили",
-                      value: 1 - props[maxTitle[0] as keyof Props],
-                      color: GraphColor.GRAY,
-                  },
-              ]
-            : [
-                  {
-                      title: "Отсутствует единство стиля",
-                      value: 1,
-                      color: GraphColor.GRAY,
-                  },
-              ];
-
     return (
-        <>
-            <div className="inf">
-                <Scale fractions={res} />
-            </div>
-        </>
+        <div className="inf">
+            <Scale
+                fractions={
+                    maxTitle.length > 0
+                        ? [
+                              {
+                                  title: convertUnityOfStyleInTitle(
+                                      maxTitle[0],
+                                  ),
+                                  value: props[maxTitle[0] as keyof Props],
+                                  color: GraphColor.BLUE,
+                              },
+                              {
+                                  title: "Другие стили",
+                                  value: 1 - props[maxTitle[0] as keyof Props],
+                                  color: GraphColor.GRAY,
+                              },
+                          ]
+                        : [
+                              {
+                                  title: "Отсутствует единство стиля",
+                                  value: 1,
+                                  color: GraphColor.GRAY,
+                              },
+                          ]
+                }
+            />
+        </div>
     );
 }
