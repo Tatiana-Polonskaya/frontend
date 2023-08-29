@@ -1,21 +1,19 @@
-
-.video-block{
-    width: 100%;
+.video-block {
     display: flex;
     flex-flow: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 100%;
 
-    &-video-grid{
-       display: flex;
-       flex-flow: row wrap;
-       gap: 20px;
-       align-content: space-around;
-       align-items: stretch;
-       justify-content: space-around;
-       max-width: 1600px;
+    &-video-grid {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 20px;
+        align-content: space-around;
+        align-items: stretch;
+        justify-content: space-around;
+        max-width: 1600px;
     }
-
 
     // &-video-grid{
     //    display: grid;
@@ -27,4 +25,3 @@
     //    justify-content: space-between;
     // }
 }
-

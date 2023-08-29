@@ -1,41 +1,40 @@
-.video-item{
+.video-item {
     display: flex;
     flex-flow: column nowrap;
+    flex-grow: 1;
+    width: 400px;
     max-width: 400px;
     padding: 0%;
-    flex-grow: 1;
 
-    &-video-block{
+    &-video-block {
         border-radius: 5%;
         cursor: pointer;
     }
 
-    &-author-block{
+    &-author-block {
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
         justify-content: space-between;
         padding-top: 10px;
-        color: #7C8EB5;
+        color: #7c8eb5;
         font-weight: 400;
         font-size: 14px;
         font-style: normal;
         line-height: 15px;
 
-        &-title{
+        &-title {
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
-            justify-content: start ;
-            color: #37476A;
+            justify-content: start;
+            color: #37476a;
             font-weight: 600;
             font-size: 14px;
-            font-family:  "Montserrat Alternates";
+            font-family: "Montserrat Alternates";
             line-height: 15px;
         }
-
     }
-
 
     &-logo {
         display: flex;
@@ -47,20 +46,18 @@
         overflow: hidden;
         border-radius: 100%;
 
-        &-pic{
+        &-pic {
             width: auto;
             height: 100%;
         }
-
     }
 
-    &-title{
+    &-title {
         color: #000;
         font-weight: 500;
         font-size: 14px;
         font-family: "Onest";
         font-style: normal;
         line-height: 18px;
-
     }
 }

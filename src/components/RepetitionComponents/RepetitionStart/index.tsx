@@ -147,8 +147,8 @@ export default function RepetitionStart() {
                     проанализировать - просто загрузите его с устройства.
                 </div>
                 <div className={cnRepetitionStart("text-blue")}>
-                    Минимальная длительность видео - 1.5 минуты, максимальная -
-                    15 минут.
+                    Минимальная длительность видео - 3 минуты, максимальная - 15
+                    минут.
                 </div>
             </div>
             <div className={cnRepetitionStart("btn-block")}>
@@ -213,13 +213,13 @@ export default function RepetitionStart() {
                             <>
                                 <div
                                     className={cnRepetitionStart(
-                                        "loading-title"
+                                        "loading-title",
                                     )}
                                 >
                                     Идет загрузка видео{" "}
                                     <span
                                         className={cnRepetitionStart(
-                                            "loading-title-animate"
+                                            "loading-title-animate",
                                         )}
                                     >
                                         {" "}
@@ -228,7 +228,7 @@ export default function RepetitionStart() {
                                 </div>
                                 <div
                                     className={cnRepetitionStart(
-                                        "loading-description"
+                                        "loading-description",
                                     )}
                                 >
                                     Пожалуйста, не закрывайте вкладку до
@@ -240,7 +240,7 @@ export default function RepetitionStart() {
                             <>
                                 <div
                                     className={cnRepetitionStart(
-                                        "loading-title-error"
+                                        "loading-title-error",
                                     )}
                                 >
                                     Произошла ошибка, попробуйте еще раз
@@ -262,14 +262,14 @@ export default function RepetitionStart() {
                             </div>
                             <div
                                 className={cnRepetitionStart(
-                                    "loading-description"
+                                    "loading-description",
                                 )}
                             >
                                 По его окончании вы сможете ознакомиться с
                                 результатами в разделе{" "}
                                 <span
                                     className={cnRepetitionStart(
-                                        "loading-title-link"
+                                        "loading-title-link",
                                     )}
                                     onClick={() =>
                                         navigate(RoutesEnum.DIARY, {

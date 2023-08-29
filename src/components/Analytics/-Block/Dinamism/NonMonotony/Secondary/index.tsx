@@ -61,6 +61,7 @@ export default function SecondaryNonMonotony(props: Props) {
     // изначально поставить 2
     const [graph, setGraph] = useState(0);
     const [temp, volume, tone] = props.averages;
+
     return (
         <>
             <div className={cnNonMon("marker")}>
@@ -73,17 +74,26 @@ export default function SecondaryNonMonotony(props: Props) {
                     }
                 </p>
                 <div className={cnNonMon("list")}>
-                    {/* вот тут надо решить вопрос с блоками цветов */}
                     {NonMonLIne.typeLine.map((el, ind) => (
                         <div key={ind} className={cnNonMon("color")}>
-                            <div
-                                className={cnNonMon("color-item")}
-                                style={{
-                                    background:
-                                        ind === 0 ? color[graph] : "#7C8EB5",
-                                }}
-                            ></div>
-                            <div className={cnNonMon("text")}>{el.type}</div>
+                            {graph === 2 && ind !== 0 ? (
+                                <></>
+                            ) : (
+                                <>
+                                    <div
+                                        className={cnNonMon("color-item")}
+                                        style={{
+                                            background:
+                                                ind === 0
+                                                    ? color[graph]
+                                                    : "#7C8EB5",
+                                        }}
+                                    ></div>
+                                    <div className={cnNonMon("text")}>
+                                        {el.type}
+                                    </div>
+                                </>
+                            )}
                         </div>
                     ))}
                 </div>

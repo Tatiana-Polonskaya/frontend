@@ -2,20 +2,22 @@
     max-width: 1200px;
 
     &-video-row {
-
         display: grid;
         grid-template-rows: min-content;
         grid-template-columns: 800px 1fr;
         gap: 14px;
+        height: 450px;
         max-height: 450px;
 
         &-videoplayer {
             width: auto;
             height: auto;
+            height: 450px;
             max-height: 450px;
             overflow: hidden;
 
             video {
+                height: 450px;
                 max-height: 450px;
             }
         }
@@ -43,17 +45,16 @@
                 &-closebutton {
                     align-self: flex-start;
                     cursor: pointer;
-                    fill: #7C8EB5;
+                    fill: #7c8eb5;
                 }
 
                 &-closebutton:hover {
                     fill: #000b22;
                 }
-
             }
 
             &-times {
-                color: #7C8EB5;
+                color: #7c8eb5;
                 font-weight: 400;
                 font-size: 16px;
                 font-family: "Onest";
@@ -85,7 +86,7 @@
                 }
 
                 &-name {
-                    color: #37476A;
+                    color: #37476a;
                     font-weight: 600;
                     font-size: 16px;
                     font-family: "Montserrat Alternates";
@@ -97,7 +98,7 @@
             &-annotation {
                 &-title {
                     padding: 10px 0;
-                    color: #7C8EB5;
+                    color: #7c8eb5;
                     font-weight: 500;
                     font-size: 12px;
                     font-family: "Onest";
@@ -125,12 +126,12 @@
 
                 // margin-top: 20px;
                 padding: 16px;
-                color: #FFF;
+                color: #fff;
                 font-weight: 600;
                 font-size: 1rem;
                 font-family: "Montserrat Alternates";
                 font-style: normal;
-                background-color: #FFB800;
+                background-color: #ffb800;
                 border: 0;
                 border-radius: 9px;
 
@@ -146,8 +147,6 @@
             }
         }
     }
-
-    
 
     &-analyze-row {
         display: grid;
@@ -170,7 +169,7 @@
             &-pie {
                 --p: 20;
                 --b: 13px;
-                --c: #2477F4;
+                --c: #2477f4;
                 --w: 85px;
 
                 position: relative;
@@ -184,10 +183,10 @@
                 line-height: 20px;
                 aspect-ratio: 1;
                 place-content: center;
-                animation: p 1s .4s both;
+                animation: p 1s 0.4s both;
 
                 &-text {
-                    color: #37476A;
+                    color: #37476a;
                     font-weight: 600;
                     font-size: 14px;
                     font-style: normal;
@@ -205,28 +204,37 @@
                 &::before {
                     inset: 0;
                     background:
-                        radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b) var(--b) no-repeat,
-                        conic-gradient(var(--c) calc(var(--p)*1%), #0000 0);
-                    mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
-                    mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
+                        radial-gradient(farthest-side, var(--c) 98%, #0000)
+                            top/var(--b) var(--b) no-repeat,
+                        conic-gradient(var(--c) calc(var(--p) * 1%), #0000 0);
+                    mask: radial-gradient(
+                        farthest-side,
+                        #0000 calc(99% - var(--b)),
+                        #000 calc(100% - var(--b))
+                    );
                 }
 
                 &::after {
-                    inset: calc(50% - var(--b)/1.95);
+                    inset: calc(50% - var(--b) / 1.95);
                     background: var(--c);
-                    transform: rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
+                    transform: rotate(calc(var(--p) * 3.6deg))
+                        translateY(calc(50% - var(--w) / 2));
                 }
             }
         }
-
     }
 
-    @media (max-height: 700px) { 
-        &-video-row { 
-            max-height: 300px; 
+    @media (height <= 700px) {
+        &-video-row {
+            height: 300px;
+            max-height: 300px;
+
             &-videoplayer {
+                height: 300px;
                 max-height: 300px;
+
                 video {
+                    height: 300px;
                     max-height: 300px;
                 }
             }
@@ -235,13 +243,13 @@
 }
 
 @property --p {
-    syntax: '<number>';
+    syntax: "<number>";
     inherits: true;
     initial-value: 0;
 }
 
 @keyframes p {
     from {
-        --p: 0
+        --p: 0;
     }
 }
