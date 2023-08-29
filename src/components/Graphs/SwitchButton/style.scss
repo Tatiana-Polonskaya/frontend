@@ -1,0 +1,36 @@
+.SwitchButton {
+    &-switch {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding: 8px 12px;
+
+        color: #2477F4;
+        font-weight: 600;
+        font-size: 12px;
+        font-family: Montserrat Alternates;
+        font-style: normal;
+        background: rgb(36 119 244 / 13%);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+
+        svg {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &_active {
+            display: flex;
+            color: #7C8EB5;
+            background: rgb(36 119 244 / 0%);
+        }
+    }
+
+}

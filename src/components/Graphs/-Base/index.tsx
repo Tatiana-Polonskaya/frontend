@@ -71,7 +71,6 @@ export default function GraphBase({
             onMouseDown={() => setPointerMoving(true)}
             onMouseUp={() => setPointerMoving(false)}
             onMouseLeave={() => setPointerMoving(false)}
-            onClick={() => console.log("click")}
             onMouseMove={onMouseMove}
             {...props}
         >

@@ -1,8 +1,11 @@
 import { cn } from "@bem-react/classname";
 import { ConfidenceDataItem } from "../../../models/graph/confidence";
 
-import { convertConfidenceArr, convertTime } from "../../Analytics/helpers";
+import { convertConfidenceArr } from "../../Analytics/helpers";
 import "./style.scss";
+import convertSecondsIntoTime from "../../../@adapters/Time/convertSeconds";
+import { Fragment } from "react";
+import { Tooltip } from "react-tooltip";
 
 const CN = cn("confidence-line");
 
@@ -17,29 +20,30 @@ export default function ConfidenceLineGraph({
     startTime = 100,
     endTime = 100,
 }: Props) {
-    const convertStart = convertTime(startTime);
-    const convertEnd = convertTime(endTime);
+    const convertStart = convertSecondsIntoTime(startTime);
+    const convertEnd = convertSecondsIntoTime(endTime);
     const convertArr = convertConfidenceArr(items);
     return (
         <div className={CN()}>
             <div className={CN("time")}>{convertStart}</div>
             <div className={CN("block")}>
                 {convertArr.map((el, ind) => (
-                    <div
-                        key={ind}
-                        className={CN("element")}
-                        style={{
-                            width: `${(el.width / items.length) * 100}%`,
-                        }}
-                    >
+                    <Fragment key={ind}>
                         <div
-                            className={CN("element-position")}
+                            className={CN("element")}
                             style={{
-                                backgroundColor: el.color,
-                                top: el.position,
+                                width: `${(el.width / items.length) * 100}%`,
                             }}
                         >
-                            {/* <div
+                            <div
+                                className={CN("element-position")}
+                                style={{
+                                    backgroundColor: el.color,
+                                    top: el.position,
+                                }}
+                                data-tooltip-id={"confidence-brick-" + ind}
+                            >
+                                {/* <div
                                 className={CN("help-content")}
                                 style={{
                                     top: "20px",
@@ -54,8 +58,24 @@ export default function ConfidenceLineGraph({
                                     {el.desc}
                                 </div>
                             </div> */}
+                            </div>
+                            {el.desc && (
+                                <Tooltip
+                                    id={"confidence-brick-" + ind}
+                                    place={"bottom"}
+                                    noArrow={true}
+                                    className={CN("tooltip")}
+                                    style={
+                                        {
+                                            "--color_border": el.color,
+                                        } as React.CSSProperties
+                                    }
+                                >
+                                    {el.desc}
+                                </Tooltip>
+                            )}
                         </div>
-                    </div>
+                    </Fragment>
                 ))}
             </div>
             <div className={CN("time")}>{convertEnd}</div>

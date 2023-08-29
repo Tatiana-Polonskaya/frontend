@@ -64,8 +64,6 @@ import EmotionalArousal from "../Graphs/EmotionalArousal";
 import CongruenceScale from "../Graphs/CongruenceScale";
 import Congruence from "../Graphs/Congruence";
 
-
-
 import { InformativeJSON } from "../../models/graph/informative";
 import Dropdown from "../Dropdown";
 import { UnityOfStyleDataItem } from "../../models/graph/unity_of_style";
@@ -76,7 +74,7 @@ import { ClarityJSON } from "../../models/graph/clarity";
 import { EloquenceJSON } from "../../models/graph/eloquence";
 import { ExpressivenessJSON } from "../../models/graph/expressiveness";
 import { NonMonotonyJSON } from "../../models/graph/monotony";
-import { EmotionalityJSON } from "../../models/graph/emotionality";
+import { ChannelInfo, EmotionalityJSON } from "../../models/graph/emotionality";
 import { EnergyJSON } from "../../models/graph/energy";
 import { CongruenceJSON } from "../../models/graph/congruence";
 import { ConfidenceJSON } from "../../models/graph/confidence";
@@ -224,7 +222,7 @@ export default function AnalysisReport() {
         if (ConnectivityDataFromBack && ConnectivityDataFromBack.data) {
             console.log(
                 "ConnectivityDataFromBack",
-                ConnectivityDataFromBack.data.data
+                ConnectivityDataFromBack.data.data,
             );
             setConnectivityData(ConnectivityDataFromBack.data.data);
         }
@@ -234,7 +232,7 @@ export default function AnalysisReport() {
         if (InformativeDataFromBack && InformativeDataFromBack.data) {
             console.log(
                 "InformativeDataFromBack",
-                InformativeDataFromBack.data.data
+                InformativeDataFromBack.data.data,
             );
             setInformativeData(InformativeDataFromBack.data.data);
         }
@@ -248,7 +246,7 @@ export default function AnalysisReport() {
         ) {
             console.log(
                 "UnityOfStyleDataFromBack",
-                UnityOfStyleDataFromBack.data.data
+                UnityOfStyleDataFromBack.data.data,
             );
             setUnityOfStyleData(UnityOfStyleDataFromBack.data.data!.values);
         }
@@ -261,7 +259,7 @@ export default function AnalysisReport() {
         ) {
             console.log(
                 "ArgumentativenessDataFromBack",
-                ArgumentativenessDataFromBack.data.data
+                ArgumentativenessDataFromBack.data.data,
             );
             setArgumentativenessData(ArgumentativenessDataFromBack.data.data);
         }
@@ -278,7 +276,7 @@ export default function AnalysisReport() {
         if (EloquenceDataFromBack && EloquenceDataFromBack.data) {
             console.log(
                 "EloquenceDataFromBack",
-                EloquenceDataFromBack.data.data
+                EloquenceDataFromBack.data.data,
             );
             setEloquenceData(EloquenceDataFromBack.data.data);
         }
@@ -288,7 +286,7 @@ export default function AnalysisReport() {
         if (ExpressivenessDataFromBack && ExpressivenessDataFromBack.data) {
             console.log(
                 "ExpressivenessDataFromBack",
-                ExpressivenessDataFromBack.data
+                ExpressivenessDataFromBack.data,
             );
             setExpressivenessData(ExpressivenessDataFromBack.data.data);
         }
@@ -298,7 +296,7 @@ export default function AnalysisReport() {
         if (NonMonotonyDataFromBack && NonMonotonyDataFromBack.data) {
             console.log(
                 "NonMonotonyDataFromBack",
-                NonMonotonyDataFromBack.data.data
+                NonMonotonyDataFromBack.data.data,
             );
             setNonMonotonyData(NonMonotonyDataFromBack.data.data);
         }
@@ -308,7 +306,7 @@ export default function AnalysisReport() {
         if (EmotionalityDataFromBack && EmotionalityDataFromBack.data) {
             console.log(
                 "EmotionalityDataFromBack",
-                EmotionalityDataFromBack.data.data
+                EmotionalityDataFromBack.data.data,
             );
             setEmotionalityData(EmotionalityDataFromBack.data.data);
         }
@@ -325,7 +323,7 @@ export default function AnalysisReport() {
         if (CongruenceDataFromBack && CongruenceDataFromBack.data) {
             console.log(
                 "CongruenceDataFromBack",
-                CongruenceDataFromBack.data.data
+                CongruenceDataFromBack.data.data,
             );
             setCongruenceData(CongruenceDataFromBack.data.data);
         }
@@ -335,7 +333,7 @@ export default function AnalysisReport() {
         if (ConfidenceDataFromBack && ConfidenceDataFromBack.data) {
             console.log(
                 "ConfidenceDataFromBack",
-                ConfidenceDataFromBack.data.data
+                ConfidenceDataFromBack.data.data,
             );
             setConfidenceData(ConfidenceDataFromBack.data.data);
         }
@@ -345,7 +343,7 @@ export default function AnalysisReport() {
         if (EmotionalArousalDataFromBack && EmotionalArousalDataFromBack.data) {
             console.log(
                 "EmotionalArousalDataFromBack",
-                EmotionalArousalDataFromBack.data.data
+                EmotionalArousalDataFromBack.data.data,
             );
             setEmotionalArousalData(EmotionalArousalDataFromBack.data.data);
         }
@@ -355,7 +353,7 @@ export default function AnalysisReport() {
         if (CommunicativeDataFromBack && CommunicativeDataFromBack.data) {
             console.log(
                 "CommunicativeDataFromBack",
-                CommunicativeDataFromBack.data.data
+                CommunicativeDataFromBack.data.data,
             );
             setCommunicativeData(CommunicativeDataFromBack.data.data);
         }
@@ -571,13 +569,13 @@ export default function AnalysisReport() {
                             <Dropdown
                                 title={"Последовательность"}
                                 subtitle={`${statmentHelper(
-                                    connectivityData.controversy
+                                    connectivityData.controversy,
                                 )}`}
                                 visible={
                                     <MainSubsequence
                                         data={connectivityData.values.map(
                                             (el) =>
-                                                convertConnectivityDataLine(el)
+                                                convertConnectivityDataLine(el),
                                         )}
                                         startTime={
                                             connectivityData.values[0]
@@ -647,7 +645,7 @@ export default function AnalysisReport() {
                                     unityOfStyleData.official,
                                     unityOfStyleData.publicistic,
                                     unityOfStyleData.colloquial,
-                                    unityOfStyleData.artistic
+                                    unityOfStyleData.artistic,
                                 )}
                                 visible={
                                     <UnityOfStylScale
@@ -691,12 +689,12 @@ export default function AnalysisReport() {
                         className={cnReport("width")}
                         data-value={
                             getTotalResult(
-                                totalData!.values.argumentativeness
+                                totalData!.values.argumentativeness,
                             )[2]
                         }
                         color={
                             getTotalResult(
-                                totalData!.values.argumentativeness
+                                totalData!.values.argumentativeness,
                             )[0]
                         }
                     >
@@ -814,7 +812,7 @@ export default function AnalysisReport() {
                                 visible={
                                     <MainDefinition
                                         data={clarityData.values.map((el) =>
-                                            convertClarityDataLine(el)
+                                            convertClarityDataLine(el),
                                         )}
                                         startTime={
                                             clarityData.values[0].time_start
@@ -855,7 +853,7 @@ export default function AnalysisReport() {
                                             10 +
                                             eloquenceData.values.short_words) *
                                             2.5 *
-                                            25
+                                            25,
                                     ),
                                     eloquenceData.values.parasitic_words,
                                     Math.ceil(
@@ -864,10 +862,10 @@ export default function AnalysisReport() {
                                             eloquenceData.values
                                                 .short_sentences) *
                                             2,
-                                        5)
+                                        5),
                                     ),
                                     eloquenceData.values.short_words,
-                                    eloquenceData.values.action_words
+                                    eloquenceData.values.action_words,
                                 )}
                                 visible={<Eloquence data={eloquenceData} />}
                                 invisible={
@@ -895,8 +893,8 @@ export default function AnalysisReport() {
                                             data={expressivenessData.values.map(
                                                 (el) =>
                                                     convertExpressivenessDataLine(
-                                                        el
-                                                    )
+                                                        el,
+                                                    ),
                                             )}
                                             startTime={
                                                 expressivenessData.values[0]
@@ -959,10 +957,10 @@ export default function AnalysisReport() {
                                             {
                                                 title: "Темп речи",
                                                 subtitle: NonMonotonyTempHelper(
-                                                    nonMonotonyData["h-temp"]
+                                                    nonMonotonyData["h-temp"],
                                                 ).subtitle,
                                                 result: NonMonotonyTempHelper(
-                                                    nonMonotonyData["h-temp"]
+                                                    nonMonotonyData["h-temp"],
                                                 ).result,
                                                 fill: "#2477F4",
                                                 dotfill: "#2477F4",
@@ -979,10 +977,10 @@ export default function AnalysisReport() {
                                                     NonMonotonyVolumeHelper(
                                                         nonMonotonyData[
                                                             "h-volume"
-                                                        ]
+                                                        ],
                                                     ).subtitle,
                                                 result: NonMonotonyVolumeHelper(
-                                                    nonMonotonyData["h-volume"]
+                                                    nonMonotonyData["h-volume"],
                                                 ).result,
                                                 fill: "#F35B60",
                                                 dotfill: "#F35B60",
@@ -998,10 +996,10 @@ export default function AnalysisReport() {
                                             {
                                                 title: "Диапазон изменения тона",
                                                 subtitle: NonMonotonyToneHelper(
-                                                    nonMonotonyData["h-tone"]
+                                                    nonMonotonyData["h-tone"],
                                                 ).subtitle,
                                                 result: NonMonotonyToneHelper(
-                                                    nonMonotonyData["h-tone"]
+                                                    nonMonotonyData["h-tone"],
                                                 ).result,
                                                 fill: "#FFB800",
                                                 dotfill: "#FFB800",
@@ -1072,7 +1070,7 @@ export default function AnalysisReport() {
                             <Dropdown
                                 title={"Энергичность"}
                                 subtitle={textForEnergySmile(
-                                    energyData.total_energy
+                                    energyData.total_energy,
                                 )}
                                 visible={
                                     <EnergySmile
@@ -1134,11 +1132,21 @@ export default function AnalysisReport() {
                                     />
                                 }
                                 invisible={
-                                    <CongruenceScale
-                                        A_T={congruenceData.values["A-T"]}
-                                        A_V={congruenceData.values["A-V"]}
-                                        V_T={congruenceData.values["V-T"]}
-                                    />
+                                    <VideoTimeContext.Provider
+                                        value={{
+                                            currentTime,
+                                            setCurrentTime,
+                                            isPlaying,
+                                            setIsPlaying,
+                                            togglePlay,
+                                        }}
+                                    >
+                                        <CongruenceScale
+                                            A_T={congruenceData.values["A-T"]}
+                                            A_V={congruenceData.values["A-V"]}
+                                            V_T={congruenceData.values["V-T"]}
+                                        />
+                                    </VideoTimeContext.Provider>
                                 }
                             />
                         )}
@@ -1146,7 +1154,7 @@ export default function AnalysisReport() {
                             <Dropdown
                                 title={"Уверенность"}
                                 subtitle={judgmentHelper(
-                                    confidenceData.uncertainty
+                                    confidenceData.uncertainty,
                                 )}
                                 visible={
                                     <MainConfidence
@@ -1350,14 +1358,14 @@ export default function AnalysisReport() {
                             <div className={cnReport("conclusion-title")}>
                                 <span
                                     className={cnReport(
-                                        "conclusion-title-icon"
+                                        "conclusion-title-icon",
                                     )}
                                 >
                                     <ReactSVG src={noteIcon} />
                                 </span>
                                 <span
                                     className={cnReport(
-                                        "conclusion-title-text"
+                                        "conclusion-title-text",
                                     )}
                                 >
                                     Вывод
@@ -1368,7 +1376,7 @@ export default function AnalysisReport() {
                         <div className={cnReport("conclusion-desciption")}>
                             <div
                                 className={cnReport(
-                                    "conclusion-desciption-text"
+                                    "conclusion-desciption-text",
                                 )}
                             >
                                 {/* заменить общий вывод */}

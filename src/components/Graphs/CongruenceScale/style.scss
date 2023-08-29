@@ -1,139 +1,79 @@
-.container{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  height: 100px;
-  overflow: hidden;
-  background: #D4DFF4;
-  border: 3px solid #D4DFF4 ;
-  border-radius: 20px;
+.CongruenceScale {
+    &-textBloc {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        width: 100%;
+        padding: 16px;
+        background: #F7FAFF;
+        border-radius: 12px;
+    }
+
+    &-text {
+        padding-top: 10px;
+        color: #17282F;
+        font-weight: 400;
+        font-size: 16px;
+        font-style: normal;
+        line-height: 20px;
+    }
+
+    &-textInfTitle {
+        font-weight: 500;
+    }
+
+
+
+    &-blockText {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+    }
+
+    &-block {
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+        border-radius: 4px;
+    }
+
+    &-Text {
+        color: #37476A;
+        font-family: Onest;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &-panels {
+        &-panel {
+            display: none;
+            
+
+            &_visible {
+                display: block;
+            }
+        }
+    }
+
+    &-congruenceScaletabs {
+        display: flex;
+        width: 40%;
+        padding: 15px 0;
+    }
 }
 
-.content{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: start;
-  width: 100%;
-  height: 100px;
 
-}
 
-.content > div{
-  border-radius: 6px;
-}
-
-.text{
-  display: flex;
-  align-items: center;
-  padding-left:5px;
-  color: #FFF;
-  font-size: 100%;
-  font-style: normal;
-}
-
-.congruenceScale{
-  &-textBloc{
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    width: 100%;
-    padding: 16px;
-    background: #F7FAFF;
-    border-radius: 12px;
-  }
-
-  &-text{
-    padding-top: 10px;
-    color: #17282F;
-    font-weight: 400;
-    font-size: 16px;
-    font-style: normal;
-    line-height: 20px;
-  }
-
-  &-textInfTitle{
-    font-weight: 500;
-  }
-
-  &-block{
-    width: 20px;
-    height: 20px;
-    margin: 5px;
-    border-radius: 4px;
-  }
-
-  &-blockText{
-    display: flex;
-    flex-direction: row;
-  }
-
-  &-Text{
-    color: #37476A;
-    font-weight: 400;
-    font-size: 14px;
-    font-style: normal;
-    line-height: 18px;
-  }
-}
-
-.congruenceScaletabs {
-  display: flex;
-  width: 40%;
-}
-
-.congruenceScaletab {
-  display: flex;
-  flex-direction: row;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-  margin: 8px;
-  padding: 6px 12px;
-  color: #2477F4;
-  font-weight: 600;
-  font-size: 12px;
-  font-style: normal;
-  background: rgb(36 119 244 / 13%);
-  border: none;
-  border-radius: 8px;
-
-  svg{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.congruenceScaletab:not(:last-child) {
-}
-
-.congruenceScaletab.congruenceScaleactive {
-  display: flex;
-  color: #7C8EB5;
-  background: rgb(36 119 244 / 0%);
-}
-
-.panel {
-  display: none;
-  padding: 10px;
-
-}
-
-.panel.congruenceScaleactive {
-  display: block;
-  flex-direction: row;
-}
-
-.congruenceScale{
-  &-blockText{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-  }
+.congruenceScale {
+    &-blockText {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+    }
 
 }

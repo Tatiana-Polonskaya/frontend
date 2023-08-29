@@ -2,9 +2,10 @@ import { cn } from "@bem-react/classname";
 import GraphColor from "../../../models/graph/_colors";
 
 import "./style.scss";
-import { convertTime } from "../../Analytics/helpers";
+
 import { useContext, useEffect, useRef, useState } from "react";
 import { getWindowWidth } from "../../../tools/window";
+import convertSecondsIntoTime from "../../../@adapters/Time/convertSeconds";
 // import { Tooltip } from "react-tooltip";
 // import { VideoTimeContext } from "../../Context/helpers";
 
@@ -25,8 +26,8 @@ export default function TimelineGraph({
     endTime = 0,
     data,
 }: Props) {
-    const convertStart = convertTime(startTime);
-    const convertEnd = convertTime(endTime);
+    const convertStart = convertSecondsIntoTime(startTime);
+    const convertEnd = convertSecondsIntoTime(endTime);
 
     const [isOpened, setIsOpened] = useState(false);
     const [indOpened, setIndOpened] = useState<number>();

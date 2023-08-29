@@ -15,11 +15,11 @@
         flex: 1 0 auto;
         height: 76px;
 
-        & > div:first-child {
+        &>div:first-child {
             border-radius: 40% 0 0 40%;
         }
 
-        & > div:last-child {
+        &>div:last-child {
             border-radius: 0 40% 40% 0;
         }
     }
@@ -42,7 +42,7 @@
         position: relative;
         display: none;
 
-        & > div {
+        &>div {
             position: absolute;
             top: 20px;
             left: 0;
@@ -62,8 +62,30 @@
     }
 
     &-element-position:hover {
-        & > div {
+        &>div {
             display: block;
         }
+    }
+
+    &-tooltip {
+
+        padding: 8px 12px;
+        border-radius: 12px !important;
+        border: 1px solid var(--color_border) !important;
+        background: #FFF !important;
+        box-shadow: 2px 2px 12px 0px rgba(173, 185, 212, 0.30);
+
+        color: #17282F !important;
+        font-family: Onest;
+        font-size: 12px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+}
+
+@keyframes color_border {
+    from {
+        --color_border: #7C8EB5
     }
 }

@@ -1,128 +1,36 @@
-import React, { Fragment, useState } from "react";
+import { useState } from "react";
 import "./style.scss";
 import { cn } from "@bem-react/classname";
-import GraphColor from "../../../models/graph/_colors";
-import { ReactSVG } from "react-svg";
+
 import video from "../EmotionalScale/img/video.svg";
 import volume_high from "../EmotionalScale/img/volume-high.svg";
 import text from "../EmotionalScale/img/text.svg";
+import {
+    CongruenceItem
+} from "../../../models/graph/congruence";
 
-const CN = cn("congruenceScale");
+import SwitchButton from "../SwitchButton";
+import CongruenceGraph from "./CongruenceGraph";
+import convertDataCongruenceFromBackIntoGraph from "../../../@adapters/Graphs/congruence";
 
-type item = {
-    time_start: number;
-    value: number;
-    type: string;
-    time_end: number;
-};
+const CN = cn("CongruenceScale");
+
 type Props = {
-    A_V: item[];
-    A_T: item[];
-    V_T: item[];
+    A_V: CongruenceItem[];
+    A_T: CongruenceItem[];
+    V_T: CongruenceItem[];
 };
-function ListItemAVT(difAVT: item[]) {
-    let time_now = 0;
-    let last = -1;
-    let last_time_end = difAVT[difAVT.length - 1].time_end;
-    let gray;
 
-    for (let i = 0; i < difAVT.length; i++) {
-        if (
-            difAVT[i].type === "angry" ||
-            (difAVT[i].type === "happiness" && difAVT[i].type != "neutral")
-        ) {
-            last = i;
-        }
-    }
 
-    if (last === -1) {
-        gray = (
-            <div
-                style={{
-                    backgroundColor: GraphColor.GRAY,
-                    height: "20%",
-                    width: 100 + "%",
-                }}
-            ></div>
-        );
-        return <Fragment key={0}> {gray} </Fragment>;
-    }
-
-    return difAVT.map((item, idx) => {
-        let block;
-        let buffer;
-        let ending;
-        let height = item.value < 0.2 ? 0.2 : item.value < 0.65 ? 0.5 : 0.8;
-        let color =
-            item.type === "angry"
-                ? GraphColor.RED
-                : item.type === "happiness"
-                ? GraphColor.GREEN
-                : GraphColor.GRAY;
-        if (item.type != "neutral") {
-            if (item.time_start > time_now) {
-                buffer = (
-                    <div
-                        style={{
-                            marginLeft: "2px",
-                            backgroundColor: GraphColor.GRAY,
-                            height: "20%",
-                            width:
-                                ((item.time_start - time_now) * 100) /
-                                    last_time_end +
-                                "%",
-                        }}
-                    ></div>
-                );
-            }
-            block = (
-                <div
-                    style={{
-                        marginLeft: "2px",
-                        backgroundColor: color,
-                        height: height * 100 + "%",
-                        width:
-                            ((item.time_end - item.time_start) * 100) /
-                                last_time_end +
-                            "%",
-                    }}
-                ></div>
-            );
-            time_now = item.time_end;
-            if (idx === last && item.time_end < last_time_end) {
-                ending = (
-                    <div
-                        style={{
-                            marginLeft: "2px",
-                            backgroundColor: GraphColor.GRAY,
-                            height: "20%",
-                            width:
-                                ((100 - item.time_end) * 100) / last_time_end +
-                                "%",
-                        }}
-                    ></div>
-                );
-            }
-        }
-
-        return (
-            <Fragment key={idx}>
-                {" "}
-                {buffer} {block} {ending}{" "}
-            </Fragment>
-        );
-    });
-}
 
 export default function CongruenceScale(props: Props) {
-    let listItemA_T = ListItemAVT(props.A_T);
-    let listItemA_V = ListItemAVT(props.A_V);
-    let listItemV_T = ListItemAVT(props.V_T);
+    const listItemA_T = props.A_T;
+    const listItemA_V = props.A_V;
+    const listItemV_T = props.V_T;
 
     const [activeIndex, setActiveIndex] = useState(1);
     const handleClick = (index: any) => setActiveIndex(index);
-    const checkActive = (index: any, className: any) =>
-        activeIndex === index ? className : "";
+
     return (
         <>
             <div className={CN("textBloc")}>
@@ -156,62 +64,47 @@ export default function CongruenceScale(props: Props) {
                     </div>
                 </div>
             </div>
-            <div className="congruenceScaletabs">
-                <button
-                    className={`congruenceScaletab ${checkActive(
-                        1,
-                        "congruenceScaleactive"
-                    )}`}
+            <div className={CN("congruenceScaletabs")}>
+                <SwitchButton
+                    title={"Видео"}
+                    icon={video}
                     onClick={() => handleClick(1)}
-                >
-                    <ReactSVG src={video} />
-                    Видео
-                </button>
-                <button
-                    className={`congruenceScaletab ${checkActive(
-                        2,
-                        "congruenceScaleactive"
-                    )}`}
+                    isActive={activeIndex === 1}
+                />
+                <SwitchButton
+                    title={"Аудио"}
+                    icon={volume_high}
                     onClick={() => handleClick(2)}
-                >
-                    <ReactSVG src={volume_high} />
-                    Аудио
-                </button>
-                <button
-                    className={`congruenceScaletab ${checkActive(
-                        3,
-                        "congruenceScaleactive"
-                    )}`}
+                    isActive={activeIndex === 2}
+                />
+                <SwitchButton
+                    title={"Текст"}
+                    icon={text}
                     onClick={() => handleClick(3)}
-                >
-                    <ReactSVG src={text} />
-                    Текст
-                </button>
+                    isActive={activeIndex === 3}
+                />
             </div>
-            <div className="panels">
+            <div className={CN("panels")}>
                 <div
-                    className={`panel ${checkActive(
-                        1,
-                        "congruenceScaleactive"
-                    )}`}
+                    className={CN("panels-panel", {
+                        visible: activeIndex === 1,
+                    })}
                 >
-                    <div className="content">{listItemA_T}</div>
+                    <CongruenceGraph elements={convertDataCongruenceFromBackIntoGraph(listItemA_T)} />
                 </div>
                 <div
-                    className={`panel ${checkActive(
-                        2,
-                        "congruenceScaleactive"
-                    )}`}
+                    className={CN("panels-panel", {
+                        visible: activeIndex === 2,
+                    })}
                 >
-                    <div className="content">{listItemV_T}</div>
+                    <CongruenceGraph elements={convertDataCongruenceFromBackIntoGraph(listItemV_T)} />
                 </div>
                 <div
-                    className={`panel ${checkActive(
-                        3,
-                        "congruenceScaleactive"
-                    )}`}
+                    className={CN("panels-panel", {
+                        visible: activeIndex === 3,
+                    })}
                 >
-                    <div className="content">{listItemA_V}</div>
+                    <CongruenceGraph elements={convertDataCongruenceFromBackIntoGraph(listItemA_V)} />
                 </div>
             </div>
         </>

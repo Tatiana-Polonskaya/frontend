@@ -90,23 +90,7 @@ export const convertExpressivenessDataLine = (
     ),
 });
 
-export const convertTime = (time: number): string => {
-    if (time < 10) {
-        return `00:0${time.toFixed(0)}`;
-    } else if (time < 60) {
-        return `00:${time.toFixed(0)}`;
-    } else if (time < 600 && time % 60 !== 0) {
-        return `0${Math.floor(time / 60)}:${
-            time % 60 < 10
-                ? "0" + (time % 60).toFixed(0)
-                : (time % 60).toFixed(0)
-        }`;
-    } else if (time < 600 && time % 60 === 0) {
-        return `0${Math.floor(time / 60)}:${(time % 60).toFixed(0)}0`;
-    } else {
-        return `${Math.floor(time / 60)}:${(time % 60).toFixed(0)}`;
-    }
-};
+
 
 type ConvertArr = {
     value: number;

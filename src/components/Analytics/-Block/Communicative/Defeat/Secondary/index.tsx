@@ -3,10 +3,10 @@ import { cn } from "@bem-react/classname";
 
 import "./style.scss";
 
-import { convertTime } from "../../../../helpers";
 import GraphColor from "../../../../../../models/graph/_colors";
 import { VideoTimeContext } from "../../../../../Context/helpers";
 import { useContext } from "react";
+import convertSecondsIntoTime from "../../../../../../@adapters/Time/convertSeconds";
 
 type Props = {
     breakdown: IBreakdown[];
@@ -301,7 +301,7 @@ export default function SecondaryDefeat(props: Props) {
                                 )
                             )}
                         >
-                            {convertTime(Number(el.time_start))}
+                            {convertSecondsIntoTime(Number(el.time_start))}
                         </div>
                         {determ(el.text, el.value, index)}
                     </div>
