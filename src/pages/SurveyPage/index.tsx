@@ -6,7 +6,11 @@ import "./style.scss";
 import { cn } from "@bem-react/classname";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
-import { LocalAnswer, updateChoiceAnswers } from "../../store/slices/survey";
+import {
+    LocalAnswer,
+    setStepAnswers,
+    updateChoiceAnswers,
+} from "../../store/slices/survey";
 
 import TarifPage from "./TarifPage";
 import { useNavigate } from "react-router-dom";
@@ -16,32 +20,8 @@ import {
 } from "../../store/api/survey";
 import { IAnswer, IQuestion, typeQuestion } from "../../models/survey";
 
-
-// post api/users  /register/complete
-// [
-//     {
-//       "question_id": "string",
-//       "choice_id": "string",
-//       "text": "string"
-//     }
-//   ]
-// get tarifs
-//{
-//     "title": "string",
-//     "price": 0,
-//     "duration": 0,
-//     "loads_limit": 0
-//   }
-
-// set tarif  tarif_id  user_id
-//{
-//     "title": "string",
-//     "price": 0,
-//     "duration": 0,
-//     "loads_limit": 0
-//   }
-
-// TO DO: SEND ANSWERS CORRECTLY AND CHECK TARIFS
+// TO DO: SEND ANSWERS CORRECTLY
+// TO DO:  добавить степ в стор
 
 export default function SurveyPage() {
     const [sendAnswersRequest, sendAnswersResponse] = useSendAnswersMutation();
@@ -55,10 +35,8 @@ export default function SurveyPage() {
 
     const ALL_STEP = 2;
     const QUESTIONS_FOR_STEP = [2, 3, 2];
-    const [step, setStep] = useState(0);
+    const step = useAppSelector((state) => state.survey.step);
     const [canMoved, setCanMoved] = useState(false);
-
-    // const storeChoiceAnswers = useAppSelector((state) => state.survey.answers);
 
     /* --------------------------------- QUESTION BLOCK --------------------------------- */
 
@@ -72,7 +50,7 @@ export default function SurveyPage() {
         if (questions) {
             let lastIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
                 (sum, elem) => sum + elem,
-                0
+                0,
             );
             setCurrentQuestions(questions.slice(firstIndex, lastIndex));
         }
@@ -85,17 +63,16 @@ export default function SurveyPage() {
 
     useEffect(() => {
         if (questions) {
-            let temp_arr: LocalAnswer[] = [];
-            for (let i = 0; i < questions?.length; i++) {
-                let temp = {
-                    id_question: questions[i].id,
-                    type_question: questions[i].type,
-                    id_choices: [],
-                    another_choices: "",
-                };
-                temp_arr.push(temp);
-            }
-            setAnswers(temp_arr);
+            setAnswers(
+                questions.map((el) => {
+                    return {
+                        id_question: el.id,
+                        type_question: el.type,
+                        id_choices: [],
+                        another_choices: "",
+                    };
+                }),
+            );
         }
     }, [questions]);
 
@@ -114,7 +91,6 @@ export default function SurveyPage() {
         });
 
         setAnswers(currentAnswers);
-
         dispatch(updateChoiceAnswers(answers));
     };
 
@@ -122,7 +98,7 @@ export default function SurveyPage() {
         if (answers && answers[0]) {
             let lastIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
                 (sum, elem) => sum + elem,
-                0
+                0,
             );
             let flag = 0;
             for (let i = firstIndex; i < lastIndex; i++) {
@@ -137,10 +113,10 @@ export default function SurveyPage() {
             setFirstIndex(
                 QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
                     (sum, elem) => sum + elem,
-                    0
-                )
+                    0,
+                ),
             );
-            setStep((prev) => ++prev);
+            dispatch(setStepAnswers(step + 1));
 
             if (step + 1 > ALL_STEP) {
                 let body: Array<IAnswer> =
@@ -170,10 +146,10 @@ export default function SurveyPage() {
         if (questions) {
             let finalArray = currentAnswers.map((el) => {
                 let current_question = questions.filter(
-                    (q) => q.id === el.id_question
+                    (q) => q.id === el.id_question,
                 )[0];
                 let current_another = current_question.choices.filter(
-                    (ch) => ch.another
+                    (ch) => ch.another,
                 )[0];
                 return el.id_choices.map((choice) => {
                     return {
@@ -211,14 +187,46 @@ export default function SurveyPage() {
                                     {el.type === typeQuestion.checkbox && (
                                         <CheckboxQuestion
                                             key={el.id}
-                                            question={el}
+                                            question={{
+                                                ...el,
+                                                title: `${
+                                                    idx +
+                                                    1 +
+                                                    (step > 0
+                                                        ? QUESTIONS_FOR_STEP.slice(
+                                                              0,
+                                                              step,
+                                                          ).reduce(
+                                                              (sum, el) =>
+                                                                  sum + el,
+                                                              0,
+                                                          )
+                                                        : 0)
+                                                }. ${el.title}`,
+                                            }}
                                             addAnswers={addAnswers}
                                         />
                                     )}
                                     {el.type === typeQuestion.radio && (
                                         <RadioBtnQuestion
                                             key={el.id}
-                                            question={el}
+                                            question={{
+                                                ...el,
+                                                title: `${
+                                                    idx +
+                                                    1 +
+                                                    (step > 0
+                                                        ? QUESTIONS_FOR_STEP.slice(
+                                                              0,
+                                                              step,
+                                                          ).reduce(
+                                                              (sum, el) =>
+                                                                  sum + el,
+                                                              0,
+                                                          )
+                                                        : 0)
+                                                }. ${el.title}`,
+                                            }}
                                             addAnswers={addAnswers}
                                         />
                                     )}
@@ -251,6 +259,7 @@ export default function SurveyPage() {
                 </div>
             )}
             {step > ALL_STEP && <TarifPage></TarifPage>}
+            {/* <TarifPage></TarifPage> */}
         </SurveyLayout>
     );
 }

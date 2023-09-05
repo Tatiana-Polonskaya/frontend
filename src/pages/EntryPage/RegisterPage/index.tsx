@@ -14,8 +14,12 @@ import SecondaryInfoBusiness from "./SecondaryInfoBusiness";
 import EmailVerification from "./EmailVerification";
 import PrimaryInfoPersonal from "./PrimaryInfoPersonal";
 import ActivationErrorPage from "../ActivationPage/-Error";
+import { cn } from "@bem-react/classname";
+import "./style.scss";
+
 
 export default function RegisterPage() {
+    const cnRegister = cn("RegisterPage");
     const userType = useAppSelector((state) => state.entry.userType);
 
     const step = useAppSelector((state) => state.entry.registerStep);
@@ -29,6 +33,7 @@ export default function RegisterPage() {
                             ? RegisterImagePersonal
                             : RegisterImageBusiness
                     }
+                    className={cnRegister("image")}
                 />
             }
         >

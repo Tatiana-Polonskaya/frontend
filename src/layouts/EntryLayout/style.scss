@@ -1,26 +1,31 @@
 .entry-layout {
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+
     background: #FFF;
 
     &-content {
-        padding: 48px 16px;
+        padding: 50px 50px;
         // padding: 50px 85px;
-        margin: auto;
-        max-width: 30%;
-        
-        
+        margin: auto 0;
+        max-width: 80%;
+
         @media screen and (max-width: 1024px) {
             max-width: inherit;
         }
     }
 
     &-image {
-        margin: auto 0;
+
         @media screen and (max-width: 1024px) {
             display: none;
         }
+
+        height: 100vh;  
+        min-height: 650px;
+        width: 100%;
     }
 }

@@ -21,51 +21,73 @@ import {
     AIM_PARAMETERS,
     IAimItem,
     IAimParameters,
+    ITaskItem,
 } from "../../../models/aim";
 import ProgressBar from "../../Graphs/Progressbar";
-import {  NewAimContext } from "..";
+import { NewAimContext } from "..";
 
 type Props = {
-    item: IAimItem;
+    purpose: IAimItem;
 };
 
-// TO DO : CHANGE VALUE PARAMS FOR SAVING sendPurposeRequest FROM resParams TO checkedParams
+function getCurrentStep(tasks: ITaskItem[]): number {
+    let maxStep = 0;
+    let minStep = tasks.length;
+    let outstandingTasks: number[] = [];
 
-export default function AimItem({ item }: Props) {
+    tasks.forEach((el) => {
+        if (!el.is_done && !outstandingTasks.includes(el.step)) {
+            minStep = el.step < minStep ? el.step : minStep;
+            outstandingTasks.push(el.step);
+        }
+        maxStep = el.step > maxStep ? el.step : maxStep;
+    });
+    return outstandingTasks.length > 0 ? minStep : maxStep;
+}
+
+const MAX_PARAMS = 5; // maximum parameters that can be tracked for a purpose
+
+export default function AimItem({ purpose }: Props) {
     const cnAimItem = cn("AimItem");
 
-    const {updateAims } = useContext(NewAimContext);
+    const { hasNewAim, updateAims } = useContext(NewAimContext);
 
     /* ------------------------------ AIM ------------------------------ */
 
-    const statusAim = item ? (item.is_done ? "завершено" : "в процессе") : "";
+    const statusAim = purpose
+        ? purpose.is_done
+            ? "завершено"
+            : "в процессе"
+        : "";
     const typeAim = "личная цель";
     const messageAim = "выберите параметры для оценки цели";
 
-    const titleAim = item ? item.title : "";
+    const titleAim = purpose ? purpose.title : "";
     const phraseAim = "Мотивирующая фраза, зависящая от прогресса!";
 
     const [sendPurposeRequest, sendPurposeResponse] =
         useSendUserPurposeMutation();
+
     const { isSuccess, isError } = sendPurposeResponse;
 
     /* ------------------------------ STEPS ------------------------------ */
 
     const count_steps = useMemo(
         () =>
-            item
-                ? item.tasks
+            purpose
+                ? purpose.tasks
                       .map((el) => el.step)
-                      .filter((item, i, ar) => ar.indexOf(item) === i)
+                      .filter((el, i, ar) => ar.indexOf(el) === i)
+                      .sort()
                 : [],
-        [item]
+        [purpose],
     );
 
-    const choosedStep = 1;
+    const choosedStep = getCurrentStep(purpose.tasks);
 
     /* ------------------------------ TASKS ------------------------------ */
 
-    const allTasks = item ? item.tasks : [];
+    const allTasks = purpose ? purpose.tasks : [];
 
     const [isShowTasks, setIsShowTasks] = useState(false);
     const titleForBtn = isShowTasks ? "Свернуть" : "Развернуть цель";
@@ -78,13 +100,14 @@ export default function AimItem({ item }: Props) {
     useEffect(() => {
         if (resultParams && resultParams.data) {
             setListParams(resultParams.data!.data!);
+            setCheckedParams([]);
         }
     }, [resultParams]);
 
     /* ------------------------------ SAVED PARAMS ------------------------------ */
 
     const [canSave, setCanSave] = useState(
-        count_steps.length > 0 ? false : true
+        count_steps.length > 0 ? false : true,
     );
 
     useEffect(() => {
@@ -99,19 +122,19 @@ export default function AimItem({ item }: Props) {
     // for existed params from user aim
     useEffect(() => {
         if (listParams) {
-            Object.entries(listParams).map(([key, value]) => {
-                let rest = item.parameters.filter(
-                    (el) => el.title === value.title
+            Object.entries(listParams).forEach(([key, value]) => {
+                const rest = purpose.parameters.filter(
+                    (el) => el.title === value.title,
                 );
                 if (rest.length > 0) {
                     setCheckedParams((prev) => [...prev, key]);
                 }
             });
         }
-    }, [listParams, item.parameters]);
+    }, [listParams]);
 
     const changeCheckedState = (el: string) => {
-        const indexParam = checkedParams.findIndex((item) => item === el);
+        const indexParam = checkedParams.findIndex((purpose) => purpose === el);
         if (indexParam !== -1) {
             const updatedCheckedState = [
                 ...checkedParams.slice(0, indexParam),
@@ -119,7 +142,7 @@ export default function AimItem({ item }: Props) {
             ];
             setCheckedParams(updatedCheckedState);
         } else {
-            if (checkedParams.length < 5) {
+            if (checkedParams.length < MAX_PARAMS) {
                 setCheckedParams([...checkedParams, el]);
             }
         }
@@ -130,16 +153,9 @@ export default function AimItem({ item }: Props) {
     };
 
     const saveParams = async () => {
-
-        let resParams = [
-            AIM_PARAMETERS.consistency,
-            AIM_PARAMETERS.informative,
-            AIM_PARAMETERS.originality,
-        ];
-
         await sendPurposeRequest({
-            title: item.title,
-            params: checkedParams as AIM_PARAMETERS[], // checkedParams
+            title: purpose.title,
+            params: checkedParams as AIM_PARAMETERS[],
         });
     };
 
@@ -152,6 +168,13 @@ export default function AimItem({ item }: Props) {
     useEffect(() => {
         if (isError) alert("Something was wrong!");
     }, [isError]);
+
+    useEffect(() => {
+        if (hasNewAim) {
+            setIsShowTasks(false);
+            setCheckedParams([]);
+        }
+    }, [hasNewAim]);
 
     return (
         <div className={cnAimItem()}>
@@ -195,24 +218,26 @@ export default function AimItem({ item }: Props) {
                     </div>
                 </div>
                 <div className={cnAimItem("row")}>
-                    {item &&
+                    {purpose &&
                         count_steps.length > 0 &&
                         count_steps.map((el, idx) => {
-                            let itemProgress = 100 / count_steps.length;
-                            let prevMax =
-                                idx > 0 ? (100 / count_steps.length) * idx : 0;
-                            let currentMax = itemProgress * (idx + 1);
-                            let currV = item.progress;
-                            let currentValue =
-                                currV >= currentMax
-                                    ? currentMax
-                                    : currV - prevMax > 0
-                                    ? currV - prevMax
-                                    : 0;
+                            const maxForStep = Math.floor(
+                                100 / count_steps.length,
+                            );
+                            const prevMax = maxForStep * idx;
+                            const currentMax = maxForStep * (idx + 1);
+                            const currentProgress = purpose.progress;
+
                             return (
                                 <ProgressBar
-                                    completed={currentValue}
-                                    maxValue={currentMax}
+                                    completed={Math.ceil(
+                                        currentProgress >= currentMax
+                                            ? maxForStep
+                                            : currentProgress - prevMax > 0
+                                            ? currentProgress - prevMax
+                                            : 0,
+                                    )}
+                                    maxValue={maxForStep}
                                     key={idx}
                                 />
                             );
@@ -258,7 +283,7 @@ export default function AimItem({ item }: Props) {
                                                         "task-block-item",
                                                         {
                                                             done: el.is_done,
-                                                        }
+                                                        },
                                                     )}
                                                 >
                                                     <ReactSVG
@@ -332,7 +357,7 @@ export default function AimItem({ item }: Props) {
                                             <div
                                                 key={idx}
                                                 className={cnAimItem(
-                                                    "params-block-grid-item"
+                                                    "params-block-grid-item",
                                                 )}
                                             >
                                                 <label
@@ -340,7 +365,7 @@ export default function AimItem({ item }: Props) {
                                                         "params-block-grid-item-label",
                                                         {
                                                             active: !canSave,
-                                                        }
+                                                        },
                                                     )}
                                                     data-tooltip-id={
                                                         "params-input-" + key
@@ -349,10 +374,10 @@ export default function AimItem({ item }: Props) {
                                                     <input
                                                         type="checkbox"
                                                         className={cnAimItem(
-                                                            "params-block-grid-item-input"
+                                                            "params-block-grid-item-input",
                                                         )}
                                                         checked={checkedParams.includes(
-                                                            key
+                                                            key,
                                                         )}
                                                         name={key}
                                                         value={key}
@@ -362,7 +387,7 @@ export default function AimItem({ item }: Props) {
                                                     ></input>
                                                     <span
                                                         className={cnAimItem(
-                                                            "params-block-grid-item-span"
+                                                            "params-block-grid-item-span",
                                                         )}
                                                     >
                                                         {value.title}
@@ -373,14 +398,14 @@ export default function AimItem({ item }: Props) {
                                                     place={"right-start"}
                                                     noArrow={true}
                                                     className={cnAimItem(
-                                                        "tooltip"
+                                                        "tooltip",
                                                     )}
                                                 >
                                                     {value.description}
                                                 </Tooltip>
                                             </div>
                                         );
-                                    }
+                                    },
                                 )}
                         </div>
                     )}

@@ -16,7 +16,7 @@ import Link from "../../../components/ui-kit/Link";
 import InputHeader from "../../../components/ui-kit/InputHeader";
 import Input from "../../../components/ui-kit/Input";
 
-import LoginImage from "./assets/login.svg";
+import LoginImage from "./assets/login.svg"; // login_pic.png
 import RegisterImageBusiness from "../RegisterPage/assets/reg-image-business.svg";
 
 import "./style.scss";
@@ -41,7 +41,7 @@ export default function LoginPage() {
     const [isEmailWrong, setEmailWrong] = useState(false);
     const [isPasswordWrong, setPasswordWrong] = useState(false);
     const [wrongEmailText, setWrongEmailText] = useState(
-        INVALID_LOGIN_INIT_TEXT
+        INVALID_LOGIN_INIT_TEXT,
     );
     const [wrongPasswordText, setWrongPasswordText] = useState("");
 
@@ -87,16 +87,24 @@ export default function LoginPage() {
     }
 
     return (
-        <EntryLayout image={<ReactSVG src={
-            userType === UserType.Personal
-                ? LoginImage
-                : RegisterImageBusiness
-        } />}>
+        <EntryLayout
+            image={
+                // <img src={LoginImage} alt="login" className={cnLoginPage("image")}/>
+                <ReactSVG
+                    src={
+                        userType === UserType.Personal
+                            ? LoginImage
+                            : RegisterImageBusiness
+                    }
+                    className={cnLoginPage("image")}
+                />
+            }
+        >
             {userType === UserType.Personal ? (
                 <>
                     <UserTypeSwitch />
-
-                    <LoginRegisterChanger pageType={PageType.Login} />
+                    <div className={cnLoginPage("padding")}><LoginRegisterChanger pageType={PageType.Login} /></div>
+                    
                     <div className={cnLoginPage()}>
                         <InfoFragment
                             phrase={
@@ -153,7 +161,10 @@ export default function LoginPage() {
                             </Button>
                         </div>
                         <p>
-                            <span  className={cnLoginPage("span")}>Забыли пароль?</span>&nbsp;
+                            <span className={cnLoginPage("span")}>
+                                Забыли пароль?
+                            </span>
+                            &nbsp;
                             <Link
                                 className={cnLoginPage("link")}
                                 onClick={() => navigate(RoutesEnum.RESTORE)}

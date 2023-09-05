@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@bem-react/classname";
-import firstTarifNotChecked from "./firstTarifNotChecked.png";
-import firstTarifChecked from "./firstTarifChechedd.png";
+
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 
 import { useNavigate } from "react-router-dom";
@@ -9,41 +8,93 @@ import RoutesEnum from "../../../models/routes";
 
 import "./style.scss";
 
+import Link from "../../../components/ui-kit/Link";
+
+import Button from "../../../components/ui-kit/Button";
+import {
+    useGetTraiffsQuery,
+    useSendTariffMutation,
+} from "../../../store/api/tariff";
+import { ITariff } from "../../../models/tariff";
+
+import { UUID } from "crypto";
+import TarifCard from "../../../components/TarifCard";
+
+
+// TODO:  добавить обратобку промокодов 
+
 export default function TarifPage() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const [checkedTarif, setCheckedTarif] = useState(-1);
+    const cnTarif = cn("TarifPage");
 
-    const tarifs = new Array(5).fill({
-        id: 0,
-        title: "Mini",
-        count_rep: 5,
-        money: 599,
-        moneyForOneRep: "119,80 руб",
-    }).map((el,i)=>{return {...el, id:el.id+i}});
+    //* -------------------------------- GETTING TARIFFS --------------------------------  */
 
+    const tariffs = useGetTraiffsQuery();
+    const [basicTariffs, setBasicTariffs] = useState<ITariff[]>();
 
-    // console.log(tarifs)
-    let trialIndex = tarifs.filter((el) => el.title === "Trial")[0] ? tarifs.filter((el) => el.title === "Trial")[0].id : -1;
-
-    const user = useAppSelector((state) => state.user.user?.id);
-
-    const clickOnButton = () => {
-        if (checkedTarif !== -1) {
-            console.log("тариф выбран");
-
-            // отправка выбранного тарифа на бэк
-            // переход на сторонние сервисы и переход на главную страницу после оплаты
-
-            if (checkedTarif === trialIndex) navigate(RoutesEnum.HOME);
+    useEffect(() => {
+        if (tariffs.data && tariffs.data.data && tariffs.isSuccess) {
+            setBasicTariffs(
+                [...tariffs.data!.data].sort((x, y) => x.price - y.price),
+            );
         }
-    };
+    }, [tariffs]);
 
-    const clickOnCard = (id: number) => {
+    //* -------------------------------- TARIFF SELECTION --------------------------------  */
+
+    const [checkedTarif, setCheckedTarif] = useState("");
+
+    const trialTariff = useMemo(() => {
+        if (basicTariffs && basicTariffs.length > 0) {
+            let trialElem = basicTariffs.filter((x) => x.price === 0);
+            return trialElem.length > 0 ? trialElem[0].id : "";
+        } else return "";
+    }, [basicTariffs]);
+
+    const clickOnCard = (id: string) => {
         setCheckedTarif(id);
     };
 
-    const cnTarif = cn("TarifPage");
+    //* -------------------------------- PROMO CODE --------------------------------  */
+
+    const promocodeRef = useRef<HTMLInputElement>(null);
+    const [isPromocodeValid, setPromocodeValid] = useState(true);
+
+    //* -------------------------------- SENDING TARIFF --------------------------------  */
+
+    const userId: UUID = useAppSelector((state) => state.profile.user.id);
+
+    const [sendTariffRequest, sendTariffResponse] = useSendTariffMutation();
+    const { isSuccess, isError } = sendTariffResponse;
+
+    const clickOnButton = async () => {
+        if (checkedTarif !== "") {
+            await sendTariffRequest({
+                tarif_id: checkedTarif,
+                user_id: userId,
+            });
+        }
+    };
+
+    useEffect(() => {
+        if (isSuccess) {
+            if (checkedTarif === trialTariff && trialTariff !== "") {
+                navigate(RoutesEnum.HOME);
+            } else {
+                // window.location.replace(...)
+                // переход на сторонние сервисы и переход на главную страницу после оплаты
+            }
+        }
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) {
+            alert("Что-то пошло не так, попробуйте еще раз.");
+        }
+    }, [isError]);
+
+    //* -------------------------------- CODE --------------------------------  */
 
     return (
         <div className={cnTarif()}>
@@ -56,80 +107,61 @@ export default function TarifPage() {
                     Выберите подходящий тариф и используйте все возможности
                     подготовки к выступлениям со Speech Up.
                 </div>
-                Первую неделю вы можете репетировать абсолютно бесплатно и без
-                ограничений.
-                <div className={cnTarif("header-link")}>
-                    Узнать подробнее о сервисе{" "}
-                </div>
+                <Link arrow="right" className={cnTarif("header-link")}>
+                    Узнать подробнее о сервисе
+                </Link>
             </div>
             <div className={cnTarif("cards")}>
-                {tarifs.map((el, index) => (
-                    <div key={index} className={cnTarif("cards-item")}>
-                        {el.id === trialIndex && (
-                            <div
-                                key={el.id}
-                                className={cnTarif("cards-trial", {
-                                    checked: checkedTarif === el.id,
-                                })}
-                                onClick={() => clickOnCard(el.id)}
-                            >
-                                <img className={cnTarif("cards-trial-img")} src={firstTarifNotChecked}/>
-                            </div>
-                        )}
-                        {el.id !== trialIndex && (
-                            <div
-                                key={el.id}
-                                className={cnTarif("cards-tarif", {
-                                    checked: checkedTarif === el.id,
-                                })}
-                                onClick={() => clickOnCard(el.id)}
-                            >
-                                <div className={cnTarif("cards-tarif-title")}>
-                                    {el.title}
-                                </div>
-                                <div className={cnTarif("cards-tarif-counts")}>
-                                    <span className={cnTarif("cards-tarif-counts-bold")}>{el.count_rep}</span>{" "+" репетиций"}
-                                </div>
-                                {el.money !== 0 && (
-                                    <div
-                                        className={cnTarif("cards-tarif-money")}
-                                    >
-                                        <span>{el.money}</span>
-                                        <span
-                                            className={cnTarif(
-                                                "cards-tarif-money-text"
-                                            )}
-                                        >
-                                            рублей
-                                        </span>
-                                    </div>
-                                )}
-
-                                <div
-                                    className={cnTarif(
-                                        "cards-tarif-money-for-period"
-                                    )}
-                                >
-                                    {el.moneyForOneRep && <>{el.moneyForOneRep}</>}
-                                </div>
-                            </div>
+                {basicTariffs &&
+                    basicTariffs.map((el, index) => (
+                        <TarifCard
+                            key={index}
+                            {...el}
+                            checked={checkedTarif === el.id}
+                            onClick={() => clickOnCard(el.id)}
+                        />
+                    ))}
+            </div>
+            <div className={cnTarif("row")}>
+                <div className={cnTarif("row-text")}>Промокод :</div>
+                <div className={cnTarif("row-block")}>
+                    <div className={cnTarif("row-block-content")}>
+                        <input
+                            type="text"
+                            placeholder={"Введите промокод"}
+                            className={cnTarif("row-block-input")}
+                            maxLength={50}
+                            onBlur={(e) =>
+                                setPromocodeValid(e.target.checkValidity())
+                            }
+                            ref={promocodeRef}
+                        />
+                        {!isPromocodeValid && (
+                            <span className={cnTarif("row-block-warning")}>
+                                Такого промокода нет. Проверьте, всё ли верно,
+                                или введите другой.
+                            </span>
                         )}
                     </div>
-                ))}
+                </div>
+
+                <Button className={cnTarif("row-btn")}>Применить</Button>
             </div>
             <div className={cnTarif("footer")}>
                 <button
                     className={cnTarif("footer-btn", {
-                        canClicked: checkedTarif !== -1,
+                        canClicked: checkedTarif !== "",
                     })}
                     onClick={clickOnButton}
                 >
-                    {checkedTarif === trialIndex ? "Начать" : "Оплатить"}
+                    {checkedTarif === trialTariff && checkedTarif !== ""
+                        ? "Начать"
+                        : "Оплатить"}
                 </button>
                 <span>
                     Обратите внимание, что при оплате выбранного тарифа, вы не
-                    сможете прекратить его действие до окончания указанного
-                    периода.
+                    сможете прекратить его действие до использования всех
+                    оплаченных попыток либо окончания указанного периода.
                 </span>
             </div>
         </div>

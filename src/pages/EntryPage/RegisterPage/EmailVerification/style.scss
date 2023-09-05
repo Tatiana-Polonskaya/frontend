@@ -1,36 +1,52 @@
 .email-verification {
+    
     &-register-link {
         font-weight: 600;
         margin: 0 0 28px 0;
         display: block;
+        font-family: Montserrat Alternates;
     }
 
     &-title {
-        color: #37476a;
-        font-size: 2rem;
+        color: #37476A;
+        font-family: Onest;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
         padding: 16px 0;
     }
 
     &-description {
+        color: #7C8EB5;
+        font-family: Onest;
         font-size: 1.25rem;
         color: #7c8eb5;
     }
 
     &-resend-text {
-        color: #37476a80;
+        color: #7C8EB5;
+        font-family: Onest;
+        font-size: 16px;
         text-transform: uppercase;
         font-weight: 700;
         padding: 32px 0;
     }
 
     &-resend-link {
+        font-family: Onest;
+        font-size: 16px;
         font-weight: 700;
         text-transform: uppercase;
         padding: 0 16px;
     }
+
     &-info-link {
+        font-family: Montserrat Alternates;
+        font-size: 20px;
+        font-style: normal;
         font-weight: 500;
+
         display: block;
-        font-size: 1.25rem;
     }
 }

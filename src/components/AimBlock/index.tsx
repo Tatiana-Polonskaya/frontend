@@ -1,10 +1,4 @@
-import {
-    Fragment,
-    createContext,
-    useEffect,
-    useRef,
-    useState,
-} from "react";
+import { Fragment, createContext, useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import "react-tooltip/dist/react-tooltip.css";
 
@@ -12,10 +6,11 @@ import AimItem from "./AimItem";
 import ModalWindow from "../ModalWindow/ModalWindow";
 
 import Button from "../ui-kit/Button";
+import { ForwardedCheckBoxItem } from "../CheckboxQuestion/CheckboxItem";
 import {
-    ForwardedCheckBoxItem,
-} from "../CheckboxQuestion/CheckboxItem";
-import { useGetUserPurposesQuery, useLazyGetUserPurposesQuery } from "../../store/api/diary";
+    useGetUserPurposesQuery,
+    useLazyGetUserPurposesQuery,
+} from "../../store/api/diary";
 import { IAimItem } from "../../models/aim";
 
 import { updateUserAims } from "../../store/slices/diary";
@@ -33,16 +28,16 @@ export const NewAimContext = createContext({
     updateAims: (() => {}) as Function,
 });
 
-
 export default function AimBlock() {
     const cnAimBlock = cn("AimBlock");
     const dispatch = useAppDispatch();
 
     /* ------------------------------ AIMS ------------------------------ */
 
-    const allUsersPurposes = useGetUserPurposesQuery();
+    const allUsersPurposes = useGetUserPurposesQuery(); 
     const [allPurposes, setAllPurposes] = useState<IAimItem[]>();
-    const count_purposes: number = allPurposes ? allPurposes.length : 0;
+
+    const countPurposes: number = allPurposes ? allPurposes.length : 0;
 
     const storePurposes = useAppSelector((state) => state.diary.userAims);
 
@@ -52,19 +47,22 @@ export default function AimBlock() {
             allUsersPurposes.data &&
             allUsersPurposes.data.data
         ) {
-            if(storePurposes.length > 0){
-            if (storePurposes[0].title.length === 0) {
-                setAllPurposes(allUsersPurposes.data!.data!.purposes);
-                dispatch(updateUserAims(allUsersPurposes.data!.data!.purposes));
-            } else {
-                setAllPurposes(storePurposes);
+            if (storePurposes.length > 0) {
+                if (storePurposes[0].title.length === 0) {
+                    const purposes = [
+                        ...allUsersPurposes.data!.data!.purposes,
+                    ].reverse();
+                    setAllPurposes(purposes);
+                    dispatch(updateUserAims(purposes));
+                } else {
+                    setAllPurposes(storePurposes);
+                }
             }
-        }
         }
     }, [allUsersPurposes]);
 
     /* ------------------------------ AIMS FOR MODAL WINDOW ------------------------------ */
-    const existedAims = [
+    const existedPurposes = [
         {
             id: "1",
             title: "Повысить уверенность в себе и в своих навыках публичного выступления",
@@ -91,16 +89,16 @@ export default function AimBlock() {
         },
     ];
 
-    const [standartAims, setStandertAims] = useState(existedAims);
+    const [standartPurposes, setStandertPurposes] = useState(existedPurposes);
 
     useEffect(() => {
         if (allPurposes) {
             const userAimTitles = allPurposes.map((el) => el.title);
             // const existedAimsTitles = existedAims.map(el=>el.title);
-            setStandertAims(
-                existedAims.map((el) => {
+            setStandertPurposes(
+                existedPurposes.map((el) => {
                     return { ...el, isExist: userAimTitles.includes(el.title) };
-                })
+                }),
             );
         }
     }, [allPurposes]);
@@ -108,30 +106,34 @@ export default function AimBlock() {
     const [choosenAim, setChoosenAim] = useState(0);
 
     /* ------------------------------ UPDATING AIMS AFTER ADDING NEW AIMS ------------------------------ */
-    
-    const [hasNewAim, setHasNewAim] = useState(false);
+
+    const [hasNewAim, setHasNewAim] = useState(false); // добавить реверс для массива
 
     const [getNewAims, newAims] = useLazyGetUserPurposesQuery();
 
-    const updateAims = async () =>{
-        setHasNewAim(prev=>!prev);
+    const updateAims = async () => {
+        setHasNewAim((prev) => !prev);
         await getNewAims();
-    }
+    };
 
-    useEffect(()=>{
-        if(newAims && newAims.data && newAims.isSuccess){
-            if (newAims.data.success && newAims.data.data){
-                setAllPurposes(newAims.data!.data!.purposes);
-                dispatch(updateUserAims(newAims.data!.data!.purposes));
+    useEffect(() => {
+        if (newAims && newAims.data && newAims.isSuccess) {
+            if (newAims.data.success && newAims.data.data) {
+                const purposes = [
+                    ...newAims.data!.data!.purposes,
+                ].reverse();
+                setAllPurposes(purposes);
+                dispatch(updateUserAims(purposes));
             }
-        } 
-    },[newAims]);
+        }
+    }, [newAims]);
 
     /* ------------------------------ MODAL WINDOW ------------------------------ */
 
     const [isModal, setIsModal] = useState(false);
 
     const closeModal = () => {
+        setCheckedState(new Array(existedPurposes.length).fill(false));
         setIsModal(false);
     };
 
@@ -143,33 +145,32 @@ export default function AimBlock() {
 
     /* ------------------------------ MODAL WINDOW VALUE ------------------------------ */
 
-
     const [checkedState, setCheckedState] = useState<Array<boolean>>(
-        new Array(existedAims.length).fill(false)
+        new Array(existedPurposes.length).fill(false),
     );
 
     const changeCheckedState = (position: number) => {
         const updatedCheckedState = checkedState.map((item, index) =>
-            index === position ? !item : item
+            index === position ? !item : item,
         );
         setCheckedState(updatedCheckedState);
     };
 
     const saveChoosedAims = () => {
-        let titles: string[] = checkedState.map((el, idx) => {
+        const choosedNames: string[] = checkedState.map((el, idx) => {
             if (el) {
-                if (existedAims[idx].title === existedAims.at(-1)?.title) {
+                if (existedPurposes[idx].title === existedPurposes.at(-1)?.title) {
                     // опишите цель использования сервиса
                     return textRef && textRef.current
                         ? textRef.current!.value
                         : "textRef";
                 }
-                return existedAims[idx].title;
+                return existedPurposes[idx].title;
             }
             return "";
         });
 
-        let res = titles
+        const resultAims = choosedNames
             .filter((el) => el !== "")
             .map((el) => ({
                 title: el,
@@ -181,13 +182,17 @@ export default function AimBlock() {
             }));
 
         dispatch(
-            updateUserAims(allPurposes ? [...res, ...allPurposes] : [...res])
+            updateUserAims(
+                allPurposes ? [...resultAims, ...allPurposes] : [...resultAims],
+            ),
         );
-        setAllPurposes((prev) => (prev ? [...res, ...prev] : [...res]));
+        setAllPurposes((prev) =>
+            prev ? [...resultAims, ...prev] : [...resultAims],
+        );
 
         setHasNewAim(true);
         setChoosenAim(0);
-        setCheckedState(new Array(existedAims.length).fill(false))
+        setCheckedState(new Array(existedPurposes.length).fill(false));
         closeModal();
     };
 
@@ -201,8 +206,8 @@ export default function AimBlock() {
                     Цели
                 </div>
                 <div className={cnAimBlock("aims-count")}>
-                    {count_purposes > 0 &&
-                        new Array(count_purposes).fill(1).map((el, i) => (
+                    {countPurposes > 0 &&
+                        new Array(countPurposes).fill(1).map((el, i) => (
                             <div
                                 key={el + i}
                                 className={cnAimBlock("aims-count-circle", {
@@ -220,16 +225,19 @@ export default function AimBlock() {
                     Добавить цель
                 </div>
             </div>
+
             <NewAimContext.Provider value={{ hasNewAim, updateAims }}>
                 {allPurposes &&
                     allPurposes.map((el, i) => (
                         <Fragment key={i}>
-                            {i === choosenAim ? <AimItem item={el} /> : null}
+                            {i === choosenAim ? <AimItem purpose={el} /> : null}
                         </Fragment>
                     ))}
-                    
             </NewAimContext.Provider>
-            {count_purposes===0 && (<span className={cnAimBlock("empty-msg")}>Целей еще нет</span>)}
+
+            {countPurposes === 0 && (
+                <span className={cnAimBlock("empty-msg")}>Целей еще нет</span>
+            )}
             <ModalWindow
                 title="Выберите цель или введите собственную"
                 icon={gpsIcon}
@@ -237,7 +245,7 @@ export default function AimBlock() {
                 onClose={() => closeModal()}
             >
                 <div className={cnAimBlock("modal")}>
-                    {standartAims.map((el, idx) => (
+                    {standartPurposes.map((el, idx) => (
                         <ForwardedCheckBoxItem
                             key={idx + el.title}
                             id={"" + idx}
@@ -254,7 +262,7 @@ export default function AimBlock() {
                                 <span
                                     className={cnAimBlock(
                                         "modal-checkbox-text",
-                                        { strikethrough: el.isExist }
+                                        { strikethrough: el.isExist },
                                     )}
                                 >
                                     {el.title}
@@ -262,7 +270,7 @@ export default function AimBlock() {
                                 {el.isExist && (
                                     <span
                                         className={cnAimBlock(
-                                            "modal-checkbox-text-blue"
+                                            "modal-checkbox-text-blue",
                                         )}
                                     >
                                         Цель уже добавлена

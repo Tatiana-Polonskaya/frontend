@@ -20,6 +20,7 @@ import { diaryApi } from "./api/diary";
 import { apiWithDifAnswers } from "./api/apiWithDifAnswers";
 import { chatApi } from "./api/chat";
 import { notificationApi } from "./api/notification";
+import { tariffApi } from "./api/tariff";
 
 export const store = configureStore({
     reducer: {
@@ -36,6 +37,7 @@ export const store = configureStore({
         [chatApi.reducerPath]: chatApi.reducer,
         [notificationApi.reducerPath]: notificationApi.reducer,
         [reportTestApi.reducerPath]: reportTestApi.reducer,
+        [tariffApi.reducerPath]: tariffApi.reducer,
 
         register: registerReducer,
         test: testSlice,
@@ -57,10 +59,10 @@ export const store = configureStore({
             videoApi.middleware,
             chatApi.middleware,
             notificationApi.middleware,
-            reportTestApi.middleware
+            reportTestApi.middleware,
+            tariffApi.middleware,
         ),
     devTools: process.env.NODE_ENV !== "production",
-    
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

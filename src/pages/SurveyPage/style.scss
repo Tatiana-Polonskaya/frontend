@@ -1,8 +1,7 @@
 .survey{
     display: flex;
     flex-flow: column nowrap;
-    margin-left: 50px;
-    margin-top:  50px;
+    margin: 50px;
     padding: 32px;
     border-radius: 48px;
     gap: 10px;
@@ -14,7 +13,7 @@
         font-style: normal;
         font-weight: 700;
         font-size: 24px;
-        line-height: normal;
+        line-height: 26px;
         text-transform: uppercase;
         color: #031C3D;
 
@@ -26,11 +25,11 @@
         font-weight: 400;
         font-size: 20px;
         color: #37476A;
-        line-height: normal;
+        line-height: 22px;
     }
 
     &-questions{
-        padding-top: 15px;
+        padding-top: 10px;
         display: flex;
         flex-flow: column nowrap;
         gap:20px;

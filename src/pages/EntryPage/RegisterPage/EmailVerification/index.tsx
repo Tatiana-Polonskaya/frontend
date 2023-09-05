@@ -17,7 +17,7 @@ export default function EmailVerification() {
     const dispatch = useAppDispatch();
     const [request, response] = useResendEmailMutation();
     return (
-        <>
+        <div className={cnEmailVerification()}>
             <Link
                 arrow="left"
                 className={cnEmailVerification("register-link")}
@@ -48,6 +48,6 @@ export default function EmailVerification() {
             <Link arrow="right" className={cnEmailVerification("info-link")}>
                 Изучить возможности сервиса
             </Link>
-        </>
+        </div>
     );
 }

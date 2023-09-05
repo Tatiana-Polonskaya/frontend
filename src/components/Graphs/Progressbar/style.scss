@@ -3,6 +3,7 @@
     height: 25px;
     background-color: #D4DFF4;
     border-radius: 50px;
+    overflow: hidden;
 
     &-line{
         width:var(--value_line);
