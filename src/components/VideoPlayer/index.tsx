@@ -9,6 +9,7 @@ import { BaseReactPlayerProps, OnProgressProps } from "react-player/base";
 import reloadPicture from "./assets/preload1.gif";
 
 import { VideoTimeContext } from "../Context/helpers";
+import LoaderLogo from "../Loader";
 
 interface VideoPlayerProps extends BaseReactPlayerProps {
     title?: string;
@@ -126,11 +127,7 @@ export default function VideoPlayer({
                 />
             </div>
             <div className={cnVideoPlayer({ unvisible: onReady })}>
-                <img
-                    className={cnVideoPlayer("gif")}
-                    src={reloadPicture}
-                    alt="loading"
-                />
+                <LoaderLogo />
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import { FC, ReactElement } from "react";
 import { useAppSelector } from "../../../hooks/redux";
 import { useGetMeQuery } from "../../../store/api/user";
 import "./style.scss";
+import LoaderLogo from "../../Loader";
 
 type IAuthMiddleware = {
     children: ReactElement;
@@ -19,16 +20,9 @@ const AuthMiddleware: FC<IAuthMiddleware> = ({ children }) => {
     if (isLoading) {
         return (
             <>
-                <svg className="spinner" viewBox="0 0 50 50">
-                    <circle
-                        className="path"
-                        cx="25"
-                        cy="25"
-                        r="20"
-                        fill="none"
-                        strokeWidth="5"
-                    ></circle>
-                </svg>
+                <div className="preloader">
+                    <LoaderLogo />
+                </div>
                 {/* auth middleware */}
             </>
         ); /// some loading splashscreen

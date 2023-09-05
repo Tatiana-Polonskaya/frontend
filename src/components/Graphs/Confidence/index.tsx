@@ -33,6 +33,7 @@ export default function ConfidenceGraph({ data, average }: Props) {
                     <div className={CN("bg", { low: true })} />
                 </div>
             }
+            tooltip={true}
         />
     );
 }

@@ -17,17 +17,16 @@
 
     &-tooltip {
         z-index: 100;
-        max-width: 500px !important;
+        max-width: 1170px !important;
         padding: 8px 12px !important;
         line-height: 12px !important;
-        background: #FFF !important;
-        border: 1px solid #7C8EB5;
+        background: #fff !important;
+        border: 1px solid #7c8eb5;
         border-radius: 12px !important;
         box-shadow: 2px 2px 12px 0 rgb(173 185 212 / 30%);
-        
 
-        &-text{
-            color: #37476A;
+        &-text {
+            color: #37476a;
             font-weight: 500;
             font-size: 12px;
             font-family: "Onest";

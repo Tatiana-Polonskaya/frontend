@@ -49,6 +49,7 @@ export default function SecondBrick({
                 data-tooltip-id={"brick-" + id}
                 onDoubleClick={choiseBlock}
                 data-time={time}
+                data-tooltip-offset={5}
             ></div>
             <Tooltip
                 id={"brick-" + id}

@@ -119,7 +119,7 @@ export default function SecondaryExpressiveness(props: Props) {
                                     setOnNeutral((prev) => !prev);
                                 }}
                             >
-                                {onNeutral ? "Выкл" : "Вкл"}
+                                {onNeutral ? "Вкл" : "Выкл"}
                             </div>
                         </li>
                     </ul>
