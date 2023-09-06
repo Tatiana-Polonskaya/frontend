@@ -9,7 +9,7 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 import rerecordIcon from "./icon/rerecoding.svg";
 import videoRemoveIcon from "./icon/video-remove.svg";
-import { MAX_MINUTES_FOR_VIDEO } from "../../constants";
+import { MAX_MINUTES_FOR_VIDEO, MIN_MINUTES_FOR_VIDEO } from "../../constants";
 
 type IPreviewBlock = {
     titleRerecordBtn?: string;
@@ -106,16 +106,12 @@ export default function PreviewBlock({
     useEffect(() => {
         if (durationVideo > 0) {
             const normDuration = getPrettyDuration(durationVideo);
-            if (normDuration > MAX_MINUTES_FOR_VIDEO) {
+            if (normDuration > MAX_MINUTES_FOR_VIDEO || normDuration < MIN_MINUTES_FOR_VIDEO) {
                 setIsNormDuration(false);
                 setCanMoved(false);
             }
         }
     }, [durationVideo]);
-
-    // const durationVideoTest = useMemo(() => {
-    //     console
-    // }, [durationVideo]);
 
     useEffect(() => {
         if (currentFile && currentFile.size > 0) {
@@ -217,11 +213,11 @@ export default function PreviewBlock({
                         </div>
                         <div className={cnPreview("col")}>
                             <span className={cnPreview("error-text-red")}>
-                                Ой, кажется, это видео слишком длинное!
+                                Ой, кажется, это видео не подходит!
                             </span>
                             <span className={cnPreview("error-text")}>
                                 Мы можем проанализировать ваше видео, только
-                                если его длительность не превышает{" "}
+                                если его длительность составляет от {MIN_MINUTES_FOR_VIDEO} {"до "}
                                 {MAX_MINUTES_FOR_VIDEO} минут.
                             </span>
                         </div>

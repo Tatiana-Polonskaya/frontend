@@ -49,10 +49,9 @@
     &-textBloc {
         display: flex;
         flex-direction: row;
-        gap: 16px;
+        justify-content: space-between;
         width: 100%;
-        margin-bottom: 15px;
-        padding: 16px;
+        padding: 16px 20px;
         background: #f7faff;
         border-radius: 12px;
     }
