@@ -136,7 +136,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
                 setTimeout(() => {
                     const newkey=Math.ceil(Math.random() * 100);
                     dispatch(setProfileAvatar(`/api/users/account/avatar/${store.id}?rnd=${newkey}`));
-                }, 2000);
+                }, 5000);
             };
             getData();
         }

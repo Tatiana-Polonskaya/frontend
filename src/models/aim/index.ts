@@ -13,7 +13,7 @@ export enum AIM_PARAMETERS {
     clarity= "clarity",
     eloquence= "eloquence",
     expressiveness= "expressiveness",
-    non_monotony= " non-monotony",
+    non_monotony= "non-monotony",
     emotionality= "emotionality",
     energy= "energy",
     congruence= "congruence",

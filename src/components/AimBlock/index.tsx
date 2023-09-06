@@ -10,8 +10,9 @@ import { ForwardedCheckBoxItem } from "../CheckboxQuestion/CheckboxItem";
 import {
     useGetUserPurposesQuery,
     useLazyGetUserPurposesQuery,
+    useSendUserPurposeMutation,
 } from "../../store/api/diary";
-import { IAimItem } from "../../models/aim";
+import { AIM_PARAMETERS, IAimItem, ISendUserPurpose } from "../../models/aim";
 
 import { updateUserAims } from "../../store/slices/diary";
 
@@ -34,7 +35,7 @@ export default function AimBlock() {
 
     /* ------------------------------ AIMS ------------------------------ */
 
-    const allUsersPurposes = useGetUserPurposesQuery(); 
+    const allUsersPurposes = useGetUserPurposesQuery();
     const [allPurposes, setAllPurposes] = useState<IAimItem[]>();
 
     const countPurposes: number = allPurposes ? allPurposes.length : 0;
@@ -68,24 +69,46 @@ export default function AimBlock() {
             title: "Повысить уверенность в себе и в своих навыках публичного выступления",
             isExist: false,
             another: false,
+            params: [
+                AIM_PARAMETERS.confidence,
+                AIM_PARAMETERS.energy,
+                AIM_PARAMETERS.eloquence,
+                AIM_PARAMETERS.informative,
+                AIM_PARAMETERS.expressiveness,
+            ],
         },
         {
             id: "2",
             title: "Улучшить качество презентаций в рамках учебных и профессиональных мероприятий",
             isExist: false,
             another: false,
+            params: [
+                AIM_PARAMETERS.consistency,
+                AIM_PARAMETERS.informative,
+                AIM_PARAMETERS.non_monotony,
+                AIM_PARAMETERS.clarity,
+                AIM_PARAMETERS.parasite_words,
+            ],
         },
         {
             id: "3",
             title: "Подготовиться к важному профессиональному или личному мероприятию, такому как конференция, выставка, презентация проекта",
             isExist: false,
             another: false,
+            params: [
+                AIM_PARAMETERS.consistency,
+                AIM_PARAMETERS.unity_of_style,
+                AIM_PARAMETERS.non_monotony,
+                AIM_PARAMETERS.confidence,
+                AIM_PARAMETERS.aggressiveness_coefficient,
+            ],
         },
         {
             id: "4",
             title: "Опишите цель использования сервиса",
             isExist: false,
             another: true,
+            params: [],
         },
     ];
 
@@ -112,16 +135,14 @@ export default function AimBlock() {
     const [getNewAims, newAims] = useLazyGetUserPurposesQuery();
 
     const updateAims = async () => {
-        setHasNewAim((prev) => !prev);
+        setHasNewAim(false);
         await getNewAims();
     };
 
     useEffect(() => {
         if (newAims && newAims.data && newAims.isSuccess) {
             if (newAims.data.success && newAims.data.data) {
-                const purposes = [
-                    ...newAims.data!.data!.purposes,
-                ].reverse();
+                const purposes = [...newAims.data!.data!.purposes].reverse();
                 setAllPurposes(purposes);
                 dispatch(updateUserAims(purposes));
             }
@@ -145,6 +166,11 @@ export default function AimBlock() {
 
     /* ------------------------------ MODAL WINDOW VALUE ------------------------------ */
 
+    const [sendPurposeRequest, sendPurposeResponse] =
+        useSendUserPurposeMutation();
+
+    const { isSuccess, isError } = sendPurposeResponse;
+
     const [checkedState, setCheckedState] = useState<Array<boolean>>(
         new Array(existedPurposes.length).fill(false),
     );
@@ -156,45 +182,76 @@ export default function AimBlock() {
         setCheckedState(updatedCheckedState);
     };
 
+    // Добавить определенные параметры
     const saveChoosedAims = () => {
-        const choosedNames: string[] = checkedState.map((el, idx) => {
+        let userAimTitle: string = "";
+        let commonAims: ISendUserPurpose[] = [];
+
+        checkedState.forEach((el, idx) => {
             if (el) {
-                if (existedPurposes[idx].title === existedPurposes.at(-1)?.title) {
+                if (
+                    existedPurposes[idx].title === existedPurposes.at(-1)?.title
+                ) {
                     // опишите цель использования сервиса
-                    return textRef && textRef.current
-                        ? textRef.current!.value
-                        : "textRef";
+                    userAimTitle =
+                        textRef && textRef.current
+                            ? textRef.current!.value
+                            : "";
+                } else {
+                    commonAims.push({
+                        title: existedPurposes[idx].title,
+                        params: existedPurposes[idx].params as AIM_PARAMETERS[],
+                    });
                 }
-                return existedPurposes[idx].title;
             }
-            return "";
         });
 
-        const resultAims = choosedNames
-            .filter((el) => el !== "")
-            .map((el) => ({
-                title: el,
+        console.log("send commonAims", commonAims)
+
+        if (userAimTitle.length > 0) {
+
+            console.log("userAimTitle.length > 0", userAimTitle)
+            const resultAims = {
+                title: userAimTitle,
                 is_done: false,
                 progress: 0,
                 created_at: "",
                 tasks: [],
                 parameters: [],
-            }));
+            };
 
-        dispatch(
-            updateUserAims(
-                allPurposes ? [...resultAims, ...allPurposes] : [...resultAims],
-            ),
-        );
-        setAllPurposes((prev) =>
-            prev ? [...resultAims, ...prev] : [...resultAims],
-        );
+            dispatch(
+                updateUserAims(
+                    allPurposes ? [resultAims, ...allPurposes] : [resultAims],
+                ),
+            );
 
-        setHasNewAim(true);
+            setAllPurposes((prev) =>
+                prev ? [resultAims, ...prev] : [resultAims],
+            );
+
+            setHasNewAim(true);
+        }
+
+        if (commonAims.length > 0) {
+            commonAims.forEach(
+                async (purpose) => await sendPurposeRequest(purpose),
+            );
+        }
+
         setChoosenAim(0);
         setCheckedState(new Array(existedPurposes.length).fill(false));
         closeModal();
     };
+
+    useEffect(() => {
+        if (isSuccess) {
+            console.log("isSuccess")
+            console.log( sendPurposeResponse)
+            const getData = async () => await getNewAims();
+            getData();
+        }
+    }, [isSuccess]);
 
     /* ------------------------------ CODE ------------------------------ */
 

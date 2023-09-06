@@ -138,6 +138,7 @@ export default function AimItem({ purpose }: Props) {
 
     useEffect(() => {
         if (resultParams && resultParams.data) {
+            
             setListParams(resultParams.data!.data!);
             setCheckedParams([]);
         }
