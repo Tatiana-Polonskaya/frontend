@@ -3,6 +3,10 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 import RadioItem from "../../RadioBtnQuestion/RadioItem";
 import { Fragment, useEffect, useRef, useState } from "react";
+import {
+    MAX_MINUTES_FOR_VIDEO,
+    MIN_MINUTES_FOR_VIDEO,
+} from "../../../constants";
 
 const cnTimerRadioBtn = cn("TimerRadioBtn");
 
@@ -21,6 +25,7 @@ const choices = [
 
 type Props = {
     setTimerSeconds: Function;
+    setTimeIsValid: Function;
 };
 
 export default function TimerRadioBtn(props: Props) {
@@ -40,18 +45,25 @@ export default function TimerRadioBtn(props: Props) {
         if (secRef.current && minRef.current) {
             const minNumber = Number(minRef.current.value);
             const secNumber = Number(secRef.current.value);
-            if (minNumber === 1) {
-                setIsValidSec(secNumber < 60 && secNumber > 29 ? true : false);
-            } else if (minNumber === 15) {
+
+            if (minNumber === MAX_MINUTES_FOR_VIDEO) {
                 setIsValidSec(secNumber === 0 ? true : false);
             } else {
                 setIsValidSec(secNumber < 60 && secNumber > -1 ? true : false);
             }
-            setIsValidMin(minNumber < 16 && minNumber > -1 ? true : false);
-            
+            setIsValidMin(
+                minNumber <= MAX_MINUTES_FOR_VIDEO &&
+                    minNumber >= MIN_MINUTES_FOR_VIDEO
+                    ? true
+                    : false,
+            );
             props.setTimerSeconds(minNumber * 60 + secNumber);
         }
     };
+
+    useEffect(() => {
+        props.setTimeIsValid(isValidMin && isValidSec);
+    }, [isValidMin, isValidSec]);
 
     return (
         <div className={cnTimerRadioBtn()}>
@@ -76,9 +88,9 @@ export default function TimerRadioBtn(props: Props) {
                                     })}
                                     id="minutes"
                                     name="minutes"
-                                    min="1"
-                                    max="15"
-                                    defaultValue={15}
+                                    min={MIN_MINUTES_FOR_VIDEO}
+                                    max={MAX_MINUTES_FOR_VIDEO}
+                                    defaultValue={MIN_MINUTES_FOR_VIDEO}
                                     ref={minRef}
                                     onChange={change}
                                 />

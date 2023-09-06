@@ -23,6 +23,7 @@ import loadingPic from "./img/loading.svg";
 
 import { useSendVideoMutation } from "../../../store/api/userVideo";
 import RoutesEnum from "../../../models/routes";
+import { MAX_MINUTES_FOR_VIDEO, MIN_MINUTES_FOR_VIDEO } from "../../../constants";
 
 export interface IInfoVideo {
     title: string;
@@ -147,8 +148,8 @@ export default function RepetitionStart() {
                     проанализировать - просто загрузите его с устройства.
                 </div>
                 <div className={cnRepetitionStart("text-blue")}>
-                    Минимальная длительность видео - 3 минуты, максимальная - 15
-                    минут.
+                    Минимальная длительность видео - {MIN_MINUTES_FOR_VIDEO} минуты, максимальная - {MAX_MINUTES_FOR_VIDEO}
+                    {" минут"}.
                 </div>
             </div>
             <div className={cnRepetitionStart("btn-block")}>

@@ -15,21 +15,33 @@ import TimerRadioBtn from "../TimerRadioBtn";
 import ListInput from "../ListInput";
 import RoutesEnum from "../../../models/routes";
 import { useState } from "react";
+import {
+    MAX_MINUTES_FOR_VIDEO,
+    MIN_MINUTES_FOR_VIDEO,
+} from "../../../constants";
 
 export default function RecodingSetup() {
     const navigate = useNavigate();
     const styleSetup = cn("RecodingSetup");
 
     const [basicPlan, setBasicPlan] = useState<Array<string>>();
-    const [timerSeconds, setTimerSecond] = useState<number>(0);
+    const [timerSeconds, setTimerSecond] = useState<number>(
+        MIN_MINUTES_FOR_VIDEO * 60,
+    );
 
-    const saveBasicPlane = (plan: string[])=>{
+    const [timeValid, setTimeValid] = useState(true);
+
+    const changeTimeValid = (value: boolean) => {
+        setTimeValid(value);
+    };
+
+    const saveBasicPlane = (plan: string[]) => {
         setBasicPlan(plan);
-    }
+    };
 
-    const saveTimer = (value: number)=>{
+    const saveTimer = (value: number) => {
         setTimerSecond(value);
-    }
+    };
 
     return (
         <div className={styleSetup()}>
@@ -56,7 +68,7 @@ export default function RecodingSetup() {
                     Вы будете видеть опорный план речи выступления во время
                     репетиции.
                 </div>
-                <ListInput saveResultPlan={saveBasicPlane}/>
+                <ListInput saveResultPlan={saveBasicPlane} />
             </div>
 
             <div className={styleSetup("text-header")}>
@@ -81,19 +93,30 @@ export default function RecodingSetup() {
                     осталось.
                 </div>
                 <div className={styleSetup("text-blue")}>
-                Обратите внимание, что длительность репетиции должна составлять не менее 1.5 минуты и не более 15 минут.
+                    Обратите внимание, что длительность репетиции должна
+                    составлять не менее {MIN_MINUTES_FOR_VIDEO} минуты и не
+                    более {MAX_MINUTES_FOR_VIDEO} минут.
                 </div>
-                <TimerRadioBtn setTimerSeconds={saveTimer}/>
+                <TimerRadioBtn
+                    setTimerSeconds={saveTimer}
+                    setTimeIsValid={changeTimeValid}
+                />
             </div>
 
             <div className={styleSetup("btn-block")}>
-
                 <Button
-                    className={styleSetup("btn-block-btn")}
-                    onClick={() => navigate(RoutesEnum.RECODING,{state: {
-                        basicPlan,
-                        timerSeconds: timerSeconds,
-                    }})}
+                    className={styleSetup("btn-block-btn", {
+                        nonclickable: !timeValid,
+                    })}
+                    onClick={() => {
+                        if (timeValid)
+                            navigate(RoutesEnum.RECODING, {
+                                state: {
+                                    basicPlan,
+                                    timerSeconds,
+                                },
+                            });
+                    }}
                 >
                     <ReactSVG
                         src={record_start_icon}

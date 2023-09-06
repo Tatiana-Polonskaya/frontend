@@ -109,6 +109,10 @@
             font-family: "Montserrat Alternates";
             font-style: normal;
             line-height: 20px;
+
+            &_nonclickable{
+                cursor: not-allowed;
+            }
         }
     }
 

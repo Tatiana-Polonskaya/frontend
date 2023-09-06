@@ -9,6 +9,7 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 import rerecordIcon from "./icon/rerecoding.svg";
 import videoRemoveIcon from "./icon/video-remove.svg";
+import { MAX_MINUTES_FOR_VIDEO } from "../../constants";
 
 type IPreviewBlock = {
     titleRerecordBtn?: string;
@@ -16,8 +17,6 @@ type IPreviewBlock = {
     titleHelpForInput?: string;
     onClickRerecordBtn: Function;
 };
-
-const NORM_COUNT_MINUTES = 15;
 
 export function getPrettyDuration(seconds: number): number {
     return seconds ? Math.floor((seconds + 1) / 60) : 0;
@@ -107,7 +106,7 @@ export default function PreviewBlock({
     useEffect(() => {
         if (durationVideo > 0) {
             const normDuration = getPrettyDuration(durationVideo);
-            if (normDuration > NORM_COUNT_MINUTES) {
+            if (normDuration > MAX_MINUTES_FOR_VIDEO) {
                 setIsNormDuration(false);
                 setCanMoved(false);
             }
@@ -152,7 +151,6 @@ export default function PreviewBlock({
                                     ref={videoRef}
                                     url={URL.createObjectURL(currentFile)}
                                     muted={true}
-                                    
                                     controls={true}
                                     onDuration={getDurationVideo}
                                 />
@@ -177,14 +175,14 @@ export default function PreviewBlock({
                                 <div className={cnPreview("input-block-title")}>
                                     <span
                                         className={cnPreview(
-                                            "input-block-title-gray-bold"
+                                            "input-block-title-gray-bold",
                                         )}
                                     >
                                         {titleHelpForInput}:{" "}
                                     </span>
                                     <span
                                         className={cnPreview(
-                                            "input-block-title-gray"
+                                            "input-block-title-gray",
                                         )}
                                     >
                                         Не более 80 символов
@@ -201,7 +199,7 @@ export default function PreviewBlock({
                                     invalid={!isFileNameValid}
                                     onBlur={(e) =>
                                         setFilenamevalid(
-                                            e.target.checkValidity()
+                                            e.target.checkValidity(),
                                         )
                                     }
                                 />
@@ -223,7 +221,8 @@ export default function PreviewBlock({
                             </span>
                             <span className={cnPreview("error-text")}>
                                 Мы можем проанализировать ваше видео, только
-                                если его длительность не превышает 15 минут.
+                                если его длительность не превышает{" "}
+                                {MAX_MINUTES_FOR_VIDEO} минут.
                             </span>
                         </div>
                     </div>

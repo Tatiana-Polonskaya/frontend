@@ -4,6 +4,7 @@ import "./style.scss";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import { VideoUploadContext } from "../RepetitionComponents/RepetitionStart";
+import { MAX_MINUTES_FOR_VIDEO, MIN_MINUTES_FOR_VIDEO } from "../../constants";
 
 export default function Upload() {
     const cnUpload = cn("cnUpload");
@@ -67,8 +68,8 @@ export default function Upload() {
                     проанализировать - просто загрузите его с устройства.
                 </span>
                 <span className={cnUpload("description-blue")}>
-                    Минимальная длительность видео - 1.5 минуты, максимальная -
-                    15 минут. Формат видео: MP4, минимальное разрешение 640х480.
+                    Минимальная длительность видео - {MIN_MINUTES_FOR_VIDEO} минуты, максимальная -
+                    {MAX_MINUTES_FOR_VIDEO} минут. Формат видео: MP4, минимальное разрешение 640х480.
                 </span>
                 <span className={cnUpload("description-gray")}>
                     Лицо спикера в кадре должно быть единственным и четко

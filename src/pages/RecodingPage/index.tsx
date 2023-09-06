@@ -36,8 +36,6 @@ export const TIMER_STATUS = {
     STOP: false,
 };
 
-const LIMIT_TIMER = 15;
-
 export default function RecodingPage() {
     /* ----------------------------------- CONST BLOCK ----------------------------------- */
     const cnRecoding = cn("RecodingPage");
