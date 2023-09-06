@@ -1060,9 +1060,20 @@ export default function AnalysisReport() {
                                     />
                                 }
                                 invisible={
-                                    <EmotionalScale
-                                        values={emotionalityData.values}
-                                    />
+                                    <VideoTimeContext.Provider
+                                        value={{
+                                            currentTime,
+                                            setCurrentTime,
+                                            isPlaying,
+                                            setIsPlaying,
+                                            togglePlay,
+                                        }}
+                                    >
+                                        <EmotionalScale
+                                            values={emotionalityData.values}
+                                            endTime={+videoInfo!.duration}
+                                        />
+                                    </VideoTimeContext.Provider>
                                 }
                             />
                         )}
@@ -1145,6 +1156,7 @@ export default function AnalysisReport() {
                                             A_T={congruenceData.values["A-T"]}
                                             A_V={congruenceData.values["A-V"]}
                                             V_T={congruenceData.values["V-T"]}
+                                            endTime={+videoInfo!.duration}
                                         />
                                     </VideoTimeContext.Provider>
                                 }

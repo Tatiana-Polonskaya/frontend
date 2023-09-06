@@ -5,9 +5,7 @@ import { cn } from "@bem-react/classname";
 import video from "../EmotionalScale/img/video.svg";
 import volume_high from "../EmotionalScale/img/volume-high.svg";
 import text from "../EmotionalScale/img/text.svg";
-import {
-    CongruenceItem
-} from "../../../models/graph/congruence";
+import { CongruenceItem } from "../../../models/graph/congruence";
 
 import SwitchButton from "../SwitchButton";
 import CongruenceGraph from "./CongruenceGraph";
@@ -19,9 +17,8 @@ type Props = {
     A_V: CongruenceItem[];
     A_T: CongruenceItem[];
     V_T: CongruenceItem[];
+    endTime: number;
 };
-
-
 
 export default function CongruenceScale(props: Props) {
     const listItemA_T = props.A_T;
@@ -29,7 +26,7 @@ export default function CongruenceScale(props: Props) {
     const listItemV_T = props.V_T;
 
     const [activeIndex, setActiveIndex] = useState(1);
-    const handleClick = (index: any) => setActiveIndex(index);
+    const handleClick = (index: number) => setActiveIndex(index);
 
     return (
         <>
@@ -90,21 +87,36 @@ export default function CongruenceScale(props: Props) {
                         visible: activeIndex === 1,
                     })}
                 >
-                    <CongruenceGraph elements={convertDataCongruenceFromBackIntoGraph(listItemA_T)} />
+                    <CongruenceGraph
+                        elements={convertDataCongruenceFromBackIntoGraph(
+                            listItemA_T,
+                        )}
+                        endTime={props.endTime}
+                    />
                 </div>
                 <div
                     className={CN("panels-panel", {
                         visible: activeIndex === 2,
                     })}
                 >
-                    <CongruenceGraph elements={convertDataCongruenceFromBackIntoGraph(listItemV_T)} />
+                    <CongruenceGraph
+                        elements={convertDataCongruenceFromBackIntoGraph(
+                            listItemV_T,
+                        )}
+                        endTime={props.endTime}
+                    />
                 </div>
                 <div
                     className={CN("panels-panel", {
                         visible: activeIndex === 3,
                     })}
                 >
-                    <CongruenceGraph elements={convertDataCongruenceFromBackIntoGraph(listItemA_V)} />
+                    <CongruenceGraph
+                        elements={convertDataCongruenceFromBackIntoGraph(
+                            listItemA_V,
+                        )}
+                        endTime={props.endTime}
+                    />
                 </div>
             </div>
         </>

@@ -12,16 +12,20 @@ export default function BrickedGraph({ items }: Props) {
 
     return (
         <GraphBase descriptionX={descriptionX}>
-            <GraphMedian top="50%" />
+            <GraphMedian top="48%" />
             {items.map((el, idx) => (
                 <SecondBrick
                     id={idx}
                     key={idx}
+                    // разобраться вот тут
                     width={`${
-                        (el.endTime - el.startTime) * (_1SEC_PX + 0.05)
+                        // (el.endTime - el.startTime) * (_1SEC_PX + 0.05)
+                        // здесь чёт кудато надо округлять
+                        (el.endTime - el.startTime) * _1SEC_PX
                     }px`}
                     top={el.top}
-                    left={`${el.startTime * (_1SEC_PX + 0.05)}px`}
+                    // left={`${el.startTime * (_1SEC_PX + 0.05)}px`}
+                    left={`${el.startTime * _1SEC_PX}px`}
                     color={el.color}
                     text={el.text}
                     type={el.type}

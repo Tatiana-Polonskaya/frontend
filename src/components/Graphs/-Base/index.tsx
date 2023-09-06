@@ -9,7 +9,11 @@ import {
 
 import { ValueTime } from "../../Analytics/helpers";
 import { cn } from "@bem-react/classname";
-import { GraphContext, _1SEC_PX } from "./helpers";
+import {
+    GraphContext,
+    _1SEC_PX,
+    createXDescriptionFromSeconds,
+} from "./helpers";
 
 import BaseGraphYDescription from "./-YDescription";
 import BaseGraphXDescription from "./-XDescription";
@@ -18,6 +22,7 @@ import GraphPointer from "./-Pointer";
 
 import "./style.scss";
 import { VideoTimeContext } from "../../Context/helpers";
+import { convertTime } from "../../Archive/helpers";
 
 const cnStrangeGraph = cn("strange-graph");
 
@@ -95,11 +100,12 @@ export default function GraphBase({
             {/* тут устанавливается положение и время в поинтер */}
             {/* надо подогнать _1SEC_PX*/}
             <GraphPointer
-                offset={18}
+                offset={40}
                 left={pointerX}
-                text={new Date(currentTime * 1000)
-                    .toISOString()
-                    .substring(14, 19)}
+                // text={new Date(currentTime * 1000)
+                //     .toISOString()
+                //     .substring(14, 19)}
+                text={convertTime(currentTime)}
             />
             <div className={cnStrangeGraph("description-y")}>
                 {/* снизу выбор текущего времени */}

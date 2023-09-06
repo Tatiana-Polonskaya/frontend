@@ -1,101 +1,122 @@
 .EmotionalScaletabs {
-  display: flex;
-  width: 40%;
+    display: flex;
+    width: 40%;
 }
 
 .EmotionalScaletab {
-  display: flex;
-  flex-direction: row;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-  margin: 8px;
-  padding: 8px 12px;
-  color: #7C8EB5;
-  font-weight: 600;
-  font-size: 12px;
-  font-style: normal;
-  background: rgb(36 119 244 / 0%);
-  border: none;
-
-  svg {
     display: flex;
     flex-direction: row;
+    gap: 6px;
     align-items: center;
     justify-content: center;
-  }
+    width: 20%;
+    margin: 8px;
+    padding: 8px 12px;
+    color: #7c8eb5;
+    font-weight: 600;
+    font-size: 12px;
+    font-style: normal;
+    background: rgb(36 119 244 / 0%);
+    border: none;
+
+    svg {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
-.EmotionalScaletab:not(:last-child) {}
-
 .EmotionalScaletab.EmotionalScaleactive {
-  display: flex;
-  color: #2477F4;
-  background: rgb(36 119 244 / 13%);
-  border-radius: 8px;
+    display: flex;
+    color: #2477f4;
+    background: rgb(36 119 244 / 13%);
+    border-radius: 8px;
 }
 
 .panel {
-  display: none;
-  padding: 10px;
-
+    display: none;
+    width: 100%;
+    // padding: 10px;
 }
 
 .panel.EmotionalScaleactive {
-  display: block;
-  flex-direction: row;
+    display: block;
+    flex-direction: row;
 }
 
 .EmotionalScale {
-  &-textBloc {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 16px;
-    background: #F7FAFF;
-    border-radius: 12px;
+    &-textBloc {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 16px;
+        background: #f7faff;
+        border-radius: 12px;
+    }
 
-  }
+    &-text1 {
+        padding-top: 10px;
+        color: #17282f;
+        font-weight: 400;
+        font-size: 16px;
+        font-style: normal;
+        line-height: 20px;
+    }
 
-  &-text1 {
-    padding-top: 10px;
-    color: #17282F;
-    font-weight: 400;
-    font-size: 16px;
-    font-style: normal;
-    line-height: 20px;
-  }
+    &-block {
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+        border-radius: 4px;
+    }
 
-  &-block {
-    width: 20px;
-    height: 20px;
-    margin: 5px;
-    border-radius: 4px;
-  }
+    &-blockText {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+    }
 
-  &-blockText {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-  }
+    &-Text {
+        color: #37476a;
+        font-weight: 400;
+        font-size: 14px;
+        font-style: normal;
+        line-height: 18px;
+    }
 
-  &-Text {
-    color: #37476A;
-    font-weight: 400;
-    font-size: 14px;
-    font-style: normal;
-    line-height: 18px;
-  }
+    &-panels {
+        position: relative;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 25px 16px 16px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        background-color: #f7faff;
+        // height: 150px;
+        border-radius: 20px;
+        user-select: none;
+    }
+
+    &-text {
+        display: inline-block;
+        width: 46px;
+        color: #7c8eb5;
+        font-weight: 400;
+        font-size: 14px;
+        font-family: "Onest";
+        font-style: normal;
+        line-height: 16px;
+    }
 }
 
 b.textInfTitle1 {
-  font-weight: 500;
-}
-
-b.textInfTitle1 {
-  font-weight: 500;
+    font-weight: 500;
 }

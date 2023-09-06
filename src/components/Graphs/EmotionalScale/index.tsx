@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Scale from "../Scale";
 import "./style.scss";
 import text from "./img/text.svg";
@@ -12,9 +12,11 @@ import {
     EmotionalityDataItem,
 } from "../../../models/graph/emotionality";
 import { IDescriptionScale } from "../../../models/graph/inteface/IDescriptionScale";
+import convertSecondsIntoTime from "../../../@adapters/Time/convertSeconds";
 
 type Props = {
     values: EmotionalityDataItem[];
+    endTime?: number;
 };
 const CN = cn("EmotionalScale");
 
@@ -62,6 +64,10 @@ export default function EmotionalScale(props: Props) {
     let infAudio: IDescriptionScale[] = covertvaluesData(
         props.values.map((n) => n.audio),
     );
+
+    // ___________________ время ________________
+
+    const timeEnd = props.endTime!;
 
     return (
         <>
@@ -127,14 +133,25 @@ export default function EmotionalScale(props: Props) {
                     Текст
                 </button>
             </div>
-            <div className="panels">
+            <div className={CN("panels")}>
+                {props.endTime ? (
+                    <span className={CN("text")}>
+                        {convertSecondsIntoTime(0)}
+                    </span>
+                ) : (
+                    <></>
+                )}
                 <div
                     className={`panel ${checkActive(
                         1,
                         "EmotionalScaleactive",
                     )}`}
                 >
-                    <Scale fractions={infVideo} />
+                    <Scale
+                        fractions={infVideo}
+                        hasPointer={true}
+                        endTime={props.endTime}
+                    />
                 </div>
                 <div
                     className={`panel ${checkActive(
@@ -142,7 +159,11 @@ export default function EmotionalScale(props: Props) {
                         "EmotionalScaleactive",
                     )}`}
                 >
-                    <Scale fractions={infAudio} />
+                    <Scale
+                        fractions={infAudio}
+                        hasPointer={true}
+                        endTime={props.endTime}
+                    />
                 </div>
                 <div
                     className={`panel ${checkActive(
@@ -150,8 +171,19 @@ export default function EmotionalScale(props: Props) {
                         "EmotionalScaleactive",
                     )}`}
                 >
-                    <Scale fractions={infText} />
+                    <Scale
+                        fractions={infText}
+                        hasPointer={true}
+                        endTime={props.endTime}
+                    />
                 </div>
+                {props.endTime ? (
+                    <span className={CN("text")}>
+                        {convertSecondsIntoTime(timeEnd)}
+                    </span>
+                ) : (
+                    <></>
+                )}
             </div>
         </>
     );
