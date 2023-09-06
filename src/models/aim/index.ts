@@ -34,6 +34,7 @@ export interface ITaskItem {
 } 
 
 export interface IAimItem {
+    id?: string,
     title: string,
     is_done: boolean,
     progress: number,

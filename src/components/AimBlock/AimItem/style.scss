@@ -50,6 +50,18 @@
 
         }
 
+        &-btn-trash {
+            cursor: pointer;
+
+            &-icon {
+                svg {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: start;
+                }
+            }
+        }
+
         &-btn-show {
             display: flex;
             flex-flow: row nowrap;
@@ -147,15 +159,15 @@
         border-radius: 6px;
     }
 
-    &-error-block{
+    &-error-block {
         display: flex;
         flex-direction: column;
-        gap:10px;
+        gap: 10px;
         align-self: center;
         justify-content: center;
         margin-top: 15px;
 
-        &-text{
+        &-text {
             color: #F35B60;
             font-size: 20px;
             font-family: "Onest";
@@ -248,7 +260,7 @@
                 font-family: "Montserrat Alternates";
                 cursor: pointer;
 
-                
+
 
                 &-label {
                     display: inline-block;
@@ -256,7 +268,7 @@
                     line-height: 21px;
                     vertical-align: top;
 
-                    &_active{
+                    &_active {
                         cursor: default;
                     }
                 }
@@ -343,8 +355,8 @@
             }
         }
 
-        &-btn{
-            gap:10px;
+        &-btn {
+            gap: 10px;
             padding: 6px 8px 6px 12px;
             color: #FFF;
             font-weight: 600;
@@ -368,6 +380,53 @@
         border: 1px solid #7C8EB5;
         border-radius: 12px;
         box-shadow: 2px 2px 12px 0 rgb(173 185 212 / 30%);
+    }
+
+    &-modal {
+        &-title {
+            max-width: 500px;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            font-family: Onest;
+        }
+
+        &-row {
+            display: flex;
+            flex-flow: row nowrap;
+            padding-top: 20px;
+        }
+
+        &-btn {
+            font-family: Montserrat Alternates;
+
+            &-delete {
+                flex-grow: 1;
+                border-radius: 10px;
+                background: #F3F5F9;
+                padding: 10px 32px;
+                color: #37476A;
+
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+            }
+
+            &-cancel {
+                flex-grow: 1;
+                border-radius: 10px;
+                padding: 10px 32px;
+                color: #FFF;
+
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+            }
+
+        }
     }
 
 }

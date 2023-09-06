@@ -28,6 +28,13 @@ export const diaryApi = createApi({
                 body:params,
             }),
         }),
+        deleteUserPurpose: build.mutation<IResponse<void>, string>({
+            query: (id) => ({
+                url: "/api/video/purposes/purpose",
+                params: {id},
+                method: "DELETE",
+            }),
+        }),
         getStatisticData: build.query<IResponse<IStatisticJSON>, TYPE_DIARY>({
             query: (type:TYPE_DIARY) => ({
                 url: `/api/video/diary/${type}`,
@@ -52,7 +59,8 @@ export const {
     useGetStatisticDataQuery,
     useLazyGetStatisticDataQuery,
     useGetAchievementsQuery,
-    useLazyGetAchievementsQuery
+    useLazyGetAchievementsQuery,
+    useDeleteUserPurposeMutation
 } = diaryApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = diaryApi;

@@ -13,7 +13,9 @@ import arrowNorm from "../icons/arrow-down.svg";
 import worningIcon from "../icons/danger.svg";
 import tickIcon from "../icons/more-circle.svg";
 import tickDone from "../icons/tick-circle.svg";
+import trashIcon from "../icons/trash.svg";
 import {
+    useDeleteUserPurposeMutation,
     useLazyGetParamsQuery,
     useSendUserPurposeMutation,
 } from "../../../store/api/diary";
@@ -25,6 +27,10 @@ import {
 } from "../../../models/aim";
 import ProgressBar from "../../Graphs/Progressbar";
 import { NewAimContext } from "..";
+
+import ModalWindow from "../../ModalWindow/ModalWindow";
+import Button from "../../ui-kit/Button";
+
 
 type Props = {
     purpose: IAimItem;
@@ -69,6 +75,39 @@ export default function AimItem({ purpose }: Props) {
         useSendUserPurposeMutation();
 
     const { isSuccess, isError } = sendPurposeResponse;
+
+    /* ------------------------------ DELETED ------------------------------ */
+
+    const [deleteModal, setDeleteModal] = useState(false);
+    const [continueDeleting, setContinueDeleting] = useState(false);
+
+    const showDeleteModal = () => {
+        setDeleteModal(true);
+    };
+    const closeDeleteModal = () => {
+        setDeleteModal(false);
+    };
+
+    const [deletePurposeRequest, deletePurposeResponse] =
+        useDeleteUserPurposeMutation();
+
+    // const { isSuccess, isError } = sendPurposeResponse;
+
+    const deleteAim = async () => {
+        if (purpose.id) {
+            await deletePurposeRequest(purpose.id);
+        }
+        window.location.reload();
+    };
+
+    useEffect(() => {
+        if (deletePurposeResponse.isSuccess) {
+            console.log(deletePurposeResponse);
+        }
+        if (deletePurposeResponse.isError) {
+            console.log(deletePurposeResponse);
+        }
+    }, [deletePurposeResponse]);
 
     /* ------------------------------ STEPS ------------------------------ */
 
@@ -206,6 +245,15 @@ export default function AimItem({ purpose }: Props) {
                             className={cnAimItem("header-btn-show-icon", {
                                 rotated: isShowTasks,
                             })}
+                        />
+                    </div>
+                    <div
+                        className={cnAimItem("header-btn-trash")}
+                        onClick={() => showDeleteModal()}
+                    >
+                        <ReactSVG
+                            src={trashIcon}
+                            className={cnAimItem("header-btn-trash-icon")}
                         />
                     </div>
                 </div>
@@ -411,6 +459,30 @@ export default function AimItem({ purpose }: Props) {
                     )}
                 </>
             )}
+            <ModalWindow
+                isVisible={deleteModal}
+                title={"Подтверждение удаления"}
+                icon={trashIcon}
+                onClose={() => closeDeleteModal()}
+            >
+                <div className={cnAimItem("modal-title")}>
+                    Удалить цель: {purpose.title}?
+                </div>
+                <div className={cnAimItem("modal-row")}>
+                    <Button
+                        className={cnAimItem("modal-btn-delete")}
+                        onClick={() => deleteAim()}
+                    >
+                        Удалить
+                    </Button>
+                    <Button
+                        className={cnAimItem("modal-btn-cancel")}
+                        onClick={() => closeDeleteModal()}
+                    >
+                        Отмена
+                    </Button>
+                </div>
+            </ModalWindow>
         </div>
     );
 }
