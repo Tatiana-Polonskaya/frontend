@@ -30,6 +30,7 @@ import dangerIcon from "./assets/danger.svg";
 import { ReactSVG } from "react-svg";
 
 import "./style.scss";
+import { MAX_MINUTES_FOR_VIDEO, MIN_MINUTES_FOR_VIDEO } from "../../constants";
 
 export const TIMER_STATUS = {
     START: true,
@@ -45,13 +46,16 @@ export default function RecodingPage() {
     const { state } = useLocation();
     const { basicPlan, timerSeconds } = state;
 
-    console.log("timerSeconds", timerSeconds)
+    console.log("timerSeconds", timerSeconds);
 
     // basicPlan params
     const isShowBasicPlan =
         basicPlan && basicPlan.length > 0 && basicPlan[0] !== "" ? true : false;
 
-    const secondsForTimer = timerSeconds ? timerSeconds : 0;
+    const secondsForTimer = timerSeconds
+        ? timerSeconds
+        : MAX_MINUTES_FOR_VIDEO * 60;
+    const timerHidden = timerSeconds && timerSeconds > 0 ? false : true;
 
     // timer params
     const [isTimerStart, setIsTimerStart] = useState(false);
@@ -90,11 +94,10 @@ export default function RecodingPage() {
                 setRecordedChunks((prev) => prev.concat(data));
             }
         },
-        [setRecordedChunks]
+        [setRecordedChunks],
     );
 
     const handleStartCaptureClick = useCallback(() => {
-
         if (canStart) {
             // const tempCodec = "h264";
             updateIsTimerStart(TIMER_STATUS.START);
@@ -103,11 +106,11 @@ export default function RecodingPage() {
                 webcamRef?.current?.stream as MediaStream,
                 {
                     mimeType: `video/webm`,
-                }
+                },
             );
             mediaRecorderRef.current.addEventListener(
                 "dataavailable",
-                handleDataAvailable
+                handleDataAvailable,
             );
             mediaRecorderRef.current.start();
             // console.log(mediaRecorderRef.current);
@@ -132,7 +135,7 @@ export default function RecodingPage() {
             setCurrentFile(
                 new File([file], "Recoding Repetition", {
                     type: tempType,
-                })
+                }),
             );
             setRecordedChunks([]);
         }
@@ -157,9 +160,9 @@ export default function RecodingPage() {
     const handleDevices = useCallback(
         (mediaDevices: any) =>
             setDevices(
-                mediaDevices.filter(({ kind }: any) => kind === "videoinput")
+                mediaDevices.filter(({ kind }: any) => kind === "videoinput"),
             ),
-        [setDevices]
+        [setDevices],
     );
 
     useEffect(() => {
@@ -176,7 +179,7 @@ export default function RecodingPage() {
     function getSupportedMimeTypes(
         media: string,
         types: string[],
-        codecs: string[]
+        codecs: string[],
     ) {
         const isSupported = MediaRecorder.isTypeSupported;
         const supported: any = [];
@@ -191,7 +194,7 @@ export default function RecodingPage() {
                     // `${mimeType};codecs:${codec.toUpperCase()}`
                 ].forEach((variation) => {
                     if (isSupported(variation)) supported.push(variation);
-                })
+                }),
             );
             if (isSupported(mimeType)) supported.push(mimeType);
         });
@@ -325,7 +328,7 @@ export default function RecodingPage() {
                                     </button>
                                     <div
                                         className={cnRecoding(
-                                            "button-block-back"
+                                            "button-block-back",
                                         )}
                                         onClick={() => navigate(-1)}
                                     >
@@ -338,20 +341,20 @@ export default function RecodingPage() {
                                 </>
                             )}
                         </div>
-                        {secondsForTimer>0 && (
-                            <div
-                            className={cnRecoding("right-block")}
+
+                        <div
+                            className={cnRecoding("right-block", {
+                                hidden: timerHidden,
+                            })}
                         >
                             <Timer
-                                minutes={Math.floor(secondsForTimer/60)}
-                                seconds={secondsForTimer%60}
+                                minutes={Math.floor(secondsForTimer / 60)}
+                                seconds={secondsForTimer % 60}
                                 isStart={isTimerStart}
                                 setIsStart={updateIsTimerStart}
                                 timerOver={handleStopCaptureClick}
                             />
                         </div>
-                        )}
-                        
 
                         {isShowBasicPlan && (
                             <div className={cnRecoding("bottom-block")}>
@@ -399,30 +402,31 @@ export default function RecodingPage() {
                                     }
                                     className={cnRecoding("loading-img")}
                                 />
-                                {isLoading && !(isErrorWithSuccess || isError) && (
+                                {isLoading &&
+                                    !(isErrorWithSuccess || isError) && (
+                                        <>
+                                            <div
+                                                className={cnRecoding(
+                                                    "loading-title",
+                                                )}
+                                            >
+                                                Идет загрузка видео...
+                                            </div>
+                                            <div
+                                                className={cnRecoding(
+                                                    "loading-description",
+                                                )}
+                                            >
+                                                Пожалуйста, не закрывайте
+                                                вкладку до окончания загрузки.
+                                            </div>
+                                        </>
+                                    )}
+                                {(isErrorWithSuccess || isError) && (
                                     <>
                                         <div
                                             className={cnRecoding(
-                                                "loading-title"
-                                            )}
-                                        >
-                                            Идет загрузка видео...
-                                        </div>
-                                        <div
-                                            className={cnRecoding(
-                                                "loading-description"
-                                            )}
-                                        >
-                                            Пожалуйста, не закрывайте вкладку до
-                                            окончания загрузки.
-                                        </div>
-                                    </>
-                                )}
-                                {(isErrorWithSuccess || isError)  && (
-                                    <>
-                                        <div
-                                            className={cnRecoding(
-                                                "loading-title-error"
+                                                "loading-title-error",
                                             )}
                                         >
                                             Произошла ошибка, попробуйте еще раз
@@ -448,14 +452,14 @@ export default function RecodingPage() {
                                     </div>
                                     <div
                                         className={cnRecoding(
-                                            "loading-description"
+                                            "loading-description",
                                         )}
                                     >
                                         По его окончании вы сможете ознакомиться
                                         с результатами в разделе{" "}
                                         <span
                                             className={cnRecoding(
-                                                "loading-title-link"
+                                                "loading-title-link",
                                             )}
                                             onClick={() =>
                                                 navigate(RoutesEnum.DIARY)

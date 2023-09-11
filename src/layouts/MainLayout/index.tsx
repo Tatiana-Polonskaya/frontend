@@ -22,8 +22,8 @@ export default function MainLayout(props: Props) {
     const avatar= useSelector((state: RootState) => state.profile.avatar);  
 
     return (
-        <Fragment >
-            <div className={cnContent()}>
+        <div  className={cnContent()}>
+            <div className={cnContent("container")}>
                 <Menu />
                 <div className={cnContent("wrapper")}>
                     <Header displayName={`${name} ${lastName}`} imageUrl={avatar}/>
@@ -33,6 +33,6 @@ export default function MainLayout(props: Props) {
                 </div>
             </div>
             <Footer />
-        </Fragment>
+        </div>
     );
 }

@@ -48,6 +48,7 @@ export default function AimBlock() {
             allUsersPurposes.data &&
             allUsersPurposes.data.data
         ) {
+            console.log("allUsersPurposes",allUsersPurposes)
             if (storePurposes.length > 0) {
                 if (storePurposes[0].title.length === 0) {
                     const purposes = [

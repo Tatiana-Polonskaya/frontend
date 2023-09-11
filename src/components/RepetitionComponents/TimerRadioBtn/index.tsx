@@ -28,11 +28,19 @@ type Props = {
     setTimeIsValid: Function;
 };
 
+//MIN_MINUTES_FOR_VIDEO * 60,
+
 export default function TimerRadioBtn(props: Props) {
     const [curentChoice, setCurrentChoice] = useState<number>(0);
 
     const addAnswers = (idChoice: number) => {
         setCurrentChoice(idChoice);
+
+        if (choices.filter((el) => el.id === idChoice)!.at(0)!.value) {
+            props.setTimerSeconds(MIN_MINUTES_FOR_VIDEO * 60);
+        } else {
+            props.setTimerSeconds(0);
+        }
     };
 
     const minRef = useRef<HTMLInputElement>(null);
