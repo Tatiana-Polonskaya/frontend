@@ -2,59 +2,46 @@ import React, { useEffect, useState } from "react";
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 import { TIMER_STATUS } from "../../pages/RecodingPage";
+import useTimer from "../../hooks/useTimer";
+import { formatTime } from "../Stopwatch";
 
 type Props = {
-    minutes: number;
     seconds: number;
     isStart: boolean;
-    setIsStart: Function;
+    setResultSeconds: Function;
     timerOver: Function;
 };
 
 export default function Timer(props: Props) {
     const cnTimer = cn("Timer");
 
-    const [minutes, setMinutes] = useState(props.minutes);
-    const [seconds, setSeconds] = useState(props.seconds);
+    const { timer, isActive, isPaused, handleStart, handlePause, handleReset } =
+        useTimer(props.seconds);
 
-    const updateStatus = (value: boolean) => {
-        props.setIsStart(value);
-    };
+    useEffect(() => {
+        if (timer === 0) {
+            handlePause();
+            props.timerOver();
+        }
+    }, [timer]);
 
     useEffect(() => {
         if (props.isStart) {
-            let myInterval = setInterval(() => {
-                if (seconds > 0) {
-                    setSeconds(seconds - 1);
-                }
-                if (seconds === 0) {
-                    if (minutes === 0) {
-                        clearInterval(myInterval);
-                        props.timerOver();
-                    } else {
-                        setMinutes(minutes - 1);
-                        setSeconds(59);
-                    }
-                }
-            }, 950);
-            return () => {
-                clearInterval(myInterval);
-            };
+            handleReset();
+            handleStart();
         } else {
-            setMinutes(props.minutes);
-            setSeconds(props.seconds);
+            handlePause();
         }
-    }, [minutes, props, props.isStart, seconds]);
+    }, [props.isStart]);
 
+    useEffect(() => {
+        if (isPaused && timer !== props.seconds)
+            props.setResultSeconds(props.seconds - timer);
+    }, [isPaused]);
 
     return (
-        <div
-            className={cnTimer()}
-            onDoubleClick={() => updateStatus(TIMER_STATUS.START)}
-        >
-            <h1 className={cnTimer("text")}>
-                {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-            </h1>
+        <div className={cnTimer()}>
+            <h1 className={cnTimer("text")}>{formatTime(timer)}</h1>
         </div>
     );
 }

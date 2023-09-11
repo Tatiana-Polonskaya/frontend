@@ -31,6 +31,7 @@ import { ReactSVG } from "react-svg";
 
 import "./style.scss";
 import { MAX_MINUTES_FOR_VIDEO, MIN_MINUTES_FOR_VIDEO } from "../../constants";
+import Stopwatch from "../../components/Stopwatch";
 
 export const TIMER_STATUS = {
     START: true,
@@ -44,25 +45,34 @@ export default function RecodingPage() {
 
     const navigate = useNavigate();
     const { state } = useLocation();
+
+    const videoConstraints = {
+        width: 1280,
+        height: 720,
+        facingMode: "user",
+    };
+
+    /* ----------------------------------- PLAN  ----------------------------------- */
     const { basicPlan, timerSeconds } = state;
 
-    console.log("timerSeconds", timerSeconds);
-
-    // basicPlan params
     const isShowBasicPlan =
         basicPlan && basicPlan.length > 0 && basicPlan[0] !== "" ? true : false;
 
+    /* ----------------------------------- TIMER  ----------------------------------- */
     const secondsForTimer = timerSeconds
         ? timerSeconds
         : MAX_MINUTES_FOR_VIDEO * 60;
+    
+
     const timerHidden = timerSeconds && timerSeconds > 0 ? false : true;
 
-    // timer params
     const [isTimerStart, setIsTimerStart] = useState(false);
 
     const updateIsTimerStart = (value: boolean) => {
         setIsTimerStart(value);
     };
+
+    const [resultDuration, setResultDuration] = useState(0);
 
     /* ----------------------------------- MODAL PARAMS BLOCK ----------------------------------- */
     const [isModal, setModal] = useState(false);
@@ -73,7 +83,7 @@ export default function RecodingPage() {
         setModal(false);
     };
 
-    const [isWarning, setIsWarning] = useState(false); // поменять когда будет доступ к камере на false и использовать при колбэке от камеры
+    const [isWarning, setIsWarning] = useState(false);
 
     const closeWarningModal = () => {
         setIsWarning(false);
@@ -99,7 +109,7 @@ export default function RecodingPage() {
 
     const handleStartCaptureClick = useCallback(() => {
         if (canStart) {
-            // const tempCodec = "h264";
+            setResultSeconds(0);
             updateIsTimerStart(TIMER_STATUS.START);
             setCapturing(true);
             mediaRecorderRef.current = new MediaRecorder(
@@ -113,7 +123,6 @@ export default function RecodingPage() {
                 handleDataAvailable,
             );
             mediaRecorderRef.current.start();
-            // console.log(mediaRecorderRef.current);
         }
     }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
 
@@ -123,12 +132,9 @@ export default function RecodingPage() {
         setCapturing(false);
     }, [mediaRecorderRef, setCapturing]);
 
-    // CHECK :  "vp9", "vp9.0", "vp8", "vp8.0", "avc1", "av1", "h264", "opus", "pcm"
-    // DONE :
     useEffect(() => {
         if (recordedChunks.length > 0) {
-            // const tempCodec = "h264";
-            const tempType = `video/webm`; //"video/webm" was
+            const tempType = `video/webm`;
             const file = new Blob(recordedChunks, {
                 type: tempType,
             });
@@ -149,12 +155,8 @@ export default function RecodingPage() {
         }
     }, [currentFile]);
 
-    const videoConstraints = {
-        width: 1280,
-        height: 720,
-        facingMode: "user",
-    };
 
+    /* ----------------------------------- DEVICES BLOCK ----------------------------------- */
     const [devices, setDevices] = useState([]);
 
     const handleDevices = useCallback(
@@ -175,60 +177,6 @@ export default function RecodingPage() {
     useEffect(() => {
         navigator.mediaDevices.enumerateDevices().then(handleDevices);
     }, [handleDevices]);
-
-    function getSupportedMimeTypes(
-        media: string,
-        types: string[],
-        codecs: string[],
-    ) {
-        const isSupported = MediaRecorder.isTypeSupported;
-        const supported: any = [];
-        types.forEach((type) => {
-            const mimeType = `${media}/${type}`;
-            codecs.forEach((codec) =>
-                [
-                    `${mimeType};codecs=${codec}`,
-                    `${mimeType};codecs=${codec.toUpperCase()}`,
-                    // /!\ false positive /!\
-                    // `${mimeType};codecs:${codec}`,
-                    // `${mimeType};codecs:${codec.toUpperCase()}`
-                ].forEach((variation) => {
-                    if (isSupported(variation)) supported.push(variation);
-                }),
-            );
-            if (isSupported(mimeType)) supported.push(mimeType);
-        });
-        return supported;
-    }
-
-    // Usage ------------------
-
-    const videoTypes = ["webm", "ogg", "mp4", "x-matroska"];
-    const audioTypes = ["webm", "ogg", "mp3", "x-matroska"];
-    const codecs = [
-        "should-not-be-supported",
-        "vp9",
-        "vp9.0",
-        "vp8",
-        "vp8.0",
-        "avc1",
-        "av1",
-        "h265",
-        "h.265",
-        "h264",
-        "h.264",
-        "opus",
-        "pcm",
-        "aac",
-        "mpeg",
-        "mp4a",
-    ];
-
-    // const supportedVideos = getSupportedMimeTypes("video", videoTypes, codecs);
-    // const supportedAudios = getSupportedMimeTypes("audio", audioTypes, codecs);
-
-    // console.log("-- All supported Videos : ", supportedVideos);
-    // console.log("-- All supported Audios : ", supportedAudios);
 
     /* ----------------------------------- LOADING MODAL PARAMS BLOCK ----------------------------------- */
     const [isLoadingModal, setIsLoadingModal] = useState(false);
@@ -284,6 +232,13 @@ export default function RecodingPage() {
         }
     }, [isError]);
 
+    const setResultSeconds = (seconds: number) => {
+        setResultDuration(seconds);
+        setCurrentInfoData((prev) => {
+            return { ...prev, duration: `${seconds}` };
+        });
+    };
+
     return (
         <EmptyLayout>
             <div className={cnRecoding()}>
@@ -329,6 +284,7 @@ export default function RecodingPage() {
                                     <div
                                         className={cnRecoding(
                                             "button-block-back",
+                                            "button-block-back",
                                         )}
                                         onClick={() => navigate(-1)}
                                     >
@@ -342,18 +298,22 @@ export default function RecodingPage() {
                             )}
                         </div>
 
-                        <div
-                            className={cnRecoding("right-block", {
-                                hidden: timerHidden,
-                            })}
-                        >
-                            <Timer
-                                minutes={Math.floor(secondsForTimer / 60)}
-                                seconds={secondsForTimer % 60}
-                                isStart={isTimerStart}
-                                setIsStart={updateIsTimerStart}
-                                timerOver={handleStopCaptureClick}
-                            />
+                        <div className={cnRecoding("right-block")}>
+                            {timerHidden ? (
+                                <Stopwatch
+                                    seconds={secondsForTimer}
+                                    isStart={isTimerStart}
+                                    setResultSeconds={setResultSeconds}
+                                    timerOver={handleStopCaptureClick}
+                                />
+                            ) : (
+                                <Timer
+                                    seconds={secondsForTimer}
+                                    isStart={isTimerStart}
+                                    setResultSeconds={setResultSeconds}
+                                    timerOver={handleStopCaptureClick}
+                                />
+                            )}
                         </div>
 
                         {isShowBasicPlan && (
@@ -427,6 +387,7 @@ export default function RecodingPage() {
                                         <div
                                             className={cnRecoding(
                                                 "loading-title-error",
+                                                "loading-title-error",
                                             )}
                                         >
                                             Произошла ошибка, попробуйте еще раз
@@ -453,12 +414,14 @@ export default function RecodingPage() {
                                     <div
                                         className={cnRecoding(
                                             "loading-description",
+                                            "loading-description",
                                         )}
                                     >
                                         По его окончании вы сможете ознакомиться
                                         с результатами в разделе{" "}
                                         <span
                                             className={cnRecoding(
+                                                "loading-title-link",
                                                 "loading-title-link",
                                             )}
                                             onClick={() =>

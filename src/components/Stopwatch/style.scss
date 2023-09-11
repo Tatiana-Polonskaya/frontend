@@ -1,0 +1,20 @@
+.Stopwatch {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 80px;
+
+    &-text {
+        align-self: center;
+        color: #FFF;
+        font-weight: 500;
+        font-size: 36px;
+        font-family: 'Onest';
+        font-style: normal;
+        line-height: 46px;
+        letter-spacing: 0.02em;
+    }
+}

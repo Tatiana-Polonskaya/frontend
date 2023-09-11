@@ -10,6 +10,7 @@ import "./style.scss";
 import rerecordIcon from "./icon/rerecoding.svg";
 import videoRemoveIcon from "./icon/video-remove.svg";
 import { MAX_MINUTES_FOR_VIDEO, MIN_MINUTES_FOR_VIDEO } from "../../constants";
+import { convertSecondIntoPrettyDuration } from "../../@adapters/Time/convertSeconds";
 
 type IPreviewBlock = {
     titleRerecordBtn?: string;
@@ -52,7 +53,8 @@ export default function PreviewBlock({
     const fileName = useRef<HTMLInputElement>(null);
 
     // get videofile from content
-    const { currentFile, setCurrentInfoData } = useContext(VideoUploadContext);
+    const { currentFile, setCurrentInfoData, currentInfoData } =
+        useContext(VideoUploadContext);
 
     const [sizeVideo, setSizeVideo] = useState(0);
     const [canMoved, setCanMoved] = useState(true);
@@ -93,10 +95,13 @@ export default function PreviewBlock({
         }
     }, [videoRef.current]);
 
-    const [durationVideo, setDurationVideo] = useState(0);
+    const [durationVideo, setDurationVideo] = useState(
+        Number(currentInfoData.duration),
+    );
+    console.log("currentInfoData.duration", currentInfoData.duration)
 
     const getDurationVideo = async (n: number) => {
-        if (n) {
+        if (n && durationVideo === 0) {
             if (n === 0 && currentFile.size === 0) setDurationVideo(0);
             if (n === Infinity) setDurationVideo(0);
             else setDurationVideo(n);
@@ -106,7 +111,10 @@ export default function PreviewBlock({
     useEffect(() => {
         if (durationVideo > 0) {
             const normDuration = getPrettyDuration(durationVideo);
-            if (normDuration > MAX_MINUTES_FOR_VIDEO || normDuration < MIN_MINUTES_FOR_VIDEO) {
+            if (
+                normDuration > MAX_MINUTES_FOR_VIDEO ||
+                normDuration < MIN_MINUTES_FOR_VIDEO
+            ) {
                 setIsNormDuration(false);
                 setCanMoved(false);
             }
@@ -162,8 +170,9 @@ export default function PreviewBlock({
                             <span className={cnPreview("title-characters")}>
                                 {sizeVideo && getPrettySizeFile(sizeVideo)} •{" "}
                                 {durationVideo &&
-                                    getPrettyDuration(durationVideo)}{" "}
-                                минут
+                                    convertSecondIntoPrettyDuration(
+                                        durationVideo,
+                                    )}
                             </span>
                         </div>
                         <div className={cnPreview("input-block")}>
@@ -217,7 +226,8 @@ export default function PreviewBlock({
                             </span>
                             <span className={cnPreview("error-text")}>
                                 Мы можем проанализировать ваше видео, только
-                                если его длительность составляет от {MIN_MINUTES_FOR_VIDEO} {"до "}
+                                если его длительность составляет от{" "}
+                                {MIN_MINUTES_FOR_VIDEO} {"до "}
                                 {MAX_MINUTES_FOR_VIDEO} минут.
                             </span>
                         </div>
