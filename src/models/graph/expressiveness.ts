@@ -1,5 +1,3 @@
-
-
 export enum ExpressivenessType {
     NEUTRAL = "neutral",
     HAPPINESS = "happiness",
@@ -8,7 +6,6 @@ export enum ExpressivenessType {
 
 type ExtendWithType = Record<ExpressivenessType, number>;
 
-
 export type ExpressivenessDataItem = {
     seq_number: number;
     time_start: number;
@@ -16,6 +13,7 @@ export type ExpressivenessDataItem = {
 } & ExtendWithType;
 
 export type ExpressivenessJSON = {
-    values: ExpressivenessDataItem[],
-    total_expressiveness:number,
-}
+    values: ExpressivenessDataItem[];
+    total_expressiveness: number;
+    comment: string;
+};

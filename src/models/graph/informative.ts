@@ -9,7 +9,8 @@ export type InformativeDataItem = {
 export type InformativeJSON = {
     values: InformativeDataItem[];
     informative: number;
-    parasite: number; 
+    parasite: number;
     sounds: number;
     empty: number;
+    comment: string;
 };

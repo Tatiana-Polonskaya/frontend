@@ -14,4 +14,5 @@ export type ConfidenceJSON = {
     values: ConfidenceDataItem[];
     average_value: number;
     uncertainty: number;
+    comment: string;
 };

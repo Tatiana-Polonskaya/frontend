@@ -16,7 +16,6 @@ import SecondaryExpressiveness from "../Analytics/-Block/Clarity/Expressiveness/
 import MainSubsequence from "../Analytics/-Block/Connectivity/Subsequence/Main";
 import SecondarySubsequence from "../Analytics/-Block/Connectivity/Subsequence/Secondary";
 import MainOriginally from "../Analytics/-Block/Argumentation/Originally/Main";
-import SecondaryOriginally from "../Analytics/-Block/Argumentation/Originally/Secondary";
 import SecondaryEnergy from "../Analytics/-Block/Dinamism/Energy/Secondary";
 import SecondaryDefeat from "../Analytics/-Block/Communicative/Defeat/Secondary";
 import MainConfidence from "../Analytics/-Block/Persuasiveness/Confidence/Main";
@@ -29,23 +28,10 @@ import {
     convertExpressivenessDataLine,
 } from "../Analytics/helpers";
 
-import {
-    getTotalDesc,
-    getTotalResult,
-    judgmentHelper,
-    statmentHelper,
-} from "./helpers";
+import { getTotalDesc, getTotalResult } from "./helpers";
 
 import ColorfulTabs from "../ColorfulTabs";
-import {
-    Dispatch,
-    SetStateAction,
-    createContext,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-} from "react";
+import { useEffect, useMemo, useState } from "react";
 import SpeechTranscription from "../SpeechTranscription";
 import VideoNotice from "../VideoNotice";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -74,7 +60,7 @@ import { ClarityJSON } from "../../models/graph/clarity";
 import { EloquenceJSON } from "../../models/graph/eloquence";
 import { ExpressivenessJSON } from "../../models/graph/expressiveness";
 import { NonMonotonyJSON } from "../../models/graph/monotony";
-import { ChannelInfo, EmotionalityJSON } from "../../models/graph/emotionality";
+import { EmotionalityJSON } from "../../models/graph/emotionality";
 import { EnergyJSON } from "../../models/graph/energy";
 import { CongruenceJSON } from "../../models/graph/congruence";
 import { ConfidenceJSON } from "../../models/graph/confidence";
@@ -88,7 +74,6 @@ import { getPrettyDuration } from "../PreviewBlock";
 import MainNonMonotony from "../Analytics/-Block/Dinamism/NonMonotony/Main";
 import SecondaryNonMonotony from "../Analytics/-Block/Dinamism/NonMonotony/Secondary";
 import VideoPlayer, { getPrettyDataTime } from "../VideoPlayer";
-import textForEnergySmile from "../Graphs/EnergySmile/text";
 
 import AddTextUnityOfStyle from "../Graphs/unityOfStyle/text";
 
@@ -115,7 +100,7 @@ import {
     useGetUnityOfStyleByIdTestQuery,
 } from "../../store/api/reportTest";
 
-import AddTextEloquence from "../Graphs/eloquence/text";
+// import AddTextEloquence from "../Graphs/eloquence/text";
 import {
     NonMonotonyTempHelper,
     NonMonotonyToneHelper,
@@ -124,7 +109,6 @@ import {
 
 import argumentativenessData1 from "./../../plugs/argumentativeness.json";
 import { useGetVideoByIdQuery } from "../../store/api/apiWithDifAnswers";
-import { UUID } from "crypto";
 import { VideoTimeContext } from "../Context/helpers";
 
 export default function AnalysisReport() {
@@ -568,9 +552,7 @@ export default function AnalysisReport() {
                         {connectivityData && (
                             <Dropdown
                                 title={"Последовательность"}
-                                subtitle={`${statmentHelper(
-                                    connectivityData.controversy,
-                                )}`}
+                                subtitle={connectivityData.comment}
                                 visible={
                                     <MainSubsequence
                                         data={connectivityData.values.map(
@@ -608,8 +590,7 @@ export default function AnalysisReport() {
                         {informativeData && (
                             <Dropdown
                                 title={"Информативность"}
-                                subtitle={`Доля неречевых звуков и слов-паразитов превышает допустимый порог. 
-                Не хватает фактов и деталей для подтверждения высказанных аргументов.`}
+                                subtitle={informativeData.comment}
                                 visible={
                                     <InformativScale
                                         informative={
@@ -846,27 +827,6 @@ export default function AnalysisReport() {
                         {eloquenceData && (
                             <Dropdown
                                 title={"Красноречивость"}
-                                subtitle={AddTextEloquence(
-                                    eloquenceData.values.parasitic_words,
-                                    Math.ceil(
-                                        (eloquenceData.values.parasitic_words /
-                                            10 +
-                                            eloquenceData.values.short_words) *
-                                            2.5 *
-                                            25,
-                                    ),
-                                    eloquenceData.values.parasitic_words,
-                                    Math.ceil(
-                                        ((eloquenceData.values.parasitic_words /
-                                            10 +
-                                            eloquenceData.values
-                                                .short_sentences) *
-                                            2,
-                                        5),
-                                    ),
-                                    eloquenceData.values.short_words,
-                                    eloquenceData.values.action_words,
-                                )}
                                 visible={<Eloquence data={eloquenceData} />}
                                 invisible={
                                     <EloquenceText
@@ -882,12 +842,7 @@ export default function AnalysisReport() {
                             videoInfo!.duration && (
                                 <Dropdown
                                     title={"Экспрессивность"}
-                                    subtitle={
-                                        expressivenessData.total_expressiveness >=
-                                        0.5
-                                            ? "Наблюдается повышенная выразительность речи"
-                                            : "Наблюдается снижение выразительности речи"
-                                    }
+                                    subtitle={expressivenessData.comment}
                                     visible={
                                         <MainExpressiveness
                                             data={expressivenessData.values.map(
@@ -1080,9 +1035,7 @@ export default function AnalysisReport() {
                         {energyData && (
                             <Dropdown
                                 title={"Энергичность"}
-                                subtitle={textForEnergySmile(
-                                    energyData.total_energy,
-                                )}
+                                subtitle={energyData.comment}
                                 visible={
                                     <EnergySmile
                                         energy={energyData.total_energy}
@@ -1136,7 +1089,7 @@ export default function AnalysisReport() {
                         {congruenceData && (
                             <Dropdown
                                 title={"Конгруэнтность"}
-                                subtitle={`Эмоции в видеоканале не согласованы.`}
+                                subtitle={congruenceData.comment}
                                 visible={
                                     <Congruence
                                         diameter={congruenceData.diameter}
@@ -1165,9 +1118,7 @@ export default function AnalysisReport() {
                         {confidenceData && videoInfo && videoInfo!.duration && (
                             <Dropdown
                                 title={"Уверенность"}
-                                subtitle={judgmentHelper(
-                                    confidenceData.uncertainty,
-                                )}
+                                subtitle={confidenceData.comment}
                                 visible={
                                     <MainConfidence
                                         data={confidenceData.values}

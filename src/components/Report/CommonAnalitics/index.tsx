@@ -82,7 +82,7 @@ export default function CommonAnalitics(props: Props) {
                     {allValues && (
                         <ReactSVG
                             src={getPictureByConclussion(
-                                allValues.big_conclussion
+                                allValues.big_conclussion,
                             )}
                         />
                     )}
@@ -198,7 +198,7 @@ export default function CommonAnalitics(props: Props) {
                                 className={cnCommon("percent")}
                                 style={{
                                     color: getTotalResult(
-                                        allValues[element]
+                                        allValues[element],
                                     )[0],
                                 }}
                             >{`${

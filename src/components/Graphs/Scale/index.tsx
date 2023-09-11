@@ -21,7 +21,6 @@ export default function Scale({
     endTime,
     hasPointer = false,
 }: IComponentProps) {
-    
     const timeEnd = endTime;
 
     const { currentTime, setCurrentTime } = useContext(VideoTimeContext);

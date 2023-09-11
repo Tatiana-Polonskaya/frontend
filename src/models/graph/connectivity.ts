@@ -6,8 +6,9 @@ export type ConnectivityDataItem = {
     time_end: number;
 };
 
-export type ConnectivityJSON= {
+export type ConnectivityJSON = {
     values: ConnectivityDataItem[];
     controversy: number;
     statements: number;
+    comment: string;
 };

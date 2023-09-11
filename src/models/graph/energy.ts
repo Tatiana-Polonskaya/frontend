@@ -1,4 +1,3 @@
-
 export enum EnergyType {
     ENERGY = "energy",
 }
@@ -10,8 +9,8 @@ export type EnergyDataItem = {
     time_start: number;
 } & ExtendWithType;
 
-
 export type EnergyJSON = {
-    values: EnergyDataItem[],
-    total_energy:number,
-}
+    values: EnergyDataItem[];
+    total_energy: number;
+    comment: string;
+};

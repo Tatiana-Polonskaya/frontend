@@ -1,9 +1,25 @@
 .EmotionalScaletabs {
     display: flex;
     width: 40%;
+    display: flex;
+    width: 40%;
 }
 
 .EmotionalScaletab {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    margin: 8px;
+    padding: 8px 12px;
+    color: #7c8eb5;
+    font-weight: 600;
+    font-size: 12px;
+    font-style: normal;
+    background: rgb(36 119 244 / 0%);
+    border: none;
     display: flex;
     flex-direction: row;
     gap: 6px;
