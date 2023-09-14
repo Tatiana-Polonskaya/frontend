@@ -134,8 +134,12 @@ export default function PersonalArea({ isArchive = false }: Props) {
             setNewPic(false);
             const getData = async () => {
                 setTimeout(() => {
-                    const newkey=Math.ceil(Math.random() * 100);
-                    dispatch(setProfileAvatar(`/api/users/account/avatar/${store.id}?rnd=${newkey}`));
+                    const newkey = Math.ceil(Math.random() * 100);
+                    dispatch(
+                        setProfileAvatar(
+                            `/api/users/account/avatar/${store.id}?rnd=${newkey}`,
+                        ),
+                    );
                 }, 5000);
             };
             getData();
@@ -154,12 +158,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
             <div className={cnPersonalSettings("left")}>
                 <div className={cnPersonalUser("")}>
                     <div className={cnPersonalUser("photo")}>
-                        {avatar && (
-                            <img
-                                src={avatar}
-                                alt={store.lastname}
-                            />
-                        )}
+                        {avatar && <img src={avatar} alt={store.lastname} />}
                     </div>
                     <div className={cnPersonalUser("name")}>
                         {storeUser && (
