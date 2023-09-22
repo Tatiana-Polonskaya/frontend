@@ -10,7 +10,7 @@ import "./style.scss";
 
 export default function HeaderNotification() {
     const cnHeaderNotification = cn("HeaderNotification");
-    const {isShow, setIsShow}= useContext(NotificationContext);
+    const { isShow, setIsShow } = useContext(NotificationContext);
 
     return (
         <div

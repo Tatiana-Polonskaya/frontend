@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { createApi } from "@reduxjs/toolkit/dist/query/react";
 
 import { IResponse } from "../../../models/api";
 
@@ -39,10 +39,10 @@ export const userApi = createApi({
         }),
         sendUserAvatar: build.mutation<IResponse<void>, Blob>({
             query: (file) => {
-                let bodyFormData = new FormData();
+                const bodyFormData = new FormData();
                 bodyFormData.append("avatar", file);
                 return {
-                    url:  `/api/users/account/avatar`,
+                    url: `/api/users/account/avatar`,
                     // headers: { 'Content-Type': 'multipart/form-data' },
                     method: "POST",
                     body: bodyFormData,
@@ -61,5 +61,11 @@ export const userApi = createApi({
     }),
 });
 
-export const { useGetMeQuery, useLazyGetMeQuery, useSendUserAvatarMutation, useGetUserAvatarQuery, useLazyGetUserAvatarQuery } = userApi;
+export const {
+    useGetMeQuery,
+    useLazyGetMeQuery,
+    useSendUserAvatarMutation,
+    useGetUserAvatarQuery,
+    useLazyGetUserAvatarQuery,
+} = userApi;
 export const { endpoints, reducerPath, reducer, middleware } = userApi;

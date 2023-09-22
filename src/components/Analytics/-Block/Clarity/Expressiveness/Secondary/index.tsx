@@ -25,7 +25,7 @@ const cnExpressiveness = cn("expressiveness");
 type propsExpressiveness = {
     typeExpressiveness: IExpressiveness[];
 };
-let expressiveness: propsExpressiveness = {
+const expressiveness: propsExpressiveness = {
     typeExpressiveness: [
         {
             type: "нейтральная",

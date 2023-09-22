@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TotalDataItem, TotalType } from "../../models/graph/total";
 
 export default function convertTotalData(

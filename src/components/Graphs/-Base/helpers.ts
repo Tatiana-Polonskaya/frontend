@@ -14,7 +14,7 @@ export const createXDescriptionFromSeconds = (lastSecond: number): string[] => {
             result.push(
                 j === 6
                     ? `${i + 1 < 10 ? "0" : ""}${i + 1}:00`
-                    : `${i < 10 ? "0" : ""}${i}:${j}0`,
+                    : `${i < 10 ? "0" : ""}${i}:${j}0`
             );
         }
     }
@@ -33,7 +33,7 @@ export const createXDescriptionFromData = (data: IWithTimeStart[]) =>
     createXDescriptionFromSeconds(data.at(-1)!.time_start);
 
 export const createXDescriptionFromDataConfidence = (
-    data: IWithoutTimeStart[],
+    data: IWithoutTimeStart[]
 ) => createXDescriptionFromSeconds(data.at(-1)!.time_sec);
 
 export const GraphContext = createContext({

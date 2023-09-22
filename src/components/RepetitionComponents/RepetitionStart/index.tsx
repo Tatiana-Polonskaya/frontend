@@ -218,13 +218,13 @@ export default function RepetitionStart() {
                             <>
                                 <div
                                     className={cnRepetitionStart(
-                                        "loading-title",
+                                        "loading-title"
                                     )}
                                 >
                                     Идет загрузка видео{" "}
                                     <span
                                         className={cnRepetitionStart(
-                                            "loading-title-animate",
+                                            "loading-title-animate"
                                         )}
                                     >
                                         {" "}
@@ -233,7 +233,7 @@ export default function RepetitionStart() {
                                 </div>
                                 <div
                                     className={cnRepetitionStart(
-                                        "loading-description",
+                                        "loading-description"
                                     )}
                                 >
                                     Пожалуйста, не закрывайте вкладку до
@@ -245,7 +245,7 @@ export default function RepetitionStart() {
                             <>
                                 <div
                                     className={cnRepetitionStart(
-                                        "loading-title-error",
+                                        "loading-title-error"
                                     )}
                                 >
                                     Произошла ошибка, попробуйте еще раз
@@ -267,14 +267,14 @@ export default function RepetitionStart() {
                             </div>
                             <div
                                 className={cnRepetitionStart(
-                                    "loading-description",
+                                    "loading-description"
                                 )}
                             >
                                 По его окончании вы сможете ознакомиться с
                                 результатами в разделе{" "}
                                 <span
                                     className={cnRepetitionStart(
-                                        "loading-title-link",
+                                        "loading-title-link"
                                     )}
                                     onClick={() =>
                                         navigate(RoutesEnum.DIARY, {

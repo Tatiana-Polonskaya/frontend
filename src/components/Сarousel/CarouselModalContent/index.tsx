@@ -1,28 +1,30 @@
-import React, { useContext } from 'react'
-import { ModalWindowContext } from '../../VideoBlock';
-import { cn } from '@bem-react/classname';
-import VideoPlayer, { getPrettyDataTime } from '../../VideoPlayer';
+import { useContext } from "react";
+import { ModalWindowContext } from "../../VideoBlock";
+import { cn } from "@bem-react/classname";
+import VideoPlayer, { getPrettyDataTime } from "../../VideoPlayer";
 import NoPhoto from "../../ProfilePreview/assets/no-photo.png";
-import { IVideoFromBack } from '../../../models/video';
+import { IVideoFromBack } from "../../../models/video";
 
 import "./style.scss";
 
 type Props = {
-    modalVideo:IVideoFromBack
-}
+    modalVideo: IVideoFromBack;
+};
 
-export default function CarouselModalContent({modalVideo}: Props) {
-
-    const {setModal} = useContext(ModalWindowContext);
+export default function CarouselModalContent({ modalVideo }: Props) {
+    const { setModal } = useContext(ModalWindowContext);
 
     const cnModalContent = cn("CarouselModalContent");
 
     return (
         <div className={cnModalContent()}>
-
             <div className={cnModalContent("video-row")}>
                 <div className={cnModalContent("video-row-videoplayer")}>
-                    <VideoPlayer url={`/api/video/${modalVideo.id}`} controls={true} muted={true}/>
+                    <VideoPlayer
+                        url={`/api/video/${modalVideo.id}`}
+                        controls={true}
+                        muted={true}
+                    />
                 </div>
                 <div className={cnModalContent("video-row-description")}>
                     <div
@@ -44,7 +46,7 @@ export default function CarouselModalContent({modalVideo}: Props) {
                                 className={cnModalContent(
                                     "video-row-description-title-row-closebutton"
                                 )}
-                                onClick={()=>setModal(false)}
+                                onClick={() => setModal(false)}
                                 alt="close"
                             />
                         </p>
@@ -101,31 +103,6 @@ export default function CarouselModalContent({modalVideo}: Props) {
                     </div>
                 </div>
             </div>
-
-            {/* <div className={cnModalContent("analyze-row")}>
-                {totalVideoInfo && (
-                    <>
-                        {criteria.map((item,idx) => (
-                             <div
-                                 key={idx}
-                                 className={cnModalContent("analyze-row-item")}
-                             >
-                                 <div
-                                     className="pie animate"
-                                     style={
-                                        {
-                                            "--p": totalVideoInfo[idx],
-                                        } as React.CSSProperties
-                                    }
-                                >
-                                    {totalVideoInfo[idx]}%
-                                </div>
-                                <p>{item.title}</p>
-                            </div>
-                        ))}   
-                        </>
-                )}
-            </div> */}
         </div>
     );
 }

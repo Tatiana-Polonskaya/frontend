@@ -9,8 +9,8 @@ export type ParasiticWordsItem = Record<ParasiticWords, number>;
 
 export type EloquenceDataItem = {
     parasitic_words: number;
-    short_sentences: number; 
-    short_words: number; 
+    short_sentences: number;
+    short_words: number;
     action_words: number;
     parasitic_words_list: {
         [key: string]: number;
@@ -18,5 +18,5 @@ export type EloquenceDataItem = {
 };
 
 export type EloquenceJSON = {
-    values:EloquenceDataItem,
-} 
+    values: EloquenceDataItem;
+};

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { cn } from "@bem-react/classname";
 import { ReactSVG } from "react-svg";
 

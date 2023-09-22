@@ -5,7 +5,6 @@ import "./style.scss";
 
 import { IСitation } from "../../../models/ICitation";
 
-
 type Props = {
     breakdown: IBreakdown[];
     state: string;

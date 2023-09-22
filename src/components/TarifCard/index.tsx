@@ -8,7 +8,6 @@ import "./style.scss";
 import { ReactSVG } from "react-svg";
 import { addDaysToDate } from "../../@adapters/Time/convertDays";
 
-
 function priceForOneRepetition(countRepetition: number, price: number): string {
     return (price / countRepetition).toFixed(2).replace(".", ",");
 }
@@ -99,7 +98,7 @@ export default function TarifCard(props: Props) {
                             <>
                                 <div
                                     className={cnCard(
-                                        "tarif-money-period-text",
+                                        "tarif-money-period-text"
                                     )}
                                 >
                                     {" "}
@@ -107,12 +106,12 @@ export default function TarifCard(props: Props) {
                                 </div>
                                 <div
                                     className={cnCard(
-                                        "tarif-money-period-text-bold",
+                                        "tarif-money-period-text-bold"
                                     )}
                                 >
                                     {priceForOneRepetition(
                                         props.loads_limit,
-                                        props.price,
+                                        props.price
                                     ) + " руб"}
                                 </div>
                             </>
@@ -120,7 +119,7 @@ export default function TarifCard(props: Props) {
                             <>
                                 <div
                                     className={cnCard(
-                                        "tarif-money-period-text",
+                                        "tarif-money-period-text"
                                     )}
                                 >
                                     {"с "}
@@ -128,12 +127,12 @@ export default function TarifCard(props: Props) {
                                 </div>
                                 <div
                                     className={cnCard(
-                                        "tarif-money-period-text",
+                                        "tarif-money-period-text"
                                     )}
                                 >
                                     {"до "}
                                     {addDaysToDate(
-                                        props.duration,
+                                        props.duration
                                     ).toLocaleDateString("ru", options)}
                                 </div>
                             </>

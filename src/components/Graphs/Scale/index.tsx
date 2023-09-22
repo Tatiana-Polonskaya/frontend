@@ -2,7 +2,6 @@ import "./style.scss";
 import { cn } from "@bem-react/classname";
 import GraphColor from "../../../models/graph/_colors";
 import { IDescriptionScale } from "../../../models/graph/inteface/IDescriptionScale";
-import convertSecondsIntoTime from "../../../@adapters/Time/convertSeconds";
 import GraphSecondPointer from "../-Base/-SecondPointer";
 import { useContext, useState, useRef, useEffect } from "react";
 import { ValueTime } from "../../Analytics/helpers";
@@ -65,13 +64,13 @@ export default function Scale({
 
     // время
 
-    const choiseBlock = (event: React.MouseEvent<HTMLDivElement>) => {
-        const dataValue = +event.currentTarget.dataset.time! as number;
+    // const choiseBlock = (event: React.MouseEvent<HTMLDivElement>) => {
+    //     const dataValue = +event.currentTarget.dataset.time! as number;
 
-        if (dataValue || dataValue === 0) {
-            setCurrentTime(dataValue);
-        }
-    };
+    //     if (dataValue || dataValue === 0) {
+    //         setCurrentTime(dataValue);
+    //     }
+    // };
 
     useEffect(() => {
         if (isPointerMoving) {
@@ -79,14 +78,13 @@ export default function Scale({
             setCurrentTime(time);
             updateTime(time);
         }
-    }, [sliderValue]);
+    }, [isPointerMoving, setCurrentTime, sliderValue, timeEnd, updateTime]);
 
     useEffect(() => {
         if (!isPointerMoving) {
             setSliderValue((currentTime / timeEnd!) * 100);
-            console.log("setSliderValue", (currentTime / timeEnd!) * 100);
         }
-    }, [currentTime]);
+    }, [currentTime, isPointerMoving, timeEnd]);
 
     return (
         <div

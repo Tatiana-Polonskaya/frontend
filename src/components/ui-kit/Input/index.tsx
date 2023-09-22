@@ -47,7 +47,7 @@ export default function Input({ invalid = false, ...props }: Props) {
                     password: isPassword,
                     invalid: invalid,
                     numeric: props.type === "number",
-                })}` }
+                })}`}
             />
             {isPassword && (
                 <ReactSVG

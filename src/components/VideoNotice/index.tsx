@@ -1,5 +1,4 @@
-import { UUID } from "crypto";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@bem-react/classname";
 import Button from "../ui-kit/Button";
 
@@ -25,8 +24,7 @@ export default function VideoNotice({ idVideo, title, description }: Props) {
     const [stateDescription, setStateDescription] = useState(description);
 
     const [updateVideoInfo, responseUpdate] = useUpdateVideoInfoByIdMutation();
-    const {isSuccess, isError} = responseUpdate;
-
+    const { isSuccess, isError } = responseUpdate;
 
     const saveDescription = async () => {
         // console.log(textareaRef.current!.value);
@@ -36,7 +34,7 @@ export default function VideoNotice({ idVideo, title, description }: Props) {
                 id: idVideo,
                 title: title,
                 description: newDescription,
-            })
+            });
             await updateVideoInfo({
                 id: idVideo,
                 title: title,
@@ -44,17 +42,17 @@ export default function VideoNotice({ idVideo, title, description }: Props) {
             });
             setStateDescription(newDescription);
         }
-        
+
         setIsEditable(false);
     };
 
-    useEffect(()=>{
-        if(isSuccess) console.log(responseUpdate)
-    },[isSuccess])
+    useEffect(() => {
+        if (isSuccess) console.log(responseUpdate);
+    }, [isSuccess]);
 
-    useEffect(()=>{
-        if(isError) console.log(responseUpdate)
-    },[isError])
+    useEffect(() => {
+        if (isError) console.log(responseUpdate);
+    }, [isError]);
 
     return (
         <div className={cnVideoNotice()}>

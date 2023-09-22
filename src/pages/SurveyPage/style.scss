@@ -1,99 +1,94 @@
-.survey{
+.survey {
     display: flex;
     flex-flow: column nowrap;
     margin: 50px;
     padding: 32px;
     border-radius: 48px;
     gap: 10px;
-    background-color: #FFFFFF;
-    
+    background-color: #ffffff;
 
-    &-title{
-        font-family: 'Onest';
+    &-title {
+        font-family: "Onest";
         font-style: normal;
         font-weight: 700;
         font-size: 24px;
         line-height: 26px;
         text-transform: uppercase;
-        color: #031C3D;
-
+        color: #031c3d;
     }
 
-    &-description{
-        font-family: 'Onest';
+    &-description {
+        font-family: "Onest";
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
-        color: #37476A;
+        color: #37476a;
         line-height: 22px;
     }
 
-    &-questions{
+    &-questions {
         padding-top: 10px;
         display: flex;
         flex-flow: column nowrap;
-        gap:20px;
+        gap: 20px;
     }
 
-    &-footer{
+    &-footer {
         padding-top: 10px;
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
         align-items: center;
 
-        &-block-btn{
+        &-block-btn {
             display: flex;
             flex-flow: column nowrap;
             justify-content: space-between;
             align-items: flex-start;
         }
 
-        &-current-step{
-            font-family: 'Montserrat Alternates';
+        &-current-step {
+            font-family: "Montserrat Alternates";
             font-style: normal;
             font-weight: 600;
             font-size: 24px;
             line-height: 29px;
 
             letter-spacing: 0.02em;
-            color: #031C3D;
+            color: #031c3d;
         }
 
-        &-all-step{
-
-            font-family: 'Montserrat Alternates';
+        &-all-step {
+            font-family: "Montserrat Alternates";
             font-style: normal;
             font-weight: 600;
             font-size: 24px;
             line-height: 29px;
             letter-spacing: 0.02em;
-            color: #D4DFF4;
-
+            color: #d4dff4;
         }
     }
 
-    &-btn{
+    &-btn {
         justify-content: center;
 
         width: 300px;
         height: 61px;
-        background: #2477F4;
-        
+        background: #2477f4;
+
         border-radius: 14px;
         border: none;
 
-        font-family: 'Montserrat Alternates';
+        font-family: "Montserrat Alternates";
         font-style: normal;
         font-weight: 700;
         font-size: 24px;
         line-height: 29px;
-        color: #FFFFFF;
+        color: #ffffff;
 
-        &_disabled{
-            background: #2477F4;
+        &_disabled {
+            background: #2477f4;
             opacity: 0.5;
         }
-
     }
 }

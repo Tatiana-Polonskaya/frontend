@@ -1,20 +1,19 @@
-.CarouselModalContent{
+.CarouselModalContent {
     max-width: 1200px;
 
     &-video-row {
         display: grid;
         grid-template-rows: min-content;
         grid-template-columns: 800px 1fr;
-        gap:14px;
-        
-        
+        gap: 14px;
+
         &-videoplayer {
             width: auto;
             height: auto;
             max-height: 450px;
             overflow: hidden;
 
-            video{
+            video {
                 max-height: 450px;
                 // height: auto !important;
                 // width: 800px !important;
@@ -41,17 +40,16 @@
                 &-closebutton {
                     align-self: flex-start;
                     cursor: pointer;
-                    fill: #7C8EB5;
+                    fill: #7c8eb5;
                 }
 
                 &-closebutton:hover {
                     fill: #000b22;
                 }
-
             }
 
             &-times {
-                color: #7C8EB5;
+                color: #7c8eb5;
                 font-weight: 400;
                 font-size: 16px;
                 font-family: "Onest";
@@ -64,7 +62,7 @@
                 flex-flow: row nowrap;
                 align-items: center;
                 justify-content: start;
-                padding:  8px 0;
+                padding: 8px 0;
 
                 &-logo {
                     display: flex;
@@ -83,7 +81,7 @@
                 }
 
                 &-name {
-                    color: #37476A;
+                    color: #37476a;
                     font-weight: 600;
                     font-size: 16px;
                     font-family: "Montserrat Alternates";
@@ -95,7 +93,7 @@
             &-annotation {
                 &-title {
                     padding: 10px 0;
-                    color: #7C8EB5;
+                    color: #7c8eb5;
                     font-weight: 500;
                     font-size: 12px;
                     font-family: "Onest";
@@ -123,16 +121,16 @@
 
                 // margin-top: 20px;
                 padding: 16px;
-                color: #FFF;
+                color: #fff;
                 font-weight: 600;
                 font-size: 1rem;
                 font-family: "Montserrat Alternates";
                 font-style: normal;
-                background-color: #FFB800;
+                background-color: #ffb800;
                 border: 0;
                 border-radius: 9px;
 
-                &-icon svg{
+                &-icon svg {
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -162,7 +160,7 @@
             p {
                 display: flex;
                 align-items: center;
-                color: #37476A;
+                color: #37476a;
                 font-weight: 600;
                 font-size: 16px;
                 font-style: normal;
@@ -170,7 +168,5 @@
                 text-align: center;
             }
         }
-
     }
 }
-

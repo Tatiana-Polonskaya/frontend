@@ -22,7 +22,9 @@
         text-align: left;
         background: white;
         border-radius: 25px;
-        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        box-shadow:
+            0 4px 8px 0 rgb(0 0 0 / 20%),
+            0 6px 20px 0 rgb(0 0 0 / 19%);
         animation-name: animatetop;
         animation-name: slide-in;
         animation-duration: 0.3s;
@@ -40,10 +42,10 @@
 
         &-title {
             flex-grow: 1;
-            color: #37476A;
+            color: #37476a;
             font-weight: 600;
             font-size: 1em;
-            font-family: 'Montserrat Alternates';
+            font-family: "Montserrat Alternates";
             font-style: normal;
             line-height: 1em;
         }
@@ -60,7 +62,6 @@
             }
         }
     }
-
 
     &-body {
         overflow: auto;

@@ -1,5 +1,4 @@
 import { cn } from "@bem-react/classname";
-import React from "react";
 import { ReactSVG } from "react-svg";
 
 import noteIcon from "../assets/note.svg";
@@ -13,8 +12,7 @@ type Props = {
     onClick: Function;
 };
 
-export default function ColorfulTab({activeTab,label,onClick}: Props) {
-    
+export default function ColorfulTab({ activeTab, label, onClick }: Props) {
     const cnColorfulTab = cn("ColorfulTabItem");
 
     const funcClick = () => {
@@ -22,8 +20,16 @@ export default function ColorfulTab({activeTab,label,onClick}: Props) {
     };
 
     return (
-        <li className={cnColorfulTab("tab-list-item",{active:activeTab === label})} onClick={funcClick}>
-            <ReactSVG className={cnColorfulTab("icon")} src={label === "Транскрипция речи" ? symbolT:noteIcon }/>
+        <li
+            className={cnColorfulTab("tab-list-item", {
+                active: activeTab === label,
+            })}
+            onClick={funcClick}
+        >
+            <ReactSVG
+                className={cnColorfulTab("icon")}
+                src={label === "Транскрипция речи" ? symbolT : noteIcon}
+            />
             {label}
         </li>
     );

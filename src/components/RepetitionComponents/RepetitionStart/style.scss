@@ -3,14 +3,13 @@
     font-size: 16px;
     line-height: 20px;
 
-
     &-text {
         display: flex;
         flex-flow: column nowrap;
         gap: 8px;
         padding: 10px;
         padding-bottom: 40px;
-        font-family: 'Onest';
+        font-family: "Onest";
         font-style: normal;
         background-color: #fff;
         border-radius: 16px;
@@ -20,7 +19,7 @@
             flex-flow: row nowrap;
             align-items: center;
             justify-content: start;
-            color: #37476A;
+            color: #37476a;
             font-weight: 600;
             font-family: "Montserrat Alternates";
         }
@@ -31,7 +30,7 @@
         }
 
         &-gray {
-            color: #7C8EB5;
+            color: #7c8eb5;
             font-weight: 400;
 
             &-bold {
@@ -40,7 +39,7 @@
         }
 
         &-blue {
-            color: #2477F4;
+            color: #2477f4;
             font-weight: 500;
         }
     }
@@ -79,14 +78,14 @@
         }
 
         &-title {
-            color: #37476A;
+            color: #37476a;
             font-weight: 600;
             font-size: 24px;
             font-family: "Montserrat Alternates";
 
             &-animate {
                 display: inline-block;
-                color: #37476A;
+                color: #37476a;
                 font-weight: 600;
                 font-size: 24px;
                 font-family: "Montserrat Alternates";
@@ -101,25 +100,23 @@
             }
 
             &-error {
-                color: #FF4E78;
+                color: #ff4e78;
                 font-weight: 600;
                 font-size: 24px;
                 font-family: "Montserrat Alternates";
-
             }
 
             &-link {
-                color: #2477F4;
+                color: #2477f4;
                 font-weight: 500;
                 font-size: 16px;
                 font-family: "Montserrat Alternates";
                 cursor: pointer;
             }
-
         }
 
         &-description {
-            color: #7C8EB5;
+            color: #7c8eb5;
             font-weight: 500;
             font-size: 16px;
             font-family: "Montserrat Alternates";
@@ -129,10 +126,9 @@
 
 @keyframes l {
     to {
-        clip-path: inset(0 -1ch 0 0)
+        clip-path: inset(0 -1ch 0 0);
     }
 }
-
 
 .ModalTitle {
     &-header {
@@ -147,7 +143,7 @@
 
         &-title {
             flex-grow: 1;
-            color: #37476A;
+            color: #37476a;
             font-weight: 600;
             font-size: 1em;
             font-family: "Montserrat Alternates";
@@ -167,5 +163,4 @@
             }
         }
     }
-
 }

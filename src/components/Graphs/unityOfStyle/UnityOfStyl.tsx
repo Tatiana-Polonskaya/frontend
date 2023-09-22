@@ -1,7 +1,5 @@
-import React from "react";
 import "./UnityOfStyl.css";
 import PieChartBlock from "../PieChartBlock";
-import { IPieChart } from "../../../models/graph/inteface/IPieChart";
 
 type Props = {
     scientific: number;

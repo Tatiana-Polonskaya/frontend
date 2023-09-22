@@ -5,13 +5,13 @@
         gap: 16px;
         width: 100%;
         padding: 16px;
-        background: #F7FAFF;
+        background: #f7faff;
         border-radius: 12px;
     }
 
     &-text {
         padding-top: 10px;
-        color: #17282F;
+        color: #17282f;
         font-weight: 400;
         font-size: 16px;
         font-style: normal;
@@ -21,8 +21,6 @@
     &-textInfTitle {
         font-weight: 500;
     }
-
-
 
     &-blockText {
         display: flex;
@@ -40,7 +38,7 @@
     }
 
     &-Text {
-        color: #37476A;
+        color: #37476a;
         font-family: Onest;
         font-size: 14px;
         font-style: normal;
@@ -51,7 +49,6 @@
     &-panels {
         &-panel {
             display: none;
-            
 
             &_visible {
                 display: block;
@@ -66,8 +63,6 @@
     }
 }
 
-
-
 .congruenceScale {
     &-blockText {
         display: flex;
@@ -75,5 +70,4 @@
         gap: 10px;
         align-items: center;
     }
-
 }

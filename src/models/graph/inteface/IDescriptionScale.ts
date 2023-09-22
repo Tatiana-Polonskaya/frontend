@@ -1,5 +1,5 @@
-export interface IDescriptionScale{
-    title:string,
-    value:number,
-    color:string
+export interface IDescriptionScale {
+    title: string;
+    value: number;
+    color: string;
 }

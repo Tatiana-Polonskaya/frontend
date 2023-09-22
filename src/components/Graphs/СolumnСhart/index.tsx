@@ -7,7 +7,6 @@ import {
     MouseEventHandler,
     useContext,
     useEffect,
-    useLayoutEffect,
     useRef,
     useState,
 } from "react";
@@ -71,7 +70,7 @@ export default function ColumnChart(props: Props) {
             setPointerX(currentTime * _1SEC_PX);
             // setPointerX(currentTime * secondarySecond);
         }
-    }, [currentTime]);
+    }, [currentTime, isPointerMoving]);
 
     useEffect(() => {
         if (isPointerMoving) {
@@ -79,7 +78,7 @@ export default function ColumnChart(props: Props) {
             setCurrentTime(time);
             updateTime(time);
         }
-    }, [pointerX]);
+    }, [isPointerMoving, pointerX, setCurrentTime, updateTime]);
 
     // ширина родителя
 
@@ -89,7 +88,6 @@ export default function ColumnChart(props: Props) {
         if (parentRef.current) {
             const parentWidth = parentRef.current.offsetWidth;
             setWidthLineGraph(parentWidth);
-            console.log(parentWidth);
         }
     };
 
@@ -139,7 +137,7 @@ export default function ColumnChart(props: Props) {
                         data-tooltip-id={"col-brick-" + i}
                         style={{
                             backgroundColor: getColorByEmotion(
-                                el.type as EMOTION,
+                                el.type as EMOTION
                             ),
                             height: getHeightByValue(el.value) + "%",
                             width:

@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import { cn } from "@bem-react/classname";
 
 import "./style.scss";
@@ -18,11 +18,20 @@ export default function RollUp(props: Props) {
     return (
         <div className={cnRollUp()}>
             <div className={cnRollUp("header")}>
-                {props.icon && <ReactSVG src={props.icon} className={cnRollUp("icon")}/>}
+                {props.icon && (
+                    <ReactSVG src={props.icon} className={cnRollUp("icon")} />
+                )}
                 <span className={cnRollUp("title")}>{props.title}</span>
-                <span onClick={()=>setIsShow(prev=>!prev)} className={cnRollUp("btn")}>{isShow ? stateBtn[0] : stateBtn[1]}</span>
+                <span
+                    onClick={() => setIsShow((prev) => !prev)}
+                    className={cnRollUp("btn")}
+                >
+                    {isShow ? stateBtn[0] : stateBtn[1]}
+                </span>
             </div>
-            {isShow && <div className={cnRollUp("content")}>{props.children}</div>}
+            {isShow && (
+                <div className={cnRollUp("content")}>{props.children}</div>
+            )}
         </div>
     );
 }

@@ -128,7 +128,6 @@ export default function PrimaryInfo() {
             <Button className={cnPrimaryInfo("next-button")} onClick={onSubmit}>
                 Продолжить
             </Button>
-
         </>
     );
 }

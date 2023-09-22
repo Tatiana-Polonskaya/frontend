@@ -48,7 +48,7 @@ export default function AimBlock() {
             allUsersPurposes.data &&
             allUsersPurposes.data.data
         ) {
-            console.log("allUsersPurposes",allUsersPurposes)
+            console.log("allUsersPurposes", allUsersPurposes);
             if (storePurposes.length > 0) {
                 if (storePurposes[0].title.length === 0) {
                     const purposes = [
@@ -122,7 +122,7 @@ export default function AimBlock() {
             setStandertPurposes(
                 existedPurposes.map((el) => {
                     return { ...el, isExist: userAimTitles.includes(el.title) };
-                }),
+                })
             );
         }
     }, [allPurposes]);
@@ -170,15 +170,15 @@ export default function AimBlock() {
     const [sendPurposeRequest, sendPurposeResponse] =
         useSendUserPurposeMutation();
 
-    const { isSuccess, isError } = sendPurposeResponse;
+    const { isSuccess } = sendPurposeResponse;
 
-    const [checkedState, setCheckedState] = useState<Array<boolean>>(
-        new Array(existedPurposes.length).fill(false),
+    const [checkedState, setCheckedState] = useState<boolean[]>(
+        new Array(existedPurposes.length).fill(false)
     );
 
     const changeCheckedState = (position: number) => {
         const updatedCheckedState = checkedState.map((item, index) =>
-            index === position ? !item : item,
+            index === position ? !item : item
         );
         setCheckedState(updatedCheckedState);
     };
@@ -186,7 +186,7 @@ export default function AimBlock() {
     // Добавить определенные параметры
     const saveChoosedAims = () => {
         let userAimTitle: string = "";
-        let commonAims: ISendUserPurpose[] = [];
+        const commonAims: ISendUserPurpose[] = [];
 
         checkedState.forEach((el, idx) => {
             if (el) {
@@ -207,11 +207,10 @@ export default function AimBlock() {
             }
         });
 
-        console.log("send commonAims", commonAims)
+        console.log("send commonAims", commonAims);
 
         if (userAimTitle.length > 0) {
-
-            console.log("userAimTitle.length > 0", userAimTitle)
+            console.log("userAimTitle.length > 0", userAimTitle);
             const resultAims = {
                 title: userAimTitle,
                 is_done: false,
@@ -223,12 +222,12 @@ export default function AimBlock() {
 
             dispatch(
                 updateUserAims(
-                    allPurposes ? [resultAims, ...allPurposes] : [resultAims],
-                ),
+                    allPurposes ? [resultAims, ...allPurposes] : [resultAims]
+                )
             );
 
             setAllPurposes((prev) =>
-                prev ? [resultAims, ...prev] : [resultAims],
+                prev ? [resultAims, ...prev] : [resultAims]
             );
 
             setHasNewAim(true);
@@ -236,7 +235,7 @@ export default function AimBlock() {
 
         if (commonAims.length > 0) {
             commonAims.forEach(
-                async (purpose) => await sendPurposeRequest(purpose),
+                async (purpose) => await sendPurposeRequest(purpose)
             );
         }
 
@@ -247,8 +246,8 @@ export default function AimBlock() {
 
     useEffect(() => {
         if (isSuccess) {
-            console.log("isSuccess")
-            console.log( sendPurposeResponse)
+            console.log("isSuccess");
+            console.log(sendPurposeResponse);
             const getData = async () => await getNewAims();
             getData();
         }
@@ -320,7 +319,7 @@ export default function AimBlock() {
                                 <span
                                     className={cnAimBlock(
                                         "modal-checkbox-text",
-                                        { strikethrough: el.isExist },
+                                        { strikethrough: el.isExist }
                                     )}
                                 >
                                     {el.title}
@@ -328,7 +327,7 @@ export default function AimBlock() {
                                 {el.isExist && (
                                     <span
                                         className={cnAimBlock(
-                                            "modal-checkbox-text-blue",
+                                            "modal-checkbox-text-blue"
                                         )}
                                     >
                                         Цель уже добавлена

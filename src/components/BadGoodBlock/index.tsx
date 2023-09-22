@@ -1,4 +1,3 @@
-import React from "react";
 import { cn } from "@bem-react/classname";
 import { ReactSVG } from "react-svg";
 import "./style.scss";

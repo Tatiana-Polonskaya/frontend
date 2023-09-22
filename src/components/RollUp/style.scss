@@ -15,20 +15,18 @@
             align-items: center;
             justify-content: center;
         }
-
     }
 
     &-title {
-        color: #37476A;
+        color: #37476a;
         font-weight: 600;
         font-size: 16px;
         font-family: "Montserrat Alternates";
-
     }
 
     &-btn {
-        padding: 0 20px  ;
-        color: #2477F4;
+        padding: 0 20px;
+        color: #2477f4;
         font-weight: 500;
         font-size: 16px;
         font-family: "Montserrat Alternates";
@@ -36,7 +34,6 @@
     }
 
     &-content {
-        padding:  15px 0;
+        padding: 15px 0;
     }
-
 }

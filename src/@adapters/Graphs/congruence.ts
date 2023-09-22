@@ -21,7 +21,7 @@ function convertCongruenceValues(values: CongruenceItem[]) {
                 previosTime = el.time_end;
                 return el;
             } else {
-                let diff = previosTime - el.time_start;
+                const diff = previosTime - el.time_start;
                 if (diff === step) {
                     previosTime = el.time_end;
                     return el;
@@ -60,7 +60,7 @@ function convertCongruenceValues(values: CongruenceItem[]) {
 function combiningNeutralTypes(values: CongruenceItem[]) {
     let previousType: string = EMOTION.NEUTRAL;
     let previousTimeStart = 0;
-    let resultArray: CongruenceItem[] = [];
+    const resultArray: CongruenceItem[] = [];
 
     const lastTimeStart = values.at(-1)!.time_start;
 
@@ -73,7 +73,7 @@ function combiningNeutralTypes(values: CongruenceItem[]) {
 
     values.forEach((el) => {
         if (el.type === EMOTION.NEUTRAL) {
-            let tempTimeStart =
+            const tempTimeStart =
                 previousType === EMOTION.NEUTRAL
                     ? previousTimeStart
                     : el.time_start;
@@ -109,7 +109,9 @@ function combiningNeutralTypes(values: CongruenceItem[]) {
     return resultArray;
 }
 
-export default function convertDataCongruenceFromBackIntoGraph(values: CongruenceItem[]) {
-    let resultArray = convertCongruenceValues(values);
+export default function convertDataCongruenceFromBackIntoGraph(
+    values: CongruenceItem[]
+) {
+    const resultArray = convertCongruenceValues(values);
     return combiningNeutralTypes(resultArray);
 }

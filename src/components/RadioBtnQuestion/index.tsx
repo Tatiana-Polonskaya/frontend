@@ -20,10 +20,12 @@ export default function RadioBtnQuestion(props: Props) {
 
     function handleChange(id: string) {
         setSelectedOption(id);
-        let isAnother = props.question.choices.filter(el=>el.id === id)[0].another;
+        const isAnother = props.question.choices.filter((el) => el.id === id)[0]
+            .another;
 
-        if (!isAnother){
-            if(anotherValue && anotherValue.current) anotherValue.current!.value = "";
+        if (!isAnother) {
+            if (anotherValue && anotherValue.current)
+                anotherValue.current!.value = "";
             props.addAnswers({
                 id_question: props.question.id,
                 type_question: typeQuestion.radio,
@@ -34,7 +36,7 @@ export default function RadioBtnQuestion(props: Props) {
     }
 
     const changeAnotherAnswer = (id: string) => {
-        if(anotherValue && anotherValue.current!.value.length !== 0){
+        if (anotherValue && anotherValue.current!.value.length !== 0) {
             props.addAnswers({
                 id_question: props.question.id,
                 type_question: typeQuestion.radio,
@@ -42,7 +44,7 @@ export default function RadioBtnQuestion(props: Props) {
                 another_choices: anotherValue.current!.value,
             } as LocalAnswer);
         }
-    }
+    };
 
     return (
         <div className={cnMain()}>
@@ -120,7 +122,9 @@ export default function RadioBtnQuestion(props: Props) {
                                         )}
                                         disabled={selectedOption !== el.id}
                                         ref={anotherValue}
-                                        onChange={()=>changeAnotherAnswer(el.id)}
+                                        onChange={() =>
+                                            changeAnotherAnswer(el.id)
+                                        }
                                     />
                                 </label>
                             </div>

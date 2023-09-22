@@ -13,7 +13,7 @@ import {
 } from "../../store/slices/survey";
 
 import TarifPage from "./TarifPage";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
     useGetSurveyQuery,
     useSendAnswersMutation,
@@ -25,10 +25,10 @@ import { IAnswer, IQuestion, typeQuestion } from "../../models/survey";
 
 export default function SurveyPage() {
     const [sendAnswersRequest, sendAnswersResponse] = useSendAnswersMutation();
-    const { isLoading, isSuccess, isError } = sendAnswersResponse;
+    const { isSuccess, isError } = sendAnswersResponse;
 
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const TITLE_ANKETA = "anketa";
 
     /* --------------------------------- STEPS BLOCK --------------------------------- */
@@ -48,9 +48,9 @@ export default function SurveyPage() {
 
     useEffect(() => {
         if (questions) {
-            let lastIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
+            const lastIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
                 (sum, elem) => sum + elem,
-                0,
+                0
             );
             setCurrentQuestions(questions.slice(firstIndex, lastIndex));
         }
@@ -59,7 +59,7 @@ export default function SurveyPage() {
     /* --------------------------------- ANSWER BLOCK --------------------------------- */
 
     const [answers, setAnswers] = useState<LocalAnswer[]>([]);
-    const storeChoiceAnswers = useAppSelector((state) => state.survey.answers);
+    // const storeChoiceAnswers = useAppSelector((state) => state.survey.answers);
 
     useEffect(() => {
         if (questions) {
@@ -71,7 +71,7 @@ export default function SurveyPage() {
                         id_choices: [],
                         another_choices: "",
                     };
-                }),
+                })
             );
         }
     }, [questions]);
@@ -79,7 +79,7 @@ export default function SurveyPage() {
     const addAnswers = (newAnswer: LocalAnswer) => {
         // взять из стора и проверить есть ли там уже ответы
 
-        let currentAnswers = answers.map((el) => {
+        const currentAnswers = answers.map((el) => {
             if (el.id_question === newAnswer.id_question) {
                 return {
                     ...el,
@@ -96,9 +96,9 @@ export default function SurveyPage() {
 
     useEffect(() => {
         if (answers && answers[0]) {
-            let lastIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
+            const lastIndex = QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
                 (sum, elem) => sum + elem,
-                0,
+                0
             );
             let flag = 0;
             for (let i = firstIndex; i < lastIndex; i++) {
@@ -113,15 +113,14 @@ export default function SurveyPage() {
             setFirstIndex(
                 QUESTIONS_FOR_STEP.slice(0, step + 1).reduce(
                     (sum, elem) => sum + elem,
-                    0,
-                ),
+                    0
+                )
             );
             dispatch(setStepAnswers(step + 1));
 
             if (step + 1 > ALL_STEP) {
-                let body: Array<IAnswer> =
-                    convertAnswersForServerFormat(answers);
-                console.log("ended", body);
+                const body: IAnswer[] = convertAnswersForServerFormat(answers);
+                // console.log("ended", body);
                 if (body)
                     await sendAnswersRequest({
                         questionnaire_title: TITLE_ANKETA,
@@ -144,12 +143,12 @@ export default function SurveyPage() {
 
     const convertAnswersForServerFormat = (currentAnswers: LocalAnswer[]) => {
         if (questions) {
-            let finalArray = currentAnswers.map((el) => {
-                let current_question = questions.filter(
-                    (q) => q.id === el.id_question,
+            const finalArray = currentAnswers.map((el) => {
+                const current_question = questions.filter(
+                    (q) => q.id === el.id_question
                 )[0];
-                let current_another = current_question.choices.filter(
-                    (ch) => ch.another,
+                const current_another = current_question.choices.filter(
+                    (ch) => ch.another
                 )[0];
                 return el.id_choices.map((choice) => {
                     return {
@@ -195,11 +194,11 @@ export default function SurveyPage() {
                                                     (step > 0
                                                         ? QUESTIONS_FOR_STEP.slice(
                                                               0,
-                                                              step,
+                                                              step
                                                           ).reduce(
-                                                              (sum, el) =>
-                                                                  sum + el,
-                                                              0,
+                                                              (sum, elem) =>
+                                                                  sum + elem,
+                                                              0
                                                           )
                                                         : 0)
                                                 }. ${el.title}`,
@@ -218,11 +217,11 @@ export default function SurveyPage() {
                                                     (step > 0
                                                         ? QUESTIONS_FOR_STEP.slice(
                                                               0,
-                                                              step,
+                                                              step
                                                           ).reduce(
-                                                              (sum, el) =>
-                                                                  sum + el,
-                                                              0,
+                                                              (sum, elem1) =>
+                                                                  sum + elem1,
+                                                              0
                                                           )
                                                         : 0)
                                                 }. ${el.title}`,

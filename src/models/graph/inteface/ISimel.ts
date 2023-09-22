@@ -1,5 +1,5 @@
-import {ISimelDescription} from "./ISimelDescription";
+import { ISimelDescription } from "./ISimelDescription";
 
-export interface ISimel{
-    items: ISimelDescription[]
+export interface ISimel {
+    items: ISimelDescription[];
 }

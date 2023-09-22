@@ -1,11 +1,8 @@
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import "./style.scss";
 import { cn } from "@bem-react/classname";
-import { ReactSVG } from "react-svg";
-import svgg from "../Menu/icons/book.svg";
-// import { IQuestion } from "../../models/survey";
-import { UUID } from "crypto";
-import { IAnswer, IQuestion, typeQuestion } from "../../models/survey";
+
+import { IQuestion, typeQuestion } from "../../models/survey";
 import { LocalAnswer } from "../../store/slices/survey";
 
 type Props = {
@@ -20,7 +17,7 @@ export default function CheckboxQuestion(props: Props) {
 
     const anotherCheckRef = useRef<HTMLInputElement>(null);
 
-    const [checkedState, setCheckedState] = useState<Array<boolean>>(
+    const [checkedState, setCheckedState] = useState<boolean[]>(
         new Array(props.question.choices.length).fill(false)
     );
 
@@ -33,11 +30,11 @@ export default function CheckboxQuestion(props: Props) {
 
     useEffect(() => {
         if (checkedState) {
-            let currentIdAswers = props.question.choices.filter(
+            const currentIdAswers = props.question.choices.filter(
                 (el, idx) => checkedState[idx]
             );
 
-            let isAnother = currentIdAswers.some((el) => el.another);
+            const isAnother = currentIdAswers.some((el) => el.another);
             if (!isAnother && anotherCheckRef)
                 anotherCheckRef.current!.value = "";
 
@@ -54,7 +51,7 @@ export default function CheckboxQuestion(props: Props) {
     const changeAnotherAnswer = () => {
         if (anotherCheckRef && anotherCheckRef.current) {
             if (anotherCheckRef.current!.value.length > 0) {
-                let currentIdAswers = props.question.choices
+                const currentIdAswers = props.question.choices
                     .filter((el, idx) => checkedState[idx])
                     .map((el) => el.id);
                 const answers: LocalAnswer = {

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { cn } from "@bem-react/classname";
 
 import "./style.scss";
@@ -29,7 +28,7 @@ type propsLine = {
 export default function SecondaryEnergy(props: Props) {
     // это лучше через useEffect сделать?
 
-    let EnergyLine: propsLine = {
+    const EnergyLine: propsLine = {
         typeLine: [
             {
                 type: "Мгновенная энергия",

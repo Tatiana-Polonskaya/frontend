@@ -13,20 +13,15 @@ import {
 
 type Props = {
     data: NonMonotonyDataItem[];
-    param: NonMonotonyType | null;
+    param: NonMonotonyType;
     average: number;
     value: number;
 };
 
-export default function NonMonotonyGraph({
-    data,
-    param = null,
-    average,
-    value,
-}: Props) {
+export default function NonMonotonyGraph({ data, param, average }: Props) {
     const data2 = convertMonotonyData(data, param);
 
-    const dependece = dependenceMonotonyData(param, average);
+    const dependece = dependenceMonotonyData(average, param);
     return (
         <LineGraph
             average={dependece.average}

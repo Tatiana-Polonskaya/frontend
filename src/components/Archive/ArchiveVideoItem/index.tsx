@@ -13,7 +13,6 @@ import Participation from "./icon/archive-participation.svg";
 import Tick from "./icon/archive-tick.svg";
 
 import { convertTime, convertDate } from "../helpers";
-import { useGetTotalByIdQuery } from "../../../store/api/report";
 import ArchiveVideoError from "../ArcviveVideoError";
 import { useDeleteVideoByIdMutation } from "../../../store/api/userVideo";
 import { useGetTotalByIdTestQuery } from "../../../store/api/reportTest";
@@ -36,26 +35,28 @@ export default function ArchiveVideoItem({
     // export default function ArchiveVideoItem({ el, ind }: Props) {
     const cnArchiveVideo = cn("archive-video");
 
-    let [openPopup, setOpenPopup] = useState<number[]>([]);
+    const [openPopup, setOpenPopup] = useState<number[]>([]);
 
-    let [tickedVideo, setTickedVideo] = useState<number[]>([]);
+    const [tickedVideo, setTickedVideo] = useState<number[]>([]);
 
-    const changePopup = (ind: number) => {
-        let copy: number[] = Object.assign([], openPopup);
-        !openPopup.includes(ind)
-            ? copy.push(ind)
-            : copy.splice(copy.indexOf(ind), 1);
+    const changePopup = (id: number) => {
+        const copy: number[] = Object.assign([], openPopup);
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        !openPopup.includes(id)
+            ? copy.push(id)
+            : copy.splice(copy.indexOf(id), 1);
 
         setOpenPopup([...copy]);
     };
 
     // поменять, от обратного
-    const changeTickVideo = (ind: number) => {
-        let copy: number[] = Object.assign([], openPopup);
+    const changeTickVideo = (id: number) => {
+        const copy: number[] = Object.assign([], openPopup);
         // let copy: number[] = [...openPopup];
-        !tickedVideo.includes(ind)
-            ? copy.push(ind)
-            : copy.splice(copy.indexOf(ind), 1);
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        !tickedVideo.includes(id)
+            ? copy.push(id)
+            : copy.splice(copy.indexOf(id), 1);
 
         setTickedVideo([...copy]);
     };
@@ -65,7 +66,6 @@ export default function ArchiveVideoItem({
 
     useEffect(() => {
         if (totalData) {
-            console.log("totalData", totalData)
             setResult([
                 totalData!.connectedness,
                 totalData!.argumentativeness,
@@ -77,8 +77,8 @@ export default function ArchiveVideoItem({
         }
     }, [totalData]);
 
-    const [deleteRequest, deleteResponse] = useDeleteVideoByIdMutation();
-    const { isLoading, isSuccess, isError } = deleteResponse;
+    const [, deleteResponse] = useDeleteVideoByIdMutation();
+    const { isSuccess, isError } = deleteResponse;
 
     useEffect(() => {
         if (isSuccess) console.log("video was deleted", deleteResponse);
@@ -88,24 +88,18 @@ export default function ArchiveVideoItem({
         if (isError) alert("Something was wrong!");
     }, [isError]);
 
-    const func = async (id: string) => await deleteRequest(id);
-
     const isAllow = visible;
-
 
     // getting video by id
 
     const videoFromBack = useGetVideoByIdQuery(el.id);
-    const [videoURL,setVideoURL] = useState<string>();
+    const [videoURL, setVideoURL] = useState<string>();
 
-
-    useEffect(()=>{
-        if(videoFromBack.data && videoFromBack.isSuccess){
-            setVideoURL(videoFromBack.data)
+    useEffect(() => {
+        if (videoFromBack.data && videoFromBack.isSuccess) {
+            setVideoURL(videoFromBack.data);
         }
-    },[videoFromBack])
-
-
+    }, [videoFromBack]);
 
     return (
         <div className={cnArchiveVideo()}>
@@ -115,11 +109,13 @@ export default function ArchiveVideoItem({
                     src={!tickedVideo.includes(ind) ? Tick : Participation}
                 />
                 <Fragment key={el.id}>
-                    {videoURL && <ReactPlayer
-                        url={videoURL}
-                        width={"100%"}
-                        height={"100%"}
-                    />}
+                    {videoURL && (
+                        <ReactPlayer
+                            url={videoURL}
+                            width={"100%"}
+                            height={"100%"}
+                        />
+                    )}
                 </Fragment>
             </div>
             <DescriptionArchiveVideo

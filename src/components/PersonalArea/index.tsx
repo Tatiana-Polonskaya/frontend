@@ -5,7 +5,6 @@ import CurrentTariff from "../../plugs/personalArea/currentTariff.json";
 import AllTariffs from "../../plugs/personalArea/allTariffs.json";
 import { ReactSVG } from "react-svg";
 
-import User from "./icon/user.png";
 import Cake from "./icon/cake.svg";
 import Building from "./icon/building.svg";
 import Message from "./icon/sms.svg";
@@ -71,6 +70,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
     }, [isError]);
 
     const changeActive = () => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         !active ? setActive("active") : setActive("");
     };
 
@@ -82,11 +82,11 @@ export default function PersonalArea({ isArchive = false }: Props) {
     const [scaleValue, setScaleValue] = useState<number>();
 
     const [selectedImg, setSelectedImg] = useState<string>(
-        `/api/users/account/avatar/${store.id}`,
+        `/api/users/account/avatar/${store.id}`
     );
 
-    const setEditorRef = (editor: AvatarEditor) => {
-        setEditor(editor);
+    const setEditorRef = (editorValue: AvatarEditor) => {
+        setEditor(editorValue);
     };
 
     const onCrop = () => {
@@ -95,7 +95,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
                 .getImage()
                 .toBlob(
                     (res) => (res ? sendUserAvatar(res) : undefined),
-                    "image/jpeg",
+                    "image/jpeg"
                 );
             setNewPic(true);
             // editor!
@@ -137,8 +137,8 @@ export default function PersonalArea({ isArchive = false }: Props) {
                     const newkey = Math.ceil(Math.random() * 100);
                     dispatch(
                         setProfileAvatar(
-                            `/api/users/account/avatar/${store.id}?rnd=${newkey}`,
-                        ),
+                            `/api/users/account/avatar/${store.id}?rnd=${newkey}`
+                        )
                     );
                 }, 5000);
             };
@@ -151,7 +151,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
             <div
                 className={cnPersonalUser(
                     "shield",
-                    cnPersonalUser(`shield-${active}`),
+                    cnPersonalUser(`shield-${active}`)
                 )}
                 onClick={closePopup}
             ></div>
@@ -181,7 +181,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
                             htmlFor="image"
                             className={cnPersonalUser(
                                 "btn",
-                                cnPersonalUser("label"),
+                                cnPersonalUser("label")
                             )}
                         >
                             <ReactSVG src={Gallery} />
@@ -190,7 +190,7 @@ export default function PersonalArea({ isArchive = false }: Props) {
                         <div
                             className={cnPersonalUser(
                                 "change",
-                                cnPersonalUser(`change-${active}`),
+                                cnPersonalUser(`change-${active}`)
                             )}
                         >
                             <div className={cnPersonalUser("current-photo")}>
@@ -275,14 +275,14 @@ export default function PersonalArea({ isArchive = false }: Props) {
                                     >
                                         <p
                                             className={cnArchiveTariff(
-                                                "item-date",
+                                                "item-date"
                                             )}
                                         >
                                             {el.date}
                                         </p>
                                         <p
                                             className={cnArchiveTariff(
-                                                "item-tariff",
+                                                "item-tariff"
                                             )}
                                         >
                                             {" "}
@@ -291,14 +291,14 @@ export default function PersonalArea({ isArchive = false }: Props) {
                                         </p>
                                         <p
                                             className={cnArchiveTariff(
-                                                "item-sum",
+                                                "item-sum"
                                             )}
                                         >
                                             {el.sum}
                                         </p>
                                         <p
                                             className={cnArchiveTariff(
-                                                "item-period",
+                                                "item-period"
                                             )}
                                         >
                                             {el.period}

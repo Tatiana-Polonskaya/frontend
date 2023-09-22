@@ -1,10 +1,8 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 import { cn } from "@bem-react/classname";
-import { GraphContext, _1SEC_PX } from "./helpers";
 
 import BaseGraphXDescription from "./../-XDescription";
-import BaseGraphBackground from "./../-Background";
 
 import "./style.scss";
 import Good from "./icons/good.svg";

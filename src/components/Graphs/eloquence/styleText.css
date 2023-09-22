@@ -1,48 +1,50 @@
-.EloquenceAllText{
+.EloquenceAllText {
     display: flex;
     flex-direction: column;
     gap: 16px;
     align-items: flex-start;
     width: 100%;
     padding: 16px;
-    background: #F7FAFF;
+    background: #f7faff;
     border-radius: 12px;
 }
 
-.textInfTitle{
+.textInfTitle {
     font-weight: 500;
 }
 
-.Eloquencetext2, .Eloquencetext1, .Eloquencetext3{
+.Eloquencetext2,
+.Eloquencetext1,
+.Eloquencetext3 {
     display: flex;
     align-items: center;
     width: 100%;
-    color: #17282F;
+    color: #17282f;
     font-weight: 400;
     font-size: 16px;
-    font-family: 'Onest';
+    font-family: "Onest";
     font-style: normal;
     line-height: 20px;
 }
 
-.li{
+.li {
     display: flex;
     align-items: center;
     width: 100%;
     color: rgb(0 0 0 / 46%);
     font-weight: 400;
     font-size: 16px;
-    font-family: 'Onest';
+    font-family: "Onest";
     font-style: normal;
     line-height: 20px;
 }
 
-.textInfTitle1{
-    margin-right: 5px ;
-    color: #17282F;
+.textInfTitle1 {
+    margin-right: 5px;
+    color: #17282f;
 }
 
-.EloquenceTextBloc{
+.EloquenceTextBloc {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -50,22 +52,22 @@
     width: 100%;
     margin-top: 10px;
     padding: 16px;
-    background: #F7FAFF;
+    background: #f7faff;
     border-radius: 12px;
 }
 
-.EloquenceTextTitle{
+.EloquenceTextTitle {
     display: flex;
     align-items: center;
-    color: #350A8E;
+    color: #350a8e;
     font-weight: 700;
     font-size: 18px;
-    font-family: 'Montserrat Alternates';
+    font-family: "Montserrat Alternates";
     font-style: normal;
     line-height: 20px;
 }
 
-.EloquenceTexts{
+.EloquenceTexts {
     display: inline-block;
     width: 100%;
     overflow: auto;
@@ -76,29 +78,29 @@
     line-height: 20px;
 }
 
-.blocWords{
+.blocWords {
     display: flex;
     gap: 8px;
     align-items: center;
     margin-right: 16px;
     padding: 4px 12px;
-    color: #37476A;
+    color: #37476a;
     font-weight: 500;
     font-size: 20px;
     font-family: "Onest";
     font-style: normal;
     line-height: normal;
-    background: #FFF;
+    background: #fff;
     border-radius: 8px;
 }
 
-.EloquenceTextWords{
+.EloquenceTextWords {
     display: flex;
     flex-flow: row wrap;
     justify-content: start;
 }
 
-.countWords{
+.countWords {
     margin-left: 6px;
     color: rgb(53 10 142 / 50%);
     font-weight: 600;
@@ -108,7 +110,7 @@
     line-height: normal;
 }
 
-.strings{
+.strings {
     color: rgb(3 28 61 / 70%);
     font-weight: 400;
     font-size: 20px;

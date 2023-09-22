@@ -5,7 +5,7 @@
         grid-template-columns: repeat(2, 1fr);
         width: 50%;
         height: 176px;
-        background: #FFF;
+        background: #fff;
         border-radius: 24px;
     }
 
@@ -30,16 +30,15 @@
         align-items: flex-start;
         justify-content: center;
         padding: 0;
-
     }
 
     &-title {
         margin: 12px 0 12px 12px;
         padding: 0 10px;
-        color: #37476A;
+        color: #37476a;
         font-weight: 600;
         font-size: 20px;
-        font-family: 'Montserrat Alternates';
+        font-family: "Montserrat Alternates";
         font-style: normal;
         line-height: 24px;
     }
@@ -48,10 +47,10 @@
         display: flex;
         align-items: center;
         padding: 0 22px;
-        color: #7C8EB5;
+        color: #7c8eb5;
         font-weight: 400;
         font-size: 16px;
-        font-family: 'Onest';
+        font-family: "Onest";
         font-style: normal;
         line-height: 20px;
     }
@@ -61,7 +60,6 @@
         height: 8px;
         margin: 12px;
         border-radius: 100%;
-
     }
 
     &-listUl {
@@ -75,7 +73,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        color: #7C8EB5;
+        color: #7c8eb5;
         font-weight: 400;
         font-size: 16px;
         font-family: "Onest";

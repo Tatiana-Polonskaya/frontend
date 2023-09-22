@@ -1,11 +1,10 @@
-import React from "react";
 import "./styleText.css";
 import { EloquenceDataItem } from "../../../models/graph/eloquence";
 
 function paintWords(data: EloquenceDataItem) {
-    let a = [];
+    const a = [];
     let i = 0;
-    for (let key in data.parasitic_words_list) {
+    for (const key in data.parasitic_words_list) {
         if (data.parasitic_words_list == null) {
             return (
                 <div className="blocWords"> {"слов-паразитов не найдено"} </div>
@@ -28,9 +27,9 @@ type Props = {
 };
 
 function EloquenceText(props: Props) {
-    let infEloquence: EloquenceDataItem = props.data;
+    const infEloquence: EloquenceDataItem = props.data;
     let countWords = 0;
-    for (let key in infEloquence.parasitic_words_list) {
+    for (const key in infEloquence.parasitic_words_list) {
         countWords += infEloquence.parasitic_words_list[key];
     }
 

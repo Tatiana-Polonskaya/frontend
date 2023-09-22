@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { registerApi } from "./api/register";
 import { accountApi } from "./api/account";
 
@@ -60,7 +60,7 @@ export const store = configureStore({
             chatApi.middleware,
             notificationApi.middleware,
             reportTestApi.middleware,
-            tariffApi.middleware,
+            tariffApi.middleware
         ),
     devTools: process.env.NODE_ENV !== "production",
 });

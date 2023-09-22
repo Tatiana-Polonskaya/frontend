@@ -10,4 +10,3 @@ export interface ILoginResponse {
     refresh_token: string;
     user: IUser;
 }
-

@@ -1,41 +1,37 @@
-.energy-smile{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 10px;
-
-  &-smile{
+.energy-smile {
     display: flex;
-    // align-items: center;
-    flex-direction: column;
-    width: 20%;
-    color: #37476A;
-    font-weight: 600;
-    font-size: 20px;
-    font-family: 'Montserrat Alternates';
-    font-style: normal;
-  }
-
-  &-center-smile{
-    text-align: center;
-  }
-
-  &-smile1{
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    width: 20%;
-    color: #37476A80;
-    font-weight: 600;
-    font-size: 20px;
-    font-family: 'Montserrat Alternates';
-    font-style: normal;
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 100%, black 0);
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
 
+    &-smile {
+        display: flex;
+        // align-items: center;
+        flex-direction: column;
+        width: 20%;
+        color: #37476a;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: "Montserrat Alternates";
+        font-style: normal;
+    }
 
-  }
+    &-center-smile {
+        text-align: center;
+    }
 
-
+    &-smile1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 20%;
+        color: #37476a80;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: "Montserrat Alternates";
+        font-style: normal;
+        mask-image: linear-gradient(rgb(0 0 0 / 50%) 100%, black 0);
+    }
 }

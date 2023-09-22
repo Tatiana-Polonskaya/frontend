@@ -21,7 +21,7 @@ const cnConfidence = cn("confidence");
 type propsConfidence = {
     typeConfidence: IConfidence[];
 };
-let confidence: propsConfidence = {
+const confidence: propsConfidence = {
     typeConfidence: [
         {
             type: "зона высокой уверенности",

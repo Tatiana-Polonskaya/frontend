@@ -1,77 +1,76 @@
-.Recommend{
-  display: flex;
-  flex-direction: column;
-  align-self: stretch;
-  margin: 16px 0 0;
-  padding: 16px;
-  background: #F7FAFF;
-
-  &-header {
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 10px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-  }
-
-  &-nameIcon{
-    display: flex;
-
-    svg{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  &-btn{
-    color: #2477F4;
-    font-weight: 500;
-    font-size: 16px;
-    font-family: "Montserrat Alternates";
-    font-style: normal;
-    line-height: normal;
-    cursor: pointer;
-  }
-
-  &-title{
-    padding: 0 10px;
-    color: #37476A;
-    font-weight: 600;
-    font-size: 16px;
-    font-family: "Montserrat Alternates";
-    font-style: normal;
-    line-height: normal;
-  }
-
-  &-content{
+.Recommend {
     display: flex;
     flex-direction: column;
-    color: #37476A;
-    font-size: 16px;
-    font-family: "Onest";
-    font-style: normal;
-    line-height: normal;
-  }
+    align-self: stretch;
+    margin: 16px 0 0;
+    padding: 16px;
+    background: #f7faff;
 
-  &-text{
-    font-weight: 500;
-  }
+    &-header {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
 
-  &-text1{
-    margin:  16px 0 0;
-    font-weight: 400;
-  }
+    &-nameIcon {
+        display: flex;
 
-  &-textDark{
-    color: #37476A;
-    font-weight: 500;
-  }
+        svg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
 
-  &-textBlue{
-    color: #2477F4;
-    font-weight: 500;
-  }
+    &-btn {
+        color: #2477f4;
+        font-weight: 500;
+        font-size: 16px;
+        font-family: "Montserrat Alternates";
+        font-style: normal;
+        line-height: normal;
+        cursor: pointer;
+    }
 
+    &-title {
+        padding: 0 10px;
+        color: #37476a;
+        font-weight: 600;
+        font-size: 16px;
+        font-family: "Montserrat Alternates";
+        font-style: normal;
+        line-height: normal;
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        color: #37476a;
+        font-size: 16px;
+        font-family: "Onest";
+        font-style: normal;
+        line-height: normal;
+    }
+
+    &-text {
+        font-weight: 500;
+    }
+
+    &-text1 {
+        margin: 16px 0 0;
+        font-weight: 400;
+    }
+
+    &-textDark {
+        color: #37476a;
+        font-weight: 500;
+    }
+
+    &-textBlue {
+        color: #2477f4;
+        font-weight: 500;
+    }
 }

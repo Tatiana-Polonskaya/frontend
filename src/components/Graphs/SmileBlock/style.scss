@@ -1,15 +1,16 @@
-.contentPaint{
+.contentPaint {
     display: flex;
     flex-direction: row;
     gap: 16px;
     align-items: center;
     height: 108px;
     padding: 16px 24px;
-    background: #F7FAFF;
+    background: #f7faff;
     border-radius: 32px;
 }
 
-.contentPaintText, .contentPaintPercent{
+.contentPaintText,
+.contentPaintPercent {
     display: flex;
     align-items: center;
     font-weight: 600;
@@ -17,53 +18,53 @@
     line-height: 29px;
 }
 
-.contentPaintText{
-    color: #37476A;
+.contentPaintText {
+    color: #37476a;
 }
 
-.contentPaintPercent{
+.contentPaintPercent {
 }
 
-.imk11{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%)0%, black 0);
+.imk11 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 0%, black 0);
 }
 
-.imk12{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 100%, black 0);
+.imk12 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 100%, black 0);
 }
 
-.imk1{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 90%, black 0);
+.imk1 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 90%, black 0);
 }
 
-.imk2{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 80%, black 0);
+.imk2 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 80%, black 0);
 }
 
-.imk3{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 70%, black 0);
+.imk3 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 70%, black 0);
 }
 
-.imk4{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 60%, black 0);
+.imk4 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 60%, black 0);
 }
 
-.imk5{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 50%, black 0);
+.imk5 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 50%, black 0);
 }
 
-.imk6{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 40%, black 0);
+.imk6 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 40%, black 0);
 }
 
-.imk7{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 30%, black 0);
+.imk7 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 30%, black 0);
 }
 
-.imk8{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 20%, black 0);
+.imk8 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 20%, black 0);
 }
 
-.imk9{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 10%, black 0);
+.imk9 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 10%, black 0);
 }

@@ -1,12 +1,10 @@
 import { cn } from "@bem-react/classname";
-import { ReactSVG } from "react-svg";
 
 import "./style.scss";
 
 import Dropdown from "../../../Dropdown";
 import Recomendation from "../-Recomendation";
 
-import Note2 from "../../icons/note-2.svg";
 import { IComp } from "../models/IComp";
 
 type Props = {

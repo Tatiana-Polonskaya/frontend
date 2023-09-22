@@ -6,8 +6,6 @@ import ReactPlayer from "react-player";
 import "./style.scss";
 import { BaseReactPlayerProps, OnProgressProps } from "react-player/base";
 
-import reloadPicture from "./assets/preload1.gif";
-
 import { VideoTimeContext } from "../Context/helpers";
 import LoaderLogo from "../Loader";
 

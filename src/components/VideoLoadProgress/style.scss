@@ -39,7 +39,12 @@
             top: 0;
             left: 0;
             height: 100%;
-            background: linear-gradient(to right, #2477f4 8%, #fff 18%, #2477f4 33%);
+            background: linear-gradient(
+                to right,
+                #2477f4 8%,
+                #fff 18%,
+                #2477f4 33%
+            );
             background-size: 800px 104px;
             transition: 5s;
             animation-name: placeHolderShimmer;
@@ -51,13 +56,12 @@
 
         @keyframes placeHolderShimmer {
             0% {
-                background-position: -800px 0
+                background-position: -800px 0;
             }
 
             100% {
-                background-position: 800px 0
+                background-position: 800px 0;
             }
         }
-
     }
 }

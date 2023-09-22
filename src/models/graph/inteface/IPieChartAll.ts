@@ -1,5 +1,5 @@
-import {IPieChart} from "./IPieChart";
+import { IPieChart } from "./IPieChart";
 
-export interface IPieChartAll{
-    item: IPieChart[]
+export interface IPieChartAll {
+    item: IPieChart[];
 }

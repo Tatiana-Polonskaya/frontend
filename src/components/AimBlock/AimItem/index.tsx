@@ -31,7 +31,6 @@ import { NewAimContext } from "..";
 import ModalWindow from "../../ModalWindow/ModalWindow";
 import Button from "../../ui-kit/Button";
 
-
 type Props = {
     purpose: IAimItem;
 };
@@ -39,7 +38,7 @@ type Props = {
 function getCurrentStep(tasks: ITaskItem[]): number {
     let maxStep = 0;
     let minStep = tasks.length;
-    let outstandingTasks: number[] = [];
+    const outstandingTasks: number[] = [];
 
     tasks.forEach((el) => {
         if (!el.is_done && !outstandingTasks.includes(el.step)) {
@@ -79,7 +78,6 @@ export default function AimItem({ purpose }: Props) {
     /* ------------------------------ DELETED ------------------------------ */
 
     const [deleteModal, setDeleteModal] = useState(false);
-    const [continueDeleting, setContinueDeleting] = useState(false);
 
     const showDeleteModal = () => {
         setDeleteModal(true);
@@ -119,7 +117,7 @@ export default function AimItem({ purpose }: Props) {
                       .filter((el, i, ar) => ar.indexOf(el) === i)
                       .sort()
                 : [],
-        [purpose],
+        [purpose]
     );
 
     const choosedStep = getCurrentStep(purpose.tasks);
@@ -138,7 +136,6 @@ export default function AimItem({ purpose }: Props) {
 
     useEffect(() => {
         if (resultParams && resultParams.data) {
-            
             setListParams(resultParams.data!.data!);
             setCheckedParams([]);
         }
@@ -147,7 +144,7 @@ export default function AimItem({ purpose }: Props) {
     /* ------------------------------ SAVED PARAMS ------------------------------ */
 
     const [canSave, setCanSave] = useState(
-        count_steps.length > 0 ? false : true,
+        count_steps.length > 0 ? false : true
     );
 
     useEffect(() => {
@@ -157,14 +154,14 @@ export default function AimItem({ purpose }: Props) {
 
     const [isShowParams, setIsShowParams] = useState(true);
 
-    const [checkedParams, setCheckedParams] = useState<Array<string>>([]);
+    const [checkedParams, setCheckedParams] = useState<string[]>([]);
 
     // for existed params from user aim
     useEffect(() => {
         if (listParams) {
             Object.entries(listParams).forEach(([key, value]) => {
                 const rest = purpose.parameters.filter(
-                    (el) => el.title === value.title,
+                    (el) => el.title === value.title
                 );
                 if (rest.length > 0) {
                     setCheckedParams((prev) => [...prev, key]);
@@ -174,7 +171,7 @@ export default function AimItem({ purpose }: Props) {
     }, [listParams]);
 
     const changeCheckedState = (el: string) => {
-        const indexParam = checkedParams.findIndex((purpose) => purpose === el);
+        const indexParam = checkedParams.findIndex((item) => item === el);
         if (indexParam !== -1) {
             const updatedCheckedState = [
                 ...checkedParams.slice(0, indexParam),
@@ -271,7 +268,7 @@ export default function AimItem({ purpose }: Props) {
                         count_steps.length > 0 &&
                         count_steps.map((el, idx) => {
                             const maxForStep = Math.floor(
-                                100 / count_steps.length,
+                                100 / count_steps.length
                             );
                             const prevMax = maxForStep * idx;
                             const currentMax = maxForStep * (idx + 1);
@@ -284,7 +281,7 @@ export default function AimItem({ purpose }: Props) {
                                             ? maxForStep
                                             : currentProgress - prevMax > 0
                                             ? currentProgress - prevMax
-                                            : 0,
+                                            : 0
                                     )}
                                     maxValue={maxForStep}
                                     key={idx}
@@ -332,7 +329,7 @@ export default function AimItem({ purpose }: Props) {
                                                         "task-block-item",
                                                         {
                                                             done: el.is_done,
-                                                        },
+                                                        }
                                                     )}
                                                 >
                                                     <ReactSVG
@@ -406,7 +403,7 @@ export default function AimItem({ purpose }: Props) {
                                             <div
                                                 key={idx}
                                                 className={cnAimItem(
-                                                    "params-block-grid-item",
+                                                    "params-block-grid-item"
                                                 )}
                                             >
                                                 <label
@@ -414,7 +411,7 @@ export default function AimItem({ purpose }: Props) {
                                                         "params-block-grid-item-label",
                                                         {
                                                             active: !canSave,
-                                                        },
+                                                        }
                                                     )}
                                                     data-tooltip-id={
                                                         "params-input-" + key
@@ -423,10 +420,10 @@ export default function AimItem({ purpose }: Props) {
                                                     <input
                                                         type="checkbox"
                                                         className={cnAimItem(
-                                                            "params-block-grid-item-input",
+                                                            "params-block-grid-item-input"
                                                         )}
                                                         checked={checkedParams.includes(
-                                                            key,
+                                                            key
                                                         )}
                                                         name={key}
                                                         value={key}
@@ -436,7 +433,7 @@ export default function AimItem({ purpose }: Props) {
                                                     ></input>
                                                     <span
                                                         className={cnAimItem(
-                                                            "params-block-grid-item-span",
+                                                            "params-block-grid-item-span"
                                                         )}
                                                     >
                                                         {value.title}
@@ -447,14 +444,14 @@ export default function AimItem({ purpose }: Props) {
                                                     place={"right-start"}
                                                     noArrow={true}
                                                     className={cnAimItem(
-                                                        "tooltip",
+                                                        "tooltip"
                                                     )}
                                                 >
                                                     {value.description}
                                                 </Tooltip>
                                             </div>
                                         );
-                                    },
+                                    }
                                 )}
                         </div>
                     )}

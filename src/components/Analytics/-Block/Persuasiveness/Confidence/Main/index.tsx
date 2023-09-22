@@ -1,5 +1,3 @@
-import { cn } from "@bem-react/classname";
-
 import "./style.scss";
 import ConfidenceLineGraph from "../../../../../Graphs/ConfidenceLine";
 import { ConfidenceDataItem } from "../../../../../../models/graph/confidence";

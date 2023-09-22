@@ -1,18 +1,18 @@
 .ProgressBar {
     width: 100%;
     height: 25px;
-    background-color: #D4DFF4;
+    background-color: #d4dff4;
     border-radius: 50px;
     overflow: hidden;
 
-    &-line{
-        width:var(--value_line);
+    &-line {
+        width: var(--value_line);
         height: 100%;
         background-color: var(--color_line);
         border-radius: var(--border_radius);
     }
 
-    &-label{
+    &-label {
         padding: 15px;
         color: white;
         font-weight: "bold";
@@ -20,13 +20,19 @@
 }
 
 @keyframes value_line {
-    from{--value_line:0px}
+    from {
+        --value_line: 0px;
+    }
 }
 
 @keyframes color_line {
-    from{--color_line:#000}
+    from {
+        --color_line: #000;
+    }
 }
 
 @keyframes border_radius {
-    from{--border_radius:50px 0 0 50px}
+    from {
+        --border_radius: 50px 0 0 50px;
+    }
 }

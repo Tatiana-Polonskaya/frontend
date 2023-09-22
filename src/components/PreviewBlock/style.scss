@@ -51,16 +51,16 @@
         border-color: #b2c2e4;
         border-radius: 12px;
 
-        &_wrong{
-            border: 2px solid #FF4E78;
+        &_wrong {
+            border: 2px solid #ff4e78;
         }
     }
 
-    &-input::placeholder{
-        color: #37476A;
+    &-input::placeholder {
+        color: #37476a;
         font-weight: 400;
         font-size: 16px;
-        font-family: 'Onest';
+        font-family: "Onest";
         font-style: normal;
         line-height: 20px;
     }
@@ -102,7 +102,7 @@
     &-btn {
         display: flex;
         flex-flow: row nowrap;
-        gap:10px;
+        gap: 10px;
         align-items: center;
         justify-content: center;
         width: 100%;
@@ -133,43 +133,40 @@
             width: 100%;
             border-radius: 9px;
 
-            &_error{
+            &_error {
                 cursor: not-allowed;
             }
         }
     }
 
-    &-error{
+    &-error {
         display: none;
         padding: 10px;
         background-color: #ffff;
         border-radius: 16px;
 
-        &-icon{
-
+        &-icon {
         }
 
-        &-text{
-            color: #7C8EB5;
+        &-text {
+            color: #7c8eb5;
             font-size: 16px;
             font-family: "Onest";
 
-            &-red{
-                color: #FF4E78;
+            &-red {
+                color: #ff4e78;
                 font-weight: 500;
                 font-size: 20px;
                 font-family: "Onest";
-
             }
         }
 
-        &_visible{
+        &_visible {
             display: block;
         }
-
     }
 
-    &-loading{
+    &-loading {
         display: flex;
         flex-flow: column nowrap;
         // width: 100%;
@@ -177,22 +174,22 @@
         align-items: center;
         justify-content: center;
 
-        &-title{
-            color: #37476A;
+        &-title {
+            color: #37476a;
             font-weight: 600;
             font-size: 24px;
             font-family: "Montserrat Alternates";
 
-            &-error{
-                color: #FF4E78;
+            &-error {
+                color: #ff4e78;
                 font-weight: 600;
                 font-size: 24px;
                 font-family: "Montserrat Alternates";
             }
         }
 
-        &-description{
-            color: #7C8EB5;
+        &-description {
+            color: #7c8eb5;
             font-weight: 500;
             font-size: 16px;
             font-family: "Montserrat Alternates";

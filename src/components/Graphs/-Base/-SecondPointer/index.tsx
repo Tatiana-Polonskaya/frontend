@@ -11,7 +11,6 @@ type Props = {
 };
 
 export default function GraphPointer({
-    offsetX = 0,
     offsetY = 0,
 
     left = 0,

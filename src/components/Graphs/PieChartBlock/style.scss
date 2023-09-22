@@ -1,48 +1,46 @@
-.textPieChart{
-    color: #37476A;
+.textPieChart {
+    color: #37476a;
     font-weight: 600;
     font-size: 14px;
     font-style: normal;
     line-height: 17px;
 }
 
-.textPieChartBlock{
+.textPieChartBlock {
     gap: 16px;
     width: 100%;
     margin-bottom: 30px;
     padding: 16px;
     overflow: auto;
-    color: #17282F;
+    color: #17282f;
     font-weight: 400;
     font-size: 16px;
     font-style: normal;
     line-height: 20px;
-    background: #F7FAFF;
+    background: #f7faff;
     border-radius: 12px;
-
 }
 
-.textInfTitle{
+.textInfTitle {
     font-weight: 500;
 }
 
-.precentPieChart{
-    color: #2477F4;
+.precentPieChart {
+    color: #2477f4;
     font-weight: 700;
     font-size: 20px;
     font-style: normal;
     line-height: 24px;
 }
 
-.allPieChart{
+.allPieChart {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-
 }
 
-.PieChart{
+.PieChart {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,54 +48,54 @@
     width: 25%;
 }
 
-.imkPie0{
+.imkPie0 {
     mask-image: conic-gradient(#fff 0%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie000{
+.imkPie000 {
     mask-image: conic-gradient(#fff 0%, #fff1 0%, #fff1 100%);
 }
 
-.imkPie00{
+.imkPie00 {
     mask-image: conic-gradient(#fff 5%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie1{
+.imkPie1 {
     mask-image: conic-gradient(#fff 10%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie2{
+.imkPie2 {
     mask-image: conic-gradient(#fff 20%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie3{
+.imkPie3 {
     mask-image: conic-gradient(#fff 30%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie4{
+.imkPie4 {
     mask-image: conic-gradient(#fff 40%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie5{
+.imkPie5 {
     mask-image: conic-gradient(#fff 50%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie6{
+.imkPie6 {
     mask-image: conic-gradient(#fff 60%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie7{
+.imkPie7 {
     mask-image: conic-gradient(#fff 70%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie8{
+.imkPie8 {
     mask-image: conic-gradient(#fff 80%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie9{
+.imkPie9 {
     mask-image: conic-gradient(#fff 90%, #fff1 1%, #fff1 100%);
 }
 
-.imkPie10{
+.imkPie10 {
     mask-image: conic-gradient(#fff 100%, #fff1 1%, #fff1 100%);
 }

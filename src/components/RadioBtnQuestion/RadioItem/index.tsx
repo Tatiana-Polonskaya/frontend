@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 
@@ -7,8 +6,7 @@ type Props = {
     titleItem: string;
     addAnswers: Function;
     currentIdItem: number;
-}
-
+};
 
 export default function RadioItem(props: Props) {
     const cnRadioItem = cn("RadioItem");
@@ -24,20 +22,13 @@ export default function RadioItem(props: Props) {
                     checked: props.idItem === props.currentIdItem,
                 })}
             >
-
-                <label
-                    className={cnRadioItem(
-                        `col-answers-item-label`
-                    )}
-                >
+                <label className={cnRadioItem(`col-answers-item-label`)}>
                     <input
                         type="radio"
                         value={props.idItem}
                         checked={props.idItem === props.currentIdItem}
                         onChange={() => handleChange(props.idItem)}
-                        className={cnRadioItem(
-                            `col-answers-item-label-radio`
-                        )}
+                        className={cnRadioItem(`col-answers-item-label-radio`)}
                     />
                     <div
                         className={cnRadioItem(

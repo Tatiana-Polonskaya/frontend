@@ -25,9 +25,7 @@ export default function RecodingSetup() {
     const styleSetup = cn("RecodingSetup");
 
     const [basicPlan, setBasicPlan] = useState<Array<string>>();
-    const [timerSeconds, setTimerSecond] = useState<number>(
-        0
-    );
+    const [timerSeconds, setTimerSecond] = useState<number>(0);
 
     const [timeValid, setTimeValid] = useState(true);
 
@@ -94,8 +92,8 @@ export default function RecodingSetup() {
                 </div>
                 <div className={styleSetup("text-blue")}>
                     Обратите внимание, что длительность репетиции должна
-                    составлять не менее {MIN_MINUTES_FOR_VIDEO} минут и не
-                    более {MAX_MINUTES_FOR_VIDEO} минут.
+                    составлять не менее {MIN_MINUTES_FOR_VIDEO} минут и не более{" "}
+                    {MAX_MINUTES_FOR_VIDEO} минут.
                 </div>
                 <TimerRadioBtn
                     setTimerSeconds={saveTimer}

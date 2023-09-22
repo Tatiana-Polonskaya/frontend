@@ -6,7 +6,6 @@
     height: 100vh;
     background-color: #020913;
 
-
     &-video-blocfk {
         position: relative;
         display: flex;
@@ -32,7 +31,6 @@
     }
 
     &-button-block {
-
         position: absolute;
         top: 10px;
         left: 10px;
@@ -47,18 +45,17 @@
         background: rgba(0, 0, 0, 0.3);
         border-radius: 24px;
 
-
         &-back {
             // margin-top: 10px;
             text-align: center;
             cursor: pointer;
             display: flex;
             flex-flow: row nowrap;
-            gap:5px;
+            gap: 5px;
 
-            font-family: 'Montserrat Alternates';
+            font-family: "Montserrat Alternates";
             font-style: normal;
-            
+
             font-weight: 500;
             font-size: 16px;
             line-height: 20px;
@@ -66,11 +63,11 @@
         }
     }
 
-    &-right-block{
+    &-right-block {
         position: absolute;
         top: 10px;
         right: 10px;
-        
+
         display: flex;
         justify-content: start;
         align-items: center;
@@ -82,12 +79,12 @@
         background: rgba(0, 0, 0, 0.3);
         border-radius: 24px;
 
-        &_hidden{
+        &_hidden {
             display: none;
         }
     }
 
-    &-bottom-block{
+    &-bottom-block {
         position: absolute;
         bottom: 20px;
         width: 90%;
@@ -99,23 +96,21 @@
         min-height: 90px;
         background: rgba(0, 0, 0, 0.3);
         border-radius: 24px;
-        color: #FFFFFF;
+        color: #ffffff;
     }
 
     &-button {
-
         display: flex;
         flex-flow: row nowrap;
         justify-content: center;
         align-content: center;
         align-items: center;
         gap: 8px;
-        
 
         width: 80%;
         margin-top: 10px;
-        font-family: 'Montserrat Alternates';
-        background: #2477F4;
+        font-family: "Montserrat Alternates";
+        background: #2477f4;
         color: #fff;
         text-align: center;
         padding: 10px;
@@ -123,12 +118,12 @@
         border-radius: 16px;
         cursor: pointer;
 
-        &_disable{
+        &_disable {
             cursor: not-allowed;
         }
     }
 
-    &-icon{
+    &-icon {
         width: 28px;
         height: 28px;
     }
@@ -147,20 +142,20 @@
         }
 
         &-title {
-            color: #37476A;
+            color: #37476a;
             font-size: 24px;
             font-family: Montserrat Alternates;
             font-weight: 600;
 
             &-error {
-                color: #FF4E78;
+                color: #ff4e78;
                 font-size: 24px;
                 font-family: Montserrat Alternates;
                 font-weight: 600;
             }
 
             &-link {
-                color: #2477F4;
+                color: #2477f4;
                 font-size: 16px;
                 font-family: Montserrat Alternates;
                 font-weight: 500;
@@ -169,21 +164,18 @@
         }
 
         &-description {
-            color: #7C8EB5;
+            color: #7c8eb5;
             font-size: 16px;
             font-family: Montserrat Alternates;
             font-weight: 500;
         }
     }
 
-    &-warning-message{
+    &-warning-message {
         padding: 16px 20px;
-        color: #37476A;
+        color: #37476a;
         font-size: 16px;
         font-family: Montserrat Alternates;
         font-weight: 500;
     }
-
 }
-
-

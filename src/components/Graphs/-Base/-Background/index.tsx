@@ -32,10 +32,10 @@ export default function BaseGraphBackground({
                                 <div className={CN("header")}></div>
                                 {Array(sectionsHorz - 1)
                                     .fill(null)
-                                    .map((_, idx) => (
+                                    .map((el, idxEl) => (
                                         <div
                                             className={CN("subsection")}
-                                            key={idx}
+                                            key={idxEl}
                                         />
                                     ))}
                             </>

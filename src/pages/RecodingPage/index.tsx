@@ -25,12 +25,12 @@ import RoutesEnum from "../../models/routes";
 
 import backIcon from "./assets/Vector.svg";
 import startRecordIcon from "./assets/video-play.svg";
-import dangerIcon from "./assets/danger.svg";
+// import dangerIcon from "./assets/danger.svg";
 
 import { ReactSVG } from "react-svg";
 
 import "./style.scss";
-import { MAX_MINUTES_FOR_VIDEO, MIN_MINUTES_FOR_VIDEO } from "../../constants";
+import { MAX_MINUTES_FOR_VIDEO } from "../../constants";
 import Stopwatch from "../../components/Stopwatch";
 
 export const TIMER_STATUS = {
@@ -62,7 +62,6 @@ export default function RecodingPage() {
     const secondsForTimer = timerSeconds
         ? timerSeconds
         : MAX_MINUTES_FOR_VIDEO * 60;
-    
 
     const timerHidden = timerSeconds && timerSeconds > 0 ? false : true;
 
@@ -72,7 +71,7 @@ export default function RecodingPage() {
         setIsTimerStart(value);
     };
 
-    const [resultDuration, setResultDuration] = useState(0);
+    const [, setResultDuration] = useState(0);
 
     /* ----------------------------------- MODAL PARAMS BLOCK ----------------------------------- */
     const [isModal, setModal] = useState(false);
@@ -104,7 +103,7 @@ export default function RecodingPage() {
                 setRecordedChunks((prev) => prev.concat(data));
             }
         },
-        [setRecordedChunks],
+        [setRecordedChunks]
     );
 
     const handleStartCaptureClick = useCallback(() => {
@@ -116,11 +115,11 @@ export default function RecodingPage() {
                 webcamRef?.current?.stream as MediaStream,
                 {
                     mimeType: `video/webm`,
-                },
+                }
             );
             mediaRecorderRef.current.addEventListener(
                 "dataavailable",
-                handleDataAvailable,
+                handleDataAvailable
             );
             mediaRecorderRef.current.start();
         }
@@ -141,7 +140,7 @@ export default function RecodingPage() {
             setCurrentFile(
                 new File([file], "Recoding Repetition", {
                     type: tempType,
-                }),
+                })
             );
             setRecordedChunks([]);
         }
@@ -155,16 +154,15 @@ export default function RecodingPage() {
         }
     }, [currentFile]);
 
-
     /* ----------------------------------- DEVICES BLOCK ----------------------------------- */
     const [devices, setDevices] = useState([]);
 
     const handleDevices = useCallback(
         (mediaDevices: any) =>
             setDevices(
-                mediaDevices.filter(({ kind }: any) => kind === "videoinput"),
+                mediaDevices.filter(({ kind }: any) => kind === "videoinput")
             ),
-        [setDevices],
+        [setDevices]
     );
 
     useEffect(() => {
@@ -225,7 +223,6 @@ export default function RecodingPage() {
 
     useEffect(() => {
         if (isError) {
-            const error = videoSendResponse.error as Response;
             console.log("isError", videoSendResponse.error);
             setCurrentFile(new File([], "empty"));
             setCurrentInfoData(initialInfoVideo);
@@ -284,7 +281,7 @@ export default function RecodingPage() {
                                     <div
                                         className={cnRecoding(
                                             "button-block-back",
-                                            "button-block-back",
+                                            "button-block-back"
                                         )}
                                         onClick={() => navigate(-1)}
                                     >
@@ -367,14 +364,14 @@ export default function RecodingPage() {
                                         <>
                                             <div
                                                 className={cnRecoding(
-                                                    "loading-title",
+                                                    "loading-title"
                                                 )}
                                             >
                                                 Идет загрузка видео...
                                             </div>
                                             <div
                                                 className={cnRecoding(
-                                                    "loading-description",
+                                                    "loading-description"
                                                 )}
                                             >
                                                 Пожалуйста, не закрывайте
@@ -387,7 +384,7 @@ export default function RecodingPage() {
                                         <div
                                             className={cnRecoding(
                                                 "loading-title-error",
-                                                "loading-title-error",
+                                                "loading-title-error"
                                             )}
                                         >
                                             Произошла ошибка, попробуйте еще раз
@@ -414,7 +411,7 @@ export default function RecodingPage() {
                                     <div
                                         className={cnRecoding(
                                             "loading-description",
-                                            "loading-description",
+                                            "loading-description"
                                         )}
                                     >
                                         По его окончании вы сможете ознакомиться
@@ -422,7 +419,7 @@ export default function RecodingPage() {
                                         <span
                                             className={cnRecoding(
                                                 "loading-title-link",
-                                                "loading-title-link",
+                                                "loading-title-link"
                                             )}
                                             onClick={() =>
                                                 navigate(RoutesEnum.DIARY)

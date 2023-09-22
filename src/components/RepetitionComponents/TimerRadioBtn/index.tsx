@@ -36,9 +36,9 @@ export default function TimerRadioBtn(props: Props) {
     const addAnswers = (idChoice: number) => {
         setCurrentChoice(idChoice);
 
-        if(choices.filter(el=>el.id===idChoice)!.at(0)!.value){
+        if (choices.filter((el) => el.id === idChoice)!.at(0)!.value) {
             props.setTimerSeconds(MIN_MINUTES_FOR_VIDEO * 60);
-        }else{
+        } else {
             props.setTimerSeconds(0);
         }
     };
@@ -63,7 +63,7 @@ export default function TimerRadioBtn(props: Props) {
                 minNumber <= MAX_MINUTES_FOR_VIDEO &&
                     minNumber >= MIN_MINUTES_FOR_VIDEO
                     ? true
-                    : false,
+                    : false
             );
             props.setTimerSeconds(minNumber * 60 + secNumber);
         }

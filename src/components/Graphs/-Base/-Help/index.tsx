@@ -19,8 +19,8 @@ const GraphHelp = ({
 }) => {
     const [isOpened, setIsOpened] = useState(false);
 
-    const [left, setLeft] = useState(0);
-    const [top, setTop] = useState(0);
+    const [leftPos, setLeftPos] = useState(0);
+    const [topPos, setTopPos] = useState(0);
     const [helpWidth, setHelpWidth] = useState(0);
 
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -32,11 +32,11 @@ const GraphHelp = ({
     ) => {
         const windowWidth = getWindowWidth();
         if (windowWidth - OFFSET < e.clientX + helpWidth) {
-            setLeft(windowWidth - helpWidth);
+            setLeftPos(windowWidth - helpWidth);
         } else {
-            setLeft(e.clientX + OFFSET);
+            setLeftPos(e.clientX + OFFSET);
         }
-        setTop(e.clientY + OFFSET);
+        setTopPos(e.clientY + OFFSET);
     };
     const handleMousePositionRel: React.MouseEventHandler<HTMLDivElement> = (
         e
@@ -45,11 +45,11 @@ const GraphHelp = ({
             const windowWidth = getWindowWidth();
             const { left, top } = wrapperRef.current.getBoundingClientRect();
             if (windowWidth - OFFSET < e.clientX + helpWidth) {
-                setLeft(windowWidth - helpWidth - left);
+                setLeftPos(windowWidth - helpWidth - left);
             } else {
-                setLeft(e.clientX - left + OFFSET);
+                setLeftPos(e.clientX - left + OFFSET);
             }
-            setTop(e.clientY - top + OFFSET);
+            setTopPos(e.clientY - top + OFFSET);
         }
     };
 
@@ -57,7 +57,8 @@ const GraphHelp = ({
         if (helpRef.current) {
             setHelpWidth(helpRef.current.getBoundingClientRect().width);
         }
-    }, [helpRef.current]);
+        // }, [helpRef.current]);
+    }, []);
 
     return (
         <div
@@ -71,7 +72,11 @@ const GraphHelp = ({
         >
             {isOpened && (
                 <div
-                    style={{ top, left, border: `thin solid ${color}` }}
+                    style={{
+                        top: `${topPos}px`,
+                        left: `${leftPos}`,
+                        border: `thin solid ${color}`,
+                    }}
                     className={cnGraphHelp("content")}
                     ref={helpRef}
                 >

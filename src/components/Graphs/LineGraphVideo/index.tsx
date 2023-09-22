@@ -96,13 +96,13 @@ export default function ColumnChart2(props: Props) {
             setCurrentTime(time);
             updateTime(time);
         }
-    }, [sliderValue]);
+    }, [isPointerMoving, setCurrentTime, sliderValue, timeEnd, updateTime]);
 
     useEffect(() => {
         if (!isPointerMoving) {
             setSliderValue((currentTime / timeEnd) * 100);
         }
-    }, [currentTime]);
+    }, [currentTime, isPointerMoving, timeEnd]);
 
     // --------------- было в предыдущей версии --------------
 
@@ -170,7 +170,7 @@ export default function ColumnChart2(props: Props) {
                         data-time={el.time_start}
                         style={{
                             backgroundColor: getColorByEmotion(
-                                el.type as EMOTION,
+                                el.type as EMOTION
                             ),
                             height: getHeightByValue(el.value) + "%",
                             width:

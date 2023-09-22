@@ -1,7 +1,5 @@
-.LearningPage{
-
+.LearningPage {
 }
-
 
 .animated-background {
     animation-duration: 3s;
@@ -11,15 +9,16 @@
     animation-timing-function: linear;
     background: linear-gradient(to right, #2477f4 8%, #fff 18%, #2477f4 33%);
     background-size: 800px 104px;
-    height: 60px;
-  }
 
-  @keyframes placeHolderShimmer {
+    height: 60px;
+}
+
+@keyframes placeHolderShimmer {
     0% {
-      background-position: -800px 0
+        background-position: -800px 0;
     }
+
     100% {
-      background-position: 800px 0
+        background-position: 800px 0;
     }
-  }
-  
+}

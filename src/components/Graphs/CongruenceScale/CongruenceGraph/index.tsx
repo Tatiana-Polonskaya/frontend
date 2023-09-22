@@ -1,6 +1,5 @@
 // import { MouseEventHandler, useContext, useEffect, useState } from "react";
 import { CongruenceItem } from "../../../../models/graph/congruence";
-import ColumnChart from "../../СolumnСhart";
 import "./style.scss";
 import { cn } from "@bem-react/classname";
 import convertSecondsIntoTime from "../../../../@adapters/Time/convertSeconds";

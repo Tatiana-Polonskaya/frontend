@@ -1,8 +1,6 @@
 import { cn } from "@bem-react/classname";
 import { useContext } from "react";
 
-import GraphHelp from "../../-Help";
-
 import "./style.scss";
 
 import { Tooltip } from "react-tooltip";

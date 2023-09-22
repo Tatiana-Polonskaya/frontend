@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import SecondBrick from "./-Brick";
 import GraphMedian from "../-Median";
 import GraphBase from "..";
@@ -17,12 +16,7 @@ export default function BrickedGraph({ items }: Props) {
                 <SecondBrick
                     id={idx}
                     key={idx}
-                    // разобраться вот тут
-                    width={`${
-                        // (el.endTime - el.startTime) * (_1SEC_PX + 0.05)
-                        // здесь чёт кудато надо округлять
-                        (el.endTime - el.startTime) * _1SEC_PX
-                    }px`}
+                    width={`${(el.endTime - el.startTime) * _1SEC_PX}px`}
                     top={el.top}
                     // left={`${el.startTime * (_1SEC_PX + 0.05)}px`}
                     left={`${el.startTime * _1SEC_PX}px`}

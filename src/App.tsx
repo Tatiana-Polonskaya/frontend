@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import DiaryPage from "./pages/DiaryPage";
@@ -63,7 +63,6 @@ export default function App() {
                     <Route path={RoutesEnum.HOME} element={<HomePage />} />
 
                     <Route path={RoutesEnum.DIARY} element={<DiaryPage />}>
-
                         <Route index={true} element={<DiaryStart />} />
                         <Route
                             index={false}

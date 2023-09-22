@@ -11,7 +11,7 @@
         border: 2px solid #b2c2e4;
         border-radius: 16px;
 
-        color: #37476A;
+        color: #37476a;
         font-family: Montserrat Alternates;
         font-size: 20px;
         font-style: normal;
@@ -31,7 +31,6 @@
         }
 
         &_numeric {
-
             &::-webkit-outer-spin-button,
             &::-webkit-inner-spin-button,
             & {
@@ -42,7 +41,7 @@
         }
 
         &::placeholder {
-            color: #7C8EB5;
+            color: #7c8eb5;
             font-family: Montserrat Alternates;
             font-size: 18px;
             font-style: normal;
@@ -50,7 +49,6 @@
             line-height: normal;
         }
     }
-
 
     &-eye {
         margin-left: -45px;

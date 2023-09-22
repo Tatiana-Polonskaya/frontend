@@ -1,10 +1,9 @@
 export type TranscriptionValue = {
-    seq_number: number,
-    time_start:number,
-    text: string,
-}
-
+    seq_number: number;
+    time_start: number;
+    text: string;
+};
 
 export interface TranscriptionJSON {
-    values: TranscriptionValue[],
+    values: TranscriptionValue[];
 }

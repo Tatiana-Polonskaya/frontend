@@ -3,7 +3,7 @@ import GraphColor from "../../../models/graph/_colors";
 
 import "./style.scss";
 
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getWindowWidth } from "../../../tools/window";
 import convertSecondsIntoTime from "../../../@adapters/Time/convertSeconds";
 // import { Tooltip } from "react-tooltip";
@@ -29,8 +29,8 @@ export default function TimelineGraph({
     const convertStart = convertSecondsIntoTime(startTime);
     const convertEnd = convertSecondsIntoTime(endTime);
 
-    const [isOpened, setIsOpened] = useState(false);
-    const [indOpened, setIndOpened] = useState<number>();
+    const [, setIsOpened] = useState(false);
+    const [, setIndOpened] = useState<number>();
 
     const [helpWidth, setHelpWidth] = useState(0);
 
@@ -39,7 +39,7 @@ export default function TimelineGraph({
     const CN = cn("timeline-graph");
     const cnGraphHelp = cn("graph-help-line");
 
-    const [right, setRight] = useState("");
+    const [, setRight] = useState("");
 
     const handleMousePosition: React.MouseEventHandler<HTMLDivElement> = (
         e
@@ -58,15 +58,6 @@ export default function TimelineGraph({
         }
     }, [helpRef.current]);
 
-    // const { setCurrentTime } = useContext(VideoTimeContext);
-
-    // const choiseBlock = (event: React.MouseEvent<HTMLDivElement>) => {
-    //     const dataValue = +event.currentTarget.dataset.time! as number;
-    //     if (dataValue) {
-    //         setCurrentTime(dataValue);
-    //     }
-    // };
-
     return (
         <div className={CN()}>
             <div className={CN("time")}>{convertStart}</div>
@@ -81,8 +72,6 @@ export default function TimelineGraph({
                                     : el.color || GraphColor.GRAY,
                         }}
                         className={CN("element")}
-                        // onClick={choiseBlock}
-                        // data-time={el.time}
                     >
                         <div
                             onMouseMove={handleMousePosition}
@@ -93,19 +82,7 @@ export default function TimelineGraph({
                             onMouseLeave={() => setIsOpened(false)}
                             className={cnGraphHelp()}
                             ref={wrapperRef}
-                            // data-tooltip-id={"line-brick-" + el.id}
                         ></div>
-                        {/* <Tooltip
-                            id={"line-brick-" + el.id}
-                            place={"bottom-end"}
-                            noArrow={true}
-                            className={CN("tooltip")}
-                            style={{ borderColor: el.color }}
-                        >
-                            <span className={CN("tooltip-text")}>
-                                {convertTime(el.time)} {el.text}
-                            </span>
-                        </Tooltip> */}
                     </div>
                 ))}
             </div>

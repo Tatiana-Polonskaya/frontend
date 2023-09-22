@@ -1,4 +1,4 @@
-.BasicTextPlan{
+.BasicTextPlan {
     display: grid;
     grid-template-columns: 60px 1fr 60px;
     gap: 10px;
@@ -7,33 +7,29 @@
     justify-items: center;
     width: 100%;
 
-    &-text{
+    &-text {
         display: flex;
         flex-flow: row nowrap;
-        gap:20px;
+        gap: 20px;
         align-items: center;
         justify-content: center;
         font-weight: 500;
         font-size: 24px;
-        font-family: 'Onest';
+        font-family: "Onest";
         font-style: normal;
         line-height: 31px;
-        
-        
-        
 
-        &-blue{
-            color: #5196FF;
+        &-blue {
+            color: #5196ff;
             font-weight: 800;
             font-size: 32px;
-            font-family: 'Onest';
+            font-family: "Onest";
             font-style: normal;
             line-height: 41px;
         }
     }
 
-    &-arrow{
+    &-arrow {
         cursor: pointer;
-
     }
 }

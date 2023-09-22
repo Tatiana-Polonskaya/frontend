@@ -2,21 +2,19 @@
     flex-grow: 1;
     width: 100%;
     height: 100%;
-    color: #031C3D;
+    color: #031c3d;
     border-radius: 24px;
     cursor: pointer;
 
-
     &_checked {
-        background: #2477F4;
+        background: #2477f4;
         box-shadow: 0px 0px 24px rgba(36, 119, 244, 0.4);
         border-radius: 24px;
 
         span,
         div {
-            color: #FFFFFF;
+            color: #ffffff;
         }
-
     }
 
     &-trial {
@@ -33,7 +31,6 @@
         border-radius: 24px;
 
         &-desc {
-
             text-align: center;
             font-family: Montserrat Alternates;
             font-size: 16px;
@@ -58,12 +55,10 @@
         align-items: center;
         gap: 10px;
 
-        font-family: 'Montserrat Alternates';
+        font-family: "Montserrat Alternates";
         font-weight: 700;
         height: 100%;
-        color: #031C3D;
-
-
+        color: #031c3d;
 
         &-counts {
             min-height: 45px;
@@ -72,7 +67,7 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            color: #4B5F8A;
+            color: #4b5f8a;
             font-size: 20px;
             font-family: "Montserrat Alternates";
 
@@ -82,7 +77,7 @@
                 justify-content: center;
                 align-items: center;
                 gap: 5px;
-                color: #4B5F8A;
+                color: #4b5f8a;
                 font-size: 20px;
                 font-family: "Montserrat Alternates";
             }
@@ -102,7 +97,7 @@
             justify-content: flex-start;
             padding-top: 20px;
             align-items: center;
-            color: #2477F4;
+            color: #2477f4;
             flex-grow: 1;
             gap: 10px;
 
@@ -124,10 +119,10 @@
 
             gap: 5px;
             align-items: center;
-            color: #4B5F8A;
+            color: #4b5f8a;
 
             &-text {
-                color: #4B5F8A;
+                color: #4b5f8a;
                 text-align: center;
                 font-family: Montserrat Alternates;
                 font-size: 14px;

@@ -8,7 +8,7 @@
     padding: 32px;
     border-radius: 48px;
     gap: 10px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 
     &-header {
         display: flex;
@@ -16,34 +16,33 @@
         gap: 10px;
         width: 100%;
 
-        font-family: 'Onest';
+        font-family: "Onest";
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
         line-height: 25px;
-        color: #37476A;
+        color: #37476a;
 
         &-thanks {
             font-weight: 700;
             font-size: 40px;
             line-height: 49px;
             text-transform: uppercase;
-            color: #031C3D;
+            color: #031c3d;
         }
 
         &-bold {
-            font-family: 'Onest';
+            font-family: "Onest";
             font-weight: 700;
         }
 
         &-link {
-            font-family: 'Montserrat Alternates';
+            font-family: "Montserrat Alternates";
             font-weight: 500;
             font-size: 20px;
             line-height: 24px;
-            color: #2477F4;
+            color: #2477f4;
         }
-
     }
 
     &-cards {
@@ -69,7 +68,7 @@
             height: 100%;
             padding-top: 8px;
             align-self: flex-start;
-            color: #7C8EB5;
+            color: #7c8eb5;
             font-family: Montserrat Alternates;
             font-size: 18px;
             font-weight: 600;
@@ -87,10 +86,10 @@
 
             &-input {
                 border-radius: 12px;
-                border: 2px solid #B2C2E4;
+                border: 2px solid #b2c2e4;
                 padding: 6px 16px;
                 &::placeholder {
-                    color: #B2C2E4;
+                    color: #b2c2e4;
                     font-family: Montserrat Alternates;
                     font-size: 16px;
                     font-style: normal;
@@ -100,7 +99,7 @@
             }
 
             &-warning {
-                color: #F35B60;
+                color: #f35b60;
                 font-family: Montserrat Alternates;
                 font-size: 12px;
                 font-style: normal;
@@ -112,19 +111,18 @@
         &-btn {
             padding: 10px 16px;
 
-            color: #FFF;
+            color: #fff;
             font-family: Montserrat Alternates;
             font-size: 16px;
             font-style: normal;
             font-weight: 600;
             line-height: normal;
             border-radius: 9px;
-            background: #FFB800;
+            background: #ffb800;
         }
     }
 
     &-footer {
-
         display: flex;
         flex-flow: column nowrap;
         justify-content: flex-start;
@@ -132,22 +130,21 @@
         gap: 10px;
         padding-top: 20px;
 
-        font-family: 'Onest';
+        font-family: "Onest";
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
         line-height: 15px;
-        color: #7C8EB5;
+        color: #7c8eb5;
 
         &-btn {
-
-            font-family: 'Montserrat Alternates';
+            font-family: "Montserrat Alternates";
             font-style: normal;
             font-weight: 700;
             font-size: 24px;
             line-height: 29px;
             letter-spacing: 0.02em;
-            color: #FFFFFF;
+            color: #ffffff;
 
             display: flex;
             flex-direction: row;
@@ -159,7 +156,7 @@
             width: 300px;
             height: 61px;
 
-            background: #2477F4;
+            background: #2477f4;
             opacity: 0.5;
             border-radius: 14px;
             border: none;

@@ -1,4 +1,10 @@
-import { BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import {
+    BaseQueryFn,
+    FetchArgs,
+    FetchBaseQueryError,
+    createApi,
+    fetchBaseQuery,
+} from "@reduxjs/toolkit/dist/query/react";
 import { RootState } from "../..";
 import { Mutex } from "async-mutex";
 import { logout, setAccessToken } from "../../slices/user";
@@ -25,7 +31,7 @@ const myFetchBase: BaseQueryFn<
     let result = await baseQ(args, api, extraOptions);
 
     // condition for token refreshing
-    if ((result.error?.data as any)?.message === 'You are not logged in'){
+    if ((result.error?.data as any)?.message === "You are not logged in") {
         if (!mutex.isLocked()) {
             const release = await mutex.acquire();
 
@@ -64,7 +70,6 @@ const myFetchBase: BaseQueryFn<
     return result;
 };
 
-
 export const apiWithDifAnswers = createApi({
     reducerPath: "api/apiWithDifAnswers",
     baseQuery: myFetchBase,
@@ -74,7 +79,7 @@ export const apiWithDifAnswers = createApi({
                 url: `/api/video/test/${id}`,
                 method: "GET",
                 responseHandler: async (response) => {
-                    let temp = response.blob();
+                    const temp = response.blob();
                     const res = await temp;
                     return URL.createObjectURL(res);
                 },
@@ -85,7 +90,7 @@ export const apiWithDifAnswers = createApi({
                 url: `/api/users/account/avatar/${id}`,
                 method: "GET",
                 responseHandler: async (response) => {
-                    let temp = response.blob();
+                    const temp = response.blob();
                     const res = await temp;
                     return URL.createObjectURL(res);
                 },
@@ -98,7 +103,8 @@ export const apiWithDifAnswers = createApi({
 export const {
     useGetVideoByIdQuery,
     useGetImageByIdQuery,
-    useLazyGetImageByIdQuery
+    useLazyGetImageByIdQuery,
 } = apiWithDifAnswers;
 
-export const { endpoints, reducerPath, reducer, middleware } = apiWithDifAnswers;
+export const { endpoints, reducerPath, reducer, middleware } =
+    apiWithDifAnswers;

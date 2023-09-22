@@ -1,16 +1,8 @@
-import { cn } from "@bem-react/classname";
-
 import StatsLineGraph from "../-Base/StatsLine";
 import GraphColor from "../../../models/graph/_colors";
 
-import { createXDescriptionFromData } from "../-Base/helpers";
-import { StatsDataItem } from "../../../models/graph/stats";
-
 import "./style.scss";
-import LineGraph from "../-Base/Line";
 import { IStatisticItem } from "../../../models/diary";
-
-const CN = cn("stats-graph");
 
 type Props = { data: IStatisticItem[] };
 
@@ -22,11 +14,11 @@ function createXDataDescriptionFromData(data: IStatisticItem[]) {
 }
 
 export default function StatsGraph({ data }: Props) {
-    const restruction = (data: IStatisticItem[]) => {
+    const restruction = (dataValue: IStatisticItem[]) => {
         const arr: number[] = [];
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].value !== null) {
-                const cur = (data[i].value / 100) as number;
+        for (let i = 0; i < dataValue.length; i++) {
+            if (dataValue[i].value !== null) {
+                const cur = (dataValue[i].value / 100) as number;
                 arr.push(cur);
             } else {
                 const cur = -0.001;

@@ -21,7 +21,7 @@ type Props = {
 const CN = cn("EmotionalScale");
 
 function covertvaluesData(data: ChannelItem[]) {
-    let result: IDescriptionScale[] = [];
+    const result: IDescriptionScale[] = [];
 
     data.forEach((el: any) => {
         let tempMax = 0;
@@ -55,14 +55,14 @@ export default function EmotionalScale(props: Props) {
     const checkActive = (index: any, className: any) =>
         activeIndex === index ? className : "";
 
-    let infVideo: IDescriptionScale[] = covertvaluesData(
-        props.values.map((n) => n.video),
+    const infVideo: IDescriptionScale[] = covertvaluesData(
+        props.values.map((n) => n.video)
     );
-    let infText: IDescriptionScale[] = covertvaluesData(
-        props.values.map((n) => n.text),
+    const infText: IDescriptionScale[] = covertvaluesData(
+        props.values.map((n) => n.text)
     );
-    let infAudio: IDescriptionScale[] = covertvaluesData(
-        props.values.map((n) => n.audio),
+    const infAudio: IDescriptionScale[] = covertvaluesData(
+        props.values.map((n) => n.audio)
     );
 
     // ___________________ время ________________
@@ -105,7 +105,7 @@ export default function EmotionalScale(props: Props) {
                 <button
                     className={`EmotionalScaletab ${checkActive(
                         1,
-                        "EmotionalScaleactive",
+                        "EmotionalScaleactive"
                     )}`}
                     onClick={() => handleClick(1)}
                 >
@@ -115,7 +115,7 @@ export default function EmotionalScale(props: Props) {
                 <button
                     className={`EmotionalScaletab ${checkActive(
                         2,
-                        "EmotionalScaleactive",
+                        "EmotionalScaleactive"
                     )}`}
                     onClick={() => handleClick(2)}
                 >
@@ -125,7 +125,7 @@ export default function EmotionalScale(props: Props) {
                 <button
                     className={`EmotionalScaletab ${checkActive(
                         3,
-                        "EmotionalScaleactive",
+                        "EmotionalScaleactive"
                     )}`}
                     onClick={() => handleClick(3)}
                 >
@@ -144,7 +144,7 @@ export default function EmotionalScale(props: Props) {
                 <div
                     className={`panel ${checkActive(
                         1,
-                        "EmotionalScaleactive",
+                        "EmotionalScaleactive"
                     )}`}
                 >
                     <Scale
@@ -156,7 +156,7 @@ export default function EmotionalScale(props: Props) {
                 <div
                     className={`panel ${checkActive(
                         2,
-                        "EmotionalScaleactive",
+                        "EmotionalScaleactive"
                     )}`}
                 >
                     <Scale
@@ -168,7 +168,7 @@ export default function EmotionalScale(props: Props) {
                 <div
                     className={`panel ${checkActive(
                         3,
-                        "EmotionalScaleactive",
+                        "EmotionalScaleactive"
                     )}`}
                 >
                     <Scale

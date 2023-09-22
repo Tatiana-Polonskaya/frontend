@@ -6,12 +6,12 @@
     width: 100%;
     padding: 8px;
     font-size: 14px;
-    background: #F3F5F9;
+    background: #f3f5f9;
     border-radius: 12px;
 
     &_blue {
-        color: #FFF;
-        background: #2477F4;
+        color: #fff;
+        background: #2477f4;
     }
 
     &-circle {
@@ -19,9 +19,9 @@
         top: 0;
         left: 0;
         display: none;
-        width: .7em;
-        height: .7em;
-        background: #FFB800;
+        width: 0.7em;
+        height: 0.7em;
+        background: #ffb800;
         border-radius: 50%;
 
         &_visible {
@@ -42,20 +42,19 @@
     }
 
     &-title {
-        color: #37476A;
+        color: #37476a;
         font-weight: 600;
         font-size: 14px;
         font-family: "Montserrat Alternates";
         line-height: normal;
 
-
         &_white {
-            color: #FFF;
+            color: #fff;
         }
     }
 
     &-description {
-        color: #7C8EB5;
+        color: #7c8eb5;
         font-weight: 400;
         font-size: 14px;
         font-family: "Onest";
@@ -78,7 +77,7 @@
         font-family: "Montserrat Alternates";
         font-style: normal;
         line-height: normal;
-        background: #FFB800;
+        background: #ffb800;
         border-radius: 6px;
         cursor: pointer;
 
@@ -88,10 +87,9 @@
             align-items: center;
             rotate: -90deg;
 
-            svg{
+            svg {
                 width: 10px;
             }
         }
     }
-
 }

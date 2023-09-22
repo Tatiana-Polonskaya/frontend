@@ -1,11 +1,10 @@
 .entry-layout {
-
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
     align-items: center;
 
-    background: #FFF;
+    background: #fff;
 
     &-content {
         padding: 50px 50px;
@@ -19,12 +18,11 @@
     }
 
     &-image {
-
         @media screen and (max-width: 1024px) {
             display: none;
         }
 
-        height: 100vh;  
+        height: 100vh;
         min-height: 650px;
         width: 100%;
     }

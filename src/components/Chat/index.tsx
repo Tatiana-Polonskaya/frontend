@@ -22,19 +22,21 @@ type Props = {
 };
 
 const INTERVAL_PULLING = 5000;
-const TITLE_NOT_MESSAGES = "Вы не задали ни одного вопроса";
+// const TITLE_NOT_MESSAGES = "Вы не задали ни одного вопроса";
 
 export default function Chat(props: Props) {
     const { data } = useGetMessagesQuery(null, {
         pollingInterval: INTERVAL_PULLING,
     });
 
-    const sortDate = (data: IMessageItem[]) => {
-        const dataSort = [...data];
+    // console.log("data", data);
+
+    const sortDate = (messageArray: IMessageItem[]) => {
+        const dataSort = [...messageArray];
         return dataSort.sort((a, b) => a.id - b.id);
     };
 
-    const replayHelper = (reply: number | null): string => {
+    const replyHelper = (reply: number | null): string => {
         const message = allMessagesUser!.filter((msg) => msg.id === reply);
         return message.length > 0 ? message[0].text : "";
     };
@@ -48,7 +50,7 @@ export default function Chat(props: Props) {
     const [isExpanded, setIsExpanded] = useState(Boolean(props.isExpanded));
 
     const firstMsg: IMessageItem = {
-        created_at: new Date().toLocaleString("ru"),
+        created_at: new Date().toISOString(),
         from_user: "Специалист",
         id: 0,
         is_mine: false,
@@ -69,21 +71,16 @@ export default function Chat(props: Props) {
                             })}
                         >
                             {allMessagesUser &&
-                                allMessagesUser.map((msg, idx) => (
+                                allMessagesUser.map((msg) => (
                                     <ChatMessage
                                         key={msg.id}
-                                        replay={replayHelper(msg.reply_to)}
+                                        replay={replyHelper(msg.reply_to)}
                                         {...msg}
                                     />
                                 ))}
                             {!allMessagesUser && (
                                 <ChatMessage {...firstMsg} is_first={true} />
                             )}
-                            {/* {!allMessagesUser && (
-                                <div className={cnChat("not_messages")}>
-                                    {TITLE_NOT_MESSAGES}
-                                </div>
-                            )} */}
                         </div>
                         <ChatFooter />
                     </Fragment>

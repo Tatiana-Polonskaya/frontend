@@ -41,7 +41,7 @@ export default function LoginPage() {
     const [isEmailWrong, setEmailWrong] = useState(false);
     const [isPasswordWrong, setPasswordWrong] = useState(false);
     const [wrongEmailText, setWrongEmailText] = useState(
-        INVALID_LOGIN_INIT_TEXT,
+        INVALID_LOGIN_INIT_TEXT
     );
     const [wrongPasswordText, setWrongPasswordText] = useState("");
 
@@ -103,8 +103,10 @@ export default function LoginPage() {
             {userType === UserType.Personal ? (
                 <>
                     <UserTypeSwitch />
-                    <div className={cnLoginPage("padding")}><LoginRegisterChanger pageType={PageType.Login} /></div>
-                    
+                    <div className={cnLoginPage("padding")}>
+                        <LoginRegisterChanger pageType={PageType.Login} />
+                    </div>
+
                     <div className={cnLoginPage()}>
                         <InfoFragment
                             phrase={

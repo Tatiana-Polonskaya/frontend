@@ -23,7 +23,7 @@
         border-radius: 16px;
     }
 
-    &-white-block{
+    &-white-block {
         background-color: #fff;
     }
 
@@ -93,10 +93,9 @@
         }
     }
 
-    &-btn-block{
+    &-btn-block {
         width: 100%;
         padding-bottom: 15px;
-
 
         &-btn {
             display: flex;
@@ -110,11 +109,9 @@
             font-style: normal;
             line-height: 20px;
 
-            &_nonclickable{
+            &_nonclickable {
                 cursor: not-allowed;
             }
         }
     }
-
-    
 }

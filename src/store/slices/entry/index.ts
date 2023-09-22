@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PageType, RegisterStep, UserType } from "../../../models/entry";
+import { RegisterStep, UserType } from "../../../models/entry";
 
 const initialState = {
     userType: UserType.Personal,

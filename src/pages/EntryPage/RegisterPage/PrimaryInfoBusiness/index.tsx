@@ -63,9 +63,8 @@ export default function PrimaryInfoBusiness() {
         }
 
         try {
-            const checkEmailResponseData = await checkEmailRequest(
-                email
-            ).unwrap();
+            const checkEmailResponseData =
+                await checkEmailRequest(email).unwrap();
             if (checkEmailResponseData.success) {
                 dispatch(setStep(RegisterStep.SecondaryInfo));
             } else {

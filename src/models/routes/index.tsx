@@ -12,8 +12,8 @@ enum RoutesEnum {
     LEARNING = "/learning",
     REPETITION = "/repetition",
     SETTINGS = "/settings",
-    RECODING="/recoding",
-    REPORT="/report",
+    RECODING = "/recoding",
+    REPORT = "/report",
 
     TEST_GRAPH = "/test-graph",
 

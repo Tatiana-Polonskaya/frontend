@@ -3,7 +3,7 @@
     flex-flow: column nowrap;
     gap: 10px;
     height: 100%;
-    overflow:auto;
+    overflow: auto;
 
     &-row {
         display: grid;
@@ -12,7 +12,6 @@
         align-content: center;
         align-items: center;
         justify-items: start;
-
     }
 
     &-time {
@@ -32,23 +31,21 @@
         }
     }
 
-    &-buble{
+    &-buble {
         width: 100%;
 
         &-text {
             padding: 8px;
-            color: #7C8EB5;
+            color: #7c8eb5;
             font-weight: 400;
             font-size: 16px;
             font-family: "Onest";
             background: #f3f5f9;
             border-radius: 8px;
-    
+
             &_active {
-                color: #37476A; 
+                color: #37476a;
             }
         }
     }
-
-    
 }

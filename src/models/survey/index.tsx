@@ -21,7 +21,7 @@ export interface IQuestion {
     type: typeQuestion;
     icons: boolean;
     type_choice: typeStyleAnswers;
-    choices:IChoice[];
+    choices: IChoice[];
 }
 
 export interface IChoice {
@@ -38,6 +38,6 @@ export interface IAnswer {
 }
 
 export interface IAnswerBack {
-    questionnaire_title: string,
-    answers: IAnswer[],
+    questionnaire_title: string;
+    answers: IAnswer[];
 }

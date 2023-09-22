@@ -6,7 +6,6 @@ export enum CommunicativeValue {
     FIFTH = "4",
 }
 
-
 export type CommunicativeValueItem = Record<CommunicativeValue, string[]>;
 
 export type CommunicativeValuesItem = {
@@ -14,12 +13,11 @@ export type CommunicativeValuesItem = {
     text: string;
     value: CommunicativeValueItem;
     time_start: string;
-}
-
+};
 
 export type CommunicativeJSON = {
     filler_words: number;
     cognitive_distortion: number;
     aggression: number;
-    values:CommunicativeValuesItem[];
-} ;
+    values: CommunicativeValuesItem[];
+};

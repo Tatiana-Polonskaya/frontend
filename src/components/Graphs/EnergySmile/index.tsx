@@ -1,4 +1,3 @@
-import React from "react";
 import slip from "./img/спящий.svg";
 import crazy from "./img/безумный.svg";
 import medium from "./img/средне.svg";

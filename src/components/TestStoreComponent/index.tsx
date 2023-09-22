@@ -15,7 +15,9 @@ export default function TestStoreComponent() {
             </div>
             <div>
                 <span>Value2 (string): {value2}</span>
-                <button onClick={() => dispatch(changeValue2(`${value2}a`))}>+a</button>
+                <button onClick={() => dispatch(changeValue2(`${value2}a`))}>
+                    +a
+                </button>
             </div>
         </>
     );

@@ -1,4 +1,3 @@
-import React from "react";
 import "./style.scss";
 import { cn } from "@bem-react/classname";
 import { ReactSVG } from "react-svg";
@@ -19,39 +18,36 @@ type Props = {
 
 // TO DO: добавить такую же функцию для поиска картинки для переданного существительного
 function checkRank(adjective: string) {
-    if ([`последовательный`, `информативный`, `закономерный`].includes(adjective))
-    {
+    if (
+        [`последовательный`, `информативный`, `закономерный`].includes(
+            adjective
+        )
+    ) {
         return Serial;
-    } else if ([`оригинальный`, `обоснованный`, `логичный`].includes(adjective))
-    {
+    } else if (
+        [`оригинальный`, `обоснованный`, `логичный`].includes(adjective)
+    ) {
         return Thorough;
-    } else if ([`доходчивый`, `продуманный`, `уверенный`].includes(adjective))
-    {
+    } else if ([`доходчивый`, `продуманный`, `уверенный`].includes(adjective)) {
         return Eloquent;
-    } else
-    {
+    } else {
         return "";
     }
 }
 
-function checkAdjective(adjective:string){
-    if ([`оратор`].includes(adjective))
-    {
+function checkAdjective(adjective: string) {
+    if ([`оратор`].includes(adjective)) {
         return Speaker;
-    } else if ([`златоуст`].includes(adjective))
-    {
+    } else if ([`златоуст`].includes(adjective)) {
         return Chrysostom;
-    } else if ([`говорун`].includes(adjective))
-    {
+    } else if ([`говорун`].includes(adjective)) {
         return Talker;
-    } else
-    {
+    } else {
         return "";
     }
 }
 
 export default function BlockGeneralAnalytics(props: Props) {
-    
     const rank_words = props.rank
         .split(" ")
         .map((el) => el.toLocaleLowerCase());
@@ -74,9 +70,7 @@ export default function BlockGeneralAnalytics(props: Props) {
                     {image_for_adjective && (
                         <ReactSVG src={image_for_adjective} />
                     )}
-                    {image_for_noun && (
-                        <ReactSVG src={image_for_noun} />
-                    )}
+                    {image_for_noun && <ReactSVG src={image_for_noun} />}
                 </div>
             </div>
         </>

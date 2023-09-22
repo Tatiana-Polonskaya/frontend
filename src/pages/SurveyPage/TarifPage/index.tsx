@@ -20,8 +20,7 @@ import { ITariff } from "../../../models/tariff";
 import { UUID } from "crypto";
 import TarifCard from "../../../components/TarifCard";
 
-
-// TODO:  добавить обратобку промокодов 
+// TODO:  добавить обратобку промокодов
 
 export default function TarifPage() {
     const dispatch = useAppDispatch();
@@ -36,7 +35,7 @@ export default function TarifPage() {
     useEffect(() => {
         if (tariffs.data && tariffs.data.data && tariffs.isSuccess) {
             setBasicTariffs(
-                [...tariffs.data!.data].sort((x, y) => x.price - y.price),
+                [...tariffs.data!.data].sort((x, y) => x.price - y.price)
             );
         }
     }, [tariffs]);

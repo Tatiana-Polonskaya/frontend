@@ -30,7 +30,7 @@ export default function Pagination(props: Props) {
     if (props.currentPage <= numbersPerPagination - 1) {
         currentPageNumbers = pageNumbers.slice(0, numbersPerPagination);
     } else if (props.currentPage + deltaPages > maxPage) {
-        let tempDelta =
+        const tempDelta =
             Math.abs(maxPage - (props.currentPage + deltaPages)) + deltaPages;
         currentPageNumbers = pageNumbers.slice(
             props.currentPage - tempDelta - 1,
@@ -69,7 +69,7 @@ export default function Pagination(props: Props) {
                         className={cnPagination("number", {
                             current: number === props.currentPage,
                         })}
-                        onClick={() => props.paginate(number-1)}
+                        onClick={() => props.paginate(number - 1)}
                     >
                         {number}
                     </div>

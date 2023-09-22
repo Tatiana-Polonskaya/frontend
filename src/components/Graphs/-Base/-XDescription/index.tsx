@@ -12,13 +12,13 @@ export default function BaseGraphXDescription({
     selected = 0,
     stats,
 }: Props) {
-    const curTime = data?.map((el, ind) => {
+    const curTime = data?.map((el) => {
         const curDate = new Date(el);
         const days = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
         return {
             day: days[curDate.getDay()],
             date: curDate.getDate(),
-            month: new Date().getMonth()+1,
+            month: new Date().getMonth() + 1,
         };
     });
     return (

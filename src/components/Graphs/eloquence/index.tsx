@@ -1,4 +1,3 @@
-import React from "react";
 import rupor from "./img/mouthpiese.svg";
 import { ReactSVG } from "react-svg";
 import "./Eloquence.css";
@@ -20,7 +19,7 @@ type Props = {
     };
 };
 function Eloquence(props: Props) {
-    let infEloquence = props.data;
+    const infEloquence = props.data;
     return (
         <>
             <div className="allEloquence">

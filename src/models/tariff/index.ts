@@ -1,7 +1,7 @@
 import { UUID } from "crypto";
 
 export interface ITariff {
-    id: string,
+    id: string;
     duration: number;
     loads_limit: number;
     title: string;
@@ -10,5 +10,5 @@ export interface ITariff {
 
 export interface ISetTariff {
     tarif_id: string;
-    user_id : UUID;
+    user_id: UUID;
 }

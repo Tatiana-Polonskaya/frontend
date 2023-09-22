@@ -41,16 +41,6 @@ type BrickedGraphItem = {
     color: string;
 };
 
-export const convertConnectivityDataLine = (
-    raw: ConnectivityDataItem
-): BrickedGraphItem => ({
-    id: raw.seq_number,
-    text: raw.text,
-    // value: raw.value, /// REMOVE THIS
-    time: raw.time_start,
-    color: getColor(raw.value),
-});
-
 const getColor = (value: number) => {
     switch (value) {
         case 0:
@@ -63,6 +53,16 @@ const getColor = (value: number) => {
             return GraphColor.GRAY;
     }
 };
+
+export const convertConnectivityDataLine = (
+    raw: ConnectivityDataItem
+): BrickedGraphItem => ({
+    id: raw.seq_number,
+    text: raw.text,
+    // value: raw.value, /// REMOVE THIS
+    time: raw.time_start,
+    color: getColor(raw.value),
+});
 
 const getMaxExpressivenessValueForColor = (
     anger: number,
@@ -90,8 +90,6 @@ export const convertExpressivenessDataLine = (
     ),
 });
 
-
-
 type ConvertArr = {
     value: number;
     color: string;
@@ -106,7 +104,7 @@ export const convertConfidenceArr = (
     const lowLevel: number = 0.5;
     const resArr: ConvertArr[] = [];
 
-    const getColor = (value: number) => {
+    const getColorConfidence = (value: number) => {
         if (value > highLevel) {
             return {
                 color: GraphColor.LIGHTGREEN,
@@ -133,7 +131,7 @@ export const convertConfidenceArr = (
             // resArr.push({ value: el.value, ...getColor(el.value), width: 1 });
             resArr.push({
                 value: el.confidence,
-                ...getColor(el.confidence),
+                ...getColorConfidence(el.confidence),
                 width: 1,
             });
         } else if (
@@ -155,7 +153,7 @@ export const convertConfidenceArr = (
             // resArr.push({ value: el.value, ...getColor(el.value), width: 1 });
             resArr.push({
                 value: el.confidence,
-                ...getColor(el.confidence),
+                ...getColorConfidence(el.confidence),
                 width: 1,
             });
         }

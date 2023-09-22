@@ -1,5 +1,5 @@
-import React from "react";
 import "./styleText.scss";
+
 function InformativeText() {
     return (
         <>

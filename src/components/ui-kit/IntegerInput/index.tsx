@@ -10,7 +10,9 @@ export default function IntegerInput(props: IntegerInputProps) {
 
     function validateInput(event: React.KeyboardEvent<HTMLInputElement>) {
         const keyInList = (key: string) =>
-            ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(key);
+            ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(
+                key
+            );
 
         const keyIsModifier = (event: React.KeyboardEvent<HTMLInputElement>) =>
             event.altKey || event.shiftKey || event.ctrlKey || event.metaKey;

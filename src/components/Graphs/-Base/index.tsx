@@ -9,11 +9,7 @@ import {
 
 import { ValueTime } from "../../Analytics/helpers";
 import { cn } from "@bem-react/classname";
-import {
-    GraphContext,
-    _1SEC_PX,
-    createXDescriptionFromSeconds,
-} from "./helpers";
+import { _1SEC_PX } from "./helpers";
 
 import BaseGraphYDescription from "./-YDescription";
 import BaseGraphXDescription from "./-XDescription";
@@ -39,9 +35,7 @@ export default function GraphBase({
     selectedX,
     ...props
 }: Props) {
-    // если ставить обычный useState а не кастомный то цепляет график
     const { currentTime, setCurrentTime } = useContext(VideoTimeContext);
-    // const [currentTime, setCurrentTime] = useState(0);
     const [isPointerMoving, setPointerMoving] = useState(false);
     const [pointerX, setPointerX] = useState(0);
     const { updateTime } = useContext(ValueTime);
@@ -56,19 +50,16 @@ export default function GraphBase({
     };
     useEffect(() => {
         if (!isPointerMoving) {
-            /// currentTime changes from external context
             setPointerX(currentTime * _1SEC_PX);
         }
-    }, [currentTime]);
+    }, [currentTime, isPointerMoving]);
     useEffect(() => {
         if (isPointerMoving) {
-            /// isPointerMoving changes inside of the component
-            // console.log(currentTime);
             const time = Math.floor(pointerX / _1SEC_PX);
             setCurrentTime(time);
             updateTime(time);
         }
-    }, [pointerX]);
+    }, [isPointerMoving, pointerX, setCurrentTime, updateTime]);
     return (
         <div
             className={cnStrangeGraph()}
@@ -97,18 +88,12 @@ export default function GraphBase({
                     {props.children}
                 </div>
             </div>
-            {/* тут устанавливается положение и время в поинтер */}
-            {/* надо подогнать _1SEC_PX*/}
             <GraphPointer
                 offset={40}
                 left={pointerX}
-                // text={new Date(currentTime * 1000)
-                //     .toISOString()
-                //     .substring(14, 19)}
                 text={convertTime(currentTime)}
             />
             <div className={cnStrangeGraph("description-y")}>
-                {/* снизу выбор текущего времени */}
                 <BaseGraphXDescription
                     data={descriptionX}
                     selected={Math.floor(currentTime / 10)}

@@ -1,4 +1,3 @@
-import React from "react";
 import "./style.scss";
 import { ReactSVG } from "react-svg";
 import { IPieChart } from "../../../models/graph/inteface/IPieChart";
@@ -11,7 +10,7 @@ interface IComponentProps {
     component: IPieChart;
 }
 function paint(item: (string | number)[], img: string) {
-    let precen = Math.round(Number(item[0]));
+    const precen = Math.round(Number(item[0]));
 
     let procent;
     if (precen > 9 && precen < 99) {
@@ -36,14 +35,14 @@ function paint(item: (string | number)[], img: string) {
     );
 }
 export default function PieChartBlock(props: IComponentProps) {
-    let artInf = [props.component.artistic.valueOf(), "художественный"];
-    let colloquialInf = [props.component.colloquial.valueOf(), "разговорный"];
-    let journalisticInf = [
+    const artInf = [props.component.artistic.valueOf(), "художественный"];
+    const colloquialInf = [props.component.colloquial.valueOf(), "разговорный"];
+    const journalisticInf = [
         props.component.official.valueOf(),
         "официально-деловой",
     ];
-    let scientificInf = [props.component.scientific.valueOf(), "научный"];
-    let officialBusinessInf = [
+    const scientificInf = [props.component.scientific.valueOf(), "научный"];
+    const officialBusinessInf = [
         props.component.publicistic.valueOf(),
         "публицистический",
     ];

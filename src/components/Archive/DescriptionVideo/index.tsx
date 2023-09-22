@@ -5,8 +5,7 @@ import Arrow from "./icon/arrow-down.svg";
 import { ReactSVG } from "react-svg";
 import { UUID } from "crypto";
 import RoutesEnum from "../../../models/routes";
-import { Link, useNavigate } from "react-router-dom";
-import { Background } from "react-speedometer/dist";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     id: UUID;

@@ -1,8 +1,8 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../models/entry/user";
 
-
-const initialStateForProfile:IUser = {
+const initialStateForProfile: IUser = {
     id: "dudud-dudud-dudud-dudud-dudud",
     firstname: "Виктор",
     lastname: "Петрович",
@@ -17,7 +17,7 @@ const initialStateForProfile:IUser = {
     loads_limit: 0,
     tarif_duration: 0,
     trial_used: false,
-}
+};
 
 export const initialProfileState = {
     name: "Виктор",
@@ -26,16 +26,18 @@ export const initialProfileState = {
 
 const profileSlice = createSlice({
     name: "profile",
-    initialState: {user: initialStateForProfile, avatar:`/api/users/account/avatar/${initialStateForProfile.id}`},
+    initialState: {
+        user: initialStateForProfile,
+        avatar: `/api/users/account/avatar/${initialStateForProfile.id}`,
+    },
     reducers: {
-        setProfile:(state, action: PayloadAction<IUser>)=>{
-            
+        setProfile: (state, action: PayloadAction<IUser>) => {
             state.user = action.payload;
             state.avatar = `/api/users/account/avatar/${action.payload.id}`;
         },
-        setProfileAvatar:(state, action: PayloadAction<string>)=>{
+        setProfileAvatar: (state, action: PayloadAction<string>) => {
             state.avatar = action.payload;
-        }
+        },
     },
 });
 

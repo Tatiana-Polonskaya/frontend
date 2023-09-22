@@ -1,9 +1,10 @@
-import {
+import type {
     BaseQueryFn,
     FetchArgs,
-    fetchBaseQuery,
     FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
+
+import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
 
 import { IResponse } from "../../../models/api";

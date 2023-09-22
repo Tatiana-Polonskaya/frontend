@@ -3,7 +3,6 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 import Link from "../../../components/ui-kit/Link";
 
-
 const cnLoginFragment = cn("login-fragment");
 
 interface InfoFragmentProps {
@@ -12,7 +11,6 @@ interface InfoFragmentProps {
 }
 
 export default function InfoFragment(props: InfoFragmentProps) {
-
     return (
         <div className={cnLoginFragment()}>
             <p className={cnLoginFragment("phrase")}>{props.phrase}</p>

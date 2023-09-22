@@ -3,7 +3,6 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 
 import ProgressLine from "../ProgressLine";
-import Visible from "../../../../../Dropdown/-Visible";
 
 type Props = {
     info: IComponents[];

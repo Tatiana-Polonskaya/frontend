@@ -37,12 +37,12 @@ export default function ArchivePopup({
         },
     ];
 
-    const getTick = (id: number) => {
-        changeTickVideo(id);
+    const getTick = (idValue: number) => {
+        changeTickVideo(idValue);
     };
 
-    const delVideo = (id: string) => {
-        handleClick(id);
+    const delVideo = (idStr: string) => {
+        handleClick(idStr);
     };
 
     return (

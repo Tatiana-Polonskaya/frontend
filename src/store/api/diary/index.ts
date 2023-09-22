@@ -1,8 +1,16 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { createApi } from "@reduxjs/toolkit/dist/query/react";
 import { IResponse } from "../../../models/api";
-import { IAimFromBack, IAimParameters, ISendUserPurpose } from "../../../models/aim";
+import {
+    IAimFromBack,
+    IAimParameters,
+    ISendUserPurpose,
+} from "../../../models/aim";
 import customFetchBase from "../utils/customFetchBase";
-import { IAchievement, IStatisticJSON, TYPE_DIARY } from "../../../models/diary";
+import {
+    IAchievement,
+    IStatisticJSON,
+    TYPE_DIARY,
+} from "../../../models/diary";
 
 export const diaryApi = createApi({
     reducerPath: "api/diary",
@@ -21,22 +29,22 @@ export const diaryApi = createApi({
             }),
         }),
         sendUserPurpose: build.mutation<IResponse<void>, ISendUserPurpose>({
-            query: ({title, params}) => ({
+            query: ({ title, params }) => ({
                 url: "/api/video/purposes/purpose",
-                params: {title},
+                params: { title },
                 method: "POST",
-                body:params,
+                body: params,
             }),
         }),
         deleteUserPurpose: build.mutation<IResponse<void>, string>({
             query: (id) => ({
                 url: "/api/video/purposes/purpose",
-                params: {id},
+                params: { id },
                 method: "DELETE",
             }),
         }),
         getStatisticData: build.query<IResponse<IStatisticJSON>, TYPE_DIARY>({
-            query: (type:TYPE_DIARY) => ({
+            query: (type: TYPE_DIARY) => ({
                 url: `/api/video/diary/${type}`,
                 method: "GET",
             }),
@@ -46,7 +54,7 @@ export const diaryApi = createApi({
                 url: `/api/video/user/achievements`,
                 method: "GET",
             }),
-        })
+        }),
     }),
 });
 
@@ -60,7 +68,7 @@ export const {
     useLazyGetStatisticDataQuery,
     useGetAchievementsQuery,
     useLazyGetAchievementsQuery,
-    useDeleteUserPurposeMutation
+    useDeleteUserPurposeMutation,
 } = diaryApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = diaryApi;

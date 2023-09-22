@@ -1,6 +1,5 @@
 import "./UnityOfStyl.css";
 import Scale from "../Scale";
-import { IScaleDataType } from "../../../models/graph/inteface/scale";
 import GraphColor from "../../../models/graph/_colors";
 
 type Props = {
@@ -31,9 +30,9 @@ const convertUnityOfStyleInTitle = (title: string) => {
 export default function UnityOfStylScale(props: Props) {
     const MAX_STYLE = 0.5;
     const SECOND_MAX_STYLE = 0.2;
-    
-    let maxTitle: string[] = [];
-    let maxSecondTitles: string[] = [];
+
+    const maxTitle: string[] = [];
+    const maxSecondTitles: string[] = [];
 
     Object.entries(props).forEach((el) => {
         if (el[1] > MAX_STYLE) maxTitle.push(el[0]);
@@ -48,7 +47,7 @@ export default function UnityOfStylScale(props: Props) {
                         ? [
                               {
                                   title: convertUnityOfStyleInTitle(
-                                      maxTitle[0],
+                                      maxTitle[0]
                                   ),
                                   value: props[maxTitle[0] as keyof Props],
                                   color: GraphColor.BLUE,

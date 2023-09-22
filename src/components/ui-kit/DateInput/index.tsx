@@ -9,7 +9,7 @@ const cnDateInput = cn("date-input");
 
 type NumStateAlias = [
     number | undefined,
-    React.Dispatch<React.SetStateAction<number | undefined>>
+    React.Dispatch<React.SetStateAction<number | undefined>>,
 ];
 
 interface IDateInputProps {
@@ -39,7 +39,7 @@ export default function DateInput(props: IDateInputProps) {
     return (
         <div className={cnDateInput("main-field")}>
             <Input
-                style={{textAlign: "center"}}
+                style={{ textAlign: "center" }}
                 type="text"
                 inputMode="numeric"
                 placeholder="ДД"
@@ -49,7 +49,7 @@ export default function DateInput(props: IDateInputProps) {
                 onChange={(e) => setDay(Number(e.target.value) || undefined)}
             />
             <Input
-                style={{textAlign: "center"}}
+                style={{ textAlign: "center" }}
                 type="number"
                 placeholder="ММ"
                 value={month}
@@ -59,7 +59,7 @@ export default function DateInput(props: IDateInputProps) {
                 onChange={(e) => setMonth(Number(e.target.value) || undefined)}
             />
             <Input
-                style={{textAlign: "center"}}
+                style={{ textAlign: "center" }}
                 type="number"
                 placeholder="ГГГГ"
                 value={year}

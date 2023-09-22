@@ -126,23 +126,23 @@ export const getTotalDesc = (arrayValues: totalItemDesc) => {
     });
 
     if (maxValueArr >= MIN_RESULT && minValueArr >= MIN_RESULT) {
-        let minObject = Object.entries(arrayValues).filter(
-            ([key, obj]) => minValueArr === obj.value,
+        const minObject = Object.entries(arrayValues).filter(
+            ([, obj]) => minValueArr === obj.value
         );
-        let maxTitles = minObject.map((el) => convertTitleToRussian(el[0]));
+        const maxTitles = minObject.map((el) => convertTitleToRussian(el[0]));
         return `Не смотря на то, что Вы добились очень хороших показателей по основным критериям публичного выступления, в последующих репетициях следует обратить на его ${
             maxTitles.length > 1 ? maxTitles.join(", ") : maxTitles.at(0)
         }. Подробные рекомендации даны в соответствующих разделах выше. `;
     } else if (maxValueArr >= MIN_RESULT && minValueArr < MIN_RESULT) {
-        let maxObject = Object.entries(arrayValues).filter(
-            ([key, obj]) => maxValueArr === obj.value,
+        const maxObject = Object.entries(arrayValues).filter(
+            ([, obj]) => maxValueArr === obj.value
         );
-        let minObjects = Object.entries(arrayValues).filter(
-            ([key, obj]) => obj.value < MIN_RESULT,
+        const minObjects = Object.entries(arrayValues).filter(
+            ([, obj]) => obj.value < MIN_RESULT
         );
 
-        let minTitles = minObjects.map((el) => convertTitleToRussian(el[0]));
-        let maxTitles = maxObject.map((el) => convertTitleToRussian(el[0]));
+        const minTitles = minObjects.map((el) => convertTitleToRussian(el[0]));
+        const maxTitles = maxObject.map((el) => convertTitleToRussian(el[0]));
 
         return `Не смотря на то, что Вы добились хороших результатов по таким критериям публичного выступления, как ${
             maxTitles.length > 1 ? maxTitles.join(", ") : maxTitles.at(0)
@@ -150,10 +150,10 @@ export const getTotalDesc = (arrayValues: totalItemDesc) => {
             minTitles.length > 1 ? minTitles.join(", ") : minTitles.at(0)
         }. Подробные рекомендации даны в соответствующих разделах выше.`;
     } else {
-        let minObjects = Object.entries(arrayValues).filter(
-            ([key, obj]) => obj.value < MIN_RESULT,
+        const minObjects = Object.entries(arrayValues).filter(
+            ([, obj]) => obj.value < MIN_RESULT
         );
-        let minTitles = minObjects.map((el) => convertTitleToRussian(el[0]));
+        const minTitles = minObjects.map((el) => convertTitleToRussian(el[0]));
 
         return `В последующих репетициях следует обратить внимание на ${
             minTitles.length > 1 ? minTitles.join(", ") : minTitles.at(0)

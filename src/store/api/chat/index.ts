@@ -8,7 +8,7 @@ export const chatApi = createApi({
     reducerPath: "/api/chat",
     baseQuery: customFetchBase,
     endpoints: (build) => ({
-        getMessages: build.query<IResponse<Array<IMessageItem>>, null>({
+        getMessages: build.query<IResponse<IMessageItem[]>, null>({
             query: () => ({
                 url: "/api/support/messages",
                 method: "GET",
@@ -18,7 +18,7 @@ export const chatApi = createApi({
             query: (message) => ({
                 url: "/api/support/send-message",
                 method: "POST",
-                params: {message},
+                params: { message },
             }),
         }),
         getSSEConnection: build.query<any, void>({
@@ -34,7 +34,7 @@ export const {
     useGetMessagesQuery,
     useLazyGetMessagesQuery,
     useGetSSEConnectionQuery,
-    useSendMessageMutation
+    useSendMessageMutation,
 } = chatApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = chatApi;

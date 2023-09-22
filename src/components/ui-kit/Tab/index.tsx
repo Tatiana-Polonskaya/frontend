@@ -11,5 +11,12 @@ type TabProps = {
 
 const cnTab = cn("tab");
 export default function Tab(props: TabProps) {
-    return <button onClick={props.onClick} className={cnTab("button", {selected: props.selected})}>{props.children}</button>;
+    return (
+        <button
+            onClick={props.onClick}
+            className={cnTab("button", { selected: props.selected })}
+        >
+            {props.children}
+        </button>
+    );
 }

@@ -1,4 +1,4 @@
-.pagination-block{
+.pagination-block {
     display: flex;
     flex-flow: row nowrap;
     gap: 2rem;
@@ -8,46 +8,45 @@
     width: 100%;
     padding-top: 30px;
     padding-bottom: 30px;
-    
 
-    &-button{
+    &-button {
         width: 1.5rem;
         cursor: pointer;
         fill: rgb(124 142 181 / 50%);
 
-        &-svg div{
+        &-svg div {
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
             justify-content: center;
             width: 1.5rem;
         }
-        
-        &_active{
-            fill:rgb(36 119 244 / 100%);
+
+        &_active {
+            fill: rgb(36 119 244 / 100%);
         }
     }
 
-    &-number{
-        color: #7C8EB5;
-        font-weight: 500;    
+    &-number {
+        color: #7c8eb5;
+        font-weight: 500;
         font-size: 20px;
-        font-family: 'Montserrat Alternates';
+        font-family: "Montserrat Alternates";
         font-style: normal;
         line-height: 24px;
         cursor: pointer;
 
         &_current {
-            color: #2477F4;
+            color: #2477f4;
             font-weight: 700;
         }
     }
 
-    &-dot{
-        color: #7C8EB5;
-        font-weight: 500;    
+    &-dot {
+        color: #7c8eb5;
+        font-weight: 500;
         font-size: 20px;
-        font-family: 'Montserrat Alternates';
+        font-family: "Montserrat Alternates";
         font-style: normal;
         line-height: 24px;
     }

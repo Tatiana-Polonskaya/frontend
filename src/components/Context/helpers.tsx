@@ -1,10 +1,4 @@
-import {
-    Dispatch,
-    SetStateAction,
-    createContext,
-    useContext,
-    useState,
-} from "react";
+import { Dispatch, SetStateAction, createContext } from "react";
 
 // provider for setting the current time in graphs and others elements accoding to the video element
 interface VideoTimeContextProps {

@@ -15,8 +15,8 @@ export function convertMonotonyData(
 }
 
 export function dependenceMonotonyData(
-    param: NonMonotonyType | null = null,
-    average: number
+    average: number,
+    param: NonMonotonyType | null = null
 ): {
     withMedian: boolean;
     min: number;

@@ -24,15 +24,11 @@ type ArrowProps = {
 };
 
 function SampleNextArrow(props: ArrowProps) {
-    const { className,onClick } = props;
+    const { className, onClick } = props;
     return (
         <div className={className}>
-            <ReactSVG
-                src={arrow_right}    
-                onClick={onClick}
-            />
+            <ReactSVG src={arrow_right} onClick={onClick} />
         </div>
-        
     );
 }
 
@@ -40,26 +36,22 @@ function SamplePrevArrow(props: ArrowProps) {
     const { className, onClick } = props;
     return (
         <div className={className}>
-            <ReactSVG
-                src={arrow_left}
-                onClick={onClick}
-            />
+            <ReactSVG src={arrow_left} onClick={onClick} />
         </div>
     );
 }
 
-const cnСarouse = cn("Carousel");//className={cnСarouse()}
+const cnСarouse = cn("Carousel"); //className={cnСarouse()}
 
 export default function Carousel() {
-
     /* --------------------------- GETTING VIDEOS ---------------------------*/
 
     const [currentVideos, setCurrentVideos] = useState<IVideoFromBack[]>([]);
-    
+
     const { data } = useGetMainVideoQuery({
-        page:0,
-        limit:6,
-        tutorial:true
+        page: 0,
+        limit: 6,
+        tutorial: true,
     });
 
     useEffect(() => {
@@ -94,8 +86,12 @@ export default function Carousel() {
     return (
         <div>
             <Slider {...settings} className={cnСarouse("main-container")}>
-                {currentVideos && currentVideos.length>0 && (
-                    <CarouselItem {...currentVideos[0]} key={currentVideos[0].id} onClick={()=>clickOnVideo(currentVideos[0])}/>
+                {currentVideos && currentVideos.length > 0 && (
+                    <CarouselItem
+                        {...currentVideos[0]}
+                        key={currentVideos[0].id}
+                        onClick={() => clickOnVideo(currentVideos[0])}
+                    />
                 )}
             </Slider>
 

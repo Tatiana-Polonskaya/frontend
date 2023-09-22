@@ -22,6 +22,6 @@ export type EmotionalityDataItem = {
 type Toteltem = Record<EmotionalityItem, number>;
 
 export type EmotionalityJSON = {
-    total: Toteltem,
-    values:EmotionalityDataItem[],
-}
+    total: Toteltem;
+    values: EmotionalityDataItem[];
+};

@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from "react";
+import { ReactNode } from "react";
 import {
     ResponsiveContainer,
     Area,
@@ -6,8 +6,6 @@ import {
     CartesianGrid,
     YAxis,
     ComposedChart,
-    LabelList,
-    Label,
 } from "recharts";
 import { cn } from "@bem-react/classname";
 
@@ -32,11 +30,8 @@ type Props = {
 export default function StatsLineGraph({
     descriptionX,
     descriptionY = [-1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1],
-    withMedian = true,
     visible = true,
     items,
-    colors,
-    range,
 }: // data,
 Props) {
     const size = [0, 1];

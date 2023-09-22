@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { IVideoFromBack, IVideoStatus } from "../../models/video";
 
 import {
@@ -37,7 +37,6 @@ import { IAchievement, IStatisticItem, TYPE_DIARY } from "../../models/diary";
 import lampСharge from "./icons/lampСharge.svg";
 import RecommendationDairyGraph from "../RecommendationDairyGraph";
 import VideoLoad from "../VideoLoad";
-import ArchiveVideo from "../Archive/ArchiveVideo";
 import { useLocation } from "react-router-dom";
 
 export default function DiaryStart() {
@@ -219,7 +218,6 @@ export default function DiaryStart() {
             setCurrentStatus(analisisVideoByUser.data!.data!.videos);
             setCountAnalysisVideos(analisisVideoByUser.data!.data.total_videos);
             setHasAnalysisVideo(true);
-            
         } else if (
             analisisVideoByUser.data &&
             analisisVideoByUser.data!.error!.msg === "Video not found"
@@ -228,24 +226,6 @@ export default function DiaryStart() {
             setCountAnalysisVideos(0);
         }
     }, [analisisVideoByUser]);
-
-    /* ----------------------- GETTING VIDEO BLOCK -----------------------*/
-
-    const videosDataFromBack = useGetVideoByUserQuery({
-        page: currentPage,
-        limit: videosPerPage,
-    });
-
-    useEffect(() => {
-        if (
-            videosDataFromBack &&
-            videosDataFromBack.data &&
-            videosDataFromBack.data!.data
-        ) {
-            setCountSearchVideos(videosDataFromBack.data!.data!.total_videos);
-            setSearchVideos(videosDataFromBack.data!.data!.videos);
-        }
-    }, [videosDataFromBack]);
 
     /* ----------------------- RESEARCH VALUE -----------------------*/
 
@@ -282,7 +262,6 @@ export default function DiaryStart() {
         ) {
             setSearchVideos(videosBySearch.data!.data!.videos);
             setCountSearchVideos(videosBySearch.data!.data!.total_videos);
-            
         }
     }, [videosBySearch]);
 
@@ -295,7 +274,31 @@ export default function DiaryStart() {
             });
             if (countAnalysisVideos === 0) setHasAnalysisVideo(false);
         }
-    }, [hasAnalysisVideo, countAnalysisVideos]);
+    }, [
+        hasAnalysisVideo,
+        countAnalysisVideos,
+        getVideosBySearch,
+        currentPage,
+        searchValue,
+    ]);
+
+    /* ----------------------- GETTING VIDEO BLOCK -----------------------*/
+
+    const videosDataFromBack = useGetVideoByUserQuery({
+        page: currentPage,
+        limit: videosPerPage,
+    });
+
+    useEffect(() => {
+        if (
+            videosDataFromBack &&
+            videosDataFromBack.data &&
+            videosDataFromBack.data!.data
+        ) {
+            setCountSearchVideos(videosDataFromBack.data!.data!.total_videos);
+            setSearchVideos(videosDataFromBack.data!.data!.videos);
+        }
+    }, [videosDataFromBack]);
 
     /* ----------------------- ANALYSIS PAGINATION BLOCK -----------------------*/
 
@@ -330,22 +333,30 @@ export default function DiaryStart() {
     const deleteVideoByID = async (id: string) => await deleteRequest(id);
 
     const removeItem = async (id: string) => {
-        // setSearchVideos((prevState) => prevState.filter((el) => el.id !== id));
-        // setCountSearchVideos((prev) => prev - 1);
         deleteVideoByID(id);
     };
 
-    useEffect(()=>{
-        if(deleteResponse.isSuccess){
-            if(countSearchVideos ===1) window.location.reload();
-            let newvideo = async ()=> await getVideosBySearch({
-                page: currentPage,
-                limit: videosPerPage,
-                search: searchValue,
-            },false);
-            newvideo()
+    useEffect(() => {
+        if (deleteResponse.isSuccess) {
+            if (countSearchVideos === 1) window.location.reload();
+            const newvideo = async () =>
+                await getVideosBySearch(
+                    {
+                        page: currentPage,
+                        limit: videosPerPage,
+                        search: searchValue,
+                    },
+                    false
+                );
+            newvideo();
         }
-    },[deleteResponse])
+    }, [
+        countSearchVideos,
+        currentPage,
+        deleteResponse,
+        getVideosBySearch,
+        searchValue,
+    ]);
 
     return (
         <div>

@@ -1,7 +1,7 @@
 import { cn } from "@bem-react/classname";
 
 import "./style.scss";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import deleteBtn from "./assets/delete-btn.svg";
 import plusBtn from "./assets/plus-btn.svg";
@@ -15,18 +15,18 @@ const LIMIT_POINT_PLAN = 20;
 export default function ListInput(props: Props) {
     const ListInputStyle = cn("ListInput");
 
-    const [inputValues, setInputValues] = useState<Array<String>>(
+    const [inputValues, setInputValues] = useState<String[]>(
         new Array(1).fill("")
     );
 
     const addInput = () => {
         if (inputValues.length < LIMIT_POINT_PLAN)
-            setInputValues((inputValues) => [...inputValues, ""]);
+            setInputValues((values) => [...values, ""]);
     };
 
     const removeInput = (index: number) => {
         if (inputValues.length > 1) {
-            let temp = [
+            const temp = [
                 ...inputValues.slice(0, index),
                 ...inputValues.slice(index + 1),
             ];
@@ -35,7 +35,7 @@ export default function ListInput(props: Props) {
     };
 
     const addInputValues = (index: number, value: string) => {
-        let temp = [...inputValues];
+        const temp = [...inputValues];
         temp[index] = value;
         setInputValues(temp);
     };
@@ -48,7 +48,7 @@ export default function ListInput(props: Props) {
         <div className={ListInputStyle()}>
             <div className={ListInputStyle("list-block-input")}>
                 {inputValues.map((el, id) => (
-                    <div key={id} className={ListInputStyle("block-input")} >
+                    <div key={id} className={ListInputStyle("block-input")}>
                         <span className={ListInputStyle("index")}>
                             {id + 1}:
                         </span>

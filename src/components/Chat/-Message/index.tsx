@@ -5,6 +5,8 @@ import { IMessageItem } from "../../../models/chat";
 import { ReactSVG } from "react-svg";
 
 import Reply from "./../icon/reply.svg";
+import { getTimeFromData } from "../../../@adapters/Time/convertStringToHours";
+import { useAppSelector } from "../../../hooks/redux";
 
 const cnMessage = cn("chat-message");
 
@@ -23,23 +25,16 @@ const WithArrow = (props: withArrowProps) => (
     </>
 );
 
-const getTimeFromData = (datetime: string) => {
-    const newdate = new Date(datetime);
-    const minutes = newdate.getMinutes();
-    const hours = newdate.getHours() + 3 >= 24 ? 0 : newdate.getHours() + 3;
-    return (
-        (hours < 10 ? "0" + hours : hours) +
-        ":" +
-        (minutes < 10 ? "0" + minutes : minutes)
-    );
-};
-
 type Props = {
     is_first?: boolean;
     replay?: string;
 } & IMessageItem;
 
 export default function ChatMessage(props: Props) {
+    const { firstname: name, lastname: surname } = useAppSelector(
+        (state) => state.profile.user
+    );
+
     return (
         <div className={cnMessage("wrapper", mineCnHelper(props.is_mine))}>
             <WithArrow is_mine={props.is_mine}>
@@ -56,7 +51,7 @@ export default function ChatMessage(props: Props) {
                                 })}
                             >
                                 {props.is_mine
-                                    ? "me"
+                                    ? `${name} ${surname}`
                                     : "Команда поддержки Speech Up"}
                             </span>
                             <span>{getTimeFromData(props.created_at)}</span>
@@ -107,8 +102,8 @@ export default function ChatMessage(props: Props) {
                                 особенностей работы системы Антиплагиат, с
                                 которой взаимодействует Speech Up, в период
                                 бета-тестирования отключена оценка показателя
-                                'Аргументированность', на всех видео она будет
-                                равна 0%.
+                                &laquo;Аргументированность&raquo;, на всех видео
+                                она будет равна 0%.
                                 <br />
                                 <br />
                                 ✨ А в этот чат вы можете задавать любые вопросы

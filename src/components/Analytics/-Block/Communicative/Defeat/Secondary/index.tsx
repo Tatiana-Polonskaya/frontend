@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { cn } from "@bem-react/classname";
-
 import "./style.scss";
 
 import GraphColor from "../../../../../../models/graph/_colors";
@@ -35,7 +33,7 @@ const cnDefeat = cn("defeat");
 type propsDefeat = {
     typeDefeat: IDefeat[];
 };
-let citations: propsDefeat = {
+const citations: propsDefeat = {
     typeDefeat: [
         {
             type: "слова-паразиты",
@@ -68,11 +66,11 @@ export default function SecondaryDefeat(props: Props) {
     };
 
     function determ(str: string, arrS: Priority, index: number) {
-        let arrParam: Param[] = [];
-        let strArr = str.split(" ");
+        const arrParam: Param[] = [];
+        const strArr = str.split(" ");
         const copyStrArr = strArr.map((el) => el.toLowerCase());
 
-        strArr.forEach((el) => {
+        strArr.forEach(() => {
             arrParam.push({
                 type: [],
                 color: [],
@@ -86,7 +84,7 @@ export default function SecondaryDefeat(props: Props) {
 
                 // сюда надо вставить перебор по массиву входящих
                 if (!subStr.includes(" ")) {
-                    let sexIndex =
+                    const sexIndex =
                         copyStrArr.indexOf(`${subStr}.`.toLowerCase()) !== -1
                             ? copyStrArr.indexOf(`${subStr}.`.toLowerCase())
                             : copyStrArr.indexOf(`${subStr},`.toLowerCase()) !==
@@ -146,15 +144,14 @@ export default function SecondaryDefeat(props: Props) {
                     }
                 } else if (subStr.includes(" ")) {
                     // если подстрока
-                    let subStrArr = subStr.split(" ");
+                    const subStrArr = subStr.split(" ");
                     const copySubStrArr = subStrArr.map((el) =>
                         el.toLowerCase()
                     );
                     for (let i = 0; i < copyStrArr.length; i++) {
                         let flag: boolean = false;
                         for (let j = 0; j < copySubStrArr.length; j++) {
-                            if (j === copySubStrArr.length - 1) {
-                            }
+                            // if (j === copySubStrArr.length - 1) { /* empty */ }
                             if (
                                 (j === copySubStrArr.length - 1 &&
                                     copyStrArr[i + j] === copySubStrArr[j]) ||

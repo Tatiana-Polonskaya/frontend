@@ -7,4 +7,4 @@ const registerReducer = combineReducers({
     business: businessRegisterReducer,
 });
 
-export default registerReducer
+export default registerReducer;

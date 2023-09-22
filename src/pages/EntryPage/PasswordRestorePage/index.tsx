@@ -43,7 +43,14 @@ export default function PasswordRestorePage() {
     };
 
     return (
-        <EntryLayout image={<ReactSVG src={PasswordRestoreImage} className={cnPasswordRestorePage("image")}/>}>
+        <EntryLayout
+            image={
+                <ReactSVG
+                    src={PasswordRestoreImage}
+                    className={cnPasswordRestorePage("image")}
+                />
+            }
+        >
             <div className={cnPasswordRestorePage()}>
                 {isProcessed ? (
                     <>

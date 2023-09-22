@@ -12,8 +12,8 @@
             align-items: center;
             justify-content: start;
             padding-top: 10px;
-            color: #7C8EB5;
-            font-family: 'Montserrat Alternates';
+            color: #7c8eb5;
+            font-family: "Montserrat Alternates";
 
             &-icon {
                 width: 24px;
@@ -23,7 +23,7 @@
             &-label {
                 font-weight: 500;
                 font-size: 16px;
-                font-family: 'Montserrat Alternates';
+                font-family: "Montserrat Alternates";
                 font-style: normal;
                 line-height: 20px;
                 cursor: pointer;
@@ -35,41 +35,39 @@
                     display: none;
                 }
 
-                &-radio:checked+&-custom-radio__label,
-                &-radio:not(:checked)+&-custom-radio__label {
+                &-radio:checked + &-custom-radio__label,
+                &-radio:not(:checked) + &-custom-radio__label {
                     position: relative;
                     display: inline-block;
                     margin-bottom: 5px;
                     padding: 6px 0 0 40px;
                 }
 
-                &-radio:not(:checked)+&-custom-radio__label::before {
+                &-radio:not(:checked) + &-custom-radio__label::before {
                     position: absolute;
                     top: 0;
                     left: 0;
                     width: 28px;
                     height: 28px;
-                    border: 2px solid #B2C2E4;
+                    border: 2px solid #b2c2e4;
                     border-radius: 8px;
-                    content: '';
-
+                    content: "";
                 }
 
-                &-radio:checked+&-custom-radio__label::before {
+                &-radio:checked + &-custom-radio__label::before {
                     position: absolute;
                     top: 0;
                     left: 0;
                     width: 32px;
                     height: 32px;
-                    background: #2477F4;
+                    background: #2477f4;
                     border-radius: 8px;
-                    outline: 2px solid #FFF;
+                    outline: 2px solid #fff;
                     outline-offset: -4px;
-                    content: '';
-
+                    content: "";
                 }
 
-                &-radio:checked+&-custom-radio__label::after {
+                &-radio:checked + &-custom-radio__label::after {
                     // content: '';
                     // width: 24px;
                     // // width: 1.3em;
@@ -85,16 +83,15 @@
                     // background-position: center center;
                     // background-size: 50% 50%;
                     // background-image: url("./images/rectangle-answer.png");
-
                 }
             }
         }
 
         &_checked {
-            color: #031C3D;
-            background: #2477F4;
+            color: #031c3d;
+            background: #2477f4;
             box-shadow: 0 0 14px rgb(124 142 181 / 25%);
-            fill: #FFF;
+            fill: #fff;
         }
     }
 }

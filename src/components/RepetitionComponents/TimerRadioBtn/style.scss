@@ -12,7 +12,7 @@
     }
 
     &-text {
-        color: #37476A;
+        color: #37476a;
         font-weight: 400;
         font-size: 16px;
         font-family: "Onest";
@@ -29,13 +29,13 @@
             justify-content: center;
             margin: 0 10px;
             padding: 3px 10px;
-            background: #F3F5F9;
+            background: #f3f5f9;
             border-radius: 8px;
         }
 
         &-field {
             width: 40px;
-            color: #37476A;
+            color: #37476a;
             font-weight: 600;
             font-size: 16px;
             font-family: "Montserrat Alternates";
@@ -45,7 +45,7 @@
             background: none;
             border: none;
 
-            &_onblur{
+            &_onblur {
                 color: red;
             }
         }

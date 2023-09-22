@@ -1,28 +1,27 @@
-.blocText{
+.blocText {
     display: flex;
     flex-direction: column;
     gap: 16px;
     align-items: flex-start;
-    width:1200px;
+    width: 1200px;
     padding: 16px;
-    background: #F7FAFF;
+    background: #f7faff;
     border-radius: 12px;
-
 }
 
-.textInf{
+.textInf {
     display: flex;
     align-items: center;
     width: 90%;
-    color: #17282F;
+    color: #17282f;
     font-weight: 500;
     font-size: 16px;
-    font-family: 'Onest';
+    font-family: "Onest";
     font-style: normal;
     line-height: 20px;
 }
 
-.blocColor{
+.blocColor {
     display: flex;
     flex-direction: row;
     gap: 6px;
@@ -30,33 +29,35 @@
     justify-content: space-between;
     width: 100%;
     padding: 0 8px;
-
 }
 
-.colorSquare1, .colorSquare2,.colorSquare3,.colorSquare4 {
+.colorSquare1,
+.colorSquare2,
+.colorSquare3,
+.colorSquare4 {
     width: 20px;
     height: 20px;
-    background: linear-gradient(74.12deg, #410DAE 0%, #7524FA 100%);
+    background: linear-gradient(74.12deg, #410dae 0%, #7524fa 100%);
     border-radius: 4px;
 }
 
-.colorSquare2{
-    background: linear-gradient(78.41deg, #FE6972 0%, #FF4E78 100%);
+.colorSquare2 {
+    background: linear-gradient(78.41deg, #fe6972 0%, #ff4e78 100%);
 }
 
-.colorSquare3{
-    background: linear-gradient(32.08deg, #FFB800 0%, #FDA743 100%);
+.colorSquare3 {
+    background: linear-gradient(32.08deg, #ffb800 0%, #fda743 100%);
 }
 
-.colorSquare4{
-    background: #ADB9D4;
+.colorSquare4 {
+    background: #adb9d4;
 }
 
-.Square{
+.Square {
     display: flex;
     flex-direction: row;
     gap: 10px;
     align-items: center;
-    width:25%;
+    width: 25%;
     padding: 0;
 }

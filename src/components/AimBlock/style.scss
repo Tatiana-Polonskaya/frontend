@@ -15,7 +15,7 @@
         align-items: center;
         justify-content: center;
         margin-right: 10px;
-        color: #37476A;
+        color: #37476a;
         font-weight: 600;
         font-size: 16px;
         font-family: "Montserrat Alternates";
@@ -32,7 +32,7 @@
             justify-content: center;
             width: 30px;
             height: 30px;
-            color: #7C8EB5;
+            color: #7c8eb5;
             font-weight: 600;
             font-size: 20px;
             font-family: "Montserrat Alternates";
@@ -42,14 +42,13 @@
 
             &_active {
                 color: #fff;
-                background: #2477F4;
+                background: #2477f4;
             }
         }
     }
 
     &-grow {
         flex-grow: 1;
-
     }
 
     &-btn {
@@ -59,17 +58,14 @@
         align-items: center;
         justify-content: center;
         padding: 6px 8px 6px 12px;
-        color: #FFF;
+        color: #fff;
         font-weight: 600;
         font-size: 14px;
         font-family: "Montserrat Alternates";
-        background: #FFB800;
+        background: #ffb800;
         border-radius: 8px;
         cursor: pointer;
-
     }
-
-
 
     &-steps {
         display: flex;
@@ -82,7 +78,7 @@
         &-item {
             flex-grow: 1;
             padding: 4px;
-            color: #7C8EB5;
+            color: #7c8eb5;
             font-weight: 500;
             font-size: 20px;
             font-family: "Onest";
@@ -90,7 +86,7 @@
             border-radius: 8px;
 
             &_active {
-                color: #2477F4;
+                color: #2477f4;
                 background: rgb(36 119 244 / 10%);
             }
         }
@@ -107,7 +103,7 @@
 
         &-checkbox {
             &-text {
-                color: #7C8EB5;
+                color: #7c8eb5;
                 font-weight: 500;
                 font-size: 16px;
                 font-family: "Montserrat Alternates";
@@ -121,7 +117,7 @@
 
                 &-blue {
                     padding: 5px;
-                    color: #2477F4;
+                    color: #2477f4;
                     font-weight: 500;
                     font-size: 12px;
                     font-family: "Montserrat Alternates";
@@ -131,8 +127,6 @@
                     opacity: 1;
                 }
             }
-
-
         }
 
         &-btn {
@@ -152,24 +146,21 @@
                 justify-content: center;
             }
 
-
             &-text {
                 font-weight: 500;
                 font-size: 16px;
                 font-family: "Montserrat Alternates";
             }
-
         }
     }
 
     &-empty-msg {
         padding: 12px;
-        color: #7C8EB5;
+        color: #7c8eb5;
         font-weight: 500;
         font-size: 16px;
         font-family: "Montserrat Alternates";
         font-style: normal;
         line-height: normal;
     }
-
 }

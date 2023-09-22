@@ -17,14 +17,14 @@ export const tariffApi = createApi({
         getUserTraiff: build.query<IResponse<ITariff>, void>({
             query: () => ({
                 url: "/api/users/tarifs/info",
-                method: "GET"
+                method: "GET",
             }),
         }),
         sendTariff: build.mutation<IResponse<void>, ISetTariff>({
-            query: ({tarif_id, user_id}) => ({
+            query: ({ tarif_id, user_id }) => ({
                 url: "/api/users/tarifs/set",
                 method: "POST",
-                params: {tarif_id, user_id}
+                params: { tarif_id, user_id },
             }),
         }),
     }),
@@ -33,7 +33,7 @@ export const tariffApi = createApi({
 export const {
     useGetTraiffsQuery,
     useGetUserTraiffQuery,
-    useSendTariffMutation
+    useSendTariffMutation,
 } = tariffApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = tariffApi;

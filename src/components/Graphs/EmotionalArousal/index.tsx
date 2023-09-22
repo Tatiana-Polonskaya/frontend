@@ -1,4 +1,3 @@
-import React from "react";
 import "./style.css";
 import { ReactSVG } from "react-svg";
 import flaw from "./img/недостаток.svg";
@@ -14,6 +13,17 @@ const textForMedium: string =
 const textForSurplusTitle: string = "Излишнее эмоциональное возбуждение";
 const textForSurplus: string =
     "Снижается способность контролировать результат выступления.";
+
+function paint(img: string, classN: string, text?: string, textTitle?: string) {
+    return (
+        <div className="blockEmotionalArousal">
+            <ReactSVG src={img} className={classN} />
+            <div className="textEmotionalArousal"> {textTitle} </div>
+            <div className="tEmotionalArousal">{text}</div>
+        </div>
+    );
+}
+
 function check(data: number) {
     if (data <= 0.4) {
         return (
@@ -57,16 +67,6 @@ function check(data: number) {
             </div>
         );
     }
-}
-
-function paint(img: string, classN: string, text?: string, textTitle?: string) {
-    return (
-        <div className="blockEmotionalArousal">
-            <ReactSVG src={img} className={classN} />
-            <div className="textEmotionalArousal"> {textTitle} </div>
-            <div className="tEmotionalArousal">{text}</div>
-        </div>
-    );
 }
 
 type Props = {

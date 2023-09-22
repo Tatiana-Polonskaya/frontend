@@ -1,7 +1,7 @@
-import React from "react";
 import "./style.css";
 import { ISimel } from "../../../models/graph/inteface/ISimel";
 import Smiley from "../SmileBlock/index";
+
 import okImg from "./img/ok.svg";
 import happyImg from "./img/happy.svg";
 import angryImg from "./img/angry.svg";
@@ -15,7 +15,7 @@ type Props = {
 };
 
 function Emotionality(props: Props) {
-    let inf: ISimel = {
+    const inf: ISimel = {
         items: [
             {
                 id: 1,

@@ -1,4 +1,4 @@
-.blockEmotionalArousal{
+.blockEmotionalArousal {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -7,44 +7,45 @@
     width: 33.3%;
     margin: 5px;
     padding: 16px;
-    background: #F7FAFF;
+    background: #f7faff;
     border-radius: 32px;
 }
 
-.allEmotionalArousal{
+.allEmotionalArousal {
     display: flex;
-    justify-content: space-between ;
+    justify-content: space-between;
     width: 100%;
     background: #fff;
 }
 
-.textEmotionalArousal{
+.textEmotionalArousal {
     display: flex;
     align-items: center;
-    color: #37476A;
+    color: #37476a;
     font-weight: 600;
     font-size: 16px;
-    font-family: 'Montserrat Alternates';
-    font-style: normal;
-    line-height: 20px;
-    text-align: center;}
-
-.tEmotionalArousal{
-    display: flex;
-    align-items: center;
-    color: #7C8EB5;
-    font-weight: 400;
-    font-size: 16px;
-    font-family: 'Onest';
+    font-family: "Montserrat Alternates";
     font-style: normal;
     line-height: 20px;
     text-align: center;
 }
 
-.imkEmotionalArousal{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 0%, black 0);
+.tEmotionalArousal {
+    display: flex;
+    align-items: center;
+    color: #7c8eb5;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: "Onest";
+    font-style: normal;
+    line-height: 20px;
+    text-align: center;
 }
 
-.imkEmotionalArousal1{
-    mask-image: linear-gradient(rgb( 0 0 0 / 50%) 100%, black 0);
+.imkEmotionalArousal {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 0%, black 0);
+}
+
+.imkEmotionalArousal1 {
+    mask-image: linear-gradient(rgb(0 0 0 / 50%) 100%, black 0);
 }

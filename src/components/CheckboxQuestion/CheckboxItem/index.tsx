@@ -1,6 +1,13 @@
 import { cn } from "@bem-react/classname";
 import "./style.scss";
-import { DetailedHTMLProps, ForwardRefRenderFunction, InputHTMLAttributes, LegacyRef, ReactNode, forwardRef, useRef } from "react";
+import {
+    DetailedHTMLProps,
+    ForwardRefRenderFunction,
+    InputHTMLAttributes,
+    LegacyRef,
+    ReactNode,
+    forwardRef,
+} from "react";
 
 type InputProps = DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
@@ -15,20 +22,7 @@ type Props = InputProps & {
     customref?: LegacyRef<HTMLInputElement>;
 };
 
-// type Props = {
-//     
-//     value: string;
-//     name: string;
-    
-//     checked: boolean;
-    
-//     disabled?: boolean;
-//     ref?: LegacyRef<HTMLInputElement>,
-    
-// };
-
 export default function CheckBoxItem(props: Props) {
-
     const cnCheckBoxItem = cn("CheckBoxItem");
 
     return (
@@ -48,9 +42,7 @@ export default function CheckBoxItem(props: Props) {
                     <input
                         type="text"
                         placeholder={props.title}
-                        className={cnCheckBoxItem(
-                            "item-input-text"
-                        )}
+                        className={cnCheckBoxItem("item-input-text")}
                         disabled={!props.checked}
                         ref={props.customref}
                         // onChange={changeAnotherAnswer}
@@ -66,7 +58,7 @@ export default function CheckBoxItem(props: Props) {
                         checked={props.checked}
                         onChange={() => props.handleOnChange()}
                         className={cnCheckBoxItem("item-check")}
-                        disabled={props.disabled? props.disabled : false}
+                        disabled={props.disabled ? props.disabled : false}
                     />
                     <span className={cnCheckBoxItem("item-span")}>
                         {props.children}
@@ -77,9 +69,9 @@ export default function CheckBoxItem(props: Props) {
     );
 }
 
-const ForwardedCheckBoxItemFunc: ForwardRefRenderFunction<HTMLInputElement, Props> = (
-    props,
-    ref
-) => <CheckBoxItem customref={ref} {...props} />;
+const ForwardedCheckBoxItemFunc: ForwardRefRenderFunction<
+    HTMLInputElement,
+    Props
+> = (props, ref) => <CheckBoxItem customref={ref} {...props} />;
 
 export const ForwardedCheckBoxItem = forwardRef(ForwardedCheckBoxItemFunc);

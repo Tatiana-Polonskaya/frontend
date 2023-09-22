@@ -1,10 +1,10 @@
-.text1{
+.text1 {
     display: flex;
     align-items: center;
     height: 40px;
-    color: #7C8EB5;
+    color: #7c8eb5;
     font-size: 20px;
-    font-family: 'Onest';
+    font-family: "Onest";
     font-style: normal;
     line-height: 25px;
 }

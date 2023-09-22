@@ -21,7 +21,9 @@ export default function LoginRegisterChanger(props: LoginRegisterChangerProps) {
             {props.pageType === PageType.Register ? (
                 <>
                     <span>Уже есть аккаунт?</span>
-                    <Link onClick={() => navigate(RoutesEnum.LOGIN)}>Войти</Link>
+                    <Link onClick={() => navigate(RoutesEnum.LOGIN)}>
+                        Войти
+                    </Link>
                 </>
             ) : (
                 <>

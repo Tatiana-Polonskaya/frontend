@@ -2,7 +2,6 @@ import { cn } from "@bem-react/classname";
 
 import "./style.scss";
 
-import Invisible from "../../../../../Dropdown/-Invisible";
 import ConnectivityGraph from "../../../../../Graphs/Connectivity";
 import { ConnectivityDataItem } from "../../../../../../models/graph/connectivity";
 
@@ -21,7 +20,7 @@ const cnSubsequence = cn("subsequence");
 type propsSubsequence = {
     typeSubsequence: ISubsequence[];
 };
-let subsequence: propsSubsequence = {
+const subsequence: propsSubsequence = {
     typeSubsequence: [
         {
             type: "высказывания логически не связаны",

@@ -5,8 +5,8 @@ import { ReactNode } from "react";
 const cnEmptyLayout = cn("empty-layout");
 
 type EmptyLayoutProps = {
-    children?: ReactNode,
-}
+    children?: ReactNode;
+};
 
 export default function EmptyLayout(props: EmptyLayoutProps) {
     return (

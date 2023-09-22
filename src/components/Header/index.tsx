@@ -3,8 +3,6 @@ import ProfilePreview from "../ProfilePreview";
 
 import Notification from "../Notification";
 
-
-
 import "./style.scss";
 
 type Props = {

@@ -17,7 +17,6 @@ import ActivationErrorPage from "../ActivationPage/-Error";
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 
-
 export default function RegisterPage() {
     const cnRegister = cn("RegisterPage");
     const userType = useAppSelector((state) => state.entry.userType);

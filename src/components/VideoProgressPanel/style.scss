@@ -127,7 +127,8 @@
 
 .pie::before {
     inset: 0;
-    background: radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b)
+    background:
+        radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b)
             var(--b) no-repeat,
         conic-gradient(var(--c) calc(var(--p) * 1%), #0000 0);
     mask: radial-gradient(

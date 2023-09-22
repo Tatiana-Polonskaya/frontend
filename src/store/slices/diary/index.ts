@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { IAimItem } from "../../../models/aim";
-
 
 // Define the initial state using that type
 const initialState: IAimItem = {
@@ -10,13 +10,12 @@ const initialState: IAimItem = {
     progress: 0,
     created_at: "",
     tasks: [],
-    parameters: []
-}
-  
+    parameters: [],
+};
 
 const diarySlice = createSlice({
     name: "diary",
-    initialState:{userAims:[initialState]},
+    initialState: { userAims: [initialState] },
     reducers: {
         updateUserAims: (state, action: PayloadAction<IAimItem[]>) => {
             state.userAims = action.payload;

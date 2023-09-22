@@ -33,7 +33,7 @@ export default function VideoBlock() {
 
     const [getCurrentMainVideos, currentMainVideos] =
         useLazyGetMainVideoQuery();
-    const { isSuccess, isLoading } = currentMainVideos;
+    const { isLoading } = currentMainVideos;
 
     useEffect(() => {
         if (isLoading) console.log("isLoading");

@@ -24,7 +24,7 @@ export default function LoadImage({
     onScaleChange,
     closePopup,
 }: Props) {
-    const cnPersonalUser = cn("personal-area");
+    // const cnPersonalUser = cn("personal-area");
     const cnChangeFoto = cn("change-foto");
     const cnTariffBlock = cn("tariff-block");
 

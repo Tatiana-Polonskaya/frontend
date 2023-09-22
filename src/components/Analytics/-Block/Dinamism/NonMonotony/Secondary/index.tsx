@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { cn } from "@bem-react/classname";
 
 import "./style.scss";
@@ -44,7 +43,7 @@ export default function SecondaryNonMonotony(props: Props) {
         setGraph(ind);
         return;
     };
-    let NonMonLIne: propsLine = {
+    const NonMonLIne: propsLine = {
         typeLine: [
             {
                 type: "основной график",

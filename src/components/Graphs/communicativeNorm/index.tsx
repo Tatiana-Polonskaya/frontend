@@ -1,4 +1,3 @@
-import React from "react";
 import { ISimel } from "../../../models/graph/inteface/ISimel";
 import angryImg from "./img/angry.svg";
 import cognitiveDistortionsImg from "./img/CognitiveDistortions.svg";
@@ -13,7 +12,7 @@ type Props = {
 };
 
 function CommunicativeNorm(props: Props) {
-    let inf: ISimel = {
+    const inf: ISimel = {
         items: [
             {
                 id: 1,

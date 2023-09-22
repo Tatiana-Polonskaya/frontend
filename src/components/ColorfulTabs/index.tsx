@@ -1,12 +1,12 @@
-import { cn } from '@bem-react/classname';
-import React, { ReactElement, ReactNode, useState } from 'react'
-import ColorfulTab from './ColorofulTab';
+import { cn } from "@bem-react/classname";
+import { ReactElement, ReactNode, useState } from "react";
+import ColorfulTab from "./ColorofulTab";
 
 import "./style.scss";
 
-type Props ={
-    children: Array<ReactNode>;
-}
+type Props = {
+    children: ReactNode[];
+};
 
 export default function ColorfulTabs(props: Props) {
     const cnColorfulTab = cn("ColorfulTabs");
@@ -22,7 +22,7 @@ export default function ColorfulTabs(props: Props) {
         <div className={cnColorfulTab()}>
             <ul className={cnColorfulTab("list")}>
                 {children.map((child) => {
-                    return child? (
+                    return child ? (
                         <ColorfulTab
                             key={child.props.title}
                             activeTab={activeTab}
@@ -35,7 +35,7 @@ export default function ColorfulTabs(props: Props) {
 
             <div className={cnColorfulTab("content")}>
                 {children.map((child) => {
-                    if(child){
+                    if (child) {
                         if (child.props.title !== activeTab) return undefined;
                         return child;
                     }

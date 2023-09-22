@@ -101,7 +101,10 @@ export default function Menu() {
             >
                 <div className={cnMenu("modal")}>
                     <div className={cnMenu("ImgText")}>
-                        <ReactSVG src={exitImg} className={cnMenu("modal-svg")}/>
+                        <ReactSVG
+                            src={exitImg}
+                            className={cnMenu("modal-svg")}
+                        />
                         <span className={cnMenu("textQ")}>
                             Вы уверены, что хотите выйти из аккаунта?
                         </span>

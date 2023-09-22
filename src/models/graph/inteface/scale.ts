@@ -1,5 +1,5 @@
-import {IDescriptionScale} from "./IDescriptionScale";
+import { IDescriptionScale } from "./IDescriptionScale";
 
-export interface IScaleDataType{
-        item: IDescriptionScale[]
+export interface IScaleDataType {
+    item: IDescriptionScale[];
 }

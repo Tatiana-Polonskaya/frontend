@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ForwardedInput } from "../ui-kit/Input";
 import Button from "../ui-kit/Button";
 import { VideoUploadContext } from "../RepetitionComponents/RepetitionStart";
@@ -29,9 +29,9 @@ function getPrettySizeFile(size: number, decimals = 2): string {
         return "0";
     } else {
         const info_for_step = 1024;
-        var dm = decimals < 0 ? 0 : decimals;
-        var sizes = ["байт", "КБ", "МБ", "ГБ", "ТБ"];
-        var i = Math.floor(Math.log(size) / Math.log(info_for_step));
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ["байт", "КБ", "МБ", "ГБ", "ТБ"];
+        const i = Math.floor(Math.log(size) / Math.log(info_for_step));
         return (
             parseFloat((size / Math.pow(info_for_step, i)).toFixed(dm)) +
             " " +
@@ -61,7 +61,7 @@ export default function PreviewBlock({
     const [isNormDuration, setIsNormDuration] = useState(true);
 
     const videoRef = useRef<HTMLVideoElement | any>();
-    let mediaSource = new MediaSource();
+    const mediaSource = new MediaSource();
     const mimeCodec = "video/mp4";
 
     function sourceOpen() {
@@ -96,9 +96,9 @@ export default function PreviewBlock({
     }, [videoRef.current]);
 
     const [durationVideo, setDurationVideo] = useState(
-        Number(currentInfoData.duration),
+        Number(currentInfoData.duration)
     );
-    console.log("currentInfoData.duration", currentInfoData.duration)
+    console.log("currentInfoData.duration", currentInfoData.duration);
 
     const getDurationVideo = async (n: number) => {
         if (n && durationVideo === 0) {
@@ -171,7 +171,7 @@ export default function PreviewBlock({
                                 {sizeVideo && getPrettySizeFile(sizeVideo)} •{" "}
                                 {durationVideo &&
                                     convertSecondIntoPrettyDuration(
-                                        durationVideo,
+                                        durationVideo
                                     )}
                             </span>
                         </div>
@@ -180,14 +180,14 @@ export default function PreviewBlock({
                                 <div className={cnPreview("input-block-title")}>
                                     <span
                                         className={cnPreview(
-                                            "input-block-title-gray-bold",
+                                            "input-block-title-gray-bold"
                                         )}
                                     >
                                         {titleHelpForInput}:{" "}
                                     </span>
                                     <span
                                         className={cnPreview(
-                                            "input-block-title-gray",
+                                            "input-block-title-gray"
                                         )}
                                     >
                                         Не более 80 символов
@@ -204,7 +204,7 @@ export default function PreviewBlock({
                                     invalid={!isFileNameValid}
                                     onBlur={(e) =>
                                         setFilenamevalid(
-                                            e.target.checkValidity(),
+                                            e.target.checkValidity()
                                         )
                                     }
                                 />

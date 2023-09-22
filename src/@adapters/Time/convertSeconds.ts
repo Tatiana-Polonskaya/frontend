@@ -17,5 +17,7 @@ export default function convertSecondsIntoTime(seconds: number): string {
 }
 
 export function convertSecondIntoPrettyDuration(seconds: number): string {
-    return `${Math.floor((seconds) / 60)} минут ${Math.floor(seconds % 60)} секунд`;
+    return `${Math.floor(seconds / 60)} минут ${Math.floor(
+        seconds % 60
+    )} секунд`;
 }

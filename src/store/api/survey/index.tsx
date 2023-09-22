@@ -12,23 +12,20 @@ export const surveyApi = createApi({
             query: (title) => ({
                 url: "/api/users/questionnaire",
                 method: "GET",
-                params: {title},
+                params: { title },
             }),
         }),
         sendAnswers: build.mutation<IResponse<void>, IAnswerBack>({
-            query: ({answers, questionnaire_title}) => ({
+            query: ({ answers, questionnaire_title }) => ({
                 url: "/api/users/register/complete",
                 method: "POST",
-                params: {questionnaire_title},
+                params: { questionnaire_title },
                 body: answers,
             }),
         }),
     }),
 });
 
-export const {
-    useGetSurveyQuery,
-    useSendAnswersMutation,
-} = surveyApi;
+export const { useGetSurveyQuery, useSendAnswersMutation } = surveyApi;
 
 export const { endpoints, reducerPath, reducer, middleware } = surveyApi;

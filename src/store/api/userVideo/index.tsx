@@ -5,7 +5,6 @@ import {
     IParamsForQueryUserVideo,
     IVideoApiReq,
     IVideoInfo,
-    IVideoStatus,
     IVideoUploadItem,
     IVideoUser,
     IVideoUserStatus,
@@ -18,9 +17,9 @@ export const videoApi = createApi({
     endpoints: (build) => ({
         sendVideo: build.mutation<IResponse<void>, IVideoApiReq>({
             query: ({ title, duration, description, file }) => {
-                var bodyFormData = new FormData();
+                const bodyFormData = new FormData();
                 bodyFormData.append("file", file);
-               
+
                 return {
                     url: "/api/video/upload",
                     method: "POST",
@@ -123,7 +122,6 @@ export const videoApi = createApi({
                 method: "GET",
             }),
             transformResponse: async (response: any) => {
-                console.log("response", response);
                 return {
                     data: await response.blob(),
                     error: { code: response.status, msg: response.statusText },

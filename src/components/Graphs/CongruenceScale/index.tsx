@@ -89,7 +89,7 @@ export default function CongruenceScale(props: Props) {
                 >
                     <CongruenceGraph
                         elements={convertDataCongruenceFromBackIntoGraph(
-                            listItemA_T,
+                            listItemA_T
                         )}
                         endTime={props.endTime}
                     />
@@ -101,7 +101,7 @@ export default function CongruenceScale(props: Props) {
                 >
                     <CongruenceGraph
                         elements={convertDataCongruenceFromBackIntoGraph(
-                            listItemV_T,
+                            listItemV_T
                         )}
                         endTime={props.endTime}
                     />
@@ -113,7 +113,7 @@ export default function CongruenceScale(props: Props) {
                 >
                     <CongruenceGraph
                         elements={convertDataCongruenceFromBackIntoGraph(
-                            listItemA_V,
+                            listItemA_V
                         )}
                         endTime={props.endTime}
                     />

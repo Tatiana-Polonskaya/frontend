@@ -30,10 +30,6 @@ export default function GraphMedian({ top, average, tooltip = false }: Props) {
             </Tooltip>
         </Fragment>
     ) : (
-        <div
-            className={CN()}
-            style={{ top }}
-            onMouseEnter={() => console.log("focus")}
-        />
+        <div className={CN()} style={{ top }} />
     );
 }

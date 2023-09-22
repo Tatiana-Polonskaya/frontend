@@ -13,14 +13,14 @@ export default function ArchiveSearch({ updateSearch }: Props) {
         updateSearch(value);
     };
     const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        switch(event.code){
+        switch (event.code) {
             case "Enter":
                 handleChange();
                 break;
             default:
                 break;
         }
-      };
+    };
 
     const [value, setValue] = useState("");
 

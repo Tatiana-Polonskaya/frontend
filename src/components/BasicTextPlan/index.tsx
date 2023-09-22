@@ -12,7 +12,7 @@ type Props = {
 export default function BasicTextPlan(props: Props) {
     const cnBasicTextPlan = cn("BasicTextPlan");
 
-    const textPlan = props.textPlan.filter(el=>el.length>0);
+    const textPlan = props.textPlan.filter((el) => el.length > 0);
     const max_steps = textPlan.length - 1;
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -26,14 +26,26 @@ export default function BasicTextPlan(props: Props) {
     return (
         <div className={cnBasicTextPlan()}>
             <div className={cnBasicTextPlan("arrow")} onClick={showLeftItem}>
-                <ReactSVG src={process.env.PUBLIC_URL+"/images/arrows/long-arrow-left.svg"}/>
+                <ReactSVG
+                    src={
+                        process.env.PUBLIC_URL +
+                        "/images/arrows/long-arrow-left.svg"
+                    }
+                />
             </div>
             <div className={cnBasicTextPlan("text")}>
-                <span className={cnBasicTextPlan("text-blue")}>{currentIndex+1}:</span>
+                <span className={cnBasicTextPlan("text-blue")}>
+                    {currentIndex + 1}:
+                </span>
                 {textPlan[currentIndex]}
             </div>
             <div className={cnBasicTextPlan("arrow")} onClick={showRightItem}>
-            <ReactSVG src={process.env.PUBLIC_URL+"/images/arrows/long-arrow-right.svg"}/>
+                <ReactSVG
+                    src={
+                        process.env.PUBLIC_URL +
+                        "/images/arrows/long-arrow-right.svg"
+                    }
+                />
             </div>
         </div>
     );

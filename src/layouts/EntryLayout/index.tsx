@@ -5,9 +5,9 @@ import { ReactNode } from "react";
 const cnEntryLayout = cn("entry-layout");
 
 type EntryLayoutProps = {
-    children?: ReactNode,
-    image?: ReactNode,
-}
+    children?: ReactNode;
+    image?: ReactNode;
+};
 
 export default function EntryLayout(props: EntryLayoutProps) {
     return (

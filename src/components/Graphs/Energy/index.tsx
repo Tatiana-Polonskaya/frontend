@@ -15,7 +15,7 @@ export default function EnergyGraph({ data, param = null, average }: Props) {
     const data2 = convertEnergyData(data, param);
     return (
         <LineGraph
-            average={100-(average*100)}
+            average={100 - average * 100}
             items={data2}
             descriptionX={createXDescriptionFromData(data)}
             range={{ min: 0, max: 1 }}

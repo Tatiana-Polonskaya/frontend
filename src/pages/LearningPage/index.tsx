@@ -10,8 +10,5 @@ import { cn } from "@bem-react/classname";
 export default function LearningPage() {
     const cnLearning = cn("LearningPage");
 
-    return (
-        <MainLayout>
-        </MainLayout>
-    );
+    return <MainLayout></MainLayout>;
 }
