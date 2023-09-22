@@ -180,27 +180,28 @@ export default function ColumnChart2(props: Props) {
                                 "%",
                         }}
                     ></div>
-                    {el.type !== EMOTION.NEUTRAL && (
-                        <Tooltip
-                            id={"col-brick-" + i}
-                            place={"top-start"}
-                            noArrow={true}
-                            className={CN("tooltip")}
-                        >
-                            {"Рассогласование "}
-                            {el.type === EMOTION.HAPPINESS ? (
-                                <span className={CN("tooltip-happiness")}>
-                                    радости
-                                </span>
-                            ) : (
-                                <span className={CN("tooltip-anger")}>
-                                    злости
-                                </span>
-                            )}
-                            {" на "}
-                            {convertSecondsIntoTime(el.time_start)}.
-                        </Tooltip>
-                    )}
+                    {el.type !== EMOTION.EMPTY &&
+                        el.type !== EMOTION.NEUTRAL && (
+                            <Tooltip
+                                id={"col-brick-" + i}
+                                place={"top-start"}
+                                noArrow={true}
+                                className={CN("tooltip")}
+                            >
+                                {"Рассогласование "}
+                                {el.type === EMOTION.HAPPINESS ? (
+                                    <span className={CN("tooltip-happiness")}>
+                                        радости
+                                    </span>
+                                ) : (
+                                    <span className={CN("tooltip-anger")}>
+                                        злости
+                                    </span>
+                                )}
+                                {" на "}
+                                {convertSecondsIntoTime(el.time_start)}.
+                            </Tooltip>
+                        )}
                 </Fragment>
             ))}
         </div>

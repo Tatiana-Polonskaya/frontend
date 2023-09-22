@@ -13,6 +13,7 @@ export enum EMOTION {
     ANGRY = "angry",
     HAPPINESS = "happiness",
     NEUTRAL = "neutral",
+    EMPTY = "empty",
 }
 
 export function getColorByEmotion(emotion: EMOTION) {
