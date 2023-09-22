@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { cn } from "@bem-react/classname";
 import "./style.scss";
-import { useGetTranscriptionByIdQuery } from "../../store/api/report";
 import { TranscriptionValue } from "../../models/report/transcription";
 import { useGetTranscriptionByIdTestQuery } from "../../store/api/reportTest";
 import { VideoTimeContext } from "../Context/helpers";

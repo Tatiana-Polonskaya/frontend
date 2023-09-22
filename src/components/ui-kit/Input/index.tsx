@@ -54,7 +54,7 @@ export default function Input({ invalid = false, ...props }: Props) {
                     className={cnInput("eye")}
                     src={showPassword ? HideIcon : ShowIcon}
                     wrapper="span"
-                    onClick={(e) => {
+                    onClick={() => {
                         setShowPassword((prev) => !prev);
                     }}
                 />

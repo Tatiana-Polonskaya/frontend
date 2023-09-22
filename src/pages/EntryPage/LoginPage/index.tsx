@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ReactSVG } from "react-svg";
 import { cn } from "@bem-react/classname";
 import { useLocation, useNavigate } from "react-router-dom";

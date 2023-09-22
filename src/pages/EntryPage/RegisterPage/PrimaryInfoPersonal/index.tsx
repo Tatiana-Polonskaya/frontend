@@ -12,14 +12,12 @@ import {
 
 import { setStep } from "../../../../store/slices/entry";
 
-import { useLazyCheckEmailQuery } from "../../../../store/api/register";
 import { useRef, useState } from "react";
 
 import InfoFragment from "../../-InfoFragment";
 import LoginRegisterChanger from "../../-LoginRegisterChanger";
 import UserTypeSwitch from "../../-UserTypeSwitch";
 import Button from "../../../../components/ui-kit/Button";
-import Link from "../../../../components/ui-kit/Link";
 
 import Input, { ForwardedInput } from "../../../../components/ui-kit/Input";
 import InputHeader from "../../../../components/ui-kit/InputHeader";

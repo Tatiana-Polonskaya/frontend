@@ -10,7 +10,7 @@ export enum TYPE_TABS {
 }
 
 type Props = {
-    children: Array<ReactNode>;
+    children: ReactNode[];
     type: TYPE_TABS;
 };
 

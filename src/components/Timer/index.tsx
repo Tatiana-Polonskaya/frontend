@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { cn } from "@bem-react/classname";
 import "./style.scss";
-import { TIMER_STATUS } from "../../pages/RecodingPage";
 import useTimer from "../../hooks/useTimer";
 import { formatTime } from "../Stopwatch";
 
@@ -15,8 +14,9 @@ type Props = {
 export default function Timer(props: Props) {
     const cnTimer = cn("Timer");
 
-    const { timer, isActive, isPaused, handleStart, handlePause, handleReset } =
-        useTimer(props.seconds);
+    const { timer, isPaused, handleStart, handlePause, handleReset } = useTimer(
+        props.seconds
+    );
 
     useEffect(() => {
         if (timer === 0) {

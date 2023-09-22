@@ -1,5 +1,5 @@
 import { cn } from "@bem-react/classname";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import ReactPlayer from "react-player";
 import { IVideoStatus } from "../../models/video";
 // import "./style.scss";
@@ -17,14 +17,7 @@ type Props = {
     isAllow: boolean;
 };
 
-export default function VideoLoad({
-    el,
-    ind,
-    handleClick,
-    visible,
-    percent,
-    isAllow,
-}: Props) {
+export default function VideoLoad({ el, visible, percent, isAllow }: Props) {
     const cnArchiveVideo = cn("archive-video");
     return (
         <div className={cnArchiveVideo()}>

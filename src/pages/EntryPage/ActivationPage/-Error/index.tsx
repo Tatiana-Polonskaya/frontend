@@ -1,6 +1,5 @@
 import { cn } from "@bem-react/classname";
 import { useNavigate } from "react-router-dom";
-import { useConfirmQuery } from "../../../../store/api/register";
 
 import Link from "../../../../components/ui-kit/Link";
 

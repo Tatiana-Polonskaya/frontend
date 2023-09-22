@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, LabelHTMLAttributes, useState } from "react";
+import { useState } from "react";
 
 import { cn } from "@bem-react/classname";
 

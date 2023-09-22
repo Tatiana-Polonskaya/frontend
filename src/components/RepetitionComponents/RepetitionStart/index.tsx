@@ -116,7 +116,7 @@ export default function RepetitionStart() {
 
     useEffect(() => {
         if (isError) {
-            const error = videoSendResponse.error as Response;
+            // const error = videoSendResponse.error as Response;
             console.log(videoSendResponse.error);
             setCurrentFile(new File([], "empty"));
             setCurrentInfoData(initialInfoVideo);

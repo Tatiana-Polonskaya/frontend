@@ -1,7 +1,7 @@
 import { cn } from "@bem-react/classname";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
 
-import { UserType, PageType, RegisterStep } from "../../../../models/entry";
+import { UserType, RegisterStep } from "../../../../models/entry";
 import {
     setEmail,
     setLastName,
@@ -13,7 +13,6 @@ import { useLazyCheckEmailQuery } from "../../../../store/api/register";
 import { useRef, useState } from "react";
 
 import InfoFragment from "../../-InfoFragment";
-import LoginRegisterChanger from "../../-LoginRegisterChanger";
 import UserTypeSwitch from "../../-UserTypeSwitch";
 import Button from "../../../../components/ui-kit/Button";
 import Link from "../../../../components/ui-kit/Link";
@@ -30,7 +29,7 @@ const EMAIL_WRONG_TEXT_INIT = "Неверный формат почты";
 export default function PrimaryInfoBusiness() {
     const [checkEmailRequest, checkEmailResponse] = useLazyCheckEmailQuery();
 
-    const { data, isFetching, isSuccess } = checkEmailResponse;
+    const { isFetching } = checkEmailResponse;
 
     const dispatch = useAppDispatch();
 

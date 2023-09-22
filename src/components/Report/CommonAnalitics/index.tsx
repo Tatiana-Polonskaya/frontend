@@ -23,7 +23,6 @@ import { ReactSVG } from "react-svg";
 
 import { getTotalResult, getTotalTitle } from "../helpers";
 import convertTotalData from "../../../@adapters/Graphs/total";
-import { useGetTotalByIdQuery } from "../../../store/api/report";
 import { useEffect, useState } from "react";
 import { TotalDataItem, TotalType } from "../../../models/graph/total";
 import { useGetTotalByIdTestQuery } from "../../../store/api/reportTest";

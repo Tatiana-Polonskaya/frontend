@@ -3,8 +3,7 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
 import Link from "../../../../components/ui-kit/Link";
-import { useNavigate } from "react-router-dom";
-import RoutesEnum from "../../../../models/routes";
+
 import { setStep } from "../../../../store/slices/entry";
 import { RegisterStep } from "../../../../models/entry";
 import { clearPersonalRegister } from "../../../../store/slices/register/personal";
@@ -15,7 +14,7 @@ const cnEmailVerification = cn("email-verification");
 export default function EmailVerification() {
     const email = useAppSelector((state) => state.register.personal.email);
     const dispatch = useAppDispatch();
-    const [request, response] = useResendEmailMutation();
+    const [request] = useResendEmailMutation();
     return (
         <div className={cnEmailVerification()}>
             <Link

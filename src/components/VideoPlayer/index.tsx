@@ -122,6 +122,7 @@ export default function VideoPlayer({
                     }}
                     playing={isPlaying}
                     onPlay={togglePlay}
+                    title={title}
                 />
             </div>
             <div className={cnVideoPlayer({ unvisible: onReady })}>

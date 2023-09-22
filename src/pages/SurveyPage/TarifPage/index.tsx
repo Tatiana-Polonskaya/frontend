@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@bem-react/classname";
 
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { useAppSelector } from "../../../hooks/redux";
 
 import { useNavigate } from "react-router-dom";
 import RoutesEnum from "../../../models/routes";
@@ -23,7 +23,7 @@ import TarifCard from "../../../components/TarifCard";
 // TODO:  добавить обратобку промокодов
 
 export default function TarifPage() {
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const cnTarif = cn("TarifPage");
 
@@ -46,7 +46,7 @@ export default function TarifPage() {
 
     const trialTariff = useMemo(() => {
         if (basicTariffs && basicTariffs.length > 0) {
-            let trialElem = basicTariffs.filter((x) => x.price === 0);
+            const trialElem = basicTariffs.filter((x) => x.price === 0);
             return trialElem.length > 0 ? trialElem[0].id : "";
         } else return "";
     }, [basicTariffs]);

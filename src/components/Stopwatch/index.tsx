@@ -24,7 +24,7 @@ type Props = {
 };
 
 export default function Stopwatch(props: Props) {
-    const { timer, isActive, isPaused, handleStart, handlePause, handleReset } =
+    const { timer, isPaused, handleStart, handlePause, handleReset } =
         useStopwatch(0);
 
     useEffect(() => {

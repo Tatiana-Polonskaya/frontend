@@ -39,7 +39,7 @@ export const getTotalResult = (value: number): string[] => {
     if (value < 20) {
         return [GraphColor.SPURPLE, Frame1, "Ужасно"];
     } else if (value < 40) {
-        return [GraphColor.SORANGE, Frame2, "Плохо"];
+        return [GraphColor.ORANGE, Frame2, "Плохо"];
     } else if (value < 60) {
         return [GraphColor.SYELLOW, Frame3, "Средне"];
     } else if (value < 80) {

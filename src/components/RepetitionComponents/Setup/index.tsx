@@ -1,5 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
-import RadioBtnQuestion from "../../RadioBtnQuestion";
+import { useNavigate } from "react-router-dom";
 
 import { cn } from "@bem-react/classname";
 import "./style.scss";
@@ -24,7 +23,7 @@ export default function RecodingSetup() {
     const navigate = useNavigate();
     const styleSetup = cn("RecodingSetup");
 
-    const [basicPlan, setBasicPlan] = useState<Array<string>>();
+    const [basicPlan, setBasicPlan] = useState<string[]>();
     const [timerSeconds, setTimerSecond] = useState<number>(0);
 
     const [timeValid, setTimeValid] = useState(true);

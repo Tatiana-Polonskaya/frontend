@@ -10,7 +10,7 @@ export default function Button(
         HTMLButtonElement
     >
 ) {
-    const newProps = { ...props, className: cnButton() };
+    // const newProps = { ...props, className: cnButton() };
     return (
         <button {...props} className={`${props.className} ${cnButton()}`}>
             {props.children}

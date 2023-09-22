@@ -14,7 +14,7 @@ import { userApi } from "./api/user";
 import { reportApi } from "./api/report";
 import { reportTestApi } from "./api/reportTest";
 
-import { surveyApi } from "./api/survey";
+import { surveyApi } from "./api/survey/surveyApi";
 import { videoApi } from "./api/userVideo";
 import { diaryApi } from "./api/diary";
 import { apiWithDifAnswers } from "./api/apiWithDifAnswers";

@@ -29,7 +29,7 @@ export default function SecondaryInfoPersonal() {
     const { name, lastName, birthday, city, email, tel } = useAppSelector(
         (state) => state.register.personal
     );
-    const [checkEmailRequest, checkEmailResponse] = useLazyCheckEmailQuery();
+    const [checkEmailRequest] = useLazyCheckEmailQuery();
     const [wrongEmailText, setWrongEmailText] = useState(EMAIL_WRONG_TEXT_INIT);
     const [isEmailValid, setEmailValid] = useState(true);
     const [isTelValid, setTelValid] = useState(true);
@@ -185,7 +185,7 @@ export default function SecondaryInfoPersonal() {
                         wrongText={passwordErrorText}
                         helpText={`Не менее 8 символов.
                             Минимум 1 латинская буква верхнего и нижнего регистра.
-                            Минимум 1 цифра или символ (~!@#$%^&*_-+=\`|\(){}[]:;"'<>,.?/)`}
+                            Минимум 1 цифра или символ (~!@#$%^&*_-+=\`|\\(){}[]:;"'<>,.?/)`}
                     />
                     <Input
                         placeholder="Придумайте пароль"

@@ -14,7 +14,6 @@ enum GraphColor {
     YELLOW = "#FFE817",
 
     SPURPLE = "#4A1193",
-    SORANGE = "#FFB800",
     SYELLOW = "#F4EC1C",
     SGREEN = "#0CCA13",
     SBLUE = "#2477F4",

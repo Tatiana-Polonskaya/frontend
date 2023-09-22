@@ -5,7 +5,6 @@ import { IVideoFromBack } from "../../../models/video";
 import NoPhoto from "../../ProfilePreview/assets/no-photo.png";
 
 import "./style.scss";
-import { useGetTotalByIdQuery } from "../../../store/api/report";
 
 import RoutesEnum from "../../../models/routes";
 import { useNavigate } from "react-router-dom";

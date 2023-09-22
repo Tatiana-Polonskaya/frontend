@@ -28,7 +28,9 @@ export const accountApi = createApi({
                         await dispatch(setAccessToken(data.data!.access_token));
                         await dispatch(userApi.endpoints.getMe.initiate(null));
                     }
-                } catch (error) {}
+                } catch (error) {
+                    console.log("error", error);
+                }
             },
         }),
         logout: build.mutation<null, any>({
