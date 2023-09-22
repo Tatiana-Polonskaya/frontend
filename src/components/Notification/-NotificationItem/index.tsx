@@ -21,6 +21,7 @@ export enum TYPE_NOTIFICATION {
     LINK = "link",
 }
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export default function NotificationItem({
     title,
     description,
