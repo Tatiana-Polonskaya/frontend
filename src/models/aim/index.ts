@@ -40,6 +40,7 @@ export interface IAimItem {
     created_at: string;
     tasks: ITaskItem[];
     parameters: ParamItem[];
+    motivating_phrase: string;
 }
 
 export interface IAimFromBack {

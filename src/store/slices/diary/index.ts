@@ -11,6 +11,7 @@ const initialState: IAimItem = {
     created_at: "",
     tasks: [],
     parameters: [],
+    motivating_phrase: "",
 };
 
 const diarySlice = createSlice({
