@@ -2,7 +2,6 @@ import { Fragment, useRef, useState } from "react";
 import "./style.scss";
 import { cn } from "@bem-react/classname";
 import { ReactSVG } from "react-svg";
-import svgg from "../Menu/icons/book.svg";
 
 import { IQuestion, typeQuestion } from "../../models/survey";
 import { LocalAnswer } from "../../store/slices/survey";
@@ -15,13 +14,16 @@ type Props = {
 export default function RadioBtnQuestion(props: Props) {
     const cnMain = cn("radio-main");
 
+    const choices = [...props.question.choices].sort(
+        (a, b) => Number(a.another) - Number(b.another)
+    );
+
     const [selectedOption, setSelectedOption] = useState<string>();
     const anotherValue = useRef<HTMLInputElement>(null);
 
     function handleChange(id: string) {
         setSelectedOption(id);
-        const isAnother = props.question.choices.filter((el) => el.id === id)[0]
-            .another;
+        const isAnother = choices.filter((el) => el.id === id)[0].another;
 
         if (!isAnother) {
             if (anotherValue && anotherValue.current)
@@ -50,7 +52,7 @@ export default function RadioBtnQuestion(props: Props) {
         <div className={cnMain()}>
             <h3 className={cnMain("title")}>{props.question.title}</h3>
             <div className={cnMain(`${props.question.type_choice}`)}>
-                {props.question.choices.map((el, index) => (
+                {choices.map((el, index) => (
                     <Fragment key={index}>
                         {!el.another && (
                             <div
@@ -64,7 +66,7 @@ export default function RadioBtnQuestion(props: Props) {
                             >
                                 {props.question.icons && (
                                     <ReactSVG
-                                        src={svgg}
+                                        src={process.env.PUBLIC_URL + el.icon}
                                         className={cnMain(
                                             `${props.question.type_choice}-item-icon`
                                         )}
@@ -80,10 +82,10 @@ export default function RadioBtnQuestion(props: Props) {
                                         type="radio"
                                         value={el.id}
                                         checked={selectedOption === el.id}
-                                        onChange={() => handleChange(el.id)}
                                         className={cnMain(
                                             `${props.question.type_choice}-item-label-radio`
                                         )}
+                                        onChange={() => handleChange(el.id)}
                                     />
                                     <div
                                         className={cnMain(

@@ -110,11 +110,9 @@ export default function TarifPage() {
     }, [isSuccess]);
 
     useEffect(() => {
-        console.log("sendPaidTariffResponse", sendPaidTariffResponse);
+
         if (sendPaidTariffResponse.isSuccess) {
-            console.log("isSuccess");
             if (sendPaidTariffResponse.data.success) {
-                console.log("data.success");
                 navigate(RoutesEnum.PAY);
             } else {
                 console.log(sendPaidTariffResponse);

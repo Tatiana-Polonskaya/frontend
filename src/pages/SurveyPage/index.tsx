@@ -50,6 +50,7 @@ export default function SurveyPage() {
                 (sum, elem) => sum + elem,
                 0
             );
+
             setCurrentQuestions(questions.slice(firstIndex, lastIndex));
         }
     }, [firstIndex, questions, step]);
@@ -118,7 +119,6 @@ export default function SurveyPage() {
 
             if (step + 1 > ALL_STEP) {
                 const body: IAnswer[] = convertAnswersForServerFormat(answers);
-                console.log("ended", body);
                 if (body)
                     await sendAnswersRequest({
                         questionnaire_title: TITLE_ANKETA,
