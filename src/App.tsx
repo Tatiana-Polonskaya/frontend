@@ -26,6 +26,8 @@ import DiaryStart from "./components/DiaryStart";
 import AnalysisReport from "./components/Report";
 import SettingsStart from "./components/SettingsStart";
 import ScrollToTop from "./tools/ScrollToTop";
+import PayPage from "./pages/PayPage";
+import QuestionnaireRoute from "./components/tools/QuestionnaireRoute";
 
 export default function App() {
     return (
@@ -58,9 +60,17 @@ export default function App() {
                         // )
                     }
                 >
-                    <Route path={RoutesEnum.SURVEY} element={<SurveyPage />} />
-                    <Route path={RoutesEnum.ROOT} element={<HomePage />} />
+                    <Route element={<QuestionnaireRoute />}>
+                        <Route
+                            path={RoutesEnum.SURVEY}
+                            element={<SurveyPage />}
+                        />
+                    </Route>
+
                     <Route path={RoutesEnum.HOME} element={<HomePage />} />
+                    <Route path={RoutesEnum.ROOT} element={<HomePage />} />
+
+                    <Route path={RoutesEnum.PAY} element={<PayPage />} />
 
                     <Route path={RoutesEnum.DIARY} element={<DiaryPage />}>
                         <Route index={true} element={<DiaryStart />} />

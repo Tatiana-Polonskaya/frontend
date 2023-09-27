@@ -14,6 +14,7 @@ enum RoutesEnum {
     SETTINGS = "/settings",
     RECODING = "/recoding",
     REPORT = "/report",
+    PAY = "/pay",
 
     TEST_GRAPH = "/test-graph",
 

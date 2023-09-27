@@ -9,6 +9,7 @@ import entryReducer from "./slices/entry";
 import userReducer from "./slices/user";
 import registerReducer from "./slices/register";
 import surveyReducer from "./slices/survey";
+import tariffSlice from "./slices/tariff";
 import { userApi } from "./api/user";
 
 import { reportApi } from "./api/report";
@@ -46,6 +47,7 @@ export const store = configureStore({
         user: userReducer,
         survey: surveyReducer,
         diary: diarySlice,
+        tariff: tariffSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(

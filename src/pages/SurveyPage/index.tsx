@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Fragment, useEffect, useState } from "react";
 import CheckboxQuestion from "../../components/CheckboxQuestion";
 import RadioBtnQuestion from "../../components/RadioBtnQuestion";
@@ -19,9 +20,6 @@ import {
     useSendAnswersMutation,
 } from "../../store/api/survey";
 import { IAnswer, IQuestion, typeQuestion } from "../../models/survey";
-
-// TO DO: SEND ANSWERS CORRECTLY
-// TO DO:  добавить степ в стор
 
 export default function SurveyPage() {
     const [sendAnswersRequest, sendAnswersResponse] = useSendAnswersMutation();
@@ -120,7 +118,7 @@ export default function SurveyPage() {
 
             if (step + 1 > ALL_STEP) {
                 const body: IAnswer[] = convertAnswersForServerFormat(answers);
-                // console.log("ended", body);
+                console.log("ended", body);
                 if (body)
                     await sendAnswersRequest({
                         questionnaire_title: TITLE_ANKETA,
@@ -137,9 +135,6 @@ export default function SurveyPage() {
     useEffect(() => {
         if (isError) console.log(sendAnswersResponse.error);
     }, [isError]);
-
-    // id
-    // "63cdf876-01ae-482d-bc98-2de6b541246b"
 
     const convertAnswersForServerFormat = (currentAnswers: LocalAnswer[]) => {
         if (questions) {
@@ -241,8 +236,7 @@ export default function SurveyPage() {
                                     disabled: !canMoved,
                                 })}
                             >
-                                {step === ALL_STEP && <>Завершить</>}
-                                {step !== ALL_STEP && <>Далее</>}
+                                {step === ALL_STEP ? "Завершить" : "Далее"}
                             </button>
                         </div>
 
@@ -258,7 +252,6 @@ export default function SurveyPage() {
                 </div>
             )}
             {step > ALL_STEP && <TarifPage></TarifPage>}
-            {/* <TarifPage></TarifPage> */}
         </SurveyLayout>
     );
 }
