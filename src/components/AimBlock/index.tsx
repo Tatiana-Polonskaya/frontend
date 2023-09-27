@@ -218,6 +218,7 @@ export default function AimBlock() {
                 created_at: "",
                 tasks: [],
                 parameters: [],
+                motivating_phrase: "",
             };
 
             dispatch(

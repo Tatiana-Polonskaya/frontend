@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@bem-react/classname";
 
-import { useAppSelector } from "../../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 
 import { useNavigate } from "react-router-dom";
 import RoutesEnum from "../../../models/routes";
@@ -13,24 +13,26 @@ import Link from "../../../components/ui-kit/Link";
 import Button from "../../../components/ui-kit/Button";
 import {
     useGetTraiffsQuery,
-    useSendTariffMutation,
+    useSendPaidTariffMutation,
+    useSetTrialtariffMutation,
 } from "../../../store/api/tariff";
 import { ITariff } from "../../../models/tariff";
 
 import { UUID } from "crypto";
 import TarifCard from "../../../components/TarifCard";
+import { updateTariffAnswers } from "../../../store/slices/tariff";
 
-// TODO:  добавить обратобку промокодов
+// TODO:  добавить обработку промокодов
 
 export default function TarifPage() {
-    // const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const cnTarif = cn("TarifPage");
+    const dispatch = useAppDispatch();
 
     //* -------------------------------- GETTING TARIFFS --------------------------------  */
 
     const tariffs = useGetTraiffsQuery();
-    const [basicTariffs, setBasicTariffs] = useState<ITariff[]>();
+    const [basicTariffs, setBasicTariffs] = useState<ITariff[]>([]);
 
     useEffect(() => {
         if (tariffs.data && tariffs.data.data && tariffs.isSuccess) {
@@ -64,34 +66,73 @@ export default function TarifPage() {
 
     const userId: UUID = useAppSelector((state) => state.profile.user.id);
 
-    const [sendTariffRequest, sendTariffResponse] = useSendTariffMutation();
-    const { isSuccess, isError } = sendTariffResponse;
+    const [sendTrialtariffRequest, sendTrialtariffResponse] =
+        useSetTrialtariffMutation();
+
+    const { isSuccess, isError } = sendTrialtariffResponse;
+
+    const [sendPaidTarifffRequest, sendPaidTariffResponse] =
+        useSendPaidTariffMutation();
 
     const clickOnButton = async () => {
         if (checkedTarif !== "") {
-            await sendTariffRequest({
-                tarif_id: checkedTarif,
-                user_id: userId,
-            });
+            if (checkedTarif === trialTariff && trialTariff !== "") {
+                await sendTrialtariffRequest(userId);
+            } else {
+                const priceCheckedTariff =
+                    basicTariffs.length > 0
+                        ? basicTariffs
+                              ?.filter((x) => x.id == checkedTarif)
+                              .at(0)?.price
+                        : 0;
+
+                await sendPaidTarifffRequest({
+                    price: priceCheckedTariff ? priceCheckedTariff : 0,
+                    user_id: userId,
+                    tarif_id: checkedTarif,
+                    key: "",
+                });
+
+                dispatch(
+                    updateTariffAnswers({
+                        id: checkedTarif,
+                        price: priceCheckedTariff ? priceCheckedTariff : 0,
+                    })
+                );
+            }
         }
     };
 
     useEffect(() => {
         if (isSuccess) {
-            if (checkedTarif === trialTariff && trialTariff !== "") {
-                navigate(RoutesEnum.HOME);
-            } else {
-                // window.location.replace(...)
-                // переход на сторонние сервисы и переход на главную страницу после оплаты
-            }
+            navigate(RoutesEnum.HOME);
         }
     }, [isSuccess]);
+
+    useEffect(() => {
+        console.log("sendPaidTariffResponse", sendPaidTariffResponse);
+        if (sendPaidTariffResponse.isSuccess) {
+            console.log("isSuccess");
+            if (sendPaidTariffResponse.data.success) {
+                console.log("data.success");
+                navigate(RoutesEnum.PAY);
+            } else {
+                console.log(sendPaidTariffResponse);
+            }
+        }
+    }, [sendPaidTariffResponse]);
 
     useEffect(() => {
         if (isError) {
             alert("Что-то пошло не так, попробуйте еще раз.");
         }
     }, [isError]);
+
+    useEffect(() => {
+        if (isError) {
+            alert("Что-то пошло не так, попробуйте еще раз.");
+        }
+    }, [sendPaidTariffResponse.isError]);
 
     //* -------------------------------- CODE --------------------------------  */
 

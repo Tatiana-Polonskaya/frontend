@@ -3,7 +3,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { IAimItem } from "../../../models/aim";
 
-// Define the initial state using that type
 const initialState: IAimItem = {
     title: "",
     is_done: false,
@@ -11,6 +10,7 @@ const initialState: IAimItem = {
     created_at: "",
     tasks: [],
     parameters: [],
+    motivating_phrase: "",
 };
 
 const diarySlice = createSlice({
@@ -20,13 +20,6 @@ const diarySlice = createSlice({
         updateUserAims: (state, action: PayloadAction<IAimItem[]>) => {
             state.userAims = action.payload;
         },
-        // decrement: (state) => {
-        //     state.value -= 1
-        // },
-        //  // Use the PayloadAction type to declare the contents of `action.payload`
-        // incrementByAmount: (state, action: PayloadAction<number>) => {
-        //     state.value += action.payload
-        // },
     },
 });
 

@@ -68,7 +68,7 @@ export default function AimItem({ purpose }: Props) {
     const messageAim = "выберите параметры для оценки цели";
 
     const titleAim = purpose ? purpose.title : "";
-    const phraseAim = "Мотивирующая фраза, зависящая от прогресса!";
+    const phraseAim = purpose.motivating_phrase;
 
     const [sendPurposeRequest, sendPurposeResponse] =
         useSendUserPurposeMutation();

@@ -1,0 +1,36 @@
+.PayPage {
+    &-container {
+        display: flex;
+        flex-flow: column nowrap;
+        flex: 1 0 auto;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+
+    &-text {
+        padding: 15px 0;
+        color: #7c8eb5;
+        font-family: Onest;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    &-block {
+        width: 30%;
+    }
+
+    &-btn {
+        width: 100%;
+        padding: 20px 32px;
+        color: white;
+        font-weight: 700;
+        font-size: 1.5rem;
+        background: #2477f4;
+        border: none;
+        border-radius: 18px;
+        font-family: Montserrat Alternates;
+    }
+}
