@@ -48,7 +48,7 @@
 
     &-tarif {
         width: 100%;
-        padding: 10px;
+        padding: 16px;
         display: flex;
         flex-flow: column nowrap;
         justify-content: start;
@@ -120,6 +120,8 @@
             gap: 5px;
             align-items: center;
             color: #4b5f8a;
+
+            padding-top: 30px;
 
             &-text {
                 color: #4b5f8a;

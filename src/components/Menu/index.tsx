@@ -118,7 +118,7 @@ export default function Menu() {
                             className={cnMenu("Btn")}
                             style={{ background: "#2477F4" }}
                         >
-                            <span className="" onClick={() => closeModal()}>
+                            <span className={cnMenu("textBtn")} onClick={() => closeModal()}>
                                 Хочу остаться
                             </span>
                         </Button>
@@ -130,7 +130,7 @@ export default function Menu() {
                             }}
                         >
                             <span
-                                className=""
+                                className={cnMenu("textBtn")}
                                 onClick={async () => {
                                     // await dispatch(accountApi.endpoints.logout.initiate(null));
                                     await dispatch(logout());

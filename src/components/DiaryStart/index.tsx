@@ -39,6 +39,7 @@ import RecommendationDairyGraph from "../RecommendationDairyGraph";
 import VideoLoad from "../VideoLoad";
 import { useLocation } from "react-router-dom";
 
+
 export default function DiaryStart() {
     const sectionTitles = {
         total: "Общий результат",
@@ -358,6 +359,10 @@ export default function DiaryStart() {
         searchValue,
     ]);
 
+    function Change(){
+        console.log('tyt')
+    }
+
     return (
         <div>
             <div className={cnDiaryStart("text-h1", { margin_bottom: true })}>
@@ -467,7 +472,7 @@ export default function DiaryStart() {
                 </Tabs>
             </RollUp>
 
-            <div>
+            <div className={cnDiaryStart('textAndButton')}>
                 <div className={cnDiaryStart("text-h1")}>
                     Архив проверок{" "}
                     {countSearchVideos && (
@@ -475,6 +480,14 @@ export default function DiaryStart() {
                             {countSearchVideos}
                         </span>
                     )}
+                </div>
+                <div className={cnDiaryStart('btns')}>
+                    <button  className={cnDiaryStart('button')} onClick={Change} >все</button>
+                    <button className={cnDiaryStart('button')} >самые связные</button>
+                    <button className={cnDiaryStart('button')} >самые убедительные</button>
+                    <button className={cnDiaryStart('button')} >самые аргументированные</button>
+                    <button className={cnDiaryStart('button')} >самые ясные</button>
+                    <button className={cnDiaryStart('button')} >самые динамичные</button>
                 </div>
             </div>
 
@@ -505,6 +518,7 @@ export default function DiaryStart() {
                     Видео не найдено
                 </div>
             )}
+
         </div>
     );
 }
