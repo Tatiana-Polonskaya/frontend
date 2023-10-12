@@ -118,7 +118,10 @@ export default function Menu() {
                             className={cnMenu("Btn")}
                             style={{ background: "#2477F4" }}
                         >
-                            <span className={cnMenu("textBtn")} onClick={() => closeModal()}>
+                            <span
+                                className={cnMenu("textBtn")}
+                                onClick={() => closeModal()}
+                            >
                                 Хочу остаться
                             </span>
                         </Button>
