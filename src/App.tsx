@@ -13,7 +13,7 @@ import ActivationPage from "./pages/EntryPage/ActivationPage";
 import LandingPage from "./pages/LandingPage";
 import AuthorizedRoute from "./components/tools/AuthorizedRoute";
 import UnauthorizedRoute from "./components/tools/UnauthorizedRoute";
-import RoutesEnum from "./models/routes";
+import RoutesEnum, { NestedRepetition } from "./models/routes";
 
 import TestPage from "./pages/TestPage";
 
@@ -28,6 +28,8 @@ import SettingsStart from "./components/SettingsStart";
 import ScrollToTop from "./tools/ScrollToTop";
 import PayPage from "./pages/PayPage";
 import QuestionnaireRoute from "./components/tools/QuestionnaireRoute";
+import LibForm from "./components/ui-kit/LibForm";
+import TarifPage from "./pages/SurveyPage/TarifPage";
 
 export default function App() {
     return (
@@ -67,10 +69,20 @@ export default function App() {
                         />
                     </Route>
 
+                    <Route path={RoutesEnum.TARIFF} element={<TarifPage />} />
+
                     <Route path={RoutesEnum.HOME} element={<HomePage />} />
                     <Route path={RoutesEnum.ROOT} element={<HomePage />} />
 
                     <Route path={RoutesEnum.PAY} element={<PayPage />} />
+
+                    <Route
+                        path={RoutesEnum.REPETITION}
+                        element={<RepetitionPage />}
+                    >
+                        <Route index={true} element={<RepetitionStart />} />
+                        <Route path="pop" element={<LibForm />} />
+                    </Route>
 
                     <Route path={RoutesEnum.DIARY} element={<DiaryPage />}>
                         <Route index={true} element={<DiaryStart />} />
@@ -102,7 +114,7 @@ export default function App() {
                         <Route index={false} path="about" element={<About />} />
                         <Route
                             index={false}
-                            path="setup"
+                            path={NestedRepetition.SETUP}
                             element={<RecodingSetup />}
                         />
                     </Route>

@@ -11,10 +11,13 @@ enum RoutesEnum {
     IMPROVISATION = "/improvisation",
     LEARNING = "/learning",
     REPETITION = "/repetition",
+    SETUP_REPETITION = "/setup",
+
     SETTINGS = "/settings",
     RECODING = "/recoding",
     REPORT = "/report",
     PAY = "/pay",
+    TARIFF = "/tarrif",
 
     TEST_GRAPH = "/test-graph",
 
@@ -26,6 +29,10 @@ enum RoutesEnum {
     // DYNAMISM = "/repetition/dynamism",
     // PERSUASIVENESS = "/repetition/persuasiveness",
     // COMMUNICATION = "/repetition/communication",
+}
+
+export enum NestedRepetition {
+    SETUP = "setup",
 }
 
 export default RoutesEnum;

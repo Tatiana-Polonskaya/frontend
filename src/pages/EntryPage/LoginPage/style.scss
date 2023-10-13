@@ -39,6 +39,10 @@
         flex-flow: row;
         justify-content: flex-end;
 
+        div {
+            flex-grow: 1;
+        }
+
         svg {
             height: 100%;
             width: 100%;

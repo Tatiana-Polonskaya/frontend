@@ -14,7 +14,7 @@ import {
 } from "../../store/slices/survey";
 
 import TarifPage from "./TarifPage";
-// import { useNavigate } from "react-router-dom";
+
 import {
     useGetSurveyQuery,
     useSendAnswersMutation,
@@ -26,7 +26,7 @@ export default function SurveyPage() {
     const { isSuccess, isError } = sendAnswersResponse;
 
     const dispatch = useAppDispatch();
-    // const navigate = useNavigate();
+
     const TITLE_ANKETA = "anketa";
 
     /* --------------------------------- STEPS BLOCK --------------------------------- */
@@ -251,7 +251,7 @@ export default function SurveyPage() {
                     </div>
                 </div>
             )}
-            {step > ALL_STEP && <TarifPage></TarifPage>}
+            {/* {step > ALL_STEP && <TarifPage></TarifPage>} */}
         </SurveyLayout>
     );
 }

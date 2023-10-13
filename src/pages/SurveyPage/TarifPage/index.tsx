@@ -21,6 +21,7 @@ import { ITariff } from "../../../models/tariff";
 import { UUID } from "crypto";
 import TarifCard from "../../../components/TarifCard";
 import { updateTariffAnswers } from "../../../store/slices/tariff";
+import SurveyLayout from "../../../layouts/SurveyLayout";
 
 // TODO:  добавить обработку промокодов
 
@@ -69,7 +70,7 @@ export default function TarifPage() {
     const [sendTrialtariffRequest, sendTrialtariffResponse] =
         useSetTrialtariffMutation();
 
-    const { isSuccess, isError } = sendTrialtariffResponse;
+    const { isError } = sendTrialtariffResponse;
 
     const [sendPaidTarifffRequest, sendPaidTariffResponse] =
         useSendPaidTariffMutation();
@@ -104,10 +105,14 @@ export default function TarifPage() {
     };
 
     useEffect(() => {
-        if (isSuccess) {
-            navigate(RoutesEnum.HOME);
+        if (sendTrialtariffResponse.isSuccess) {
+            if (!sendTrialtariffResponse.data.success) {
+                alert("Данный тариф выбрать сейчас нельзя!");
+            } else {
+                navigate(RoutesEnum.HOME);
+            }
         }
-    }, [isSuccess]);
+    }, [sendTrialtariffResponse]);
 
     useEffect(() => {
         if (sendPaidTariffResponse.isSuccess) {
@@ -134,73 +139,75 @@ export default function TarifPage() {
     //* -------------------------------- CODE --------------------------------  */
 
     return (
-        <div className={cnTarif()}>
-            <div className={cnTarif("header")}>
-                <div className={cnTarif("header-thanks")}>
-                    Спасибо за ваши ответы!
-                </div>
-                Пора начинать подготовку!
-                <div className={cnTarif("header-bold")}>
-                    Выберите подходящий тариф и используйте все возможности
-                    подготовки к выступлениям со Speech Up.
-                </div>
-                <Link arrow="right" className={cnTarif("header-link")}>
-                    Узнать подробнее о сервисе
-                </Link>
-            </div>
-            <div className={cnTarif("cards")}>
-                {basicTariffs &&
-                    basicTariffs.map((el, index) => (
-                        <TarifCard
-                            key={index}
-                            {...el}
-                            checked={checkedTarif === el.id}
-                            onClick={() => clickOnCard(el.id)}
-                        />
-                    ))}
-            </div>
-            <div className={cnTarif("row")}>
-                <div className={cnTarif("row-text")}>Промокод :</div>
-                <div className={cnTarif("row-block")}>
-                    <div className={cnTarif("row-block-content")}>
-                        <input
-                            type="text"
-                            placeholder={"Введите промокод"}
-                            className={cnTarif("row-block-input")}
-                            maxLength={50}
-                            onBlur={(e) =>
-                                setPromocodeValid(e.target.checkValidity())
-                            }
-                            ref={promocodeRef}
-                        />
-                        {!isPromocodeValid && (
-                            <span className={cnTarif("row-block-warning")}>
-                                Такого промокода нет. Проверьте, всё ли верно,
-                                или введите другой.
-                            </span>
-                        )}
+        <SurveyLayout>
+            <div className={cnTarif()}>
+                <div className={cnTarif("header")}>
+                    <div className={cnTarif("header-thanks")}>
+                        Спасибо за ваши ответы!
                     </div>
+                    Пора начинать подготовку!
+                    <div className={cnTarif("header-bold")}>
+                        Выберите подходящий тариф и используйте все возможности
+                        подготовки к выступлениям со Speech Up.
+                    </div>
+                    <Link arrow="right" className={cnTarif("header-link")}>
+                        Узнать подробнее о сервисе
+                    </Link>
                 </div>
+                <div className={cnTarif("cards")}>
+                    {basicTariffs &&
+                        basicTariffs.map((el, index) => (
+                            <TarifCard
+                                key={index}
+                                {...el}
+                                checked={checkedTarif === el.id}
+                                onClick={() => clickOnCard(el.id)}
+                            />
+                        ))}
+                </div>
+                <div className={cnTarif("row")}>
+                    <div className={cnTarif("row-text")}>Промокод :</div>
+                    <div className={cnTarif("row-block")}>
+                        <div className={cnTarif("row-block-content")}>
+                            <input
+                                type="text"
+                                placeholder={"Введите промокод"}
+                                className={cnTarif("row-block-input")}
+                                maxLength={50}
+                                onBlur={(e) =>
+                                    setPromocodeValid(e.target.checkValidity())
+                                }
+                                ref={promocodeRef}
+                            />
+                            {!isPromocodeValid && (
+                                <span className={cnTarif("row-block-warning")}>
+                                    Такого промокода нет. Проверьте, всё ли
+                                    верно, или введите другой.
+                                </span>
+                            )}
+                        </div>
+                    </div>
 
-                <Button className={cnTarif("row-btn")}>Применить</Button>
+                    <Button className={cnTarif("row-btn")}>Применить</Button>
+                </div>
+                <div className={cnTarif("footer")}>
+                    <button
+                        className={cnTarif("footer-btn", {
+                            canClicked: checkedTarif !== "",
+                        })}
+                        onClick={clickOnButton}
+                    >
+                        {checkedTarif === trialTariff && checkedTarif !== ""
+                            ? "Начать"
+                            : "Оплатить"}
+                    </button>
+                    <span>
+                        Обратите внимание, что при оплате выбранного тарифа, вы
+                        не сможете прекратить его действие до использования всех
+                        оплаченных попыток либо окончания указанного периода.
+                    </span>
+                </div>
             </div>
-            <div className={cnTarif("footer")}>
-                <button
-                    className={cnTarif("footer-btn", {
-                        canClicked: checkedTarif !== "",
-                    })}
-                    onClick={clickOnButton}
-                >
-                    {checkedTarif === trialTariff && checkedTarif !== ""
-                        ? "Начать"
-                        : "Оплатить"}
-                </button>
-                <span>
-                    Обратите внимание, что при оплате выбранного тарифа, вы не
-                    сможете прекратить его действие до использования всех
-                    оплаченных попыток либо окончания указанного периода.
-                </span>
-            </div>
-        </div>
+        </SurveyLayout>
     );
 }

@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { cn } from "@bem-react/classname";
 import "./style.scss";
 
-import CurrentTariff from "../../plugs/personalArea/currentTariff.json";
 import AllTariffs from "../../plugs/personalArea/allTariffs.json";
 import { ReactSVG } from "react-svg";
 
@@ -20,6 +20,8 @@ import LoadImage from "./LoadImage";
 import Gallery from "./icon/gallery.svg";
 import AvatarEditor from "react-avatar-editor";
 import { setProfileAvatar } from "../../store/slices/profileSlice";
+import { useGetUserTraiffQuery } from "../../store/api/tariff";
+import { ITariff } from "../../models/tariff";
 
 type Props = {
     isArchive: boolean;
@@ -38,6 +40,18 @@ export default function PersonalArea({ isArchive = false }: Props) {
 
     const store = useAppSelector((state) => state.profile.user);
     const avatar = useAppSelector((state) => state.profile.avatar);
+
+    const tariff = useGetUserTraiffQuery();
+    const [userTariff, setUserTariff] = useState<ITariff>();
+
+    useEffect(() => {
+        if (tariff.data && tariff.isSuccess && tariff.data.data) {
+            setUserTariff(tariff.data.data.at(0));
+        }
+    }, [tariff]);
+
+    console.log("userTariff", userTariff);
+    console.log("store", store);
 
     const [storeUser, setStoreUser] = useState(store);
     const [iconArr, setIconArr] = useState<IconsArr[]>([]);
@@ -70,7 +84,6 @@ export default function PersonalArea({ isArchive = false }: Props) {
     }, [isError]);
 
     const changeActive = () => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         !active ? setActive("active") : setActive("");
     };
 
@@ -228,11 +241,11 @@ export default function PersonalArea({ isArchive = false }: Props) {
                                 {"Текущий тариф"}
                             </p>
                             <p className={cnTariffBlock("text")}>
-                                {CurrentTariff.data.tariff}
+                                {userTariff && userTariff.title}
                             </p>
                             <p
                                 className={cnTariffBlock("text")}
-                            >{`Осталось ${CurrentTariff.data.left} репетиций`}</p>
+                            >{`Осталось ${store.loads_limit} репетиций`}</p>
                         </div>
                     </div>
                     <button className={cnTariffBlock("btn")}>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Carousel from "../../components/Сarousel";
 import { cn } from "@bem-react/classname";
 
@@ -8,7 +9,7 @@ import ElementEqual from "./icons/element-equal.svg";
 import "./style.scss";
 import { ReactSVG } from "react-svg";
 import VideoBlock from "../../components/VideoBlock";
-import { useNavigate } from "react-router";
+
 import { useAppSelector } from "../../hooks/redux";
 import UserStatus from "../../models/userStatus";
 import { useEffect, useMemo } from "react";
@@ -17,7 +18,6 @@ import RoutesEnum from "../../models/routes";
 const cnHome = cn("home");
 
 export default function HomePage() {
-    const navigate = useNavigate();
     const status = useAppSelector((state) => state.profile.user.status);
 
     const userLocalStatus = useMemo(() => {
@@ -25,7 +25,7 @@ export default function HomePage() {
     }, [status]);
 
     useEffect(() => {
-        if (userLocalStatus) navigate(RoutesEnum.SURVEY);
+        // if (userLocalStatus) navigate(RoutesEnum.SURVEY);
     }, [userLocalStatus]);
 
     return (

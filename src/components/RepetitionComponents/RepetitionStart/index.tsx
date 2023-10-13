@@ -6,7 +6,7 @@ import {
     useState,
 } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import ModalWindow from "../../ModalWindow/ModalWindow";
 import Upload from "../../Upload";
@@ -16,17 +16,19 @@ import { cn } from "@bem-react/classname";
 import "./style.scss";
 
 import { ReactSVG } from "react-svg";
-import downloand_btn from "./img/download_btn.svg";
-import online_btn from "./img/online_btn.svg";
+import uploadPicture from "./img/uploadBtn.svg";
+import onlinePicture from "./img/onlineBtn.svg";
 import notice_btn from "../Setup/icons/note_icon.svg";
 import loadingPic from "./img/loading.svg";
 
 import { useSendVideoMutation } from "../../../store/api/userVideo";
-import RoutesEnum from "../../../models/routes";
+import RoutesEnum, { NestedRepetition } from "../../../models/routes";
 import {
     MAX_MINUTES_FOR_VIDEO,
     MIN_MINUTES_FOR_VIDEO,
 } from "../../../constants";
+import LargeButton from "../-LargeButton";
+import Button from "../../ui-kit/Button";
 
 export interface IInfoVideo {
     title: string;
@@ -51,6 +53,9 @@ export const VideoUploadContext = createContext({
 
 export default function RepetitionStart() {
     const cnRepetitionStart = cn("RepetitionStart");
+    const navigate = useNavigate();
+
+    /* ------------------------ UPLOADING MODAL ------------------------ */
 
     const [isModal, setModal] = useState(false);
     const [currentFile, setCurrentFile] = useState<File>(new File([], "empty"));
@@ -65,8 +70,17 @@ export default function RepetitionStart() {
         setModal(false);
     };
 
-    // loading modal
+    /* ------------------------ LOADING MODAL ------------------------ */
     const [isLoadingModal, setIsLoadingModal] = useState(false);
+
+    const showLoadingModal = async () => {
+        setIsLoadingModal(true);
+    };
+
+    const closeLoadingModal = () => {
+        setIsLoadingModal(false);
+    };
+
     const [currentInfoData, setCurrentInfoData] =
         useState<IInfoVideo>(initialInfoVideo);
 
@@ -82,21 +96,11 @@ export default function RepetitionStart() {
     const { isLoading, isSuccess, isError } = videoSendResponse;
     const [isErrorWithSuccess, setIsErrorWithSuccess] = useState(false);
 
-    const navigate = useNavigate();
-
     const sendVideoData = async () => {
         if (currentInfoData) {
             await videoSendRequest(currentInfoData);
             // navigate(RoutesEnum.DIARY);
         }
-    };
-
-    const showLoadingModal = async () => {
-        setIsLoadingModal(true);
-    };
-
-    const closeLoadingModal = () => {
-        setIsLoadingModal(false);
     };
 
     // answers from back
@@ -116,14 +120,46 @@ export default function RepetitionStart() {
 
     useEffect(() => {
         if (isError) {
-            // const error = videoSendResponse.error as Response;
             console.log(videoSendResponse.error);
             setCurrentFile(new File([], "empty"));
             setCurrentInfoData(initialInfoVideo);
         }
     }, [isError]);
 
-    // const videoData  = useGetVideoQuery("feb81d20-2bb0-4622-b41a-3c6d50c6b3f8");
+    /* ------------------------ BUTTON CONTENT ------------------------ */
+
+    const BUTTON_CONTENT = [
+        {
+            id: 0,
+            img: onlinePicture,
+            title: "Онлайн запись репетиции",
+            banTitle: "Упс.. доступных репетиций пока нет",
+            onClick: () =>
+                navigate(RoutesEnum.REPETITION + "/" + NestedRepetition.SETUP),
+            className: cnRepetitionStart("btn-block-link-blue"),
+        },
+        {
+            id: 1,
+            img: uploadPicture,
+            title: "Загрузка репетиции",
+            banTitle: "Упс.. доступных загрузок пока нет",
+            onClick: () => showModal(),
+            className: cnRepetitionStart("btn-block-link-white"),
+        },
+    ];
+
+    /* ------------------------ BAN UPLOADING AND RECORDING ------------------------ */
+
+    const BAN_DESC =
+        "Оформите подходящий тариф прямо сейчас, чтобы избавиться от всех ограничений!";
+
+    const [isBan, setIsBan] = useState(false); // TODO: добавить получение на количество лимитов для загрузки
+
+    useEffect(() => {
+        setIsBan(false);
+    }, []);
+
+    /* ------------------------ CODE ------------------------ */
 
     return (
         <div className={cnRepetitionStart()}>
@@ -157,21 +193,62 @@ export default function RepetitionStart() {
                 </div>
             </div>
             <div className={cnRepetitionStart("btn-block")}>
-                <div className={cnRepetitionStart("btn-block-link")}>
-                    <Link to="/repetition/setup">
-                        <ReactSVG
-                            src={online_btn}
-                            className={cnRepetitionStart("btn-block-link-svg")}
-                        />
-                    </Link>
-                </div>
-                <div className={cnRepetitionStart("btn-block-link")}>
-                    <ReactSVG
-                        src={downloand_btn}
-                        className={cnRepetitionStart("btn-block-link-svg")}
-                        onClick={() => showModal()}
-                    />
-                </div>
+                {BUTTON_CONTENT.map((item) => (
+                    <div
+                        key={item.id}
+                        className={cnRepetitionStart("btn-block-link")}
+                    >
+                        <LargeButton
+                            img={item.img}
+                            onClick={item.onClick}
+                            className={item.className}
+                            isBan={isBan}
+                        >
+                            <div
+                                className={cnRepetitionStart(
+                                    "btn-block-link-container"
+                                )}
+                                style={{ padding: isBan ? "16px 0" : "50px 0" }}
+                            >
+                                <div
+                                    className={cnRepetitionStart(
+                                        "btn-block-link-title",
+                                        { opacity: isBan }
+                                    )}
+                                >
+                                    {item.title}
+                                </div>
+                                {isBan && (
+                                    <>
+                                        <div
+                                            className={cnRepetitionStart(
+                                                "btn-block-link-ban",
+                                                { gray: Boolean(item.id) }
+                                            )}
+                                        >
+                                            {item.banTitle}
+                                        </div>
+                                        <div
+                                            className={cnRepetitionStart(
+                                                "btn-block-link-ban",
+                                                { gray: Boolean(item.id) }
+                                            )}
+                                        >
+                                            {BAN_DESC}
+                                        </div>
+                                        <Button
+                                            className={cnRepetitionStart(
+                                                "btn-block-link-btn"
+                                            )}
+                                        >
+                                            Выбрать тариф
+                                        </Button>
+                                    </>
+                                )}
+                            </div>
+                        </LargeButton>
+                    </div>
+                ))}
             </div>
 
             <ModalWindow

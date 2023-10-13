@@ -47,21 +47,83 @@
     &-btn-block {
         display: flex;
         flex-flow: row wrap;
-        gap: 40px;
-        justify-content: start;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
         width: 100%;
         margin-top: 30px;
         margin-bottom: 50px;
 
+        border-radius: 32px;
+        background: #e4eaf5;
+        padding: 16px;
+
         &-link {
             flex-grow: 1;
             max-width: 700px;
-            cursor: pointer;
+            display: flex;
+            justify-content: center;
 
-            &-svg {
-                width: 100%;
+            &-blue {
+                background: #2477f4;
+                color: #fff;
+            }
+
+            &-white {
+                background: #f3f5f9;
+                color: #2477f4;
+            }
+
+            &-container {
+                padding: 16px 0;
+                display: flex;
+                flex-flow: column nowrap;
+                align-items: center;
+                gap: 16px;
+            }
+
+            &-title {
+                @extend %text-style;
+
+                &_opacity {
+                    opacity: 0.5;
+                }
+            }
+
+            &-ban {
+                text-align: center;
+                font-family: Onest;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+
+                &_gray {
+                    color: #7c8eb5;
+                }
+            }
+
+            &-btn {
+                color: #fff;
+                font-family: Montserrat Alternates;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 18px;
+                border-radius: 9px;
+                background: #ffb800;
+                padding: 10px 20px;
             }
         }
+    }
+
+    %text-style {
+        font-family: Montserrat Alternates;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
     }
 
     &-loading {
