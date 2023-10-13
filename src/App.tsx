@@ -27,7 +27,7 @@ import AnalysisReport from "./components/Report";
 import SettingsStart from "./components/SettingsStart";
 import ScrollToTop from "./tools/ScrollToTop";
 import PayPage from "./pages/PayPage";
-import QuestionnaireRoute from "./components/tools/QuestionnaireRoute";
+
 import LibForm from "./components/ui-kit/LibForm";
 import TarifPage from "./pages/SurveyPage/TarifPage";
 
@@ -62,13 +62,7 @@ export default function App() {
                         // )
                     }
                 >
-                    <Route element={<QuestionnaireRoute />}>
-                        <Route
-                            path={RoutesEnum.SURVEY}
-                            element={<SurveyPage />}
-                        />
-                    </Route>
-
+                    <Route path={RoutesEnum.SURVEY} element={<SurveyPage />} />
                     <Route path={RoutesEnum.TARIFF} element={<TarifPage />} />
 
                     <Route path={RoutesEnum.HOME} element={<HomePage />} />

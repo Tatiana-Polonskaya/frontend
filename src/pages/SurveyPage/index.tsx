@@ -20,12 +20,15 @@ import {
     useSendAnswersMutation,
 } from "../../store/api/survey";
 import { IAnswer, IQuestion, typeQuestion } from "../../models/survey";
+import { useNavigate } from "react-router-dom";
+import RoutesEnum from "../../models/routes";
 
 export default function SurveyPage() {
     const [sendAnswersRequest, sendAnswersResponse] = useSendAnswersMutation();
     const { isSuccess, isError } = sendAnswersResponse;
 
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const TITLE_ANKETA = "anketa";
 
@@ -135,6 +138,12 @@ export default function SurveyPage() {
     useEffect(() => {
         if (isError) console.log(sendAnswersResponse.error);
     }, [isError]);
+
+    useEffect(() => {
+        if (step > ALL_STEP) {
+            navigate(RoutesEnum.TARIFF);
+        }
+    }, [step]);
 
     const convertAnswersForServerFormat = (currentAnswers: LocalAnswer[]) => {
         if (questions) {
