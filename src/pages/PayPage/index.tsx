@@ -87,12 +87,13 @@ export default function PayPage() {
                     </span>
                     <div className={CN("blockInputs")}>
                         <div className={CN("block")}>
-                            <InputHeader text="Номер заказа:" />
+{/*                             <InputHeader text="Номер заказа:" /> */}
                             <input
                                 className={CN("input")}
                                 {...register("orderid", { required: true })}
                                 readOnly={true}
                                 defaultValue={idTariff}
+                                hidden
                             />
                         </div>
                         <div className={CN("block")}>
