@@ -16,6 +16,9 @@ import { UUID } from "crypto";
 import { IUser } from "../../models/entry/user";
 import type { SubmitHandler } from "react-hook-form";
 import { Form, useForm } from "react-hook-form";
+import { ReactSVG } from "react-svg";
+import icon from "./icon/payIcon.svg";
+import { useNavigate } from "react-router-dom";
 
 type Inputs = {
     client_email: string;
@@ -39,6 +42,7 @@ const formOptions = {
 
 export default function PayPage() {
     const CN = cn("PayPage");
+    const navigate = useNavigate();
 
     const {
         register,
@@ -67,57 +71,91 @@ export default function PayPage() {
     const emailRef = useRef<HTMLInputElement>(null);
 
     return (
-        <>
-            <form
-                method="POST"
-                action="https://speechup.server.paykeeper.ru/create/"
-                className={CN("container")}
-            >
-                <span className={CN("text")}>
-                    Подтвердите данные перед оплатой
+        <div className={CN("background")}>
+            <div className={CN()}>
+                <form
+                    method="POST"
+                    action="https://speechup.server.paykeeper.ru/create/"
+                    className={CN("container")}
+                >
+                    <span className={CN("text")}>Оплата</span>
+                    <span className={CN("text2")}>
+                        Для оплаты заказа, пожалуйста, подтвердите правильность
+                        введенных личных данных.
+                        <br />
+                        При необходимости, отредактируйте.
+                    </span>
+                    <div className={CN("blockInputs")}>
+                        <div className={CN("block")}>
+                            <InputHeader text="Номер заказа:" />
+                            <input
+                                className={CN("input")}
+                                {...register("orderid", { required: true })}
+                                readOnly={true}
+                                defaultValue={idTariff}
+                            />
+                        </div>
+                        <div className={CN("block")}>
+                            <InputHeader text="Адрес электронной почты" />
+                            <input
+                                className={CN("input")}
+                                {...register(
+                                    "client_email",
+                                    formOptions.client_email
+                                )}
+                                defaultValue={user.email}
+                            />
+                            <small className="text-danger">
+                                {errors?.client_email &&
+                                    errors.client_email.message}
+                            </small>
+                        </div>
+                        <div className={CN("block")}>
+                            <InputHeader text="Сумма оплаты" />
+                            <input
+                                className={CN("input")}
+                                style={{
+                                    background: "#F0F6FF",
+                                    color: "#7C8EB5",
+                                }}
+                                {...register("sum", { required: true })}
+                                value={price}
+                                type="text"
+                                readOnly={true}
+                            />
+                        </div>
+                        <input
+                            {...register("clientid", { required: true })}
+                            readOnly={true}
+                            defaultValue={user.id}
+                            hidden
+                        />
+                    </div>
+                    <ReactSVG src={icon} className={CN("Img")} />
+                    <div className={CN("blockBtn")}>
+                        <input
+                            type="submit"
+                            value="Назад"
+                            className={CN("btnback")}
+                            onClick={() => navigate(-1)}
+                        />
+                        <input
+                            type="submit"
+                            value="Перейти к оплате"
+                            className={CN("btn")}
+                        />
+                    </div>
+                </form>
+                <span className={CN("textEnd")}>
+                    Для возврата уплаченных денежных средств за услугу, которая
+                    не соответствует заявленному описанию, изложенному на сайте,
+                    необходимо отправить электронное письмо по адресу:
+                    support@speechup.ru.
+                    <br />
+                    Возврат производится исключительно на ту же банковскую
+                    карту, с которой была произведена оплата.
                 </span>
-                <div className={CN("block")}>
-                    <InputHeader text="Номер заказа:" />
-                    <input
-                        {...register("orderid", { required: true })}
-                        readOnly={true}
-                        defaultValue={idTariff}
-                    />
-                </div>
-
-                <div className={CN("block")}>
-                    <InputHeader text="Адрес электронной почты" />
-                    <input
-                        {...register("client_email", formOptions.client_email)}
-                        defaultValue={user.email}
-                    />
-                    <small className="text-danger">
-                        {errors?.client_email && errors.client_email.message}
-                    </small>
-                </div>
-                <div className={CN("block")}>
-                    <InputHeader text="Сумма оплаты" />
-                    <input
-                        {...register("sum", { required: true })}
-                        value={price}
-                        type="text"
-                        readOnly={true}
-                    />
-                </div>
-                <input
-                    {...register("clientid", { required: true })}
-                    readOnly={true}
-                    defaultValue={user.id}
-                    hidden
-                />
-                <div className={CN("block")}>
-                    <input
-                        type="submit"
-                        value="Перейти к оплате"
-                        className={CN("btn")}
-                    />
-                </div>
-            </form>
-        </>
+            </div>
+        </div>
     );
 }
