@@ -9,11 +9,15 @@ export default function Footer() {
                     <br /> Разработчики:
                     <a href="https://github.com/4in4in">Леонов Александр</a>
                     {", "}
-                    <a href="https://github.com/4in4in">Полонская Татьяна</a>
+                    <a href="https://github.com/Tatiana-Polonskaya">
+                        Полонская Татьяна
+                    </a>
                     {", "}
-                    <a href="https://github.com/4in4in">Лагун Алексей</a>
+                    <a href="https://github.com/alagun">Лагун Алексей</a>
                     {", "}
-                    <a href="https://github.com/4in4in">Ванькович Анастасия</a>
+                    <a href="https://github.com/AnastasiaKlets">
+                        Ванькович Анастасия
+                    </a>
                     <br />
                     Дизайнер:
                     <a href="https://t.me/ann_choys">Эгамова Анна</a>
